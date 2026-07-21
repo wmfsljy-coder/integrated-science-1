@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>통합과학1 — 관측 스테이션</title>
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  body { display: block; }
+  .hero { padding: 64px 30px 30px; max-width: 1080px; margin: 0 auto; }
+  .hero .eyebrow { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
+  .hero h1 { font-size: clamp(30px, 5vw, 46px); margin: 10px 0 14px; text-wrap: balance; }
+  .hero p { color: var(--mist); font-size: 15.5px; line-height: 1.7; max-width: 640px; margin: 0; }
+  .hero a.back { color: var(--mist); font-size: 12.5px; text-decoration: none; }
+  .hero a.back:hover { color: var(--teal); }
+  .grid { max-width: 1080px; margin: 30px auto 80px; padding: 0 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .unit-card { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; text-decoration: none; color: inherit; transition: border-color .15s, transform .15s; position: relative; overflow: hidden; }
+  .unit-card:hover { border-color: var(--teal-dim); transform: translateY(-2px); }
+  .unit-card .chapter { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: 6px; }
+  .unit-card h3 { font-size: 19px; margin: 0 0 8px; }
+  .unit-card p { color: var(--mist); font-size: 13px; line-height: 1.6; margin: 0 0 14px; min-height: 60px; }
+  .unit-card .topics { display: flex; flex-wrap: wrap; gap: 6px; }
+  .unit-card .topics span { font-size: 10.5px; padding: 3px 8px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); color: var(--mist); }
+  .unit-card .go { position: absolute; top: 22px; right: 22px; color: var(--mist); font-size: 18px; }
+  .part-label { max-width: 1080px; margin: 0 auto; padding: 30px 30px 0; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mist); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <a class="back" href="https://wmfsljy-coder.github.io/science-teacher-hub/">← 지구과학 교사 웹툴 모음</a>
+  <div class="eyebrow" style="margin-top:14px">고등학교 통합과학1 · 인터랙티브 학습 도구</div>
+  <h1 class="display">통합과학1<br>관측 스테이션</h1>
+  <p>과학의 기초, 물질과 규칙성, 시스템과 상호작용 3개 대단원, 7개 단원을 직접 조작하며 배웁니다.</p>
+</div>
+
+<div class="part-label">Ⅰ. 과학의 기초</div>
+<div class="grid">
+  <a class="unit-card" href="1-1/">
+    <div class="chapter">Ⅰ-1</div>
+    <h3 class="display">과학의 기본량</h3>
+    <p>SI 기본단위, 우주와 미시세계의 스케일, 과학적 표기법을 다룹니다.</p>
+    <div class="topics"><span>SI 단위</span><span>스케일 비교</span><span>과학적 표기법</span></div>
+    <div class="go">→</div>
+  </a>
+  <a class="unit-card" href="1-2/">
+    <div class="chapter">Ⅰ-2</div>
+    <h3 class="display">과학의 측정과 우리 사회</h3>
+    <p>정밀도와 정확도, 측정 표준의 유용성, 측정 기술이 만든 현대 문명을 다룹니다.</p>
+    <div class="topics"><span>정밀도·정확도</span><span>측정 표준</span></div>
+    <div class="go">→</div>
+  </a>
+</div>
+
+<div class="part-label">Ⅱ. 물질과 규칙성</div>
+<div class="grid">
+  <a class="unit-card" href="2-1/">
+    <div class="chapter">Ⅱ-1</div>
+    <h3 class="display">자연의 구성 원소</h3>
+    <p>빅뱅과 원소의 생성, 별의 핵융합, 우주·지각·생명체의 원소 존재비를 다룹니다.</p>
+    <div class="topics"><span>빅뱅 핵합성</span><span>별의 진화</span><span>원소 존재비</span></div>
+    <div class="go">→</div>
+  </a>
+  <a class="unit-card" href="2-2/">
+    <div class="chapter">Ⅱ-2</div>
+    <h3 class="display">물질의 규칙성과 성질</h3>
+    <p>원소의 주기성, 화학 결합, 규산염·탄소 화합물의 규칙성, 물질의 전기적 성질을 다룹니다.</p>
+    <div class="topics"><span>주기율표</span><span>화학 결합</span><span>도체·반도체</span></div>
+    <div class="go">→</div>
+  </a>
+</div>
+
+<div class="part-label">Ⅲ. 시스템과 상호작용</div>
+<div class="grid">
+  <a class="unit-card" href="3-1/">
+    <div class="chapter">Ⅲ-1</div>
+    <h3 class="display">지구시스템</h3>
+    <p>지구시스템의 구성과 상호작용, 에너지원, 판구조론과 지권의 변화를 다룹니다.</p>
+    <div class="topics"><span>4권 상호작용</span><span>에너지원</span><span>판구조론</span></div>
+    <div class="go">→</div>
+  </a>
+  <a class="unit-card" href="3-2/">
+    <div class="chapter">Ⅲ-2</div>
+    <h3 class="display">역학 시스템</h3>
+    <p>중력과 자유 낙하, 뉴턴 운동 법칙, 충돌과 운동량 보존을 다룹니다.</p>
+    <div class="topics"><span>자유 낙하</span><span>F=ma</span><span>운동량 보존</span></div>
+    <div class="go">→</div>
+  </a>
+  <a class="unit-card" href="3-3/">
+    <div class="chapter">Ⅲ-3</div>
+    <h3 class="display">생명 시스템</h3>
+    <p>효소와 활성화 에너지, 동화·이화 작용, 유전정보의 흐름(전사·번역)을 다룹니다.</p>
+    <div class="topics"><span>효소</span><span>물질대사</span><span>유전정보 흐름</span></div>
+    <div class="go">→</div>
+  </a>
+</div>
+
+<button class="theme-toggle" id="themeToggle">라이트 모드</button>
+<script src="assets/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>물질의 규칙성과 성질 — 관측 스테이션</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+
+<div class="app">
+  <nav class="rail" id="rail">
+    <div class="brand">
+      <a class="home" href="../">← 통합과학1</a>
+      <div class="eyebrow" style="margin-top:8px">Ⅱ-2 · 물질과 규칙성</div>
+      <h1 class="display">물질의 규칙성과<br>성질</h1>
+    </div>
+    <button class="tab-btn active" data-tab="0"><span class="num">01</span> 원소의 주기성</button>
+    <button class="tab-btn" data-tab="1"><span class="num">02</span> 화학 결합</button>
+    <button class="tab-btn" data-tab="2"><span class="num">03</span> 지각·생명체의 물질</button>
+    <button class="tab-btn" data-tab="3"><span class="num">04</span> 물질의 전기적 성질</button>
+  </nav>
+
+  <main>
+    <section class="tab-panel" data-panel="0">
+      <div class="stage-head">
+        <div class="eyebrow">01 · 주기율표에 숨겨진 규칙</div>
+        <h2 class="display">원소의 주기성</h2>
+        <p>원자 번호 슬라이더를 움직여 주기율표 위 원소를 확인하고, 원자 반지름과 이온화 에너지가 주기율표에서 어떤 경향을 보이는지 살펴보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">원자 번호<span class="val" id="c0-z-val">1</span></div>
+            <input type="range" id="c0-z" min="1" max="20" step="1" value="1">
+          </div>
+        </div>
+        <div class="info-card" id="c0-info"></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="1" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">02 · 원자와 원자가 만나는 방법</div>
+        <h2 class="display">이온 결합과 공유 결합</h2>
+        <p>두 원소를 선택해 어떤 종류의 화학 결합이 만들어지는지 확인해 보세요. 금속과 비금속은 전자를 주고받고(이온 결합), 비금속끼리는 전자를 공유합니다(공유 결합).</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">원소 A</div>
+            <div class="seg" id="c1-a">
+              <button class="on" data-e="Na">Na(금속)</button>
+              <button data-e="H">H(비금속)</button>
+            </div>
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">원소 B</div>
+            <div class="seg" id="c1-b">
+              <button class="on" data-e="Cl">Cl(비금속)</button>
+              <button data-e="O">O(비금속)</button>
+            </div>
+          </div>
+        </div>
+        <div class="info-card" id="c1-info"></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="2" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">03 · 규산염 사면체와 탄소 화합물</div>
+        <h2 class="display">지각과 생명체를 이루는 규칙적인 구조</h2>
+        <p>지각의 대부분은 규산염 사면체(SiO₄)의 다양한 결합 방식으로, 생명체는 탄소 원자의 다양한 결합 방식으로 만들어집니다.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c2" width="900" height="380"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">구조 선택</div>
+            <div class="seg" id="c2-mode">
+              <button class="on" data-m="silica">규산염 사면체</button>
+              <button data-m="carbon">탄소 화합물</button>
+            </div>
+          </div>
+        </div>
+        <div class="info-card" id="c2-info"></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="3" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">04 · 전자가 얼마나 자유로운가</div>
+        <h2 class="display">도체 · 반도체 · 절연체</h2>
+        <p>띠 간격(band gap) 슬라이더를 조절해 물질이 도체, 반도체, 절연체 중 어디에 해당하는지 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c3" width="900" height="380"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">띠 간격(eV)<span class="val" id="c3-gap-val">0.0</span></div>
+            <input type="range" id="c3-gap" min="0" max="9" step="0.1" value="0">
+          </div>
+        </div>
+        <div class="info-card" id="c3-info"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button class="theme-toggle" id="themeToggle">라이트 모드</button>
+<script src="../assets/theme.js"></script>
+<script>
+(function () {
+"use strict";
+
+/* TAB0 주기성 */
+(function () {
+  var canvas = document.getElementById("c0");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var z = 1;
+  var info = document.getElementById("c0-info");
+  var elems = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca"];
+  var periods = [1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4];
+  var groupsByPeriod = { 1: [1, 18], 2: [1, 2, 13, 14, 15, 16, 17, 18], 3: [1, 2, 13, 14, 15, 16, 17, 18], 4: [1, 2] };
+
+  document.getElementById("c0-z").addEventListener("input", function (e) { z = +e.target.value; document.getElementById("c0-z-val").textContent = z; render(); });
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var cellW = 42, cellH = 42, x0 = 40, y0 = 30;
+    elems.forEach(function (sym, i) {
+      var period = periods[i];
+      var groupIdx = groupsByPeriod[period].indexOf(groupOf(i));
+      var col = groupOf(i) <= 2 ? (groupOf(i) - 1) : (groupOf(i) - 13 + 2);
+      var x = x0 + col * cellW, y = y0 + (period - 1) * cellH;
+      ctx.save();
+      ctx.fillStyle = (i + 1 === z) ? cssVar("--teal") : cssVar("--panel-2");
+      ctx.fillRect(x, y, cellW - 3, cellH - 3);
+      ctx.strokeStyle = cssVar("--line"); ctx.strokeRect(x, y, cellW - 3, cellH - 3);
+      ctx.restore();
+      ctx.font = "700 13px Segoe UI"; ctx.fillStyle = (i + 1 === z) ? cssVar("--abyss") : cssVar("--foam");
+      ctx.textAlign = "center"; ctx.fillText(sym, x + (cellW - 3) / 2, y + (cellH - 3) / 2 + 5);
+    });
+
+    // trend arrows
+    ctx.save();
+    ctx.strokeStyle = cssVar("--coral"); ctx.fillStyle = cssVar("--coral"); ctx.lineWidth = 2;
+    drawArrow(ctx, x0 + 9 * cellW + 10, y0 - 12, x0 + 40, y0 - 12, 7);
+    ctx.font = "11px Segoe UI"; ctx.textAlign = "center";
+    ctx.fillText("원자 반지름 증가 →", x0 + 5 * cellW, y0 - 20);
+    ctx.restore();
+    ctx.save();
+    ctx.strokeStyle = cssVar("--cold"); ctx.fillStyle = cssVar("--cold"); ctx.lineWidth = 2;
+    ctx.save(); ctx.translate(x0 - 20, y0 + 20); ctx.rotate(Math.PI / 2);
+    drawArrow(ctx, 0, 0, 130, 0, 7);
+    ctx.restore();
+    ctx.font = "11px Segoe UI"; ctx.textAlign = "center";
+    ctx.save(); ctx.translate(x0 - 30, y0 + 90); ctx.rotate(-Math.PI / 2); ctx.fillText("이온화 에너지 증가 ↑", 0, 0); ctx.restore();
+    ctx.restore();
+
+    var sym = elems[z - 1];
+    ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
+    info.innerHTML = "현재 선택: <b>" + sym + "</b>(원자 번호 " + z + "). 같은 주기(가로줄)에서는 오른쪽으로 갈수록 원자 반지름이 <b>작아지고</b> 이온화 에너지는 <b>커집니다</b>. 같은 족(세로줄)에서는 아래로 갈수록 원자 반지름이 <b>커지고</b> 이온화 에너지는 <b>작아집니다</b>.";
+  }
+  function groupOf(i) {
+    var groupMap = [1, 18, 1, 2, 13, 14, 15, 16, 17, 18, 1, 2, 13, 14, 15, 16, 17, 18, 1, 2];
+    return groupMap[i];
+  }
+  render();
+})();
+
+/* TAB1 화학결합 */
+(function () {
+  var canvas = document.getElementById("c1");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var a = "Na", b = "Cl";
+  var info = document.getElementById("c1-info");
+  var meta = {
+    Na: { metal: true, label: "Na", color: "--violet" },
+    H: { metal: false, label: "H", color: "--teal" },
+    Cl: { metal: false, label: "Cl", color: "--coral" },
+    O: { metal: false, label: "O", color: "--cold" }
+  };
+  document.querySelectorAll("#c1-a button").forEach(function (btn) {
+    btn.addEventListener("click", function () { a = btn.getAttribute("data-e"); document.querySelectorAll("#c1-a button").forEach(function (x) { x.classList.toggle("on", x === btn); }); render(); });
+  });
+  document.querySelectorAll("#c1-b button").forEach(function (btn) {
+    btn.addEventListener("click", function () { b = btn.getAttribute("data-e"); document.querySelectorAll("#c1-b button").forEach(function (x) { x.classList.toggle("on", x === btn); }); render(); });
+  });
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var A = meta[a], B = meta[b];
+    var ionic = A.metal && !B.metal;
+    var ax = W / 2 - 130, bx = W / 2 + 130, y = H / 2;
+
+    ctx.font = "700 22px Georgia, serif"; ctx.textAlign = "center";
+    ctx.fillStyle = cssVar(A.color); ctx.beginPath(); ctx.arc(ax, y, 40, 0, 7); ctx.fill();
+    ctx.fillStyle = cssVar(B.color); ctx.beginPath(); ctx.arc(bx, y, 40, 0, 7); ctx.fill();
+    ctx.fillStyle = cssVar("--abyss");
+    ctx.fillText(A.label, ax, y + 8);
+    ctx.fillText(B.label, bx, y + 8);
+
+    if (ionic) {
+      ctx.save();
+      ctx.strokeStyle = cssVar("--foam"); ctx.fillStyle = cssVar("--foam"); ctx.lineWidth = 2;
+      drawArrow(ctx, ax + 44, y - 10, bx - 44, y - 10, 8);
+      ctx.restore();
+      ctx.font = "11px Segoe UI"; ctx.fillText("전자 이동", (ax + bx) / 2, y - 20);
+      ctx.font = "700 14px Segoe UI"; ctx.fillText(A.label + "⁺", ax, y - 55);
+      ctx.fillText(B.label + "⁻", bx, y - 55);
+      info.innerHTML = "<b>이온 결합</b>: 금속(" + a + ")이 전자를 잃어 양이온이 되고, 비금속(" + b + ")이 전자를 얻어 음이온이 됩니다. 두 이온은 정전기적 인력으로 결합합니다. 예: 염화 나트륨(NaCl).";
+    } else {
+      ctx.save();
+      ctx.strokeStyle = cssVar("--foam"); ctx.globalAlpha = .5; ctx.lineWidth = 6;
+      ctx.beginPath(); ctx.moveTo(ax + 40, y); ctx.lineTo(bx - 40, y); ctx.stroke();
+      ctx.restore();
+      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText("전자쌍 공유", (ax + bx) / 2, y - 55);
+      info.innerHTML = "<b>공유 결합</b>: 비금속(" + a + ")과 비금속(" + b + ") 원자가 전자쌍을 함께 사용하며 결합합니다. 예: 물(H₂O), 염화수소(HCl) 등 대부분의 분자.";
+    }
+  }
+  render();
+})();
+
+/* TAB2 지각/생명체 구조 */
+(function () {
+  var canvas = document.getElementById("c2");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var mode = "silica";
+  var info = document.getElementById("c2-info");
+  document.querySelectorAll("#c2-mode button").forEach(function (b) {
+    b.addEventListener("click", function () { mode = b.getAttribute("data-m"); document.querySelectorAll("#c2-mode button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); });
+  });
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    if (mode === "silica") {
+      // draw simplified SiO4 tetrahedra chain
+      for (var i = 0; i < 4; i++) {
+        var cx = 150 + i * 180, cy = H / 2;
+        drawTetra(cx, cy);
+      }
+      info.innerHTML = "지각을 구성하는 광물의 대부분은 <b>규산염 사면체(SiO₄)</b>가 기본 단위입니다. 사면체가 꼭짓점을 공유하며 사슬, 판, 그물 구조 등 다양한 규칙적인 형태로 연결되어 여러 광물을 만듭니다.";
+    } else {
+      // carbon chain and ring
+      drawChain(100, H / 2 - 60, 6);
+      drawRing(600, H / 2 + 20, 6, 70);
+      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+      ctx.fillText("사슬 구조", 260, H / 2 - 100);
+      ctx.fillText("고리 구조", 600, H / 2 + 130);
+      info.innerHTML = "생명체는 <b>탄소(C)</b> 원자를 중심으로 만들어집니다. 탄소는 다른 원자와 최대 4개의 공유 결합을 형성할 수 있어 사슬, 고리 등 매우 다양한 구조의 유기 화합물을 만들 수 있습니다.";
+    }
+  }
+  function drawTetra(cx, cy) {
+    var r = 55;
+    ctx.save();
+    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
+    var pts = [[0, -r], [r * 0.87, r * 0.5], [-r * 0.87, r * 0.5]];
+    ctx.beginPath();
+    pts.forEach(function (p, i) { if (i === 0) ctx.moveTo(cx + p[0], cy + p[1]); else ctx.lineTo(cx + p[0], cy + p[1]); });
+    ctx.closePath(); ctx.stroke();
+    pts.forEach(function (p) { ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + p[0], cy + p[1]); ctx.stroke(); });
+    ctx.fillStyle = cssVar("--teal"); ctx.beginPath(); ctx.arc(cx, cy, 12, 0, 7); ctx.fill();
+    ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center"; ctx.fillText("Si", cx, cy + 3);
+    pts.forEach(function (p) {
+      ctx.fillStyle = cssVar("--coral"); ctx.beginPath(); ctx.arc(cx + p[0], cy + p[1], 9, 0, 7); ctx.fill();
+    });
+    ctx.restore();
+  }
+  function drawChain(x0, y, n) {
+    ctx.save();
+    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 3;
+    for (var i = 0; i < n - 1; i++) {
+      var x1 = x0 + i * 55, y1 = y + (i % 2 === 0 ? 0 : -25);
+      var x2 = x0 + (i + 1) * 55, y2 = y + ((i + 1) % 2 === 0 ? 0 : -25);
+      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+    }
+    for (var j = 0; j < n; j++) {
+      var xx = x0 + j * 55, yy = y + (j % 2 === 0 ? 0 : -25);
+      ctx.fillStyle = cssVar("--violet"); ctx.beginPath(); ctx.arc(xx, yy, 12, 0, 7); ctx.fill();
+      ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center"; ctx.fillText("C", xx, yy + 3);
+    }
+    ctx.restore();
+  }
+  function drawRing(cx, cy, n, r) {
+    ctx.save();
+    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 3;
+    ctx.beginPath();
+    for (var i = 0; i <= n; i++) {
+      var a = (i / n) * Math.PI * 2 - Math.PI / 2;
+      var x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    for (var j = 0; j < n; j++) {
+      var a2 = (j / n) * Math.PI * 2 - Math.PI / 2;
+      var x2 = cx + r * Math.cos(a2), y2 = cy + r * Math.sin(a2);
+      ctx.fillStyle = cssVar("--violet"); ctx.beginPath(); ctx.arc(x2, y2, 12, 0, 7); ctx.fill();
+      ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center"; ctx.fillText("C", x2, y2 + 3);
+    }
+    ctx.restore();
+  }
+  render();
+})();
+
+/* TAB3 전기적 성질 */
+(function () {
+  var canvas = document.getElementById("c3");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var gap = 0;
+  var info = document.getElementById("c3-info");
+  document.getElementById("c3-gap").addEventListener("input", function (e) { gap = +e.target.value; document.getElementById("c3-gap-val").textContent = gap.toFixed(1); render(); });
+
+  function classify(g) {
+    if (g < 0.3) return { name: "도체", color: "--teal" };
+    if (g < 3) return { name: "반도체", color: "--coral" };
+    return { name: "절연체(부도체)", color: "--cold" };
+  }
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var cls = classify(gap);
+    var cx = W / 2, valTop = 220, valBot = 280, condBot = 100;
+    var gapPx = gap * 12;
+    ctx.save();
+    ctx.fillStyle = cssVar("--mist"); ctx.globalAlpha = .35;
+    ctx.fillRect(cx - 150, valTop, 300, valBot - valTop);
+    ctx.restore();
+    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText("원자가 띠(전자로 채워짐)", cx, valTop + 30);
+
+    var condTop = valTop - gapPx - 60;
+    ctx.save();
+    ctx.fillStyle = cssVar(cls.color); ctx.globalAlpha = .35;
+    ctx.fillRect(cx - 150, condTop, 300, 60);
+    ctx.restore();
+    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist");
+    ctx.fillText("전도띠(전자가 이동하면 전류가 흐름)", cx, condTop + 35);
+
+    ctx.save();
+    ctx.strokeStyle = cssVar(cls.color); ctx.setLineDash([5, 4]); ctx.lineWidth = 1.5;
+    ctx.strokeRect(cx - 150, condTop + 60, 300, valTop - (condTop + 60));
+    ctx.restore();
+    ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar(cls.color);
+    ctx.fillText("띠 간격 " + gap.toFixed(1) + " eV", cx, (condTop + 60 + valTop) / 2 + 4);
+
+    info.innerHTML = "띠 간격이 " + gap.toFixed(1) + " eV일 때, 이 물질은 <b style='color:var(" + cls.color + ")'>" + cls.name + "</b>입니다. " +
+      (cls.name === "도체" ? "원자가 띠와 전도띠가 겹쳐 있어(또는 간격이 매우 좁아) 전자가 쉽게 이동합니다." :
+        cls.name === "반도체" ? "약간의 에너지를 얻으면 전자가 전도띠로 넘어갈 수 있어, 조건에 따라 도체처럼도, 절연체처럼도 행동합니다." :
+          "띠 간격이 넓어 전자가 전도띠로 넘어가기 어려워 전류가 잘 흐르지 않습니다.");
+  }
+  render();
+})();
+
+})();
+</script>
+</body>
+</html>

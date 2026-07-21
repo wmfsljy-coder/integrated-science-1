@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>역학 시스템 — 관측 스테이션</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+
+<div class="app">
+  <nav class="rail" id="rail">
+    <div class="brand">
+      <a class="home" href="../">← 통합과학1</a>
+      <div class="eyebrow" style="margin-top:8px">Ⅲ-2 · 시스템과 상호작용</div>
+      <h1 class="display">역학<br>시스템</h1>
+    </div>
+    <button class="tab-btn active" data-tab="0"><span class="num">01</span> 중력과 자유 낙하</button>
+    <button class="tab-btn" data-tab="1"><span class="num">02</span> 뉴턴 운동 법칙</button>
+    <button class="tab-btn" data-tab="2"><span class="num">03</span> 충돌과 운동량 보존</button>
+  </nav>
+
+  <main>
+    <section class="tab-panel" data-panel="0">
+      <div class="stage-head">
+        <div class="eyebrow">01 · 행성마다 다른 중력</div>
+        <h2 class="display">중력을 받는 물체의 운동</h2>
+        <p>행성을 선택해 중력 가속도가 다를 때 같은 높이에서 물체가 얼마나 빨리 떨어지는지 비교해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">천체</div>
+            <div class="seg" id="c0-planet">
+              <button data-g="1.6" data-n="달">달 (1.6 m/s²)</button>
+              <button class="on" data-g="9.8" data-n="지구">지구 (9.8 m/s²)</button>
+              <button data-g="24.8" data-n="목성">목성 (24.8 m/s²)</button>
+            </div>
+          </div>
+          <button class="chip" id="c0-drop">낙하 시작</button>
+        </div>
+        <div class="info-card" id="c0-info"></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="1" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">02 · F = ma</div>
+        <h2 class="display">힘, 질량, 가속도의 관계</h2>
+        <p>힘과 질량을 조절하며 물체의 가속도가 어떻게 달라지는지 확인해 보세요. 같은 힘이라도 질량이 클수록 가속도는 작아집니다.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c1" width="900" height="360"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">힘 F(N)<span class="val" id="c1-f-val">10</span></div>
+            <input type="range" id="c1-f" min="1" max="50" step="1" value="10">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">질량 m(kg)<span class="val" id="c1-m-val">5</span></div>
+            <input type="range" id="c1-m" min="1" max="50" step="1" value="5">
+          </div>
+          <div class="readout"><span class="dot" style="background:var(--teal)"></span><span class="txt" id="c1-a">가속도: —</span></div>
+        </div>
+        <div class="info-card">뉴턴의 운동 제2법칙(가속도의 법칙): 물체의 가속도는 작용하는 힘에 비례하고, 질량에 반비례합니다 (a = F / m).</div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="2" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">03 · 충돌 전후 운동량의 합은 같다</div>
+        <h2 class="display">충돌과 운동량 보존</h2>
+        <p>두 물체의 질량과 속도를 조절하고 충돌시켜 보세요. 외력이 없다면 충돌 전후 전체 운동량의 합은 보존됩니다.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c2" width="900" height="380"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">물체 A 질량(kg)<span class="val" id="c2-ma-val">4</span></div>
+            <input type="range" id="c2-ma" min="1" max="10" step="1" value="4">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">물체 B 질량(kg)<span class="val" id="c2-mb-val">2</span></div>
+            <input type="range" id="c2-mb" min="1" max="10" step="1" value="2">
+          </div>
+          <button class="chip" id="c2-go">충돌시키기</button>
+        </div>
+        <div class="info-card" id="c2-info"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button class="theme-toggle" id="themeToggle">라이트 모드</button>
+<script src="../assets/theme.js"></script>
+<script>
+(function () {
+"use strict";
+
+/* TAB0 자유낙하 */
+(function () {
+  var canvas = document.getElementById("c0");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var g = 9.8, name = "지구";
+  var dropping = false, y = 60, t0 = 0;
+  var info = document.getElementById("c0-info");
+  document.querySelectorAll("#c0-planet button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      g = +b.getAttribute("data-g"); name = b.getAttribute("data-n");
+      document.querySelectorAll("#c0-planet button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      y = 60; dropping = false;
+    });
+  });
+  document.getElementById("c0-drop").addEventListener("click", function () { y = 60; dropping = true; t0 = performance.now(); });
+
+  var groundY = 360;
+  function frame() {
+    if (canvas.offsetParent === null) { requestAnimationFrame(frame); return; }
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(60, groundY); ctx.lineTo(W - 60, groundY); ctx.stroke();
+
+    if (dropping) {
+      var elapsed = (performance.now() - t0) / 1000;
+      var h = 0.5 * g * elapsed * elapsed * 20;
+      y = 60 + h;
+      if (y >= groundY - 16) { y = groundY - 16; dropping = false; info.innerHTML = name + "에서 낙하 완료! 중력 가속도 " + g + " m/s²로 떨어지는 데 약 " + elapsed.toFixed(2) + "초 걸렸습니다."; }
+    }
+    ctx.fillStyle = cssVar("--coral");
+    ctx.beginPath(); ctx.arc(W / 2, y, 16, 0, 7); ctx.fill();
+    ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText(name + " · g = " + g + " m/s²", W / 2, 40);
+
+    requestAnimationFrame(frame);
+  }
+  info.innerHTML = "천체를 선택하고 '낙하 시작'을 눌러 보세요.";
+  requestAnimationFrame(frame);
+})();
+
+/* TAB1 F=ma */
+(function () {
+  var canvas = document.getElementById("c1");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var F = 10, m = 5;
+  document.getElementById("c1-f").addEventListener("input", function (e) { F = +e.target.value; document.getElementById("c1-f-val").textContent = F; render(); });
+  document.getElementById("c1-m").addEventListener("input", function (e) { m = +e.target.value; document.getElementById("c1-m-val").textContent = m; render(); });
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var a = F / m;
+    var boxSize = 30 + m * 3;
+    var cx = W / 2, cy = H / 2;
+    ctx.save();
+    ctx.fillStyle = cssVar("--teal");
+    ctx.fillRect(cx - boxSize / 2, cy - boxSize / 2, boxSize, boxSize);
+    ctx.restore();
+    ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center";
+    ctx.fillText(m + "kg", cx, cy + 4);
+
+    ctx.save();
+    ctx.strokeStyle = cssVar("--coral"); ctx.fillStyle = cssVar("--coral"); ctx.lineWidth = 4;
+    var arrowLen = 40 + F * 3;
+    drawArrow(ctx, cx - boxSize / 2 - arrowLen - 10, cy, cx - boxSize / 2 - 10, cy, 10);
+    ctx.restore();
+    ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--coral"); ctx.textAlign = "right";
+    ctx.fillText("F = " + F + "N", cx - boxSize / 2 - 14, cy - 16);
+
+    ctx.save();
+    ctx.strokeStyle = cssVar("--violet"); ctx.fillStyle = cssVar("--violet"); ctx.lineWidth = 3;
+    var aLen = Math.min(200, a * 20);
+    drawArrow(ctx, cx + boxSize / 2 + 20, cy + 60, cx + boxSize / 2 + 20 + aLen, cy + 60, 8);
+    ctx.restore();
+    ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--violet"); ctx.textAlign = "left";
+    ctx.fillText("가속도 방향", cx + boxSize / 2 + 20, cy + 80);
+
+    document.getElementById("c1-a").innerHTML = "가속도: <b>" + a.toFixed(2) + " m/s²</b> (a = F/m = " + F + "/" + m + ")";
+  }
+  render();
+})();
+
+/* TAB2 충돌 */
+(function () {
+  var canvas = document.getElementById("c2");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var ma = 4, mb = 2;
+  var pos = { a: 150, b: 650 }, vel = { a: 0, b: 0 }, running = false, collided = false;
+  var info = document.getElementById("c2-info");
+  document.getElementById("c2-ma").addEventListener("input", function (e) { ma = +e.target.value; document.getElementById("c2-ma-val").textContent = ma; reset(); });
+  document.getElementById("c2-mb").addEventListener("input", function (e) { mb = +e.target.value; document.getElementById("c2-mb-val").textContent = mb; reset(); });
+  document.getElementById("c2-go").addEventListener("click", function () { reset(); vel.a = 2.5; vel.b = 0; running = true; collided = false; });
+  function reset() { pos.a = 150; pos.b = 650; vel.a = 0; vel.b = 0; running = false; collided = false; }
+
+  var y = H / 2, rA, rB;
+  function frame() {
+    if (canvas.offsetParent === null) { requestAnimationFrame(frame); return; }
+    rA = 16 + ma * 3; rB = 16 + mb * 3;
+    if (running) {
+      pos.a += vel.a; pos.b += vel.b;
+      if (!collided && pos.a + rA >= pos.b - rB) {
+        collided = true;
+        var pBefore = ma * vel.a + mb * vel.b;
+        // elastic collision
+        var vaN = ((ma - mb) * vel.a + 2 * mb * vel.b) / (ma + mb);
+        var vbN = ((mb - ma) * vel.b + 2 * ma * vel.a) / (ma + mb);
+        vel.a = vaN; vel.b = vbN;
+        var pAfter = ma * vel.a + mb * vel.b;
+        info.innerHTML = "충돌 전 운동량: " + pBefore.toFixed(2) + " kg·m/s → 충돌 후 운동량: " + pAfter.toFixed(2) + " kg·m/s. <b>운동량이 보존</b>되었습니다 (탄성 충돌 가정).";
+      }
+      if (pos.b > W - 40 || pos.a < 40) running = false;
+    }
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(20, y + 60); ctx.lineTo(W - 20, y + 60); ctx.stroke();
+
+    ctx.fillStyle = cssVar("--teal"); ctx.beginPath(); ctx.arc(pos.a, y, rA, 0, 7); ctx.fill();
+    ctx.font = "700 11px Segoe UI"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center"; ctx.fillText("A", pos.a, y + 4);
+    ctx.fillStyle = cssVar("--coral"); ctx.beginPath(); ctx.arc(pos.b, y, rB, 0, 7); ctx.fill();
+    ctx.fillStyle = cssVar("--abyss"); ctx.fillText("B", pos.b, y + 4);
+
+    requestAnimationFrame(frame);
+  }
+  info.innerHTML = "질량을 설정하고 '충돌시키기'를 눌러 보세요. (A가 오른쪽으로 이동해 정지한 B와 충돌합니다)";
+  requestAnimationFrame(frame);
+})();
+
+})();
+</script>
+</body>
+</html>

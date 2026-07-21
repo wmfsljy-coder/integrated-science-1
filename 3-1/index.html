@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>지구시스템 — 관측 스테이션</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+
+<div class="app">
+  <nav class="rail" id="rail">
+    <div class="brand">
+      <a class="home" href="../">← 통합과학1</a>
+      <div class="eyebrow" style="margin-top:8px">Ⅲ-1 · 시스템과 상호작용</div>
+      <h1 class="display">지구<br>시스템</h1>
+    </div>
+    <button class="tab-btn active" data-tab="0"><span class="num">01</span> 지구시스템의 구성</button>
+    <button class="tab-btn" data-tab="1"><span class="num">02</span> 지구시스템의 에너지원</button>
+    <button class="tab-btn" data-tab="2"><span class="num">03</span> 판구조론과 지권의 변화</button>
+  </nav>
+
+  <main>
+    <section class="tab-panel" data-panel="0">
+      <div class="stage-head">
+        <div class="eyebrow">01 · 서로 영향을 주고받는 네 영역</div>
+        <h2 class="display">지구시스템의 구성과 상호작용</h2>
+        <p>기권·수권·지권·생물권을 클릭해 각 권의 특징을 확인하고, 화살표를 클릭해 서로 어떻게 상호작용하는지 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c0" width="900" height="480"></canvas></div>
+        <div class="info-card" id="c0-info">원이나 화살표를 클릭해 보세요.</div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="1" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">02 · 지구시스템을 움직이는 힘</div>
+        <h2 class="display">세 가지 에너지원</h2>
+        <p>지구시스템은 태양 에너지, 지구 내부 에너지, 조력 에너지로 움직입니다. 각 에너지원의 상대적 크기와 대표적인 현상을 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
+        <div class="info-card" id="c1-info">막대를 클릭해 보세요.</div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="2" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">03 · 판의 경계에서 일어나는 일</div>
+        <h2 class="display">판구조론과 지권의 변화</h2>
+        <p>판 경계의 종류를 선택해 각 경계에서 판이 어떻게 움직이고, 어떤 지형이 만들어지는지 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c2" width="900" height="380"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">판 경계 유형</div>
+            <div class="seg" id="c2-type">
+              <button class="on" data-t="divergent">발산형 경계</button>
+              <button data-t="convergent">수렴형 경계</button>
+              <button data-t="transform">보존형 경계</button>
+            </div>
+          </div>
+        </div>
+        <div class="info-card" id="c2-info"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button class="theme-toggle" id="themeToggle">라이트 모드</button>
+<script src="../assets/theme.js"></script>
+<script>
+(function () {
+"use strict";
+
+/* TAB0 지구시스템 구성 */
+(function () {
+  var canvas = document.getElementById("c0");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var info = document.getElementById("c0-info");
+  var spheres = [
+    { name: "기권", x: W / 2, y: 110, color: "--cold", desc: "지구를 둘러싼 대기의 영역입니다. 날씨와 기후 현상이 나타납니다." },
+    { name: "수권", x: W / 2 - 200, y: H / 2, color: "--teal", desc: "바다, 강, 호수, 지하수, 빙하 등 물이 존재하는 영역입니다." },
+    { name: "지권", x: W / 2 + 200, y: H / 2, color: "--coral", desc: "지구의 표면과 내부, 암석과 토양으로 이루어진 영역입니다." },
+    { name: "생물권", x: W / 2, y: H - 110, color: "--violet", desc: "지구에 사는 모든 생명체를 포함하는 영역입니다." }
+  ];
+  var edges = [
+    { a: 0, b: 1, desc: "비와 눈이 내려 기권의 물이 수권으로 이동하고, 바다에서 물이 증발해 기권으로 이동합니다." },
+    { a: 0, b: 2, desc: "바람에 의한 풍화·침식 작용이 지권의 지형을 변화시킵니다." },
+    { a: 0, b: 3, desc: "식물의 광합성과 호흡으로 대기 중 산소·이산화 탄소 농도가 달라집니다." },
+    { a: 1, b: 2, desc: "파도와 하천이 지권을 침식하고, 퇴적물을 운반해 지형을 만듭니다." },
+    { a: 1, b: 3, desc: "생명체는 물을 마시고 서식지로 이용하며, 수권의 생태계를 구성합니다." },
+    { a: 2, b: 3, desc: "토양은 생물의 서식 기반이 되고, 생물은 풍화 작용을 촉진합니다." }
+  ];
+  canvas.addEventListener("click", function (e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas._w / rect.width, scaleY = canvas._h / rect.height;
+    var mx = (e.clientX - rect.left) * scaleX, my = (e.clientY - rect.top) * scaleY;
+    var hit = null;
+    spheres.forEach(function (s) { if (Math.hypot(mx - s.x, my - s.y) < 50) hit = s; });
+    if (hit) { info.innerHTML = "<b>" + hit.name + "</b> — " + hit.desc; return; }
+    edges.forEach(function (ed) {
+      var A = spheres[ed.a], B = spheres[ed.b];
+      var mxid = (A.x + B.x) / 2, myid = (A.y + B.y) / 2;
+      if (Math.hypot(mx - mxid, my - myid) < 34) info.innerHTML = "<b>" + spheres[ed.a].name + " ↔ " + spheres[ed.b].name + "</b> — " + ed.desc;
+    });
+  });
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    edges.forEach(function (ed) {
+      var A = spheres[ed.a], B = spheres[ed.b];
+      ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.stroke();
+    });
+    spheres.forEach(function (s) {
+      ctx.save();
+      ctx.fillStyle = cssVar(s.color); ctx.globalAlpha = .85;
+      ctx.beginPath(); ctx.arc(s.x, s.y, 50, 0, 7); ctx.fill();
+      ctx.restore();
+      ctx.font = "700 15px Segoe UI"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center";
+      ctx.fillText(s.name, s.x, s.y + 5);
+    });
+  }
+  render();
+})();
+
+/* TAB1 에너지원 */
+(function () {
+  var canvas = document.getElementById("c1");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var info = document.getElementById("c1-info");
+  var sources = [
+    { name: "태양 에너지", rel: 100, color: "--coral", desc: "가장 큰 에너지원으로, 대기와 해수의 순환, 기상 현상, 광합성 등을 일으킵니다." },
+    { name: "지구 내부 에너지", rel: 0.03, color: "--teal", desc: "방사성 원소의 붕괴열 등에서 비롯되며, 화산 활동·지진·판의 운동을 일으킵니다." },
+    { name: "조력 에너지", rel: 0.002, color: "--cold", desc: "달과 태양의 인력으로 생기며, 밀물과 썰물(조석 현상)을 일으킵니다." }
+  ];
+  canvas.addEventListener("click", function (e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas._w / rect.width;
+    var mx = (e.clientX - rect.left) * scaleX;
+    var barX0 = 200;
+    sources.forEach(function (s, i) {
+      var y = 80 + i * 100;
+      if (mx > barX0 && mx < barX0 + 600) info.innerHTML = "<b>" + s.name + "</b> — " + s.desc;
+    });
+  });
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var maxLog = Math.log10(100);
+    sources.forEach(function (s, i) {
+      var y = 80 + i * 100;
+      var w = Math.max(6, (Math.log10(s.rel) + 3) / (maxLog + 3) * 600);
+      ctx.save();
+      ctx.fillStyle = cssVar(s.color); ctx.globalAlpha = .8;
+      ctx.fillRect(200, y, w, 40);
+      ctx.restore();
+      ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "left";
+      ctx.fillText(s.name, 200, y - 8);
+      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist");
+      ctx.fillText("상대적 크기 ≈ " + s.rel + "%", 200 + w + 12, y + 25);
+    });
+  }
+  render();
+})();
+
+/* TAB2 판구조론 */
+(function () {
+  var canvas = document.getElementById("c2");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var type = "divergent";
+  var t = 0;
+  var info = document.getElementById("c2-info");
+  var texts = {
+    divergent: "<b>발산형 경계</b>: 두 판이 서로 멀어지며 맨틀 물질이 상승해 새로운 지각이 만들어집니다. 예) 대서양 중앙 해령.",
+    convergent: "<b>수렴형 경계</b>: 두 판이 서로 부딪히며, 밀도가 큰 판이 다른 판 아래로 섭입하거나 두 대륙판이 충돌해 산맥을 만듭니다. 예) 일본 해구, 히말라야 산맥.",
+    transform: "<b>보존형 경계</b>: 두 판이 서로 반대 방향으로 어긋나며 미끄러집니다. 지각이 새로 생기거나 사라지지 않습니다. 예) 산안드레아스 단층."
+  };
+  document.querySelectorAll("#c2-type button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      type = b.getAttribute("data-t");
+      document.querySelectorAll("#c2-type button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      info.innerHTML = texts[type];
+    });
+  });
+
+  function frame() {
+    if (canvas.offsetParent === null) { requestAnimationFrame(frame); return; }
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var midY = H / 2, plateH = 40;
+    var offset = Math.sin(t) * 6;
+
+    if (type === "divergent") {
+      ctx.fillStyle = cssVar("--coral"); ctx.fillRect(0, midY - plateH / 2, W / 2 - 20 - offset, plateH);
+      ctx.fillRect(W / 2 + 20 + offset, midY - plateH / 2, W / 2, plateH);
+      ctx.save(); ctx.fillStyle = cssVar("--violet");
+      ctx.beginPath(); ctx.moveTo(W / 2, midY - 100); ctx.lineTo(W / 2 - 40, midY - plateH / 2); ctx.lineTo(W / 2 + 40, midY - plateH / 2); ctx.closePath(); ctx.fill();
+      ctx.restore();
+      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+      ctx.fillText("맨틀 상승 → 새 지각 생성", W / 2, midY - 110);
+    } else if (type === "convergent") {
+      ctx.fillStyle = cssVar("--coral"); ctx.fillRect(0, midY - plateH / 2, W / 2 + offset, plateH);
+      ctx.save();
+      ctx.translate(W / 2 + offset, midY);
+      ctx.rotate(-0.35);
+      ctx.fillStyle = cssVar("--teal");
+      ctx.fillRect(0, -plateH / 2, W / 2, plateH);
+      ctx.restore();
+      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+      ctx.fillText("섭입대 / 조산 운동", W / 2, midY + 90);
+    } else {
+      ctx.fillStyle = cssVar("--coral"); ctx.fillRect(0, midY - plateH / 2 - 20 + offset, W, plateH);
+      ctx.fillStyle = cssVar("--teal"); ctx.fillRect(0, midY + plateH / 2 - 20 - offset, W, plateH);
+      ctx.strokeStyle = cssVar("--foam"); ctx.setLineDash([6, 4]); ctx.beginPath();
+      ctx.moveTo(0, midY - 20); ctx.lineTo(W, midY - 20); ctx.stroke(); ctx.setLineDash([]);
+      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+      ctx.fillText("두 판이 서로 어긋나며 미끄러짐", W / 2, midY + 60);
+    }
+    t += 1 / 90;
+    requestAnimationFrame(frame);
+  }
+  info.innerHTML = texts.divergent;
+  requestAnimationFrame(frame);
+})();
+
+})();
+</script>
+</body>
+</html>
