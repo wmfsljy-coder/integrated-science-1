@@ -25,14 +25,26 @@
       <div class="stage-head">
         <div class="eyebrow">01 · 생체 촉매</div>
         <h2 class="display">효소와 활성화 에너지</h2>
-        <p>온도 슬라이더를 조절해 효소의 반응 속도가 어떻게 달라지는지, 효소가 있을 때와 없을 때 활성화 에너지가 어떻게 다른지 확인해 보세요.</p>
+        <p>온도와 pH를 함께 조절해 효소의 반응 속도가 어떻게 달라지는지 확인해 보세요. 효소마다 최적 온도와 최적 pH가 다릅니다.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
         <div class="controls">
           <div class="ctrl-group">
+            <div class="ctrl-label">효소 종류</div>
+            <div class="seg" id="c0-enzyme">
+              <button class="on" data-opt-t="37" data-opt-ph="7" data-name="아밀레이스(침, 소화효소)">아밀레이스(입)</button>
+              <button data-opt-t="37" data-opt-ph="2" data-name="펩신(위, 소화효소)">펩신(위)</button>
+              <button data-opt-t="37" data-opt-ph="8" data-name="트립신(소장, 소화효소)">트립신(소장)</button>
+            </div>
+          </div>
+          <div class="ctrl-group">
             <div class="ctrl-label">온도(°C)<span class="val" id="c0-t-val">37</span></div>
             <input type="range" id="c0-t" min="0" max="80" step="1" value="37">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">pH<span class="val" id="c0-ph-val">7.0</span></div>
+            <input type="range" id="c0-ph" min="0" max="14" step="0.5" value="7">
           </div>
         </div>
         <div class="info-card" id="c0-info"></div>
@@ -43,7 +55,7 @@
       <div class="stage-head">
         <div class="eyebrow">02 · 물질대사의 두 방향</div>
         <h2 class="display">동화 작용과 이화 작용</h2>
-        <p>물질대사는 작은 물질을 큰 물질로 합성하며 에너지를 흡수하는 동화 작용과, 큰 물질을 분해하며 에너지를 방출하는 이화 작용으로 나뉩니다.</p>
+        <p>반응 진행률 슬라이더를 움직여, 작은 물질과 큰 물질이 서로 변환되는 과정이 진행되는 모습을 애니메이션으로 확인해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
@@ -55,6 +67,10 @@
               <button data-m="catabolism">이화 작용 (세포 호흡 등)</button>
             </div>
           </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">반응 진행률(%)<span class="val" id="c1-p-val">0</span></div>
+            <input type="range" id="c1-p" min="0" max="100" step="1" value="0">
+          </div>
         </div>
         <div class="info-card" id="c1-info"></div>
       </div>
@@ -64,15 +80,19 @@
       <div class="stage-head">
         <div class="eyebrow">03 · 유전 정보의 중심원리</div>
         <h2 class="display">DNA → RNA → 단백질</h2>
-        <p>DNA 염기서열을 입력하면, 전사(transcription)로 만들어지는 mRNA 서열과 번역(translation) 과정을 확인할 수 있습니다.</p>
+        <p>DNA 염기서열을 입력하면, 전사(transcription)로 만들어지는 mRNA와 실제 유전 암호표에 따른 번역(translation) 결과(아미노산 사슬)까지 확인할 수 있습니다.</p>
       </div>
       <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c2" width="900" height="320"></canvas></div>
+        <div class="canvas-wrap"><canvas id="c2" width="900" height="360"></canvas></div>
         <div class="controls">
           <div class="ctrl-group">
             <div class="ctrl-label">DNA 주형 가닥 (A, T, G, C만 입력)</div>
-            <input type="text" id="c2-seq" value="TACGGCATT" maxlength="12" style="background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--foam);font-family:Consolas,monospace;font-size:16px;letter-spacing:3px;width:100%">
+            <input type="text" id="c2-seq" value="TACGGCATTATT" maxlength="15" style="background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--foam);font-family:Consolas,monospace;font-size:16px;letter-spacing:3px;width:100%">
           </div>
+        </div>
+        <div class="readout" style="margin:0 20px 14px;">
+          <span class="dot" style="background:var(--violet)"></span>
+          <span class="txt" id="c2-protein"></span>
         </div>
         <div class="info-card" id="c2-info"></div>
       </div>
@@ -86,40 +106,68 @@
 (function () {
 "use strict";
 
-/* TAB0 효소 */
+/* TAB0 효소 — 온도 + pH */
 (function () {
   var canvas = document.getElementById("c0");
   var ctx = setupCanvas(canvas);
   var W = canvas._w, H = canvas._h;
-  var temp = 37;
+  var temp = 37, ph = 7, optT = 37, optPh = 7, ename = "아밀레이스(침, 소화효소)";
   var info = document.getElementById("c0-info");
   document.getElementById("c0-t").addEventListener("input", function (e) { temp = +e.target.value; document.getElementById("c0-t-val").textContent = temp; render(); });
+  document.getElementById("c0-ph").addEventListener("input", function (e) { ph = +e.target.value; document.getElementById("c0-ph-val").textContent = ph.toFixed(1); render(); });
+  document.querySelectorAll("#c0-enzyme button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      optT = +b.getAttribute("data-opt-t"); optPh = +b.getAttribute("data-opt-ph"); ename = b.getAttribute("data-name");
+      document.querySelectorAll("#c0-enzyme button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      render();
+    });
+  });
 
-  function rate(t) {
-    var optimal = 37, spread = 14;
-    var v = Math.exp(-Math.pow(t - optimal, 2) / (2 * spread * spread));
-    if (t > 60) v *= Math.max(0, 1 - (t - 60) / 20);
+  function tempRate(t) {
+    var spread = 14;
+    var v = Math.exp(-Math.pow(t - optT, 2) / (2 * spread * spread));
+    if (t > optT + 23) v *= Math.max(0, 1 - (t - (optT + 23)) / 20);
     return v;
+  }
+  function phRate(p) {
+    var spread = 1.6;
+    return Math.exp(-Math.pow(p - optPh, 2) / (2 * spread * spread));
   }
   function render() {
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    // rate curve
     var x0 = 60, x1 = 480, y0 = 40, y1 = 220;
     ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
     ctx.beginPath();
     for (var px = 0; px <= 100; px++) {
       var tt = px / 100 * 80;
-      var r = rate(tt);
+      var r = tempRate(tt);
       var xx = x0 + px / 100 * (x1 - x0), yy = y1 - r * (y1 - y0);
       if (px === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
     }
     ctx.strokeStyle = cssVar("--teal"); ctx.lineWidth = 2.5; ctx.stroke();
-    var curX = x0 + temp / 80 * (x1 - x0), curY = y1 - rate(temp) * (y1 - y0);
+    var curX = x0 + temp / 80 * (x1 - x0), curY = y1 - tempRate(temp) * (y1 - y0);
     ctx.fillStyle = cssVar("--coral"); ctx.beginPath(); ctx.arc(curX, curY, 6, 0, 7); ctx.fill();
     ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
     ctx.fillText("온도(°C) →", (x0 + x1) / 2, y1 + 26);
-    ctx.save(); ctx.translate(24, (y0 + y1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("반응 속도", 0, 0); ctx.restore();
+    ctx.save(); ctx.translate(24, (y0 + y1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("온도별 반응 속도", 0, 0); ctx.restore();
+
+    // pH curve
+    var px0 = 60, px1 = 480, py0 = 260, py1 = 400;
+    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(px0, py0); ctx.lineTo(px0, py1); ctx.lineTo(px1, py1); ctx.stroke();
+    ctx.beginPath();
+    for (var pxi = 0; pxi <= 100; pxi++) {
+      var pp = pxi / 100 * 14;
+      var rp = phRate(pp);
+      var xxp = px0 + pxi / 100 * (px1 - px0), yyp = py1 - rp * (py1 - py0);
+      if (pxi === 0) ctx.moveTo(xxp, yyp); else ctx.lineTo(xxp, yyp);
+    }
+    ctx.strokeStyle = cssVar("--violet"); ctx.lineWidth = 2.5; ctx.stroke();
+    var curXp = px0 + ph / 14 * (px1 - px0), curYp = py1 - phRate(ph) * (py1 - py0);
+    ctx.fillStyle = cssVar("--coral"); ctx.beginPath(); ctx.arc(curXp, curYp, 6, 0, 7); ctx.fill();
+    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText("pH →", (px0 + px1) / 2, py1 + 26);
+    ctx.save(); ctx.translate(24, (py0 + py1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("pH별 반응 속도", 0, 0); ctx.restore();
 
     // activation energy diagram
     var ex = 620, ey0 = 60, ey1 = 240, ew = 240;
@@ -141,37 +189,53 @@
     ctx.fillStyle = cssVar("--teal");
     ctx.fillText("효소 있음(낮은 활성화 에너지)", ex + 10, ey1 - 70);
 
-    var r = rate(temp);
-    info.innerHTML = "체온 " + temp + "°C에서 효소의 상대 반응 속도는 <b>" + (r * 100).toFixed(0) + "%</b>입니다. 대부분의 사람 효소는 약 37°C 부근에서 최적으로 작동하며, 온도가 너무 높으면 단백질(효소)의 입체 구조가 변형(변성)되어 활성을 잃습니다. 효소는 활성화 에너지를 낮춰 반응이 더 쉽게 일어나게 합니다.";
+    ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "left";
+    ctx.fillText("최적 조건: " + optT + "°C, pH " + optPh, ex, ey1 + 60);
+
+    var combined = tempRate(temp) * phRate(ph);
+    info.innerHTML = "<b>" + ename + "</b> · 온도 " + temp + "°C, pH " + ph.toFixed(1) + "에서 종합 반응 속도는 최적 조건 대비 <b>" + (combined * 100).toFixed(0) + "%</b>입니다. 온도와 pH가 최적값에서 멀어질수록 효소(단백질)의 입체 구조가 변형되어(변성) 활성을 잃습니다. 효소마다 작동하는 최적 pH가 크게 다르다는 점(위=산성, 소장=염기성)에 주목하세요.";
   }
   render();
 })();
 
-/* TAB1 동화/이화 */
+/* TAB1 동화/이화 — 진행률 애니메이션 */
 (function () {
   var canvas = document.getElementById("c1");
   var ctx = setupCanvas(canvas);
   var W = canvas._w, H = canvas._h;
-  var mode = "anabolism";
+  var mode = "anabolism", progress = 0;
   var info = document.getElementById("c1-info");
   document.querySelectorAll("#c1-mode button").forEach(function (b) {
     b.addEventListener("click", function () { mode = b.getAttribute("data-m"); document.querySelectorAll("#c1-mode button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); });
   });
+  document.getElementById("c1-p").addEventListener("input", function (e) { progress = +e.target.value; document.getElementById("c1-p-val").textContent = progress; render(); });
 
   function render() {
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
     var isAna = mode === "anabolism";
+    var p = progress / 100;
     var leftLabel = isAna ? "작은 분자 (예: CO₂ + H₂O)" : "큰 분자 (예: 포도당)";
     var rightLabel = isAna ? "큰 분자 (예: 포도당)" : "작은 분자 (예: CO₂ + H₂O)";
-    var n = isAna ? 4 : 1, nR = isAna ? 1 : 4;
 
-    drawMolecules(150, H / 2, n, isAna ? 10 : 26);
-    drawMolecules(650, H / 2, nR, isAna ? 26 : 10);
+    // interpolate: at p=0, 4 small at left, 0 big at right; at p=1, 0 small at left, 1 big at right (or reversed for catabolism)
+    var nLeftStart = 4, nRightEnd = 1;
+    var nLeftNow = Math.round(nLeftStart * (1 - p));
+    var nRightNow = Math.round(nRightEnd * p);
 
+    drawMolecules(150, H / 2, Math.max(nLeftNow, 0), isAna ? 10 : 26, isAna ? "--violet" : "--violet");
+    drawMolecules(650, H / 2, Math.max(nRightNow, 0), isAna ? 26 : 10, "--violet");
+
+    // moving particle along the arrow to show progress
+    var ax0 = 260, ax1 = 540;
+    var px = ax0 + p * (ax1 - ax0);
     ctx.save();
     ctx.strokeStyle = cssVar(isAna ? "--coral" : "--teal"); ctx.fillStyle = cssVar(isAna ? "--coral" : "--teal"); ctx.lineWidth = 4;
-    drawArrow(ctx, 260, H / 2, 540, H / 2, 12);
+    drawArrow(ctx, ax0, H / 2, ax1, H / 2, 12);
+    ctx.restore();
+    ctx.save();
+    ctx.fillStyle = cssVar("--foam");
+    ctx.beginPath(); ctx.arc(px, H / 2, 7, 0, Math.PI * 2); ctx.fill();
     ctx.restore();
 
     ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "center";
@@ -181,16 +245,18 @@
     ctx.fillText(leftLabel, 150, H / 2 + 80);
     ctx.fillText(rightLabel, 650, H / 2 + 80);
 
-    info.innerHTML = isAna
+    info.innerHTML = (isAna
       ? "<b>동화 작용</b>: 작고 간단한 물질을 크고 복잡한 물질로 합성하는 과정으로, 에너지를 흡수합니다. 예) 광합성(포도당 합성), 단백질 합성."
-      : "<b>이화 작용</b>: 크고 복잡한 물질을 작고 간단한 물질로 분해하는 과정으로, 에너지를 방출합니다. 예) 세포 호흡(포도당 분해), 소화.";
+      : "<b>이화 작용</b>: 크고 복잡한 물질을 작고 간단한 물질로 분해하는 과정으로, 에너지를 방출합니다. 예) 세포 호흡(포도당 분해), 소화.") +
+      " 현재 반응 진행률: <b>" + progress + "%</b>";
   }
   function drawMolecules(cx, cy, n, r) {
+    if (n <= 0) return;
     var cols = Math.ceil(Math.sqrt(n));
     for (var i = 0; i < n; i++) {
       var col = i % cols, row = Math.floor(i / cols);
       var x = cx + (col - (cols - 1) / 2) * (r * 2.4);
-      var y = cy + (row - Math.floor(n / cols) / 2) * (r * 2.4);
+      var y = cy + (row - Math.floor(n / Math.max(cols, 1)) / 2) * (r * 2.4);
       ctx.save();
       ctx.fillStyle = cssVar("--violet"); ctx.globalAlpha = .85;
       ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
@@ -200,32 +266,40 @@
   render();
 })();
 
-/* TAB2 유전정보흐름 */
+/* TAB2 유전정보흐름 — 실제 코돈표 번역 */
 (function () {
   var canvas = document.getElementById("c2");
   var ctx = setupCanvas(canvas);
   var W = canvas._w, H = canvas._h;
   var info = document.getElementById("c2-info");
+  var proteinTxt = document.getElementById("c2-protein");
   var seqInput = document.getElementById("c2-seq");
   seqInput.addEventListener("input", function () { render(); });
 
   var dnaComp = { A: "T", T: "A", G: "C", C: "G" };
   var rnaFromDna = { A: "U", T: "A", G: "C", C: "G" };
+  /* 표준 유전 암호(RNA 코돈 → 아미노산 3문자 약자), Stop 포함 */
   var codonTable = {
-    UAC: "Tyr(티로신)", AUG: "Met(메싸이오닌·시작)", UGA: "Stop(정지)", GCU: "Ala(알라닌)",
-    default: "아미노산"
+    UUU: "Phe", UUC: "Phe", UUA: "Leu", UUG: "Leu", CUU: "Leu", CUC: "Leu", CUA: "Leu", CUG: "Leu",
+    AUU: "Ile", AUC: "Ile", AUA: "Ile", AUG: "Met", GUU: "Val", GUC: "Val", GUA: "Val", GUG: "Val",
+    UCU: "Ser", UCC: "Ser", UCA: "Ser", UCG: "Ser", CCU: "Pro", CCC: "Pro", CCA: "Pro", CCG: "Pro",
+    ACU: "Thr", ACC: "Thr", ACA: "Thr", ACG: "Thr", GCU: "Ala", GCC: "Ala", GCA: "Ala", GCG: "Ala",
+    UAU: "Tyr", UAC: "Tyr", UAA: "Stop", UAG: "Stop", CAU: "His", CAC: "His", CAA: "Gln", CAG: "Gln",
+    AAU: "Asn", AAC: "Asn", AAA: "Lys", AAG: "Lys", GAU: "Asp", GAC: "Asp", GAA: "Glu", GAG: "Glu",
+    UGU: "Cys", UGC: "Cys", UGA: "Stop", UGG: "Trp", CGU: "Arg", CGC: "Arg", CGA: "Arg", CGG: "Arg",
+    AGU: "Ser", AGC: "Ser", AGA: "Arg", AGG: "Arg", GGU: "Gly", GGC: "Gly", GGA: "Gly", GGG: "Gly"
   };
 
   function render() {
-    var seq = seqInput.value.toUpperCase().replace(/[^ATGC]/g, "").slice(0, 12);
+    var seq = seqInput.value.toUpperCase().replace(/[^ATGC]/g, "").slice(0, 15);
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    if (seq.length === 0) { info.innerHTML = "A, T, G, C로 이루어진 DNA 서열을 입력해 보세요."; return; }
+    if (seq.length === 0) { info.innerHTML = "A, T, G, C로 이루어진 DNA 서열을 입력해 보세요."; proteinTxt.textContent = ""; return; }
 
     var codingStrand = seq.split("").map(function (b) { return dnaComp[b]; }).join("");
     var mrna = seq.split("").map(function (b) { return rnaFromDna[b]; }).join("");
 
-    var x0 = 50, cellW = Math.min(60, (W - 100) / seq.length);
+    var x0 = 50, cellW = Math.min(50, (W - 100) / seq.length);
     function drawStrand(y, seqArr, color, label) {
       ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
       ctx.fillText(label, 10, y + 5);
@@ -233,29 +307,44 @@
         var x = x0 + i * cellW;
         ctx.save();
         ctx.fillStyle = cssVar(color); ctx.globalAlpha = .85;
-        ctx.beginPath(); ctx.arc(x, y, 16, 0, 7); ctx.fill();
+        ctx.beginPath(); ctx.arc(x, y, 14, 0, 7); ctx.fill();
         ctx.restore();
-        ctx.font = "700 13px Consolas, monospace"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center";
+        ctx.font = "700 12px Consolas, monospace"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center";
         ctx.fillText(base, x, y + 4);
       });
     }
-    drawStrand(70, seq, "--mist", "DNA 주형 가닥");
-    drawStrand(140, codingStrand, "--cold", "DNA 비주형(암호화) 가닥");
-    drawStrand(210, mrna, "--teal", "전사된 mRNA");
+    drawStrand(60, seq, "--mist", "DNA 주형 가닥");
+    drawStrand(120, codingStrand, "--cold", "DNA 비주형(암호화) 가닥");
+    drawStrand(180, mrna, "--teal", "전사된 mRNA");
 
-    // codons grouping
-    ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
-    ctx.fillText("코돈(3염기 단위)", 10, 260);
     var codons = [];
     for (var i = 0; i + 3 <= mrna.length; i += 3) codons.push(mrna.slice(i, i + 3));
-    codons.forEach(function (c, i) {
-      var x = x0 + i * cellW * 3 + cellW;
-      ctx.strokeStyle = cssVar("--violet"); ctx.strokeRect(x0 + i * cellW * 3 - 4, 270, cellW * 3 - 12, 26);
-      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--violet"); ctx.textAlign = "center";
-      ctx.fillText(c, x, 288);
+    var aminoAcids = [];
+    var stopped = false;
+    codons.forEach(function (c) {
+      var aa = codonTable[c] || "?";
+      if (aa === "Stop") stopped = true;
+      if (!stopped) aminoAcids.push(aa);
     });
 
-    info.innerHTML = "DNA(<b>" + seq + "</b>)가 전사되어 mRNA(<b>" + mrna + "</b>)가 만들어집니다. mRNA는 3염기씩 <b>코돈</b>으로 묶여 리보솜에서 번역되며, 각 코돈은 특정 아미노산을 지정합니다(중심원리: DNA → RNA → 단백질).";
+    ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
+    ctx.fillText("코돈 → 아미노산", 10, 225);
+    codons.forEach(function (c, i) {
+      var x = x0 + i * cellW * 3 + cellW * 1.5;
+      var aa = codonTable[c] || "?";
+      ctx.strokeStyle = aa === "Stop" ? cssVar("--coral") : cssVar("--violet");
+      ctx.strokeRect(x0 + i * cellW * 3 - 4, 235, cellW * 3 - 6, 44);
+      ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--violet"); ctx.textAlign = "center";
+      ctx.fillText(c, x, 250);
+      ctx.font = "700 11px Segoe UI"; ctx.fillStyle = aa === "Stop" ? cssVar("--coral") : cssVar("--foam");
+      ctx.fillText(aa, x, 268);
+    });
+
+    proteinTxt.innerHTML = aminoAcids.length > 0
+      ? "생성된 폴리펩타이드(단백질 사슬): <b>" + aminoAcids.join("-") + "</b>" + (stopped ? " (정지 코돈에서 종료)" : " (서열이 짧아 정지 코돈 전에 끝남)")
+      : "첫 코돈이 정지 코돈이라 단백질이 만들어지지 않습니다.";
+
+    info.innerHTML = "DNA(<b>" + seq + "</b>)가 전사되어 mRNA(<b>" + mrna + "</b>)가 만들어집니다. mRNA는 3염기씩 <b>코돈</b>으로 묶여 리보솜에서 번역되며, 실제 표준 유전 암호표에 따라 각 코돈이 특정 아미노산(또는 정지 신호)을 지정합니다(중심원리: DNA → RNA → 단백질).";
   }
   render();
 })();
