@@ -31,21 +31,49 @@
         <div class="canvas-wrap"><canvas id="c0" width="900" height="380"></canvas></div>
         <div class="info-card" id="c0-info">기본량 카드를 클릭해 보세요.</div>
       </div>
+
+      <div class="stage-card">
+        <div class="stage-head" style="padding:20px 20px 0;">
+          <div class="eyebrow">심화 · 실시간 단위 변환기</div>
+          <h2 class="display" style="font-size:19px;">온도(K)와 물질량(mol) 직접 조절해보기</h2>
+          <p>슬라이더를 움직이면 온도계와 입자 개수가 실시간으로 바뀝니다. 정의식이 실제 값에 어떻게 반영되는지 확인해 보세요.</p>
+        </div>
+        <div class="canvas-wrap"><canvas id="c0b" width="900" height="260"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">섭씨 온도 (℃)<span class="val" id="c0b-t-val">25℃</span></div>
+            <input type="range" id="c0b-t" min="-50" max="150" step="1" value="25">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">물질량 지수 n (10ⁿ mol)<span class="val" id="c0b-mol-val">10⁰ mol</span></div>
+            <input type="range" id="c0b-mol" min="-3" max="3" step="0.1" value="0">
+          </div>
+        </div>
+        <div class="info-card" id="c0b-info"></div>
+      </div>
     </section>
 
     <section class="tab-panel" data-panel="1" hidden>
       <div class="stage-head">
         <div class="eyebrow">02 · 10의 거듭제곱으로 본 세계</div>
-        <h2 class="display">우주에서 원자핵까지, 시간과 공간의 규모</h2>
-        <p>슬라이더를 움직여 우주의 크기(약 10²⁶m)부터 원자핵의 크기(약 10⁻¹⁵m)까지, 자릿수가 다른 다양한 크기를 비교해 보세요.</p>
+        <h2 class="display">두 크기를 동시에 놓고 비교하기</h2>
+        <p>기준 A, B 두 슬라이더를 각각 움직여 서로 다른 두 크기를 지정해 보세요. 두 크기의 배율 차이가 얼마나 되는지 실시간으로 계산됩니다.</p>
       </div>
       <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
+        <div class="canvas-wrap"><canvas id="c1" width="900" height="420"></canvas></div>
         <div class="controls">
           <div class="ctrl-group">
-            <div class="ctrl-label">크기(10의 거듭제곱, m)<span class="val" id="c1-e-val">0</span></div>
-            <input type="range" id="c1-e" min="-15" max="26" step="1" value="0">
+            <div class="ctrl-label">기준 A · 10ⁿ m<span class="val" id="c1-eA-val">0</span></div>
+            <input type="range" id="c1-eA" min="-15" max="26" step="1" value="0">
           </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">기준 B · 10ⁿ m<span class="val" id="c1-eB-val">26</span></div>
+            <input type="range" id="c1-eB" min="-15" max="26" step="1" value="26">
+          </div>
+        </div>
+        <div class="readout" style="margin:0 20px 14px;">
+          <span class="dot" style="background:var(--violet)"></span>
+          <span class="txt" id="c1-ratio"></span>
         </div>
         <div class="info-card" id="c1-info"></div>
       </div>
@@ -55,7 +83,7 @@
       <div class="stage-head">
         <div class="eyebrow">03 · 매우 크거나 작은 수를 다루는 방법</div>
         <h2 class="display">과학적 표기법</h2>
-        <p>지수 슬라이더를 조절해 숫자가 어떻게 A × 10ⁿ 형태로 표현되는지, 실제 숫자로 풀어 쓰면 어떤 모습인지 비교해 보세요.</p>
+        <p>지수 슬라이더를 조절해 숫자가 어떻게 A × 10ⁿ 형태로 표현되는지 확인하고, 실제 값 프리셋과 문제 풀기 모드로 연습해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c2" width="900" height="300"></canvas></div>
@@ -68,6 +96,23 @@
             <div class="ctrl-label">지수(n)<span class="val" id="c2-n-val">0</span></div>
             <input type="range" id="c2-n" min="-8" max="12" step="1" value="0">
           </div>
+        </div>
+        <div class="toggle-row" id="c2-presets" style="margin:0 20px 14px;">
+          <button class="chip" data-a="6.02" data-n="23">아보가드로수</button>
+          <button class="chip" data-a="3.00" data-n="8">빛의 속력 (m/s)</button>
+          <button class="chip" data-a="1.00" data-n="-10">원자 반지름 (m)</button>
+          <button class="chip" data-a="1.20" data-n="-7">바이러스 지름 (m)</button>
+          <button class="chip" data-a="5.97" data-n="24">지구 질량 (kg)</button>
+          <button class="chip" data-a="1.00" data-n="-9">나노 입자 (m)</button>
+        </div>
+        <div class="seg" id="c2-mode" style="margin:0 20px 14px;">
+          <button class="on" data-mode="explore">자유 탐색</button>
+          <button data-mode="quiz">문제 풀기</button>
+        </div>
+        <div class="info-card" id="c2-target" style="display:none;"></div>
+        <div class="toggle-row" id="c2-quiz-actions" style="display:none;margin:0 20px 14px;">
+          <button class="chip" id="c2-check">정답 확인</button>
+          <button class="chip" id="c2-newq">새 문제</button>
         </div>
         <div class="info-card" id="c2-info"></div>
       </div>
@@ -132,14 +177,93 @@
   render();
 })();
 
-/* TAB1 우주의 스케일 */
+/* TAB0-B 온도·몰 변환기 */
+(function () {
+  var canvas = document.getElementById("c0b");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var tSlider = document.getElementById("c0b-t");
+  var molSlider = document.getElementById("c0b-mol");
+  var tVal = document.getElementById("c0b-t-val");
+  var molVal = document.getElementById("c0b-mol-val");
+  var info = document.getElementById("c0b-info");
+  var NA = 6.02214076e23;
+
+  function superscript(n) {
+    var map = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹", ".": "" };
+    return String(n).split("").map(function (c) { return map[c] !== undefined ? map[c] : c; }).join("");
+  }
+
+  function render() {
+    var c = +tSlider.value;
+    var n = +molSlider.value;
+    tVal.textContent = c + "℃";
+    molVal.textContent = "10" + superscript(n.toFixed(1)) + " mol";
+
+    var k = c + 273.15;
+    var f = c * 9 / 5 + 32;
+    var particles = Math.pow(10, n) * NA;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+
+    /* left: thermometer */
+    var bx = 70, bw = 40, by0 = 30, by1 = H - 40;
+    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
+    ctx.strokeRect(bx, by0, bw, by1 - by0);
+    var frac = (c - (-50)) / (150 - (-50));
+    frac = Math.max(0, Math.min(1, frac));
+    var fillY = by1 - frac * (by1 - by0);
+    var grad = ctx.createLinearGradient(0, by1, 0, by0);
+    grad.addColorStop(0, cssVar("--cold"));
+    grad.addColorStop(1, cssVar("--coral"));
+    ctx.fillStyle = grad;
+    ctx.fillRect(bx + 3, fillY, bw - 6, by1 - fillY);
+    // reference ticks: 0C and 100C
+    [0, 100].forEach(function (ref) {
+      var rf = (ref - (-50)) / (150 - (-50));
+      var ry = by1 - rf * (by1 - by0);
+      ctx.strokeStyle = cssVar("--mist"); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(bx - 8, ry); ctx.lineTo(bx + bw + 8, ry); ctx.stroke();
+      ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
+      ctx.fillText(ref === 0 ? "물의 어는점 0℃" : "물의 끓는점 100℃", bx + bw + 12, ry + 3);
+    });
+
+    ctx.font = "700 15px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "left";
+    ctx.fillText("K = ℃ + 273.15 = " + k.toFixed(2) + " K", 260, 50);
+    ctx.fillText("℉ = ℃ × 9/5 + 32 = " + f.toFixed(1) + " ℉", 260, 78);
+
+    /* right: particle dot cluster (visual, not literal count) */
+    var dotCount = Math.round(6 + (n + 3) * 7); // 6~48 dots to visualize scale, not literal
+    var gx0 = 260, gy0 = 110, gCols = 12;
+    ctx.fillStyle = cssVar("--teal");
+    for (var i = 0; i < dotCount; i++) {
+      var col = i % gCols, row = Math.floor(i / gCols);
+      ctx.beginPath();
+      ctx.arc(gx0 + col * 24, gy0 + row * 22, 6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.font = "700 15px Segoe UI"; ctx.fillStyle = cssVar("--foam");
+    ctx.fillText("실제 입자 수 ≈ " + particles.toExponential(2) + " 개", 260, gy0 + 5 * 22 + 26);
+
+    info.innerHTML = "온도 정의: 절대 영도(0K, -273.15℃)를 기준으로 한 온도가 켈빈(K)입니다. 물질량 정의: 1 mol은 아보가드로수(6.02×10²³개)만큼의 입자를 뜻하며, 지수 n이 1 커질 때마다 입자 수는 10배씩 늘어납니다.";
+  }
+  tSlider.addEventListener("input", render);
+  molSlider.addEventListener("input", render);
+  render();
+})();
+
+/* TAB1 우주의 스케일 — 비교 모드 */
 (function () {
   var canvas = document.getElementById("c1");
   var ctx = setupCanvas(canvas);
   var W = canvas._w, H = canvas._h;
-  var e = 0;
+  var eA = 0, eB = 26;
   var info = document.getElementById("c1-info");
-  document.getElementById("c1-e").addEventListener("input", function (ev) { e = +ev.target.value; document.getElementById("c1-e-val").textContent = e; render(); });
+  var ratioTxt = document.getElementById("c1-ratio");
+  var slA = document.getElementById("c1-eA"), slB = document.getElementById("c1-eB");
+  slA.addEventListener("input", function () { eA = +slA.value; document.getElementById("c1-eA-val").textContent = eA; render(); });
+  slB.addEventListener("input", function () { eB = +slB.value; document.getElementById("c1-eB-val").textContent = eB; render(); });
 
   var refs = [
     { e: 26, label: "관측 가능한 우주의 크기", icon: "🌌" },
@@ -153,33 +277,59 @@
     { e: -15, label: "원자핵의 크기(fm)", icon: "🔬" }
   ];
 
+  function xOf(ee) { return 60 + (ee + 15) / (26 + 15) * (W - 120); }
+
   function render() {
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var x0 = 60, x1 = W - 60, y = H / 2;
+    var y = H / 2 + 20;
     ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke();
-
-    function xOf(ee) { return x0 + (ee + 15) / (26 + 15) * (x1 - x0); }
+    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(W - 60, y); ctx.stroke();
 
     refs.forEach(function (r) {
       var x = xOf(r.e);
       ctx.save();
       ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x, y - 6); ctx.lineTo(x, y + 6); ctx.stroke();
-      ctx.font = "18px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(r.icon, x, y - 20);
-      ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--mist");
-      wrapText(ctx, r.label, x, y + 30, 90, 12);
+      ctx.font = "16px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(r.icon, x, y + 28);
+      ctx.font = "9.5px Segoe UI"; ctx.fillStyle = cssVar("--mist");
+      wrapText(ctx, r.label, x, y + 44, 85, 11);
       ctx.restore();
     });
 
-    var px = xOf(e);
-    ctx.save();
-    ctx.fillStyle = cssVar("--coral");
-    ctx.beginPath(); ctx.arc(px, y, 8, 0, 7); ctx.fill();
-    ctx.restore();
+    var xA = xOf(eA), xB = xOf(eB);
+    var xLow = Math.min(xA, xB), xHigh = Math.max(xA, xB);
+    var by = y - 70;
+    ctx.strokeStyle = cssVar("--violet"); ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(xLow, by); ctx.lineTo(xHigh, by); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(xLow, by - 6); ctx.lineTo(xLow, by + 6); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(xHigh, by - 6); ctx.lineTo(xHigh, by + 6); ctx.stroke();
 
-    var meters = Math.pow(10, e);
-    info.innerHTML = "10<sup>" + e + "</sup> m ≈ " + formatMeters(meters) + ". " + closestRef(e);
+    ctx.fillStyle = cssVar("--coral");
+    ctx.beginPath(); ctx.arc(xA, y, 9, 0, Math.PI * 2); ctx.fill();
+    ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--coral"); ctx.textAlign = "center";
+    ctx.fillText("A", xA, y - 16);
+
+    ctx.fillStyle = cssVar("--cold");
+    ctx.beginPath(); ctx.arc(xB, y, 9, 0, Math.PI * 2); ctx.fill();
+    ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--cold");
+    ctx.fillText("B", xB, y - 16);
+
+    var diff = eB - eA;
+    var ratioStr;
+    if (Math.abs(diff) >= 3) {
+      ratioStr = "10" + superscript(Math.abs(diff)) + "배";
+    } else {
+      ratioStr = Math.pow(10, Math.abs(diff)).toLocaleString() + "배";
+    }
+    ratioTxt.innerHTML = diff === 0
+      ? "A와 B는 같은 크기입니다."
+      : (diff > 0 ? "B는 A보다 <b>" + ratioStr + "</b> 더 큽니다." : "A는 B보다 <b>" + ratioStr + "</b> 더 큽니다.");
+
+    info.innerHTML = "A(10<sup>" + eA + "</sup>m) 가장 가까운 기준: " + closestRef(eA) + "<br>B(10<sup>" + eB + "</sup>m) 가장 가까운 기준: " + closestRef(eB);
+  }
+  function superscript(n) {
+    var map = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+    return String(n).split("").map(function (c) { return map[c] || c; }).join("");
   }
   function wrapText(ctx, text, x, y, maxW, lh) {
     var line = "", lines = [];
@@ -190,29 +340,73 @@
     lines.push(line);
     lines.forEach(function (l, i) { ctx.fillText(l, x, y + i * lh); });
   }
-  function formatMeters(m) {
-    if (m >= 1e3) return m.toExponential(2) + " m";
-    if (m >= 1) return m.toFixed(0) + " m";
-    if (m >= 1e-2) return (m * 100).toFixed(1) + " cm";
-    return m.toExponential(2) + " m";
-  }
   function closestRef(ee) {
     var best = refs[0], bestD = Infinity;
     refs.forEach(function (r) { var d = Math.abs(r.e - ee); if (d < bestD) { bestD = d; best = r; } });
-    return "가장 가까운 기준: " + best.icon + " " + best.label;
+    return best.icon + " " + best.label;
   }
   render();
 })();
 
-/* TAB2 과학적 표기법 */
+/* TAB2 과학적 표기법 — 프리셋 + 문제풀기 */
 (function () {
   var canvas = document.getElementById("c2");
   var ctx = setupCanvas(canvas);
   var W = canvas._w, H = canvas._h;
   var a = 1, n = 0;
+  var mode = "explore";
+  var target = null;
   var info = document.getElementById("c2-info");
-  document.getElementById("c2-a").addEventListener("input", function (e) { a = +e.target.value; document.getElementById("c2-a-val").textContent = a.toFixed(1); render(); });
-  document.getElementById("c2-n").addEventListener("input", function (e) { n = +e.target.value; document.getElementById("c2-n-val").textContent = n; render(); });
+  var aSlider = document.getElementById("c2-a"), nSlider = document.getElementById("c2-n");
+  aSlider.addEventListener("input", function (e) { a = +e.target.value; document.getElementById("c2-a-val").textContent = a.toFixed(1); render(); });
+  nSlider.addEventListener("input", function (e) { n = +e.target.value; document.getElementById("c2-n-val").textContent = n; render(); });
+
+  document.querySelectorAll("#c2-presets button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      a = +b.getAttribute("data-a"); n = +b.getAttribute("data-n");
+      aSlider.value = a; nSlider.value = n;
+      document.getElementById("c2-a-val").textContent = a.toFixed(1);
+      document.getElementById("c2-n-val").textContent = n;
+      info.innerHTML = "<b>" + b.textContent + "</b> 값으로 설정했습니다.";
+      render();
+    });
+  });
+
+  var modeSeg = document.getElementById("c2-mode");
+  var targetBox = document.getElementById("c2-target");
+  var quizActions = document.getElementById("c2-quiz-actions");
+  modeSeg.querySelectorAll("button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      modeSeg.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
+      b.classList.add("on");
+      mode = b.getAttribute("data-mode");
+      var isQuiz = mode === "quiz";
+      targetBox.style.display = isQuiz ? "" : "none";
+      quizActions.style.display = isQuiz ? "" : "none";
+      if (isQuiz && !target) newQuestion();
+      render();
+    });
+  });
+
+  function newQuestion() {
+    var ta = Math.round((1 + Math.random() * 8.9) * 10) / 10;
+    var tn = Math.floor(Math.random() * 21) - 8;
+    target = { a: ta, n: tn, value: ta * Math.pow(10, tn) };
+    targetBox.style.display = "";
+    targetBox.innerHTML = "<b>다음 숫자를 A × 10ⁿ 형태로 맞춰 보세요:</b><br>" + formatFull(target.value);
+    info.textContent = "슬라이더로 A와 n을 조절한 뒤 [정답 확인]을 눌러 보세요.";
+  }
+  document.getElementById("c2-newq").addEventListener("click", newQuestion);
+  document.getElementById("c2-check").addEventListener("click", function () {
+    if (!target) return;
+    var userVal = a * Math.pow(10, n);
+    var ok = Math.abs(userVal - target.value) / Math.abs(target.value) < 0.015;
+    if (ok) {
+      info.innerHTML = "<b style='color:var(--teal)'>정답입니다!</b> " + target.a.toFixed(1) + " × 10" + superscript(target.n) + " = " + formatFull(target.value) + ". [새 문제]를 눌러 계속 연습해 보세요.";
+    } else {
+      info.innerHTML = "<b style='color:var(--coral)'>다시 시도해 보세요.</b> 정답은 " + target.a.toFixed(1) + " × 10" + superscript(target.n) + " 입니다 (= " + formatFull(target.value) + ").";
+    }
+  });
 
   function render() {
     ctx.clearRect(0, 0, W, H);
@@ -226,7 +420,9 @@
     ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist");
     ctx.fillText(n >= 0 ? "지수가 양수 → 큰 수" : "지수가 음수 → 작은 수 (소수)", W / 2, 220);
 
-    info.innerHTML = "과학적 표기법은 1 ≤ A < 10인 계수 A와 10의 거듭제곱을 이용해 매우 크거나 작은 수를 간결하게 나타내는 방법입니다. 지수 n은 소수점을 몇 자리 이동했는지를 나타냅니다.";
+    if (mode === "explore") {
+      info.innerHTML = "과학적 표기법은 1 ≤ A < 10인 계수 A와 10의 거듭제곱을 이용해 매우 크거나 작은 수를 간결하게 나타내는 방법입니다. 지수 n은 소수점을 몇 자리 이동했는지를 나타냅니다.";
+    }
   }
   function superscript(n) {
     var map = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };

@@ -24,16 +24,20 @@
     <section class="tab-panel" data-panel="0">
       <div class="stage-head">
         <div class="eyebrow">01 · 빅뱅 이후 138억 년</div>
-        <h2 class="display">우주의 시작과 원소의 생성</h2>
-        <p>시간 슬라이더를 움직여 빅뱅 직후부터 최초의 원자가 만들어지기까지, 우주가 팽창하며 온도가 낮아짐에 따라 무엇이 만들어졌는지 확인해 보세요.</p>
+        <h2 class="display">우주의 온도가 내려가며 생긴 일</h2>
+        <p>우주 온도 슬라이더를 낮춰가며(왼쪽=뜨거운 초기 우주, 오른쪽=차가운 현재에 가까운 우주), 온도 임계값을 지날 때마다 무엇이 새로 만들어지는지 확인해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="400"></canvas></div>
         <div class="controls">
           <div class="ctrl-group">
-            <div class="ctrl-label">빅뱅 이후 경과 단계<span class="val" id="c0-t-val">0</span></div>
-            <input type="range" id="c0-t" min="0" max="4" step="1" value="0">
+            <div class="ctrl-label">우주의 온도 (10ⁿ K, 로그 스케일)<span class="val" id="c0-t-val">32</span></div>
+            <input type="range" id="c0-t" min="1" max="32" step="1" value="32">
           </div>
+        </div>
+        <div class="readout" style="margin:0 20px 14px;">
+          <span class="dot" style="background:var(--coral)"></span>
+          <span class="txt" id="c0-ratio">아직 원자핵이 생성되지 않았습니다.</span>
         </div>
         <div class="info-card" id="c0-info"></div>
       </div>
@@ -43,7 +47,7 @@
       <div class="stage-head">
         <div class="eyebrow">02 · 항성 내부의 핵융합</div>
         <h2 class="display">별은 원소의 용광로</h2>
-        <p>별의 질량을 조절하며, 별 내부에서 핵융합으로 어떤 원소까지 만들어질 수 있는지, 무거운 원소는 어떻게 생성되는지 확인해 보세요.</p>
+        <p>별의 질량을 조절하며, 별 내부에서 핵융합으로 어떤 원소까지 만들어질 수 있는지, 별의 예상 수명은 어떻게 달라지는지 확인해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
@@ -53,6 +57,10 @@
             <input type="range" id="c1-m" min="0.3" max="25" step="0.1" value="1">
           </div>
         </div>
+        <div class="readout" style="margin:0 20px 14px;">
+          <span class="dot" style="background:var(--violet)"></span>
+          <span class="txt" id="c1-life"></span>
+        </div>
         <div class="info-card" id="c1-info"></div>
       </div>
     </section>
@@ -61,10 +69,10 @@
       <div class="stage-head">
         <div class="eyebrow">03 · 우주 · 지각 · 생명체의 원소 구성</div>
         <h2 class="display">어디에나 있지만, 비율은 다르다</h2>
-        <p>같은 원소라도 우주 전체, 지각, 생명체(사람 몸)에서 차지하는 비율이 다릅니다. 탭을 눌러 비교해 보세요.</p>
+        <p>탭을 눌러 각 대상의 구성 비율을 원그래프로 비교하고, 아래에서 원소 하나를 골라 세 대상에서의 비율 차이를 막대그래프로 비교해 보세요.</p>
       </div>
       <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c2" width="900" height="420"></canvas></div>
+        <div class="canvas-wrap"><canvas id="c2" width="900" height="380"></canvas></div>
         <div class="controls">
           <div class="ctrl-group">
             <div class="ctrl-label">대상</div>
@@ -77,6 +85,19 @@
         </div>
         <div class="info-card" id="c2-info"></div>
       </div>
+      <div class="stage-card">
+        <div class="stage-head" style="padding:20px 20px 0;">
+          <div class="eyebrow">심화 · 원소별 3중 비교</div>
+          <h2 class="display" style="font-size:18px;">같은 원소, 다른 비율</h2>
+        </div>
+        <div class="toggle-row" id="c2b-picker" style="margin:0 20px 14px;">
+          <button class="chip on" data-el="수소">수소</button>
+          <button class="chip" data-el="산소">산소</button>
+          <button class="chip" data-el="헬륨">헬륨</button>
+        </div>
+        <div class="canvas-wrap"><canvas id="c2b" width="900" height="220"></canvas></div>
+        <div class="info-card" id="c2b-info"></div>
+      </div>
     </section>
   </main>
 </div>
@@ -87,30 +108,36 @@
 (function () {
 "use strict";
 
-/* TAB0 빅뱅 */
+/* TAB0 빅뱅 — 온도 임계값 모델 */
 (function () {
   var canvas = document.getElementById("c0");
   var ctx = setupCanvas(canvas);
   var W = canvas._w, H = canvas._h;
-  var stage = 0;
+  var e = 32; // 10^e K
   var info = document.getElementById("c0-info");
+  var ratioTxt = document.getElementById("c0-ratio");
   var stages = [
-    { name: "쿼크·경입자 시대", time: "빅뱅 후 ~10⁻⁶초", desc: "온도가 매우 높아 쿼크와 경입자가 자유롭게 떠도는 상태였습니다. 아직 양성자·중성자도 만들어지지 않았습니다.", n: 3 },
-    { name: "양성자·중성자 생성", time: "빅뱅 후 ~10⁻⁶초 ~ 3분", desc: "온도가 낮아지며 쿼크 3개가 결합해 양성자와 중성자가 만들어졌습니다.", n: 6 },
-    { name: "원자핵 생성 (빅뱅 핵합성)", time: "빅뱅 후 약 3분", desc: "양성자와 중성자가 결합해 수소와 헬륨의 원자핵이 만들어졌습니다. 이때 우주의 수소:헬륨 비율(개수비 약 12:1)이 거의 정해졌습니다.", n: 8 },
-    { name: "원자 생성 (재결합)", time: "빅뱅 후 약 38만 년", desc: "우주가 충분히 식으면서 원자핵이 전자를 붙잡아 중성 원자(수소, 헬륨)가 만들어졌습니다. 이때 빛이 자유롭게 퍼져나가 우주배경복사가 되었습니다.", n: 10 },
-    { name: "별의 탄생", time: "빅뱅 후 약 수억 년", desc: "중력에 의해 수소와 헬륨 가스가 뭉쳐 최초의 별이 탄생했습니다. 이후 별 내부에서 더 무거운 원소들이 만들어지기 시작합니다.", n: 14 }
+    { min: 13, name: "쿼크·경입자 시대", desc: "온도가 매우 높아 쿼크와 경입자가 자유롭게 떠도는 상태였습니다. 아직 양성자·중성자도 만들어지지 않았습니다.", n: 3 },
+    { min: 10, name: "양성자·중성자 생성", desc: "온도가 낮아지며 쿼크 3개가 결합해 양성자와 중성자가 만들어졌습니다.", n: 6 },
+    { min: 9, name: "원자핵 생성 (빅뱅 핵합성)", desc: "양성자와 중성자가 결합해 수소와 헬륨의 원자핵이 만들어졌습니다. 이때 우주의 수소:헬륨 개수비(약 12:1)가 거의 정해졌습니다.", n: 8 },
+    { min: 3.5, name: "원자 생성 (재결합)", desc: "우주가 충분히 식으면서 원자핵이 전자를 붙잡아 중성 원자(수소, 헬륨)가 만들어졌습니다. 이때 빛이 자유롭게 퍼져나가 우주배경복사가 되었습니다.", n: 10 },
+    { min: 1, name: "별의 탄생", desc: "중력에 의해 수소와 헬륨 가스가 뭉쳐 최초의 별이 탄생했습니다. 이후 별 내부에서 더 무거운 원소들이 만들어지기 시작합니다.", n: 14 }
   ];
-  document.getElementById("c0-t").addEventListener("input", function (e) { stage = +e.target.value; document.getElementById("c0-t-val").textContent = stage; render(); });
+  document.getElementById("c0-t").addEventListener("input", function (ev) { e = +ev.target.value; document.getElementById("c0-t-val").textContent = e; render(); });
+
+  function stageOf(ee) {
+    for (var i = 0; i < stages.length; i++) if (ee >= stages[i].min) return stages[i];
+    return stages[stages.length - 1];
+  }
 
   function render() {
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var s = stages[stage];
+    var s = stageOf(e);
     ctx.font = "700 18px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "center";
     ctx.fillText(s.name, W / 2, 50);
     ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist");
-    ctx.fillText(s.time, W / 2, 74);
+    ctx.fillText("우주의 온도 ≈ 10" + superscript(e) + " K", W / 2, 74);
 
     var n = s.n;
     var cols = Math.ceil(Math.sqrt(n));
@@ -119,23 +146,34 @@
       var col = i % cols, row = Math.floor(i / cols);
       var x = cx0 + col * 60 + 30, y = cy0 + row * 60;
       ctx.save();
-      var hue = stage <= 1 ? (i % 2 === 0 ? cssVar("--coral") : cssVar("--cold")) : stage === 2 ? cssVar("--teal") : stage === 3 ? cssVar("--violet") : cssVar("--coral");
+      var hue = e >= 10 ? (i % 2 === 0 ? cssVar("--coral") : cssVar("--cold")) : e >= 9 ? cssVar("--teal") : e >= 3.5 ? cssVar("--violet") : cssVar("--coral");
       ctx.fillStyle = hue;
-      ctx.beginPath(); ctx.arc(x, y, stage <= 1 ? 8 : 14, 0, 7); ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y, e >= 10 ? 8 : 14, 0, 7); ctx.fill();
       ctx.restore();
     }
-    info.innerHTML = "<b>" + s.time + "</b> — " + s.desc;
+
+    if (e < 9) {
+      ratioTxt.innerHTML = "빅뱅 핵합성 완료: 수소와 헬륨의 개수비 ≈ <b>12 : 1</b> (질량비로는 약 75% : 25%), 이후 우주가 식어도 이 비율은 거의 변하지 않습니다.";
+    } else {
+      ratioTxt.textContent = "아직 온도가 너무 높아 원자핵이 만들어지지 않았습니다. 슬라이더를 더 내려 보세요.";
+    }
+    info.innerHTML = s.desc;
+  }
+  function superscript(n) {
+    var map = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+    return String(n).split("").map(function (c) { return map[c] || c; }).join("");
   }
   render();
 })();
 
-/* TAB1 별의 핵융합 */
+/* TAB1 별의 핵융합 — 수명 계산 */
 (function () {
   var canvas = document.getElementById("c1");
   var ctx = setupCanvas(canvas);
   var W = canvas._w, H = canvas._h;
   var mass = 1.0;
   var info = document.getElementById("c1-info");
+  var lifeTxt = document.getElementById("c1-life");
   document.getElementById("c1-m").addEventListener("input", function (e) { mass = +e.target.value; document.getElementById("c1-m-val").textContent = mass.toFixed(1); render(); });
 
   function fusionChain(m) {
@@ -172,6 +210,12 @@
     }
     var cat = mass < 0.5 ? "가벼운 별은 헬륨 생성 단계에서 멈춥니다." : mass < 8 ? "태양급 별은 탄소·산소까지 만들고 생을 마칩니다." : "무거운 별은 철까지 융합하고, 초신성 폭발로 철보다 무거운 원소(금, 은, 우라늄 등)까지 만들어 냅니다.";
     info.innerHTML = "질량 " + mass.toFixed(1) + "M☉ 별의 핵융합: " + cat;
+
+    // 주계열성 수명 근사: t ≈ 10 Gyr × M^-2.5 (실제 관측적 근사식)
+    var lifeGyr = 10 * Math.pow(mass, -2.5);
+    var lifeStr = lifeGyr >= 1 ? lifeGyr.toFixed(2) + "억 년 × 10 = 약 " + lifeGyr.toFixed(1) + "Gyr(10억 년)" : (lifeGyr * 1000).toFixed(0) + "백만 년(Myr)";
+    var fate = mass < 0.5 ? "적색거성을 거쳐 백색왜성으로 남습니다." : mass < 8 ? "적색거성 → 행성상 성운 → 백색왜성" : "초신성 폭발 후 중성자별 또는 블랙홀이 됩니다.";
+    lifeTxt.innerHTML = "주계열 수명 근사식 t ≈ 10Gyr × M<sup>-2.5</sup> ≈ <b>" + (lifeGyr >= 1 ? lifeGyr.toFixed(1) + "0억 년" : (lifeGyr * 1000).toFixed(0) + "백만 년") + "</b> · 최후: " + fate;
   }
   render();
 })();
@@ -184,9 +228,9 @@
   var target = "universe";
   var info = document.getElementById("c2-info");
   var data = {
-    universe: { items: [["수소", 74], ["헬륨", 24], ["기타", 2]], desc: "우주 전체는 빅뱅 핵합성으로 만들어진 수소와 헬륨이 압도적으로 많습니다." },
-    crust: { items: [["산소", 46], ["규소", 28], ["알루미늄", 8], ["철", 5], ["기타", 13]], desc: "지각은 산소와 규소가 대부분을 차지하며, 규산염 광물의 주성분입니다." },
-    body: { items: [["산소", 65], ["탄소", 18], ["수소", 10], ["질소", 3], ["기타", 4]], desc: "사람의 몸은 물(H₂O)과 유기물의 주성분인 산소·탄소·수소·질소가 대부분을 차지합니다." }
+    universe: { items: [["수소", 74], ["헬륨", 24], ["기타", 2]], desc: "우주 전체는 빅뱅 핵합성으로 만들어진 수소와 헬륨이 압도적으로 많습니다.", full: { "수소": 74, "헬륨": 24, "산소": 0.9 } },
+    crust: { items: [["산소", 46], ["규소", 28], ["알루미늄", 8], ["철", 5], ["기타", 13]], desc: "지각은 산소와 규소가 대부분을 차지하며, 규산염 광물의 주성분입니다.", full: { "수소": 0.1, "헬륨": 0, "산소": 46 } },
+    body: { items: [["산소", 65], ["탄소", 18], ["수소", 10], ["질소", 3], ["기타", 4]], desc: "사람의 몸은 물(H₂O)과 유기물의 주성분인 산소·탄소·수소·질소가 대부분을 차지합니다.", full: { "수소": 10, "헬륨": 0, "산소": 65 } }
   };
   document.querySelectorAll("#c2-target button").forEach(function (b) {
     b.addEventListener("click", function () {
@@ -223,6 +267,40 @@
     info.innerHTML = d.desc;
   }
   render();
+
+  /* 심화: 원소별 3중 비교 막대 */
+  var canvas2 = document.getElementById("c2b");
+  var ctx2 = setupCanvas(canvas2);
+  var W2 = canvas2._w, H2 = canvas2._h;
+  var info2 = document.getElementById("c2b-info");
+  var el = "수소";
+  document.querySelectorAll("#c2b-picker button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      el = b.getAttribute("data-el");
+      document.querySelectorAll("#c2b-picker button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      renderCompare();
+    });
+  });
+  var contexts = [["universe", "우주 전체", "--teal"], ["crust", "지각", "--coral"], ["body", "사람의 몸", "--cold"]];
+  function renderCompare() {
+    ctx2.clearRect(0, 0, W2, H2);
+    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
+    var x0 = 220, x1 = W2 - 40, maxPct = 80;
+    contexts.forEach(function (c, i) {
+      var y = 40 + i * 60;
+      var pct = data[c[0]].full[el] || 0;
+      ctx2.font = "13px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "right";
+      ctx2.fillText(c[1], x0 - 12, y + 14);
+      ctx2.strokeStyle = cssVar("--line"); ctx2.strokeRect(x0, y, x1 - x0, 26);
+      ctx2.fillStyle = cssVar(c[2]);
+      ctx2.fillRect(x0, y, (x1 - x0) * Math.min(pct, maxPct) / maxPct, 26);
+      ctx2.font = "700 13px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "left";
+      ctx2.fillText(pct + "%", x0 + 8, y + 18);
+    });
+    var uni = data.universe.full[el] || 0, bod = data.body.full[el] || 0;
+    info2.innerHTML = "<b>" + el + "</b>은(는) 우주 전체에서 " + uni + "%지만 사람의 몸에서는 " + bod + "%를 차지합니다 — 원소의 절대적인 풍부함과, 특정 계(생명체·행성)에서의 중요도는 서로 다른 문제임을 보여줍니다.";
+  }
+  renderCompare();
 })();
 
 })();

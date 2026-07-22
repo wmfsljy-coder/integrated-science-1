@@ -25,7 +25,7 @@
       <div class="stage-head">
         <div class="eyebrow">01 · 반복 측정의 두 가지 품질</div>
         <h2 class="display">정밀도와 정확도</h2>
-        <p>과녁을 클릭해 화살을 쏘아 보세요(5발). 값이 목표(중심)에 가까운 정도가 <b>정확도</b>, 값들이 서로 모여 있는 정도가 <b>정밀도</b>입니다.</p>
+        <p>과녁에 화살을 쏘아 보세요. 쏠 때마다 결과가 <b>누적</b>되어 표준편차·평균 오차가 실시간으로 갱신됩니다. 값이 목표(중심)에 가까운 정도가 <b>정확도</b>, 값들이 서로 모여 있는 정도가 <b>정밀도</b>입니다.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
@@ -38,9 +38,16 @@
             <div class="ctrl-label">손떨림(무작위 오차)<span class="val" id="c0-noise-val">10</span></div>
             <input type="range" id="c0-noise" min="2" max="60" step="2" value="10">
           </div>
-          <button class="chip" id="c0-shoot">클릭해서 5발 쏘기</button>
         </div>
-        <div class="info-card" id="c0-info">슬라이더로 편향과 무작위 오차를 조절한 뒤 쏘아 보세요.</div>
+        <div class="toggle-row" style="margin:0 20px 14px;">
+          <button class="chip" id="c0-shoot">화살 5발 추가로 쏘기</button>
+          <button class="chip" id="c0-reset">전체 리셋</button>
+        </div>
+        <div class="readout" style="margin:0 20px 14px;">
+          <span class="dot" style="background:var(--teal)"></span>
+          <span class="txt" id="c0-stats">아직 쏘지 않았습니다.</span>
+        </div>
+        <div class="info-card" id="c0-info">슬라이더로 편향과 무작위 오차를 조절한 뒤 쏘아 보세요. 여러 번 쏠수록 통계가 더 정확해집니다.</div>
       </div>
     </section>
 
@@ -48,11 +55,15 @@
       <div class="stage-head">
         <div class="eyebrow">02 · 같은 기준으로 잰다는 것</div>
         <h2 class="display">측정 표준이 없다면?</h2>
-        <p>표준 단위가 있을 때와 없을 때, 같은 길이를 측정한 결과가 어떻게 달라지는지 비교해 보세요.</p>
+        <p>측정 대상의 실제 길이를 바꿔가며, 표준 단위가 있을 때와 없을 때 세 사람의 측정 결과가 어떻게 달라지는지 비교해 보세요.</p>
       </div>
       <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="360"></canvas></div>
+        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
         <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">측정 대상의 실제 길이(cm)<span class="val" id="c1-len-val">150</span></div>
+            <input type="range" id="c1-len" min="50" max="300" step="5" value="150">
+          </div>
           <div class="ctrl-group">
             <div class="ctrl-label">측정 방식</div>
             <div class="seg" id="c1-mode">
@@ -60,6 +71,10 @@
               <button data-m="standard">표준 단위(미터)</button>
             </div>
           </div>
+        </div>
+        <div class="readout" style="margin:0 20px 14px;">
+          <span class="dot" style="background:var(--coral)"></span>
+          <span class="txt" id="c1-spread"></span>
         </div>
         <div class="info-card" id="c1-info"></div>
       </div>
@@ -69,11 +84,19 @@
       <div class="stage-head">
         <div class="eyebrow">03 · 정밀 측정이 만든 현대 문명</div>
         <h2 class="display">측정 기술의 활용 분야</h2>
-        <p>카드를 클릭해 각 분야에서 정밀 측정 기술이 어떻게 활용되는지 확인해 보세요.</p>
+        <p>카드를 클릭해 각 분야에서 정밀 측정 기술이 어떻게 활용되는지 확인하고, 아래 그래프에서 분야별로 요구되는 측정 정밀도(자릿수)를 비교해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c2" width="900" height="380"></canvas></div>
         <div class="info-card" id="c2-info">카드를 클릭해 보세요.</div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-head" style="padding:20px 20px 0;">
+          <div class="eyebrow">심화 · 요구 정밀도 비교</div>
+          <h2 class="display" style="font-size:18px;">분야마다 다른 '자릿수 요구량'</h2>
+        </div>
+        <div class="canvas-wrap"><canvas id="c2b" width="900" height="220"></canvas></div>
+        <div class="info-card" id="c2b-info">위에서 카드를 클릭하면 해당 분야의 정밀도 요구 수준이 강조됩니다.</div>
       </div>
     </section>
   </main>
@@ -85,7 +108,7 @@
 (function () {
 "use strict";
 
-/* TAB0 정밀도/정확도 */
+/* TAB0 정밀도/정확도 — 누적 통계 */
 (function () {
   var canvas = document.getElementById("c0");
   var ctx = setupCanvas(canvas);
@@ -94,18 +117,25 @@
   var bias = 0, noise = 10;
   var shots = [];
   var info = document.getElementById("c0-info");
+  var stats = document.getElementById("c0-stats");
 
   document.getElementById("c0-bias").addEventListener("input", function (e) { bias = +e.target.value; document.getElementById("c0-bias-val").textContent = bias; });
   document.getElementById("c0-noise").addEventListener("input", function (e) { noise = +e.target.value; document.getElementById("c0-noise-val").textContent = noise; });
   document.getElementById("c0-shoot").addEventListener("click", function () {
-    shots = [];
     var biasAngle = Math.PI * 0.6;
     for (var i = 0; i < 5; i++) {
       var bx = cx + Math.cos(biasAngle) * bias, by = cy + Math.sin(biasAngle) * bias;
       var ang = Math.random() * Math.PI * 2, r = Math.random() * noise;
       shots.push({ x: bx + Math.cos(ang) * r, y: by + Math.sin(ang) * r });
     }
+    if (shots.length > 60) shots = shots.slice(shots.length - 60);
     analyze();
+    render();
+  });
+  document.getElementById("c0-reset").addEventListener("click", function () {
+    shots = [];
+    stats.textContent = "아직 쏘지 않았습니다.";
+    info.textContent = "슬라이더로 편향과 무작위 오차를 조절한 뒤 쏘아 보세요. 여러 번 쏠수록 통계가 더 정확해집니다.";
     render();
   });
 
@@ -115,12 +145,14 @@
     shots.forEach(function (s) { mx += s.x; my += s.y; });
     mx /= shots.length; my /= shots.length;
     var accDist = Math.hypot(mx - cx, my - cy);
-    var spread = 0;
-    shots.forEach(function (s) { spread += Math.hypot(s.x - mx, s.y - my); });
-    spread /= shots.length;
-    var accurate = accDist < 25, precise = spread < 20;
+    var variance = 0;
+    shots.forEach(function (s) { variance += Math.pow(Math.hypot(s.x - mx, s.y - my), 2); });
+    variance /= shots.length;
+    var sd = Math.sqrt(variance);
+    var accurate = accDist < 25, precise = sd < 20;
     var verdict = accurate && precise ? "정확하고 정밀함 (이상적인 측정)" : accurate && !precise ? "정확하지만 정밀하지 않음 (무작위 오차가 큼)" : !accurate && precise ? "정밀하지만 정확하지 않음 (시스템 오차가 있음)" : "정확하지도 정밀하지도 않음";
-    info.innerHTML = "평균이 중심에서 <b>" + accDist.toFixed(0) + "px</b> 떨어짐(정확도), 값들이 평균에서 평균 <b>" + spread.toFixed(0) + "px</b> 흩어짐(정밀도) → <b>" + verdict + "</b>";
+    stats.innerHTML = "누적 " + shots.length + "발 · 평균이 중심에서 <b>" + accDist.toFixed(0) + "px</b>(정확도 오차) · 표준편차 <b>" + sd.toFixed(1) + "px</b>(정밀도) → <b>" + verdict + "</b>";
+    info.innerHTML = "화살 수가 늘어날수록 평균값이 참값에 가까워지며 통계가 안정됩니다(큰 수의 법칙). 지금은 " + shots.length + "발이 누적되었습니다.";
   }
 
   function render() {
@@ -137,13 +169,23 @@
     ctx.fillStyle = cssVar("--coral");
     ctx.beginPath(); ctx.arc(cx, cy, 6, 0, 7); ctx.fill();
 
-    shots.forEach(function (s) {
+    shots.forEach(function (s, i) {
       ctx.save();
+      ctx.globalAlpha = 0.35 + 0.65 * (i / Math.max(1, shots.length - 1));
       ctx.fillStyle = cssVar("--teal");
       ctx.beginPath(); ctx.arc(s.x, s.y, 6, 0, 7); ctx.fill();
       ctx.strokeStyle = cssVar("--abyss"); ctx.lineWidth = 1.5; ctx.stroke();
       ctx.restore();
     });
+
+    if (shots.length > 0) {
+      var mx = 0, my = 0;
+      shots.forEach(function (s) { mx += s.x; my += s.y; });
+      mx /= shots.length; my /= shots.length;
+      ctx.strokeStyle = cssVar("--violet"); ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(mx - 10, my); ctx.lineTo(mx + 10, my); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(mx, my - 10); ctx.lineTo(mx, my + 10); ctx.stroke();
+    }
   }
   render();
 })();
@@ -154,7 +196,9 @@
   var ctx = setupCanvas(canvas);
   var W = canvas._w, H = canvas._h;
   var mode = "none";
+  var realLength = 150;
   var info = document.getElementById("c1-info");
+  var spreadTxt = document.getElementById("c1-spread");
   document.querySelectorAll("#c1-mode button").forEach(function (b) {
     b.addEventListener("click", function () {
       mode = b.getAttribute("data-m");
@@ -162,36 +206,48 @@
       render();
     });
   });
+  document.getElementById("c1-len").addEventListener("input", function (e) {
+    realLength = +e.target.value;
+    document.getElementById("c1-len-val").textContent = realLength;
+    render();
+  });
 
   var people = [
     { name: "철수(손 15cm)", handCm: 15 },
     { name: "영희(손 12cm)", handCm: 12 },
     { name: "민수(손 18cm)", handCm: 18 }
   ];
-  var realLength = 150; // cm
 
   function render() {
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var barY0 = 80, barH = 60;
+    var barY0 = 80;
+    var maxBarPx = 700;
+    var results = [];
     people.forEach(function (p, i) {
       var y = barY0 + i * 90;
-      ctx.strokeStyle = cssVar("--line"); ctx.strokeRect(60, y, 700, 30);
+      ctx.strokeStyle = cssVar("--line"); ctx.strokeRect(60, y, maxBarPx, 30);
+      var estimatedCm = mode === "none" ? Math.round(realLength / p.handCm) * p.handCm : realLength;
       var measured = mode === "none" ? Math.round(realLength / p.handCm) : (realLength / 100).toFixed(2);
       var unit = mode === "none" ? "뼘" : "m";
-      var barLen = mode === "none" ? 700 : 700 * (realLength / 100) / 1.5;
+      var barLen = maxBarPx * estimatedCm / 300;
+      results.push(estimatedCm);
       ctx.fillStyle = cssVar("--teal"); ctx.globalAlpha = .7;
-      ctx.fillRect(60, y, Math.min(barLen, 700), 30);
+      ctx.fillRect(60, y, Math.min(barLen, maxBarPx), 30);
       ctx.globalAlpha = 1;
       ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "left";
-      ctx.fillText(p.name + " 측정 결과: " + measured + unit, 60, y - 10);
+      ctx.fillText(p.name + " 측정 결과: " + measured + unit + "  (환산 시 약 " + estimatedCm.toFixed(0) + "cm)", 60, y - 10);
     });
     ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
-    ctx.fillText("실제 길이: 150cm (모두 같은 물체를 측정)", 60, 40);
+    ctx.fillText("실제 길이: " + realLength + "cm (모두 같은 물체를 측정)", 60, 40);
 
+    var maxR = Math.max.apply(null, results), minR = Math.min.apply(null, results);
+    var errRange = maxR - minR;
     if (mode === "none") {
+      spreadTxt.innerHTML = "세 사람의 환산 결과 차이(오차 범위): <b>" + errRange.toFixed(1) + "cm</b> (실제 길이의 " + (errRange / realLength * 100).toFixed(1) + "%)";
       info.innerHTML = "신체 부위(뼘)로 측정하면 사람마다 손 크기가 달라 <b>같은 물체인데도 측정값이 다르게</b> 나옵니다. 결과를 공유하거나 비교하기 어렵습니다.";
     } else {
+      spreadTxt.innerHTML = "세 사람의 결과 차이(오차 범위): <b>0.0cm</b> — 누가 측정해도 동일합니다.";
       info.innerHTML = "미터(m)라는 <b>표준 단위</b>를 사용하면 누가 측정하든 같은 결과가 나와, 결과를 정확하게 공유·비교·재현할 수 있습니다. 이것이 측정 표준의 유용성입니다.";
     }
   }
@@ -204,30 +260,36 @@
   var ctx = setupCanvas(canvas);
   var W = canvas._w, H = canvas._h;
   var info = document.getElementById("c2-info");
+  var selected = -1;
   var cards = [
-    { icon: "🛰️", name: "GPS 위성 항법", desc: "원자시계로 나노초 단위 시간을 정밀하게 측정하여 위치를 계산합니다.", x: 130, y: 100 },
-    { icon: "🏥", name: "의료 영상 진단", desc: "미세한 신호 측정 기술(MRI, CT)로 몸속을 정밀하게 관찰합니다.", x: 380, y: 100 },
-    { icon: "🏭", name: "반도체 공정", desc: "나노미터 단위의 정밀한 길이 측정으로 초미세 회로를 제작합니다.", x: 630, y: 100 },
-    { icon: "🌡️", name: "기후 관측", desc: "표준화된 온도·기압 측정으로 전 지구 기후 데이터를 비교합니다.", x: 130, y: 260 },
-    { icon: "⚖️", name: "무역과 거래", desc: "질량·부피의 표준 단위로 공정한 상거래가 가능해집니다.", x: 380, y: 260 },
-    { icon: "🚀", name: "우주 탐사", desc: "정밀한 거리·속도 측정으로 우주선의 궤도를 계산합니다.", x: 630, y: 260 }
+    { icon: "🛰️", name: "GPS 위성 항법", desc: "원자시계로 나노초 단위 시간을 정밀하게 측정하여 위치를 계산합니다.", x: 130, y: 100, order: -9, unit: "초" },
+    { icon: "🏥", name: "의료 영상 진단", desc: "미세한 신호 측정 기술(MRI, CT)로 몸속을 정밀하게 관찰합니다.", x: 380, y: 100, order: -3, unit: "m" },
+    { icon: "🏭", name: "반도체 공정", desc: "나노미터 단위의 정밀한 길이 측정으로 초미세 회로를 제작합니다.", x: 630, y: 100, order: -9, unit: "m" },
+    { icon: "🌡️", name: "기후 관측", desc: "표준화된 온도·기압 측정으로 전 지구 기후 데이터를 비교합니다.", x: 130, y: 260, order: -1, unit: "℃" },
+    { icon: "⚖️", name: "무역과 거래", desc: "질량·부피의 표준 단위로 공정한 상거래가 가능해집니다.", x: 380, y: 260, order: -3, unit: "kg" },
+    { icon: "🚀", name: "우주 탐사", desc: "정밀한 거리·속도 측정으로 우주선의 궤도를 계산합니다.", x: 630, y: 260, order: 0, unit: "m" }
   ];
   canvas.addEventListener("click", function (e) {
     var rect = canvas.getBoundingClientRect();
     var scaleX = canvas._w / rect.width, scaleY = canvas._h / rect.height;
     var mx = (e.clientX - rect.left) * scaleX, my = (e.clientY - rect.top) * scaleY;
-    cards.forEach(function (c) {
+    cards.forEach(function (c, i) {
       if (mx > c.x - 100 && mx < c.x + 100 && my > c.y - 60 && my < c.y + 60) {
         info.innerHTML = "<b>" + c.icon + " " + c.name + "</b> — " + c.desc;
+        selected = i;
+        render();
+        renderBar();
       }
     });
   });
   function render() {
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    cards.forEach(function (c) {
+    cards.forEach(function (c, i) {
       ctx.save();
-      ctx.strokeStyle = cssVar("--line"); ctx.fillStyle = cssVar("--panel-2");
+      ctx.strokeStyle = i === selected ? cssVar("--teal") : cssVar("--line");
+      ctx.lineWidth = i === selected ? 2.5 : 1;
+      ctx.fillStyle = cssVar("--panel-2");
       ctx.fillRect(c.x - 100, c.y - 60, 200, 120);
       ctx.strokeRect(c.x - 100, c.y - 60, 200, 120);
       ctx.restore();
@@ -236,7 +298,39 @@
       ctx.fillText(c.name, c.x, c.y + 30);
     });
   }
+  var canvas2 = document.getElementById("c2b");
+  var ctx2 = setupCanvas(canvas2);
+  var W2 = canvas2._w, H2 = canvas2._h;
+  var info2 = document.getElementById("c2b-info");
+  function renderBar() {
+    ctx2.clearRect(0, 0, W2, H2);
+    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
+    var x0 = 80, x1 = W2 - 40;
+    function xOf(order) { return x0 + (order + 10) / 10 * (x1 - x0); }
+    ctx2.strokeStyle = cssVar("--line"); ctx2.lineWidth = 2;
+    var midY = H2 / 2 + 40;
+    cards.forEach(function (c, i) {
+      var y = 30 + i * 28;
+      var x = xOf(c.order);
+      ctx2.strokeStyle = cssVar("--line"); ctx2.lineWidth = 1;
+      ctx2.beginPath(); ctx2.moveTo(x0, y); ctx2.lineTo(x1, y); ctx2.stroke();
+      ctx2.fillStyle = i === selected ? cssVar("--coral") : cssVar("--teal");
+      ctx2.beginPath(); ctx2.arc(x, y, i === selected ? 8 : 5, 0, Math.PI * 2); ctx2.fill();
+      ctx2.font = (i === selected ? "700 " : "") + "11.5px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "left";
+      ctx2.fillText(c.icon + " " + c.name + "  (약 10" + superscript(c.order) + " " + c.unit + " 단위 요구)", x1 - x1 + 10, y - 8);
+    });
+    if (selected >= 0) {
+      info2.innerHTML = "<b>" + cards[selected].name + "</b>은(는) 약 10<sup>" + cards[selected].order + "</sup> " + cards[selected].unit + " 수준의 정밀도가 필요합니다. 값이 작을(음의 지수일)수록 훨씬 미세한 차이까지 구분해야 하는 고정밀 기술입니다.";
+    } else {
+      info2.innerHTML = "위에서 카드를 클릭하면 해당 분야의 정밀도 요구 수준이 강조됩니다.";
+    }
+  }
+  function superscript(n) {
+    var map = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+    return String(n).split("").map(function (c) { return map[c] || c; }).join("");
+  }
   render();
+  renderBar();
 })();
 
 })();
