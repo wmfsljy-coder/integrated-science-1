@@ -63,6 +63,24 @@
         </div>
         <div class="info-card" id="c1-info"></div>
       </div>
+
+      <div class="stage-head">
+        <div class="eyebrow">🔎 미션 · 별의 질량으로 최후를 맞히기</div>
+        <h2 class="display" style="font-size:18px;">이 별은 어디까지 만들고, 어떻게 최후를 맞을까?</h2>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c1m-data"></div>
+        <div class="seg" id="c1m-choices">
+          <button data-c="light">헬륨까지만 만들고 백색왜성으로</button>
+          <button data-c="mid">탄소·산소까지 만들고 백색왜성으로</button>
+          <button data-c="heavy">철까지 만들고 초신성 폭발 → 중성자별/블랙홀</button>
+        </div>
+        <div class="toggle-row" style="margin:14px 20px;">
+          <button class="btn" id="c1m-check">정답 확인</button>
+          <button class="btn" id="c1m-new">새 문제</button>
+        </div>
+        <div class="info-card" id="c1m-info"></div>
+      </div>
     </section>
 
     <section class="tab-panel" data-panel="2" hidden>
@@ -164,6 +182,58 @@
     return String(n).split("").map(function (c) { return map[c] || c; }).join("");
   }
   render();
+})();
+
+/* TAB1 미션 — 질량으로 최후 맞히기 */
+(function () {
+  var dataBox = document.getElementById("c1m-data");
+  var seg = document.getElementById("c1m-choices");
+  var checkBtn = document.getElementById("c1m-check");
+  var newBtn = document.getElementById("c1m-new");
+  var info = document.getElementById("c1m-info");
+  var mass, key, picked = null;
+
+  var labels = { light: "헬륨까지만 만들고 백색왜성으로", mid: "탄소·산소까지 만들고 백색왜성으로", heavy: "철까지 만들고 초신성 폭발 → 중성자별/블랙홀" };
+
+  function classify(m) {
+    if (m < 0.5) return "light";
+    if (m < 8) return "mid";
+    return "heavy";
+  }
+
+  function newQuestion() {
+    var roll = Math.random();
+    if (roll < 0.34) mass = +(0.3 + Math.random() * 0.19).toFixed(1);
+    else if (roll < 0.67) mass = +(0.6 + Math.random() * 7).toFixed(1);
+    else mass = +(8 + Math.random() * 17).toFixed(1);
+    key = classify(mass);
+    picked = null;
+    dataBox.innerHTML = "이 별의 질량은 <b>" + mass.toFixed(1) + "M☉</b>(태양 질량 배수)입니다. 이 별은 최후에 어떻게 될까요?";
+    seg.querySelectorAll("button").forEach(function (b) { b.classList.remove("on"); });
+    info.innerHTML = "";
+    info.style.color = "";
+  }
+
+  seg.querySelectorAll("button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      picked = b.dataset.c;
+      seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); });
+    });
+  });
+
+  checkBtn.addEventListener("click", function () {
+    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
+    if (picked === key) {
+      info.innerHTML = "✅ 정답! " + mass.toFixed(1) + "M☉ 별은 '" + labels[key] + "' 경로를 따릅니다.";
+      info.style.color = "var(--teal)";
+    } else {
+      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[key] + "' 입니다.";
+      info.style.color = "var(--coral)";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 /* TAB1 별의 핵융합 — 수명 계산 */

@@ -49,6 +49,24 @@
         </div>
         <div class="info-card" id="c0-info"></div>
       </div>
+
+      <div class="stage-head">
+        <div class="eyebrow">🔎 미션 · 효소의 최적 환경 맞히기</div>
+        <h2 class="display" style="font-size:18px;">이 소화효소는 어떤 pH 환경에서 가장 잘 작동할까?</h2>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c0m-data"></div>
+        <div class="seg" id="c0m-choices">
+          <button data-c="acid">강산성 환경(pH 2 부근)</button>
+          <button data-c="neutral">중성 환경(pH 7 부근)</button>
+          <button data-c="base">약염기성 환경(pH 8 부근)</button>
+        </div>
+        <div class="toggle-row" style="margin:14px 20px;">
+          <button class="btn" id="c0m-check">정답 확인</button>
+          <button class="btn" id="c0m-new">새 문제</button>
+        </div>
+        <div class="info-card" id="c0m-info"></div>
+      </div>
     </section>
 
     <section class="tab-panel" data-panel="1" hidden>
@@ -196,6 +214,52 @@
     info.innerHTML = "<b>" + ename + "</b> · 온도 " + temp + "°C, pH " + ph.toFixed(1) + "에서 종합 반응 속도는 최적 조건 대비 <b>" + (combined * 100).toFixed(0) + "%</b>입니다. 온도와 pH가 최적값에서 멀어질수록 효소(단백질)의 입체 구조가 변형되어(변성) 활성을 잃습니다. 효소마다 작동하는 최적 pH가 크게 다르다는 점(위=산성, 소장=염기성)에 주목하세요.";
   }
   render();
+})();
+
+/* TAB0 미션 — 효소의 최적 pH 맞히기 */
+(function () {
+  var enzymes = [
+    { name: "아밀레이스(입, 침 속 소화효소)", key: "neutral" },
+    { name: "펩신(위, 위액 속 소화효소)", key: "acid" },
+    { name: "트립신(소장, 이자액 속 소화효소)", key: "base" }
+  ];
+  var dataBox = document.getElementById("c0m-data");
+  var seg = document.getElementById("c0m-choices");
+  var checkBtn = document.getElementById("c0m-check");
+  var newBtn = document.getElementById("c0m-new");
+  var info = document.getElementById("c0m-info");
+  var labels = { acid: "강산성 환경(pH 2 부근)", neutral: "중성 환경(pH 7 부근)", base: "약염기성 환경(pH 8 부근)" };
+  var current = null, picked = null;
+
+  function newQuestion() {
+    current = enzymes[Math.floor(Math.random() * enzymes.length)];
+    picked = null;
+    dataBox.innerHTML = "효소: <b>" + current.name + "</b>";
+    seg.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
+    info.innerHTML = "";
+    info.style.color = "";
+  }
+
+  seg.querySelectorAll("button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      picked = btn.dataset.c;
+      seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === btn); });
+    });
+  });
+
+  checkBtn.addEventListener("click", function () {
+    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
+    if (picked === current.key) {
+      info.innerHTML = "✅ 정답! " + current.name + "는 '" + labels[current.key] + "'에서 가장 활발합니다.";
+      info.style.color = "var(--teal)";
+    } else {
+      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
+      info.style.color = "var(--coral)";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 /* TAB1 동화/이화 — 진행률 애니메이션 */

@@ -86,6 +86,20 @@
         </div>
         <div class="info-card" id="c1b-info">현재 F, m 값으로 5초 동안 움직였을 때의 그래프를 그립니다.</div>
       </div>
+
+      <div class="stage-head">
+        <div class="eyebrow">🔎 미션 · a = F/m 암산 대결</div>
+        <h2 class="display" style="font-size:18px;">힘과 질량이 주어지면 가속도는?</h2>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c1m-data"></div>
+        <div class="seg" id="c1m-choices"></div>
+        <div class="toggle-row" style="margin:14px 20px;">
+          <button class="btn" id="c1m-check">정답 확인</button>
+          <button class="btn" id="c1m-new">새 문제</button>
+        </div>
+        <div class="info-card" id="c1m-info"></div>
+      </div>
     </section>
 
     <section class="tab-panel" data-panel="2" hidden>
@@ -298,6 +312,59 @@
     if (playing) requestAnimationFrame(renderGraph);
   }
   renderGraph();
+})();
+
+/* TAB1 미션 — a = F/m 암산 */
+(function () {
+  var dataBox = document.getElementById("c1m-data");
+  var seg = document.getElementById("c1m-choices");
+  var checkBtn = document.getElementById("c1m-check");
+  var newBtn = document.getElementById("c1m-new");
+  var info = document.getElementById("c1m-info");
+  var F, m, answer, picked = null;
+
+  function newQuestion() {
+    var mVals = [1, 2, 4, 5, 10];
+    m = mVals[Math.floor(Math.random() * mVals.length)];
+    var aVals = [1, 2, 3, 4, 5, 6, 8, 10];
+    answer = aVals[Math.floor(Math.random() * aVals.length)];
+    F = answer * m;
+    picked = null;
+    dataBox.innerHTML = "힘 F = <b>" + F + "N</b>, 질량 m = <b>" + m + "kg</b> 일 때, 가속도 a는 얼마일까요?";
+    var opts = [answer];
+    while (opts.length < 4) {
+      var decoy = Math.max(1, answer + Math.round((Math.random() - 0.5) * 6));
+      if (opts.indexOf(decoy) === -1) opts.push(decoy);
+    }
+    opts.sort(function () { return Math.random() - 0.5; });
+    seg.innerHTML = "";
+    opts.forEach(function (o) {
+      var b = document.createElement("button");
+      b.textContent = o + " m/s²";
+      b.dataset.v = o;
+      b.addEventListener("click", function () {
+        picked = o;
+        seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      });
+      seg.appendChild(b);
+    });
+    info.innerHTML = "";
+    info.style.color = "";
+  }
+
+  checkBtn.addEventListener("click", function () {
+    if (picked === null) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
+    if (picked === answer) {
+      info.innerHTML = "✅ 정답! a = F/m = " + F + "/" + m + " = " + answer + " m/s²";
+      info.style.color = "var(--teal)";
+    } else {
+      info.innerHTML = "❌ 틀렸습니다. a = F/m = " + F + "/" + m + " = " + answer + " m/s² 입니다.";
+      info.style.color = "var(--coral)";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 /* TAB2 충돌 */

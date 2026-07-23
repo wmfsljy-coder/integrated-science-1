@@ -49,6 +49,26 @@
         </div>
         <div class="info-card" id="c0-info">슬라이더로 편향과 무작위 오차를 조절한 뒤 쏘아 보세요. 여러 번 쏠수록 통계가 더 정확해집니다.</div>
       </div>
+
+      <div class="stage-head" style="margin-top:30px;">
+        <div class="eyebrow">🔎 미션 · 정밀도와 정확도 판별하기</div>
+        <h2 class="display" style="font-size:20px;">이 측정 결과는 어떤 경우일까요?</h2>
+        <p>조준 편향(시스템 오차)과 손떨림(무작위 오차) 자료가 주어집니다. 편향이 작으면 정확하고, 무작위 오차가 작으면 정밀합니다. 이 결과가 어느 경우에 해당하는지 선택해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c0m-data" style="margin:18px 20px 0;"></div>
+        <div class="seg" id="c0m-choices" style="margin:14px 20px 0;">
+          <button data-c="both">정확하고 정밀함</button>
+          <button data-c="acc">정확하지만 정밀하지 않음</button>
+          <button data-c="prec">정밀하지만 정확하지 않음</button>
+          <button data-c="neither">정확하지도 정밀하지도 않음</button>
+        </div>
+        <div class="toggle-row" style="margin:14px 20px 0;">
+          <button class="chip" id="c0m-check">정답 확인</button>
+          <button class="chip" id="c0m-new">새 측정 자료</button>
+        </div>
+        <div class="info-card" id="c0m-info">보기 중 하나를 선택한 뒤 [정답 확인]을 눌러 보세요.</div>
+      </div>
     </section>
 
     <section class="tab-panel" data-panel="1" hidden>
@@ -188,6 +208,67 @@
     }
   }
   render();
+})();
+
+/* TAB0 미션 — 정밀도와 정확도 판별하기 */
+(function () {
+  var dataEl = document.getElementById("c0m-data");
+  var choicesEl = document.getElementById("c0m-choices");
+  var checkBtn = document.getElementById("c0m-check");
+  var newBtn = document.getElementById("c0m-new");
+  if (!dataEl) return;
+
+  var bias = 0, noise = 10, trueKey = "both";
+  var picked = null;
+  var seg = choicesEl.querySelectorAll("button");
+
+  seg.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      picked = btn.dataset.c;
+      seg.forEach(function (b) { b.classList.toggle("on", b === btn); });
+    });
+  });
+
+  function classify(b, n) {
+    var acc = b < 8, prec = n < 15;
+    if (acc && prec) return "both";
+    if (acc && !prec) return "acc";
+    if (!acc && prec) return "prec";
+    return "neither";
+  }
+
+  function newQuestion() {
+    bias = Math.round(Math.random() * 30);
+    noise = Math.round(Math.random() * 40);
+    trueKey = classify(bias, noise);
+    dataEl.innerHTML = "조준 편향(시스템 오차) = <b>" + bias + "</b>, 손떨림(무작위 오차) = <b>" + noise + "</b>";
+    picked = null;
+    seg.forEach(function (b) { b.classList.remove("on"); });
+    var info = document.getElementById("c0m-info");
+    info.style.color = "";
+    info.textContent = "보기 중 하나를 선택한 뒤 [정답 확인]을 눌러 보세요.";
+  }
+
+  var labels = { both: "정확하고 정밀함", acc: "정확하지만 정밀하지 않음", prec: "정밀하지만 정확하지 않음", neither: "정확하지도 정밀하지도 않음" };
+
+  checkBtn.addEventListener("click", function () {
+    var info = document.getElementById("c0m-info");
+    if (picked === null) {
+      info.style.color = "";
+      info.textContent = "먼저 보기 중 하나를 선택하세요.";
+      return;
+    }
+    if (picked === trueKey) {
+      info.style.color = "var(--teal)";
+      info.innerHTML = "<b>정답입니다!</b> 이 결과는 <b>" + labels[trueKey] + "</b>에 해당합니다.";
+    } else {
+      info.style.color = "var(--coral)";
+      info.innerHTML = "다시 생각해 보세요. 정답은 <b>" + labels[trueKey] + "</b>입니다. 편향이 작을수록 정확, 무작위 오차가 작을수록 정밀합니다.";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 /* TAB1 측정표준의 유용성 */

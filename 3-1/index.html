@@ -95,6 +95,24 @@
         </div>
         <div class="info-card" id="c2-info"></div>
       </div>
+
+      <div class="stage-head">
+        <div class="eyebrow">🔎 미션 · 사례로 판 경계 유형 맞히기</div>
+        <h2 class="display" style="font-size:18px;">이 지형·현상은 어떤 경계에서 생겼을까?</h2>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c2m-data"></div>
+        <div class="seg" id="c2m-choices">
+          <button data-c="divergent">발산형 경계</button>
+          <button data-c="convergent">수렴형 경계</button>
+          <button data-c="transform">보존형 경계</button>
+        </div>
+        <div class="toggle-row" style="margin:14px 20px;">
+          <button class="btn" id="c2m-check">정답 확인</button>
+          <button class="btn" id="c2m-new">새 문제</button>
+        </div>
+        <div class="info-card" id="c2m-info"></div>
+      </div>
     </section>
   </main>
 </div>
@@ -368,6 +386,55 @@
   info.innerHTML = texts.divergent;
   updateRateInfo();
   requestAnimationFrame(frame);
+})();
+
+/* TAB2 미션 — 사례로 경계 유형 맞히기 */
+(function () {
+  var cases = [
+    { txt: "대서양 중앙 해령에서는 해저가 갈라지며 새로운 현무암질 지각이 계속 생성되고 있다.", key: "divergent" },
+    { txt: "일본 해구 부근에서는 태평양판이 유라시아판 아래로 가라앉으며 잦은 지진과 화산이 발생한다.", key: "convergent" },
+    { txt: "히말라야 산맥은 인도판과 유라시아판이라는 두 대륙판이 충돌하며 솟아올랐다.", key: "convergent" },
+    { txt: "미국 캘리포니아의 산안드레아스 단층에서는 두 판이 지각의 생성·소멸 없이 서로 반대 방향으로 어긋나며 미끄러진다.", key: "transform" },
+    { txt: "동아프리카 열곡대는 대륙판이 갈라지며 새로운 지각이 만들어지는 초기 단계로 여겨진다.", key: "divergent" },
+    { txt: "안데스 산맥 서쪽에서는 나스카판이 남아메리카판 아래로 섭입하며 화산 활동이 활발하다.", key: "convergent" }
+  ];
+  var dataBox = document.getElementById("c2m-data");
+  var seg = document.getElementById("c2m-choices");
+  var checkBtn = document.getElementById("c2m-check");
+  var newBtn = document.getElementById("c2m-new");
+  var info = document.getElementById("c2m-info");
+  var labels = { divergent: "발산형 경계", convergent: "수렴형 경계", transform: "보존형 경계" };
+  var current = null, picked = null;
+
+  function newQuestion() {
+    current = cases[Math.floor(Math.random() * cases.length)];
+    picked = null;
+    dataBox.innerHTML = current.txt;
+    seg.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
+    info.innerHTML = "";
+    info.style.color = "";
+  }
+
+  seg.querySelectorAll("button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      picked = btn.dataset.c;
+      seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === btn); });
+    });
+  });
+
+  checkBtn.addEventListener("click", function () {
+    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
+    if (picked === current.key) {
+      info.innerHTML = "✅ 정답! '" + labels[current.key] + "'에서 나타나는 현상입니다.";
+      info.style.color = "var(--teal)";
+    } else {
+      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
+      info.style.color = "var(--coral)";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 })();

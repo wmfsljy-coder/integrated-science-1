@@ -82,6 +82,24 @@
         </div>
         <div class="info-card" id="c1-info"></div>
       </div>
+
+      <div class="stage-head">
+        <div class="eyebrow">🔎 미션 · ΔEN으로 결합 종류 맞히기</div>
+        <h2 class="display" style="font-size:18px;">전기음성도 차이만 보고 결합을 분류해보세요</h2>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c1m-data"></div>
+        <div class="seg" id="c1m-choices">
+          <button data-c="ionic">이온 결합</button>
+          <button data-c="polar">극성 공유 결합</button>
+          <button data-c="nonpolar">무극성 공유 결합</button>
+        </div>
+        <div class="toggle-row" style="margin:14px 20px;">
+          <button class="btn" id="c1m-check">정답 확인</button>
+          <button class="btn" id="c1m-new">새 문제</button>
+        </div>
+        <div class="info-card" id="c1m-info"></div>
+      </div>
     </section>
 
     <section class="tab-panel" data-panel="2" hidden>
@@ -313,6 +331,60 @@ var ionizationE = [1312, 2372, 520, 899, 801, 1086, 1402, 1314, 1681, 2081, 496,
     info.innerHTML = "일반적 기준: ΔEN ≥ 1.7이면 이온 결합, 0.4 ≤ ΔEN < 1.7이면 극성 공유 결합, ΔEN < 0.4이면 무극성 공유 결합으로 분류합니다. 전기음성도 차이가 클수록 전자가 한쪽으로 치우치는 정도(결합의 이온성)가 커집니다.";
   }
   render();
+})();
+
+/* TAB1 미션 — ΔEN으로 결합 종류 맞히기 */
+(function () {
+  var EN = { Na: 0.93, K: 0.82, Li: 0.98, H: 2.20, C: 2.55, Cl: 3.16, O: 3.44, F: 3.98, N: 3.04, S: 2.58, Br: 2.96 };
+  var elList = Object.keys(EN);
+  var dataBox = document.getElementById("c1m-data");
+  var seg = document.getElementById("c1m-choices");
+  var checkBtn = document.getElementById("c1m-check");
+  var newBtn = document.getElementById("c1m-new");
+  var info = document.getElementById("c1m-info");
+  var a, b, key, picked = null;
+  var labels = { ionic: "이온 결합", polar: "극성 공유 결합", nonpolar: "무극성 공유 결합" };
+
+  function classify(d) {
+    if (d >= 1.7) return "ionic";
+    if (d >= 0.4) return "polar";
+    return "nonpolar";
+  }
+
+  function newQuestion() {
+    var ia = Math.floor(Math.random() * elList.length);
+    var ib = Math.floor(Math.random() * elList.length);
+    while (ib === ia) ib = Math.floor(Math.random() * elList.length);
+    a = elList[ia]; b = elList[ib];
+    var d = Math.abs(EN[a] - EN[b]);
+    key = classify(d);
+    picked = null;
+    dataBox.innerHTML = "원소 A = <b>" + a + "</b>(전기음성도 " + EN[a].toFixed(2) + "), 원소 B = <b>" + b + "</b>(전기음성도 " + EN[b].toFixed(2) + ")<br>ΔEN = " + d.toFixed(2) + " 일 때, 이 결합은 무슨 결합일까요?";
+    seg.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
+    info.innerHTML = "";
+    info.style.color = "";
+  }
+
+  seg.querySelectorAll("button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      picked = btn.dataset.c;
+      seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === btn); });
+    });
+  });
+
+  checkBtn.addEventListener("click", function () {
+    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
+    if (picked === key) {
+      info.innerHTML = "✅ 정답! ΔEN 기준으로 '" + labels[key] + "' 입니다.";
+      info.style.color = "var(--teal)";
+    } else {
+      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[key] + "' 입니다.";
+      info.style.color = "var(--coral)";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 /* TAB2 지각/생명체 구조 */

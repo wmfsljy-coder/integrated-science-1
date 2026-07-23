@@ -77,6 +77,21 @@
         </div>
         <div class="info-card" id="c1-info"></div>
       </div>
+
+      <div class="stage-head" style="margin-top:30px;">
+        <div class="eyebrow">🔎 미션 · 스케일 배율 어림하기</div>
+        <h2 class="display" style="font-size:20px;">두 크기는 몇 배 차이가 날까요?</h2>
+        <p>두 물체(또는 거리)의 크기 자료가 주어집니다. 10의 거듭제곱을 이용해 두 크기의 배율 차이로 가장 알맞은 값을 선택해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c1m-data" style="margin:18px 20px 0;"></div>
+        <div class="seg" id="c1m-choices" style="margin:14px 20px 0;"></div>
+        <div class="toggle-row" style="margin:14px 20px 0;">
+          <button class="chip" id="c1m-check">정답 확인</button>
+          <button class="chip" id="c1m-new">새 문제</button>
+        </div>
+        <div class="info-card" id="c1m-info">보기 중 하나를 선택한 뒤 [정답 확인]을 눌러 보세요.</div>
+      </div>
     </section>
 
     <section class="tab-panel" data-panel="2" hidden>
@@ -433,6 +448,91 @@
     return v.toLocaleString(undefined, { maximumFractionDigits: 10 });
   }
   render();
+})();
+
+/* TAB1 미션 — 스케일 배율 어림하기 */
+(function () {
+  var dataEl = document.getElementById("c1m-data");
+  var choicesEl = document.getElementById("c1m-choices");
+  var checkBtn = document.getElementById("c1m-check");
+  var newBtn = document.getElementById("c1m-new");
+  if (!dataEl) return;
+
+  var refs = [
+    { e: 26, label: "관측 가능한 우주의 크기" },
+    { e: 21, label: "우리은하의 지름" },
+    { e: 11, label: "지구-태양 거리(1 AU)" },
+    { e: 7, label: "지구의 지름" },
+    { e: 0, label: "사람의 키(약 1~2m)" },
+    { e: -3, label: "머리카락 굵기(mm)" },
+    { e: -6, label: "세포의 크기(μm)" },
+    { e: -10, label: "원자의 크기(Å)" },
+    { e: -15, label: "원자핵의 크기(fm)" }
+  ];
+
+  var diff = 7, picked = null, choices = [];
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  var big, small;
+
+  function newQuestion() {
+    var i = Math.floor(Math.random() * refs.length);
+    var j;
+    do { j = Math.floor(Math.random() * refs.length); } while (j === i);
+    big = refs[i].e > refs[j].e ? refs[i] : refs[j];
+    small = refs[i].e > refs[j].e ? refs[j] : refs[i];
+    diff = big.e - small.e;
+    dataEl.innerHTML = "A: " + big.label + "<br>B: " + small.label;
+    var decoys = [];
+    while (decoys.length < 3) {
+      var d = diff + Math.round((Math.random() - 0.5) * 8);
+      if (d > 0 && d !== diff && decoys.indexOf(d) === -1) decoys.push(d);
+    }
+    choices = shuffle([diff].concat(decoys));
+    picked = null;
+    renderChoices();
+    var info = document.getElementById("c1m-info");
+    info.style.color = "";
+    info.textContent = "보기 중 하나를 선택한 뒤 [정답 확인]을 눌러 보세요.";
+  }
+
+  function renderChoices() {
+    choicesEl.innerHTML = "";
+    choices.forEach(function (d) {
+      var btn = document.createElement("button");
+      btn.className = picked === d ? "on" : "";
+      btn.textContent = "10" + (("" + d).replace(/\d/g, function(c){return "⁰¹²³⁴⁵⁶⁷⁸⁹"[+c];})) + "배";
+      btn.addEventListener("click", function () { picked = d; renderChoices(); });
+      choicesEl.appendChild(btn);
+    });
+  }
+
+  checkBtn.addEventListener("click", function () {
+    var info = document.getElementById("c1m-info");
+    if (picked === null) {
+      info.style.color = "";
+      info.textContent = "먼저 보기 중 하나를 선택하세요.";
+      return;
+    }
+    if (picked === diff) {
+      info.style.color = "var(--teal)";
+      info.innerHTML = "<b>정답입니다!</b> A(" + big.label + ")는 B(" + small.label + ")보다 10^" + diff + "배 큽니다(지수의 차를 빼서 구합니다).";
+    } else {
+      info.style.color = "var(--coral)";
+      info.innerHTML = "다시 생각해 보세요. 정답은 10^" + diff + "배입니다. 두 크기의 지수를 빼서 구해 보세요.";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 })();
