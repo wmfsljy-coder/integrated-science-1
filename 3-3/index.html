@@ -30,8 +30,9 @@
       
         <span class="std-chip">10통과1-03-05</span><span class="std-chip">10통과1-03-06</span><div class="std-note"><b>[10통과1-03-05]</b> 생명 시스템을 유지하기 위해서 다양한 화학 반응과 물질 출입이 필요함을 이해하고, 일상생활에서 활용되는 화학 반응 사례를 조사하여 발표할 수 있다.<br><b>[10통과1-03-06]</b> 생명 시스템의 유지에 필요한 세포 내 정보의 흐름을 유전자로부터 단백질이 만들어지는 과정을 중심으로 설명할 수 있다.</div><div class="terms"><b>효소</b><b>활성화 에너지</b><b>전사</b><b>번역</b></div>
       </div>
+      <div class="gate loose" id="gt"></div>
       <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
+        <div class="canvas-wrap" style="position:relative"><canvas id="c0" width="900" height="420"></canvas><div class="veil" id="vl"><p>예상을 고르면 화면이 열립니다.</p></div></div>
         <div class="controls">
           <div class="ctrl-group">
             <div class="ctrl-label">효소 종류</div>
@@ -456,6 +457,26 @@
             "ph": ""
       }
 ]
+  });
+})();
+</script>
+
+<script>
+(function () {
+  window.sthGate({
+    gate: "gt", veil: "vl", key: "enzyme",
+    question: "과산화 수소에 카탈레이스(효소)를 <b>넣지 않으면</b> 어떻게 될까요?",
+    options: ["㉠ 전혀 분해되지 않는다", "㉡ 아주 느리게 분해된다", "㉢ 오히려 더 빨리 분해된다", "㉣ 다른 물질로 바뀐다"],
+    onPick: function (i) {
+      var ok = (i === 1);
+      window.sthState("enzymeOK", ok ? "맞음" : "어긋남");
+      var msg = (ok ? "<b>맞았습니다.</b> " : "<b>정답은 ㉡ 입니다.</b> ") + "효소는 <b>반응물이 아닙니다.</b> 과산화 수소는 효소가 없어도 상온에서 스스로 분해됩니다." + " " + "효소가 하는 일은 <b>활성화 에너지를 낮춰 반응을 빠르게</b> 하는 것입니다. 묽은 과산화 수소수에서는 너무 느려 기포가 보이지 않을 뿐입니다.";
+      var g = document.getElementById("gt");
+      var box = g.parentNode.querySelector(".info-card");
+      if (box) box.innerHTML = msg;
+      else { var d = document.createElement("div"); d.className = "info-card"; d.style.margin = "18px 0 0";
+             d.innerHTML = msg; g.insertAdjacentElement("afterend", d); }
+    }
   });
 })();
 </script>

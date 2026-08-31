@@ -30,8 +30,9 @@
       
         <span class="std-chip">10통과1-02-01</span><span class="std-chip">10통과1-02-02</span><div class="std-note"><b>[10통과1-02-01]</b> 천체에서 방출되는 빛의 스펙트럼을 분석하여 우주 초기에 형성된 원소와 천체의 구성 물질을 추론할 수 있다.<br><b>[10통과1-02-02]</b> 우주 초기의 원소들로부터 태양계의 재료이면서 생명체를 구성하는 원소들이 형성되는 과정을 통해 지구와 생명의 역사가 우주 역사의 일부분임을 해석할 수 있다.</div><div class="terms"><b>빅뱅</b><b>핵융합</b><b>스펙트럼</b><b>원소 존재비</b></div>
       </div>
+      <div class="gate loose" id="gt"></div>
       <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c0" width="900" height="400"></canvas></div>
+        <div class="canvas-wrap" style="position:relative"><canvas id="c0" width="900" height="400"></canvas><div class="veil" id="vl"><p>예상을 고르면 화면이 열립니다.</p></div></div>
         <div class="controls">
           <div class="ctrl-group">
             <div class="ctrl-label">우주의 온도 (10ⁿ K, 로그 스케일)<span class="val" id="c0-t-val">32</span></div>
@@ -415,6 +416,26 @@
             "ph": ""
       }
 ]
+  });
+})();
+</script>
+
+<script>
+(function () {
+  window.sthGate({
+    gate: "gt", veil: "vl", key: "solarspec",
+    question: "태양 빛을 프리즘에 통과시키면 무지개가 보입니다. 태양의 스펙트럼은 <b>끊김 없는 연속</b>일까요?",
+    options: ["㉠ 완전히 연속이다", "㉡ 검은 흡수선이 수백 개 있다", "㉢ 몇 개의 밝은 선만 있다", "㉣ 색이 일곱 개로 딱 나뉜다"],
+    onPick: function (i) {
+      var ok = (i === 1);
+      window.sthState("solarspecOK", ok ? "맞음" : "어긋남");
+      var msg = (ok ? "<b>맞았습니다.</b> " : "<b>정답은 ㉡ 입니다.</b> ") + "무지개로 볼 때는 연속처럼 보이지만, 정밀하게 펼치면 다릅니다." + " " + "태양 스펙트럼에는 <b>수백 개의 검은 흡수선</b>이 있습니다. 이 선들이 태양 대기에 어떤 원소가 있는지 알려 줍니다. 별의 구성 원소를 알아내는 방법이 바로 이것입니다.";
+      var g = document.getElementById("gt");
+      var box = g.parentNode.querySelector(".info-card");
+      if (box) box.innerHTML = msg;
+      else { var d = document.createElement("div"); d.className = "info-card"; d.style.margin = "18px 0 0";
+             d.innerHTML = msg; g.insertAdjacentElement("afterend", d); }
+    }
   });
 })();
 </script>

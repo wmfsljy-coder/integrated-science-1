@@ -64,8 +64,9 @@
         <h2 class="display">힘, 질량, 가속도의 관계</h2>
         <p>힘과 질량을 조절하며 가속도가 어떻게 달라지는지 확인하고, [재생]을 눌러 속도-시간, 위치-시간 그래프가 그려지는 모습을 관찰해 보세요.</p><div class="info-card" style="margin:14px 0 0;max-width:640px;"><span class="tag" style="background:#d9f0fb;color:#1179a6">예시</span>예를 들어 질량 2kg인 물체에 10N의 힘을 가하면, 가속도는 a = F/m = 10 ÷ 2 = <b>5 m/s²</b>입니다. 같은 힘이라도 질량이 2배가 되면 가속도는 절반으로 줄고, 같은 질량에서 힘이 2배가 되면 가속도도 2배가 됩니다 — 힘과 가속도는 비례, 질량과 가속도는 반비례 관계입니다.</div><div class="info-card" style="margin:14px 0 0;max-width:640px;"><span class="tag" style="background:#d9f0fb;color:#1179a6">예시</span>예를 들어 질량 2kg인 물체에 10N의 힘을 가하면, 가속도는 a = F/m = 10 ÷ 2 = <b>5 m/s²</b>입니다. 같은 힘이라도 질량이 2배가 되면 가속도는 절반으로 줄고, 같은 질량에서 힘이 2배가 되면 가속도도 2배가 됩니다 — 힘과 가속도는 비례, 질량과 가속도는 반비례 관계입니다.</div>
       </div>
+      <div class="gate loose" id="gt"></div>
       <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="360"></canvas></div>
+        <div class="canvas-wrap" style="position:relative"><canvas id="c1" width="900" height="360"></canvas><div class="veil" id="vl"><p>예상을 고르면 화면이 열립니다.</p></div></div>
         <div class="controls">
           <div class="ctrl-group">
             <div class="ctrl-label">힘 F(N)<span class="val" id="c1-f-val">10</span></div>
@@ -486,6 +487,26 @@
             "ph": ""
       }
 ]
+  });
+})();
+</script>
+
+<script>
+(function () {
+  window.sthGate({
+    gate: "gt", veil: "vl", key: "impulse",
+    question: "질량이 크게 다른 두 자동차가 정면으로 충돌합니다. <b>어느 쪽이 받는 충격량</b>이 더 클까요?",
+    options: ["㉠ 가벼운 자동차", "㉡ 무거운 자동차", "㉢ 둘이 같다", "㉣ 속도에 따라 달라진다"],
+    onPick: function (i) {
+      var ok = (i === 2);
+      window.sthState("impulseOK", ok ? "맞음" : "어긋남");
+      var msg = (ok ? "<b>맞았습니다.</b> " : "<b>정답은 ㉢ 입니다.</b> ") + "작용 반작용 법칙에 따라 주고받는 <b>힘의 크기는 질량과 상관없이 같습니다.</b> 부딪친 시간도 같으므로 충격량도 같습니다." + " " + "다만 같은 충격량을 받아도 <b>질량이 작은 쪽의 속도 변화가 더 큽니다.</b> 그래서 피해가 더 커집니다.";
+      var g = document.getElementById("gt");
+      var box = g.parentNode.querySelector(".info-card");
+      if (box) box.innerHTML = msg;
+      else { var d = document.createElement("div"); d.className = "info-card"; d.style.margin = "18px 0 0";
+             d.innerHTML = msg; g.insertAdjacentElement("afterend", d); }
+    }
   });
 })();
 </script>
