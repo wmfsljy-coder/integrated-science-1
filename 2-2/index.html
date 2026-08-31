@@ -19,6 +19,7 @@
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 화학 결합</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 지각·생명체의 물질</button>
     <button class="tab-btn" data-tab="3"><span class="num">04</span> 물질의 전기적 성질</button>
+    <button class="tab-btn" data-tab="4"><span class="num">05</span> 정리하기</button>
   </nav>
 
   <main>
@@ -27,6 +28,8 @@
         <div class="eyebrow">01 · 주기율표에 숨겨진 규칙</div>
         <h2 class="display">원소의 주기성</h2>
         <p>원자 번호 슬라이더를 움직여 주기율표 위 원소를 확인하고, 아래 그래프에서 원자 반지름과 이온화 에너지가 원자 번호에 따라 실제로 어떻게 변하는지 확인해 보세요.</p>
+      
+        <span class="std-chip">10통과1-02-03</span><span class="std-chip">10통과1-02-04</span><span class="std-chip">10통과1-02-05</span><span class="std-chip">10통과1-02-06</span><div class="std-note"><b>[10통과1-02-03]</b> 세상을 구성하는 원소들의 성질이 주기성을 나타내는 현상을 통해 자연의 규칙성을 도출하고, 지구와 생명체를 구성하는 주요 원소들이 결합을 형성하는 이유를 해석할 수 있다.<br><b>[10통과1-02-04]</b> 인류의 생존에 필수적인 물, 산소, 소금 등이 만들어지는 결합의 차이를 이해하고 각 물질의 성질과 관련지어 설명할 수 있다.<br><b>[10통과1-02-05]</b> 지각과 생명체를 구성하는 물질들이 기본 단위체의 결합을 통해서 형성된다는 것을 규산염 광물, 단백질과 핵산의 예를 통해 설명할 수 있다.<br><b>[10통과1-02-06]</b> 지구를 구성하는 물질을 전기적 성질에 따라 구분할 수 있고, 물질의 전기적 성질이 다양한 소재로 활용됨을 인식한다.</div><div class="terms"><b>주기성</b><b>이온 결합</b><b>공유 결합</b><b>규산염 사면체</b></div>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="300"></canvas></div>
@@ -163,6 +166,15 @@
         </div>
         <div class="info-card" id="c3-info"></div>
       </div>
+    </section>
+
+    <section class="tab-panel" data-panel="4" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">05 · 오늘 알아낸 것을 문장으로</div>
+        <h2 class="display">정리하기</h2>
+        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+      </div>
+      <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
     </section>
   </main>
 </div>
@@ -529,6 +541,36 @@ var ionizationE = [1312, 2372, 520, 899, 801, 1086, 1402, 1314, 1681, 2081, 496,
   render();
 })();
 
+})();
+</script>
+
+<script>
+(function () {
+  window.sthUnit("is1-2-2");
+  window.sthWork({
+    mount: "wk",
+    unitLabel: "[통합과학1 Ⅱ-2] 물질의 규칙성과 성질",
+    items: [
+      {
+            "id": "w1",
+            "label": "주기성이 나타나는 까닭",
+            "hint": "같은 족 원소들이 비슷하게 행동하는 이유를 전자 배치로 설명하세요.",
+            "ph": ""
+      },
+      {
+            "id": "w2",
+            "label": "결합이 다르면 성질이 다르다",
+            "hint": "물과 소금을 골라, 결합의 차이가 어떤 성질의 차이로 이어지는지 짝지어 쓰세요.",
+            "ph": ""
+      },
+      {
+            "id": "w3",
+            "label": "아직 헷갈리는 것",
+            "hint": "다음 시간에 여기서부터 시작합니다.",
+            "ph": ""
+      }
+]
+  });
 })();
 </script>
 </body>

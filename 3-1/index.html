@@ -18,6 +18,7 @@
     <button class="tab-btn active" data-tab="0"><span class="num">01</span> 지구시스템의 구성</button>
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 지구시스템의 에너지원</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 판구조론과 지권의 변화</button>
+    <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
   </nav>
 
   <main>
@@ -26,6 +27,8 @@
         <div class="eyebrow">01 · 서로 영향을 주고받는 네 영역</div>
         <h2 class="display">지구시스템의 구성과 상호작용</h2>
         <p>원이나 화살표를 클릭해 각 권의 특징과 상호작용을 확인하고, 아래에서 사건 시나리오를 골라 하나의 변화가 다른 권까지 어떻게 연쇄적으로 퍼지는지 확인해 보세요.</p>
+      
+        <span class="std-chip">10통과1-03-01</span><span class="std-chip">10통과1-03-02</span><div class="std-note"><b>[10통과1-03-01]</b> 지구 시스템은 태양계라는 시스템의 구성요소임을 알고, 지구 시스템을 구성하는 권역들 간의 물질 순환과 에너지 흐름의 결과로 나타나는 현상을 논증할 수 있다.<br><b>[10통과1-03-02]</b> 지권의 변화를 판구조론 관점에서 해석하고, 에너지 흐름의 결과로 발생하는 지권의 변화가 지구시스템에 미치는 영향을 추론할 수 있다.</div><div class="terms"><b>지권·수권·기권·생물권</b><b>에너지원</b><b>판구조론</b></div>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="480"></canvas></div>
@@ -113,6 +116,15 @@
         </div>
         <div class="info-card" id="c2m-info"></div>
       </div>
+    </section>
+
+    <section class="tab-panel" data-panel="3" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <h2 class="display">정리하기</h2>
+        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+      </div>
+      <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
     </section>
   </main>
 </div>
@@ -437,6 +449,36 @@
   newQuestion();
 })();
 
+})();
+</script>
+
+<script>
+(function () {
+  window.sthUnit("is1-3-1");
+  window.sthWork({
+    mount: "wk",
+    unitLabel: "[통합과학1 Ⅲ-1] 지구시스템",
+    items: [
+      {
+            "id": "w1",
+            "label": "권역 사이를 오가는 것",
+            "hint": "두 권역을 골라, 그 사이를 오가는 물질과 에너지를 각각 하나씩 쓰세요.",
+            "ph": "예: 기권 → 수권 : 물질은 …, 에너지는 …"
+      },
+      {
+            "id": "w2",
+            "label": "지구 내부 에너지가 하는 일",
+            "hint": "태양 에너지로는 설명되지 않는 현상을 하나 들고, 무엇이 그 현상을 일으키는지 쓰세요.",
+            "ph": ""
+      },
+      {
+            "id": "w3",
+            "label": "아직 헷갈리는 것",
+            "hint": "다음 시간에 여기서부터 시작합니다.",
+            "ph": ""
+      }
+]
+  });
 })();
 </script>
 </body>

@@ -18,6 +18,7 @@
     <button class="tab-btn active" data-tab="0"><span class="num">01</span> 효소와 화학 반응</button>
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 동화 작용과 이화 작용</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 유전정보의 흐름</button>
+    <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
   </nav>
 
   <main>
@@ -26,6 +27,8 @@
         <div class="eyebrow">01 · 생체 촉매</div>
         <h2 class="display">효소와 활성화 에너지</h2>
         <p>온도와 pH를 함께 조절해 효소의 반응 속도가 어떻게 달라지는지 확인해 보세요. 효소마다 최적 온도와 최적 pH가 다릅니다.</p>
+      
+        <span class="std-chip">10통과1-03-05</span><span class="std-chip">10통과1-03-06</span><div class="std-note"><b>[10통과1-03-05]</b> 생명 시스템을 유지하기 위해서 다양한 화학 반응과 물질 출입이 필요함을 이해하고, 일상생활에서 활용되는 화학 반응 사례를 조사하여 발표할 수 있다.<br><b>[10통과1-03-06]</b> 생명 시스템의 유지에 필요한 세포 내 정보의 흐름을 유전자로부터 단백질이 만들어지는 과정을 중심으로 설명할 수 있다.</div><div class="terms"><b>효소</b><b>활성화 에너지</b><b>전사</b><b>번역</b></div>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
@@ -67,6 +70,7 @@
         </div>
         <div class="info-card" id="c0m-info"></div>
       </div>
+      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>효소는 반응물이 아니다</b><br>과산화 수소는 카탈레이스와 같은 효소가 <b>없더라도 상온에서 자연적으로 분해된다.</b> 다만 묽은 과산화 수소수에서는 반응이 느려 산소 기체의 발생을 관찰하기 어렵다. 따라서 카탈레이스는 <b>반응물이 아니라 반응 속도를 빠르게 하는 것</b>이다.<cite>통합과학1 교사용 교과서, 오개념 지도</cite></div>
     </section>
 
     <section class="tab-panel" data-panel="1" hidden>
@@ -114,6 +118,16 @@
         </div>
         <div class="info-card" id="c2-info"></div>
       </div>
+      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>전사에 대한 오해</b><br>학생들은 전사라고 하면 <b>DNA 전체가 RNA로 바뀌는 것</b>이라고 생각하기 쉽다. DNA에는 수많은 유전자가 있고, 유전자를 구성하는 염기의 수는 DNA 전체 염기 수에 비해 매우 적다. 따라서 특정 유전자가 발현될 때 만들어지는 <b>RNA 분자의 크기는 DNA에 비해 매우 작다.</b><cite>통합과학1 교사용 교과서, 오개념 지도</cite></div>
+    </section>
+
+    <section class="tab-panel" data-panel="3" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <h2 class="display">정리하기</h2>
+        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+      </div>
+      <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
     </section>
   </main>
 </div>
@@ -413,6 +427,36 @@
   render();
 })();
 
+})();
+</script>
+
+<script>
+(function () {
+  window.sthUnit("is1-3-3");
+  window.sthWork({
+    mount: "wk",
+    unitLabel: "[통합과학1 Ⅲ-3] 생명 시스템",
+    items: [
+      {
+            "id": "w1",
+            "label": "효소가 바꾸는 것과 바꾸지 않는 것",
+            "hint": "효소가 있을 때와 없을 때 무엇이 같고 무엇이 다른지, 활성화 에너지로 설명하세요.",
+            "ph": ""
+      },
+      {
+            "id": "w2",
+            "label": "전사에서 실제로 일어나는 일",
+            "hint": "DNA 전체가 아니라 무엇이 RNA로 옮겨지는지, 오개념 상자를 근거로 쓰세요.",
+            "ph": ""
+      },
+      {
+            "id": "w3",
+            "label": "아직 헷갈리는 것",
+            "hint": "다음 시간에 여기서부터 시작합니다.",
+            "ph": ""
+      }
+]
+  });
 })();
 </script>
 </body>

@@ -18,6 +18,7 @@
     <button class="tab-btn active" data-tab="0"><span class="num">01</span> 정밀도와 정확도</button>
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 측정 표준의 유용성</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 측정과 현대 문명</button>
+    <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
   </nav>
 
   <main>
@@ -26,6 +27,8 @@
         <div class="eyebrow">01 · 반복 측정의 두 가지 품질</div>
         <h2 class="display">정밀도와 정확도</h2>
         <p>과녁에 화살을 쏘아 보세요. 쏠 때마다 결과가 <b>누적</b>되어 표준편차·평균 오차가 실시간으로 갱신됩니다. 값이 목표(중심)에 가까운 정도가 <b>정확도</b>, 값들이 서로 모여 있는 정도가 <b>정밀도</b>입니다.</p>
+      
+        <span class="std-chip">10통과1-01-03</span><span class="std-chip">10통과1-01-04</span><div class="std-note"><b>[10통과1-01-03]</b> 과학 탐구에서 측정과 어림의 의미를 알고, 일상생활의 여러 가지 상황에서 측정 표준의 유용성과 필요성을 논증할 수 있다.<br><b>[10통과1-01-04]</b> 자연에서 일어나는 다양한 변화를 측정·분석하여 정보를 산출함을 알고, 이러한 정보를 디지털로 변환하는 기술이 현대 문명에 미친 영향을 인식한다.</div><div class="terms"><b>정밀도</b><b>정확도</b><b>측정 표준</b><b>디지털 변환</b></div>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
@@ -118,6 +121,15 @@
         <div class="canvas-wrap"><canvas id="c2b" width="900" height="220"></canvas></div>
         <div class="info-card" id="c2b-info">위에서 카드를 클릭하면 해당 분야의 정밀도 요구 수준이 강조됩니다.</div>
       </div>
+    </section>
+
+    <section class="tab-panel" data-panel="3" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <h2 class="display">정리하기</h2>
+        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+      </div>
+      <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
     </section>
   </main>
 </div>
@@ -414,6 +426,36 @@
   renderBar();
 })();
 
+})();
+</script>
+
+<script>
+(function () {
+  window.sthUnit("is1-1-2");
+  window.sthWork({
+    mount: "wk",
+    unitLabel: "[통합과학1 Ⅰ-2] 과학의 측정과 우리 사회",
+    items: [
+      {
+            "id": "w1",
+            "label": "정밀도와 정확도",
+            "hint": "과녁 그림 네 가지 중 하나를 골라, 왜 그 조합인지 설명하세요.",
+            "ph": "내가 고른 것: … / 정밀도 …, 정확도 … 인 까닭은 …"
+      },
+      {
+            "id": "w2",
+            "label": "표준이 필요한 이유",
+            "hint": "측정 표준이 없었다면 곤란해졌을 상황을 하나 들고, 왜 그런지 쓰세요.",
+            "ph": ""
+      },
+      {
+            "id": "w3",
+            "label": "아직 헷갈리는 것",
+            "hint": "다음 시간에 여기서부터 시작합니다.",
+            "ph": ""
+      }
+]
+  });
 })();
 </script>
 </body>

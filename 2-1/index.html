@@ -18,6 +18,7 @@
     <button class="tab-btn active" data-tab="0"><span class="num">01</span> 빅뱅과 원소의 생성</button>
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 별에서 만들어지는 원소</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 원소의 존재비</button>
+    <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
   </nav>
 
   <main>
@@ -26,6 +27,8 @@
         <div class="eyebrow">01 · 빅뱅 이후 138억 년</div>
         <h2 class="display">우주의 온도가 내려가며 생긴 일</h2>
         <p>우주 온도 슬라이더를 낮춰가며(왼쪽=뜨거운 초기 우주, 오른쪽=차가운 현재에 가까운 우주), 온도 임계값을 지날 때마다 무엇이 새로 만들어지는지 확인해 보세요.</p>
+      
+        <span class="std-chip">10통과1-02-01</span><span class="std-chip">10통과1-02-02</span><div class="std-note"><b>[10통과1-02-01]</b> 천체에서 방출되는 빛의 스펙트럼을 분석하여 우주 초기에 형성된 원소와 천체의 구성 물질을 추론할 수 있다.<br><b>[10통과1-02-02]</b> 우주 초기의 원소들로부터 태양계의 재료이면서 생명체를 구성하는 원소들이 형성되는 과정을 통해 지구와 생명의 역사가 우주 역사의 일부분임을 해석할 수 있다.</div><div class="terms"><b>빅뱅</b><b>핵융합</b><b>스펙트럼</b><b>원소 존재비</b></div>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="400"></canvas></div>
@@ -41,6 +44,7 @@
         </div>
         <div class="info-card" id="c0-info"></div>
       </div>
+      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>태양의 스펙트럼</b><br>태양의 스펙트럼을 <b>연속 스펙트럼으로 알고 있는 경우가 많다.</b> 일상생활에서 프리즘이나 무지개를 통해 태양 빛을 연속 스펙트럼으로 관찰한 경험이 있기 때문이고, 흡수선을 관찰하기 쉽지 않기 때문이다. 실제 태양 스펙트럼에는 <b>수백 개의 흡수선</b>이 있다.<cite>통합과학1 교사용 교과서, 오개념 지도</cite></div>
     </section>
 
     <section class="tab-panel" data-panel="1" hidden>
@@ -116,6 +120,15 @@
         <div class="canvas-wrap"><canvas id="c2b" width="900" height="220"></canvas></div>
         <div class="info-card" id="c2b-info"></div>
       </div>
+    </section>
+
+    <section class="tab-panel" data-panel="3" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <h2 class="display">정리하기</h2>
+        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+      </div>
+      <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
     </section>
   </main>
 </div>
@@ -373,6 +386,36 @@
   renderCompare();
 })();
 
+})();
+</script>
+
+<script>
+(function () {
+  window.sthUnit("is1-2-1");
+  window.sthWork({
+    mount: "wk",
+    unitLabel: "[통합과학1 Ⅱ-1] 자연의 구성 원소",
+    items: [
+      {
+            "id": "w1",
+            "label": "스펙트럼으로 알아내는 것",
+            "hint": "별빛의 스펙트럼에서 흡수선의 위치를 보고 무엇을 알 수 있는지, 왜 알 수 있는지 쓰세요.",
+            "ph": ""
+      },
+      {
+            "id": "w2",
+            "label": "원소가 만들어진 곳",
+            "hint": "수소·헬륨과 철의 생성 장소가 다른 까닭을 쓰세요.",
+            "ph": ""
+      },
+      {
+            "id": "w3",
+            "label": "아직 헷갈리는 것",
+            "hint": "다음 시간에 여기서부터 시작합니다.",
+            "ph": ""
+      }
+]
+  });
 })();
 </script>
 </body>

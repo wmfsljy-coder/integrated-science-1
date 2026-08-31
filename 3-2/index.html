@@ -18,6 +18,7 @@
     <button class="tab-btn active" data-tab="0"><span class="num">01</span> 중력과 자유 낙하</button>
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 뉴턴 운동 법칙</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 충돌과 운동량 보존</button>
+    <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
   </nav>
 
   <main>
@@ -26,6 +27,8 @@
         <div class="eyebrow">01 · 행성마다 다른 중력</div>
         <h2 class="display">중력을 받는 물체의 운동</h2>
         <p>두 천체를 각각 골라 동시에 낙하시켜 보세요. 중력 가속도가 다르면 같은 높이에서도 도착 시간이 크게 달라집니다.</p>
+      
+        <span class="std-chip">10통과1-03-03</span><span class="std-chip">10통과1-03-04</span><div class="std-note"><b>[10통과1-03-03]</b> 중력의 작용으로 인한 지구 표면과 지구 주위의 다양한 운동을 설명할 수 있다.<br><b>[10통과1-03-04]</b> 상호작용이 없을 때 물체가 가속되지 않음을 알고, 충격량과 운동량의 관계를 충돌 관련 안전장치와 스포츠에 적용할 수 있다.</div><div class="terms"><b>중력</b><b>관성</b><b>운동량</b><b>충격량</b></div>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
@@ -52,6 +55,7 @@
         </div>
         <div class="info-card" id="c0-info"></div>
       </div>
+      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>관성과 속도</b><br>학생들은 <b>속도가 클수록 관성이 크다</b>고 생각하기 쉽다. 관성은 <b>속도와 관계없고 질량에만 관계가 있다</b>는 점에 유의해야 한다.<cite>통합과학1 교사용 교과서, 오개념 지도</cite></div>
     </section>
 
     <section class="tab-panel" data-panel="1" hidden>
@@ -100,6 +104,7 @@
         </div>
         <div class="info-card" id="c1m-info"></div>
       </div>
+      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>충돌에서 받는 충격량</b><br>질량이 다른 자동차의 충돌에서 <b>질량이 작은 자동차가 받는 충격량이 더 크다</b>고 생각하기 쉽다. 작용 반작용 법칙에 따라 주고받는 힘의 크기는 질량과 관계없이 같으므로 <b>충격량의 크기도 같다.</b> 다만 질량이 작은 자동차의 <b>속도 변화</b>가 더 크게 일어나기 때문에 더 큰 피해를 입는다.<cite>통합과학1 교사용 교과서, 오개념 지도</cite></div>
     </section>
 
     <section class="tab-panel" data-panel="2" hidden>
@@ -134,6 +139,15 @@
         </div>
         <div class="info-card" id="c2-info"></div>
       </div>
+    </section>
+
+    <section class="tab-panel" data-panel="3" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <h2 class="display">정리하기</h2>
+        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+      </div>
+      <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
     </section>
   </main>
 </div>
@@ -437,6 +451,42 @@
   requestAnimationFrame(frame);
 })();
 
+})();
+</script>
+
+<script>
+(function () {
+  window.sthUnit("is1-3-2");
+  window.sthWork({
+    mount: "wk",
+    unitLabel: "[통합과학1 Ⅲ-2] 역학 시스템",
+    items: [
+      {
+            "id": "w1",
+            "label": "관성은 무엇에 달렸나",
+            "hint": "같은 속도로 달리는 트럭과 자전거 중 어느 쪽이 멈추기 어려운지, 그 까닭을 관성으로 설명하세요.",
+            "ph": ""
+      },
+      {
+            "id": "w2",
+            "label": "충격량은 같은데 피해는 다르다",
+            "hint": "두 자동차가 충돌할 때 무엇이 같고 무엇이 다른지, 오개념 상자를 근거로 정리해 쓰세요.",
+            "ph": "같은 것: … / 다른 것: … / 그래서 …"
+      },
+      {
+            "id": "w3",
+            "label": "안전장치가 하는 일",
+            "hint": "에어백이나 안전벨트가 충격량 식의 어느 값을 바꾸는지 쓰세요.",
+            "ph": ""
+      },
+      {
+            "id": "w4",
+            "label": "아직 헷갈리는 것",
+            "hint": "다음 시간에 여기서부터 시작합니다.",
+            "ph": ""
+      }
+]
+  });
 })();
 </script>
 </body>
