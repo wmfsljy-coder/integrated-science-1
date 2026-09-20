@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>지구시스템 — 관측 스테이션</title>
 <link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="../assets/story.css">
 </head>
 <body>
 
@@ -19,467 +20,337 @@
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 지구시스템의 에너지원</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 판구조론과 지권의 변화</button>
     <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
+    <button class="tab-btn" data-tab="4"><span class="num">05</span> 우리 반</button>
   </nav>
 
   <main>
+    <!-- =====================================================================
+         01 지구시스템의 구성 — 이야기 「모래 한 알의 여행」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="0">
       <div class="stage-head">
-        <div class="eyebrow">01 · 서로 영향을 주고받는 네 영역</div>
-        <h2 class="display">지구시스템의 구성과 상호작용</h2>
-        <p>원이나 화살표를 클릭해 각 권의 특징과 상호작용을 확인하고, 아래에서 사건 시나리오를 골라 하나의 변화가 다른 권까지 어떻게 연쇄적으로 퍼지는지 확인해 보세요.</p>
-      
-        <span class="std-chip">10통과1-03-01</span><span class="std-chip">10통과1-03-02</span><div class="std-note"><b>[10통과1-03-01]</b> 지구 시스템은 태양계라는 시스템의 구성요소임을 알고, 지구 시스템을 구성하는 권역들 간의 물질 순환과 에너지 흐름의 결과로 나타나는 현상을 논증할 수 있다.<br><b>[10통과1-03-02]</b> 지권의 변화를 판구조론 관점에서 해석하고, 에너지 흐름의 결과로 발생하는 지권의 변화가 지구시스템에 미치는 영향을 추론할 수 있다.</div><div class="terms"><b>지권·수권·기권·생물권</b><b>에너지원</b><b>판구조론</b></div>
+        <div class="eyebrow">01 · 지구시스템의 구성 · 이야기 한 편</div>
+        <h2 class="display">모래 한 알의 여행</h2>
+        <p>해변에서 주운 모래 한 알이 어디서 왔는지 따라가는 이야기입니다. 물이 저장고마다 얼마나 오래 머무는지 계산하고, 권역 사이를 오가는 것들을 지도에서 확인하고, 화산재 한 번이 지구 전체의 기온을 얼마나 낮추는지 직접 맞춰 봅니다.</p>
+        <span class="std-chip">10통과1-03-01</span><div class="std-note"><b>[10통과1-03-01]</b> 지구 시스템은 태양계라는 시스템의 구성요소임을 알고, 지구 시스템을 구성하는 권역들 간의 물질 순환과 에너지 흐름의 결과로 나타나는 현상을 논증할 수 있다.</div><div class="terms"><b>지권·수권·기권·생물권</b><b>외권</b><b>물질 순환</b><b>상호 작용</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c0" width="900" height="480"></canvas></div>
-        <div class="info-card" id="c0-info">원이나 화살표를 클릭해 보세요.</div>
+
+      <div class="episode" id="ep1">
+        <section class="scene" data-title="해변에서 주운 한 알">
+          <div class="story narr"><div class="who">🏖️</div><div class="say"><span class="name">이야기</span>여름 방학, 동해안 해수욕장. 발가락 사이로 빠져나가는 모래를 한 줌 쥐었다가 한 알만 남기고 털어 냈습니다. 지름 0.3 mm, 투명하고 모난 데가 닳은 알갱이 하나. 학교로 돌아와 현미경과 성분 분석기에 올려 보았더니, 이 작은 알갱이 하나에 <b>네 곳의 주소</b>가 찍혀 있었습니다.</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">지구시스템 관측소 · 연구원 서하</span>“조사관님, 잘 오셨습니다. 이 모래 한 알은 아주 좋은 증거물이에요. 지구를 <b>따로 노는 네 덩어리</b>로 보면 이 알갱이는 설명이 안 됩니다. 지구를 <b>서로 주고받는 하나의 시스템</b>으로 볼 때만 여행 경로가 보이죠. 시작하기 전에, 조사관님의 첫 추리부터 들어 봅시다.”</div></div>
+          <div class="case-file"><b class="k">분석표</b> 석영 78% (화강암에서 떨어져 나온 알갱이) &nbsp;|&nbsp; 장석 12% &nbsp;|&nbsp; <b>조개껍데기 조각</b> 7% &nbsp;|&nbsp; <b>화산 유리</b> 3% &nbsp;|&nbsp; 모서리가 둥글게 닳음 &nbsp;|&nbsp; 지름 0.3 mm</div>
+          <div class="gate loose" id="g1"></div>
+        </section>
+
+        <section class="scene" data-title="물의 여행 — 어디에 얼마나 머무는가">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서하</span>“이 알갱이를 산에서 바다까지 실어 나른 것은 <b>물</b>입니다. 그런데 물은 한곳에 가만히 있지 않아요. 바다에서 증발해 기권으로 올라가고, 비가 되어 땅에 내리고, 강을 따라 다시 바다로 갑니다. 이렇게 <b>같은 물이 권역 사이를 돌고 도는 것</b>을 물의 순환이라고 하죠. 그럼 물 한 방울은 각 저장고에 <b>얼마나 오래</b> 머물까요? 계산은 간단합니다. <b>머무는 시간 = 저장량 ÷ 해마다 드나드는 양</b>.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-water" width="900" height="390"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">들여다볼 저장고</div>
+                <div class="seg" id="a-store">
+                  <button class="on" data-s="sea">바닷물</button>
+                  <button data-s="ice">빙하</button>
+                  <button data-s="gnd">지하수</button>
+                  <button data-s="riv">하천</button>
+                  <button data-s="atm">대기(수증기)</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">만약 물의 순환이 지금의 몇 배로 빨라진다면<span class="val" id="a-cyc-val">1.00배</span></div>
+                <input type="range" id="a-cyc" min="0.5" max="3" step="0.05" value="1">
+              </div>
+            </div>
+            <div class="info-card" id="a-water-info"></div>
+          </div>
+          <div class="mission" id="m1-2"><span class="m-tag">미션</span>두 가지를 알아내세요. (하나씩 해도 됩니다)<ul><li id="m1-2a">물이 <b>가장 빨리 갈아치워지는</b> 저장고를 찾아 눌러 보기 (머무는 시간이 열흘 아래인 곳)</li><li id="m1-2b">순환 배율을 올려 <b>바닷물</b>이 머무는 시간을 <b>2,000년 아래로</b> 만들기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="권역 지도 — 서로 주고받는 것들">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서하</span>“이제 전체 지도를 봅시다. 지구시스템은 <b>지권·수권·기권·생물권</b>, 그리고 대기권 바깥의 <b>외권</b>으로 이루어져 있습니다. 지구 자체도 <b>태양계라는 더 큰 시스템의 한 부품</b>이라, 시스템을 돌리는 에너지는 거의 다 바깥에서 들어오죠. 지도 위의 <b>동그란 표시</b>를 하나씩 눌러 보세요. 두 권역 사이에 무엇이 오가는지 나옵니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-map" width="900" height="440"></canvas></div>
+            <div class="info-card" id="a-map-info">지도 위의 작은 동그라미(상호 작용 표시)나 권역의 원을 눌러 보세요.</div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s1-sort"></div></div>
+          <div class="mission" id="m1-3"><span class="m-tag">미션</span><ul><li id="m1-3a">권역 사이의 <b>상호 작용 표시 8개를 모두</b> 눌러 확인하기</li><li id="m1-3b">실제로 일어난 일 8가지를 ‘무엇이 무엇을 바꾸었는지’로 나누기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="1991년, 여름이 서늘했다">
+          <div class="story narr"><div class="who">🌋</div><div class="say"><span class="name">이야기</span>1991년 6월, 필리핀의 <b>피나투보 화산</b>이 폭발했습니다. 20세기에 손꼽히는 큰 분화였고, 이산화 황이 성층권까지 올라가 지구를 한 바퀴 둘렀습니다. 그리고 그다음 해, <b>지구 평균 기온이 약 0.5 ℃ 낮아졌습니다.</b> 화산 하나가 지구 전체의 온도계를 움직인 것입니다.</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서하</span>“모래 한 알에 섞여 있던 <b>화산 유리 3%</b> 기억하시죠? 지권에서 나온 것이 기권으로 올라가 햇빛을 가리고, 기온이 내려가면 생물권의 광합성과 수권의 증발까지 달라집니다. 분출량을 바꿔 가며 <b>얼마나 뿜어야 0.5 ℃ 가 내려가는지</b> 직접 맞춰 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-volc" width="900" height="430"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">성층권으로 올라간 이산화 황의 양 (Tg = 100만 t)<span class="val" id="a-so2-val">6 Tg</span></div>
+                <input type="range" id="a-so2" min="0" max="60" step="1" value="6">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">폭발한 뒤 지난 시간 (개월)<span class="val" id="a-mon-val">6개월</span></div>
+                <input type="range" id="a-mon" min="0" max="48" step="1" value="6">
+              </div>
+            </div>
+            <div class="info-card" id="a-volc-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s1-q1"></div></div>
+          <div class="mission" id="m1-4"><span class="m-tag">미션</span>세 가지를 해내세요. (슬라이더는 하나씩 맞춰도 됩니다)<ul><li id="m1-4a">이산화 황의 양을 조절해 <b>가장 많이 식었을 때의 기온 변화</b>를 피나투보와 같은 <b>−0.5 ℃</b>로 맞추기</li><li id="m1-4b">시간 슬라이더를 움직여 <b>식히는 효과가 절반 이하로 줄어드는 때</b> 찾기</li><li id="m1-4c">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 한 알이 지나온 길">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서하</span>“마지막으로 하나만 더. 사람이 숲을 베어 내면 어떤 순서로 연쇄가 퍼질까요? 순서대로 놓아 보세요. 다 놓으면 이 모래 한 알의 보고서가 열립니다.”</div></div>
+          <div class="stage-card"><div id="s1-order"></div></div>
+          <div id="e1-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🏖️ 모래 한 알은 네 권역을 모두 지나왔다</h4>
+              <p>석영 알갱이는 <b>지권</b>의 화강암에서 떨어져 나왔습니다. 그것을 떼어 낸 것은 빗물과 얼음(<b>수권</b>), 기온 변화와 바람(<b>기권</b>), 그리고 바위에 달라붙어 산을 내놓는 지의류와 뿌리(<b>생물권</b>)였습니다. 강물이 이 알갱이를 바다까지 날랐고(수권 → 지권), 바닷가에서 조개껍데기 조각(생물권)과 화산 유리(지권)가 섞였습니다. <b>한 알갱이의 이력서에 네 권역이 모두 적혀 있는 까닭</b>은, 지구가 서로 주고받는 하나의 시스템이기 때문입니다.</p>
+              <p>권역 사이를 오가는 것은 <b>물질</b>만이 아닙니다. 물의 순환·탄소의 순환처럼 물질이 돌고, 그 물질을 움직이는 <b>에너지</b>도 함께 흐릅니다. 그래서 한곳의 변화는 반드시 다른 곳에 나타납니다 — 화산재가 기온을 낮추고, 기온이 광합성과 증발을 바꾸고, 숲이 사라지면 토양과 하천과 대기가 함께 달라집니다.</p>
+              <div class="vs" id="e1-vs"></div>
+              <span class="stamp">사건 파일 ① 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 물의 저장량과 해마다 순환하는 양은 널리 쓰이는 추정값이고, ‘머무는 시간 = 저장량 ÷ 드나드는 양’은 저장고가 <b>고르게 섞인다고 본 단순화한 모형</b>입니다. 실제 바닷물은 표층과 심층이 다른 속도로 움직입니다. 화산 화면도 냉각의 크기가 이산화 황의 양에 <b>정비례</b>하고 에어로졸이 1년 남짓의 시간 척도로 줄어든다고 본 아주 단순한 모형입니다. 실제로는 분출 높이·위도·계절에 따라 결과가 크게 달라지고, 1991년 피나투보의 약 0.5 ℃ 냉각도 관측과 모형으로 추정한 값입니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk1"></div></div>
+          </div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="stage-head" style="padding:20px 20px 0;">
-          <div class="eyebrow">심화 · 시스템 사고 시뮬레이션</div>
-          <h2 class="display" style="font-size:18px;">사건 하나가 만드는 연쇄 반응</h2>
-        </div>
-        <div class="toggle-row" id="c0b-scenarios" style="margin:0 20px 14px;">
-          <button class="chip on" data-s="volcano">화산 폭발</button>
-          <button class="chip" data-s="drought">대가뭄</button>
-          <button class="chip" data-s="deforest">삼림 벌채</button>
-        </div>
-        <div class="canvas-wrap"><canvas id="c0b" width="900" height="300"></canvas></div>
-        <div class="info-card" id="c0b-info"></div>
-      </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         02 지구시스템의 에너지원 — 이야기 「세 개의 난로」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="1" hidden>
       <div class="stage-head">
-        <div class="eyebrow">02 · 지구시스템을 움직이는 힘</div>
-        <h2 class="display">세 가지 에너지원, 스케일에 따라 달라지는 인상</h2>
-        <p>막대를 클릭해 각 에너지원의 대표적인 현상을 확인하고, 척도를 로그/선형으로 바꿔가며 세 에너지원의 크기 차이가 얼마나 극단적인지 살펴보세요.</p>
+        <div class="eyebrow">02 · 지구시스템의 에너지원 · 이야기 한 편</div>
+        <h2 class="display">세 개의 난로</h2>
+        <p>지구라는 집에는 난로가 셋 있습니다. 크기를 직접 재서 견주고, 들어온 에너지와 나간 에너지를 맞춰 지구의 평균 기온을 계산하고, 달을 돌려 바닷물을 끌어올립니다.</p>
+        <span class="std-chip">10통과1-03-01</span><div class="std-note"><b>[10통과1-03-01]</b> 지구 시스템은 태양계라는 시스템의 구성요소임을 알고, 지구 시스템을 구성하는 권역들 간의 물질 순환과 에너지 흐름의 결과로 나타나는 현상을 논증할 수 있다.</div><div class="terms"><b>에너지원</b><b>태양 에너지</b><b>지구 내부 에너지</b><b>조력 에너지</b><b>복사 평형</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">그래프 척도</div>
-            <div class="seg" id="c1-scale">
-              <button class="on" data-s="log">로그 스케일</button>
-              <button data-s="linear">선형 스케일</button>
+
+      <div class="episode" id="ep2">
+        <section class="scene" data-title="태양이 사라진 아침">
+          <div class="story narr"><div class="who">🌑</div><div class="say"><span class="name">이야기</span>생각 실험 하나. 내일 아침, 태양이 갑자기 빛을 잃었다고 해 봅시다. 며칠 지나면 바람이 잦아들고, 비가 그치고, 식물이 시들 것입니다. 그런데 <b>그래도 계속되는 일</b>이 있습니다. 지구에 난로가 태양 하나뿐이 아니기 때문입니다.</div></div>
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">관측소장 정우</span>“지구시스템을 움직이는 에너지원은 셋입니다. <b>태양 복사 에너지</b>, <b>지구 내부 에너지</b>, 그리고 <b>조력 에너지</b>. 오늘은 이 난로 셋의 크기를 직접 재고, 어떤 현상이 어느 난로에서 왔는지 가려낼 겁니다. 먼저 예상부터 해 보시죠.”</div></div>
+          <div class="case-file"><b class="k">난로 목록</b> ① 태양 복사 에너지 — 지구가 가로채는 양 약 <b>174,000 TW</b> &nbsp;|&nbsp; ② 지구 내부 에너지 — 지표로 빠져나오는 열 약 <b>47 TW</b> &nbsp;|&nbsp; ③ 조력 에너지 — 달과 태양의 인력이 하는 일 약 <b>3.7 TW</b> &nbsp;&nbsp;(1 TW = 1조 W)</div>
+          <div class="gate loose" id="g2"></div>
+        </section>
+
+        <section class="scene" data-title="난로 세 대의 크기를 재다">
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">정우</span>“숫자만 보면 감이 안 오죠. 두 가지 방법으로 봅시다. 하나는 <b>막대 그래프의 척도를 바꿔 보는 것</b>, 또 하나는 <b>같은 넓이의 땅 위에서 견주는 것</b>입니다. 운동장만 한 땅 위에 태양이 쏟아붓는 에너지와, 그 땅 밑에서 올라오는 지구 내부의 열을 같은 단위(W)로 비교해 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-stove" width="900" height="400"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">그래프 척도</div>
+                <div class="seg" id="b-scale">
+                  <button class="on" data-s="log">로그 척도</button>
+                  <button data-s="linear">선형 척도</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">견주어 볼 땅의 넓이 (m²)<span class="val" id="b-area-val">100 m²</span></div>
+                <input type="range" id="b-area" min="10" max="2000" step="10" value="100">
+              </div>
             </div>
+            <div class="info-card" id="b-stove-info"></div>
           </div>
-        </div>
-        <div class="info-card" id="c1-info">막대를 클릭해 보세요.</div>
+          <div class="mission" id="m2-2"><span class="m-tag">미션</span><ul><li id="m2-2a"><b>선형 척도</b>로 바꿔, 내부 에너지와 조력 에너지 막대가 어떻게 보이는지 확인하기</li><li id="m2-2b">넓이를 조절해, 그 땅에서 올라오는 <b>지구 내부의 열이 백열전구 한 개(60 W)</b>와 같아지게 만들기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="들어온 만큼 내보낸다 — 지구의 에너지 수지">
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">정우</span>“태양 난로가 저렇게 큰데 지구는 왜 계속 뜨거워지지 않을까요? <b>들어오는 만큼 내보내고 있기</b> 때문입니다. 이것을 <b>복사 평형</b>이라 하고, 들어오고 나가는 에너지의 장부를 <b>에너지 수지</b>라고 부르죠. 장부를 직접 맞춰 봅시다. 반사율을 바꾸면 흡수하는 양이 달라지고, 대기의 온실 효과는 지표를 한 번 더 데웁니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-budget" width="900" height="410"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">지구의 반사율(알베도) <span class="val" id="b-alb-val">10 %</span></div>
+                <input type="range" id="b-alb" min="0" max="70" step="1" value="10">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">대기의 온실 효과로 더해지는 온도 (℃)<span class="val" id="b-gh-val">0 ℃</span></div>
+                <input type="range" id="b-gh" min="0" max="80" step="1" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="b-budget-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s2-q1"></div></div>
+          <div class="mission" id="m2-3"><span class="m-tag">미션</span>실제 지구의 장부를 재현하세요.<ul><li id="m2-3a">반사율을 조절해 <b>대기가 없을 때의 복사 평형 온도</b>를 <b>−18 ℃</b>(±1)로 맞추기</li><li id="m2-3b">이어서 온실 효과를 조절해 <b>지표의 평균 기온</b>을 <b>15 ℃</b>(±1)로 맞추기</li><li id="m2-3c">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="달이 끌어올린 바다, 그리고 난로 가려내기">
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">정우</span>“세 번째 난로, 조력입니다. 바닷물을 하루 두 번 부풀리는 힘은 <b>달과 태양의 인력</b>에서 옵니다. 달이 태양보다 훨씬 작은데도 <b>더 가깝기 때문에</b> 조석을 일으키는 힘은 달이 태양의 두 배쯤 됩니다. 달의 위상을 돌려 보면 둘의 힘이 겹칠 때와 어긋날 때가 보일 거예요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-tide" width="900" height="370"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">달의 위상 (0°=그믐, 90°=상현, 180°=보름)<span class="val" id="b-ph-val">45°</span></div>
+                <input type="range" id="b-ph" min="0" max="360" step="15" value="45">
+              </div>
+            </div>
+            <div class="info-card" id="b-tide-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s2-sort"></div></div>
+          <div class="mission" id="m2-4"><span class="m-tag">미션</span><ul><li id="m2-4a">조차가 가장 커지는 때(<b>사리</b>)를 만들기</li><li id="m2-4b">조차가 가장 작아지는 때(<b>조금</b>)를 만들기</li><li id="m2-4c">현상 9가지를 <b>어느 난로에서 왔는지</b>로 나누기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 큰 난로와 센 난로">
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">정우</span>“보고서를 쓰기 전에 마지막 물음 하나. 여기서 많은 사람이 헷갈립니다.”</div></div>
+          <div class="stage-card"><div id="s2-q2"></div></div>
+          <div id="e2-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🔥 가장 큰 난로가 모든 일을 하는 것은 아니다</h4>
+              <p>세 에너지원의 크기는 <b>태양 174,000 TW : 지구 내부 47 TW : 조력 3.7 TW</b>, 곧 태양이 전체의 <b>99.9% 이상</b>입니다. 태양 에너지는 대기와 해수를 순환시키고, 바람·구름·비를 만들고, 풍화와 침식을 일으키고, 광합성으로 생물권을 먹여 살립니다. 그런데도 <b>화산과 지진, 판의 운동</b>은 태양이 아니라 <b>지구 내부 에너지</b>가, <b>밀물과 썰물</b>은 <b>달과 태양의 인력</b>이 일으킵니다. 에너지가 <b>어디에, 얼마나 좁은 곳에 모여서</b> 쓰이는지가 다르기 때문입니다.</p>
+              <p>또 지구는 받은 만큼 우주로 내보냅니다(<b>복사 평형</b>). 들어오는 태양 복사 중 약 30%는 곧바로 반사되고 70%가 흡수되며, 지구는 그만큼을 적외선으로 내보내 평균 기온을 유지합니다. 대기가 없다면 지표의 평균 기온은 약 <b>−18 ℃</b>였을 것입니다. 지금의 약 <b>15 ℃</b>는 <b>온실 효과</b>가 더해 준 30 ℃ 남짓의 몫입니다.</p>
+              <div class="vs" id="e2-vs"></div>
+              <span class="stamp">사건 파일 ② 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 세 에너지원의 크기는 널리 쓰이는 추정값입니다(지구 내부 열은 약 47 TW, 조력은 약 3.7 TW). 에너지 수지 화면은 지구를 <b>온도가 하나뿐인 공</b>으로 본 아주 단순한 모형이라, 온실 효과를 ‘더해 주는 온도’로 다루었습니다. 실제 대기는 높이마다 온도가 다르고 구름·수증기·이산화 탄소가 저마다 다르게 작용합니다. 조석 화면도 달과 태양의 기조력만 겹친 모형이며, 실제 조차는 해안 지형과 바다의 모양에 따라 같은 날에도 지역마다 크게 다릅니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk2"></div></div>
+          </div>
+        </section>
       </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         03 판구조론과 지권의 변화 — 이야기 「갈라지는 땅」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="2" hidden>
       <div class="stage-head">
-        <div class="eyebrow">03 · 판의 경계에서 일어나는 일</div>
-        <h2 class="display">판구조론과 지권의 변화</h2>
-        <p>판 경계의 종류와 이동 속력을 조절해, 각 경계에서 판이 어떻게 움직이고 어떤 지형이 얼마나 빨리 만들어지는지 확인해 보세요.</p><div class="info-card" style="margin:14px 0 0;max-width:640px;"><span class="tag" style="background:#d9f0fb;color:#1179a6">지진과의 관계</span>판 경계에서 판이 서로 멀어지면(발산 경계) 지각이 늘어나며 <b>정단층</b>이, 서로 부딪히면(수렴 경계) 지각이 눌리며 <b>역단층</b>이, 옆으로 어긋나게 스쳐 지나가면(보존 경계) <b>주향이동단층</b>이 만들어집니다. 지진이 일어날 때 발생하는 단층의 종류를 분석하면 거꾸로 그 지역이 어떤 판 경계에 놓여 있는지도 알아낼 수 있습니다.</div>
-      </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c2" width="900" height="380"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">판 경계 유형</div>
-            <div class="seg" id="c2-type">
-              <button class="on" data-t="divergent">발산형 경계</button>
-              <button data-t="convergent">수렴형 경계</button>
-              <button data-t="transform">보존형 경계</button>
-            </div>
-          </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">판의 이동 속력(cm/년)<span class="val" id="c2-rate-val">5</span></div>
-            <input type="range" id="c2-rate" min="1" max="15" step="1" value="5">
-          </div>
-        </div>
-        <div class="readout" style="margin:0 20px 14px;">
-          <span class="dot" style="background:var(--teal)"></span>
-          <span class="txt" id="c2-rate-info"></span>
-        </div>
-        <div class="info-card" id="c2-info"></div>
+        <div class="eyebrow">03 · 판구조론과 지권의 변화 · 이야기 한 편</div>
+        <h2 class="display">갈라지는 땅</h2>
+        <p>100년 전에 비웃음을 산 지도 한 장에서 시작합니다. 판 경계 세 종류를 직접 만들어 보고, 세계 지도 위에서 화산과 지진이 왜 띠를 이루는지 재현하고, 하와이 열도로 판의 속도를 재서 5천만 년 뒤의 지구를 예측합니다.</p>
+        <span class="std-chip">10통과1-03-02</span><div class="std-note"><b>[10통과1-03-02]</b> 지권의 변화를 판구조론 관점에서 해석하고, 에너지 흐름의 결과로 발생하는 지권의 변화가 지구시스템에 미치는 영향을 추론할 수 있다.</div><div class="terms"><b>판구조론</b><b>판의 경계</b><b>맨틀 대류</b><b>변동대</b></div>
       </div>
 
-      <div class="stage-head">
-        <div class="eyebrow">🔎 미션 · 사례로 판 경계 유형 맞히기</div>
-        <h2 class="display" style="font-size:18px;">이 지형·현상은 어떤 경계에서 생겼을까?</h2>
+      <div class="episode" id="ep3">
+        <section class="scene" data-title="맞물리는 해안선">
+          <div class="story narr"><div class="who">🗺️</div><div class="say"><span class="name">이야기</span>1912년, 독일의 기상학자 <b>알프레트 베게너</b>가 이상한 주장을 내놓았습니다. “대서양 양쪽 해안선은 퍼즐처럼 맞물린다. 옛날에 대륙은 하나였고(<b>판게아</b>), 그 뒤 갈라져 이동했다.” 증거도 함께 내놓았지만, 지질학자들은 거의 받아들이지 않았습니다. 베게너는 1930년 그린란드 탐사 중에 숨졌고, 그의 생각이 되살아난 것은 <b>30년이 더 지나서</b>였습니다.</div></div>
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">지질 조사단장 민서</span>“조사관님, 오늘 사건은 <b>왜 이렇게 좋은 증거를 두고도 틀렸다고 했는가</b>입니다. 증거 목록을 보시죠. 해안선, 화석, 빙하, 산맥까지 다 맞아떨어집니다. 그런데도 학계는 고개를 저었어요. 무엇이 빠져 있었을까요?”</div></div>
+          <div class="case-file"><b class="k">베게너가 내놓은 증거</b> 대서양 양쪽 해안선이 맞물림 &nbsp;|&nbsp; 남아메리카와 아프리카에서 같은 민물 파충류(<b>메소사우루스</b>) 화석 &nbsp;|&nbsp; 남아메리카·아프리카·인도·오스트레일리아·남극에 같은 <b>글로소프테리스</b> 화석 &nbsp;|&nbsp; 따뜻한 지역에 남은 <b>빙하가 긁은 자국</b>, 그 방향이 여러 대륙에서 이어짐 &nbsp;|&nbsp; 떨어진 대륙의 산맥과 암석 나이가 이어짐</div>
+          <div class="gate loose" id="g3"></div>
+        </section>
+
+        <section class="scene" data-title="판 경계 실험대">
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">민서</span>“빠져 있던 것은 <b>움직이게 하는 힘</b>이었습니다. 1960년대에 해저 지형과 고지자기 줄무늬가 밝혀지고 <b>해저 확장설</b>이 나오면서, 지구의 겉껍질이 여러 장의 <b>판</b>으로 나뉘어 <b>맨틀의 대류</b>를 타고 움직인다는 <b>판구조론</b>이 자리를 잡았죠. 판을 움직이는 에너지는 <b>지구 내부 에너지</b>입니다. 자, 경계를 직접 만들어 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-bnd" width="900" height="430"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">판 경계 유형</div>
+                <div class="seg" id="c-type">
+                  <button class="on" data-t="divergent">발산형 경계</button>
+                  <button data-t="convergent">수렴형 경계</button>
+                  <button data-t="transform">보존형 경계</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">판의 이동 속력 (cm/년)<span class="val" id="c-v-val">5.0</span></div>
+                <input type="range" id="c-v" min="0.5" max="15" step="0.5" value="5">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">지난 시간 (만 년)<span class="val" id="c-t-val">500만 년</span></div>
+                <input type="range" id="c-t" min="100" max="20000" step="100" value="500">
+              </div>
+            </div>
+            <div class="info-card" id="c-bnd-info"></div>
+          </div>
+          <div class="info-card" style="margin:14px 0 0;max-width:640px;"><span class="tag" style="background:#d9f0fb;color:#1179a6">지진과의 관계</span>판 경계에서 판이 서로 멀어지면(발산 경계) 지각이 늘어나며 <b>정단층</b>이, 서로 부딪히면(수렴 경계) 지각이 눌리며 <b>역단층</b>이, 옆으로 어긋나게 스쳐 지나가면(보존 경계) <b>주향이동단층</b>이 만들어집니다. 지진이 일어날 때 발생하는 단층의 종류를 분석하면 거꾸로 그 지역이 어떤 판 경계에 놓여 있는지도 알아낼 수 있습니다.</div>
+          <div class="stage-card" style="margin-top:14px"><div id="s3-q1"></div></div>
+          <div class="mission" id="m3-2"><span class="m-tag">미션</span><ul><li id="m3-2a">세 가지 경계를 <b>모두</b> 만들어 보고, 각각에서 어떤 지형과 지진이 생기는지 확인하기</li><li id="m3-2b"><b>발산형 경계</b>에서 새로 만들어진 해양 지각의 폭을 <b>대서양만큼(약 5,000 km)</b> 만들기</li><li id="m3-2c">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="불의 고리 — 왜 하필 그 자리인가">
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">민서</span>“이제 세계 지도를 펴 봅시다. 화산과 큰 지진이 일어난 자리를 찍어 보면 지구 전체에 고르게 흩어져 있지 않아요. <b>가느다란 띠</b>를 이룹니다. 그 띠가 무엇과 겹치는지, 거리를 재면서 확인해 보세요. 지도 위의 점을 누르면 어떤 화산·지진인지 나옵니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-quake" width="900" height="520"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">판 경계에서 이 거리 안쪽을 세어 봅니다 (km)<span class="val" id="c-r-val">2,000 km</span></div>
+                <input type="range" id="c-r" min="100" max="2000" step="100" value="2000">
+              </div>
+            </div>
+            <div class="info-card" id="c-quake-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s3-sort"></div></div>
+          <div class="mission" id="m3-3"><span class="m-tag">미션</span><ul><li id="m3-3a">거리를 <b>800 km 이하</b>로 줄이고도 화산과 지진이 <b>각각 70% 이상</b> 들어오게 만들기 — 너무 넓게 잡으면 실패입니다</li><li id="m3-3b">실제 지형·현상 9가지를 판 경계 유형별로 나누기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="하와이가 알려 준 속도, 5천만 년 뒤의 지도">
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">민서</span>“판이 정말 움직인다면 <b>속도를 잴 수 있어야</b> 합니다. 하와이 열도가 자입니다. 태평양판 아래 한자리에 고정된 <b>열점</b>에서 마그마가 올라와 섬을 만드는데, 판이 지나가는 동안 섬이 줄지어 늘어서죠. 그래서 <b>열점에서 멀어질수록 섬이 오래된</b> 겁니다. 속도를 맞춰 실제 섬의 나이와 거리에 들어맞게 해 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-hot" width="900" height="370"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">태평양판의 이동 속력 (cm/년)<span class="val" id="c-vp-val">14.0</span></div>
+                <input type="range" id="c-vp" min="2" max="14" step="0.5" value="14">
+              </div>
+            </div>
+            <div class="info-card" id="c-hot-info"></div>
+          </div>
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">민서</span>“속도를 알면 <b>미래</b>도 그려집니다. 지금 이 순간에도 대서양은 넓어지고, 태평양판은 일본 해구로 가라앉고, 인도판은 북쪽으로 밀고 올라가 히말라야를 더 높이고 있어요. 시간을 앞으로 돌려 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-future" width="900" height="330"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">앞으로 흐를 시간 (만 년)<span class="val" id="c-ft-val">0만 년</span></div>
+                <input type="range" id="c-ft" min="0" max="10000" step="100" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="c-future-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s3-q2"></div></div>
+          <div class="mission" id="m3-4"><span class="m-tag">미션</span><ul><li id="m3-4a">하와이 열도의 <b>두 자료에 모두 들어맞는</b> 판의 속력 찾기 (오차 15% 이내 — 너무 느려도, 너무 빨라도 실패)</li><li id="m3-4b">시간을 돌려 <b>대서양이 지금보다 1,000 km 더 넓어지는 때</b> 찾기</li><li id="m3-4c">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 30년 걸린 증거">
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">민서</span>“마지막으로, 대륙 이동설이 판구조론이 되기까지의 일을 순서대로 놓아 보세요. 다 놓으면 보고서가 열립니다.”</div></div>
+          <div class="stage-card"><div id="s3-order"></div></div>
+          <div id="e3-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🌍 지도는 옳았지만, 힘이 빠져 있었다</h4>
+              <p>베게너의 증거는 대부분 옳았습니다. 빠진 것은 <b>대륙을 움직이는 힘</b>이었고, 그 힘은 <b>맨틀의 대류</b>였습니다. 지구 내부 에너지가 맨틀을 천천히 순환시키고, 그 위에 얹힌 <b>판</b>들이 해마다 몇 cm씩 움직입니다. 판이 <b>멀어지는 곳</b>에서는 해령과 열곡이 생겨 새 해양 지각이 태어나고(정단층), <b>부딪히는 곳</b>에서는 해구·호상 열도·습곡 산맥이 만들어지며 한쪽이 가라앉고(역단층), <b>어긋나는 곳</b>에서는 지각이 생기지도 사라지지도 않은 채 미끄러집니다(주향이동단층).</p>
+              <p>그래서 화산과 지진은 아무 데서나 일어나지 않고 <b>판 경계를 따라 띠</b>를 이룹니다. 이 띠를 <b>변동대</b>라 하고, 태평양을 둘러싼 것이 ‘불의 고리’입니다. 우리나라는 판 경계에서 떨어져 있어 큰 지진이 드물지만, <b>2016년 경주 지진(규모 5.8)</b>과 <b>2017년 포항 지진(규모 5.4)</b>처럼 판 내부에서도 지진은 일어납니다. 그리고 지권의 이 변화는 지권에서 끝나지 않습니다 — 화산재는 기권의 기온을 낮추고, 해저 지진은 수권에 지진해일을 일으키며, 솟아오른 산맥은 바람과 비의 길을 바꾸어 생물권까지 흔듭니다.</p>
+              <div class="vs" id="e3-vs"></div>
+              <span class="stamp">사건 파일 ③ 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 지도 화면의 대륙 윤곽과 판 경계선은 <b>눈으로 알아볼 정도로 단순화한 선</b>이고, 거리 계산도 위도·경도를 평면처럼 다룬 근삿값입니다. 화산과 지진도 대표적인 것만 골라 찍었으므로, 화면에 나온 비율은 ‘대부분이 경계 부근’이라는 경향을 보여 줄 뿐 정확한 통계값이 아닙니다. 열점 화면은 판이 <b>일정한 속력으로 곧게</b> 움직였다고 본 모형입니다. 실제로는 속력과 방향이 시대마다 달라졌고, 하와이-엠퍼러 해산열이 꺾인 것이 그 증거로 연구되고 있습니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk3"></div></div>
+          </div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="info-card" id="c2m-data"></div>
-        <div class="seg" id="c2m-choices">
-          <button data-c="divergent">발산형 경계</button>
-          <button data-c="convergent">수렴형 경계</button>
-          <button data-c="transform">보존형 경계</button>
-        </div>
-        <div class="toggle-row" style="margin:14px 20px;">
-          <button class="btn" id="c2m-check">정답 확인</button>
-          <button class="btn" id="c2m-new">새 문제</button>
-        </div>
-        <div class="info-card" id="c2m-info"></div>
-      </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- ===================================================================== 04 정리하기 -->
     <section class="tab-panel" data-panel="3" hidden>
       <div class="stage-head">
-        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <div class="eyebrow">04 · 세 사건을 하나로</div>
         <h2 class="display">정리하기</h2>
-        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+        <p>세 이야기의 결과가 아래에 모입니다. 세 사건을 꿰는 한 문장을 쓰고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
       </div>
       <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
+    </section>
+
+    <!-- ===================================================================== 05 우리 반 -->
+    <section class="tab-panel" data-panel="4" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">05 · 같은 반 친구들과 나누기</div>
+        <h2 class="display">우리 반</h2>
+        <p>내가 해결한 사건과 찾아낸 값을 우리 반에 올리고, 친구들은 어떤 답을 냈는지 살펴보세요. <b>올리기 버튼을 눌렀을 때만</b> 공유됩니다. 실명 대신 별명을 쓰세요.</p>
+      </div>
+      <div class="stage-card"><div id="share"></div></div>
     </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
 <script src="../assets/theme.js"></script>
-<script>
-(function () {
-"use strict";
-
-/* TAB0 지구시스템 구성 */
-(function () {
-  var canvas = document.getElementById("c0");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c0-info");
-  var spheres = [
-    { name: "기권", x: W / 2, y: 110, color: "--cold", desc: "지구를 둘러싼 대기의 영역입니다. 날씨와 기후 현상이 나타납니다." },
-    { name: "수권", x: W / 2 - 200, y: H / 2, color: "--teal", desc: "바다, 강, 호수, 지하수, 빙하 등 물이 존재하는 영역입니다." },
-    { name: "지권", x: W / 2 + 200, y: H / 2, color: "--coral", desc: "지구의 표면과 내부, 암석과 토양으로 이루어진 영역입니다." },
-    { name: "생물권", x: W / 2, y: H - 110, color: "--violet", desc: "지구에 사는 모든 생명체를 포함하는 영역입니다." }
-  ];
-  var edges = [
-    { a: 0, b: 1, desc: "비와 눈이 내려 기권의 물이 수권으로 이동하고, 바다에서 물이 증발해 기권으로 이동합니다." },
-    { a: 0, b: 2, desc: "바람에 의한 풍화·침식 작용이 지권의 지형을 변화시킵니다." },
-    { a: 0, b: 3, desc: "식물의 광합성과 호흡으로 대기 중 산소·이산화 탄소 농도가 달라집니다." },
-    { a: 1, b: 2, desc: "파도와 하천이 지권을 침식하고, 퇴적물을 운반해 지형을 만듭니다." },
-    { a: 1, b: 3, desc: "생명체는 물을 마시고 서식지로 이용하며, 수권의 생태계를 구성합니다." },
-    { a: 2, b: 3, desc: "토양은 생물의 서식 기반이 되고, 생물은 풍화 작용을 촉진합니다." }
-  ];
-  canvas.addEventListener("click", function (e) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas._w / rect.width, scaleY = canvas._h / rect.height;
-    var mx = (e.clientX - rect.left) * scaleX, my = (e.clientY - rect.top) * scaleY;
-    var hit = null;
-    spheres.forEach(function (s) { if (Math.hypot(mx - s.x, my - s.y) < 50) hit = s; });
-    if (hit) { info.innerHTML = "<b>" + hit.name + "</b> — " + hit.desc; return; }
-    edges.forEach(function (ed) {
-      var A = spheres[ed.a], B = spheres[ed.b];
-      var mxid = (A.x + B.x) / 2, myid = (A.y + B.y) / 2;
-      if (Math.hypot(mx - mxid, my - myid) < 34) info.innerHTML = "<b>" + spheres[ed.a].name + " ↔ " + spheres[ed.b].name + "</b> — " + ed.desc;
-    });
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    edges.forEach(function (ed) {
-      var A = spheres[ed.a], B = spheres[ed.b];
-      ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.stroke();
-    });
-    spheres.forEach(function (s) {
-      ctx.save();
-      ctx.fillStyle = cssVar(s.color); ctx.globalAlpha = .85;
-      ctx.beginPath(); ctx.arc(s.x, s.y, 50, 0, 7); ctx.fill();
-      ctx.restore();
-      ctx.font = "700 15px Segoe UI"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center";
-      ctx.fillText(s.name, s.x, s.y + 5);
-    });
-  }
-  render();
-})();
-
-/* TAB0-B 시나리오 연쇄반응 */
-(function () {
-  var canvas = document.getElementById("c0b");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c0b-info");
-  var scenarios = {
-    volcano: {
-      label: "화산 폭발 (지권 → 기권 → 기권 전체)",
-      steps: [
-        { sphere: "지권", text: "화산이 폭발하며 화산재와 이산화 황이 대량으로 분출됩니다." },
-        { sphere: "기권", text: "화산재가 성층권까지 퍼져 햇빛을 가리고, 지구 평균 기온이 일시적으로 낮아집니다." },
-        { sphere: "생물권", text: "일조량 감소로 광합성이 줄어 식물 생장이 둔화되고, 먹이 사슬에 영향을 줍니다." },
-        { sphere: "수권", text: "기온 변화로 증발량과 강수 패턴이 바뀌어 해류·강수 분포가 달라집니다." }
-      ]
-    },
-    drought: {
-      label: "대가뭄 (기권 → 수권 → 생물권 → 지권)",
-      steps: [
-        { sphere: "기권", text: "장기간 강수량이 크게 줄어드는 이상 기후가 발생합니다." },
-        { sphere: "수권", text: "하천과 호수의 수위가 낮아지고 지하수면이 내려갑니다." },
-        { sphere: "생물권", text: "물 부족으로 식생이 말라 죽고, 농작물 수확량이 감소합니다." },
-        { sphere: "지권", text: "식생이 사라진 토양은 바람에 쉽게 침식되어 사막화가 진행됩니다." }
-      ]
-    },
-    deforest: {
-      label: "삼림 벌채 (생물권 → 지권 → 기권 → 수권)",
-      steps: [
-        { sphere: "생물권", text: "대규모로 숲이 사라지며 서식지를 잃은 생물들의 다양성이 줄어듭니다." },
-        { sphere: "지권", text: "나무 뿌리가 사라져 토양을 붙잡는 힘이 약해지고 산사태·침식이 늘어납니다." },
-        { sphere: "기권", text: "광합성으로 흡수되던 이산화 탄소가 줄어 대기 중 농도가 증가합니다." },
-        { sphere: "수권", text: "숲이 흡수하던 빗물이 그대로 흘러가 홍수 위험이 커지고 하천의 탁도가 높아집니다." }
-      ]
-    }
-  };
-  var current = "volcano";
-  document.querySelectorAll("#c0b-scenarios [data-s]").forEach(function (b) {
-    b.addEventListener("click", function () {
-      current = b.getAttribute("data-s");
-      document.querySelectorAll("#c0b-scenarios [data-s]").forEach(function (x) { x.classList.toggle("on", x === b); });
-      render();
-    });
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var s = scenarios[current];
-    var steps = s.steps;
-    var x0 = 90, x1 = W - 90, y = H / 2 - 20;
-    steps.forEach(function (st, i) {
-      var x = x0 + (i / (steps.length - 1)) * (x1 - x0);
-      ctx.save();
-      ctx.fillStyle = cssVar("--teal");
-      ctx.beginPath(); ctx.arc(x, y, 12, 0, Math.PI * 2); ctx.fill();
-      ctx.restore();
-      ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "center";
-      ctx.fillText((i + 1) + ". " + st.sphere, x, y - 24);
-      wrapText(ctx, st.text, x, y + 34, 190, 14);
-      if (i > 0) {
-        var xPrev = x0 + ((i - 1) / (steps.length - 1)) * (x1 - x0);
-        ctx.save();
-        ctx.strokeStyle = cssVar("--coral"); ctx.fillStyle = cssVar("--coral"); ctx.lineWidth = 2;
-        drawArrow(ctx, xPrev + 16, y, x - 16, y, 7);
-        ctx.restore();
-      }
-    });
-    function wrapText(ctx, text, x, y, maxW, lh) {
-      var line = "", lines = [];
-      for (var i = 0; i < text.length; i++) {
-        var test = line + text[i];
-        if (ctx.measureText(test).width > maxW && line.length > 0) { lines.push(line); line = text[i]; } else line = test;
-      }
-      lines.push(line);
-      lines.forEach(function (l, i) { ctx.fillText(l, x, y + i * lh); });
-    }
-    info.innerHTML = "<b>" + s.label + "</b> — 지구시스템은 네 권이 서로 연결되어 있어, 한 곳에서 시작된 변화가 시간이 지나며 다른 권으로 계속 퍼져 나갑니다. 이것이 '시스템으로서의 지구'라는 관점의 핵심입니다.";
-  }
-  render();
-})();
-
-/* TAB1 에너지원 */
-(function () {
-  var canvas = document.getElementById("c1");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c1-info");
-  var scale = "log";
-  var sources = [
-    { name: "태양 에너지", rel: 100, color: "--coral", desc: "가장 큰 에너지원으로, 대기와 해수의 순환, 기상 현상, 광합성 등을 일으킵니다." },
-    { name: "지구 내부 에너지", rel: 0.03, color: "--teal", desc: "방사성 원소의 붕괴열 등에서 비롯되며, 화산 활동·지진·판의 운동을 일으킵니다." },
-    { name: "조력 에너지", rel: 0.002, color: "--cold", desc: "달과 태양의 인력으로 생기며, 밀물과 썰물(조석 현상)을 일으킵니다." }
-  ];
-  document.querySelectorAll("#c1-scale button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      scale = b.getAttribute("data-s");
-      document.querySelectorAll("#c1-scale button").forEach(function (x) { x.classList.toggle("on", x === b); });
-      render();
-    });
-  });
-  canvas.addEventListener("click", function (e) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas._w / rect.width, scaleY = canvas._h / rect.height;
-    var mx = (e.clientX - rect.left) * scaleX, my = (e.clientY - rect.top) * scaleY;
-    sources.forEach(function (s, i) {
-      var y = 80 + i * 100;
-      if (mx > 200 && mx < 800 && my > y && my < y + 40) info.innerHTML = "<b>" + s.name + "</b> — " + s.desc;
-    });
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var maxLog = Math.log10(100);
-    sources.forEach(function (s, i) {
-      var y = 80 + i * 100;
-      var w;
-      if (scale === "log") {
-        w = Math.max(6, (Math.log10(s.rel) + 3) / (maxLog + 3) * 600);
-      } else {
-        w = Math.max(1, s.rel / 100 * 600);
-      }
-      ctx.save();
-      ctx.fillStyle = cssVar(s.color); ctx.globalAlpha = .8;
-      ctx.fillRect(200, y, w, 40);
-      ctx.restore();
-      ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "left";
-      ctx.fillText(s.name, 200, y - 8);
-      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist");
-      ctx.fillText("상대적 크기 ≈ " + s.rel + "%", 200 + Math.max(w, 40) + 12, y + 25);
-    });
-    if (scale === "linear") {
-      info.innerHTML = "선형 스케일에서는 지구 내부 에너지(0.03%)와 조력 에너지(0.002%)가 거의 보이지 않을 만큼 태양 에너지에 압도적으로 밀립니다. 그런데도 화산·지진처럼 지구 내부 에너지가 만드는 현상은 결코 작지 않죠 — 이것이 '전체 에너지양'과 '국지적 영향력'은 다른 문제라는 점을 보여줍니다.";
-    } else {
-      info.innerHTML = "로그 스케일에서는 세 에너지원의 막대 길이 차이가 완화되어 보이지만, 실제 값 차이는 수만 배에 달합니다. 막대를 클릭해 각 에너지원의 대표 현상을 확인해 보세요.";
-    }
-  }
-  render();
-})();
-
-/* TAB2 판구조론 */
-(function () {
-  var canvas = document.getElementById("c2");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var type = "divergent";
-  var rate = 5;
-  var t = 0;
-  var info = document.getElementById("c2-info");
-  var rateInfo = document.getElementById("c2-rate-info");
-  var texts = {
-    divergent: "<b>발산형 경계</b>: 두 판이 서로 멀어지며 맨틀 물질이 상승해 새로운 지각이 만들어집니다. 예) 대서양 중앙 해령.",
-    convergent: "<b>수렴형 경계</b>: 두 판이 서로 부딪히며, 밀도가 큰 판이 다른 판 아래로 섭입하거나 두 대륙판이 충돌해 산맥을 만듭니다. 예) 일본 해구, 히말라야 산맥.",
-    transform: "<b>보존형 경계</b>: 두 판이 서로 반대 방향으로 어긋나며 미끄러집니다. 지각이 새로 생기거나 사라지지 않습니다. 예) 산안드레아스 단층."
-  };
-  document.querySelectorAll("#c2-type button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      type = b.getAttribute("data-t");
-      document.querySelectorAll("#c2-type button").forEach(function (x) { x.classList.toggle("on", x === b); });
-      info.innerHTML = texts[type];
-    });
-  });
-  document.getElementById("c2-rate").addEventListener("input", function (e) {
-    rate = +e.target.value;
-    document.getElementById("c2-rate-val").textContent = rate;
-    updateRateInfo();
-  });
-  function updateRateInfo() {
-    var km100InYears = (100 * 100000) / rate; // 100km = 1e7 cm
-    rateInfo.innerHTML = "이동 속력 " + rate + "cm/년이면, 두 판이 100km(수도권~강원도 규모) 벌어지거나 좁혀지는 데 약 <b>" + Math.round(km100InYears).toLocaleString() + "년</b>이 걸립니다. (실제 판의 평균 이동 속력은 약 2~10cm/년입니다.)";
-  }
-
-  function frame() {
-    if (canvas.offsetParent === null) { requestAnimationFrame(frame); return; }
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var midY = H / 2, plateH = 40;
-    var speedFactor = rate / 5;
-    var offset = Math.sin(t * speedFactor) * 6;
-
-    if (type === "divergent") {
-      ctx.fillStyle = cssVar("--coral"); ctx.fillRect(0, midY - plateH / 2, W / 2 - 20 - offset, plateH);
-      ctx.fillRect(W / 2 + 20 + offset, midY - plateH / 2, W / 2, plateH);
-      ctx.save(); ctx.fillStyle = cssVar("--violet");
-      ctx.beginPath(); ctx.moveTo(W / 2, midY - 100); ctx.lineTo(W / 2 - 40, midY - plateH / 2); ctx.lineTo(W / 2 + 40, midY - plateH / 2); ctx.closePath(); ctx.fill();
-      ctx.restore();
-      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-      ctx.fillText("맨틀 상승 → 새 지각 생성", W / 2, midY - 110);
-    } else if (type === "convergent") {
-      ctx.fillStyle = cssVar("--coral"); ctx.fillRect(0, midY - plateH / 2, W / 2 + offset, plateH);
-      ctx.save();
-      ctx.translate(W / 2 + offset, midY);
-      ctx.rotate(-0.35);
-      ctx.fillStyle = cssVar("--teal");
-      ctx.fillRect(0, -plateH / 2, W / 2, plateH);
-      ctx.restore();
-      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-      ctx.fillText("섭입대 / 조산 운동", W / 2, midY + 90);
-    } else {
-      ctx.fillStyle = cssVar("--coral"); ctx.fillRect(0, midY - plateH / 2 - 20 + offset, W, plateH);
-      ctx.fillStyle = cssVar("--teal"); ctx.fillRect(0, midY + plateH / 2 - 20 - offset, W, plateH);
-      ctx.strokeStyle = cssVar("--foam"); ctx.setLineDash([6, 4]); ctx.beginPath();
-      ctx.moveTo(0, midY - 20); ctx.lineTo(W, midY - 20); ctx.stroke(); ctx.setLineDash([]);
-      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-      ctx.fillText("두 판이 서로 어긋나며 미끄러짐", W / 2, midY + 60);
-    }
-    t += 1 / 90;
-    requestAnimationFrame(frame);
-  }
-  info.innerHTML = texts.divergent;
-  updateRateInfo();
-  requestAnimationFrame(frame);
-})();
-
-/* TAB2 미션 — 사례로 경계 유형 맞히기 */
-(function () {
-  var cases = [
-    { txt: "대서양 중앙 해령에서는 해저가 갈라지며 새로운 현무암질 지각이 계속 생성되고 있다.", key: "divergent" },
-    { txt: "일본 해구 부근에서는 태평양판이 유라시아판 아래로 가라앉으며 잦은 지진과 화산이 발생한다.", key: "convergent" },
-    { txt: "히말라야 산맥은 인도판과 유라시아판이라는 두 대륙판이 충돌하며 솟아올랐다.", key: "convergent" },
-    { txt: "미국 캘리포니아의 산안드레아스 단층에서는 두 판이 지각의 생성·소멸 없이 서로 반대 방향으로 어긋나며 미끄러진다.", key: "transform" },
-    { txt: "동아프리카 열곡대는 대륙판이 갈라지며 새로운 지각이 만들어지는 초기 단계로 여겨진다.", key: "divergent" },
-    { txt: "안데스 산맥 서쪽에서는 나스카판이 남아메리카판 아래로 섭입하며 화산 활동이 활발하다.", key: "convergent" }
-  ];
-  var dataBox = document.getElementById("c2m-data");
-  var seg = document.getElementById("c2m-choices");
-  var checkBtn = document.getElementById("c2m-check");
-  var newBtn = document.getElementById("c2m-new");
-  var info = document.getElementById("c2m-info");
-  var labels = { divergent: "발산형 경계", convergent: "수렴형 경계", transform: "보존형 경계" };
-  var current = null, picked = null;
-
-  function newQuestion() {
-    current = cases[Math.floor(Math.random() * cases.length)];
-    picked = null;
-    dataBox.innerHTML = current.txt;
-    seg.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
-    info.innerHTML = "";
-    info.style.color = "";
-  }
-
-  seg.querySelectorAll("button").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      picked = btn.dataset.c;
-      seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === btn); });
-    });
-  });
-
-  checkBtn.addEventListener("click", function () {
-    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
-    if (picked === current.key) {
-      info.innerHTML = "✅ 정답! '" + labels[current.key] + "'에서 나타나는 현상입니다.";
-      info.style.color = "var(--teal)";
-    } else {
-      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
-      info.style.color = "var(--coral)";
-    }
-  });
-
-  newBtn.addEventListener("click", newQuestion);
-  newQuestion();
-})();
-
-})();
-</script>
-
-<script>
-(function () {
-  window.sthUnit("is1-3-1");
-  window.sthWork({
-    mount: "wk",
-    unitLabel: "[통합과학1 Ⅲ-1] 지구시스템",
-    items: [
-      {
-            "id": "w1",
-            "label": "권역 사이를 오가는 것",
-            "hint": "두 권역을 골라, 그 사이를 오가는 물질과 에너지를 각각 하나씩 쓰세요.",
-            "ph": "예: 기권 → 수권 : 물질은 …, 에너지는 …"
-      },
-      {
-            "id": "w2",
-            "label": "지구 내부 에너지가 하는 일",
-            "hint": "태양 에너지로는 설명되지 않는 현상을 하나 들고, 무엇이 그 현상을 일으키는지 쓰세요.",
-            "ph": ""
-      },
-      {
-            "id": "w3",
-            "label": "아직 헷갈리는 것",
-            "hint": "다음 시간에 여기서부터 시작합니다.",
-            "ph": ""
-      }
-]
-  });
-})();
-</script>
+<script src="../assets/story.js"></script>
+<script src="../assets/share-config.js"></script>
+<script src="../assets/share.js"></script>
+<script src="episodes.js"></script>
 </body>
 </html>
