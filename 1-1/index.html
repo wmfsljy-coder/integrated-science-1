@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>과학의 기본량 — 관측 스테이션</title>
 <link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="../assets/story.css">
 </head>
 <body>
 
@@ -19,565 +20,294 @@
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 우주의 스케일</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 과학적 표기법</button>
     <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
+    <button class="tab-btn" data-tab="4"><span class="num">05</span> 우리 반</button>
   </nav>
 
   <main>
+    <!-- =====================================================================
+         01 SI 기본단위 — 이야기 「단위를 잃어버린 우주선」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="0">
       <div class="stage-head">
-        <div class="eyebrow">01 · 국제단위계(SI)</div>
-        <h2 class="display">7개의 SI 기본단위</h2>
-        <p>모든 물리량은 7개의 기본량을 조합하여 나타낼 수 있습니다. 카드를 클릭해 각 기본량의 단위와 정의를 확인해 보세요.</p>
-      
-        <span class="std-chip">10통과1-01-01</span><span class="std-chip">10통과1-01-02</span><div class="std-note"><b>[10통과1-01-01]</b> 자연을 시간과 공간에서 기술할 수 있음을 알고, 길이와 시간 측정의 현대적 방법과 다양한 규모의 측정 사례를 조사할 수 있다.<br><b>[10통과1-01-02]</b> 과학 탐구에서 중요한 기본량의 의미를 알고, 자연 현상을 기술하는 데 단위가 가지는 의미와 적용 사례를 설명할 수 있다.</div><div class="terms"><b>SI 기본단위</b><b>과학적 표기법</b><b>스케일</b></div>
-      </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c0" width="900" height="380"></canvas></div>
-        <div class="info-card" id="c0-info">기본량 카드를 클릭해 보세요.</div>
+        <div class="eyebrow">01 · SI 기본단위 · 이야기 한 편</div>
+        <h2 class="display">단위를 잃어버린 우주선</h2>
+        <p>1999년에 실제로 있었던 사고를 다섯 장면에 걸쳐 조사합니다. 장면마다 미션을 끝내야 다음 장면이 열리고, 마지막 장면에서 사건이 해결됩니다.</p>
+        <span class="std-chip">10통과1-01-01</span><span class="std-chip">10통과1-01-02</span><div class="std-note"><b>[10통과1-01-01]</b> 자연을 시간과 공간에서 기술할 수 있음을 알고, 길이와 시간 측정의 현대적 방법과 다양한 규모의 측정 사례를 조사할 수 있다.<br><b>[10통과1-01-02]</b> 과학 탐구에서 중요한 기본량의 의미를 알고, 자연 현상을 기술하는 데 단위가 가지는 의미와 적용 사례를 설명할 수 있다.</div><p class="std-note" style="margin-top:6px">※ 성취기준은 2022 개정 과학과 교육과정 원문입니다. 이 단원의 기존 페이지에는 오개념 지도 상자가 실려 있지 않아 옮겨 싣지 못했습니다.</p><div class="terms"><b>SI 기본단위</b><b>기본량과 유도량</b><b>단위 환산</b><b>미터·초·킬로그램의 정의</b></div>
       </div>
 
-      <div class="stage-card">
-        <div class="stage-head" style="padding:20px 20px 0;">
-          <div class="eyebrow">심화 · 실시간 단위 변환기</div>
-          <h2 class="display" style="font-size:19px;">온도(K)와 물질량(mol) 직접 조절해보기</h2>
-          <p>슬라이더를 움직이면 온도계와 입자 개수가 실시간으로 바뀝니다. 정의식이 실제 값에 어떻게 반영되는지 확인해 보세요.</p>
-        </div>
-        <div class="canvas-wrap"><canvas id="c0b" width="900" height="260"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">섭씨 온도 (℃)<span class="val" id="c0b-t-val">25℃</span></div>
-            <input type="range" id="c0b-t" min="-50" max="150" step="1" value="25">
+      <div class="episode" id="ep1">
+        <section class="scene" data-title="교신이 끊긴 아침">
+          <div class="story narr"><div class="who">🛰️</div><div class="say"><span class="name">이야기</span>1999년 9월 23일. 9개월 반 동안 우주를 날아온 <b>화성 기후 궤도선(Mars Climate Orbiter)</b>이 화성 뒤편으로 들어갔습니다. 몇 분 뒤 다시 나타나야 할 전파는 끝내 오지 않았습니다. 궤도선은 화성 대기 속으로 너무 깊이 들어가 부서진 것으로 추정되었습니다.</div></div>
+          <div class="story"><div class="who">👩‍🚀</div><div class="say"><span class="name">사고 조사관 한나</span>“엔진도, 안테나도, 통신도 모두 정상이었습니다. 계획대로라면 화성 상공 <b>226 km</b>를 스쳐 지나가야 했는데, 마지막 계산으로는 <b>57 km</b>까지 내려갔어요. 조사관님, 두 숫자 사이에서 무슨 일이 있었을까요?”</div></div>
+          <div class="case-file"><b class="k">증거물 ①</b> 지상 팀의 소프트웨어는 추력의 크기를 <b>파운드힘초(lbf·s)</b> 단위로 출력했다. &nbsp;|&nbsp; <b class="k">증거물 ②</b> 항법 팀의 소프트웨어는 같은 숫자를 <b>뉴턴초(N·s)</b>로 읽었다. &nbsp;|&nbsp; <b class="k">증거물 ③</b> 살아남을 수 있는 최저 고도는 약 <b>80 km</b>였다.</div>
+          <div class="gate loose" id="g1"></div>
+        </section>
+
+        <section class="scene" data-title="조사 ① — 두 저울로 같은 힘 재기">
+          <div class="story"><div class="who">👩‍🚀</div><div class="say"><span class="name">한나</span>“먼저 두 단위가 얼마나 다른지부터 봅시다. 똑같은 힘을 <b>뉴턴 저울</b>과 <b>파운드힘 저울</b>로 동시에 재는 장치를 만들어 왔어요. 손잡이를 당겨 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-gauge" width="900" height="320"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">당기는 힘 (뉴턴 저울 눈금)<span class="val" id="a-f-val">10.0 N</span></div>
+                <input type="range" id="a-f" min="0" max="50" step="0.1" value="10">
+              </div>
+            </div>
+            <div class="info-card" id="a-gauge-info"></div>
           </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">물질량 지수 n (10ⁿ mol)<span class="val" id="c0b-mol-val">10⁰ mol</span></div>
-            <input type="range" id="c0b-mol" min="-3" max="3" step="0.1" value="0">
+          <div class="mission" id="m1-2"><span class="m-tag">미션</span>파운드힘 저울의 눈금을 보고, 1 파운드힘이 몇 뉴턴인지 알아내세요.<ul><li id="m1-2a">파운드힘 저울이 <b>1.0 lbf</b>를 가리키게 만들기</li><li id="m1-2b">파운드힘 저울이 <b>10.0 lbf</b>를 가리키게 만들기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="조사 ② — 궤도를 다시 계산하다">
+          <div class="story"><div class="who">👩‍🚀</div><div class="say"><span class="name">한나</span>“이제 사고를 재현합니다. 지상 팀이 보낸 숫자를 항법 컴퓨터에 넣기 전에 <b>환산 계수</b>를 곱해야 해요. 계수를 바꾸면 화성에 닿을 때의 고도가 어떻게 달라지는지 보세요. <b>계수를 1로 두면</b> 단위를 바꾸지 않고 그냥 넣은 셈입니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-orbit" width="900" height="360"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">항법 컴퓨터에 넣기 전 곱하는 환산 계수<span class="val" id="a-k-val">× 1.0</span></div>
+                <input type="range" id="a-k" min="0.5" max="6" step="0.1" value="1">
+              </div>
+            </div>
+            <div class="info-card" id="a-orbit-info"></div>
           </div>
-        </div>
-        <div class="info-card" id="c0b-info"></div>
+          <div class="mission" id="m1-3"><span class="m-tag">미션</span>궤도선을 <b>예정 고도 226 km(±8 km)</b>로 진입시키는 환산 계수를 찾으세요. 너무 낮으면 타 버리고, 너무 높으면 화성을 그대로 지나칩니다.</div>
+        </section>
+
+        <section class="scene" data-title="재발 방지 위원회 — 기준을 다시 세우다">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">표준 연구원 도윤</span>“원인은 찾았습니다. 이제 다시는 같은 일이 없도록 <b>기준</b>을 정리해야죠. 세상의 모든 물리량은 단 <b>7개의 기본량</b>에서 나옵니다. 카드를 눌러 하나씩 확인해 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-cards" width="900" height="330"></canvas></div>
+            <div class="info-card" id="a-cards-info">카드를 누르면 그 기본량의 단위와 정의가 여기에 나타납니다.</div>
+          </div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">도윤</span>“기본량 가운데 <b>온도</b>는 조금 특별합니다. 우리가 쓰는 섭씨온도(℃)는 SI 기본단위가 아니에요. 기본단위는 <b>켈빈(K)</b>이고, 시작점이 다릅니다. 직접 움직여 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-temp" width="900" height="230"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">섭씨온도<span class="val" id="a-c-val">25 ℃</span></div>
+                <input type="range" id="a-c" min="-273" max="200" step="1" value="25">
+              </div>
+            </div>
+            <div class="info-card" id="a-temp-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s1-sort"></div></div>
+          <div class="mission" id="m1-4"><span class="m-tag">미션</span>세 가지를 모두 끝내세요.<ul><li id="m1-4a">14개의 물리량과 단위를 기본량·유도량·SI 가 아닌 단위로 분류하기</li><li id="m1-4b">온도계를 <b>절대 영도(0 K)</b>에 맞춰 보기</li><li id="m1-4c">물이 어는 온도를 <b>켈빈(K)</b>으로 확인하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 사건 해결">
+          <div class="ending">
+            <h4>🔎 범인은 고장 난 부품이 아니라 ‘빠뜨린 한 번의 환산’이었다</h4>
+            <p>조사 결과, 지상 소프트웨어는 추력을 <b>파운드힘초(lbf·s)</b>로 내보냈는데 항법 소프트웨어는 그 숫자를 <b>뉴턴초(N·s)</b>로 읽었습니다. 1 lbf = 4.448222 N 이므로, 항법 팀은 실제보다 약 <b>4.45배 작은 힘</b>이 작용했다고 계산한 셈입니다. 9개월 동안 수십 차례의 작은 분사가 쌓이면서 궤도는 조금씩 어긋났고, 궤도선은 예정보다 훨씬 낮은 곳으로 들어갔습니다.</p>
+            <p>단위가 어긋나면 아무리 정교한 기계도 이렇게 길을 잃습니다. 그래서 과학계는 오래전부터 기준을 <b>물건</b>이 아니라 <b>변하지 않는 자연 상수</b>에 묶어 왔습니다. 1 m 는 빛이 진공에서 <b>1/299,792,458초</b> 동안 간 거리, 1 s 는 세슘-133 원자가 내는 특정 복사선이 <b>9,192,631,770번</b> 진동하는 시간입니다. 130년 동안 파리의 금고에 있던 킬로그램 원기(금속 덩어리)도 <b>2019년</b>에 <b>플랑크 상수</b>로 정의가 바뀌었습니다. 이제 지구 어디서 재도, 화성에서 재도 1 m 는 같은 1 m 입니다.</p>
+            <div class="vs" id="e1-vs"></div>
+            <span class="stamp">사건 파일 ① 해결</span>
+          </div>
+          <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 이 화면의 고도 계산은 ‘환산 계수를 잘못 쓴 만큼 근화점 고도가 달라진다’고만 둔 <b>단순화한 모형</b>입니다. 실제 사고에서는 아홉 달 동안 쌓인 자세 제어 분사의 오차가 궤도를 조금씩 밀어냈습니다. 사고 조사 보고서가 지목한 근본 원인은 <b>지상 소프트웨어가 SI 단위를 쓰지 않은 것</b>이었습니다.</div>
+          <div class="stage-card" style="padding:6px 0 4px"><div id="wk1"></div></div>
+        </section>
       </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         02 우주의 스케일 — 이야기 「10의 거듭제곱으로 걷기」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="1" hidden>
       <div class="stage-head">
-        <div class="eyebrow">02 · 10의 거듭제곱으로 본 세계</div>
-        <h2 class="display">두 크기를 동시에 놓고 비교하기</h2>
-        <p>기준 A, B 두 슬라이더를 각각 움직여 서로 다른 두 크기를 지정해 보세요. 두 크기의 배율 차이가 얼마나 되는지 실시간으로 계산됩니다.</p>
-      </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="420"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">기준 A · 10ⁿ m<span class="val" id="c1-eA-val">0</span></div>
-            <input type="range" id="c1-eA" min="-15" max="26" step="1" value="0">
-          </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">기준 B · 10ⁿ m<span class="val" id="c1-eB-val">26</span></div>
-            <input type="range" id="c1-eB" min="-15" max="26" step="1" value="26">
-          </div>
-        </div>
-        <div class="readout" style="margin:0 20px 14px;">
-          <span class="dot" style="background:var(--violet)"></span>
-          <span class="txt" id="c1-ratio"></span>
-        </div>
-        <div class="info-card" id="c1-info"></div>
+        <div class="eyebrow">02 · 우주의 스케일 · 이야기 한 편</div>
+        <h2 class="display">10의 거듭제곱으로 걷기</h2>
+        <p>손톱 위에서 출발해 한 걸음마다 10배씩 넓혀 가며 우주 끝까지, 그리고 반대로 원자핵까지 걸어갑니다. 걸음 수를 세는 것이 이 이야기의 열쇠입니다.</p>
+        <span class="std-chip">10통과1-01-01</span><div class="std-note"><b>[10통과1-01-01]</b> 자연을 시간과 공간에서 기술할 수 있음을 알고, 길이와 시간 측정의 현대적 방법과 다양한 규모의 측정 사례를 조사할 수 있다.</div><div class="terms"><b>10의 거듭제곱</b><b>배율(지수의 차)</b><b>광년</b><b>다양한 규모의 측정</b></div>
       </div>
 
-      <div class="stage-head" style="margin-top:30px;">
-        <div class="eyebrow">🔎 미션 · 스케일 배율 어림하기</div>
-        <h2 class="display" style="font-size:20px;">두 크기는 몇 배 차이가 날까요?</h2>
-        <p>두 물체(또는 거리)의 크기 자료가 주어집니다. 10의 거듭제곱을 이용해 두 크기의 배율 차이로 가장 알맞은 값을 선택해 보세요.</p>
+      <div class="episode" id="ep2">
+        <section class="scene" data-title="사진 한 장에서 시작한 내기">
+          <div class="story narr"><div class="who">📷</div><div class="say"><span class="name">이야기</span>과학 동아리 게시판에 사진 한 장이 붙었습니다. 가로가 딱 <b>1 cm(10⁻² m)</b>인 정사각형 사진, 찍힌 것은 누군가의 <b>손톱</b>입니다. 아래에는 이렇게 적혀 있습니다. “이 사진에서 한 걸음마다 가로를 10배씩 넓혀 보세요. <b>관측 가능한 우주(약 10²⁶ m)</b>가 한 화면에 들어올 때까지 몇 걸음일까요?”</div></div>
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">동아리원 세민</span>“10배씩이면… 엄청 오래 걸릴 것 같은데요. 100만 번은 눌러야 하지 않아요?”</div></div>
+          <div class="gate loose" id="g2"></div>
+        </section>
+
+        <section class="scene" data-title="산책 ① — 배율 손잡이를 돌려라">
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">동아리 선생님</span>“직접 걸어 보면 알겠지. 손잡이를 한 칸 움직일 때마다 화면 한 변이 <b>10배</b>가 된다. 가운데가 지금 보이는 것, 양옆은 한 걸음 앞뒤의 모습이야.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-walk" width="900" height="400"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">화면 한 변의 길이 · 10ⁿ m<span class="val" id="b-n-val">n = −2</span></div>
+                <input type="range" id="b-n" min="-15" max="26" step="1" value="-2">
+              </div>
+            </div>
+            <div class="info-card" id="b-walk-info"></div>
+          </div>
+          <div class="mission" id="m2-2"><span class="m-tag">미션</span>세 곳을 찾아가 보세요. 이름이 화면 가운데에 크게 뜨면 도착한 것입니다.<ul><li id="m2-2a">사람의 세포가 보이는 자리</li><li id="m2-2b">원자핵이 보이는 자리 (가장 작은 쪽 끝)</li><li id="m2-2c">우리은하가 한 화면에 들어오는 자리</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="산책 ② — 두 크기는 몇 배 차이일까">
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">세민</span>“걸음 수를 세면서 알았어요. <b>두 크기의 배율 차이 = 지수의 차</b>네요! 표지 두 개를 꽂아서 확인해 볼래요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-cmp" width="900" height="360"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">표지 A · 10ⁿ m<span class="val" id="b-ea-val">n = 0</span></div>
+                <input type="range" id="b-ea" min="-15" max="26" step="1" value="0">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">표지 B · 10ⁿ m<span class="val" id="b-eb-val">n = 26</span></div>
+                <input type="range" id="b-eb" min="-15" max="26" step="1" value="26">
+              </div>
+            </div>
+            <div class="info-card" id="b-cmp-info"></div>
+          </div>
+          <div class="mission" id="m2-3"><span class="m-tag">미션</span><ul><li id="m2-3a">두 표지의 차이가 <b>정확히 10²⁰ 배</b>가 되게 만드세요. (표지 하나만 움직여도 됩니다)</li><li id="m2-3b">아래 물음에 답하세요.</li></ul></div>
+          <div class="stage-card" style="margin-top:14px"><div id="s2-q1"></div></div>
+        </section>
+
+        <section class="scene" data-title="산책 ③ — 빛으로 거리를 재다">
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">동아리 선생님</span>“우주는 너무 넓어서 미터로 말하면 0이 스무 개도 넘지. 그래서 천문학자들은 <b>빛이 가는 시간</b>으로 거리를 말한단다. 1 m 의 정의도 결국 빛이 간 시간이었지? 거리를 바꿔 가며 빛이 얼마나 걸리는지 보렴.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-light" width="900" height="320"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">거리 · 10ⁿ m<span class="val" id="b-d-val">n = 7.0</span></div>
+                <input type="range" id="b-d" min="5" max="26" step="0.1" value="7">
+              </div>
+            </div>
+            <div class="info-card" id="b-light-info"></div>
+          </div>
+          <div class="mission" id="m2-4"><span class="m-tag">미션</span>빛의 속력은 <b>299,792,458 m/s</b>입니다. 두 거리를 찾으세요.<ul><li id="m2-4a">빛이 가는 데 <b>약 1초</b> 걸리는 거리</li><li id="m2-4b">빛이 가는 데 <b>약 1년</b> 걸리는 거리 — 이것이 <b>1 광년</b>입니다</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 사다리의 끝과 끝">
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">동아리 선생님</span>“마지막으로 오늘 만난 것들을 <b>작은 것부터</b> 세워 보자. 지수만 보면 금방 할 수 있을 거야.”</div></div>
+          <div class="stage-card"><div id="s2-order"></div></div>
+          <div id="e2-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🪜 스물여덟 걸음이면 손톱에서 우주 끝까지</h4>
+              <p>10⁻²m 에서 10²⁶m 까지는 지수로 <b>28만큼</b> 차이가 납니다. 10배씩 넓히는 걸음이니 <b>28걸음</b>이면 충분합니다. 반대로 손톱에서 원자핵(10⁻¹⁵ m)까지는 13걸음이고요. 우주 전체를 위아래로 훑는 데 <b>마흔한 걸음</b>밖에 걸리지 않습니다.</p>
+              <p>10의 거듭제곱을 쓰면 이렇게 서로 다른 세계를 <b>같은 자 위에</b> 올려놓을 수 있습니다. 두 크기의 배율은 <b>지수를 빼기만</b> 하면 되고, 너무 큰 거리는 <b>빛이 가는 시간</b>으로 바꿔 말할 수 있습니다. 1 광년 = 9.46×10¹⁵ m 이니, 우리은하를 가로지르는 데 빛으로 10만 년이 걸립니다.</p>
+              <div class="vs" id="e2-vs"></div>
+              <span class="stamp">사건 파일 ② 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 여기 쓴 크기는 모두 <b>자릿수를 보려는 어림값</b>입니다. 사람의 세포는 종류에 따라 지름이 몇 µm 에서 100 µm 을 넘기까지 하고, ‘관측 가능한 우주’도 반지름 약 4.4×10²⁶ m 로 재느냐 지름으로 재느냐에 따라 한 걸음쯤 달라집니다. 자릿수를 다루는 이야기에서는 이런 어림이 오히려 정확한 태도입니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk2"></div></div>
+          </div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="info-card" id="c1m-data" style="margin:18px 20px 0;"></div>
-        <div class="seg" id="c1m-choices" style="margin:14px 20px 0;"></div>
-        <div class="toggle-row" style="margin:14px 20px 0;">
-          <button class="chip" id="c1m-check">정답 확인</button>
-          <button class="chip" id="c1m-new">새 문제</button>
-        </div>
-        <div class="info-card" id="c1m-info">보기 중 하나를 선택한 뒤 [정답 확인]을 눌러 보세요.</div>
-      </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         03 과학적 표기법 — 이야기 「0을 세다가 밤을 새운 보고서」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="2" hidden>
       <div class="stage-head">
-        <div class="eyebrow">03 · 매우 크거나 작은 수를 다루는 방법</div>
-        <h2 class="display">과학적 표기법</h2>
-        <p>지수 슬라이더를 조절해 숫자가 어떻게 A × 10ⁿ 형태로 표현되는지 확인하고, 실제 값 프리셋과 문제 풀기 모드로 연습해 보세요.</p>
+        <div class="eyebrow">03 · 과학적 표기법 · 이야기 한 편</div>
+        <h2 class="display">0을 세다가 밤을 새운 보고서</h2>
+        <p>숫자를 그대로 적으려다 0을 세지 못해 제출을 놓칠 뻔한 보고서를 구해 냅니다. 소수점을 옮기고, 유효숫자로 어림하고, 우리 반의 세포 수까지 셈해 봅니다.</p>
+        <span class="std-chip">10통과1-01-02</span><div class="std-note"><b>[10통과1-01-02]</b> 과학 탐구에서 중요한 기본량의 의미를 알고, 자연 현상을 기술하는 데 단위가 가지는 의미와 적용 사례를 설명할 수 있다.</div><div class="terms"><b>과학적 표기법</b><b>계수와 지수</b><b>유효숫자</b><b>물질량(mol)과 아보가드로수</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c2" width="900" height="300"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">계수(A)<span class="val" id="c2-a-val">1.0</span></div>
-            <input type="range" id="c2-a" min="1" max="9.9" step="0.1" value="1">
+
+      <div class="episode" id="ep3">
+        <section class="scene" data-title="0이 몇 개였더라">
+          <div class="story narr"><div class="who">📄</div><div class="say"><span class="name">이야기</span>밤 11시. 과학 보고서 마감 한 시간 전. 세민이의 화면에는 이런 문장이 떠 있습니다. “사람 몸에는 세포가 37000000000000개 있고, 물 한 컵에는 분자가 6690000000000000000000000개 들어 있다.” 세민이는 조금 전부터 <b>0의 개수를 세 번째로 다시 세고</b> 있습니다.</div></div>
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">세민</span>“분명히 맞게 옮겨 적었는데, 셀 때마다 개수가 달라요. 이대로 내면 틀릴 게 뻔한데… 과학자들은 이런 수를 어떻게 적어요?”</div></div>
+          <div class="case-file"><b class="k">자료</b> 사람 몸의 세포 수 약 3.7×10¹³ 개(2013년 연구진의 추정값) &nbsp;|&nbsp; 물 1 mol = 18.0 g 에 들어 있는 분자 수 = 아보가드로수 <b>6.02214076×10²³</b> 개</div>
+          <div class="gate loose" id="g3"></div>
+        </section>
+
+        <section class="scene" data-title="구조 ① — 소수점을 옮겨라">
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">과학 선생님</span>“과학적 표기법은 규칙이 딱 하나야. <b>A × 10ⁿ 꼴로 쓰되, 계수 A 는 1 이상 10 미만</b>. 소수점을 옮긴 칸 수가 곧 지수 n 이지. 세 가지 수를 직접 고쳐 보렴.”</div></div>
+          <div class="stage-card">
+            <div class="seg" id="c-pick" style="margin:18px 20px 0;">
+              <button class="on" data-t="0">빛의 속력</button>
+              <button data-t="1">사람 몸의 세포 수</button>
+              <button data-t="2">수소 원자의 지름</button>
+            </div>
+            <div class="canvas-wrap"><canvas id="c-sci" width="900" height="300"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">소수점을 옮긴 칸 수 (왼쪽으로 옮기면 +)<span class="val" id="c-p-val">0칸</span></div>
+                <input type="range" id="c-p" min="-12" max="16" step="1" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="c-sci-info"></div>
           </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">지수(n)<span class="val" id="c2-n-val">0</span></div>
-            <input type="range" id="c2-n" min="-8" max="12" step="1" value="0">
+          <div class="mission" id="m3-2"><span class="m-tag">미션</span>세 수를 모두 올바른 과학적 표기법(1 ≤ A &lt; 10)으로 고치세요. 위의 단추로 수를 바꿔 가며 하면 됩니다.<ul><li id="m3-2a">빛의 속력 299,792,458 m/s</li><li id="m3-2b">사람 몸의 세포 수 37,000,000,000,000 개</li><li id="m3-2c">수소 원자의 지름 0.0000000001 m</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="구조 ② — 물 한 컵에는 분자가 몇 개">
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">과학 선생님</span>“분자는 너무 작아서 한 개씩 셀 수가 없어. 그래서 기본량 가운데 하나인 <b>물질량(mol)</b>이 있는 거야. <b>1 mol = 6.02×10²³ 개</b>. 물은 1 mol 이 18.0 g 이란다. 저울에 물을 부어 보렴.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-water" width="900" height="320"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">비커에 담은 물의 질량<span class="val" id="c-m-val">50 g</span></div>
+                <input type="range" id="c-m" min="0" max="360" step="1" value="50">
+              </div>
+            </div>
+            <div class="info-card" id="c-water-info"></div>
           </div>
-        </div>
-        <div class="toggle-row" id="c2-presets" style="margin:0 20px 14px;">
-          <button class="chip" data-a="6.02" data-n="23">아보가드로수</button>
-          <button class="chip" data-a="3.00" data-n="8">빛의 속력 (m/s)</button>
-          <button class="chip" data-a="1.00" data-n="-10">원자 반지름 (m)</button>
-          <button class="chip" data-a="1.20" data-n="-7">바이러스 지름 (m)</button>
-          <button class="chip" data-a="5.97" data-n="24">지구 질량 (kg)</button>
-          <button class="chip" data-a="1.00" data-n="-9">나노 입자 (m)</button>
-        </div>
-        <div class="seg" id="c2-mode" style="margin:0 20px 14px;">
-          <button class="on" data-mode="explore">자유 탐색</button>
-          <button data-mode="quiz">문제 풀기</button>
-        </div>
-        <div class="info-card" id="c2-target" style="display:none;"></div>
-        <div class="toggle-row" id="c2-quiz-actions" style="display:none;margin:0 20px 14px;">
-          <button class="chip" id="c2-check">정답 확인</button>
-          <button class="chip" id="c2-newq">새 문제</button>
-        </div>
-        <div class="info-card" id="c2-info"></div>
+          <div class="mission" id="m3-3"><span class="m-tag">미션</span><ul><li id="m3-3a">물을 <b>정확히 1 mol</b> 담아 보세요. (몇 g 일까요?)</li><li id="m3-3b">물 한 컵 <b>약 200 g</b>을 담아 분자 수를 확인하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="구조 ③ — 우리 반의 세포를 모두 더하면">
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">세민</span>“이제 자신 있어요! 그런데 보고서 마지막 문장이 남았어요. <b>‘우리 반 전체의 세포 수’</b>… 한 사람이 3.7×10¹³ 개니까, 인원을 바꿔 가며 세어 볼게요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-class" width="900" height="280"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">우리 반 인원<span class="val" id="c-n-val">1명</span></div>
+                <input type="range" id="c-n" min="1" max="40" step="1" value="1">
+              </div>
+            </div>
+            <div class="info-card" id="c-class-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s3-sort"></div></div>
+          <div class="mission" id="m3-4"><span class="m-tag">미션</span><ul><li id="m3-4a">전체 세포 수가 <b>처음으로 10¹⁵ 개를 넘는</b> 인원을 찾으세요.</li><li id="m3-4b">아래 표기 9개를 올바른 것과 잘못된 것으로 분류하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 제출 완료">
+          <div class="ending">
+            <h4>✅ 두 줄로 줄어든 보고서</h4>
+            <p>0을 세지 않아도 됩니다. “사람 몸의 세포 <b>3.7×10¹³ 개</b>, 물 한 컵(200 g)의 분자 <b>6.7×10²⁴ 개</b>.” 과학적 표기법은 세 가지 일을 한꺼번에 해냅니다. 첫째, <b>짧게</b> 적습니다. 둘째, 지수만 보면 <b>크기를 바로 비교</b>할 수 있습니다. 셋째, 계수의 자릿수로 <b>어디까지 믿을 만한 값인지(유효숫자)</b>를 드러냅니다.</p>
+            <p>3.7×10¹³ 은 “3과 7까지는 믿을 만하다”는 뜻입니다. 37,000,000,000,000 이라고 쓰면 마치 한 개까지 세어 본 것처럼 보이지만, 실제로 세포를 한 개씩 센 사람은 아무도 없습니다. <b>어림한 값은 어림한 만큼만 적는 것</b>이 과학의 정직함입니다.</p>
+            <div class="vs" id="e3-vs"></div>
+            <span class="stamp">사건 파일 ③ 해결</span>
+          </div>
+          <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 사람 몸의 세포 수 3.7×10¹³ 개는 2013년 연구진이 기관마다 따로 어림해 더한 <b>추정값</b>이며, 몸에 사는 세균은 빼고 센 값입니다. 연구에 따라 값이 달라지므로 유효숫자 두 자리까지만 말하는 것이 알맞습니다. 물의 몰 질량도 이 화면에서는 18.0 g/mol 로 어림해 썼습니다.</div>
+          <div class="stage-card" style="padding:6px 0 4px"><div id="wk3"></div></div>
+        </section>
       </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- ===================================================================== 04 정리하기 -->
     <section class="tab-panel" data-panel="3" hidden>
       <div class="stage-head">
-        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <div class="eyebrow">04 · 세 사건을 하나로</div>
         <h2 class="display">정리하기</h2>
-        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+        <p>세 이야기의 결과가 아래에 모입니다. 세 사건을 꿰는 한 문장을 쓰고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
       </div>
       <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
+    </section>
+
+    <!-- ===================================================================== 05 우리 반 -->
+    <section class="tab-panel" data-panel="4" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">05 · 같은 반 친구들과 나누기</div>
+        <h2 class="display">우리 반</h2>
+        <p>내가 해결한 사건과 찾아낸 답을 우리 반에 올리고, 친구들은 어떤 값을 찾았는지 살펴보세요. <b>올리기 버튼을 눌렀을 때만</b> 공유됩니다. 실명 대신 별명을 쓰세요.</p>
+      </div>
+      <div class="stage-card"><div id="share"></div></div>
     </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
 <script src="../assets/theme.js"></script>
-<script>
-(function () {
-"use strict";
-
-/* TAB0 SI 기본단위 */
-(function () {
-  var canvas = document.getElementById("c0");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c0-info");
-  var units = [
-    { q: "길이", sym: "m", name: "미터", desc: "빛이 진공에서 1/299,792,458초 동안 진행한 거리로 정의됩니다." },
-    { q: "질량", sym: "kg", name: "킬로그램", desc: "플랑크 상수 값을 고정하여 정의되는 질량의 단위입니다(2019년 재정의)." },
-    { q: "시간", sym: "s", name: "초", desc: "세슘-133 원자에서 방출되는 특정 복사선이 91억 9263만 1770번 진동하는 데 걸리는 시간입니다." },
-    { q: "전류", sym: "A", name: "암페어", desc: "전하량의 기본 단위인 전기 소량(전자 전하)을 기준으로 정의됩니다." },
-    { q: "온도", sym: "K", name: "켈빈", desc: "볼츠만 상수를 기준으로 정의되는 절대 온도의 단위입니다." },
-    { q: "물질량", sym: "mol", name: "몰", desc: "아보가드로수(약 6.02×10²³개)만큼의 입자를 포함하는 물질의 양입니다." },
-    { q: "광도", sym: "cd", name: "칸델라", desc: "특정 진동수의 빛을 방출하는 광원의 밝기를 나타내는 단위입니다." }
-  ];
-  var cols = 4;
-  var cellW = W / cols, cellH = 170;
-
-  canvas.addEventListener("click", function (e) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas._w / rect.width, scaleY = canvas._h / rect.height;
-    var mx = (e.clientX - rect.left) * scaleX, my = (e.clientY - rect.top) * scaleY;
-    var col = Math.floor(mx / cellW), row = Math.floor(my / cellH);
-    var idx = row * cols + col;
-    if (units[idx]) {
-      info.innerHTML = "<b>" + units[idx].q + " (" + units[idx].sym + ")</b> — " + units[idx].name + ". " + units[idx].desc;
-    }
-  });
-
-  var colors = ["--teal", "--coral", "--cold", "--violet", "--teal-dim", "--coral", "--cold"];
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    units.forEach(function (u, i) {
-      var col = i % cols, row = Math.floor(i / cols);
-      var x = col * cellW, y = row * cellH;
-      ctx.save();
-      ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 1;
-      ctx.strokeRect(x + 8, y + 8, cellW - 16, cellH - 16);
-      ctx.restore();
-      ctx.font = "700 26px Georgia, serif"; ctx.fillStyle = cssVar(colors[i]); ctx.textAlign = "center";
-      ctx.fillText(u.sym, x + cellW / 2, y + 70);
-      ctx.font = "700 14px Segoe UI"; ctx.fillStyle = cssVar("--foam");
-      ctx.fillText(u.q, x + cellW / 2, y + 100);
-      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist");
-      ctx.fillText(u.name, x + cellW / 2, y + 120);
-    });
-  }
-  render();
-})();
-
-/* TAB0-B 온도·몰 변환기 */
-(function () {
-  var canvas = document.getElementById("c0b");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var tSlider = document.getElementById("c0b-t");
-  var molSlider = document.getElementById("c0b-mol");
-  var tVal = document.getElementById("c0b-t-val");
-  var molVal = document.getElementById("c0b-mol-val");
-  var info = document.getElementById("c0b-info");
-  var NA = 6.02214076e23;
-
-  function superscript(n) {
-    var map = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹", ".": "" };
-    return String(n).split("").map(function (c) { return map[c] !== undefined ? map[c] : c; }).join("");
-  }
-
-  function render() {
-    var c = +tSlider.value;
-    var n = +molSlider.value;
-    tVal.textContent = c + "℃";
-    molVal.textContent = "10" + superscript(n.toFixed(1)) + " mol";
-
-    var k = c + 273.15;
-    var f = c * 9 / 5 + 32;
-    var particles = Math.pow(10, n) * NA;
-
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-
-    /* left: thermometer */
-    var bx = 70, bw = 40, by0 = 30, by1 = H - 40;
-    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
-    ctx.strokeRect(bx, by0, bw, by1 - by0);
-    var frac = (c - (-50)) / (150 - (-50));
-    frac = Math.max(0, Math.min(1, frac));
-    var fillY = by1 - frac * (by1 - by0);
-    var grad = ctx.createLinearGradient(0, by1, 0, by0);
-    grad.addColorStop(0, cssVar("--cold"));
-    grad.addColorStop(1, cssVar("--coral"));
-    ctx.fillStyle = grad;
-    ctx.fillRect(bx + 3, fillY, bw - 6, by1 - fillY);
-    // reference ticks: 0C and 100C
-    [0, 100].forEach(function (ref) {
-      var rf = (ref - (-50)) / (150 - (-50));
-      var ry = by1 - rf * (by1 - by0);
-      ctx.strokeStyle = cssVar("--mist"); ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(bx - 8, ry); ctx.lineTo(bx + bw + 8, ry); ctx.stroke();
-      ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
-      ctx.fillText(ref === 0 ? "물의 어는점 0℃" : "물의 끓는점 100℃", bx + bw + 12, ry + 3);
-    });
-
-    ctx.font = "700 15px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "left";
-    ctx.fillText("K = ℃ + 273.15 = " + k.toFixed(2) + " K", 260, 50);
-    ctx.fillText("℉ = ℃ × 9/5 + 32 = " + f.toFixed(1) + " ℉", 260, 78);
-
-    /* right: particle dot cluster (visual, not literal count) */
-    var dotCount = Math.round(6 + (n + 3) * 7); // 6~48 dots to visualize scale, not literal
-    var gx0 = 260, gy0 = 110, gCols = 12;
-    ctx.fillStyle = cssVar("--teal");
-    for (var i = 0; i < dotCount; i++) {
-      var col = i % gCols, row = Math.floor(i / gCols);
-      ctx.beginPath();
-      ctx.arc(gx0 + col * 24, gy0 + row * 22, 6, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.font = "700 15px Segoe UI"; ctx.fillStyle = cssVar("--foam");
-    ctx.fillText("실제 입자 수 ≈ " + particles.toExponential(2) + " 개", 260, gy0 + 5 * 22 + 26);
-
-    info.innerHTML = "온도 정의: 절대 영도(0K, -273.15℃)를 기준으로 한 온도가 켈빈(K)입니다. 물질량 정의: 1 mol은 아보가드로수(6.02×10²³개)만큼의 입자를 뜻하며, 지수 n이 1 커질 때마다 입자 수는 10배씩 늘어납니다.";
-  }
-  tSlider.addEventListener("input", render);
-  molSlider.addEventListener("input", render);
-  render();
-})();
-
-/* TAB1 우주의 스케일 — 비교 모드 */
-(function () {
-  var canvas = document.getElementById("c1");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var eA = 0, eB = 26;
-  var info = document.getElementById("c1-info");
-  var ratioTxt = document.getElementById("c1-ratio");
-  var slA = document.getElementById("c1-eA"), slB = document.getElementById("c1-eB");
-  slA.addEventListener("input", function () { eA = +slA.value; document.getElementById("c1-eA-val").textContent = eA; render(); });
-  slB.addEventListener("input", function () { eB = +slB.value; document.getElementById("c1-eB-val").textContent = eB; render(); });
-
-  var refs = [
-    { e: 26, label: "관측 가능한 우주의 크기", icon: "🌌" },
-    { e: 21, label: "우리은하의 지름", icon: "🌠" },
-    { e: 11, label: "지구-태양 거리(1 AU)", icon: "☀️" },
-    { e: 7, label: "지구의 지름", icon: "🌍" },
-    { e: 0, label: "사람의 키(약 1~2m)", icon: "🧍" },
-    { e: -3, label: "머리카락 굵기(mm)", icon: "💇" },
-    { e: -6, label: "세포의 크기(μm)", icon: "🦠" },
-    { e: -10, label: "원자의 크기(Å)", icon: "⚛️" },
-    { e: -15, label: "원자핵의 크기(fm)", icon: "🔬" }
-  ];
-
-  function xOf(ee) { return 60 + (ee + 15) / (26 + 15) * (W - 120); }
-
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var y = H / 2 + 20;
-    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(W - 60, y); ctx.stroke();
-
-    refs.forEach(function (r) {
-      var x = xOf(r.e);
-      ctx.save();
-      ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x, y - 6); ctx.lineTo(x, y + 6); ctx.stroke();
-      ctx.font = "16px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(r.icon, x, y + 28);
-      ctx.font = "9.5px Segoe UI"; ctx.fillStyle = cssVar("--mist");
-      wrapText(ctx, r.label, x, y + 44, 85, 11);
-      ctx.restore();
-    });
-
-    var xA = xOf(eA), xB = xOf(eB);
-    var xLow = Math.min(xA, xB), xHigh = Math.max(xA, xB);
-    var by = y - 70;
-    ctx.strokeStyle = cssVar("--violet"); ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(xLow, by); ctx.lineTo(xHigh, by); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(xLow, by - 6); ctx.lineTo(xLow, by + 6); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(xHigh, by - 6); ctx.lineTo(xHigh, by + 6); ctx.stroke();
-
-    ctx.fillStyle = cssVar("--coral");
-    ctx.beginPath(); ctx.arc(xA, y, 9, 0, Math.PI * 2); ctx.fill();
-    ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--coral"); ctx.textAlign = "center";
-    ctx.fillText("A", xA, y - 16);
-
-    ctx.fillStyle = cssVar("--cold");
-    ctx.beginPath(); ctx.arc(xB, y, 9, 0, Math.PI * 2); ctx.fill();
-    ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--cold");
-    ctx.fillText("B", xB, y - 16);
-
-    var diff = eB - eA;
-    var ratioStr;
-    if (Math.abs(diff) >= 3) {
-      ratioStr = "10" + superscript(Math.abs(diff)) + "배";
-    } else {
-      ratioStr = Math.pow(10, Math.abs(diff)).toLocaleString() + "배";
-    }
-    ratioTxt.innerHTML = diff === 0
-      ? "A와 B는 같은 크기입니다."
-      : (diff > 0 ? "B는 A보다 <b>" + ratioStr + "</b> 더 큽니다." : "A는 B보다 <b>" + ratioStr + "</b> 더 큽니다.");
-
-    info.innerHTML = "A(10<sup>" + eA + "</sup>m) 가장 가까운 기준: " + closestRef(eA) + "<br>B(10<sup>" + eB + "</sup>m) 가장 가까운 기준: " + closestRef(eB);
-  }
-  function superscript(n) {
-    var map = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
-    return String(n).split("").map(function (c) { return map[c] || c; }).join("");
-  }
-  function wrapText(ctx, text, x, y, maxW, lh) {
-    var line = "", lines = [];
-    for (var i = 0; i < text.length; i++) {
-      var test = line + text[i];
-      if (ctx.measureText(test).width > maxW && line.length > 0) { lines.push(line); line = text[i]; } else line = test;
-    }
-    lines.push(line);
-    lines.forEach(function (l, i) { ctx.fillText(l, x, y + i * lh); });
-  }
-  function closestRef(ee) {
-    var best = refs[0], bestD = Infinity;
-    refs.forEach(function (r) { var d = Math.abs(r.e - ee); if (d < bestD) { bestD = d; best = r; } });
-    return best.icon + " " + best.label;
-  }
-  render();
-})();
-
-/* TAB2 과학적 표기법 — 프리셋 + 문제풀기 */
-(function () {
-  var canvas = document.getElementById("c2");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var a = 1, n = 0;
-  var mode = "explore";
-  var target = null;
-  var info = document.getElementById("c2-info");
-  var aSlider = document.getElementById("c2-a"), nSlider = document.getElementById("c2-n");
-  aSlider.addEventListener("input", function (e) { a = +e.target.value; document.getElementById("c2-a-val").textContent = a.toFixed(1); render(); });
-  nSlider.addEventListener("input", function (e) { n = +e.target.value; document.getElementById("c2-n-val").textContent = n; render(); });
-
-  document.querySelectorAll("#c2-presets button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      a = +b.getAttribute("data-a"); n = +b.getAttribute("data-n");
-      aSlider.value = a; nSlider.value = n;
-      document.getElementById("c2-a-val").textContent = a.toFixed(1);
-      document.getElementById("c2-n-val").textContent = n;
-      info.innerHTML = "<b>" + b.textContent + "</b> 값으로 설정했습니다.";
-      render();
-    });
-  });
-
-  var modeSeg = document.getElementById("c2-mode");
-  var targetBox = document.getElementById("c2-target");
-  var quizActions = document.getElementById("c2-quiz-actions");
-  modeSeg.querySelectorAll("button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      modeSeg.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
-      b.classList.add("on");
-      mode = b.getAttribute("data-mode");
-      var isQuiz = mode === "quiz";
-      targetBox.style.display = isQuiz ? "" : "none";
-      quizActions.style.display = isQuiz ? "" : "none";
-      if (isQuiz && !target) newQuestion();
-      render();
-    });
-  });
-
-  function newQuestion() {
-    var ta = Math.round((1 + Math.random() * 8.9) * 10) / 10;
-    var tn = Math.floor(Math.random() * 21) - 8;
-    target = { a: ta, n: tn, value: ta * Math.pow(10, tn) };
-    targetBox.style.display = "";
-    targetBox.innerHTML = "<b>다음 숫자를 A × 10ⁿ 형태로 맞춰 보세요:</b><br>" + formatFull(target.value);
-    info.textContent = "슬라이더로 A와 n을 조절한 뒤 [정답 확인]을 눌러 보세요.";
-  }
-  document.getElementById("c2-newq").addEventListener("click", newQuestion);
-  document.getElementById("c2-check").addEventListener("click", function () {
-    if (!target) return;
-    var userVal = a * Math.pow(10, n);
-    var ok = Math.abs(userVal - target.value) / Math.abs(target.value) < 0.015;
-    if (ok) {
-      info.innerHTML = "<b style='color:var(--teal)'>정답입니다!</b> " + target.a.toFixed(1) + " × 10" + superscript(target.n) + " = " + formatFull(target.value) + ". [새 문제]를 눌러 계속 연습해 보세요.";
-    } else {
-      info.innerHTML = "<b style='color:var(--coral)'>다시 시도해 보세요.</b> 정답은 " + target.a.toFixed(1) + " × 10" + superscript(target.n) + " 입니다 (= " + formatFull(target.value) + ").";
-    }
-  });
-
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var value = a * Math.pow(10, n);
-    ctx.font = "700 30px Georgia, serif"; ctx.fillStyle = cssVar("--teal"); ctx.textAlign = "center";
-    ctx.fillText(a.toFixed(1) + " × 10" + superscript(n), W / 2, 110);
-    ctx.font = "22px Consolas, monospace"; ctx.fillStyle = cssVar("--foam");
-    ctx.fillText("=  " + formatFull(value), W / 2, 170);
-
-    ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist");
-    ctx.fillText(n >= 0 ? "지수가 양수 → 큰 수" : "지수가 음수 → 작은 수 (소수)", W / 2, 220);
-
-    if (mode === "explore") {
-      info.innerHTML = "과학적 표기법은 1 ≤ A < 10인 계수 A와 10의 거듭제곱을 이용해 매우 크거나 작은 수를 간결하게 나타내는 방법입니다. 지수 n은 소수점을 몇 자리 이동했는지를 나타냅니다.";
-    }
-  }
-  function superscript(n) {
-    var map = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
-    return String(n).split("").map(function (c) { return map[c] || c; }).join("");
-  }
-  function formatFull(v) {
-    if (Math.abs(v) >= 1e15 || (Math.abs(v) < 1e-6 && v !== 0)) return v.toExponential(3);
-    return v.toLocaleString(undefined, { maximumFractionDigits: 10 });
-  }
-  render();
-})();
-
-/* TAB1 미션 — 스케일 배율 어림하기 */
-(function () {
-  var dataEl = document.getElementById("c1m-data");
-  var choicesEl = document.getElementById("c1m-choices");
-  var checkBtn = document.getElementById("c1m-check");
-  var newBtn = document.getElementById("c1m-new");
-  if (!dataEl) return;
-
-  var refs = [
-    { e: 26, label: "관측 가능한 우주의 크기" },
-    { e: 21, label: "우리은하의 지름" },
-    { e: 11, label: "지구-태양 거리(1 AU)" },
-    { e: 7, label: "지구의 지름" },
-    { e: 0, label: "사람의 키(약 1~2m)" },
-    { e: -3, label: "머리카락 굵기(mm)" },
-    { e: -6, label: "세포의 크기(μm)" },
-    { e: -10, label: "원자의 크기(Å)" },
-    { e: -15, label: "원자핵의 크기(fm)" }
-  ];
-
-  var diff = 7, picked = null, choices = [];
-
-  function shuffle(arr) {
-    var a = arr.slice();
-    for (var i = a.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
-    }
-    return a;
-  }
-
-  var big, small;
-
-  function newQuestion() {
-    var i = Math.floor(Math.random() * refs.length);
-    var j;
-    do { j = Math.floor(Math.random() * refs.length); } while (j === i);
-    big = refs[i].e > refs[j].e ? refs[i] : refs[j];
-    small = refs[i].e > refs[j].e ? refs[j] : refs[i];
-    diff = big.e - small.e;
-    dataEl.innerHTML = "A: " + big.label + "<br>B: " + small.label;
-    var decoys = [];
-    while (decoys.length < 3) {
-      var d = diff + Math.round((Math.random() - 0.5) * 8);
-      if (d > 0 && d !== diff && decoys.indexOf(d) === -1) decoys.push(d);
-    }
-    choices = shuffle([diff].concat(decoys));
-    picked = null;
-    renderChoices();
-    var info = document.getElementById("c1m-info");
-    info.style.color = "";
-    info.textContent = "보기 중 하나를 선택한 뒤 [정답 확인]을 눌러 보세요.";
-  }
-
-  function renderChoices() {
-    choicesEl.innerHTML = "";
-    choices.forEach(function (d) {
-      var btn = document.createElement("button");
-      btn.className = picked === d ? "on" : "";
-      btn.textContent = "10" + (("" + d).replace(/\d/g, function(c){return "⁰¹²³⁴⁵⁶⁷⁸⁹"[+c];})) + "배";
-      btn.addEventListener("click", function () { picked = d; renderChoices(); });
-      choicesEl.appendChild(btn);
-    });
-  }
-
-  checkBtn.addEventListener("click", function () {
-    var info = document.getElementById("c1m-info");
-    if (picked === null) {
-      info.style.color = "";
-      info.textContent = "먼저 보기 중 하나를 선택하세요.";
-      return;
-    }
-    if (picked === diff) {
-      info.style.color = "var(--teal)";
-      info.innerHTML = "<b>정답입니다!</b> A(" + big.label + ")는 B(" + small.label + ")보다 10^" + diff + "배 큽니다(지수의 차를 빼서 구합니다).";
-    } else {
-      info.style.color = "var(--coral)";
-      info.innerHTML = "다시 생각해 보세요. 정답은 10^" + diff + "배입니다. 두 크기의 지수를 빼서 구해 보세요.";
-    }
-  });
-
-  newBtn.addEventListener("click", newQuestion);
-  newQuestion();
-})();
-
-})();
-</script>
-
-<script>
-(function () {
-  window.sthUnit("is1-1-1");
-  window.sthWork({
-    mount: "wk",
-    unitLabel: "[통합과학1 Ⅰ-1] 과학의 기본량",
-    items: [
-      {
-            "id": "w1",
-            "label": "단위가 없으면 생기는 일",
-            "hint": "이 단원에서 본 사례 하나를 골라, 단위를 정하지 않으면 무엇이 어긋나는지 쓰세요.",
-            "ph": ""
-      },
-      {
-            "id": "w2",
-            "label": "스케일 비교",
-            "hint": "가장 큰 것과 가장 작은 것을 골라 몇 자릿수 차이인지 계산하고, 그 차이를 실감할 수 있는 비유를 하나 만들어 보세요.",
-            "ph": ""
-      },
-      {
-            "id": "w3",
-            "label": "아직 헷갈리는 것",
-            "hint": "다음 시간에 여기서부터 시작합니다.",
-            "ph": ""
-      }
-]
-  });
-})();
-</script>
+<script src="../assets/story.js"></script>
+<script src="../assets/share-config.js"></script>
+<script src="../assets/share.js"></script>
+<script src="episodes.js"></script>
 </body>
 </html>
