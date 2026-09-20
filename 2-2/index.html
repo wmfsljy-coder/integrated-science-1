@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>물질의 규칙성과 성질 — 관측 스테이션</title>
 <link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="../assets/story.css">
 </head>
 <body>
 
@@ -20,558 +21,430 @@
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 지각·생명체의 물질</button>
     <button class="tab-btn" data-tab="3"><span class="num">04</span> 물질의 전기적 성질</button>
     <button class="tab-btn" data-tab="4"><span class="num">05</span> 정리하기</button>
+    <button class="tab-btn" data-tab="5"><span class="num">06</span> 우리 반</button>
   </nav>
 
   <main>
+    <!-- =====================================================================
+         01 원소의 주기성 — 이야기 「빈칸이 있는 표」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="0">
       <div class="stage-head">
-        <div class="eyebrow">01 · 주기율표에 숨겨진 규칙</div>
-        <h2 class="display">원소의 주기성</h2>
-        <p>원자 번호 슬라이더를 움직여 주기율표 위 원소를 확인하고, 아래 그래프에서 원자 반지름과 이온화 에너지가 원자 번호에 따라 실제로 어떻게 변하는지 확인해 보세요.</p>
-      
-        <span class="std-chip">10통과1-02-03</span><span class="std-chip">10통과1-02-04</span><span class="std-chip">10통과1-02-05</span><span class="std-chip">10통과1-02-06</span><div class="std-note"><b>[10통과1-02-03]</b> 세상을 구성하는 원소들의 성질이 주기성을 나타내는 현상을 통해 자연의 규칙성을 도출하고, 지구와 생명체를 구성하는 주요 원소들이 결합을 형성하는 이유를 해석할 수 있다.<br><b>[10통과1-02-04]</b> 인류의 생존에 필수적인 물, 산소, 소금 등이 만들어지는 결합의 차이를 이해하고 각 물질의 성질과 관련지어 설명할 수 있다.<br><b>[10통과1-02-05]</b> 지각과 생명체를 구성하는 물질들이 기본 단위체의 결합을 통해서 형성된다는 것을 규산염 광물, 단백질과 핵산의 예를 통해 설명할 수 있다.<br><b>[10통과1-02-06]</b> 지구를 구성하는 물질을 전기적 성질에 따라 구분할 수 있고, 물질의 전기적 성질이 다양한 소재로 활용됨을 인식한다.</div><div class="terms"><b>주기성</b><b>이온 결합</b><b>공유 결합</b><b>규산염 사면체</b></div>
+        <div class="eyebrow">01 · 원소의 주기성 · 이야기 한 편</div>
+        <h2 class="display">빈칸이 있는 표</h2>
+        <p>1869년, 멘델레예프는 표에 빈칸을 남겨 두고 <b>아직 발견되지도 않은 원소</b>의 원자량과 밀도를 적어 두었습니다. 17년 뒤 그 칸이 채워졌고, 숫자는 거의 맞았습니다. 다섯 장면에 걸쳐 주기율표를 직접 훑고, 빈칸의 성질을 이웃으로 예측해 맞혀 봅니다.</p>
+        <span class="std-chip">10통과1-02-03</span><div class="std-note"><b>[10통과1-02-03]</b> 세상을 구성하는 원소들의 성질이 주기성을 나타내는 현상을 통해 자연의 규칙성을 도출하고, 지구와 생명체를 구성하는 주요 원소들이 결합을 형성하는 이유를 해석할 수 있다.</div><div class="terms"><b>주기성</b><b>원자가 전자</b><b>이온화 에너지</b><b>알칼리 금속</b><b>할로젠</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c0" width="900" height="300"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">원자 번호<span class="val" id="c0-z-val">1</span></div>
-            <input type="range" id="c0-z" min="1" max="20" step="1" value="1">
+
+      <div class="episode" id="ep1">
+        <section class="scene" data-title="비워 둔 칸">
+          <div class="story narr"><div class="who">📋</div><div class="say"><span class="name">이야기</span>1869년, 러시아의 멘델레예프는 그때까지 알려진 원소 63가지를 원자량 순서로 늘어놓다가 이상한 것을 보았습니다. 성질이 비슷한 원소가 <b>일정한 간격을 두고 되풀이</b>되고 있었던 것입니다. 그는 줄을 맞추기 위해 몇 칸을 <b>비워 두었고</b>, 그중 규소 바로 아래 칸에는 ‘에카규소’라는 임시 이름을 붙인 뒤 <b>원자량 72, 밀도 5.5</b> 라고 적어 넣었습니다. 아무도 본 적 없는 원소였습니다. 1886년, 독일의 빈클러가 은광석에서 새 원소를 찾아내 <b>저마늄</b>이라 이름 붙였습니다. 그것이 바로 그 빈칸이었습니다.</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">원소 자료실 서윤</span>“조사관님, 오늘 맡으실 사건은 이겁니다. <b>보지도 않은 원소의 성질을 어떻게 맞혔는가.</b> 점쟁이가 아니라면, 표 안에 답이 있어야 합니다. 시작하기 전에 하나만 여쭐게요.”</div></div>
+          <div class="case-file"><b class="k">증거물 ①</b> 멘델레예프의 1871년 예측 — 에카규소의 원자량 <b>72</b>, 밀도 <b>5.5 g/cm³</b> &nbsp;|&nbsp; <b class="k">증거물 ②</b> 1886년 빈클러가 실제로 잰 저마늄 — 원자량 <b>72.63</b>, 밀도 <b>5.32 g/cm³</b> &nbsp;|&nbsp; <b class="k">증거물 ③</b> 빈칸의 이웃 네 곳은 규소(위) · 주석(아래) · 갈륨(왼쪽) · 비소(오른쪽)</div>
+          <div class="gate loose" id="g1"></div>
+        </section>
+
+        <section class="scene" data-title="판독실 — 주기율표를 훑다">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서윤</span>“먼저 표 자체를 읽어야 합니다. 원자 번호를 1부터 20까지 밀어 보세요. 가운데에는 그 원자의 <b>전자 껍질</b>이, 아래에는 원자 반지름과 이온화 에너지가 그려집니다. 어디서 무엇이 <b>되풀이</b>되는지 눈으로 찾아보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-tab" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap"><canvas id="a-trend" width="900" height="300"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">원자 번호<span class="val" id="a-z-val">1 · 수소</span></div>
+                <input type="range" id="a-z" min="1" max="20" step="1" value="1">
+              </div>
+            </div>
+            <div class="info-card" id="a-tab-info"></div>
           </div>
-        </div>
-        <div class="info-card" id="c0-info"></div>
+          <div class="mission" id="m1-2"><span class="m-tag">미션</span>슬라이더를 밀어 세 가지를 모두 찾아내세요. 하나씩 찾을 때마다 저장됩니다.<ul><li id="m1-2a">원자가 전자가 <b>1개</b>인 자리를 <b>네 곳</b> 모두 지나가기</li><li id="m1-2b">이온화 에너지가 <b>가장 큰</b> 원소 찾기</li><li id="m1-2c">원자 반지름이 <b>가장 큰</b> 원소 찾기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="빈칸 예측실 — 에카규소">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서윤</span>“이제 1871년의 멘델레예프가 되어 보세요. 빈칸의 <b>위·아래·왼쪽·오른쪽</b> 네 이웃의 값이 화면에 나와 있습니다. 성질이 표를 따라 <b>고르게</b> 변한다면, 빈칸의 값은 어디쯤에 있어야 할까요? 두 슬라이더를 움직여 예측값을 적어 내세요. ‘높다 · 낮다’로만 알려 드리겠습니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-eka" width="900" height="420"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">예측 · 원자량<span class="val" id="a-am-val">60.0</span></div>
+                <input type="range" id="a-am" min="60" max="86" step="0.2" value="60">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">예측 · 밀도 (g/cm³)<span class="val" id="a-de-val">4.00</span></div>
+                <input type="range" id="a-de" min="4" max="7" step="0.02" value="4">
+              </div>
+            </div>
+            <div class="info-card" id="a-eka-info"></div>
+          </div>
+          <div class="mission" id="m1-3"><span class="m-tag">미션</span>두 예측을 따로따로 맞히면 됩니다. 한쪽을 맞히면 바로 저장됩니다.<ul><li id="m1-3a">빈칸의 <b>원자량</b> 예측 맞히기 (네 이웃의 평균 자리)</li><li id="m1-3b">빈칸의 <b>밀도</b> 예측 맞히기 (네 이웃의 평균 자리)</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="반응 실험대 — 되풀이의 증거">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서윤</span>“마지막입니다. 표의 <b>세로줄(족)</b>을 골라 아래로 내려가 보세요. 같은 세로줄의 원소는 원자가 전자 수가 같습니다. 그러면 물에 넣었을 때, 다른 원소와 만났을 때 <b>어떻게 행동하는지</b>도 닮아야 합니다. 정말 그런지 확인해 봅시다.”</div></div>
+          <div class="stage-card">
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">세로줄(족) 고르기</div>
+                <div class="seg" id="a-fam">
+                  <button class="on" data-f="g1">1족 · 알칼리 금속</button>
+                  <button data-f="g17">17족 · 할로젠</button>
+                  <button data-f="g18">18족 · 비활성 기체</button>
+                </div>
+              </div>
+            </div>
+            <div class="canvas-wrap"><canvas id="a-rx" width="900" height="400"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">몇 번째 가로줄(주기)까지 내려갈까<span class="val" id="a-per-val">2주기</span></div>
+                <input type="range" id="a-per" min="2" max="4" step="1" value="2">
+              </div>
+            </div>
+            <div class="info-card" id="a-rx-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s1-q"></div></div>
+          <div class="mission" id="m1-4"><span class="m-tag">미션</span>네 가지를 모두 끝내세요.<ul><li id="m1-4a">1족에서 물과 <b>가장 격렬하게</b> 반응하는 원소 찾기</li><li id="m1-4b">17족에서 <b>반응성이 가장 큰</b> 원소 찾기</li><li id="m1-4c">이온이 <b>되려 하지 않는</b> 세로줄 확인하기</li><li id="m1-4d">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 사건 해결">
+          <div class="ending">
+            <h4>📋 표의 빈칸은 ‘모르는 곳’이 아니라 ‘예측할 수 있는 곳’이었다</h4>
+            <p>원소를 원자 번호 순서로 늘어놓으면 <b>원자가 전자 수</b>가 1, 2, 3 … 8 하고 다시 1로 돌아옵니다. 화학적 성질을 정하는 것이 바로 이 원자가 전자이므로, 성질도 함께 되풀이됩니다. 이것이 <b>주기성</b>이고, 같은 세로줄(족)에 있는 원소들이 서로 닮은 까닭입니다. 원자 반지름과 이온화 에너지 그래프가 톱니 모양이 되는 것도 새 주기가 시작될 때마다 전자 껍질이 하나씩 늘기 때문입니다.</p>
+            <p>성질이 규칙적으로 변한다면, 빈칸의 성질은 <b>이웃에서 계산해 낼 수</b> 있습니다. 규소·주석·갈륨·비소 네 이웃의 원자량 평균은 <b>72.9</b>, 밀도 평균은 <b>5.32 g/cm³</b> 입니다. 1886년에 빈클러가 실제로 잰 저마늄의 값은 원자량 <b>72.63</b>, 밀도 <b>5.32 g/cm³</b> 였습니다. 멘델레예프의 표는 이미 알려진 것을 정리한 목록이 아니라, <b>아직 모르는 것을 맞히는 도구</b>였던 것입니다.</p>
+            <p>같은 세로줄이 같은 행동을 한다는 것도 확인했습니다. 1족 금속은 전자 한 개를 잘 내주어 물과 격렬하게 반응하고 아래로 갈수록 더 격렬해지며, 17족은 전자 한 개를 잘 빼앗아 위로 갈수록 반응성이 크고, 18족은 이미 안정해서 거의 반응하지 않습니다.</p>
+            <div class="vs" id="e1-vs"></div>
+            <span class="stamp">사건 파일 ① 해결</span>
+          </div>
+          <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 이 화면의 ‘반응성 지수’는 1족은 1차 이온화 에너지, 17족은 전기음성도 하나만 보고 0~100 으로 바꾼 <b>단순화한 눈금</b>입니다. 실제 반응의 격렬함은 녹는점, 생성물이 물에 녹는 정도, 반응열까지 함께 정해집니다. 또한 18족도 <b>완전히</b> 반응하지 않는 것은 아니어서, 제논은 1962년에 플루오린과 결합한 화합물(XeF₄ 등)이 실제로 만들어졌습니다. 멘델레예프의 표는 원자 번호가 아니라 <b>원자량</b> 순서였고, 원자 번호 순서라는 것은 1913년 모즐리가 밝혔습니다.</div>
+          <div class="stage-card" style="padding:6px 0 4px"><div id="wk1"></div></div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="stage-head" style="padding:20px 20px 0;">
-          <div class="eyebrow">심화 · 실제 경향 그래프</div>
-          <h2 class="display" style="font-size:18px;">원자 반지름과 이온화 에너지의 톱니 패턴</h2>
-        </div>
-        <div class="canvas-wrap"><canvas id="c0b" width="900" height="280"></canvas></div>
-        <div class="info-card" id="c0b-info"></div>
-      </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         02 화학 결합 — 이야기 「녹이면 통한다」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="1" hidden>
       <div class="stage-head">
-        <div class="eyebrow">02 · 원자와 원자가 만나는 방법</div>
-        <h2 class="display">전기음성도 차이로 예측하는 결합의 종류</h2>
-        <p>두 원소를 선택하면 두 원소의 전기음성도 차이(ΔEN)가 계산되어, 결합의 종류(이온/극성 공유/무극성 공유)를 정량적으로 판단합니다.</p>
-      </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">원소 A</div>
-            <div class="seg" id="c1-a">
-              <button data-e="Na">Na (0.93)</button>
-              <button data-e="H" class="on">H (2.20)</button>
-              <button data-e="C">C (2.55)</button>
-              <button data-e="K">K (0.82)</button>
-            </div>
-          </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">원소 B</div>
-            <div class="seg" id="c1-b">
-              <button class="on" data-e="Cl">Cl (3.16)</button>
-              <button data-e="O">O (3.44)</button>
-              <button data-e="F">F (3.98)</button>
-              <button data-e="N">N (3.04)</button>
-            </div>
-          </div>
-        </div>
-        <div class="readout" style="margin:0 20px 14px;">
-          <span class="dot" style="background:var(--coral)"></span>
-          <span class="txt" id="c1-en"></span>
-        </div>
-        <div class="info-card" id="c1-info"></div>
+        <div class="eyebrow">02 · 화학 결합 · 이야기 한 편</div>
+        <h2 class="display">녹이면 통한다</h2>
+        <p>소금 덩어리는 전기가 통하지 않습니다. 그런데 녹이면 통합니다. 설탕은 녹여도 통하지 않습니다. 이 차이가 어디서 오는지, 원자가 전자를 직접 옮기고 나눠 보며 밝혀냅니다.</p>
+        <span class="std-chip">10통과1-02-04</span><div class="std-note"><b>[10통과1-02-04]</b> 인류의 생존에 필수적인 물, 산소, 소금 등이 만들어지는 결합의 차이를 이해하고 각 물질의 성질과 관련지어 설명할 수 있다.</div><div class="terms"><b>이온 결합</b><b>공유 결합</b><b>옥텟 규칙</b><b>전기 전도성</b></div>
       </div>
 
-      <div class="stage-head">
-        <div class="eyebrow">🔎 미션 · ΔEN으로 결합 종류 맞히기</div>
-        <h2 class="display" style="font-size:18px;">전기음성도 차이만 보고 결합을 분류해보세요</h2>
+      <div class="episode" id="ep2">
+        <section class="scene" data-title="녹인 순간 바늘이 움직였다">
+          <div class="story narr"><div class="who">⚡</div><div class="say"><span class="name">이야기</span>1807년 런던, 험프리 데이비는 커다란 전지의 두 극을 고체 수산화 칼륨에 대 보았습니다. 아무 일도 일어나지 않았습니다. 그래서 그것을 <b>녹여서 액체로 만든 뒤</b> 다시 전극을 담갔습니다. 그러자 전류가 흐르면서 은빛 방울이 맺혔습니다. 인류가 처음으로 손에 쥔 <b>칼륨</b>이었습니다. 며칠 뒤 같은 방법으로 <b>나트륨</b>도 얻었습니다. 고체일 때는 통하지 않던 전기가, 녹이자 통한 것입니다.</div></div>
+          <div class="story"><div class="who">👨‍🔬</div><div class="say"><span class="name">결합 분석실 도현</span>“조사관님, 부엌에 있는 소금으로도 같은 일이 일어납니다. 그런데 바로 옆에 있는 설탕은 녹여도 전기가 통하지 않아요. 둘 다 하얀 가루인데 말이죠. 먼저 짐작해 보시겠어요?”</div></div>
+          <div class="case-file"><b class="k">증거물 ①</b> 염화 나트륨 녹는점 <b>802 ℃</b> · 설탕(수크로스) 녹는점 약 <b>186 ℃</b> &nbsp;|&nbsp; <b class="k">증거물 ②</b> 소금 — 고체는 전기가 통하지 않지만 <b>녹인 것과 소금물</b>은 통한다 &nbsp;|&nbsp; <b class="k">증거물 ③</b> 설탕 — 고체도, 녹인 것도, 설탕물도 <b>전기가 통하지 않는다</b></div>
+          <div class="gate loose" id="g2"></div>
+        </section>
+
+        <section class="scene" data-title="조립대 — 전자를 옮기거나 나누거나">
+          <div class="story"><div class="who">👨‍🔬</div><div class="say"><span class="name">도현</span>“원자는 가장 바깥 껍질에 전자를 <b>8개</b>(수소·헬륨은 2개) 채우면 안정해집니다. 그 상태가 되는 방법은 두 가지예요. 전자를 <b>주고받거나</b>, 아니면 <b>같이 쓰거나</b>. 물질을 고른 뒤 슬라이더로 전자 수를 맞춰 보세요. 안정해지는 순간 초록불이 켜집니다.”</div></div>
+          <div class="stage-card">
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">만들어 볼 물질</div>
+                <div class="seg" id="b-pair">
+                  <button class="on" data-p="nacl">염화 나트륨 NaCl</button>
+                  <button data-p="mgo">산화 마그네슘 MgO</button>
+                  <button data-p="h2o">물 H₂O</button>
+                  <button data-p="ch4">메테인 CH₄</button>
+                  <button data-p="o2">산소 O₂</button>
+                </div>
+              </div>
+            </div>
+            <div class="canvas-wrap"><canvas id="b-make" width="900" height="420"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label"><span id="b-n-label">옮길 전자 수</span><span class="val" id="b-n-val">0개</span></div>
+                <input type="range" id="b-n" min="0" max="4" step="1" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="b-make-info"></div>
+          </div>
+          <div class="mission" id="m2-2"><span class="m-tag">미션</span>네 가지 물질을 모두 안정하게 만드세요. 하나씩 저장됩니다.<ul><li id="m2-2a">염화 나트륨 완성</li><li id="m2-2b">산화 마그네슘 완성</li><li id="m2-2c">물 완성</li><li id="m2-2d">메테인 완성</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="성질 시험대 — 언제 전기가 통하나">
+          <div class="story"><div class="who">👨‍🔬</div><div class="say"><span class="name">도현</span>“이제 데이비의 실험을 되풀이해 봅시다. 물질을 고르고, 온도를 올려 녹이거나 물에 녹여 보세요. 오른쪽 <b>전구</b>가 켜지면 전기가 통한 겁니다. 왜 어떤 것만 켜지는지 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">시험할 물질</div>
+                <div class="seg" id="b-sub">
+                  <button class="on" data-s="nacl">염화 나트륨</button>
+                  <button data-s="sugar">설탕</button>
+                  <button data-s="cu">구리</button>
+                  <button data-s="h2o">물</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">어떻게 할까</div>
+                <div class="seg" id="b-sol">
+                  <button class="on" data-w="dry">그대로</button>
+                  <button data-w="wet">물에 녹이기</button>
+                </div>
+              </div>
+            </div>
+            <div class="canvas-wrap"><canvas id="b-prop" width="900" height="400"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">온도<span class="val" id="b-t-val">20 ℃</span></div>
+                <input type="range" id="b-t" min="-40" max="1200" step="20" value="20">
+              </div>
+            </div>
+            <div class="info-card" id="b-prop-info"></div>
+          </div>
+          <div class="mission" id="m2-3"><span class="m-tag">미션</span>네 가지를 모두 확인하세요.<ul><li id="m2-3a">염화 나트륨을 <b>녹여서</b> 전기가 통하게 만들기</li><li id="m2-3b">염화 나트륨을 <b>물에 녹여서</b> 전기가 통하게 만들기</li><li id="m2-3c">설탕은 <b>녹여도</b> 전기가 통하지 않는 것 확인하기</li><li id="m2-3d">구리는 <b>녹여도</b> 여전히 전기가 통하는 것 확인하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="감식실 — 이름 없는 시료 여섯">
+          <div class="story"><div class="who">👨‍🔬</div><div class="say"><span class="name">도현</span>“마지막 일감입니다. 이름표 없는 시료 여섯 개의 <b>측정값만</b> 드릴게요. 녹는점과 전기 전도성만 보고 어떤 결합인지 가려내 보세요. 조사관님이 조금 전에 직접 만든 규칙이면 충분합니다.”</div></div>
+          <div class="stage-card"><div id="s2-sort"></div></div>
+          <div class="stage-card" style="margin-top:14px"><div id="s2-q"></div></div>
+          <div class="mission" id="m2-4"><span class="m-tag">미션</span><ul><li id="m2-4a">시료 여섯 개를 결합의 종류에 따라 나누기</li><li id="m2-4b">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 사건 해결">
+          <div class="ending">
+            <h4>⚡ 전기를 나르는 것은 ‘움직일 수 있는 전하’다</h4>
+            <p>금속 원소와 비금속 원소가 만나면 전자를 <b>주고받아</b> 양이온과 음이온이 되고, 둘이 서로 끌어당겨 <b>이온 결합</b>이 됩니다. 염화 나트륨에서는 나트륨이 전자 하나를 내주어 Na⁺, 염소가 그것을 받아 Cl⁻ 가 됩니다. 이온들이 규칙적으로 빼곡히 쌓여 결정을 이루므로 녹는점이 <b>802 ℃</b> 로 높고, 고체일 때는 이온이 제자리에 묶여 있어 전기가 통하지 않습니다. 그러나 <b>녹이거나 물에 녹이면</b> 이온이 풀려나 움직일 수 있게 되어 전기가 통합니다.</p>
+            <p>비금속 원소끼리 만나면 서로 전자를 내놓아 <b>같이 쓰는</b> 공유 결합을 합니다. 물은 산소가 수소 두 개와 전자쌍을 하나씩 나누어 산소는 8개, 수소는 2개를 채웁니다. 이렇게 만들어진 <b>분자</b>는 전체가 전기적으로 중성이고 분자끼리는 약하게만 끌어당기므로, 녹는점이 낮고 녹여도 <b>움직일 수 있는 전하가 없어</b> 전기가 통하지 않습니다. 설탕이 그렇습니다.</p>
+            <p>구리는 또 다릅니다. 금속 원자들이 내놓은 전자가 <b>자유 전자</b>가 되어 금속 전체를 돌아다니므로, 고체든 액체든 늘 전기가 통합니다. 결국 ‘전기가 통하는가’는 물질이 아니라 <b>그 안에 움직일 수 있는 전하가 있는가</b>의 문제였습니다.</p>
+            <div class="vs" id="e2-vs"></div>
+            <span class="stamp">사건 파일 ② 해결</span>
+          </div>
+          <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 전자를 점으로 그린 이 조립대는 <b>옥텟 규칙</b>을 눈에 보이게 만든 모형입니다. 실제 전자는 정해진 자리에 박힌 구슬이 아니라 확률로 퍼져 있고, 옥텟 규칙에서 벗어나는 물질도 많습니다(BF₃, PCl₅ 등). 또 이온 결합과 공유 결합은 칼로 자르듯 나뉘지 않고 <b>전기음성도 차이</b>에 따라 이어져 있습니다. 순수한 물이 전기를 거의 통하지 않는다고 한 것도 ‘거의’이며, 물 분자 일부가 스스로 이온으로 나뉘어 아주 약한 전류는 흐릅니다. 수돗물이 잘 통하는 것은 물 자체가 아니라 <b>녹아 있는 이온</b> 때문입니다.</div>
+          <div class="stage-card" style="padding:6px 0 4px"><div id="wk2"></div></div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="info-card" id="c1m-data"></div>
-        <div class="seg" id="c1m-choices">
-          <button data-c="ionic">이온 결합</button>
-          <button data-c="polar">극성 공유 결합</button>
-          <button data-c="nonpolar">무극성 공유 결합</button>
-        </div>
-        <div class="toggle-row" style="margin:14px 20px;">
-          <button class="btn" id="c1m-check">정답 확인</button>
-          <button class="btn" id="c1m-new">새 문제</button>
-        </div>
-        <div class="info-card" id="c1m-info"></div>
-      </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         03 지각·생명체의 물질 — 이야기 「같은 부품, 다른 물건」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="2" hidden>
       <div class="stage-head">
-        <div class="eyebrow">03 · 규산염 사면체와 탄소 화합물</div>
-        <h2 class="display">지각과 생명체를 이루는 규칙적인 구조</h2>
-        <p>지각의 대부분은 규산염 사면체(SiO₄)의 다양한 연결 방식으로, 생명체는 탄소 원자 사슬의 길이와 형태로 다양성이 만들어집니다.</p>
+        <div class="eyebrow">03 · 지각·생명체의 물질 · 이야기 한 편</div>
+        <h2 class="display">같은 부품, 다른 물건</h2>
+        <p>운모는 손톱으로도 얇게 벗겨지는데, 같은 부품으로 만들어진 석영은 칼로도 긁히지 않습니다. 부품 하나가 어떻게 이어지느냐가 물질을 정합니다. 지각의 규산염과 생명체의 단백질·핵산에서 같은 규칙을 찾아냅니다.</p>
+        <span class="std-chip">10통과1-02-05</span><div class="std-note"><b>[10통과1-02-05]</b> 지각과 생명체를 구성하는 물질들이 기본 단위체의 결합을 통해서 형성된다는 것을 규산염 광물, 단백질과 핵산의 예를 통해 설명할 수 있다.</div><div class="terms"><b>규산염 사면체</b><b>단위체</b><b>아미노산</b><b>단백질</b><b>핵산</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c2" width="900" height="380"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">구조 선택</div>
-            <div class="seg" id="c2-mode">
-              <button class="on" data-m="silica">규산염 사면체</button>
-              <button data-m="carbon">탄소 화합물</button>
+
+      <div class="episode" id="ep3">
+        <section class="scene" data-title="손톱으로 벗겨지는 돌">
+          <div class="story narr"><div class="who">🪨</div><div class="say"><span class="name">이야기</span>책상 위에 광물 표본 다섯 개가 놓여 있습니다. <b>감람석</b>은 초록빛 알갱이로 부서지고, <b>휘석</b>은 거의 직각인 두 방향으로 쪼개지며, <b>운모</b>는 손톱만 걸어도 투명한 종이처럼 한 장씩 벗겨집니다. <b>석영</b>은 쪼개지는 방향이 아예 없어 조개껍데기 자국을 내며 깨지고, 유리도 긁습니다. 성분표를 보면 다섯 개 모두 주성분이 <b>규소와 산소</b>입니다.</div></div>
+          <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">지질 조사실 민주</span>“지각 부피의 90%가 넘는 광물이 모두 같은 부품 하나로 만들어집니다. 규소 하나를 산소 넷이 둘러싼 <b>규산염 사면체(SiO₄)</b> 예요. 부품이 같은데 결과가 이렇게 다르다면, 다른 것은 무엇일까요?”</div></div>
+          <div class="case-file"><b class="k">증거물 ①</b> 지각의 질량비 1위 산소 <b>46.6%</b>, 2위 규소 <b>27.7%</b> &nbsp;|&nbsp; <b class="k">증거물 ②</b> 다섯 광물의 규소 : 산소 개수비 — 감람석 <b>1 : 4</b>, 휘석 <b>1 : 3</b>, 운모 <b>1 : 2.5</b>, 석영 <b>1 : 2</b> &nbsp;|&nbsp; <b class="k">증거물 ③</b> 규소는 원자가 전자가 4개여서 결합을 <b>네 개</b>까지 만들 수 있다 — 탄소와 같다</div>
+          <div class="gate loose" id="g3"></div>
+        </section>
+
+        <section class="scene" data-title="사면체 조립대 — 산소를 몇 개나 나눠 쓸까">
+          <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">민주</span>“사면체 하나에는 산소가 4개 있습니다. 그 산소를 <b>옆 사면체와 몇 개나 나눠 쓰느냐</b>를 슬라이더로 정해 보세요. 나눠 쓴 산소는 두 사면체가 반씩 가진 셈이 되니, 규소 하나가 차지하는 산소 수가 줄어듭니다. 그 숫자가 곧 광물의 이름표입니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-tet" width="900" height="420"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">이웃과 나눠 쓰는 산소 수<span class="val" id="c-share-val">0개</span></div>
+                <input type="range" id="c-share" min="0" max="4" step="1" value="0">
+              </div>
             </div>
+            <div class="info-card" id="c-tet-info"></div>
           </div>
-        </div>
-        <div class="controls" id="c2-silica-ctrl">
-          <div class="ctrl-group">
-            <div class="ctrl-label">사면체 연결 방식</div>
-            <div class="seg" id="c2-link">
-              <button class="on" data-l="isolated">독립형(감람석)</button>
-              <button data-l="chain">사슬형(휘석)</button>
-              <button data-l="sheet">판상형(운모)</button>
+          <div class="mission" id="m3-2"><span class="m-tag">미션</span>세 가지 구조를 찾아내세요.<ul><li id="m3-2a">규소 : 산소 = <b>1 : 3</b> 인 구조 찾기</li><li id="m3-2b">산소를 <b>모두</b> 나눠 써서 1 : 2 가 되는 구조 찾기</li><li id="m3-2c">한 방향으로 <b>얇게 벗겨지는</b> 구조 찾기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="탄소 조립대 — 사슬과 고리">
+          <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">민주</span>“생명체 쪽으로 넘어갑니다. 탄소도 규소처럼 결합을 네 개 만들 수 있는데, 탄소끼리 서로 이어 붙는 힘이 훨씬 셉니다. 그래서 사슬도 되고 고리도 됩니다. 탄소 수를 바꿔 가며 <b>분자식과 끓는점</b>이 어떻게 달라지는지 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">뼈대 모양</div>
+                <div class="seg" id="c-shape">
+                  <button class="on" data-k="chain">사슬형</button>
+                  <button data-k="ring">고리형</button>
+                </div>
+              </div>
             </div>
+            <div class="canvas-wrap"><canvas id="c-carb" width="900" height="400"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">탄소 개수<span class="val" id="c-n-val">1개</span></div>
+                <input type="range" id="c-n" min="1" max="10" step="1" value="1">
+              </div>
+            </div>
+            <div class="info-card" id="c-carb-info"></div>
           </div>
-        </div>
-        <div class="controls" id="c2-carbon-ctrl" style="display:none;">
-          <div class="ctrl-group">
-            <div class="ctrl-label">탄소 사슬 길이<span class="val" id="c2-n-val">4</span></div>
-            <input type="range" id="c2-n" min="2" max="10" step="1" value="4">
+          <div class="mission" id="m3-3"><span class="m-tag">미션</span>세 가지를 확인하세요.<ul><li id="m3-3a">실온(25 ℃)에서 <b>액체</b>가 되는 가장 작은 사슬형 탄화수소 찾기</li><li id="m3-3b">탄소 8개 사슬형의 분자식이 <b>C₈H₁₈</b> 인 것 확인하기</li><li id="m3-3c">고리형은 같은 탄소 수에서 수소가 <b>2개 적다</b>는 것 확인하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="단위체 계산실 — 다양성은 어디서 오나">
+          <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">민주</span>“단백질의 단위체는 <b>아미노산 20종</b>, 핵산의 단위체는 <b>염기 4종</b>의 뉴클레오타이드입니다. 종류가 이것뿐인데 생명체는 왜 이렇게 다양할까요? 몇 개를 이어 붙일지 정해 보면 답이 나옵니다.”</div></div>
+          <div class="stage-card">
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">무엇을 이어 붙일까</div>
+                <div class="seg" id="c-bio">
+                  <button class="on" data-b="pro">아미노산 20종 → 단백질</button>
+                  <button data-b="dna">뉴클레오타이드 4종 → DNA</button>
+                </div>
+              </div>
+            </div>
+            <div class="canvas-wrap"><canvas id="c-poly" width="900" height="380"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">이어 붙인 단위체 수<span class="val" id="c-len-val">2개</span></div>
+                <input type="range" id="c-len" min="2" max="26" step="1" value="2">
+              </div>
+            </div>
+            <div class="info-card" id="c-poly-info"></div>
           </div>
-        </div>
-        <div class="info-card" id="c2-info"></div>
+          <div class="stage-card" style="margin-top:14px"><div id="s3-sort"></div></div>
+          <div class="mission" id="m3-4"><span class="m-tag">미션</span><ul><li id="m3-4a">아미노산으로 <b>1조 가지</b>(10¹²)를 넘기는 데 필요한 <b>가장 적은</b> 개수 찾기</li><li id="m3-4b">뉴클레오타이드로 같은 1조 가지를 넘기는 <b>가장 적은</b> 개수 찾기</li><li id="m3-4c">물질 일곱 개를 단위체별로 나누기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 사건 해결">
+          <div class="ending">
+            <h4>🪨 부품이 아니라 ‘이어 붙이는 방식’이 물질을 정한다</h4>
+            <p>규산염 사면체(SiO₄)는 꼭짓점의 산소를 이웃과 나눠 쓰면서 이어집니다. 하나도 나눠 쓰지 않으면 <b>독립형</b>(감람석, Si : O = 1 : 4), 두 개를 나눠 쓰면 <b>사슬형</b>(휘석, 1 : 3), 세 개면 <b>판상</b>(운모, 1 : 2.5), 네 개를 모두 나눠 쓰면 <b>망상</b>(석영·장석, 1 : 2)이 됩니다. 운모가 한 방향으로만 얇게 벗겨지는 것은 판과 판 사이의 결합이 약하기 때문이고, 석영이 단단한 것은 모든 방향으로 공유 결합이 이어져 약한 면이 없기 때문입니다. 부품은 하나인데 <b>연결 방식</b>이 광물을 갈랐습니다.</p>
+            <p>생명체도 똑같은 규칙으로 지어졌습니다. 탄소는 결합을 네 개 만들 수 있고 탄소끼리 튼튼히 이어져 사슬·가지·고리를 자유롭게 만듭니다. 그 위에 생명체는 단위체를 이어 붙여 큰 분자를 만듭니다. <b>아미노산</b> 20종이 이어지면 <b>단백질</b>, <b>뉴클레오타이드</b> 4종이 이어지면 <b>핵산(DNA·RNA)</b> 입니다.</p>
+            <p>종류가 20가지, 4가지뿐인데 다양성이 나오는 까닭은 <b>순서</b> 때문입니다. 아미노산을 10개만 이어 붙여도 20¹⁰ ≈ <b>10조 가지</b>, 염기를 20개 이어 붙이면 4²⁰ ≈ <b>1조 가지</b> 가 됩니다. 사람의 단백질은 보통 아미노산 수백 개로 되어 있으니, 가능한 경우의 수는 사실상 끝이 없습니다. 지각도 생명체도 <b>적은 종류의 단위체를 여러 방식으로 잇는다</b>는 같은 설계도를 씁니다.</p>
+            <div class="vs" id="e3-vs"></div>
+            <span class="stamp">사건 파일 ③ 해결</span>
+          </div>
+          <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 사면체 조립대는 나눠 쓰는 산소 수를 0~4 의 정수로만 다루었지만, 실제 각섬석은 사슬 두 줄이 붙은 <b>복사슬</b>이라 사면체마다 나눠 쓰는 산소 수가 2와 3이 섞여 평균 2.5 입니다(Si₄O₁₁). 또 실제 광물에는 규소 자리에 알루미늄이 들어가기도 하고, 음전하를 맞추기 위해 철·마그네슘·칼슘 같은 양이온이 사이에 들어갑니다. 끓는점 값은 실제 <b>n-알케인</b>과 <b>사이클로알케인</b>의 1기압 측정값이며, 가지 달린 이성질체는 끓는점이 더 낮습니다. 서열 가짓수 계산은 20ⁿ, 4ⁿ 으로 <b>모든 순서가 똑같이 가능하다</b>고 본 값이고, 실제로는 만들어져도 제 구실을 못 하는 서열이 훨씬 많습니다.</div>
+          <div class="stage-card" style="padding:6px 0 4px"><div id="wk3"></div></div>
+        </section>
       </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         04 물질의 전기적 성질 — 이야기 「거꾸로 가는 물질」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="3" hidden>
       <div class="stage-head">
-        <div class="eyebrow">04 · 전자가 얼마나 자유로운가</div>
-        <h2 class="display">도체 · 반도체 · 절연체</h2>
-        <p>띠 간격(band gap)과 온도를 함께 조절해, 물질의 종류가 무엇인지 그리고 온도가 오를 때 전도 전자 비율이 어떻게 달라지는지 확인해 보세요.</p>
+        <div class="eyebrow">04 · 물질의 전기적 성질 · 이야기 한 편</div>
+        <h2 class="display">거꾸로 가는 물질</h2>
+        <p>금속은 뜨거워지면 전기가 덜 통합니다. 그런데 어떤 물질은 뜨거워질수록 더 잘 통합니다. 그리고 그 물질에 불순물을 <b>일부러</b> 넣으면 전기가 수백만 배 잘 통합니다. 세상을 바꾼 이 거꾸로 가는 물질의 정체를 밝힙니다.</p>
+        <span class="std-chip">10통과1-02-06</span><div class="std-note"><b>[10통과1-02-06]</b> 지구를 구성하는 물질을 전기적 성질에 따라 구분할 수 있고, 물질의 전기적 성질이 다양한 소재로 활용됨을 인식한다.</div><div class="terms"><b>도체</b><b>반도체</b><b>절연체</b><b>불순물 반도체</b><b>다이오드</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c3" width="900" height="380"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">띠 간격(eV)<span class="val" id="c3-gap-val">0.0</span></div>
-            <input type="range" id="c3-gap" min="0" max="9" step="0.1" value="0">
+
+      <div class="episode" id="ep4">
+        <section class="scene" data-title="1947년 12월, 저마늄 조각">
+          <div class="story narr"><div class="who">💡</div><div class="say"><span class="name">이야기</span>1947년 12월, 미국 벨 연구소. 바딘과 브래튼은 <b>저마늄</b> 조각에 금을 입힌 얇은 조각 두 개를 아주 가까이 붙여 놓고 전압을 걸었습니다. 한쪽에 넣은 작은 신호가 다른 쪽에서 <b>크게 증폭되어</b> 나왔습니다. 첫 번째 트랜지스터였습니다. 이 저마늄은, 바로 78년 전에 멘델레예프가 비워 두었던 그 칸의 원소였습니다. 지금 여러분의 스마트폰 안에는 이 장치의 자손이 <b>수백억 개</b> 들어 있습니다.</div></div>
+          <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">소재 연구실 하준</span>“조사관님, 저마늄과 규소는 구리처럼 전기가 잘 통하지도, 유리처럼 안 통하지도 않습니다. 애매한 물질이죠. 그런데 바로 그 애매함이 쓸모였습니다. 첫 질문 드릴게요.”</div></div>
+          <div class="case-file"><b class="k">증거물 ①</b> 20 ℃ 비저항 — 구리 <b>1.7×10⁻⁸ Ω·m</b>, 순수한 규소 약 <b>2.3×10³ Ω·m</b>, 석영 유리 <b>10¹⁶ Ω·m</b> 이상 (스물넉 자리 차이) &nbsp;|&nbsp; <b class="k">증거물 ②</b> 구리선은 온도가 오르면 저항이 <b>커진다</b> &nbsp;|&nbsp; <b class="k">증거물 ③</b> 규소에 인을 100만 분의 1 넣으면 전기가 훨씬 잘 통한다</div>
+          <div class="gate loose" id="g4"></div>
+        </section>
+
+        <section class="scene" data-title="띠 간격 실험대">
+          <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">하준</span>“물질 속 전자는 아무 데나 있을 수 없고 <b>띠</b> 안에만 있습니다. 전자로 꽉 찬 아래쪽 띠에서 텅 빈 위쪽 띠로 건너뛰어야 전류가 흐르는데, 그 사이의 틈을 <b>띠 간격</b>이라고 합니다. 틈의 너비와 온도를 바꿔 가며, 건너뛴 전자의 비율이 어떻게 달라지는지 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="d-band" width="900" height="420"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">띠 간격 E<sub>g</sub> (eV)<span class="val" id="d-gap-val">1.1</span></div>
+                <input type="range" id="d-gap" min="0" max="6" step="0.1" value="1.1">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">온도<span class="val" id="d-t-val">300 K</span></div>
+                <input type="range" id="d-t" min="100" max="1000" step="20" value="300">
+              </div>
+            </div>
+            <div class="info-card" id="d-band-info"></div>
           </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">온도(K)<span class="val" id="c3-temp-val">300</span></div>
-            <input type="range" id="c3-temp" min="100" max="1000" step="10" value="300">
+          <div class="mission" id="m4-2"><span class="m-tag">미션</span>세 가지를 모두 만들어 보세요. 하나씩 저장됩니다.<ul><li id="m4-2a">띠 간격을 좁혀 <b>도체</b> 만들기</li><li id="m4-2b">띠 간격을 넓혀 <b>절연체</b> 만들기</li><li id="m4-2c">반도체를 고른 뒤 <b>온도만 올려</b> 건너뛴 전자 비율을 100만 분의 1보다 크게 만들기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="도핑실 — 일부러 넣는 불순물">
+          <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">하준</span>“반도체가 쓸모 있어진 결정적 이유입니다. 규소는 원자가 전자가 4개라 이웃 넷과 결합을 꽉 채웁니다. 여기에 전자가 <b>하나 더 많은</b> 인이나, <b>하나 모자란</b> 붕소를 아주 조금 섞어 보세요. 무슨 일이 생기는지.”</div></div>
+          <div class="stage-card">
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">규소에 무엇을 섞을까</div>
+                <div class="seg" id="d-type">
+                  <button class="on" data-d="pure">순수한 규소</button>
+                  <button data-d="n">인(P) — 원자가 전자 5개</button>
+                  <button data-d="p">붕소(B) — 원자가 전자 3개</button>
+                </div>
+              </div>
+            </div>
+            <div class="canvas-wrap"><canvas id="d-dope" width="900" height="420"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">섞는 양 (1 cm³ 안의 불순물 원자 수)<span class="val" id="d-dop-val">10¹²개</span></div>
+                <input type="range" id="d-dop" min="12" max="19" step="0.5" value="12">
+              </div>
+            </div>
+            <div class="info-card" id="d-dope-info"></div>
           </div>
-        </div>
-        <div class="readout" style="margin:0 20px 14px;">
-          <span class="dot" style="background:var(--violet)"></span>
-          <span class="txt" id="c3-carrier"></span>
-        </div>
-        <div class="info-card" id="c3-info"></div>
+          <div class="mission" id="m4-3"><span class="m-tag">미션</span>세 가지를 모두 확인하세요.<ul><li id="m4-3a">인을 섞어 전기가 <b>100만 배</b> 넘게 잘 통하게 만들기</li><li id="m4-3b">붕소를 섞어 <b>양공</b>이 전하를 나르는 물질(p형) 만들기</li><li id="m4-3c">순수한 규소에서는 나르개가 <b>고유 전자뿐</b>인 것 확인하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="다이오드 시험대 — 한쪽으로만">
+          <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">하준</span>“n형과 p형을 맞붙이면 <b>다이오드</b>가 됩니다. 전압의 방향을 바꿔 가며 전류가 얼마나 흐르는지 재 보세요. 이 한 가지 성질이 오늘날 모든 전자 기기의 바탕입니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="d-diode" width="900" height="400"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">걸어 준 전압<span class="val" id="d-v-val">0.00 V</span></div>
+                <input type="range" id="d-v" min="-2" max="1" step="0.05" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="d-diode-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s4-sort"></div></div>
+          <div class="stage-card" style="margin-top:14px"><div id="s4-q"></div></div>
+          <div class="mission" id="m4-4"><span class="m-tag">미션</span>네 가지를 모두 끝내세요.<ul><li id="m4-4a">순방향으로 전압을 걸어 전류를 <b>1 mA 이상</b> 흘리기</li><li id="m4-4b">역방향에서는 전류가 <b>거의 흐르지 않는</b> 것 확인하기</li><li id="m4-4c">물질 아홉 개를 전기적 성질에 따라 나누기</li><li id="m4-4d">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 사건 해결">
+          <div class="ending">
+            <h4>💡 애매한 물질이라서 쓸모가 있었다</h4>
+            <p>전자는 물질 속에서 <b>띠</b> 안에만 있을 수 있습니다. 전자로 채워진 띠와 비어 있는 띠가 겹치거나 틈이 거의 없으면 <b>도체</b>(구리·은·철), 틈이 아주 넓어 상온에서는 아무도 건너뛰지 못하면 <b>절연체</b>(유리·고무·다이아몬드), 틈이 어중간하면 <b>반도체</b>(규소 1.12 eV, 저마늄 0.67 eV)입니다. 건너뛰는 전자의 비율은 온도에 따라 지수 함수로 늘어나므로, 반도체는 뜨거워질수록 전기가 <b>더 잘</b> 통합니다. 금속이 뜨거워질수록 저항이 커지는 것과 정반대입니다.</p>
+            <p>여기에 불순물을 일부러 넣으면(도핑) 성질을 마음대로 고를 수 있습니다. 원자가 전자가 5개인 <b>인</b>을 넣으면 남는 전자가 나르개가 되어 <b>n형</b>, 3개인 <b>붕소</b>를 넣으면 빈자리(양공)가 나르개가 되어 <b>p형</b>이 됩니다. 100만 분의 1 정도만 넣어도 전도도가 수백만 배 뜁니다. 둘을 맞붙인 <b>다이오드</b>는 순방향으로는 전류를 흘리고 역방향으로는 막아, 전류의 방향을 고르는 문이 됩니다. 발광 다이오드(LED), 태양 전지, 트랜지스터가 모두 여기서 나왔습니다.</p>
+            <p>전기적 성질을 다루는 기술은 지금도 자라고 있습니다. 특정 온도 아래에서 저항이 정확히 <b>0</b> 이 되는 <b>초전도체</b>는 자기 공명 영상 장치(MRI)의 강한 전자석에 쓰이고, 탄소 원자가 육각형으로 한 겹만 깔린 <b>그래핀</b>은 전기가 아주 잘 통하면서도 얇고 휘어져 차세대 소재로 연구되고 있습니다. 물질의 전기적 성질을 <b>구분하는 것</b>에서 <b>설계하는 것</b>으로 넘어온 것입니다.</p>
+            <div class="vs" id="e4-vs"></div>
+            <span class="stamp">사건 파일 ④ 해결</span>
+          </div>
+          <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 이 화면의 ‘건너뛴 전자 비율’은 exp(−E<sub>g</sub>/2k<sub>B</sub>T) 하나만 쓴 <b>정성적인 어림</b>입니다. 실제 고유 캐리어 농도에는 온도의 3/2 제곱에 비례하는 항이 함께 들어가고, 띠 간격 자체도 온도에 따라 조금 줄어듭니다. 다이오드 곡선은 이상적인 쇼클리 식(I = I₀(e<sup>V/V<sub>T</sub></sup> − 1), I₀ = 10⁻¹² A, V<sub>T</sub> = 0.026 V)이며, 실제 다이오드에는 직렬 저항과 항복 전압이 있어 역방향 전압이 아주 커지면 갑자기 전류가 흐릅니다. 도체·반도체·절연체를 띠 간격 0.3 eV 와 3.0 eV 로 자른 것도 <b>교과서용 어림선</b>이며, 실제로는 매끄럽게 이어집니다.</div>
+          <div class="stage-card" style="padding:6px 0 4px"><div id="wk4"></div></div>
+        </section>
       </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- ===================================================================== 05 정리하기 -->
     <section class="tab-panel" data-panel="4" hidden>
       <div class="stage-head">
-        <div class="eyebrow">05 · 오늘 알아낸 것을 문장으로</div>
+        <div class="eyebrow">05 · 네 사건을 하나로</div>
         <h2 class="display">정리하기</h2>
-        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+        <p>네 이야기의 결과가 아래에 모입니다. 네 사건을 꿰는 한 문장을 쓰고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
       </div>
       <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
+    </section>
+
+    <!-- ===================================================================== 06 우리 반 -->
+    <section class="tab-panel" data-panel="5" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">06 · 같은 반 친구들과 나누기</div>
+        <h2 class="display">우리 반</h2>
+        <p>내가 해결한 사건과 찾아낸 답을 우리 반에 올리고, 친구들은 어떤 값을 찾았는지 살펴보세요. <b>올리기 버튼을 눌렀을 때만</b> 공유됩니다. 실명 대신 별명을 쓰세요.</p>
+      </div>
+      <div class="stage-card"><div id="share"></div></div>
     </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
 <script src="../assets/theme.js"></script>
-<script>
-(function () {
-"use strict";
-
-var elems0 = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca"];
-/* 실제 관측값 근사(pm) 및 1차 이온화 에너지(kJ/mol) — 고교 수준 참고 데이터 */
-var atomicRadius = [53, 31, 152, 112, 85, 77, 75, 73, 71, 69, 186, 160, 143, 118, 110, 103, 99, 97, 227, 197];
-var ionizationE = [1312, 2372, 520, 899, 801, 1086, 1402, 1314, 1681, 2081, 496, 738, 578, 786, 1012, 1000, 1251, 1521, 419, 590];
-
-/* TAB0 주기성 */
-(function () {
-  var canvas = document.getElementById("c0");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var z = 1;
-  var info = document.getElementById("c0-info");
-  var elems = elems0;
-  var periods = [1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4];
-  var groupsByPeriod = { 1: [1, 18], 2: [1, 2, 13, 14, 15, 16, 17, 18], 3: [1, 2, 13, 14, 15, 16, 17, 18], 4: [1, 2] };
-
-  document.getElementById("c0-z").addEventListener("input", function (e) { z = +e.target.value; document.getElementById("c0-z-val").textContent = z; render(); });
-
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var cellW = 42, cellH = 42, x0 = 40, y0 = 30;
-    elems.forEach(function (sym, i) {
-      var period = periods[i];
-      var col = groupOf(i) <= 2 ? (groupOf(i) - 1) : (groupOf(i) - 13 + 2);
-      var x = x0 + col * cellW, y = y0 + (period - 1) * cellH;
-      ctx.save();
-      ctx.fillStyle = (i + 1 === z) ? cssVar("--teal") : cssVar("--panel-2");
-      ctx.fillRect(x, y, cellW - 3, cellH - 3);
-      ctx.strokeStyle = cssVar("--line"); ctx.strokeRect(x, y, cellW - 3, cellH - 3);
-      ctx.restore();
-      ctx.font = "700 13px Segoe UI"; ctx.fillStyle = (i + 1 === z) ? cssVar("--abyss") : cssVar("--foam");
-      ctx.textAlign = "center"; ctx.fillText(sym, x + (cellW - 3) / 2, y + (cellH - 3) / 2 + 5);
-    });
-
-    ctx.save();
-    ctx.strokeStyle = cssVar("--coral"); ctx.fillStyle = cssVar("--coral"); ctx.lineWidth = 2;
-    drawArrow(ctx, x0 + 9 * cellW + 10, y0 - 12, x0 + 40, y0 - 12, 7);
-    ctx.font = "11px Segoe UI"; ctx.textAlign = "center";
-    ctx.fillText("원자 반지름 증가 →", x0 + 5 * cellW, y0 - 20);
-    ctx.restore();
-    ctx.save();
-    ctx.strokeStyle = cssVar("--cold"); ctx.fillStyle = cssVar("--cold"); ctx.lineWidth = 2;
-    ctx.save(); ctx.translate(x0 - 20, y0 + 20); ctx.rotate(Math.PI / 2);
-    drawArrow(ctx, 0, 0, 130, 0, 7);
-    ctx.restore();
-    ctx.font = "11px Segoe UI"; ctx.textAlign = "center";
-    ctx.save(); ctx.translate(x0 - 30, y0 + 90); ctx.rotate(-Math.PI / 2); ctx.fillText("이온화 에너지 증가 ↑", 0, 0); ctx.restore();
-    ctx.restore();
-
-    var sym = elems[z - 1];
-    info.innerHTML = "현재 선택: <b>" + sym + "</b>(원자 번호 " + z + "). 같은 주기(가로줄)에서는 오른쪽으로 갈수록 원자 반지름이 <b>작아지고</b> 이온화 에너지는 <b>커집니다</b>. 같은 족(세로줄)에서는 아래로 갈수록 원자 반지름이 <b>커지고</b> 이온화 에너지는 <b>작아집니다</b>.";
-  }
-  function groupOf(i) {
-    var groupMap = [1, 18, 1, 2, 13, 14, 15, 16, 17, 18, 1, 2, 13, 14, 15, 16, 17, 18, 1, 2];
-    return groupMap[i];
-  }
-  render();
-})();
-
-/* TAB0-B 실제 데이터 그래프 */
-(function () {
-  var canvas = document.getElementById("c0b");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c0b-info");
-  var zSlider = document.getElementById("c0-z");
-
-  function plotSeries(vals, x0, x1, yTop, yBot, color, z, label) {
-    var maxV = Math.max.apply(null, vals), minV = Math.min.apply(null, vals);
-    function px(i) { return x0 + i / (vals.length - 1) * (x1 - x0); }
-    function py(v) { return yBot - (v - minV) / (maxV - minV) * (yBot - yTop); }
-    ctx.strokeStyle = cssVar(color); ctx.lineWidth = 2;
-    ctx.beginPath();
-    vals.forEach(function (v, i) { var x = px(i), y = py(v); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); });
-    ctx.stroke();
-    vals.forEach(function (v, i) {
-      ctx.fillStyle = (i + 1 === z) ? cssVar("--foam") : cssVar(color);
-      ctx.beginPath(); ctx.arc(px(i), py(v), (i + 1 === z) ? 6 : 3, 0, Math.PI * 2); ctx.fill();
-    });
-    ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
-    ctx.fillText(label, x0, yTop - 6);
-    return { px: px, py: py };
-  }
-
-  function render() {
-    var z = +zSlider.value;
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var x0 = 50, x1 = W - 30;
-    plotSeries(atomicRadius, x0, x1, 30, 120, "--teal", z, "원자 반지름 (pm)");
-    plotSeries(ionizationE, x0, x1, 150, 250, "--coral", z, "1차 이온화 에너지 (kJ/mol)");
-
-    ctx.font = "9px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-    elems0.forEach(function (sym, i) {
-      var x = x0 + i / (elems0.length - 1) * (x1 - x0);
-      ctx.fillText(sym, x, 268);
-    });
-
-    info.innerHTML = "선택한 원소(<b>" + elems0[z - 1] + "</b>)에서 원자 반지름은 <b>" + atomicRadius[z - 1] + "pm</b>, 1차 이온화 에너지는 <b>" + ionizationE[z - 1] + "kJ/mol</b>입니다. 그래프가 톱니 모양인 이유는 같은 주기 안에서는 감소/증가하다가, 새 주기(껍질)가 시작될 때마다 값이 급격히 반전되기 때문입니다.";
-  }
-  zSlider.addEventListener("input", render);
-  render();
-})();
-
-/* TAB1 화학결합 — 전기음성도 차이 */
-(function () {
-  var canvas = document.getElementById("c1");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var a = "H", b = "Cl";
-  var info = document.getElementById("c1-info");
-  var enTxt = document.getElementById("c1-en");
-  var EN = { Na: 0.93, K: 0.82, H: 2.20, C: 2.55, Cl: 3.16, O: 3.44, F: 3.98, N: 3.04 };
-  var metals = { Na: true, K: true };
-
-  document.querySelectorAll("#c1-a button").forEach(function (btn) {
-    btn.addEventListener("click", function () { a = btn.getAttribute("data-e"); document.querySelectorAll("#c1-a button").forEach(function (x) { x.classList.toggle("on", x === btn); }); render(); });
-  });
-  document.querySelectorAll("#c1-b button").forEach(function (btn) {
-    btn.addEventListener("click", function () { b = btn.getAttribute("data-e"); document.querySelectorAll("#c1-b button").forEach(function (x) { x.classList.toggle("on", x === btn); }); render(); });
-  });
-
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var enA = EN[a], enB = EN[b];
-    var d = Math.abs(enA - enB);
-    var kind = d >= 1.7 ? { name: "이온 결합", color: "--violet" } : d >= 0.4 ? { name: "극성 공유 결합", color: "--coral" } : { name: "무극성 공유 결합", color: "--teal" };
-
-    var ax = W / 2 - 130, bx = W / 2 + 130, y = H / 2;
-    ctx.font = "700 22px Georgia, serif"; ctx.textAlign = "center";
-    ctx.fillStyle = cssVar("--cold"); ctx.beginPath(); ctx.arc(ax, y, 40, 0, 7); ctx.fill();
-    ctx.fillStyle = cssVar("--coral"); ctx.beginPath(); ctx.arc(bx, y, 40, 0, 7); ctx.fill();
-    ctx.fillStyle = cssVar("--abyss");
-    ctx.fillText(a, ax, y + 8);
-    ctx.fillText(b, bx, y + 8);
-
-    if (kind.name === "이온 결합") {
-      ctx.save();
-      ctx.strokeStyle = cssVar("--foam"); ctx.fillStyle = cssVar("--foam"); ctx.lineWidth = 2;
-      drawArrow(ctx, ax + 44, y - 10, bx - 44, y - 10, 8);
-      ctx.restore();
-      ctx.font = "11px Segoe UI"; ctx.fillText("전자 이동", (ax + bx) / 2, y - 20);
-      ctx.font = "700 14px Segoe UI"; ctx.fillText(a + "⁺", ax, y - 55);
-      ctx.fillText(b + "⁻", bx, y - 55);
-    } else {
-      ctx.save();
-      ctx.strokeStyle = cssVar(kind.color); ctx.globalAlpha = .6; ctx.lineWidth = 6;
-      ctx.beginPath(); ctx.moveTo(ax + 40, y); ctx.lineTo(bx - 40, y); ctx.stroke();
-      ctx.restore();
-      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText("전자쌍 공유(치우침 정도 = ΔEN)", (ax + bx) / 2, y - 55);
-    }
-
-    enTxt.innerHTML = "전기음성도 차이 ΔEN = |" + enA.toFixed(2) + " − " + enB.toFixed(2) + "| = <b>" + d.toFixed(2) + "</b> → <b style='color:var(" + kind.color + ")'>" + kind.name + "</b>";
-    info.innerHTML = "일반적 기준: ΔEN ≥ 1.7이면 이온 결합, 0.4 ≤ ΔEN < 1.7이면 극성 공유 결합, ΔEN < 0.4이면 무극성 공유 결합으로 분류합니다. 전기음성도 차이가 클수록 전자가 한쪽으로 치우치는 정도(결합의 이온성)가 커집니다.";
-  }
-  render();
-})();
-
-/* TAB1 미션 — ΔEN으로 결합 종류 맞히기 */
-(function () {
-  var EN = { Na: 0.93, K: 0.82, Li: 0.98, H: 2.20, C: 2.55, Cl: 3.16, O: 3.44, F: 3.98, N: 3.04, S: 2.58, Br: 2.96 };
-  var elList = Object.keys(EN);
-  var dataBox = document.getElementById("c1m-data");
-  var seg = document.getElementById("c1m-choices");
-  var checkBtn = document.getElementById("c1m-check");
-  var newBtn = document.getElementById("c1m-new");
-  var info = document.getElementById("c1m-info");
-  var a, b, key, picked = null;
-  var labels = { ionic: "이온 결합", polar: "극성 공유 결합", nonpolar: "무극성 공유 결합" };
-
-  function classify(d) {
-    if (d >= 1.7) return "ionic";
-    if (d >= 0.4) return "polar";
-    return "nonpolar";
-  }
-
-  function newQuestion() {
-    var ia = Math.floor(Math.random() * elList.length);
-    var ib = Math.floor(Math.random() * elList.length);
-    while (ib === ia) ib = Math.floor(Math.random() * elList.length);
-    a = elList[ia]; b = elList[ib];
-    var d = Math.abs(EN[a] - EN[b]);
-    key = classify(d);
-    picked = null;
-    dataBox.innerHTML = "원소 A = <b>" + a + "</b>(전기음성도 " + EN[a].toFixed(2) + "), 원소 B = <b>" + b + "</b>(전기음성도 " + EN[b].toFixed(2) + ")<br>ΔEN = " + d.toFixed(2) + " 일 때, 이 결합은 무슨 결합일까요?";
-    seg.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
-    info.innerHTML = "";
-    info.style.color = "";
-  }
-
-  seg.querySelectorAll("button").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      picked = btn.dataset.c;
-      seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === btn); });
-    });
-  });
-
-  checkBtn.addEventListener("click", function () {
-    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
-    if (picked === key) {
-      info.innerHTML = "✅ 정답! ΔEN 기준으로 '" + labels[key] + "' 입니다.";
-      info.style.color = "var(--teal)";
-    } else {
-      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[key] + "' 입니다.";
-      info.style.color = "var(--coral)";
-    }
-  });
-
-  newBtn.addEventListener("click", newQuestion);
-  newQuestion();
-})();
-
-/* TAB2 지각/생명체 구조 */
-(function () {
-  var canvas = document.getElementById("c2");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var mode = "silica", link = "isolated", chainN = 4;
-  var info = document.getElementById("c2-info");
-  document.querySelectorAll("#c2-mode button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      mode = b.getAttribute("data-m");
-      document.querySelectorAll("#c2-mode button").forEach(function (x) { x.classList.toggle("on", x === b); });
-      document.getElementById("c2-silica-ctrl").style.display = mode === "silica" ? "" : "none";
-      document.getElementById("c2-carbon-ctrl").style.display = mode === "carbon" ? "" : "none";
-      render();
-    });
-  });
-  document.querySelectorAll("#c2-link button").forEach(function (b) {
-    b.addEventListener("click", function () { link = b.getAttribute("data-l"); document.querySelectorAll("#c2-link button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); });
-  });
-  document.getElementById("c2-n").addEventListener("input", function (e) { chainN = +e.target.value; document.getElementById("c2-n-val").textContent = chainN; render(); });
-
-  var linkDesc = {
-    isolated: "사면체가 서로 연결되지 않고 독립적으로 존재합니다 (예: 감람석). 산소를 다른 사면체와 공유하지 않습니다.",
-    chain: "사면체가 꼭짓점을 공유하며 사슬처럼 길게 이어집니다 (예: 휘석, 각섬석).",
-    sheet: "사면체가 여러 방향으로 산소를 공유하며 넓은 판 구조를 이룹니다 (예: 운모, 점토광물)."
-  };
-
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    if (mode === "silica") {
-      if (link === "isolated") {
-        [150, 400, 650].forEach(function (cx) { drawTetra(cx, H / 2); });
-      } else if (link === "chain") {
-        for (var i = 0; i < 4; i++) drawTetra(120 + i * 140, H / 2 + (i % 2 === 0 ? -20 : 20));
-        ctx.strokeStyle = cssVar("--mist"); ctx.setLineDash([4, 4]);
-        ctx.beginPath(); ctx.moveTo(160, H / 2 - 20); ctx.lineTo(720, H / 2 - 20 + (3 % 2 === 0 ? -20 : 20)); ctx.stroke();
-        ctx.setLineDash([]);
-      } else {
-        var cols = 4, rows = 2;
-        for (var r = 0; r < rows; r++) for (var c = 0; c < cols; c++) {
-          drawTetra(150 + c * 160, H / 2 - 60 + r * 130);
-        }
-      }
-      info.innerHTML = "<b>규산염 사면체(SiO₄)</b>: 규소(Si) 1개가 산소(O) 4개에 둘러싸인 구조입니다. " + linkDesc[link];
-    } else {
-      drawChain(80, H / 2, chainN);
-      info.innerHTML = "생명체는 <b>탄소(C)</b> 원자를 중심으로 만들어집니다. 탄소는 다른 원자와 최대 4개의 공유 결합을 형성할 수 있어, 사슬 길이(현재 " + chainN + "개)만 바뀌어도 완전히 다른 성질의 화합물(예: 메테인 C1, 뷰테인 C4, 옥테인 C8)이 됩니다.";
-    }
-  }
-  function drawTetra(cx, cy) {
-    var r = 42;
-    ctx.save();
-    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
-    var pts = [[0, -r], [r * 0.87, r * 0.5], [-r * 0.87, r * 0.5]];
-    ctx.beginPath();
-    pts.forEach(function (p, i) { if (i === 0) ctx.moveTo(cx + p[0], cy + p[1]); else ctx.lineTo(cx + p[0], cy + p[1]); });
-    ctx.closePath(); ctx.stroke();
-    pts.forEach(function (p) { ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + p[0], cy + p[1]); ctx.stroke(); });
-    ctx.fillStyle = cssVar("--teal"); ctx.beginPath(); ctx.arc(cx, cy, 11, 0, 7); ctx.fill();
-    ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center"; ctx.fillText("Si", cx, cy + 3);
-    pts.forEach(function (p) {
-      ctx.fillStyle = cssVar("--coral"); ctx.beginPath(); ctx.arc(cx + p[0], cy + p[1], 8, 0, 7); ctx.fill();
-    });
-    ctx.restore();
-  }
-  function drawChain(x0, y, n) {
-    ctx.save();
-    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 3;
-    var spacing = Math.min(70, (W - x0 - 60) / Math.max(1, n - 1));
-    for (var i = 0; i < n - 1; i++) {
-      var x1 = x0 + i * spacing, y1 = y + (i % 2 === 0 ? 0 : -25);
-      var x2 = x0 + (i + 1) * spacing, y2 = y + ((i + 1) % 2 === 0 ? 0 : -25);
-      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
-    }
-    for (var j = 0; j < n; j++) {
-      var xx = x0 + j * spacing, yy = y + (j % 2 === 0 ? 0 : -25);
-      ctx.fillStyle = cssVar("--violet"); ctx.beginPath(); ctx.arc(xx, yy, 12, 0, 7); ctx.fill();
-      ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center"; ctx.fillText("C", xx, yy + 3);
-    }
-    ctx.restore();
-  }
-  render();
-})();
-
-/* TAB3 전기적 성질 — 온도 의존 전도 */
-(function () {
-  var canvas = document.getElementById("c3");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var gap = 0, temp = 300;
-  var info = document.getElementById("c3-info");
-  var carrierTxt = document.getElementById("c3-carrier");
-  var kB = 8.617e-5; // eV/K
-  document.getElementById("c3-gap").addEventListener("input", function (e) { gap = +e.target.value; document.getElementById("c3-gap-val").textContent = gap.toFixed(1); render(); });
-  document.getElementById("c3-temp").addEventListener("input", function (e) { temp = +e.target.value; document.getElementById("c3-temp-val").textContent = temp; render(); });
-
-  function classify(g) {
-    if (g < 0.3) return { name: "도체", color: "--teal" };
-    if (g < 3) return { name: "반도체", color: "--coral" };
-    return { name: "절연체(부도체)", color: "--cold" };
-  }
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var cls = classify(gap);
-    var cx = W / 2, valTop = 220, valBot = 280;
-    var gapPx = gap * 12;
-    ctx.save();
-    ctx.fillStyle = cssVar("--mist"); ctx.globalAlpha = .35;
-    ctx.fillRect(cx - 150, valTop, 300, valBot - valTop);
-    ctx.restore();
-    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-    ctx.fillText("원자가 띠(전자로 채워짐)", cx, valTop + 30);
-
-    var condTop = valTop - gapPx - 60;
-    ctx.save();
-    ctx.fillStyle = cssVar(cls.color); ctx.globalAlpha = .35;
-    ctx.fillRect(cx - 150, condTop, 300, 60);
-    ctx.restore();
-    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist");
-    ctx.fillText("전도띠(전자가 이동하면 전류가 흐름)", cx, condTop + 35);
-
-    ctx.save();
-    ctx.strokeStyle = cssVar(cls.color); ctx.setLineDash([5, 4]); ctx.lineWidth = 1.5;
-    ctx.strokeRect(cx - 150, condTop + 60, 300, valTop - (condTop + 60));
-    ctx.restore();
-    ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar(cls.color);
-    ctx.fillText("띠 간격 " + gap.toFixed(1) + " eV", cx, (condTop + 60 + valTop) / 2 + 4);
-
-    // 캐리어 밀도 비례값: exp(-Eg / (2 kB T))  — 정성적 비교용
-    var ratio = Math.exp(-gap / (2 * kB * temp));
-    carrierTxt.innerHTML = "전도 전자 비율(상대값) ∝ exp(−E<sub>g</sub>/2k<sub>B</sub>T) ≈ <b>" + ratio.toExponential(2) + "</b> (T=" + temp + "K 기준)";
-
-    info.innerHTML = "띠 간격이 " + gap.toFixed(1) + " eV일 때, 이 물질은 <b style='color:var(" + cls.color + ")'>" + cls.name + "</b>입니다. " +
-      (cls.name === "도체" ? "원자가 띠와 전도띠가 겹쳐 있어(또는 간격이 매우 좁아) 온도와 상관없이 전자가 쉽게 이동합니다." :
-        cls.name === "반도체" ? "온도를 높이면 전자가 열에너지를 얻어 전도띠로 넘어가는 비율이 지수적으로 늘어나, 반도체의 전도성이 뚜렷이 좋아집니다 — 이는 도체와 달리 온도가 오를수록 저항이 줄어드는 반도체만의 특징입니다." :
-          "띠 간격이 넓어 상온에서는 전자가 거의 전도띠로 넘어가지 못해 전류가 잘 흐르지 않습니다.");
-  }
-  render();
-})();
-
-})();
-</script>
-
-<script>
-(function () {
-  window.sthUnit("is1-2-2");
-  window.sthWork({
-    mount: "wk",
-    unitLabel: "[통합과학1 Ⅱ-2] 물질의 규칙성과 성질",
-    items: [
-      {
-            "id": "w1",
-            "label": "주기성이 나타나는 까닭",
-            "hint": "같은 족 원소들이 비슷하게 행동하는 이유를 전자 배치로 설명하세요.",
-            "ph": ""
-      },
-      {
-            "id": "w2",
-            "label": "결합이 다르면 성질이 다르다",
-            "hint": "물과 소금을 골라, 결합의 차이가 어떤 성질의 차이로 이어지는지 짝지어 쓰세요.",
-            "ph": ""
-      },
-      {
-            "id": "w3",
-            "label": "아직 헷갈리는 것",
-            "hint": "다음 시간에 여기서부터 시작합니다.",
-            "ph": ""
-      }
-]
-  });
-})();
-</script>
+<script src="../assets/story.js"></script>
+<script src="../assets/share-config.js"></script>
+<script src="../assets/share.js"></script>
+<script src="episodes.js"></script>
 </body>
 </html>
