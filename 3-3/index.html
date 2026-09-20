@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>생명 시스템 — 관측 스테이션</title>
 <link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="../assets/story.css">
 </head>
 <body>
 
@@ -19,466 +20,412 @@
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 동화 작용과 이화 작용</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 유전정보의 흐름</button>
     <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
+    <button class="tab-btn" data-tab="4"><span class="num">05</span> 우리 반</button>
   </nav>
 
   <main>
+    <!-- =====================================================================
+         01 효소와 화학 반응 — 이야기 「익지 않는 김치」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="0">
       <div class="stage-head">
-        <div class="eyebrow">01 · 생체 촉매</div>
-        <h2 class="display">효소와 활성화 에너지</h2>
-        <p>온도와 pH를 함께 조절해 효소의 반응 속도가 어떻게 달라지는지 확인해 보세요. 효소마다 최적 온도와 최적 pH가 다릅니다.</p>
-      
-        <span class="std-chip">10통과1-03-05</span><span class="std-chip">10통과1-03-06</span><div class="std-note"><b>[10통과1-03-05]</b> 생명 시스템을 유지하기 위해서 다양한 화학 반응과 물질 출입이 필요함을 이해하고, 일상생활에서 활용되는 화학 반응 사례를 조사하여 발표할 수 있다.<br><b>[10통과1-03-06]</b> 생명 시스템의 유지에 필요한 세포 내 정보의 흐름을 유전자로부터 단백질이 만들어지는 과정을 중심으로 설명할 수 있다.</div><div class="terms"><b>효소</b><b>활성화 에너지</b><b>전사</b><b>번역</b></div>
-      </div>
-      <div class="gate loose" id="gt"></div>
-      <div class="stage-card">
-        <div class="canvas-wrap" style="position:relative"><canvas id="c0" width="900" height="420"></canvas><div class="veil" id="vl"><p>예상을 고르면 화면이 열립니다.</p></div></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">효소 종류</div>
-            <div class="seg" id="c0-enzyme">
-              <button class="on" data-opt-t="37" data-opt-ph="7" data-name="아밀레이스(침, 소화효소)">아밀레이스(입)</button>
-              <button data-opt-t="37" data-opt-ph="2" data-name="펩신(위, 소화효소)">펩신(위)</button>
-              <button data-opt-t="37" data-opt-ph="8" data-name="트립신(소장, 소화효소)">트립신(소장)</button>
-            </div>
-          </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">온도(°C)<span class="val" id="c0-t-val">37</span></div>
-            <input type="range" id="c0-t" min="0" max="80" step="1" value="37">
-          </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">pH<span class="val" id="c0-ph-val">7.0</span></div>
-            <input type="range" id="c0-ph" min="0" max="14" step="0.5" value="7">
-          </div>
-        </div>
-        <div class="info-card" id="c0-info"></div>
+        <div class="eyebrow">01 · 효소와 화학 반응 · 이야기 한 편</div>
+        <h2 class="display">익지 않는 김치</h2>
+        <p>급식실 김치냉장고에서 3주가 지나도 익지 않는 김치통이 나왔습니다. 온도와 pH 다이얼을 직접 돌려 효소의 반응 속도 곡선을 그리고, 활성화 에너지를 낮춰 보고, 마지막에는 세탁기 속 효소까지 따라갑니다.</p>
+        <span class="std-chip">10통과1-03-05</span><div class="std-note"><b>[10통과1-03-05]</b> 생명 시스템을 유지하기 위해서 다양한 화학 반응과 물질 출입이 필요함을 이해하고, 일상생활에서 활용되는 화학 반응 사례를 조사하여 발표할 수 있다.</div><div class="terms"><b>효소</b><b>활성화 에너지</b><b>최적 온도</b><b>최적 pH</b><b>변성</b><b>기질 특이성</b></div>
       </div>
 
-      <div class="stage-head">
-        <div class="eyebrow">🔎 미션 · 효소의 최적 환경 맞히기</div>
-        <h2 class="display" style="font-size:18px;">이 소화효소는 어떤 pH 환경에서 가장 잘 작동할까?</h2>
+      <div class="episode" id="ep1">
+        <section class="scene" data-title="사건 — 3주가 지나도 익지 않는 김치">
+          <div class="story narr"><div class="who">🥬</div><div class="say"><span class="name">이야기</span>김치가 익는다는 것은 김치 속 <b>유산균</b>이 배추와 양념에 든 당을 <b>젖산</b>으로 바꾸는 화학 반응이 일어난다는 뜻입니다. 이 반응을 실제로 굴리는 것은 유산균의 몸속에 들어 있는 <b>효소</b>들입니다. 그래서 김치가 익는 속도는 곧 효소가 일하는 속도입니다.</div></div>
+          <div class="story"><div class="who">👩‍🍳</div><div class="say"><span class="name">급식실 조리사 정 선생님</span>“과학 동아리 학생이라고 들었어요. 좀 봐 주세요. 같은 날 같은 양념으로 담근 김치 세 통인데, 하나는 3주가 지나도 <b>아삭아삭 생김치 그대로</b>예요. 하나는 하루 만에 시어 터졌고요. 그리고 마지막 한 통은… 제가 남은 <b>뜨거운 국물</b>을 아깝다고 부어 담갔는데, 식힌 뒤로 한 달이 지나도 아무 일도 안 일어나요.”</div></div>
+          <div class="case-file"><b class="k">사건 기록</b> 통 ㉮ 김치냉장고 <b>−2 °C</b> → 3주째 안 익음 &nbsp;|&nbsp; 통 ㉯ 실온 <b>20 °C</b> → 하루 만에 시어짐 &nbsp;|&nbsp; 통 ㉰ <b>80 °C</b> 국물을 붓고 식혀 20 °C 보관 → 한 달째 변화 없음 &nbsp;|&nbsp; 세 통 모두 같은 배추·같은 양념</div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">동아리 지도 · 생명과학 선생님</span>“조사에 들어가기 전에 하나만 묻자. 효소가 무엇을 하는 물질인지 아직 헷갈리는 사람이 많거든. 상처에 바르는 과산화 수소수 이야기로 물어볼게.”</div></div>
+          <div class="gate loose" id="g1"></div>
+        </section>
+
+        <section class="scene" data-title="온도와 pH 다이얼 — 속도 곡선을 직접 그리다">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“효소는 <b>단백질</b>로 만들어져 있고, 단백질은 접힌 모양이 정확히 맞아야 일을 한다. 그래서 효소에는 가장 빠르게 일하는 <b>최적 온도</b>와 <b>최적 pH</b>가 있지. 김치 유산균의 효소를 실험대에 올려 두었으니, 다이얼을 직접 돌려 봐. 오른쪽에는 문제의 <b>통 ㉰</b>(끓는 국물을 부었다 식힌 통)도 같이 올려 두었다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-rate" width="900" height="440"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">살펴볼 김치통</div>
+                <div class="seg" id="a-jar">
+                  <button class="on" data-j="fresh">통 ㉮ · 한 번도 데운 적 없음</button>
+                  <button data-j="boiled">통 ㉰ · 80 °C 국물을 부었다 식힘</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">보관 온도 (°C)<span class="val" id="a-t-val">20</span></div>
+                <input type="range" id="a-t" min="-5" max="80" step="1" value="20">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">김치 국물의 pH<span class="val" id="a-ph-val">6.5</span></div>
+                <input type="range" id="a-ph" min="2" max="9" step="0.1" value="6.5">
+              </div>
+            </div>
+            <div class="info-card" id="a-rate-info"></div>
+          </div>
+          <div class="mission" id="m1-2"><span class="m-tag">미션</span>다이얼을 하나씩 맞춰 가며 세 가지를 확인하세요. (하나씩 해도 됩니다)<ul>
+            <li id="m1-2a">온도만 바꿔 <b>온도 활성 95 % 이상</b> 만들기 — 이 효소의 최적 온도 찾기</li>
+            <li id="m1-2b">pH만 바꿔 <b>pH 활성 95 % 이상</b> 만들기 — 이 효소의 최적 pH 찾기</li>
+            <li id="m1-2c"><b>통 ㉰</b>를 고른 뒤 온도 활성을 <b>80 % 이상</b>으로 맞춰도 김치가 익지 않는 것 확인하기</li>
+          </ul></div>
+        </section>
+
+        <section class="scene" data-title="효소는 무엇을 낮추는가">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“이제 핵심이다. 화학 반응이 일어나려면 넘어야 할 <b>언덕</b>이 있어. 그 언덕의 높이를 <b>활성화 에너지</b>라고 한다. 효소는 반응물을 없애거나 새로 만들어 내는 것이 아니라, <b>언덕을 낮춰 주는</b> 일만 해. 상처에 바르는 과산화 수소수로 확인해 보자. 과산화 수소가 저절로 분해될 때 넘어야 하는 언덕은 약 <b>75 kJ/mol</b>이고, 우리 몸속 효소 <b>카탈레이스</b>가 붙으면 <b>8 kJ/mol</b>까지 내려간다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-ea" width="900" height="400"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">효소가 낮춰 준 활성화 에너지 (kJ/mol)<span class="val" id="a-ea-val">75</span></div>
+                <input type="range" id="a-ea" min="8" max="75" step="1" value="75">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">반응이 일어나는 온도 (°C)<span class="val" id="a-temp-val">25</span></div>
+                <input type="range" id="a-temp" min="0" max="80" step="1" value="25">
+              </div>
+            </div>
+            <div class="readout" style="margin:0 22px 18px;"><span class="dot" style="background:var(--violet)"></span><span class="txt" id="a-ea-out">—</span></div>
+            <div class="info-card" id="a-ea-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s1-q1"></div></div>
+          <div class="mission" id="m1-3"><span class="m-tag">미션</span>두 가지 길로 반응을 빠르게 만들어 보고, 어느 쪽이 더 센지 견주세요.<ul>
+            <li id="m1-3a"><b>효소 쪽</b> — 활성화 에너지를 낮춰 반응이 <b>1억 배 이상</b> 빨라지게 하기</li>
+            <li id="m1-3b"><b>온도 쪽</b> — 효소 없이, 온도만 올려 반응이 25 °C 때보다 <b>10배 이상</b> 빨라지게 하기</li>
+            <li id="m1-3c">아래 물음에 답하기</li>
+          </ul></div>
+        </section>
+
+        <section class="scene" data-title="세탁기 속의 효소">
+          <div class="story"><div class="who">👩‍🍳</div><div class="say"><span class="name">정 선생님</span>“그런데 이상해요. 김치통 옆에 둔 <b>과산화 수소수</b> 병에는 아무 일도 안 일어나던데요? 김치 속 효소가 그렇게 대단하면 그것도 분해해야 하는 거 아닌가요?”</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“좋은 질문이에요. 효소는 <b>아무 물질에나 붙지 않습니다.</b> 효소에는 반응할 물질(<b>기질</b>)이 꼭 맞게 들어가는 홈이 있어서, 마치 <b>자물쇠와 열쇠</b>처럼 짝이 맞는 기질에만 작용하죠. 이것을 <b>기질 특이성</b>이라고 합니다. 이 성질을 사람이 가장 많이 써먹는 곳이 바로 세탁기예요. 급식실 앞치마의 얼룩으로 시험해 봅시다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-wash" width="900" height="380"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">앞치마의 얼룩</div>
+                <div class="seg" id="a-stain">
+                  <button class="on" data-s="pro">핏자국 (단백질)</button>
+                  <button data-s="lip">기름때 (지방)</button>
+                  <button data-s="amy">눌어붙은 밥풀 (녹말)</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">넣을 세제</div>
+                <div class="seg" id="a-enz">
+                  <button class="on" data-e="none">효소가 없는 세제</button>
+                  <button data-e="pro">단백질 분해 효소 세제</button>
+                  <button data-e="lip">지방 분해 효소 세제</button>
+                  <button data-e="amy">녹말 분해 효소 세제</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">세탁물의 온도 (°C)<span class="val" id="a-wt-val">30</span></div>
+                <input type="range" id="a-wt" min="10" max="90" step="5" value="30">
+              </div>
+            </div>
+            <div class="info-card" id="a-wash-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s1-sort"></div></div>
+          <div class="mission" id="m1-4"><span class="m-tag">미션</span>30분 세탁으로 다음을 해내세요.<ul>
+            <li id="m1-4a">얼룩 하나를 골라 <b>90 % 이상</b> 지우기 — 짝이 맞는 효소와 알맞은 온도를 찾으세요</li>
+            <li id="m1-4b">짝이 맞는 그 조합 그대로 물 온도만 <b>75 °C 이상</b>으로 올려, 오히려 안 지워지는 것 확인하기</li>
+            <li id="m1-4c">생활 속 효소 9가지를 기질에 따라 세 갈래로 나누기</li>
+          </ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 효소가 바꾼 것은 속도였다">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“보고서를 내기 전에, 첫 장면에서 물었던 과산화 수소 문제로 돌아가자. 그 한 문장이 이 사건 전체의 답이거든. 아래 물음을 풀면 보고서가 열린다.”</div></div>
+          <div class="stage-card"><div id="s1-q2"></div></div>
+          <div id="e1-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🥬 김치냉장고는 김치를 ‘안 익게’ 만들지 않는다 — ‘아주 느리게’ 익게 만든다</h4>
+              <p>효소는 반응을 <b>없던 일로 만들지 못합니다.</b> 효소가 하는 일은 반응이 넘어야 할 언덕, 곧 <b>활성화 에너지를 낮추어 속도를 바꾸는 것</b>뿐입니다. 그래서 −2 °C 의 김치냉장고에 넣은 통 ㉮ 도 <b>익고 있습니다.</b> 최적 온도에서 이틀이면 끝날 일이 저온에서는 몇 달로 늘어났을 뿐이지요. 반대로 20 °C 에 둔 통 ㉯ 는 효소가 잘 일할 수 있는 온도라 하루 만에 시어 버렸습니다.</p>
+              <p>통 ㉰ 만은 다릅니다. 효소는 <b>단백질</b>이고, 80 °C 의 국물을 맞으면 접힌 모양이 풀어져 기질이 들어갈 홈이 사라집니다. 이것을 <b>변성</b>이라 하고, 변성된 효소는 <b>온도를 다시 내려도 돌아오지 않습니다.</b> 삶은 달걀이 식는다고 날달걀로 돌아오지 않는 것과 같습니다. 그리고 효소는 짝이 맞는 기질에만 작용하므로(<b>기질 특이성</b>), 김치 옆의 과산화 수소수는 끝내 멀쩡했습니다.</p>
+              <div class="vs" id="e1-vs"></div>
+              <span class="stamp">사건 파일 ① 해결</span>
+            </div>
+            <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>효소는 반응물이 아니다</b><br>과산화 수소는 카탈레이스와 같은 효소가 <b>없더라도 상온에서 자연적으로 분해된다.</b> 다만 묽은 과산화 수소수에서는 반응이 느려 산소 기체의 발생을 관찰하기 어렵다. 따라서 카탈레이스는 <b>반응물이 아니라 반응 속도를 빠르게 하는 것</b>이다.<cite>통합과학1 교사용 교과서, 오개념 지도</cite></div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 김치를 익히는 것은 사실 <b>살아 있는 유산균</b>이고, 이 화면은 그 안에서 일하는 효소 하나만 떼어 낸 <b>단순화한 모형</b>입니다. 실제 숙성에는 유산균이 늘어나는 속도, 소금 농도, 산소의 양도 함께 얽힙니다. 활성화 에너지 화면의 75 kJ/mol → 8 kJ/mol 은 과산화 수소 분해에 널리 쓰이는 값이고, 속도 배수는 온도와 활성화 에너지만 따지는 <b>아레니우스 식</b>으로만 계산했습니다. 세탁 화면의 제거율도 실제 세제 시험 수치가 아니라, ‘짝이 맞아야 하고 너무 뜨거우면 안 된다’를 보이기 위한 모형값입니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk1"></div></div>
+          </div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="info-card" id="c0m-data"></div>
-        <div class="seg" id="c0m-choices">
-          <button data-c="acid">강산성 환경(pH 2 부근)</button>
-          <button data-c="neutral">중성 환경(pH 7 부근)</button>
-          <button data-c="base">약염기성 환경(pH 8 부근)</button>
-        </div>
-        <div class="toggle-row" style="margin:14px 20px;">
-          <button class="btn" id="c0m-check">정답 확인</button>
-          <button class="btn" id="c0m-new">새 문제</button>
-        </div>
-        <div class="info-card" id="c0m-info"></div>
-      </div>
-      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>효소는 반응물이 아니다</b><br>과산화 수소는 카탈레이스와 같은 효소가 <b>없더라도 상온에서 자연적으로 분해된다.</b> 다만 묽은 과산화 수소수에서는 반응이 느려 산소 기체의 발생을 관찰하기 어렵다. 따라서 카탈레이스는 <b>반응물이 아니라 반응 속도를 빠르게 하는 것</b>이다.<cite>통합과학1 교사용 교과서, 오개념 지도</cite></div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         02 동화 작용과 이화 작용 — 이야기 「빠진 살은 어디로 갔을까」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="1" hidden>
       <div class="stage-head">
-        <div class="eyebrow">02 · 물질대사의 두 방향</div>
-        <h2 class="display">동화 작용과 이화 작용</h2>
-        <p>반응 진행률 슬라이더를 움직여, 작은 물질과 큰 물질이 서로 변환되는 과정이 진행되는 모습을 애니메이션으로 확인해 보세요.</p>
+        <div class="eyebrow">02 · 동화 작용과 이화 작용 · 이야기 한 편</div>
+        <h2 class="display">빠진 살은 어디로 갔을까</h2>
+        <p>의사와 영양사들도 대부분 틀렸다는 질문에서 시작합니다. 포도당을 태워 나오는 물질과 에너지를 직접 계산하고, 거꾸로 아미노산을 이어 단백질을 짓고, 마지막에는 내 하루치 에너지 수지를 맞춥니다.</p>
+        <span class="std-chip">10통과1-03-05</span><div class="std-note"><b>[10통과1-03-05]</b> 생명 시스템을 유지하기 위해서 다양한 화학 반응과 물질 출입이 필요함을 이해하고, 일상생활에서 활용되는 화학 반응 사례를 조사하여 발표할 수 있다.</div><div class="terms"><b>물질대사</b><b>동화 작용</b><b>이화 작용</b><b>세포 호흡</b><b>ATP</b><b>기초 대사량</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">작용 선택</div>
-            <div class="seg" id="c1-mode">
-              <button class="on" data-m="anabolism">동화 작용 (광합성 등)</button>
-              <button data-m="catabolism">이화 작용 (세포 호흡 등)</button>
+
+      <div class="episode" id="ep2">
+        <section class="scene" data-title="사건 — 빠진 살은 어디로 갔을까">
+          <div class="story narr"><div class="who">⚖️</div><div class="say"><span class="name">이야기</span>2014년, 한 의학 학술지에 조금 엉뚱해 보이는 논문이 실렸습니다. 연구진은 의사·영양사·운동 지도자들에게 이렇게 물었습니다. “사람이 살을 빼면, <b>그 사라진 지방은 어디로 갑니까?</b>” 놀랍게도 대부분이 틀린 답을 골랐습니다.</div></div>
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">동아리 부장 하윤</span>“어? 저는 이게 왜 어려운 질문인지 모르겠는데요. 그냥… 없어지는 거 아니에요? 아니면 땀으로 나가거나요.”</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“물질은 <b>없어지지 않아.</b> 지방을 이루던 탄소와 수소 원자는 반드시 어딘가로 <b>나갔어야</b> 해. 몸에서 나가는 길은 몇 개뿐이지 — 날숨, 오줌, 땀, 대변. 원자를 따라가 보면 답은 하나로 좁혀진다.”</div></div>
+          <div class="case-file"><b class="k">단서</b> 지방 1분자는 주로 <b>탄소 · 수소 · 산소</b>로 되어 있다 &nbsp;|&nbsp; 몸에서 밖으로 나가는 길: 날숨 · 오줌 · 땀 · 대변 &nbsp;|&nbsp; 살이 빠지는 동안 사람은 계속 <b>산소를 들이마시고 이산화 탄소를 내쉰다</b></div>
+          <div class="gate loose" id="g2"></div>
+        </section>
+
+        <section class="scene" data-title="세포 호흡 계량기 — 포도당을 태우다">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“답을 확인하기 전에 기본부터. 우리 세포가 포도당에서 에너지를 꺼내는 과정을 <b>세포 호흡</b>이라 한다. 식으로 쓰면 <b>C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O</b> 이고, 이때 나온 에너지의 일부가 <b>ATP</b> 에 담긴다. 크고 복잡한 물질을 작게 쪼개며 에너지를 <b>내놓는</b> 쪽 — 이것이 <b>이화 작용</b>이야. 계량기를 줄 테니 포도당의 양을 직접 바꿔 봐.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-resp" width="900" height="420"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">세포가 태운 포도당 (g)<span class="val" id="b-glu-val">18</span></div>
+                <input type="range" id="b-glu" min="0" max="180" step="1" value="18">
+              </div>
             </div>
+            <div class="info-card" id="b-resp-info"></div>
           </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">반응 진행률(%)<span class="val" id="c1-p-val">0</span></div>
-            <input type="range" id="c1-p" min="0" max="100" step="1" value="0">
+          <div class="stage-card" style="margin-top:14px"><div id="s2-q1"></div></div>
+          <div class="mission" id="m2-2"><span class="m-tag">미션</span>계량기를 맞춰 보세요.<ul>
+            <li id="m2-2a">날숨으로 내보내는 이산화 탄소가 <b>44.0 g</b>(±0.5)이 되는 포도당의 양 찾기</li>
+            <li id="m2-2b">나오는 에너지가 <b>500 kcal 이상</b>이 되는 포도당의 양 찾기</li>
+            <li id="m2-2c">아래 물음에 답하기</li>
+          </ul></div>
+        </section>
+
+        <section class="scene" data-title="단백질 공장 — 거꾸로 가는 반응">
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">하윤</span>“그럼 몸은 부수기만 하나요? 근육이 붙거나 키가 크는 건 뭐예요?”</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“정반대 방향도 쉬지 않고 돌아가. 작은 아미노산을 줄줄이 이어 <b>단백질</b>을 짓는 일 — 작고 간단한 물질을 크고 복잡한 물질로 <b>합성</b>하며 에너지를 <b>쓰는</b> 쪽, 이것이 <b>동화 작용</b>이다. 아미노산 두 개가 이어질 때마다 <b>물 한 분자가 빠져나오고</b>, 그 자리에 <b>펩타이드 결합</b>이 생기지. 공장을 돌려 봐.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-anab" width="900" height="380"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">이어 붙일 아미노산의 개수<span class="val" id="b-n-val">3</span></div>
+                <input type="range" id="b-n" min="2" max="60" step="1" value="3">
+              </div>
+            </div>
+            <div class="info-card" id="b-anab-info"></div>
           </div>
-        </div>
-        <div class="info-card" id="c1-info"></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“두 방향을 나란히 놓고 보면 더 또렷해진다. 진행률을 끝까지 밀어 보면서, 에너지 막대가 어느 쪽으로 움직이는지 봐 둬.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-flow" width="900" height="340"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">작용 고르기</div>
+                <div class="seg" id="b-mode">
+                  <button class="on" data-m="ana">동화 작용 (광합성 · 단백질 합성)</button>
+                  <button data-m="cat">이화 작용 (세포 호흡 · 소화)</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">반응 진행률 (%)<span class="val" id="b-p-val">0</span></div>
+                <input type="range" id="b-p" min="0" max="100" step="1" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="b-flow-info"></div>
+          </div>
+          <div class="mission" id="m2-3"><span class="m-tag">미션</span>세 가지를 해내세요. (하나씩 해도 됩니다)<ul>
+            <li id="m2-3a">아미노산 <b>10개</b>짜리 사슬을 만들어, 빠져나오는 물 분자가 <b>9개</b>인 것 확인하기</li>
+            <li id="m2-3b">조립에 드는 ATP 가 <b>100개 이상</b>인 단백질 만들기</li>
+            <li id="m2-3c">아래 화면에서 <b>동화 작용과 이화 작용 둘 다</b> 진행률 100 %까지 밀어 보기</li>
+          </ul></div>
+        </section>
+
+        <section class="scene" data-title="하루의 수지 맞추기">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“이제 네 몸으로 계산해 보자. 숨만 쉬고 가만히 누워 있어도 심장은 뛰고 체온은 유지되고 세포는 새 단백질을 짓는다. 이렇게 <b>살아 있기만 해도</b> 쓰는 최소한의 에너지가 <b>기초 대사량</b>이야. 여기에 움직인 만큼을 더하면 하루 소비가 되고, 먹은 것과 견주면 남거나 모자란 몫이 나온다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-bmr" width="900" height="420"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">성별 (만 17세 · 키 170 cm 로 고정)</div>
+                <div class="seg" id="b-sex">
+                  <button class="on" data-x="m">남</button>
+                  <button data-x="f">여</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">몸무게 (kg)<span class="val" id="b-w-val">60</span></div>
+                <input type="range" id="b-w" min="35" max="100" step="1" value="60">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">하루 활동량</div>
+                <div class="seg" id="b-act">
+                  <button data-a="1.2">거의 앉아 지냄 (×1.2)</button>
+                  <button class="on" data-a="1.55">보통 (×1.55)</button>
+                  <button data-a="1.9">운동을 많이 함 (×1.9)</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">하루에 먹는 열량 (kcal)<span class="val" id="b-kcal-val">2000</span></div>
+                <input type="range" id="b-kcal" min="1000" max="4000" step="10" value="2000">
+              </div>
+            </div>
+            <div class="info-card" id="b-bmr-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s2-sort"></div></div>
+          <div class="mission" id="m2-4"><span class="m-tag">미션</span><ul>
+            <li id="m2-4a">기초 대사량이 <b>1,600 kcal 이상</b>인 조건 만들기</li>
+            <li id="m2-4b">한 달 뒤 몸무게 변화가 <b>±0.2 kg 이내</b>가 되는 하루 섭취 열량 찾기</li>
+            <li id="m2-4c">몸속에서 일어나는 일 10가지를 동화 작용과 이화 작용으로 나누기</li>
+          </ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 몸은 날마다 지었다 허문다">
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">하윤</span>“선생님, 그럼 첫 질문의 답을 이제 알 것 같아요. 마지막으로 확인만 하고 보고서 쓸게요.”</div></div>
+          <div class="stage-card"><div id="s2-q2"></div></div>
+          <div id="e2-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>💨 빠진 살은 대부분 ‘숨’으로 나갔다</h4>
+              <p>지방을 이루던 원자는 사라지지 않고 <b>세포 호흡</b>을 거쳐 <b>이산화 탄소</b>와 <b>물</b>이 됩니다. 빠져나간 지방을 이루던 원자의 약 <b>84 %</b>는 날숨 속 이산화 탄소가 되어 몸을 떠나고, 나머지는 물이 되어 오줌·땀·날숨으로 나갑니다. 살을 뺀다는 말은 사실상 <b>지방을 숨으로 내쉰다</b>는 뜻입니다. 이때 나온 에너지의 일부가 ATP 에 담겨 근육을 움직이고 체온을 지킵니다.</p>
+              <p>몸은 이렇게 <b>부수는 쪽(이화 작용)</b>과 <b>짓는 쪽(동화 작용)</b>을 동시에 굴립니다. 포도당을 태워 에너지를 꺼내고, 그 에너지로 아미노산을 이어 단백질을 짓습니다. 이 둘을 합쳐 <b>물질대사</b>라 하고, 어느 쪽이 더 큰가에 따라 몸무게가 늘거나 줄어듭니다. 물질과 에너지는 늘 <b>어디선가 와서 어디론가 갑니다.</b></p>
+              <div class="vs" id="e2-vs"></div>
+              <span class="stamp">사건 파일 ② 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 포도당 1 mol(180 g)이 완전히 분해될 때 나오는 에너지는 약 <b>2,802 kJ</b>(약 669 kcal)이고, 이 화면은 그 값을 그대로 썼습니다. 영양 성분표에서 탄수화물 1 g 을 4 kcal 로 치는 것은 소화·흡수되지 않는 몫까지 감안한 <b>어림값</b>이라 조금 다릅니다. 포도당 1분자당 ATP 32개도 최대치에 가까운 어림값이며, 실제 세포에서는 조건에 따라 달라집니다. 아미노산 하나를 붙이는 데 ATP 가 약 4개 든다는 것도 여러 단계를 하나로 뭉뚱그린 값입니다. 기초 대사량 식은 널리 쓰이는 추정식일 뿐, 사람마다 실제 값은 다릅니다. ‘지방 1 kg = 7,700 kcal’ 도 어림값입니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk2"></div></div>
+          </div>
+        </section>
       </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         03 유전정보의 흐름 — 이야기 「한 글자가 바뀌면」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="2" hidden>
       <div class="stage-head">
-        <div class="eyebrow">03 · 유전 정보의 중심원리</div>
-        <h2 class="display">DNA → RNA → 단백질</h2>
-        <p>DNA 염기서열을 입력하면, 전사(transcription)로 만들어지는 mRNA와 실제 유전 암호표에 따른 번역(translation) 결과(아미노산 사슬)까지 확인할 수 있습니다.</p>
+        <div class="eyebrow">03 · 유전정보의 흐름 · 이야기 한 편</div>
+        <h2 class="display">한 글자가 바뀌면</h2>
+        <p>1904년 현미경 아래에서 발견된 낫 모양 적혈구의 정체를 쫓습니다. 실제 사람 유전자의 염기 서열을 전사·번역해 아미노산을 읽어 내고, 염기 한 글자를 직접 바꿔 보고, 30억 염기쌍 속에서 유전자 하나를 찾아냅니다.</p>
+        <span class="std-chip">10통과1-03-06</span><div class="std-note"><b>[10통과1-03-06]</b> 생명 시스템의 유지에 필요한 세포 내 정보의 흐름을 유전자로부터 단백질이 만들어지는 과정을 중심으로 설명할 수 있다.</div><div class="terms"><b>유전자</b><b>전사</b><b>번역</b><b>코돈</b><b>중심 원리</b><b>돌연변이</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c2" width="900" height="360"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">DNA 주형 가닥 (A, T, G, C만 입력)</div>
-            <input type="text" id="c2-seq" value="TACGGCATTATT" maxlength="15" style="background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--foam);font-family:Consolas,monospace;font-size:16px;letter-spacing:3px;width:100%">
+
+      <div class="episode" id="ep3">
+        <section class="scene" data-title="사건 — 1904년, 낫 모양 적혈구">
+          <div class="story narr"><div class="who">🔬</div><div class="say"><span class="name">이야기</span>1904년 미국 시카고. 의사 <b>제임스 헤릭</b>은 서인도 제도에서 유학 온 학생 <b>월터 클레멘트 노엘</b>의 피를 현미경으로 들여다보다 손을 멈췄습니다. 동그란 접시 모양이어야 할 적혈구들 사이에, <b>낫처럼 길쭉하게 휜 적혈구</b>가 섞여 있었던 것입니다. 노엘은 숨이 차고 온몸이 아픈 증상으로 오래 고생하고 있었습니다.</div></div>
+          <div class="story narr"><div class="who">🧬</div><div class="say"><span class="name">이야기</span>원인이 밝혀지기까지 반세기가 걸렸습니다. 1949년 <b>라이너스 폴링</b>은 이 병이 혈액 속 단백질인 <b>헤모글로빈</b> 자체가 다른 데서 온다는 것을 보이며 ‘분자병’이라는 말을 만들었습니다. 그리고 1956년 <b>버넌 잉그램</b>이 그 차이의 정체를 찾아냈습니다. 답은 누구도 예상하지 못할 만큼 작았습니다.</div></div>
+          <div class="case-file"><b class="k">사건 기록</b> 정상 적혈구: 지름 7~8 µm 의 <b>가운데가 눌린 원반</b> 모양 &nbsp;|&nbsp; 환자의 적혈구: <b>낫 모양</b>으로 굳어 좁은 모세 혈관을 막음 &nbsp;|&nbsp; 헤모글로빈의 β 사슬은 아미노산 <b>146개</b>로 된 단백질 &nbsp;|&nbsp; 환자와 정상인의 β 사슬을 견주자 <b>딱 한 자리</b>만 달랐다</div>
+          <div class="gate loose" id="g3"></div>
+        </section>
+
+        <section class="scene" data-title="전사와 번역 — 유전자를 읽는 기계">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“세포 안에서 정보는 늘 한 방향으로 흐른다. <b>DNA → RNA → 단백질</b>. 핵 속 DNA 의 한쪽 가닥을 본떠 mRNA 를 만드는 일이 <b>전사</b>, 그 mRNA 를 세 글자씩(<b>코돈</b>) 끊어 읽어 아미노산을 이어 붙이는 일이 <b>번역</b>이야. 실제 사람의 헤모글로빈 β 유전자 앞부분을 올려 두었다. 리보솜을 한 칸씩 밀어 봐.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-express" width="900" height="440"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">리보솜이 읽은 코돈 수<span class="val" id="c-rib-val">0</span></div>
+                <input type="range" id="c-rib" min="0" max="9" step="1" value="0">
+              </div>
+            </div>
+            <div class="toggle-row" style="margin:0 22px 18px;"><button class="btn primary" id="c-play" type="button">▶ 리보솜 자동 진행</button></div>
+            <div class="info-card" id="c-express-info"></div>
           </div>
-        </div>
-        <div class="readout" style="margin:0 20px 14px;">
-          <span class="dot" style="background:var(--violet)"></span>
-          <span class="txt" id="c2-protein"></span>
-        </div>
-        <div class="info-card" id="c2-info"></div>
+          <div class="stage-card" style="margin-top:14px"><div id="s3-q1"></div></div>
+          <div class="mission" id="m3-2"><span class="m-tag">미션</span><ul>
+            <li id="m3-2a">리보솜을 끝까지 밀어 아미노산 <b>9개</b>짜리 사슬을 완성하기</li>
+            <li id="m3-2b">아래 물음에 답하기</li>
+          </ul></div>
+        </section>
+
+        <section class="scene" data-title="한 글자 바꾸기">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“이제 잉그램이 찾아낸 것을 우리 손으로 재현해 보자. 자리를 고르고 염기 버튼을 누르면, DNA 주형 가닥의 그 자리 <b>한 글자만</b> 바뀐다. 자리 슬라이더를 다시 움직이면 서열은 원래대로 돌아오니 마음껏 시험해도 돼. 바뀐 글자가 mRNA 와 아미노산을 어떻게 흔드는지 봐라.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-mut" width="900" height="460"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">바꿀 자리 (DNA 주형 가닥의 몇 번째 염기)<span class="val" id="c-pos-val">20</span></div>
+                <input type="range" id="c-pos" min="1" max="27" step="1" value="20">
+              </div>
+            </div>
+            <div class="toggle-row" style="margin:0 22px 8px;">
+              <span style="font-size:12.5px;color:var(--mist);align-self:center;margin-right:4px">그 자리를 이 염기로 바꾸기 →</span>
+              <button class="btn" id="c-bA" type="button">A</button>
+              <button class="btn" id="c-bT" type="button">T</button>
+              <button class="btn" id="c-bG" type="button">G</button>
+              <button class="btn" id="c-bC" type="button">C</button>
+            </div>
+            <div class="info-card" id="c-mut-info"></div>
+          </div>
+          <div class="mission" id="m3-3"><span class="m-tag">미션</span>염기 한 글자만 바꿔 세 가지 결과를 모두 만들어 내세요.<ul>
+            <li id="m3-3a"><b>낫 모양 적혈구</b> 만들기 — 7번째 아미노산이 Glu 에서 <b>Val</b> 로 바뀌게 하기</li>
+            <li id="m3-3b"><b>아무 일도 일어나지 않는</b> 돌연변이 찾기 — 염기는 바뀌었는데 아미노산 서열은 그대로</li>
+            <li id="m3-3c">단백질이 <b>도중에 끊기는</b> 돌연변이 만들기 — 정지 코돈이 생기게 하기</li>
+          </ul></div>
+        </section>
+
+        <section class="scene" data-title="30억 분의 1,600">
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">하윤</span>“잠깐만요. 그럼 전사를 할 때 우리 <b>DNA 전체</b>가 통째로 RNA 로 바뀌는 건가요? 그렇게 긴 RNA 가 핵 밖으로 어떻게 나가요?”</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“많이들 그렇게 생각하지. 얼마나 다른지 <b>자로 재 보자.</b> 배율 다이얼을 돌려 사람의 DNA 전체에서 헤모글로빈 β 유전자를 찾아봐. 화면 가로 한 줄이 몇 염기쌍인지 옆에 적어 두었다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-scale" width="900" height="400"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">배율 다이얼<span class="val" id="c-zoom-val">×1.00</span></div>
+                <input type="range" id="c-zoom" min="0" max="100" step="1" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="c-scale-info"></div>
+          </div>
+          <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>전사에 대한 오해</b><br>학생들은 전사라고 하면 <b>DNA 전체가 RNA로 바뀌는 것</b>이라고 생각하기 쉽다. DNA에는 수많은 유전자가 있고, 유전자를 구성하는 염기의 수는 DNA 전체 염기 수에 비해 매우 적다. 따라서 특정 유전자가 발현될 때 만들어지는 <b>RNA 분자의 크기는 DNA에 비해 매우 작다.</b><cite>통합과학1 교사용 교과서, 오개념 지도</cite></div>
+          <div class="stage-card" style="margin-top:14px"><div id="s3-q2"></div></div>
+          <div class="mission" id="m3-4"><span class="m-tag">미션</span>배율 다이얼을 돌려 두 자리를 찾아내세요.<ul>
+            <li id="m3-4a">헤모글로빈 β 유전자가 화면에서 <b>1 px 이상</b>으로 보이는 배율 찾기</li>
+            <li id="m3-4b">코돈 하나(염기 3개)가 화면에서 <b>10 px 이상</b>이 되는 배율 찾기</li>
+            <li id="m3-4c">아래 물음에 답하기</li>
+          </ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 한 글자가 바꾼 것">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“마지막이다. 염기 한 글자가 바뀌고 나서 노엘의 몸에서 벌어진 일을 일어난 순서대로 놓아 봐. 다 놓으면 보고서가 열린다.”</div></div>
+          <div class="stage-card"><div id="s3-order"></div></div>
+          <div id="e3-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🧬 146개 가운데 단 하나</h4>
+              <p>헤모글로빈 β 사슬의 아미노산 <b>146개</b> 가운데 <b>6번째</b> 하나가 글루탐산(Glu)에서 발린(Val)으로 바뀐 것이 전부였습니다. 그리고 그 아미노산을 지정한 것은 DNA 의 <b>염기 한 글자</b>였습니다. 정보의 흐름은 <b>DNA → (전사) → mRNA → (번역) → 단백질</b> 한 방향이므로, 맨 앞의 한 글자가 바뀌면 그 끝의 단백질이 달라지고, 단백질이 달라지면 적혈구의 모양이 달라지고, 결국 온몸의 혈액 순환이 달라집니다.</p>
+              <p>그렇다고 한 글자가 바뀔 때마다 늘 병이 되는 것은 아닙니다. 코돈표에는 <b>같은 아미노산을 가리키는 코돈이 여럿</b>이라, 염기가 바뀌어도 아미노산 서열이 그대로인 경우가 많습니다. 반대로 정지 코돈이 새로 생기면 단백질이 <b>도중에 끊겨</b> 아예 만들어지지 못하기도 합니다. 세포 속 정보의 흐름은 이렇게 <b>한 글자 단위</b>로 읽히고 옮겨집니다.</p>
+              <div class="vs" id="e3-vs"></div>
+              <span class="stamp">사건 파일 ③ 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 이 화면이 쓴 서열은 사람 헤모글로빈 β 유전자의 실제 앞부분입니다. 다만 실제 세포에서는 전사된 RNA 에서 필요 없는 부분이 잘려 나가는 단계가 더 있고, 번역이 끝난 뒤 맨 앞의 메싸이오닌(Met)이 떨어져 나갑니다. 그래서 완성된 β 사슬에서는 우리가 <b>7번째</b>로 센 자리가 <b>6번째</b> 아미노산이 됩니다. 또 낫 모양 적혈구 빈혈증은 부모 양쪽에서 모두 이 유전자를 물려받았을 때 증상이 나타나며, 한쪽만 물려받은 사람은 대체로 건강하게 지냅니다. 배율 화면의 사람 DNA 30억 염기쌍, 유전자 약 1,600 염기쌍은 널리 쓰이는 어림값입니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk3"></div></div>
+          </div>
+        </section>
       </div>
-      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>전사에 대한 오해</b><br>학생들은 전사라고 하면 <b>DNA 전체가 RNA로 바뀌는 것</b>이라고 생각하기 쉽다. DNA에는 수많은 유전자가 있고, 유전자를 구성하는 염기의 수는 DNA 전체 염기 수에 비해 매우 적다. 따라서 특정 유전자가 발현될 때 만들어지는 <b>RNA 분자의 크기는 DNA에 비해 매우 작다.</b><cite>통합과학1 교사용 교과서, 오개념 지도</cite></div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- ===================================================================== 04 정리하기 -->
     <section class="tab-panel" data-panel="3" hidden>
       <div class="stage-head">
-        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <div class="eyebrow">04 · 세 사건을 하나로</div>
         <h2 class="display">정리하기</h2>
-        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+        <p>세 이야기의 결과가 아래에 모입니다. 세 사건을 꿰는 한 문장을 쓰고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
       </div>
       <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
+    </section>
+
+    <!-- ===================================================================== 05 우리 반 -->
+    <section class="tab-panel" data-panel="4" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">05 · 같은 반 친구들과 나누기</div>
+        <h2 class="display">우리 반</h2>
+        <p>내가 해결한 사건과 찾아낸 답을 우리 반에 올리고, 친구들은 어떤 답을 찾았는지 살펴보세요. <b>올리기 버튼을 눌렀을 때만</b> 공유됩니다. 실명 대신 별명을 쓰세요.</p>
+      </div>
+      <div class="stage-card"><div id="share"></div></div>
     </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
 <script src="../assets/theme.js"></script>
-<script>
-(function () {
-"use strict";
-
-/* TAB0 효소 — 온도 + pH */
-(function () {
-  var canvas = document.getElementById("c0");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var temp = 37, ph = 7, optT = 37, optPh = 7, ename = "아밀레이스(침, 소화효소)";
-  var info = document.getElementById("c0-info");
-  document.getElementById("c0-t").addEventListener("input", function (e) { temp = +e.target.value; document.getElementById("c0-t-val").textContent = temp; render(); });
-  document.getElementById("c0-ph").addEventListener("input", function (e) { ph = +e.target.value; document.getElementById("c0-ph-val").textContent = ph.toFixed(1); render(); });
-  document.querySelectorAll("#c0-enzyme button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      optT = +b.getAttribute("data-opt-t"); optPh = +b.getAttribute("data-opt-ph"); ename = b.getAttribute("data-name");
-      document.querySelectorAll("#c0-enzyme button").forEach(function (x) { x.classList.toggle("on", x === b); });
-      render();
-    });
-  });
-
-  function tempRate(t) {
-    var spread = 14;
-    var v = Math.exp(-Math.pow(t - optT, 2) / (2 * spread * spread));
-    if (t > optT + 23) v *= Math.max(0, 1 - (t - (optT + 23)) / 20);
-    return v;
-  }
-  function phRate(p) {
-    var spread = 1.6;
-    return Math.exp(-Math.pow(p - optPh, 2) / (2 * spread * spread));
-  }
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var x0 = 60, x1 = 480, y0 = 40, y1 = 220;
-    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
-    ctx.beginPath();
-    for (var px = 0; px <= 100; px++) {
-      var tt = px / 100 * 80;
-      var r = tempRate(tt);
-      var xx = x0 + px / 100 * (x1 - x0), yy = y1 - r * (y1 - y0);
-      if (px === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
-    }
-    ctx.strokeStyle = cssVar("--teal"); ctx.lineWidth = 2.5; ctx.stroke();
-    var curX = x0 + temp / 80 * (x1 - x0), curY = y1 - tempRate(temp) * (y1 - y0);
-    ctx.fillStyle = cssVar("--coral"); ctx.beginPath(); ctx.arc(curX, curY, 6, 0, 7); ctx.fill();
-    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-    ctx.fillText("온도(°C) →", (x0 + x1) / 2, y1 + 26);
-    ctx.save(); ctx.translate(24, (y0 + y1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("온도별 반응 속도", 0, 0); ctx.restore();
-
-    // pH curve
-    var px0 = 60, px1 = 480, py0 = 260, py1 = 400;
-    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(px0, py0); ctx.lineTo(px0, py1); ctx.lineTo(px1, py1); ctx.stroke();
-    ctx.beginPath();
-    for (var pxi = 0; pxi <= 100; pxi++) {
-      var pp = pxi / 100 * 14;
-      var rp = phRate(pp);
-      var xxp = px0 + pxi / 100 * (px1 - px0), yyp = py1 - rp * (py1 - py0);
-      if (pxi === 0) ctx.moveTo(xxp, yyp); else ctx.lineTo(xxp, yyp);
-    }
-    ctx.strokeStyle = cssVar("--violet"); ctx.lineWidth = 2.5; ctx.stroke();
-    var curXp = px0 + ph / 14 * (px1 - px0), curYp = py1 - phRate(ph) * (py1 - py0);
-    ctx.fillStyle = cssVar("--coral"); ctx.beginPath(); ctx.arc(curXp, curYp, 6, 0, 7); ctx.fill();
-    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-    ctx.fillText("pH →", (px0 + px1) / 2, py1 + 26);
-    ctx.save(); ctx.translate(24, (py0 + py1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("pH별 반응 속도", 0, 0); ctx.restore();
-
-    // activation energy diagram
-    var ex = 620, ey0 = 60, ey1 = 240, ew = 240;
-    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(ex, ey0); ctx.lineTo(ex, ey1); ctx.lineTo(ex + ew, ey1); ctx.stroke();
-    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-    ctx.fillText("반응 경로 →", ex + ew / 2, ey1 + 26);
-    ctx.save(); ctx.translate(ex - 14, (ey0 + ey1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("에너지", 0, 0); ctx.restore();
-
-    ctx.beginPath();
-    ctx.moveTo(ex, ey1 - 30);
-    ctx.quadraticCurveTo(ex + ew * 0.5, ey0 - 10, ex + ew, ey1 - 80);
-    ctx.strokeStyle = cssVar("--coral"); ctx.lineWidth = 2; ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(ex, ey1 - 30);
-    ctx.quadraticCurveTo(ex + ew * 0.5, ey1 - 90, ex + ew, ey1 - 80);
-    ctx.strokeStyle = cssVar("--teal"); ctx.lineWidth = 2.5; ctx.stroke();
-    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--coral"); ctx.textAlign = "left";
-    ctx.fillText("효소 없음(높은 활성화 에너지)", ex + 10, ey0 + 10);
-    ctx.fillStyle = cssVar("--teal");
-    ctx.fillText("효소 있음(낮은 활성화 에너지)", ex + 10, ey1 - 70);
-
-    ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "left";
-    ctx.fillText("최적 조건: " + optT + "°C, pH " + optPh, ex, ey1 + 60);
-
-    var combined = tempRate(temp) * phRate(ph);
-    info.innerHTML = "<b>" + ename + "</b> · 온도 " + temp + "°C, pH " + ph.toFixed(1) + "에서 종합 반응 속도는 최적 조건 대비 <b>" + (combined * 100).toFixed(0) + "%</b>입니다. 온도와 pH가 최적값에서 멀어질수록 효소(단백질)의 입체 구조가 변형되어(변성) 활성을 잃습니다. 효소마다 작동하는 최적 pH가 크게 다르다는 점(위=산성, 소장=염기성)에 주목하세요.";
-  }
-  render();
-})();
-
-/* TAB0 미션 — 효소의 최적 pH 맞히기 */
-(function () {
-  var enzymes = [
-    { name: "아밀레이스(입, 침 속 소화효소)", key: "neutral" },
-    { name: "펩신(위, 위액 속 소화효소)", key: "acid" },
-    { name: "트립신(소장, 이자액 속 소화효소)", key: "base" }
-  ];
-  var dataBox = document.getElementById("c0m-data");
-  var seg = document.getElementById("c0m-choices");
-  var checkBtn = document.getElementById("c0m-check");
-  var newBtn = document.getElementById("c0m-new");
-  var info = document.getElementById("c0m-info");
-  var labels = { acid: "강산성 환경(pH 2 부근)", neutral: "중성 환경(pH 7 부근)", base: "약염기성 환경(pH 8 부근)" };
-  var current = null, picked = null;
-
-  function newQuestion() {
-    current = enzymes[Math.floor(Math.random() * enzymes.length)];
-    picked = null;
-    dataBox.innerHTML = "효소: <b>" + current.name + "</b>";
-    seg.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
-    info.innerHTML = "";
-    info.style.color = "";
-  }
-
-  seg.querySelectorAll("button").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      picked = btn.dataset.c;
-      seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === btn); });
-    });
-  });
-
-  checkBtn.addEventListener("click", function () {
-    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
-    if (picked === current.key) {
-      info.innerHTML = "✅ 정답! " + current.name + "는 '" + labels[current.key] + "'에서 가장 활발합니다.";
-      info.style.color = "var(--teal)";
-    } else {
-      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
-      info.style.color = "var(--coral)";
-    }
-  });
-
-  newBtn.addEventListener("click", newQuestion);
-  newQuestion();
-})();
-
-/* TAB1 동화/이화 — 진행률 애니메이션 */
-(function () {
-  var canvas = document.getElementById("c1");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var mode = "anabolism", progress = 0;
-  var info = document.getElementById("c1-info");
-  document.querySelectorAll("#c1-mode button").forEach(function (b) {
-    b.addEventListener("click", function () { mode = b.getAttribute("data-m"); document.querySelectorAll("#c1-mode button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); });
-  });
-  document.getElementById("c1-p").addEventListener("input", function (e) { progress = +e.target.value; document.getElementById("c1-p-val").textContent = progress; render(); });
-
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var isAna = mode === "anabolism";
-    var p = progress / 100;
-    var leftLabel = isAna ? "작은 분자 (예: CO₂ + H₂O)" : "큰 분자 (예: 포도당)";
-    var rightLabel = isAna ? "큰 분자 (예: 포도당)" : "작은 분자 (예: CO₂ + H₂O)";
-
-    // interpolate: at p=0, 4 small at left, 0 big at right; at p=1, 0 small at left, 1 big at right (or reversed for catabolism)
-    var nLeftStart = 4, nRightEnd = 1;
-    var nLeftNow = Math.round(nLeftStart * (1 - p));
-    var nRightNow = Math.round(nRightEnd * p);
-
-    drawMolecules(150, H / 2, Math.max(nLeftNow, 0), isAna ? 10 : 26, isAna ? "--violet" : "--violet");
-    drawMolecules(650, H / 2, Math.max(nRightNow, 0), isAna ? 26 : 10, "--violet");
-
-    // moving particle along the arrow to show progress
-    var ax0 = 260, ax1 = 540;
-    var px = ax0 + p * (ax1 - ax0);
-    ctx.save();
-    ctx.strokeStyle = cssVar(isAna ? "--coral" : "--teal"); ctx.fillStyle = cssVar(isAna ? "--coral" : "--teal"); ctx.lineWidth = 4;
-    drawArrow(ctx, ax0, H / 2, ax1, H / 2, 12);
-    ctx.restore();
-    ctx.save();
-    ctx.fillStyle = cssVar("--foam");
-    ctx.beginPath(); ctx.arc(px, H / 2, 7, 0, Math.PI * 2); ctx.fill();
-    ctx.restore();
-
-    ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "center";
-    ctx.fillText(isAna ? "에너지 흡수" : "에너지 방출", 400, H / 2 - 20);
-
-    ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist");
-    ctx.fillText(leftLabel, 150, H / 2 + 80);
-    ctx.fillText(rightLabel, 650, H / 2 + 80);
-
-    info.innerHTML = (isAna
-      ? "<b>동화 작용</b>: 작고 간단한 물질을 크고 복잡한 물질로 합성하는 과정으로, 에너지를 흡수합니다. 예) 광합성(포도당 합성), 단백질 합성."
-      : "<b>이화 작용</b>: 크고 복잡한 물질을 작고 간단한 물질로 분해하는 과정으로, 에너지를 방출합니다. 예) 세포 호흡(포도당 분해), 소화.") +
-      " 현재 반응 진행률: <b>" + progress + "%</b>";
-  }
-  function drawMolecules(cx, cy, n, r) {
-    if (n <= 0) return;
-    var cols = Math.ceil(Math.sqrt(n));
-    for (var i = 0; i < n; i++) {
-      var col = i % cols, row = Math.floor(i / cols);
-      var x = cx + (col - (cols - 1) / 2) * (r * 2.4);
-      var y = cy + (row - Math.floor(n / Math.max(cols, 1)) / 2) * (r * 2.4);
-      ctx.save();
-      ctx.fillStyle = cssVar("--violet"); ctx.globalAlpha = .85;
-      ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
-      ctx.restore();
-    }
-  }
-  render();
-})();
-
-/* TAB2 유전정보흐름 — 실제 코돈표 번역 */
-(function () {
-  var canvas = document.getElementById("c2");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c2-info");
-  var proteinTxt = document.getElementById("c2-protein");
-  var seqInput = document.getElementById("c2-seq");
-  seqInput.addEventListener("input", function () { render(); });
-
-  var dnaComp = { A: "T", T: "A", G: "C", C: "G" };
-  var rnaFromDna = { A: "U", T: "A", G: "C", C: "G" };
-  /* 표준 유전 암호(RNA 코돈 → 아미노산 3문자 약자), Stop 포함 */
-  var codonTable = {
-    UUU: "Phe", UUC: "Phe", UUA: "Leu", UUG: "Leu", CUU: "Leu", CUC: "Leu", CUA: "Leu", CUG: "Leu",
-    AUU: "Ile", AUC: "Ile", AUA: "Ile", AUG: "Met", GUU: "Val", GUC: "Val", GUA: "Val", GUG: "Val",
-    UCU: "Ser", UCC: "Ser", UCA: "Ser", UCG: "Ser", CCU: "Pro", CCC: "Pro", CCA: "Pro", CCG: "Pro",
-    ACU: "Thr", ACC: "Thr", ACA: "Thr", ACG: "Thr", GCU: "Ala", GCC: "Ala", GCA: "Ala", GCG: "Ala",
-    UAU: "Tyr", UAC: "Tyr", UAA: "Stop", UAG: "Stop", CAU: "His", CAC: "His", CAA: "Gln", CAG: "Gln",
-    AAU: "Asn", AAC: "Asn", AAA: "Lys", AAG: "Lys", GAU: "Asp", GAC: "Asp", GAA: "Glu", GAG: "Glu",
-    UGU: "Cys", UGC: "Cys", UGA: "Stop", UGG: "Trp", CGU: "Arg", CGC: "Arg", CGA: "Arg", CGG: "Arg",
-    AGU: "Ser", AGC: "Ser", AGA: "Arg", AGG: "Arg", GGU: "Gly", GGC: "Gly", GGA: "Gly", GGG: "Gly"
-  };
-
-  function render() {
-    var seq = seqInput.value.toUpperCase().replace(/[^ATGC]/g, "").slice(0, 15);
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    if (seq.length === 0) { info.innerHTML = "A, T, G, C로 이루어진 DNA 서열을 입력해 보세요."; proteinTxt.textContent = ""; return; }
-
-    var codingStrand = seq.split("").map(function (b) { return dnaComp[b]; }).join("");
-    var mrna = seq.split("").map(function (b) { return rnaFromDna[b]; }).join("");
-
-    var x0 = 50, cellW = Math.min(50, (W - 100) / seq.length);
-    function drawStrand(y, seqArr, color, label) {
-      ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
-      ctx.fillText(label, 10, y + 5);
-      seqArr.split("").forEach(function (base, i) {
-        var x = x0 + i * cellW;
-        ctx.save();
-        ctx.fillStyle = cssVar(color); ctx.globalAlpha = .85;
-        ctx.beginPath(); ctx.arc(x, y, 14, 0, 7); ctx.fill();
-        ctx.restore();
-        ctx.font = "700 12px Consolas, monospace"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center";
-        ctx.fillText(base, x, y + 4);
-      });
-    }
-    drawStrand(60, seq, "--mist", "DNA 주형 가닥");
-    drawStrand(120, codingStrand, "--cold", "DNA 비주형(암호화) 가닥");
-    drawStrand(180, mrna, "--teal", "전사된 mRNA");
-
-    var codons = [];
-    for (var i = 0; i + 3 <= mrna.length; i += 3) codons.push(mrna.slice(i, i + 3));
-    var aminoAcids = [];
-    var stopped = false;
-    codons.forEach(function (c) {
-      var aa = codonTable[c] || "?";
-      if (aa === "Stop") stopped = true;
-      if (!stopped) aminoAcids.push(aa);
-    });
-
-    ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
-    ctx.fillText("코돈 → 아미노산", 10, 225);
-    codons.forEach(function (c, i) {
-      var x = x0 + i * cellW * 3 + cellW * 1.5;
-      var aa = codonTable[c] || "?";
-      ctx.strokeStyle = aa === "Stop" ? cssVar("--coral") : cssVar("--violet");
-      ctx.strokeRect(x0 + i * cellW * 3 - 4, 235, cellW * 3 - 6, 44);
-      ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--violet"); ctx.textAlign = "center";
-      ctx.fillText(c, x, 250);
-      ctx.font = "700 11px Segoe UI"; ctx.fillStyle = aa === "Stop" ? cssVar("--coral") : cssVar("--foam");
-      ctx.fillText(aa, x, 268);
-    });
-
-    proteinTxt.innerHTML = aminoAcids.length > 0
-      ? "생성된 폴리펩타이드(단백질 사슬): <b>" + aminoAcids.join("-") + "</b>" + (stopped ? " (정지 코돈에서 종료)" : " (서열이 짧아 정지 코돈 전에 끝남)")
-      : "첫 코돈이 정지 코돈이라 단백질이 만들어지지 않습니다.";
-
-    info.innerHTML = "DNA(<b>" + seq + "</b>)가 전사되어 mRNA(<b>" + mrna + "</b>)가 만들어집니다. mRNA는 3염기씩 <b>코돈</b>으로 묶여 리보솜에서 번역되며, 실제 표준 유전 암호표에 따라 각 코돈이 특정 아미노산(또는 정지 신호)을 지정합니다(중심원리: DNA → RNA → 단백질).";
-  }
-  render();
-})();
-
-})();
-</script>
-
-<script>
-(function () {
-  window.sthUnit("is1-3-3");
-  window.sthWork({
-    mount: "wk",
-    unitLabel: "[통합과학1 Ⅲ-3] 생명 시스템",
-    items: [
-      {
-            "id": "w1",
-            "label": "효소가 바꾸는 것과 바꾸지 않는 것",
-            "hint": "효소가 있을 때와 없을 때 무엇이 같고 무엇이 다른지, 활성화 에너지로 설명하세요.",
-            "ph": ""
-      },
-      {
-            "id": "w2",
-            "label": "전사에서 실제로 일어나는 일",
-            "hint": "DNA 전체가 아니라 무엇이 RNA로 옮겨지는지, 오개념 상자를 근거로 쓰세요.",
-            "ph": ""
-      },
-      {
-            "id": "w3",
-            "label": "아직 헷갈리는 것",
-            "hint": "다음 시간에 여기서부터 시작합니다.",
-            "ph": ""
-      }
-]
-  });
-})();
-</script>
-
-<script>
-(function () {
-  window.sthGate({
-    gate: "gt", veil: "vl", key: "enzyme",
-    question: "과산화 수소에 카탈레이스(효소)를 <b>넣지 않으면</b> 어떻게 될까요?",
-    options: ["㉠ 전혀 분해되지 않는다", "㉡ 아주 느리게 분해된다", "㉢ 오히려 더 빨리 분해된다", "㉣ 다른 물질로 바뀐다"],
-    onPick: function (i) {
-      var ok = (i === 1);
-      window.sthState("enzymeOK", ok ? "맞음" : "어긋남");
-      var msg = (ok ? "<b>맞았습니다.</b> " : "<b>정답은 ㉡ 입니다.</b> ") + "효소는 <b>반응물이 아닙니다.</b> 과산화 수소는 효소가 없어도 상온에서 스스로 분해됩니다." + " " + "효소가 하는 일은 <b>활성화 에너지를 낮춰 반응을 빠르게</b> 하는 것입니다. 묽은 과산화 수소수에서는 너무 느려 기포가 보이지 않을 뿐입니다.";
-      var g = document.getElementById("gt");
-      var box = g.parentNode.querySelector(".info-card");
-      if (box) box.innerHTML = msg;
-      else { var d = document.createElement("div"); d.className = "info-card"; d.style.margin = "18px 0 0";
-             d.innerHTML = msg; g.insertAdjacentElement("afterend", d); }
-    }
-  });
-})();
-</script>
+<script src="../assets/story.js"></script>
+<script src="../assets/share-config.js"></script>
+<script src="../assets/share.js"></script>
+<script src="episodes.js"></script>
 </body>
 </html>
