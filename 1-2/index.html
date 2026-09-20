@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>과학의 측정과 우리 사회 — 관측 스테이션</title>
 <link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="../assets/story.css">
 </head>
 <body>
 
@@ -19,444 +20,326 @@
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 측정 표준의 유용성</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 측정과 현대 문명</button>
     <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
+    <button class="tab-btn" data-tab="4"><span class="num">05</span> 우리 반</button>
   </nav>
 
   <main>
+    <!-- =====================================================================
+         01 정밀도와 정확도 — 이야기 「과녁에 남은 자국」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="0">
       <div class="stage-head">
-        <div class="eyebrow">01 · 반복 측정의 두 가지 품질</div>
-        <h2 class="display">정밀도와 정확도</h2>
-        <p>과녁에 화살을 쏘아 보세요. 쏠 때마다 결과가 <b>누적</b>되어 표준편차·평균 오차가 실시간으로 갱신됩니다. 값이 목표(중심)에 가까운 정도가 <b>정확도</b>, 값들이 서로 모여 있는 정도가 <b>정밀도</b>입니다.</p>
-      
-        <span class="std-chip">10통과1-01-03</span><span class="std-chip">10통과1-01-04</span><div class="std-note"><b>[10통과1-01-03]</b> 과학 탐구에서 측정과 어림의 의미를 알고, 일상생활의 여러 가지 상황에서 측정 표준의 유용성과 필요성을 논증할 수 있다.<br><b>[10통과1-01-04]</b> 자연에서 일어나는 다양한 변화를 측정·분석하여 정보를 산출함을 알고, 이러한 정보를 디지털로 변환하는 기술이 현대 문명에 미친 영향을 인식한다.</div><div class="terms"><b>정밀도</b><b>정확도</b><b>측정 표준</b><b>디지털 변환</b></div>
-      </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">조준 편향(시스템 오차)<span class="val" id="c0-bias-val">0</span></div>
-            <input type="range" id="c0-bias" min="0" max="60" step="5" value="0">
-          </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">손떨림(무작위 오차)<span class="val" id="c0-noise-val">10</span></div>
-            <input type="range" id="c0-noise" min="2" max="60" step="2" value="10">
-          </div>
-        </div>
-        <div class="toggle-row" style="margin:0 20px 14px;">
-          <button class="chip" id="c0-shoot">화살 5발 추가로 쏘기</button>
-          <button class="chip" id="c0-reset">전체 리셋</button>
-        </div>
-        <div class="readout" style="margin:0 20px 14px;">
-          <span class="dot" style="background:var(--teal)"></span>
-          <span class="txt" id="c0-stats">아직 쏘지 않았습니다.</span>
-        </div>
-        <div class="info-card" id="c0-info">슬라이더로 편향과 무작위 오차를 조절한 뒤 쏘아 보세요. 여러 번 쏠수록 통계가 더 정확해집니다.</div>
+        <div class="eyebrow">01 · 정밀도와 정확도 · 이야기 한 편</div>
+        <h2 class="display">과녁에 남은 자국</h2>
+        <p>표적지 넉 장만 보고, 총을 손봐야 할 선수와 연습을 더 해야 할 선수를 가려냅니다. 과녁·저울·자를 차례로 다루며 <b>정확도</b>와 <b>정밀도</b>가 어떻게 다른지, 반복해서 재면 무엇이 줄고 무엇이 그대로인지 알아냅니다.</p>
+        <span class="std-chip">10통과1-01-03</span><div class="std-note"><b>[10통과1-01-03]</b> 과학 탐구에서 측정과 어림의 의미를 알고, 일상생활의 여러 가지 상황에서 측정 표준의 유용성과 필요성을 논증할 수 있다.</div><p class="std-note" style="margin-top:6px">※ 성취기준은 2022 개정 과학과 교육과정 원문입니다. 이 단원의 기존 페이지에는 오개념 지도 상자가 실려 있지 않아 옮겨 싣지 못했습니다.</p><div class="terms"><b>정확도</b><b>정밀도</b><b>계통 오차</b><b>우연 오차</b><b>평균과 표준편차</b><b>유효숫자와 어림</b></div>
       </div>
 
-      <div class="stage-head" style="margin-top:30px;">
-        <div class="eyebrow">🔎 미션 · 정밀도와 정확도 판별하기</div>
-        <h2 class="display" style="font-size:20px;">이 측정 결과는 어떤 경우일까요?</h2>
-        <p>조준 편향(시스템 오차)과 손떨림(무작위 오차) 자료가 주어집니다. 편향이 작으면 정확하고, 무작위 오차가 작으면 정밀합니다. 이 결과가 어느 경우에 해당하는지 선택해 보세요.</p>
+      <div class="episode" id="ep1">
+        <section class="scene" data-title="표적지 넉 장">
+          <div class="story narr"><div class="who">🎯</div><div class="say"><span class="name">이야기</span>사격부 대표 선발전이 끝났습니다. 코치 선생님이 표적지 넉 장을 들고 과학실 문을 두드립니다. 넉 장 모두 <b>10발씩</b> 쏜 결과이고, 한가운데 붉은 점이 <b>참값</b>, 곧 맞혀야 할 자리입니다.</div></div>
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">사격부 코치</span>“한 사람은 <b>총을 정비실에 보내야</b> 하고, 한 사람은 <b>연습을 더 해야</b> 합니다. 그런데 어느 쪽이 어느 쪽인지 도무지 모르겠어요. 총의 문제와 사람의 문제를 자국만 보고 갈라낼 수 있을까요?”</div></div>
+          <div class="case-file"><b class="k">가온</b> 열 발이 한가운데에 동전만 한 크기로 모였다. &nbsp;|&nbsp; <b class="k">나래</b> 열 발이 <b>오른쪽 위 한곳에</b> 동전만 한 크기로 빈틈없이 모였다. &nbsp;|&nbsp; <b class="k">다인</b> 열 발이 과녁 전체에 흩어졌지만 <b>평균을 내면 한가운데</b>다. &nbsp;|&nbsp; <b class="k">라온</b> 열 발이 오른쪽 위로 치우친 채 넓게 흩어졌다.</div>
+          <div class="gate loose" id="g1"></div>
+        </section>
+
+        <section class="scene" data-title="조사 ① — 같은 총, 다른 자국">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">측정 분석가 하루</span>“말로 다투지 말고 <b>만들어 봅시다</b>. 여기 사격 시뮬레이터가 있어요. 손잡이가 둘인데, 위쪽은 쏘는 사람의 <b>손떨림</b>, 아래쪽은 총의 <b>조준선이 틀어진 정도</b>입니다. 손잡이를 움직이면 그 조건으로 곧바로 10발을 쏩니다.”</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">하루</span>“오른쪽 표를 보세요. 평균이 중심에서 얼마나 떨어졌는지가 <b>정확도</b>, 열 발이 서로 얼마나 모였는지(표준편차)가 <b>정밀도</b>입니다. 두 가지는 따로 놉니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-target" width="900" height="430"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">손떨림<span class="val" id="a-noise-val">20</span></div>
+                <input type="range" id="a-noise" min="2" max="40" step="2" value="20">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">조준선이 틀어진 정도<span class="val" id="a-bias-val">0</span></div>
+                <input type="range" id="a-bias" min="0" max="60" step="5" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="a-target-info"></div>
+          </div>
+          <div class="mission" id="m1-2"><span class="m-tag">미션</span>표적지 두 장을 직접 만들어 보세요.<ul><li id="m1-2a"><b>나래</b>의 표적지 — 정밀하지만 정확하지 않음 (한곳에 빈틈없이 모였으나 중심이 아님)</li><li id="m1-2b"><b>가온</b>의 표적지 — 정확하고 정밀함 (한가운데에 모임)</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="조사 ② — 백 번을 재면 참값에 닿을까">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">하루</span>“이번엔 총 대신 <b>전자저울</b>입니다. 질량이 정확히 <b>50.00 g</b>인 표준 분동을 몇 번이고 다시 올려 볼 수 있어요. 손잡이 하나는 <b>잰 횟수</b>, 다른 하나는 저울의 <b>영점이 틀어진 정도</b>입니다.”</div></div>
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">사격부 주장 세윤</span>“여러 번 재서 평균을 내면 언제나 참값에 가까워지는 거 아니에요? 그럼 나래 선배도 그냥 많이 쏘면 되잖아요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-scale" width="900" height="390"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">잰 횟수<span class="val" id="a-n-val">6 번</span></div>
+                <input type="range" id="a-n" min="1" max="60" step="1" value="6">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">저울의 영점이 틀어진 정도<span class="val" id="a-z-val">0.0 g</span></div>
+                <input type="range" id="a-z" min="-2" max="2" step="0.1" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="a-scale-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s1-sort"></div></div>
+          <div class="mission" id="m1-3"><span class="m-tag">미션</span>세 가지를 모두 끝내세요.<ul><li id="m1-3a">영점이 맞은 저울(0.0 g)로 <b>25번 이상</b> 재어, 평균이 참값 50.00 g 에 <b>0.05 g 이내</b>로 다가가는 것 확인하기</li><li id="m1-3b">영점을 <b>0.5 g 이상</b> 틀어 놓고 25번 이상 재어도 평균이 참값으로 돌아오지 <b>않는</b> 것 확인하기</li><li id="m1-3c">아래 여덟 가지를 계통 오차와 우연 오차로 분류하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="조사 ③ — 어디까지 적어도 되는가">
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">사격부 코치</span>“마지막으로 하나만 더. 부원들이 총열 길이를 적어 오는데, 누구는 <b>4.3 cm</b>, 누구는 <b>4.270 cm</b> 라고 적어 옵니다. 같은 것을 쟀는데 왜 자릿수가 다른가요? 아무나 자리를 늘려 적어도 되는 건가요?”</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">하루</span>“안 됩니다. 적을 수 있는 자리는 <b>자가 정해 줍니다</b>. 규칙은 하나예요. <b>눈금으로 읽을 수 있는 자리까지 읽고, 그다음 한 자리만 어림해서 적는다.</b> 자를 바꿔 가며 같은 막대를 재 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="seg" id="a-mode" style="margin:18px 20px 0;">
+              <button class="on" data-m="10">최소 눈금 1 cm 자</button>
+              <button data-m="1">최소 눈금 1 mm 자</button>
+              <button data-m="0.1">최소 눈금 0.1 mm 자</button>
+            </div>
+            <div class="canvas-wrap"><canvas id="a-ruler" width="900" height="330"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">막대의 실제 길이<span class="val" id="a-len-val">42.7 mm</span></div>
+                <input type="range" id="a-len" min="20" max="80" step="0.1" value="42.7">
+              </div>
+            </div>
+            <div class="info-card" id="a-ruler-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s1-pick"></div></div>
+          <div class="mission" id="m1-4"><span class="m-tag">미션</span><ul><li id="m1-4a">세 가지 자(1 cm · 1 mm · 0.1 mm)로 <b>모두</b> 읽어 보기</li><li id="m1-4b">막대 길이를 조절해 <b>1 mm 자로 읽은 값이 5.00 cm</b> 가 되게 하기</li><li id="m1-4c">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 총을 고칠 사람, 연습을 할 사람">
+          <div class="ending">
+            <h4>🎯 나래의 총은 정비실로, 다인의 연습은 계속</h4>
+            <p><b>나래</b>의 자국은 한곳에 빈틈없이 모였습니다. 쏘는 솜씨는 넷 중 가장 좋다는 뜻이지요. 그런데 모인 자리가 중심이 아닙니다. <b>매번 같은 쪽으로 같은 만큼</b> 어긋났다면 그것은 사람의 손이 아니라 <b>조준선</b>이 틀어졌다는 증거입니다. 이렇게 한쪽으로 치우치는 오차를 <b>계통 오차</b>라 하고, 영점을 다시 맞추면 사라집니다. 반대로 <b>다인</b>은 평균이 한가운데였으니 조준선은 멀쩡합니다. 발마다 제멋대로 흩어진 <b>우연 오차</b>가 클 뿐이고, 이것은 연습과 반복으로 줄입니다.</p>
+            <p>저울 실험이 그 차이를 그대로 보여 주었습니다. 영점이 맞은 저울은 <b>여러 번 재어 평균을 내자</b> 참값 50.00 g 에 다가갔지만, 영점이 0.5 g 틀어진 저울은 60번을 재도 평균이 <b>0.5 g 만큼 어긋난 채</b> 그대로였습니다. <b>우연 오차는 반복이 줄여 주지만, 계통 오차는 아무리 반복해도 줄지 않습니다.</b> 그래서 측정 전에 기기를 <b>교정</b>하는 일이 먼저입니다.</p>
+            <p>마지막으로 자릿수입니다. 1 cm 자로는 4.3 cm, 1 mm 자로는 4.27 cm, 0.1 mm 자로는 4.270 cm. 같은 막대인데 적는 자릿수가 다른 까닭은 <b>믿을 수 있는 자리가 자마다 다르기</b> 때문입니다. 읽을 수 있는 자리까지 읽고 그다음 한 자리를 <b>어림</b>해 적은 것, 그것이 <b>유효숫자</b>입니다. 자리를 함부로 늘려 적는 것은 재지도 않은 것을 잰 척하는 일입니다.</p>
+            <div class="vs" id="e1-vs"></div>
+            <span class="stamp">사건 파일 ① 해결</span>
+          </div>
+          <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 이 화면의 사격 시뮬레이터는 ‘조준선이 틀어진 정도 = 평균이 중심에서 떨어진 거리’, ‘손떨림 = 표준편차’가 <b>정확히 같아지도록</b> 만든 단순화한 모형입니다. 실제 사격에서는 열 발만 쏘면 평균과 표준편차 자체가 우연히 흔들리므로, 계통 오차가 있는지 판단하려면 훨씬 많은 발수가 필요합니다. 저울 화면의 측정값도 미리 정해 둔 수열을 쓰기 때문에 다시 열어도 같은 값이 나옵니다. 실제 실험에서는 잴 때마다 다른 값이 나오지요.</div>
+          <div class="stage-card" style="padding:6px 0 4px"><div id="wk1"></div></div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="info-card" id="c0m-data" style="margin:18px 20px 0;"></div>
-        <div class="seg" id="c0m-choices" style="margin:14px 20px 0;">
-          <button data-c="both">정확하고 정밀함</button>
-          <button data-c="acc">정확하지만 정밀하지 않음</button>
-          <button data-c="prec">정밀하지만 정확하지 않음</button>
-          <button data-c="neither">정확하지도 정밀하지도 않음</button>
-        </div>
-        <div class="toggle-row" style="margin:14px 20px 0;">
-          <button class="chip" id="c0m-check">정답 확인</button>
-          <button class="chip" id="c0m-new">새 측정 자료</button>
-        </div>
-        <div class="info-card" id="c0m-info">보기 중 하나를 선택한 뒤 [정답 확인]을 눌러 보세요.</div>
-      </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         02 측정 표준의 유용성 — 이야기 「1미터를 다시 정하는 회의」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="1" hidden>
       <div class="stage-head">
-        <div class="eyebrow">02 · 같은 기준으로 잰다는 것</div>
-        <h2 class="display">측정 표준이 없다면?</h2>
-        <p>측정 대상의 실제 길이를 바꿔가며, 표준 단위가 있을 때와 없을 때 세 사람의 측정 결과가 어떻게 달라지는지 비교해 보세요.</p>
+        <div class="eyebrow">02 · 측정 표준의 유용성 · 이야기 한 편</div>
+        <h2 class="display">1미터를 다시 정하는 회의</h2>
+        <p>파리의 금고에 잠들어 있던 금속 막대 하나가 세계의 1 m 였던 시절이 있었습니다. 그 막대가 온도에 따라 늘어난다는 사실이 밝혀지면서, 사람들은 기준 자체를 바꾸기로 합니다.</p>
+        <span class="std-chip">10통과1-01-03</span><div class="std-note"><b>[10통과1-01-03]</b> 과학 탐구에서 측정과 어림의 의미를 알고, 일상생활의 여러 가지 상황에서 측정 표준의 유용성과 필요성을 논증할 수 있다.</div><div class="terms"><b>측정 표준</b><b>미터원기</b><b>열팽창</b><b>단위의 재정의</b><b>SI 와 자연 상수</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">측정 대상의 실제 길이(cm)<span class="val" id="c1-len-val">150</span></div>
-            <input type="range" id="c1-len" min="50" max="300" step="5" value="150">
-          </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">측정 방식</div>
-            <div class="seg" id="c1-mode">
-              <button class="on" data-m="none">표준 없이(신체 단위)</button>
-              <button data-m="standard">표준 단위(미터)</button>
+
+      <div class="episode" id="ep2">
+        <section class="scene" data-title="금고 속의 1미터">
+          <div class="story narr"><div class="who">🏛️</div><div class="say"><span class="name">이야기</span>1889년, 프랑스 세브르의 국제도량형국 지하 금고에 백금과 이리듐을 섞어 만든 막대 하나가 놓였습니다. 이것이 <b>국제 미터원기</b>, 세상의 모든 1 m 가 이 막대 하나를 베껴 만들어졌습니다. 그런데 이 정의에는 조건이 하나 붙어 있었습니다. <b>“얼음이 녹는 온도에서”</b>.</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">도량형국 연구원 마농</span>“금속은 따뜻해지면 늘어납니다. 원기도 예외가 아니에요. 금고의 온도가 조금만 올라가도 ‘1 m’가 1 m 보다 길어집니다. 그러면 세상의 자가 전부 조금씩 어긋나지요.”</div></div>
+          <div class="case-file"><b class="k">증거물 ①</b> 미터원기는 백금 90 % 와 이리듐 10 % 의 합금이고, 선팽창 계수는 약 <b>8.7 × 10⁻⁶ /℃</b> 다. &nbsp;|&nbsp; <b class="k">증거물 ②</b> 사람 머리카락의 굵기는 약 <b>70 µm</b> 다. &nbsp;|&nbsp; <b class="k">증거물 ③</b> 1889년의 정의는 <b>얼음이 녹는 온도(0 ℃)</b> 에서의 길이를 1 m 로 삼았다.</div>
+          <div class="gate loose" id="g2"></div>
+        </section>
+
+        <section class="scene" data-title="회의 ① — 금고의 온도를 올려 보다">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">마농</span>“말로는 안 믿으실 테니 직접 데워 보세요. 손잡이는 금고의 <b>온도</b>입니다. 오른쪽에는 늘어난 만큼을 머리카락 굵기와 나란히 놓고, 이 원기를 베낀 자로 <b>1 km 를 재면</b> 얼마나 어긋나는지도 같이 보여 드립니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-bar" width="900" height="360"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">금고 안의 온도<span class="val" id="b-t-val">5.0 ℃</span></div>
+                <input type="range" id="b-t" min="0" max="40" step="0.5" value="5">
+              </div>
             </div>
+            <div class="info-card" id="b-bar-info"></div>
           </div>
-        </div>
-        <div class="readout" style="margin:0 20px 14px;">
-          <span class="dot" style="background:var(--coral)"></span>
-          <span class="txt" id="c1-spread"></span>
-        </div>
-        <div class="info-card" id="c1-info"></div>
+          <div class="mission" id="m2-2"><span class="m-tag">미션</span>온도 손잡이 하나로 두 가지를 확인하세요.<ul><li id="m2-2a">막대가 <b>0.1 mm(100 µm) 이상</b> 늘어나는 온도 만들기 — 머리카락 굵기를 훌쩍 넘습니다</li><li id="m2-2b">늘어난 길이가 <b>5 µm 이내</b>가 되는 온도 찾기 — 원기가 ‘정확히 1 m’인 자리입니다</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="회의 ② — 표준이 없던 시장">
+          <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">마농</span>“왜 이렇게까지 까다롭게 구느냐고요? 표준이 <b>아예 없던</b> 시절로 가 보면 압니다. 옛 시장에서는 천을 <b>뼘</b>으로 팔았어요. 그런데 뼘은 사람마다 다릅니다.”</div></div>
+          <div class="story narr"><div class="who">🧵</div><div class="say"><span class="name">이야기</span>손이 <b>12 cm</b>인 상인이 천을 재고 “스물다섯 뼘”이라 말합니다. 손이 <b>18 cm</b>인 손님은 그 말을 듣고 머릿속으로 자기 뼘 스물다섯 개, 곧 <b>450 cm</b>를 떠올리고 값을 치릅니다. 실제 천은 300 cm 인데 말이지요. 천 1 cm 에 200원입니다.</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-market" width="900" height="380"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">천의 실제 길이<span class="val" id="b-len-val">150 cm</span></div>
+                <input type="range" id="b-len" min="50" max="300" step="5" value="150">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">재는 방법</div>
+                <div class="seg" id="b-mode">
+                  <button class="on" data-m="span">뼘으로 재기</button>
+                  <button data-m="meter">미터자로 재기</button>
+                </div>
+              </div>
+            </div>
+            <div class="info-card" id="b-market-info"></div>
+          </div>
+          <div class="mission" id="m2-3"><span class="m-tag">미션</span><ul><li id="m2-3a">뼘으로 재어, 손님이 실제보다 <b>140 cm 이상</b> 더 길다고 믿게 되는 경우 만들기</li><li id="m2-3b">재는 방법을 <b>미터자</b>로 바꿔, 두 사람이 떠올리는 길이의 차이가 <b>0</b> 이 되는 것 확인하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="회의 ③ — 빛으로 만든 자">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">마농</span>“결론이 났습니다. 기준을 <b>물건</b>에 두지 말자는 것이었어요. 물건은 늘어나고, 닳고, 잃어버릴 수 있으니까요. 1983년부터 1 m 의 정의는 이렇게 바뀌었습니다. <b>빛이 진공에서 1/299,792,458 초 동안 간 거리.</b>”</div></div>
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">견학 온 학생 하윤</span>“그럼 자를 들고 다닐 필요가 없네요. 시계만 정확하면 어디서든 1 m 를 만들 수 있는 거죠? 빛을 얼마나 오래 달리게 해야 1 m 가 되는지 직접 맞춰 볼게요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-light" width="900" height="320"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">빛을 달리게 하는 시간<span class="val" id="b-ns-val">5.00 ns</span></div>
+                <input type="range" id="b-ns" min="0.1" max="10" step="0.01" value="5">
+              </div>
+            </div>
+            <div class="info-card" id="b-light-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s2-sort"></div></div>
+          <div class="mission" id="m2-4"><span class="m-tag">미션</span>세 가지를 모두 끝내세요.<ul><li id="m2-4a">빛이 간 거리가 <b>1.000 m</b>(±0.005 m)가 되는 시간 찾기</li><li id="m2-4b">빛을 <b>1.00 ns</b>(10억분의 1초) 동안 달리게 하면 얼마나 가는지 확인하기</li><li id="m2-4c">아래 아홉 가지 기준을 ‘물건에 매인 기준’과 ‘자연 상수에 매인 기준’으로 분류하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 금고를 열 필요가 없어졌다">
+          <div class="ending">
+            <h4>📏 기준을 물건에서 자연 상수로 옮기다</h4>
+            <p>1 ℃ 가 오를 때마다 미터원기는 약 <b>8.7 µm</b> 씩 늘어납니다. 금고가 20 ℃ 였다면 ‘1 m’는 1 m 보다 <b>174 µm</b>, 머리카락 두 개 반쯤 길어진 셈이고, 그 자로 1 km 를 재면 <b>17 cm</b> 넘게 어긋납니다. 게다가 물건인 이상 닳고 오염되고, 전쟁이나 사고로 잃어버릴 수도 있습니다. 실제로 <b>2019년</b>에는 질량의 기준이던 <b>국제 킬로그램 원기</b>마저 물건의 자리에서 내려왔고, 그 자리를 <b>플랑크 상수</b>가 대신했습니다.</p>
+            <p>이제 SI 의 일곱 기본단위는 모두 <b>변하지 않는 자연 상수</b>에 묶여 있습니다. 1 m 는 빛이 <b>1/299,792,458 초</b> 동안 간 거리, 1 초는 세슘-133 원자가 내는 특정 복사선이 <b>9,192,631,770번</b> 진동하는 시간입니다. 누구도 금고를 열 필요가 없고, 서울에서도 남극에서도 화성에서도 같은 방법으로 1 m 를 다시 만들 수 있습니다.</p>
+            <p>표준이 없으면 어떤 일이 벌어지는지는 시장에서 이미 보았습니다. 같은 “스물다섯 뼘”이 사람에 따라 <b>300 cm 도 되고 450 cm 도 되는</b> 세상에서는 거래도, 실험도, 결과를 나누는 일도 불가능합니다. <b>측정 표준은 서로 다른 사람의 측정을 같은 자 위에 올려놓는 약속</b>입니다.</p>
+            <div class="vs" id="e2-vs"></div>
+            <span class="stamp">사건 파일 ② 해결</span>
+          </div>
+          <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 백금–이리듐 합금의 선팽창 계수 8.7 × 10⁻⁶ /℃ 는 <b>어림값</b>이고, 온도 범위와 합금 조성에 따라 조금씩 달라집니다. 또 이 화면은 막대가 길이 방향으로만 고르게 늘어난다고 보았지만, 실제 원기는 휘지 않도록 X자 단면으로 만들어졌고 측정에는 원기에 새긴 두 눈금 사이의 간격을 씁니다. 1983년의 재정의는 미터의 길이를 바꾼 것이 아니라 <b>정의하는 방법</b>을 바꾼 것이어서, 그 전후로 1 m 의 길이는 사실상 같습니다.</div>
+          <div class="stage-card" style="padding:6px 0 4px"><div id="wk2"></div></div>
+        </section>
       </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         03 측정과 현대 문명 — 이야기 「30 cm 를 다투는 사람들」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="2" hidden>
       <div class="stage-head">
-        <div class="eyebrow">03 · 정밀 측정이 만든 현대 문명</div>
-        <h2 class="display">측정 기술의 활용 분야</h2>
-        <p>카드를 클릭해 각 분야에서 정밀 측정 기술이 어떻게 활용되는지 확인하고, 아래 그래프에서 분야별로 요구되는 측정 정밀도(자릿수)를 비교해 보세요.</p>
+        <div class="eyebrow">03 · 측정과 현대 문명 · 이야기 한 편</div>
+        <h2 class="display">30 cm 를 다투는 사람들</h2>
+        <p>지도 앱이 나를 옆 건물에 찍어 놓은 아침에서 출발해, 위성의 시계·반도체의 선폭·체온계의 숫자까지 따라갑니다. 측정이 조금만 흔들려도 현대 문명이 어떻게 흔들리는지 직접 확인합니다.</p>
+        <span class="std-chip">10통과1-01-04</span><div class="std-note"><b>[10통과1-01-04]</b> 자연에서 일어나는 다양한 변화를 측정·분석하여 정보를 산출함을 알고, 이러한 정보를 디지털로 변환하는 기술이 현대 문명에 미친 영향을 인식한다.</div><div class="terms"><b>정밀 측정</b><b>원자시계와 GPS</b><b>나노미터 공정</b><b>아날로그–디지털 변환</b><b>표본화와 양자화</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c2" width="900" height="380"></canvas></div>
-        <div class="info-card" id="c2-info">카드를 클릭해 보세요.</div>
+
+      <div class="episode" id="ep3">
+        <section class="scene" data-title="지도 앱이 나를 옆 건물에 찍었다">
+          <div class="story narr"><div class="who">📱</div><div class="say"><span class="name">이야기</span>등교 첫날 아침. 하윤이는 지도 앱을 켜고 학교를 찾아갑니다. 그런데 화면 속 파란 점이 <b>학교가 아니라 옆 건물</b> 위에 놓여 있습니다. 앱을 껐다 켜도 마찬가지입니다.</div></div>
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">하윤</span>“위성은 지구 위 2만 km 밖에 있다던데, 거기 있는 시계가 아주 조금 틀린다고 여기 내 위치가 달라질 리가 있나요?”</div></div>
+          <div class="case-file"><b class="k">증거물 ①</b> GPS 위성은 <b>원자시계</b>를 싣고, 전파가 위성에서 수신기까지 오는 데 걸린 시간으로 거리를 잰다. &nbsp;|&nbsp; <b class="k">증거물 ②</b> 전파는 빛과 같은 속력, <b>299,792,458 m/s</b> 로 달린다. &nbsp;|&nbsp; <b class="k">증거물 ③</b> 아래 지도는 정밀 측정이 떠받치고 있는 분야들이다 — 눌러서 살펴볼 수 있다.</div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-fields" width="900" height="440"></canvas></div>
+            <div class="info-card" id="c-fields-info">카드를 누르면 그 분야가 어느 자릿수까지 재고 있는지 아래 사다리에서 함께 강조됩니다.</div>
+          </div>
+          <div class="gate loose" id="g3"></div>
+        </section>
+
+        <section class="scene" data-title="조사 ① — 위성의 시계와 내 위치">
+          <div class="story"><div class="who">🛰️</div><div class="say"><span class="name">항법 기술자 준서</span>“계산은 아주 단순합니다. <b>거리 = 빛의 속력 × 시간</b>. 시간이 틀리면 거리가 틀리고, 거리가 틀리면 위치가 틀립니다. 손잡이로 위성 시계의 오차를 바꿔 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-gps" width="900" height="390"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">위성 시계의 오차<span class="val" id="c-dt-val">200 ns</span></div>
+                <input type="range" id="c-dt" min="0" max="1000" step="10" value="200">
+              </div>
+            </div>
+            <div class="info-card" id="c-gps-info"></div>
+          </div>
+          <div class="mission" id="m3-2"><span class="m-tag">미션</span><ul><li id="m3-2a">위치 오차가 <b>10 m 이내</b>가 되는 시계 정확도 찾기 — 같은 건물 안을 가리킬 수 있는 수준입니다</li><li id="m3-2b">위치 오차가 <b>100 m 를 넘는</b> 시계 오차 찾기 — 옆 블록으로 건너뛰는 수준입니다</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="조사 ② — 나노미터를 다투는 공장">
+          <div class="story"><div class="who">🏭</div><div class="say"><span class="name">공정 관리자 은채</span>“여기는 반도체 공장입니다. 회로 <b>선폭</b>을 목표대로 만들었는지 매 장 재는데, 목표에서 <b>±10 %</b> 를 벗어나면 그 칩은 버립니다. 지금 10 nm 공정을 시작했는데 <b>다섯 장에 한 장꼴로</b> 버리고 있어요. 위쪽 손잡이가 우리 <b>측정·공정의 오차</b>, 아래쪽이 <b>목표 선폭</b>입니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-chip" width="900" height="370"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">공정·측정의 오차(표준편차)<span class="val" id="c-sd-val">0.8 nm</span></div>
+                <input type="range" id="c-sd" min="0.1" max="3" step="0.1" value="0.8">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">목표 선폭<span class="val" id="c-w-val">10 nm</span></div>
+                <input type="range" id="c-w" min="3" max="90" step="1" value="10">
+              </div>
+            </div>
+            <div class="info-card" id="c-chip-info"></div>
+          </div>
+          <div class="mission" id="m3-3"><span class="m-tag">미션</span><ul><li id="m3-3a"><b>선폭 10 nm 이하</b>의 미세 공정에서 <b>수율 95 % 이상</b> 만들기</li><li id="m3-3b">측정 오차를 <b>1.0 nm 이상</b>으로 크게 둔 채로도 수율 95 % 를 넘길 수 있는 선폭 찾기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="조사 ③ — 숫자로 바뀌는 순간">
+          <div class="story"><div class="who">🧑‍⚕️</div><div class="say"><span class="name">보건 선생님 지호</span>“보건실 체온계는 이마에 대면 <b>36.5</b> 라는 숫자를 띄웁니다. 그런데 이마에서 오는 것은 숫자가 아니라 <b>끊김 없이 이어지는 신호</b>예요. 그 신호가 숫자가 되려면 두 단계를 거칩니다. <b>얼마나 자주 재느냐(표본화)</b>, 그리고 <b>얼마나 잘게 나누느냐(양자화)</b>.”</div></div>
+          <div class="story"><div class="who">🧑‍⚕️</div><div class="say"><span class="name">지호</span>“먼저 표본화입니다. 손목의 맥박 신호를 초에 몇 번 잴지 정해 보세요. 드문드문 재면 아무리 정밀한 센서라도 원래 물결을 되살리지 못합니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-samp" width="900" height="320"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">1초에 재는 횟수<span class="val" id="c-rate-val">4 번/초</span></div>
+                <input type="range" id="c-rate" min="2" max="60" step="1" value="4">
+              </div>
+            </div>
+            <div class="info-card" id="c-samp-info"></div>
+          </div>
+          <div class="story"><div class="who">🧑‍⚕️</div><div class="say"><span class="name">지호</span>“다음은 양자화입니다. 체온계가 다루는 범위는 <b>30 ℃ 에서 45 ℃</b> 까지 15 ℃ 예요. 이 폭을 몇 칸으로 쪼갤지는 <b>비트 수</b>가 정합니다. 칸이 성기면 36.5 도 36.7 도 같은 숫자로 찍힙니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-quant" width="900" height="300"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">쓰는 비트 수<span class="val" id="c-bits-val">4 비트</span></div>
+                <input type="range" id="c-bits" min="1" max="12" step="1" value="4">
+              </div>
+            </div>
+            <div class="info-card" id="c-quant-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s3-pick"></div></div>
+          <div class="mission" id="m3-4"><span class="m-tag">미션</span><ul><li id="m3-4a">맥박 신호를 <b>복원 오차 5 % 이내</b>로 되살리는 측정 횟수 찾기</li><li id="m3-4b">체온계가 <b>0.05 ℃ 까지</b> 구분하도록 비트 수 올리기</li><li id="m3-4c">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 파란 점은 왜 옆 건물에 있었나">
+          <div class="ending">
+            <h4>🛰️ 100만분의 1초가 300 m 다</h4>
+            <p>빛은 1초에 약 3억 m 를 갑니다. 그러니 위성 시계가 <b>100만분의 1초(1 µs)</b> 만 틀려도 거리는 <b>약 300 m</b> 어긋납니다. 하윤이의 파란 점이 옆 건물에 찍힌 것은 지도가 잘못 그려져서가 아니라, <b>시간을 잰 값</b>이 조금 틀렸기 때문입니다. 거꾸로 위치를 10 m 안쪽으로 맞추려면 시계는 <b>30 ns(10억분의 30초)</b> 안쪽까지 맞아야 합니다. GPS 위성이 값비싼 원자시계를 싣고 다니는 까닭이 여기 있습니다.</p>
+            <p>공장도 사정은 같았습니다. 선폭이 90 nm 일 때는 측정 오차 0.8 nm 가 아무 문제가 아니었지만, 선폭을 10 nm 로 줄이는 순간 같은 오차가 칩을 무더기로 버리게 만들었습니다. <b>허용 오차는 대상이 작아지는 만큼 함께 작아지기 때문</b>입니다. 더 작게 만들려면 더 정밀하게 재는 기술이 먼저 있어야 합니다.</p>
+            <p>그리고 이 모든 측정값은 <b>숫자로 바뀌어야</b> 쓸모가 생깁니다. 얼마나 자주 재는가(표본화)와 얼마나 잘게 나누는가(양자화)가 정해지면, 이어지던 신호는 <b>디지털 정보</b>가 됩니다. 디지털이 되고 나면 값은 몇 번을 옮겨 적어도 변하지 않고, 멀리 보내도 흐려지지 않으며, 수십 년치를 쌓아 견줄 수 있습니다. 세계 어디의 기후 관측소든 같은 표준으로 재어 같은 형식의 숫자로 보내오기 때문에, 우리는 <b>지구 전체의 변화</b>를 하나의 그래프로 볼 수 있습니다.</p>
+            <div class="vs" id="e3-vs"></div>
+            <span class="stamp">사건 파일 ③ 해결</span>
+          </div>
+          <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 실제 GPS 는 위성 네 기 이상의 신호를 함께 풀어 시계 오차까지 미지수로 두고 계산하므로, 위성 시계 오차가 곧바로 그만큼의 위치 오차가 되지는 않습니다. 이 화면은 ‘거리 = 빛의 속력 × 시간’ 한 줄만 남긴 <b>단순화한 모형</b>입니다. 또 실제 위치 오차에는 대기(전리층·대류권)를 지나며 전파가 느려지는 효과와 건물에 반사된 신호가 크게 끼어듭니다. 반도체 화면의 <b>‘목표의 ±10 %’ 라는 허용 범위는 설명을 위해 정한 값</b>이고(실제 규격은 공정마다 다릅니다), 수율도 선폭의 흩어짐만 정규분포로 본 모형입니다. 실제 수율은 먼지·결함 등 훨씬 많은 요인으로 정해집니다.</div>
+          <div class="stage-card" style="padding:6px 0 4px"><div id="wk3"></div></div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="stage-head" style="padding:20px 20px 0;">
-          <div class="eyebrow">심화 · 요구 정밀도 비교</div>
-          <h2 class="display" style="font-size:18px;">분야마다 다른 '자릿수 요구량'</h2>
-        </div>
-        <div class="canvas-wrap"><canvas id="c2b" width="900" height="220"></canvas></div>
-        <div class="info-card" id="c2b-info">위에서 카드를 클릭하면 해당 분야의 정밀도 요구 수준이 강조됩니다.</div>
-      </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- ===================================================================== 04 정리하기 -->
     <section class="tab-panel" data-panel="3" hidden>
       <div class="stage-head">
-        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <div class="eyebrow">04 · 세 사건을 하나로</div>
         <h2 class="display">정리하기</h2>
-        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+        <p>세 이야기의 결과가 아래에 모입니다. 세 사건을 꿰는 한 문장을 쓰고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
       </div>
       <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
+    </section>
+
+    <!-- ===================================================================== 05 우리 반 -->
+    <section class="tab-panel" data-panel="4" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">05 · 같은 반 친구들과 나누기</div>
+        <h2 class="display">우리 반</h2>
+        <p>내가 해결한 사건과 찾아낸 값을 우리 반에 올리고, 친구들은 어떤 값을 찾았는지 살펴보세요. <b>올리기 버튼을 눌렀을 때만</b> 공유됩니다. 실명 대신 별명을 쓰세요.</p>
+      </div>
+      <div class="stage-card"><div id="share"></div></div>
     </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
 <script src="../assets/theme.js"></script>
-<script>
-(function () {
-"use strict";
-
-/* TAB0 정밀도/정확도 — 누적 통계 */
-(function () {
-  var canvas = document.getElementById("c0");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var cx = W / 2, cy = H / 2, R = 150;
-  var bias = 0, noise = 10;
-  var shots = [];
-  var info = document.getElementById("c0-info");
-  var stats = document.getElementById("c0-stats");
-
-  document.getElementById("c0-bias").addEventListener("input", function (e) { bias = +e.target.value; document.getElementById("c0-bias-val").textContent = bias; });
-  document.getElementById("c0-noise").addEventListener("input", function (e) { noise = +e.target.value; document.getElementById("c0-noise-val").textContent = noise; });
-  document.getElementById("c0-shoot").addEventListener("click", function () {
-    var biasAngle = Math.PI * 0.6;
-    for (var i = 0; i < 5; i++) {
-      var bx = cx + Math.cos(biasAngle) * bias, by = cy + Math.sin(biasAngle) * bias;
-      var ang = Math.random() * Math.PI * 2, r = Math.random() * noise;
-      shots.push({ x: bx + Math.cos(ang) * r, y: by + Math.sin(ang) * r });
-    }
-    if (shots.length > 60) shots = shots.slice(shots.length - 60);
-    analyze();
-    render();
-  });
-  document.getElementById("c0-reset").addEventListener("click", function () {
-    shots = [];
-    stats.textContent = "아직 쏘지 않았습니다.";
-    info.textContent = "슬라이더로 편향과 무작위 오차를 조절한 뒤 쏘아 보세요. 여러 번 쏠수록 통계가 더 정확해집니다.";
-    render();
-  });
-
-  function analyze() {
-    if (shots.length === 0) return;
-    var mx = 0, my = 0;
-    shots.forEach(function (s) { mx += s.x; my += s.y; });
-    mx /= shots.length; my /= shots.length;
-    var accDist = Math.hypot(mx - cx, my - cy);
-    var variance = 0;
-    shots.forEach(function (s) { variance += Math.pow(Math.hypot(s.x - mx, s.y - my), 2); });
-    variance /= shots.length;
-    var sd = Math.sqrt(variance);
-    var accurate = accDist < 25, precise = sd < 20;
-    var verdict = accurate && precise ? "정확하고 정밀함 (이상적인 측정)" : accurate && !precise ? "정확하지만 정밀하지 않음 (무작위 오차가 큼)" : !accurate && precise ? "정밀하지만 정확하지 않음 (시스템 오차가 있음)" : "정확하지도 정밀하지도 않음";
-    stats.innerHTML = "누적 " + shots.length + "발 · 평균이 중심에서 <b>" + accDist.toFixed(0) + "px</b>(정확도 오차) · 표준편차 <b>" + sd.toFixed(1) + "px</b>(정밀도) → <b>" + verdict + "</b>";
-    info.innerHTML = "화살 수가 늘어날수록 평균값이 참값에 가까워지며 통계가 안정됩니다(큰 수의 법칙). 지금은 " + shots.length + "발이 누적되었습니다.";
-  }
-
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    [R, R * 0.66, R * 0.33].forEach(function (r, i) {
-      ctx.save();
-      ctx.fillStyle = i % 2 === 0 ? cssVar("--panel-2") : cssVar("--abyss");
-      ctx.globalAlpha = .6;
-      ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.fill();
-      ctx.restore();
-      ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.stroke();
-    });
-    ctx.fillStyle = cssVar("--coral");
-    ctx.beginPath(); ctx.arc(cx, cy, 6, 0, 7); ctx.fill();
-
-    shots.forEach(function (s, i) {
-      ctx.save();
-      ctx.globalAlpha = 0.35 + 0.65 * (i / Math.max(1, shots.length - 1));
-      ctx.fillStyle = cssVar("--teal");
-      ctx.beginPath(); ctx.arc(s.x, s.y, 6, 0, 7); ctx.fill();
-      ctx.strokeStyle = cssVar("--abyss"); ctx.lineWidth = 1.5; ctx.stroke();
-      ctx.restore();
-    });
-
-    if (shots.length > 0) {
-      var mx = 0, my = 0;
-      shots.forEach(function (s) { mx += s.x; my += s.y; });
-      mx /= shots.length; my /= shots.length;
-      ctx.strokeStyle = cssVar("--violet"); ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(mx - 10, my); ctx.lineTo(mx + 10, my); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(mx, my - 10); ctx.lineTo(mx, my + 10); ctx.stroke();
-    }
-  }
-  render();
-})();
-
-/* TAB0 미션 — 정밀도와 정확도 판별하기 */
-(function () {
-  var dataEl = document.getElementById("c0m-data");
-  var choicesEl = document.getElementById("c0m-choices");
-  var checkBtn = document.getElementById("c0m-check");
-  var newBtn = document.getElementById("c0m-new");
-  if (!dataEl) return;
-
-  var bias = 0, noise = 10, trueKey = "both";
-  var picked = null;
-  var seg = choicesEl.querySelectorAll("button");
-
-  seg.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      picked = btn.dataset.c;
-      seg.forEach(function (b) { b.classList.toggle("on", b === btn); });
-    });
-  });
-
-  function classify(b, n) {
-    var acc = b < 8, prec = n < 15;
-    if (acc && prec) return "both";
-    if (acc && !prec) return "acc";
-    if (!acc && prec) return "prec";
-    return "neither";
-  }
-
-  function newQuestion() {
-    bias = Math.round(Math.random() * 30);
-    noise = Math.round(Math.random() * 40);
-    trueKey = classify(bias, noise);
-    dataEl.innerHTML = "조준 편향(시스템 오차) = <b>" + bias + "</b>, 손떨림(무작위 오차) = <b>" + noise + "</b>";
-    picked = null;
-    seg.forEach(function (b) { b.classList.remove("on"); });
-    var info = document.getElementById("c0m-info");
-    info.style.color = "";
-    info.textContent = "보기 중 하나를 선택한 뒤 [정답 확인]을 눌러 보세요.";
-  }
-
-  var labels = { both: "정확하고 정밀함", acc: "정확하지만 정밀하지 않음", prec: "정밀하지만 정확하지 않음", neither: "정확하지도 정밀하지도 않음" };
-
-  checkBtn.addEventListener("click", function () {
-    var info = document.getElementById("c0m-info");
-    if (picked === null) {
-      info.style.color = "";
-      info.textContent = "먼저 보기 중 하나를 선택하세요.";
-      return;
-    }
-    if (picked === trueKey) {
-      info.style.color = "var(--teal)";
-      info.innerHTML = "<b>정답입니다!</b> 이 결과는 <b>" + labels[trueKey] + "</b>에 해당합니다.";
-    } else {
-      info.style.color = "var(--coral)";
-      info.innerHTML = "다시 생각해 보세요. 정답은 <b>" + labels[trueKey] + "</b>입니다. 편향이 작을수록 정확, 무작위 오차가 작을수록 정밀합니다.";
-    }
-  });
-
-  newBtn.addEventListener("click", newQuestion);
-  newQuestion();
-})();
-
-/* TAB1 측정표준의 유용성 */
-(function () {
-  var canvas = document.getElementById("c1");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var mode = "none";
-  var realLength = 150;
-  var info = document.getElementById("c1-info");
-  var spreadTxt = document.getElementById("c1-spread");
-  document.querySelectorAll("#c1-mode button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      mode = b.getAttribute("data-m");
-      document.querySelectorAll("#c1-mode button").forEach(function (x) { x.classList.toggle("on", x === b); });
-      render();
-    });
-  });
-  document.getElementById("c1-len").addEventListener("input", function (e) {
-    realLength = +e.target.value;
-    document.getElementById("c1-len-val").textContent = realLength;
-    render();
-  });
-
-  var people = [
-    { name: "철수(손 15cm)", handCm: 15 },
-    { name: "영희(손 12cm)", handCm: 12 },
-    { name: "민수(손 18cm)", handCm: 18 }
-  ];
-
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var barY0 = 80;
-    var maxBarPx = 700;
-    var results = [];
-    people.forEach(function (p, i) {
-      var y = barY0 + i * 90;
-      ctx.strokeStyle = cssVar("--line"); ctx.strokeRect(60, y, maxBarPx, 30);
-      var estimatedCm = mode === "none" ? Math.round(realLength / p.handCm) * p.handCm : realLength;
-      var measured = mode === "none" ? Math.round(realLength / p.handCm) : (realLength / 100).toFixed(2);
-      var unit = mode === "none" ? "뼘" : "m";
-      var barLen = maxBarPx * estimatedCm / 300;
-      results.push(estimatedCm);
-      ctx.fillStyle = cssVar("--teal"); ctx.globalAlpha = .7;
-      ctx.fillRect(60, y, Math.min(barLen, maxBarPx), 30);
-      ctx.globalAlpha = 1;
-      ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "left";
-      ctx.fillText(p.name + " 측정 결과: " + measured + unit + "  (환산 시 약 " + estimatedCm.toFixed(0) + "cm)", 60, y - 10);
-    });
-    ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
-    ctx.fillText("실제 길이: " + realLength + "cm (모두 같은 물체를 측정)", 60, 40);
-
-    var maxR = Math.max.apply(null, results), minR = Math.min.apply(null, results);
-    var errRange = maxR - minR;
-    if (mode === "none") {
-      spreadTxt.innerHTML = "세 사람의 환산 결과 차이(오차 범위): <b>" + errRange.toFixed(1) + "cm</b> (실제 길이의 " + (errRange / realLength * 100).toFixed(1) + "%)";
-      info.innerHTML = "신체 부위(뼘)로 측정하면 사람마다 손 크기가 달라 <b>같은 물체인데도 측정값이 다르게</b> 나옵니다. 결과를 공유하거나 비교하기 어렵습니다.";
-    } else {
-      spreadTxt.innerHTML = "세 사람의 결과 차이(오차 범위): <b>0.0cm</b> — 누가 측정해도 동일합니다.";
-      info.innerHTML = "미터(m)라는 <b>표준 단위</b>를 사용하면 누가 측정하든 같은 결과가 나와, 결과를 정확하게 공유·비교·재현할 수 있습니다. 이것이 측정 표준의 유용성입니다.";
-    }
-  }
-  render();
-})();
-
-/* TAB2 측정과 현대문명 */
-(function () {
-  var canvas = document.getElementById("c2");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c2-info");
-  var selected = -1;
-  var cards = [
-    { icon: "🛰️", name: "GPS 위성 항법", desc: "원자시계로 나노초 단위 시간을 정밀하게 측정하여 위치를 계산합니다.", x: 130, y: 100, order: -9, unit: "초" },
-    { icon: "🏥", name: "의료 영상 진단", desc: "미세한 신호 측정 기술(MRI, CT)로 몸속을 정밀하게 관찰합니다.", x: 380, y: 100, order: -3, unit: "m" },
-    { icon: "🏭", name: "반도체 공정", desc: "나노미터 단위의 정밀한 길이 측정으로 초미세 회로를 제작합니다.", x: 630, y: 100, order: -9, unit: "m" },
-    { icon: "🌡️", name: "기후 관측", desc: "표준화된 온도·기압 측정으로 전 지구 기후 데이터를 비교합니다.", x: 130, y: 260, order: -1, unit: "℃" },
-    { icon: "⚖️", name: "무역과 거래", desc: "질량·부피의 표준 단위로 공정한 상거래가 가능해집니다.", x: 380, y: 260, order: -3, unit: "kg" },
-    { icon: "🚀", name: "우주 탐사", desc: "정밀한 거리·속도 측정으로 우주선의 궤도를 계산합니다.", x: 630, y: 260, order: 0, unit: "m" }
-  ];
-  canvas.addEventListener("click", function (e) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas._w / rect.width, scaleY = canvas._h / rect.height;
-    var mx = (e.clientX - rect.left) * scaleX, my = (e.clientY - rect.top) * scaleY;
-    cards.forEach(function (c, i) {
-      if (mx > c.x - 100 && mx < c.x + 100 && my > c.y - 60 && my < c.y + 60) {
-        info.innerHTML = "<b>" + c.icon + " " + c.name + "</b> — " + c.desc;
-        selected = i;
-        render();
-        renderBar();
-      }
-    });
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    cards.forEach(function (c, i) {
-      ctx.save();
-      ctx.strokeStyle = i === selected ? cssVar("--teal") : cssVar("--line");
-      ctx.lineWidth = i === selected ? 2.5 : 1;
-      ctx.fillStyle = cssVar("--panel-2");
-      ctx.fillRect(c.x - 100, c.y - 60, 200, 120);
-      ctx.strokeRect(c.x - 100, c.y - 60, 200, 120);
-      ctx.restore();
-      ctx.font = "32px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(c.icon, c.x, c.y - 10);
-      ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--foam");
-      ctx.fillText(c.name, c.x, c.y + 30);
-    });
-  }
-  var canvas2 = document.getElementById("c2b");
-  var ctx2 = setupCanvas(canvas2);
-  var W2 = canvas2._w, H2 = canvas2._h;
-  var info2 = document.getElementById("c2b-info");
-  function renderBar() {
-    ctx2.clearRect(0, 0, W2, H2);
-    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
-    var x0 = 80, x1 = W2 - 40;
-    function xOf(order) { return x0 + (order + 10) / 10 * (x1 - x0); }
-    ctx2.strokeStyle = cssVar("--line"); ctx2.lineWidth = 2;
-    var midY = H2 / 2 + 40;
-    cards.forEach(function (c, i) {
-      var y = 30 + i * 28;
-      var x = xOf(c.order);
-      ctx2.strokeStyle = cssVar("--line"); ctx2.lineWidth = 1;
-      ctx2.beginPath(); ctx2.moveTo(x0, y); ctx2.lineTo(x1, y); ctx2.stroke();
-      ctx2.fillStyle = i === selected ? cssVar("--coral") : cssVar("--teal");
-      ctx2.beginPath(); ctx2.arc(x, y, i === selected ? 8 : 5, 0, Math.PI * 2); ctx2.fill();
-      ctx2.font = (i === selected ? "700 " : "") + "11.5px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "left";
-      ctx2.fillText(c.icon + " " + c.name + "  (약 10" + superscript(c.order) + " " + c.unit + " 단위 요구)", x1 - x1 + 10, y - 8);
-    });
-    if (selected >= 0) {
-      info2.innerHTML = "<b>" + cards[selected].name + "</b>은(는) 약 10<sup>" + cards[selected].order + "</sup> " + cards[selected].unit + " 수준의 정밀도가 필요합니다. 값이 작을(음의 지수일)수록 훨씬 미세한 차이까지 구분해야 하는 고정밀 기술입니다.";
-    } else {
-      info2.innerHTML = "위에서 카드를 클릭하면 해당 분야의 정밀도 요구 수준이 강조됩니다.";
-    }
-  }
-  function superscript(n) {
-    var map = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
-    return String(n).split("").map(function (c) { return map[c] || c; }).join("");
-  }
-  render();
-  renderBar();
-})();
-
-})();
-</script>
-
-<script>
-(function () {
-  window.sthUnit("is1-1-2");
-  window.sthWork({
-    mount: "wk",
-    unitLabel: "[통합과학1 Ⅰ-2] 과학의 측정과 우리 사회",
-    items: [
-      {
-            "id": "w1",
-            "label": "정밀도와 정확도",
-            "hint": "과녁 그림 네 가지 중 하나를 골라, 왜 그 조합인지 설명하세요.",
-            "ph": "내가 고른 것: … / 정밀도 …, 정확도 … 인 까닭은 …"
-      },
-      {
-            "id": "w2",
-            "label": "표준이 필요한 이유",
-            "hint": "측정 표준이 없었다면 곤란해졌을 상황을 하나 들고, 왜 그런지 쓰세요.",
-            "ph": ""
-      },
-      {
-            "id": "w3",
-            "label": "아직 헷갈리는 것",
-            "hint": "다음 시간에 여기서부터 시작합니다.",
-            "ph": ""
-      }
-]
-  });
-})();
-</script>
+<script src="../assets/story.js"></script>
+<script src="../assets/share-config.js"></script>
+<script src="../assets/share.js"></script>
+<script src="episodes.js"></script>
 </body>
 </html>
