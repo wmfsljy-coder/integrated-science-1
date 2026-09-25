@@ -800,7 +800,7 @@ function pointOnCanvas(canvas, e) {
       var x0 = 40, x1 = 556, surf = 196, mid = (x0 + x1) / 2, ph = 40;
       /* 맨틀 */
       ctx.fillStyle = v("--coral-100"); ctx.fillRect(x0, surf + ph, x1 - x0, 170);
-      text(ctx, "맨틀", x0 + 10, surf + ph + 160, { s: 11, w: "800", c: v("--coral-700") });
+      text(ctx, "맨틀", x1 - 10, surf + ph + 160, { s: 11, w: "800", a: "right", c: v("--coral-700") });
       /* 대류 화살표 */
       ctx.strokeStyle = v("--coral"); ctx.fillStyle = v("--coral"); ctx.lineWidth = 3;
       if (type === "divergent") {

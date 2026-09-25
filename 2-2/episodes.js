@@ -238,19 +238,19 @@ function mark(ctx, ok, s, x, y, o) {
     function line(y, lo, hi, cur, lr, ud, tgt, ok, title, fmt, unit) {
       var X0 = 430, X1 = 860;
       function px(x) { return X0 + (clamp(x, lo, hi) - lo) / (hi - lo) * (X1 - X0); }
-      text(ctx, title, X0, y - 34, { s: 12.5, w: "800" });
+      text(ctx, title, X0, y - 50, { s: 12.5, w: "800" });
       ctx.strokeStyle = v("--line"); ctx.lineWidth = 2;
       ctx.beginPath(); ctx.moveTo(X0, y); ctx.lineTo(X1, y); ctx.stroke();
       text(ctx, fmt(lo), X0, y + 34, { s: 10, c: v("--mist") });
       text(ctx, fmt(hi), X1, y + 34, { s: 10, a: "right", c: v("--mist") });
-      function tick(x, lab, col) {
+      function tick(x, lab, col, up) {
         var gx = px(x);
         ctx.strokeStyle = v(col); ctx.lineWidth = 2;
         ctx.beginPath(); ctx.moveTo(gx, y - 9); ctx.lineTo(gx, y + 9); ctx.stroke();
-        text(ctx, lab, clamp(gx, X0 + 52, X1 - 52), y - 15, { s: 10, w: "800", a: "center", c: v(col) });
+        text(ctx, lab, clamp(gx, X0 + 52, X1 - 52), y - 15 - (up || 0), { s: 10, w: "800", a: "center", c: v(col) });
       }
       tick(lr, "왼·오른 평균 " + fmt(lr), "--teal-700");
-      tick(ud, "위·아래 평균 " + fmt(ud), "--amber-700");
+      tick(ud, "위·아래 평균 " + fmt(ud), "--amber-700", 16);
       if (ok) {
         var tx = px(tgt);
         ctx.strokeStyle = v("--green"); ctx.lineWidth = 3;
@@ -586,9 +586,9 @@ function mark(ctx, ok, s, x, y, o) {
         }
         atom(ccx, ccy, 50, C.s, cc, "--violet", C.k + " · 바깥 전자 " + cc + "개" + (cc === C.t ? " ✅" : ""));
         stable = ok && cc === C.t && n === M.need;
-        text(ctx, "나눠 쓰는 전자쌍 " + n + "쌍 — 굵은 선 하나가 전자쌍 하나입니다", 450, 372, { s: 12, w: "800", a: "center", c: v("--mist") });
+        text(ctx, "나눠 쓰는 전자쌍 " + n + "쌍 — 굵은 선 하나가 전자쌍 하나입니다", 450, 392, { s: 12, w: "800", a: "center", c: v("--mist") });
         text(ctx, stable ? "✅ 모든 원자가 8개(수소는 2개)를 채웠습니다 — 공유 결합" : "아직 채우지 못한 원자가 있습니다",
-          450, 396, { s: 13, w: "900", a: "center", c: v(stable ? "--green-700" : "--mist") });
+          450, 414, { s: 13, w: "900", a: "center", c: v(stable ? "--green-700" : "--mist") });
       }
 
       if (M.kind === "ion") {

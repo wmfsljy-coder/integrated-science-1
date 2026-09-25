@@ -932,7 +932,7 @@ function lcg(seed) {
 
       text(ctx, "웨이퍼 한 장에서 잰 선폭의 분포", 40, 36, { s: 12.5, w: "800", c: v("--teal-700") });
       text(ctx, "목표 " + w + " nm · 허용 범위 ± 10 % = ± " + tol().toFixed(1) + " nm · 측정·공정 오차 " + sd.toFixed(1) + " nm",
-        450, 58, { s: 12, a: "center", c: v("--mist") });
+        860, 36, { s: 12, a: "right", c: v("--mist") });
 
       /* 분포 곡선 + 색칠 */
       var lo = w - tol(), hi = w + tol();
@@ -968,8 +968,8 @@ function lcg(seed) {
 
       vdash(ctx, clamp(xOf(lo), 80, 820), 72, 280, v("--rose"));
       vdash(ctx, clamp(xOf(hi), 80, 820), 72, 280, v("--rose"));
-      text(ctx, "허용 하한 " + lo.toFixed(1), clamp(xOf(lo), 110, 780), 66, { s: 10.5, w: "800", a: "center", c: v("--rose-700") });
-      text(ctx, "허용 상한 " + hi.toFixed(1), clamp(xOf(hi), 110, 780), 66, { s: 10.5, w: "800", a: "center", c: v("--rose-700") });
+      text(ctx, "허용 하한 " + lo.toFixed(1), clamp(xOf(lo), 110, 780) - 6, 66, { s: 10.5, w: "800", a: "right", c: v("--rose-700") });
+      text(ctx, "허용 상한 " + hi.toFixed(1), clamp(xOf(hi), 110, 780) + 6, 66, { s: 10.5, w: "800", c: v("--rose-700") });
       vdash(ctx, xOf(w), 72, 280, v("--brand"));
       text(ctx, "목표 " + w + " nm", xOf(w), 300, { s: 11, w: "800", a: "center", c: v("--brand-700") });
       text(ctx, "초록 = 살아남는 칩 · 붉은색 = 버리는 칩", 820, 300, { s: 10.5, a: "right", c: v("--mist") });

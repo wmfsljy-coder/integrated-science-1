@@ -678,7 +678,7 @@ function ticker(box) {
         window.drawArrow(ctx, 452, ice - 74, 392, ice - 74, 13);
         window.drawArrow(ctx, 452, ice - 74, 512, ice - 74, 13);
         text(ctx, "200 N", 452, ice - 86, { s: 12, w: "800", a: "center", c: v("--violet-700") });
-        text(ctx, "두 힘은 크기가 같고 방향이 반대입니다", 452, ice - 104, { s: 11, a: "center", c: v("--mist") });
+        text(ctx, "두 힘은 크기가 같고 방향이 반대입니다", 508, ice - 126, { s: 11, a: "right", c: v("--mist") });
       }
       /* 계기 */
       text(ctx, "0.5초 동안 200 N → 각자 받은 충격량 100 N·s (크기는 같고 방향만 반대)", 40, 34, { s: 12.5, w: "800", c: v("--brand-700") });

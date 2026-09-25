@@ -146,12 +146,12 @@ function segOn(wrapId, btn) {
       ctx.strokeStyle = v("--coral"); ctx.lineWidth = 2; ctx.setLineDash([5, 4]);
       ctx.beginPath(); ctx.moveTo(cx, bandTop - 12); ctx.lineTo(cx, gy1); ctx.stroke(); ctx.setLineDash([]);
       ctx.fillStyle = v("--coral"); ctx.beginPath(); ctx.arc(cx, bandTop - 16, 5, 0, Math.PI * 2); ctx.fill();
-      var lab = wl + " nm";
-      text(ctx, lab, clamp(cx, X0 + 22, X1 - 22), bandTop - 26, { s: 12, w: "800", c: v("--coral-700"), a: "center" });
+      var lab = wl + " nm", labR = cx > (X0 + X1) / 2;
+      text(ctx, lab, labR ? cx - 8 : cx + 8, bandTop + bandH + 18, { s: 12, w: "800", c: v("--coral-700"), a: labR ? "right" : "left" });
       /* 찾아낸 표시 */
       text(ctx, (got.h ? "✅" : "⬜") + " 수소 656 nm", X0, 322, { s: 12, w: "800", c: got.h ? v("--green-700") : v("--mist") });
       text(ctx, (got.he ? "✅" : "⬜") + " 헬륨 588 nm", X0 + 180, 322, { s: 12, w: "800", c: got.he ? v("--green-700") : v("--mist") });
-      text(ctx, "선의 자리가 원소의 지문입니다", X1, 322, { s: 11, c: v("--mist"), a: "right" });
+      text(ctx, "선의 자리가 원소의 지문입니다", X1, 344, { s: 11, c: v("--mist"), a: "right" });
       say();
     }
     function say() {
@@ -626,9 +626,9 @@ function segOn(wrapId, btn) {
       });
       var b = ba(A);
       ctx.fillStyle = v("--coral"); ctx.beginPath(); ctx.arc(gx(A), gy(b), 7, 0, Math.PI * 2); ctx.fill();
-      text(ctx, "A = " + A + " · " + b.toFixed(2) + " MeV", clamp(gx(A), X0 + 70, X1 - 70), gy(b) - 14, { s: 12, w: "900", a: "center", c: v("--coral-700") });
+      text(ctx, "A = " + A + " · " + b.toFixed(2) + " MeV", clamp(gx(A), X0 + 70, X1 - 70), Math.min(gy(b) - 14, Y1 - 34), { s: 12, w: "900", a: "center", c: v("--coral-700") });
       text(ctx, (got ? "✅" : "⬜") + " 곡선의 꼭대기 찾기", 70, 292, { s: 12.5, w: "800", c: got ? v("--green-700") : v("--mist") });
-      text(ctx, "총 결합 에너지 = " + b.toFixed(2) + " × " + A + " = " + (b * A).toFixed(0) + " MeV", 850, 292, { s: 12, w: "800", a: "right", c: v("--mist") });
+      text(ctx, "총 결합 에너지 = " + b.toFixed(2) + " × " + A + " = " + (b * A).toFixed(0) + " MeV", 850, 320, { s: 12, w: "800", a: "right", c: v("--mist") });
       text(ctx, "별은 이 곡선을 오르며 에너지를 얻습니다. 꼭대기에 닿으면 더 오를 데가 없습니다.", 70, 320, { s: 11.5, c: v("--mist") });
       $("b-bind-info").innerHTML = "<b>질량수 " + A + "</b>" + (NAME[A] ? " (" + NAME[A] + ")" : "") + " · 핵자당 결합 에너지 <b>" + b.toFixed(3) + " MeV</b> · 총 <b>" + (b * A).toFixed(0) + " MeV</b><br>" +
         (A < 50 ? "꼭대기보다 <b>왼쪽</b>입니다. 이 원자핵끼리 융합하면 더 단단한 핵이 되면서 <b>에너지가 나옵니다</b>. 별이 빛나는 까닭입니다."
