@@ -1184,7 +1184,8 @@ window.sthWork({
   recap: [
     { key: "r1", label: "① 익지 않는 김치" },
     { key: "r2", label: "② 빠진 살은 어디로 갔을까" },
-    { key: "r3", label: "③ 한 글자가 바뀌면" }
+    { key: "r3", label: "③ 한 글자가 바뀌면" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   items: [
     { id: "all", label: "세 사건을 꿰는 한 문장", hint: "익지 않는 김치, 숨으로 빠져나간 지방, 낫 모양 적혈구. 세 이야기에는 모두 ‘단백질’이 들어 있습니다. 생명 시스템이 유지되려면 무엇이 필요한지 ‘화학 반응’과 ‘정보’라는 말을 넣어 한 문장으로 쓰세요.", ph: "" },
@@ -1198,7 +1199,8 @@ window.sthShare({
   rows: [
     { key: "r1", label: "① 익지 않는 김치" },
     { key: "r2", label: "② 빠진 살은 어디로 갔을까" },
-    { key: "r3", label: "③ 한 글자가 바뀌면" }
+    { key: "r3", label: "③ 한 글자가 바뀌면" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
 });

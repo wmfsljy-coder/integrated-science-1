@@ -1592,7 +1592,8 @@ window.sthWork({
     { key: "r1", label: "① 빈칸이 있는 표" },
     { key: "r2", label: "② 녹이면 통한다" },
     { key: "r3", label: "③ 같은 부품, 다른 물건" },
-    { key: "r4", label: "④ 거꾸로 가는 물질" }
+    { key: "r4", label: "④ 거꾸로 가는 물질" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   items: [
     { id: "all", label: "네 사건을 꿰는 한 문장", hint: "원자가 전자의 되풀이 → 결합 → 단위체를 잇는 방식 → 전기적 성질. 네 이야기를 ‘물질의 성질은 …에서 나온다’로 이어지는 한 문장으로 쓰세요." },
@@ -1607,7 +1608,8 @@ window.sthShare({
     { key: "r1", label: "① 빈칸이 있는 표" },
     { key: "r2", label: "② 녹이면 통한다" },
     { key: "r3", label: "③ 같은 부품, 다른 물건" },
-    { key: "r4", label: "④ 거꾸로 가는 물질" }
+    { key: "r4", label: "④ 거꾸로 가는 물질" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "네 사건을 꿰는 한 문장" }
 });

@@ -45,7 +45,35 @@
     ctx.save(); ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineWidth = w || 3;
     window.drawArrow(ctx, x1, y1, x2, y2, head || 10); ctx.restore();
   }
-  var H_ = { text: text, paper: paper, arrow: arrow, clamp: clamp, v: v, FONT: FONT };
+  function dash(ctx, x1, y1, x2, y2, col, w) {
+    ctx.save(); ctx.strokeStyle = col || v("--mist"); ctx.lineWidth = w || 1.5; ctx.setLineDash([5, 4]);
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.restore();
+  }
+  function line(ctx, pts, col, w) {
+    ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = w || 2.5; ctx.beginPath();
+    pts.forEach(function (p, i) { if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); });
+    ctx.stroke(); ctx.restore();
+  }
+  function axes(ctx, x0, y0, x1, y1) {
+    ctx.save(); ctx.strokeStyle = v("--line"); ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke(); ctx.restore();
+  }
+  function box(ctx, x, y, w, h, col, a) {
+    ctx.save(); ctx.globalAlpha = a == null ? 1 : a; ctx.fillStyle = col; ctx.fillRect(x, y, w, h); ctx.restore();
+  }
+  function dot(ctx, x, y, r, col) { ctx.save(); ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
+  /* 오른쪽 수치 판 : rows = [[이름, 값, 색토큰(선택), 큰글씨(선택)], …] */
+  function rows(ctx, x, y, list, gap) {
+    gap = gap || 34;
+    list.forEach(function (r, i) {
+      var yy = y + i * gap;
+      text(ctx, r[0], x, yy, { s: 12, w: "800", c: v("--mist") });
+      text(ctx, r[1], x, yy + 18, { s: r[3] ? 20 : 15, w: "900", c: r[2] ? v(r[2]) : v("--ink") });
+    });
+  }
+  function log10(x) { return Math.log(x) / Math.LN10; }
+  var H_ = { text: text, paper: paper, arrow: arrow, clamp: clamp, v: v, FONT: FONT,
+             dash: dash, line: line, axes: axes, box: box, dot: dot, rows: rows, log10: log10 };
 
   window.sthLab = function (opt) {
     var mount = document.getElementById(opt.mount);
@@ -199,6 +227,7 @@
       mount.appendChild(card);
 
       var made = c.build(stage, api) || {};
+      card._judge = made.judge;                         /* 검수 도구(_tools/labcheck.js)가 부른다 */
 
       function showHint() {
         var n = s.n || 0;
