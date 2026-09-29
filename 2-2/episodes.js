@@ -1593,6 +1593,7 @@ window.sthWork({
     { key: "r2", label: "② 녹이면 통한다" },
     { key: "r3", label: "③ 같은 부품, 다른 물건" },
     { key: "r4", label: "④ 거꾸로 가는 물질" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   items: [
@@ -1609,6 +1610,7 @@ window.sthShare({
     { key: "r2", label: "② 녹이면 통한다" },
     { key: "r3", label: "③ 같은 부품, 다른 물건" },
     { key: "r4", label: "④ 거꾸로 가는 물질" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "네 사건을 꿰는 한 문장" }

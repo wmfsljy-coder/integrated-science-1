@@ -1207,6 +1207,7 @@ window.sthWork({
     { key: "r1", label: "① 과녁에 남은 자국" },
     { key: "r2", label: "② 1미터를 다시 정하는 회의" },
     { key: "r3", label: "③ 30 cm 를 다투는 사람들" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   items: [
@@ -1222,6 +1223,7 @@ window.sthShare({
     { key: "r1", label: "① 과녁에 남은 자국" },
     { key: "r2", label: "② 1미터를 다시 정하는 회의" },
     { key: "r3", label: "③ 30 cm 를 다투는 사람들" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }

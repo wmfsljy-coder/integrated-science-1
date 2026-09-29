@@ -1185,6 +1185,7 @@ window.sthWork({
     { key: "r1", label: "① 익지 않는 김치" },
     { key: "r2", label: "② 빠진 살은 어디로 갔을까" },
     { key: "r3", label: "③ 한 글자가 바뀌면" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   items: [
@@ -1200,6 +1201,7 @@ window.sthShare({
     { key: "r1", label: "① 익지 않는 김치" },
     { key: "r2", label: "② 빠진 살은 어디로 갔을까" },
     { key: "r3", label: "③ 한 글자가 바뀌면" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }

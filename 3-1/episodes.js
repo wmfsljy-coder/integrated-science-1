@@ -1298,6 +1298,7 @@ window.sthWork({
     { key: "r1", label: "① 모래 한 알의 여행" },
     { key: "r2", label: "② 세 개의 난로" },
     { key: "r3", label: "③ 갈라지는 땅" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   items: [
@@ -1313,6 +1314,7 @@ window.sthShare({
     { key: "r1", label: "① 모래 한 알의 여행" },
     { key: "r2", label: "② 세 개의 난로" },
     { key: "r3", label: "③ 갈라지는 땅" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
