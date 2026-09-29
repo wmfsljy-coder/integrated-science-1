@@ -1114,7 +1114,8 @@ window.sthWork({
   recap: [
     { key: "r1", label: "① 피사에서 달까지" },
     { key: "r2", label: "② 엘리베이터 저울" },
-    { key: "r3", label: "③ 충돌 실험실" }
+    { key: "r3", label: "③ 충돌 실험실" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   items: [
     { id: "all", label: "세 사건을 꿰는 한 문장", hint: "떨어지는 깃털, 오르내리는 체중계 눈금, 구겨지는 자동차. 세 이야기에 공통으로 들어 있는 생각을 ‘힘’과 ‘질량’이라는 말을 넣어 한 문장으로 쓰세요.", ph: "" },
@@ -1128,7 +1129,8 @@ window.sthShare({
   rows: [
     { key: "r1", label: "① 피사에서 달까지" },
     { key: "r2", label: "② 엘리베이터 저울" },
-    { key: "r3", label: "③ 충돌 실험실" }
+    { key: "r3", label: "③ 충돌 실험실" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
 });
