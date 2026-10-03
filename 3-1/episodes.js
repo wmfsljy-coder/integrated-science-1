@@ -1299,7 +1299,8 @@ window.sthWork({
     { key: "r2", label: "② 세 개의 난로" },
     { key: "r3", label: "③ 갈라지는 땅" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   items: [
     { id: "all", label: "세 사건을 꿰는 한 문장", hint: "모래 한 알, 난로 세 대, 갈라지는 땅. 세 이야기에 공통으로 들어 있는 생각을 ‘에너지’와 ‘상호 작용’이라는 말을 넣어 한 문장으로 쓰세요.", ph: "" },
@@ -1315,7 +1316,8 @@ window.sthShare({
     { key: "r2", label: "② 세 개의 난로" },
     { key: "r3", label: "③ 갈라지는 땅" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
 });

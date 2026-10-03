@@ -1055,7 +1055,8 @@ window.sthWork({
     { key: "r2", label: "② 별의 부엌" },
     { key: "r3", label: "③ 존재비 저울" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   items: [
     { id: "all", label: "세 사건을 꿰는 한 문장", hint: "빅뱅의 3분, 별의 일생, 그리고 지구의 크기. 세 이야기를 ‘지구와 생명의 역사는 우주 역사의 …’로 이어지는 한 문장으로 쓰세요." },
@@ -1071,7 +1072,8 @@ window.sthShare({
     { key: "r2", label: "② 별의 부엌" },
     { key: "r3", label: "③ 존재비 저울" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
 });
