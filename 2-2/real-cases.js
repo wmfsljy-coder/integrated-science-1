@@ -7,6 +7,7 @@
 var E = (window.REAL_ELEMENTS || { rows: [] }).rows;      /* [원자 번호, 기호, 첫 이온화 에너지 eV, 원자 반지름 pm, 분류] */
 function ie(z) { var r = E[z - 1]; return r ? r[2] : null; }
 function sym(z) { var r = E[z - 1]; return r ? r[1] : "?"; }
+var KN = { 3: "리튬", 4: "베릴륨", 5: "붕소", 6: "탄소", 7: "질소", 8: "산소", 9: "플루오린", 10: "네온" };
 var SRC = "<small>출처: 미국 국립보건원 PubChem 주기율표(이온화 에너지는 NIST 원자 스펙트럼 자료), 사본은 이 단원의 data/elements.js.</small>";
 
 function plot(H, ctx, W, CH, from, to, mark) {
@@ -99,7 +100,7 @@ window.sthLab({
         judge: function () {
           var ok1 = a === 5, ok2 = b === 8;
           if (ok1 && ok2) return { ok: true, msg: "붕소(8.30) < 베릴륨(9.32), 산소(13.62) < 질소(14.53) — 두 곳에서 흐름이 꺾입니다." };
-          return { ok: false, msg: (ok1 ? "앞쪽은 맞았습니다. " : sym(a) + "는 앞 원소보다 큽니다. ") + (ok2 ? "뒤쪽은 맞았습니다." : sym(b) + "는 앞 원소보다 " + (ie(b) > ie(b - 1) ? "큽니다." : "작지만 앞쪽과 같은 곳이에요.")) };
+          return { ok: false, msg: (ok1 ? "앞쪽은 맞았습니다. " : KN[a] + "의 값은 앞 원소보다 큽니다. ") + (ok2 ? "뒤쪽은 맞았습니다." : KN[b] + "의 값은 앞 원소보다 " + (ie(b) > ie(b - 1) ? "큽니다." : "작지만 앞쪽과 같은 곳이에요.")) };
         }
       };
     },
