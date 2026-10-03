@@ -555,11 +555,13 @@ function ticker(box) {
     var F = 10, f = 0, m = 5, box = { gen: 0 }, run = ticker(box), cur = 1;
     var got = window.sthState("fmaGot") || { a: false, b: false, c: false };
 
-    function acc() { return (F - f) / m; }
+    /* 정지해 있던 로봇에서 마찰력은 미는 힘보다 커질 수 없다(정지 마찰력 = 미는 힘) */
+    function fe() { return Math.min(f, F); }
+    function acc() { return (F - fe()) / m; }
 
     function draw() {
       paper(ctx, W, H);
-      var a = acc(), net = F - f, ground = 236;
+      var a = acc(), net = F - fe(), ground = 236;
       ctx.fillStyle = v("--line"); ctx.fillRect(40, ground, W - 80, 5);
       for (var i = 0; i < 26; i++) { ctx.fillStyle = v("--card-2"); ctx.fillRect(44 + i * 32, ground + 5, 18, 7); }
       var s = 44 + m * 2.4, bx = 452, by = ground - s;
@@ -572,17 +574,18 @@ function ticker(box) {
       text(ctx, "미는 힘 F = " + F + " N", bx - s / 2 - lf - 10, by + s / 2 + 5, { s: 12.5, w: "800", a: "right", c: v("--coral-700") });
       /* 마찰력 */
       ctx.strokeStyle = v("--violet"); ctx.fillStyle = v("--violet"); ctx.lineWidth = 5;
-      var lr = 20 + f * 2.6;
+      var lr = 20 + fe() * 2.6;
       window.drawArrow(ctx, bx + s / 2 + lr, by + s - 8, bx + s / 2 + 6, by + s - 8, 13);
-      text(ctx, "마찰력 f = " + f + " N", bx + s / 2 + lr + 10, by + s - 3, { s: 12.5, w: "800", c: v("--violet-700") });
+      text(ctx, f > F ? "정지 마찰력 = " + F + " N" : "마찰력 f = " + f + " N", bx + s / 2 + lr + 10, by + s - 3, { s: 12.5, w: "800", c: v("--violet-700") });
       /* 알짜힘 · 가속도 */
-      text(ctx, "알짜힘 = F − f = " + net + " N", 40, 36, { s: 14, w: "900", c: v("--brand-700") });
+      text(ctx, "알짜힘 = F − (마찰력) = " + F + " − " + fe() + " = " + net + " N", 40, 36, { s: 14, w: "900", c: v("--brand-700") });
       text(ctx, "가속도 a = 알짜힘 ÷ m = " + net + " ÷ " + m + " = " + a.toFixed(2) + " m/s²", 40, 60, { s: 14, w: "900" });
       ctx.strokeStyle = v("--brand"); ctx.fillStyle = v("--brand"); ctx.lineWidth = 4;
       var la = clamp(Math.abs(a) * 16, 0, 300);
       if (la > 4) window.drawArrow(ctx, bx, 104, bx + (a > 0 ? la : -la), 104, 12);
       text(ctx, Math.abs(a) < 0.005 ? "가속도 0 — 속도가 변하지 않습니다" : (a > 0 ? "→ 점점 빨라집니다" : "← 점점 느려집니다"), bx, 92, { s: 11.5, w: "800", a: "center", c: v("--brand-700") });
-      $("b-a-out").innerHTML = "가속도: <b>" + a.toFixed(2) + " m/s²</b> &nbsp;( a = (F − f) / m = (" + F + " − " + f + ") / " + m + " )";
+      $("b-a-out").innerHTML = "가속도: <b>" + a.toFixed(2) + " m/s²</b> &nbsp;( a = (F − 마찰력) / m = (" + F + " − " + fe() + ") / " + m + " )" +
+        (f > F ? "<br>바닥이 버틸 수 있는 마찰력(" + f + " N)이 미는 힘보다 큽니다. 이때 마찰력은 미는 힘과 똑같은 " + F + " N 만 작용해(정지 마찰력) 알짜힘이 0 이 되므로, 정지해 있던 로봇은 <b>그대로 멈춰 있습니다</b>. 마찰력이 미는 힘보다 커져 로봇을 뒤로 밀지는 않습니다." : "");
       graph();
       check();
     }
@@ -624,7 +627,7 @@ function ticker(box) {
       if (got.b) done("m2-3b");
       if (got.c) done("m2-3c");
       if (got.a && got.b && got.c) {
-        window.sthMission("m2-3", true, "<span class='m-tag'>미션 완료</span>가속도를 정하는 것은 미는 힘 하나가 아니라 <b>알짜힘</b>입니다. 알짜힘이 0이면 밀고 있어도 속도가 변하지 않고 <b>등속으로</b> 굴러갑니다.");
+        window.sthMission("m2-3", true, "<span class='m-tag'>미션 완료</span>가속도를 정하는 것은 미는 힘 하나가 아니라 <b>알짜힘</b>입니다. 알짜힘이 0이면 밀고 있어도 <b>속도가 변하지 않습니다</b>. 정지해 있던 로봇은 계속 정지해 있고, 이미 움직이던 로봇이라면 같은 속도로 계속 움직입니다.");
         ep.clear(2);
       }
     }
@@ -899,7 +902,7 @@ function ticker(box) {
   /* 장면 3 — 야구공 받기 ------------------------------------------------- */
   (function () {
     var canvas = $("c-catch"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
-    var MB = 0.145, V0 = 40, DP = MB * V0;
+    var MB = 0.145, V0 = 40, DP = MB * V0, LIM = 400;   /* 합격선: 손을 30 cm 쯤 빼면 닿는 힘 */
     var t = 0.01;
     var got = window.sthState("catchGot") || { a: false, b: false };
 
@@ -912,14 +915,15 @@ function ticker(box) {
       ctx.strokeStyle = v("--coral"); ctx.fillStyle = v("--coral"); ctx.lineWidth = 4;
       window.drawArrow(ctx, 146, 150, 236, 150, 12);
       /* 손 */
-      var back = clamp((t - 0.005) / 0.195, 0, 1) * 96;
+      var dist = V0 * t / 2;                                   /* 고르게 느려진다고 볼 때 손이 공과 함께 움직인 거리(m) */
+      var back = clamp(dist / 0.6, 0, 1) * 96;
       ctx.fillStyle = v("--amber"); ctx.beginPath(); ctx.roundRect(258 + back, 112, 40, 76, 12); ctx.fill();
       ctx.strokeStyle = v("--amber-700"); ctx.lineWidth = 2; ctx.strokeRect(258 + back, 112, 40, 76);
       text(ctx, "손", 278 + back, 158, { s: 13, w: "900", a: "center", c: v("--amber-700") });
       if (back > 4) {
         ctx.strokeStyle = v("--teal"); ctx.fillStyle = v("--teal"); ctx.lineWidth = 3;
         window.drawArrow(ctx, 258, 214, 258 + back, 214, 10);
-        text(ctx, "손을 뒤로 " + (back / 96 * 20).toFixed(0) + " cm 빼며 받는다", 256, 236, { s: 11, c: v("--teal-700"), w: "800" });
+        text(ctx, "손을 뒤로 약 " + (dist < 1 ? (dist * 100).toFixed(0) + " cm" : dist.toFixed(1) + " m") + " 빼며 받는다", 256, 236, { s: 11, c: v("--teal-700"), w: "800" });
       } else {
         text(ctx, "손을 고정하고 받으면 아주 짧은 시간에 멈춘다", 256, 236, { s: 11, c: v("--mist") });
       }
@@ -931,25 +935,25 @@ function ticker(box) {
       axes(ctx, x0, y0, x1, y1);
       text(ctx, "힘 – 시간 그래프 (색칠한 넓이 = 충격량)", x0, 40, { s: 12.5, w: "800" });
       var bw = (x1 - x0) * clamp(t / TM, 0, 1), bh = (y1 - y0) * clamp(F / FM, 0, 1);
-      ctx.fillStyle = v(F > 100 ? "--rose" : "--green"); ctx.globalAlpha = .35;
+      ctx.fillStyle = v(F > LIM ? "--rose" : "--green"); ctx.globalAlpha = .35;
       ctx.fillRect(x0, y1 - bh, bw, bh); ctx.globalAlpha = 1;
-      ctx.strokeStyle = v(F > 100 ? "--rose" : "--green"); ctx.lineWidth = 2.5;
+      ctx.strokeStyle = v(F > LIM ? "--rose" : "--green"); ctx.lineWidth = 2.5;
       ctx.strokeRect(x0, y1 - bh, bw, bh);
       text(ctx, "0.2초", x1, y1 + 18, { s: 10.5, c: v("--mist"), a: "right" });
       text(ctx, "0", x0 - 6, y1 + 18, { s: 10.5, c: v("--mist"), a: "right" });
       text(ctx, "1200 N", x0 - 6, y0 + 4, { s: 10.5, c: v("--mist"), a: "right" });
-      var gy = y1 - (y1 - y0) * 100 / FM;
+      var gy = y1 - (y1 - y0) * LIM / FM;
       ctx.strokeStyle = v("--amber"); ctx.setLineDash([6, 5]); ctx.lineWidth = 2;
       ctx.beginPath(); ctx.moveTo(x0, gy); ctx.lineTo(x1, gy); ctx.stroke(); ctx.setLineDash([]);
-      text(ctx, "합격선 100 N", x1, gy - 8, { s: 10.5, w: "800", a: "right", c: v("--amber-700") });
+      text(ctx, "합격선 " + LIM + " N", x1, gy - 8, { s: 10.5, w: "800", a: "right", c: v("--amber-700") });
       text(ctx, "가로 " + t.toFixed(3) + "초 × 세로 " + F.toFixed(0) + " N = " + DP.toFixed(2) + " N·s", x0, y1 + 38, { s: 12, w: "800" });
       text(ctx, "시간을 늘리면 직사각형이 납작해질 뿐 넓이는 그대로입니다.", x0, y1 + 56, { s: 10.5, c: v("--mist") });
 
       $("c-catch-info").innerHTML = "멈추는 시간 <b>" + t.toFixed(3) + "초</b> → 손에 걸리는 평균 힘 <b>" + F.toFixed(0) + " N</b> (약 " + (F / G).toFixed(0) + " kg중). " +
-        (F <= 100 ? "🎉 합격선 아래입니다. 손을 뒤로 빼며 받으면 <b>같은 충격량</b>을 <b>더 긴 시간</b>에 나누어 받게 됩니다."
+        (F <= LIM ? "🎉 합격선 아래입니다. 손을 뒤로 빼며 받으면 <b>같은 충격량</b>을 <b>더 긴 시간</b>에 나누어 받게 됩니다."
           : "아직 너무 큽니다. 멈추는 시간을 늘려 보세요.");
       var ch = false;
-      if (F <= 100 && !got.a) { got.a = true; ch = true; }
+      if (F <= LIM && !got.a) { got.a = true; ch = true; }
       if (ch) { window.sthState("catchGot", got); mission(); }
     }
     function mission() {

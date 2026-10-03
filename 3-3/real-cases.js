@@ -59,7 +59,7 @@ window.sthLab({
       api.seg({ label: "읽는 틀", value: "1", options: [{ v: "0", t: "1번째 글자부터" }, { v: "1", t: "2번째 글자부터" }, { v: "2", t: "3번째 글자부터" }], onPick: function (x) { f = +x; api.changed(); draw(); } });
       api.slider({ label: "멈춤 전까지 아미노산 수", min: 50, max: 150, step: 1, value: 50, fmt: function (x) { return x + " 개"; }, onInput: function (x) { n = x; api.changed(); draw(); } });
       api.info("올바른 틀에서는 멈춤 코돈이 맨 끝에 한 번만 나옵니다. 염기 수 ÷ 3 을 생각해 보세요. " + SRC
-        + "<div data-link='{\"id\":\"ncbi-ins\",\"title\":\"NCBI — 사람 인슐린 mRNA (NM_000207)\",\"src\":\"미국 국립생물공학정보센터\",\"url\":\"https://www.ncbi.nlm.nih.gov/nuccore/NM_000207\",\"ask\":\"쪽 아래 FEATURES 의 CDS 항목에서 /translation= 뒤의 아미노산 서열이 어떤 글자로 시작하는지(처음 5 글자) 적어 오세요.\"}'></div>");
+        + "<div data-link='{\"id\":\"ncbi-ins\",\"title\":\"NCBI — 사람 인슐린 mRNA (NM_000207)\",\"src\":\"미국 국립생물공학정보센터\",\"url\":\"https://www.ncbi.nlm.nih.gov/nuccore/NM_000207\",\"ask\":\"영어 화면입니다. Ctrl+F 로 translation 을 찾으면 됩니다. 쪽 아래 FEATURES 의 CDS 항목에서 /translation= 뒤의 아미노산 서열이 어떤 글자로 시작하는지(처음 5 글자) 적어 오세요.\"}'></div>");
       draw();
       return {
         judge: function () {

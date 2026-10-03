@@ -67,7 +67,7 @@ window.sthLab({
       api.seg({ label: "C·F·G′·h 선의 주인 후보", value: "He", options: opts, onPick: function (x) { g1 = x; api.changed(); draw(); } });
       api.seg({ label: "D 선의 주인 후보", value: "He", options: opts, onPick: function (x) { g2 = x; api.changed(); draw(); } });
       api.info("검은 선의 파장(nm): " + FR.map(function (f) { return f[0] + " " + f[1].toFixed(2); }).join(" · ") + "<br><small>출처: 프라운호퍼 선 이름과 파장 — 미국 국립표준기술연구소(NIST) 원자 스펙트럼 자료(공기 중 파장). A·B 선은 지구 대기의 산소가 만든 것입니다.</small>"
-        + "<div data-link='{\"id\":\"nist-h\",\"title\":\"NIST 원자 스펙트럼 자료\",\"src\":\"미국 국립표준기술연구소\",\"url\":\"https://physics.nist.gov/PhysRefData/ASD/lines_form.html\",\"ask\":\"Spectrum 칸에 H I 을 넣고 600 ~ 700 nm 를 찾아, 656.28 nm 근처에 선이 몇 줄 나오는지와 가장 센 선의 파장을 적어 오세요.\"}'></div>");
+        + "<div data-link='{\"id\":\"nist-h\",\"title\":\"NIST 원자 스펙트럼 자료\",\"src\":\"미국 국립표준기술연구소\",\"url\":\"https://physics.nist.gov/PhysRefData/ASD/lines_form.html\",\"ask\":\"영어 화면입니다. Spectrum 칸에 H I, 파장 범위에 600 과 700 (nm)을 넣고 검색한 뒤, Rel. Int.(상대 세기) 값이 가장 큰 선의 파장을 적어 오세요.\"}'></div>");
       draw();
       return {
         judge: function () {
@@ -119,7 +119,7 @@ window.sthLab({
       cv.canvas._redraw = draw;
       api.slider({ label: "수소 원자 수 ÷ 헬륨 원자 수", min: 1, max: 30, step: 0.5, value: 3, fmt: function (x) { return x.toFixed(1) + " 배"; }, onInput: function (x) { r = x; api.changed(); draw(); } });
       api.info("로그 눈금 읽기: 차이가 1 이면 10배, 2 이면 100배, 차이가 1.07 이면 10<sup>1.07</sup> 배입니다(계산기의 10<sup>x</sup> 를 쓰세요).<br><small>출처: Asplund, Grevesse, Sauval & Scott (2009), The Chemical Composition of the Sun, Annu. Rev. Astron. Astrophys. 47, 481–522. 수소를 12 로 둔 값.</small>"
-        + "<div data-link='{\"id\":\"asplund\",\"title\":\"The Chemical Composition of the Sun (2009) 논문 초록\",\"src\":\"arXiv 공개 논문 저장소\",\"url\":\"https://arxiv.org/abs/0909.0948\",\"ask\":\"초록(Abstract)을 번역기로 읽고, 이 논문이 태양의 성분을 어떤 방법으로 다시 구했는지 한 문장으로 적어 오세요.\"}'></div>");
+        + "<div data-link='{\"id\":\"asplund\",\"title\":\"(도전) The Chemical Composition of the Sun (2009) 논문 초록\",\"src\":\"arXiv 공개 논문 저장소\",\"url\":\"https://arxiv.org/abs/0909.0948\",\"ask\":\"초록(Abstract)을 번역기로 읽고, 이 논문이 태양의 성분을 어떤 방법으로 다시 구했는지 한 문장으로 적어 오세요.\"}'></div>");
       draw();
       return {
         judge: function () {

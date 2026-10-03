@@ -64,7 +64,7 @@ function lcg(seed) {
   /* 장면 1 — 첫 추리 */
   window.sthGate({
     gate: "g1", key: "p1", title: "조사관의 첫 추리",
-    question: "표적지 넉 장 가운데, 총을 정비실로 보내야 할 선수는 누구일까요?",
+    question: "표적지 넉 장 가운데, <b>연습은 충분하고 총만 정비하면 되는</b> 선수는 누구일까요?",
     options: [
       "㉠ 가온 — 한가운데에 모였다",
       "㉡ 나래 — 오른쪽 위 한곳에 빈틈없이 모였다",
@@ -184,7 +184,7 @@ function lcg(seed) {
          : "치우치기도 하고 흩어지기도 했습니다. 두 손잡이를 따로 움직여 어느 쪽이 무엇을 바꾸는지 보세요.");
 
       var ch = false;
-      if (bias >= 30 && noise <= 8 && !got.a) { got.a = true; ch = true; }
+      if (bias > 10 && noise <= 8 && !got.a) { got.a = true; ch = true; }
       if (bias <= 10 && noise <= 8 && !got.b) { got.b = true; ch = true; }
       if (ch) { window.sthState("aShot", got); mission(); }
     }

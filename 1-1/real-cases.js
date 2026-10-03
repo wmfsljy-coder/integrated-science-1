@@ -47,7 +47,7 @@ window.sthLab({
       api.slider({ label: "읽을 해", min: 1962, max: 2026, step: 1, value: 1972, fmt: function (x) { return x + "년"; }, onInput: function (x) { yr = x; draw(); } });
       api.slider({ label: "1972년 한 해 동안 쌓인 어긋남", min: 0, max: 3, step: 0.02, value: 0, fmt: function (x) { return x.toFixed(2) + " 초"; }, onInput: function (x) { g = x; api.changed(); draw(); } });
       api.info("1 ms = 0.001 초. 하루마다 조금씩 길어진 시간을 1년치 모두 더해 보세요. " + SRC1
-        + "<div data-link='{\"id\":\"iers-leap\",\"title\":\"IERS 공지 C — 윤초\",\"src\":\"국제 지구 자전·좌표계 사업\",\"url\":\"https://hpiers.obspm.fr/iers/bul/bulc/bulletinc.dat\",\"ask\":\"가장 최근 공지에서 ‘다음에 윤초를 넣는다/넣지 않는다’ 중 어느 쪽인지, 그리고 지금 UTC 와 원자시(TAI)가 몇 초 차이 나는지 찾아 오세요.\"}'></div>");
+        + "<div data-link='{\"id\":\"iers-leap\",\"title\":\"IERS 공지 C — 윤초\",\"src\":\"국제 지구 자전·좌표계 사업\",\"url\":\"https://hpiers.obspm.fr/iers/bul/bulc/bulletinc.dat\",\"ask\":\"가장 최근 공지에서 ‘다음에 윤초를 넣는다/넣지 않는다’ 중 어느 쪽인지, 그리고 지금 UTC 와 원자시(TAI)가 몇 초 차이 나는지 찾아 오세요(영어 문서입니다. ‘leap second’ 와 ‘UTC-TAI’ 가 들어 있는 줄을 찾으세요).\"}'></div>");
       draw();
       return {
         judge: function () {
@@ -70,7 +70,7 @@ window.sthLab({
       options: ["㉠ 몇 초", "㉡ 몇 분", "㉢ 하루 가까이"],
       answer: 2
     },
-    task: "거리를 km 로 바꾸고 빛의 속력으로 나누어, 신호가 오는 데 걸리는 시간을 슬라이더로 맞추세요(± 0.3 시간).",
+    task: "거리를 km 로 바꾸고 빛의 속력으로 나누어, 신호가 오는 데 걸리는 시간을 슬라이더로 맞추세요(± 0.5 시간).",
     build: function (stage, api) {
       var H = api.h, cv = api.canvas(270), ctx = cv.ctx, W = cv.W, h = 1;
       var x0 = 60, x1 = 600, y0 = 24, y1 = 230;
@@ -88,16 +88,16 @@ window.sthLab({
       cv.canvas._redraw = draw;
       api.slider({ label: "신호가 오는 데 걸리는 시간", min: 0, max: 30, step: 0.1, value: 1, fmt: function (x) { return x.toFixed(1) + " 시간"; }, onInput: function (x) { h = x; api.changed(); draw(); } });
       api.info("시간 = 거리 ÷ 속력. 초로 나온 값을 3,600 으로 나누면 시간입니다. " + SRC2
-        + "<div data-link='{\"id\":\"voyager-now\",\"title\":\"NASA — 보이저 1·2호는 지금 어디에?\",\"src\":\"미국 항공우주국\",\"url\":\"https://science.nasa.gov/mission/voyager/where-are-voyager-1-and-voyager-2-now/\",\"ask\":\"오늘 보이저 1호까지의 거리(km)와 빛이 오가는 시간(round-trip light time)을 찾아, 이 사례의 값과 비교해 오세요.\"}'></div>");
+        + "<div data-link='{\"id\":\"voyager-now\",\"title\":\"NASA — 보이저 1·2호는 지금 어디에?\",\"src\":\"미국 항공우주국\",\"url\":\"https://science.nasa.gov/mission/voyager/where-are-voyager-1-and-voyager-2-now/\",\"ask\":\"오늘 보이저 1호까지의 거리(km)와 빛이 오가는 시간(round-trip light time)을 찾아, 이 사례의 값과 비교해 오세요(왕복 시간이므로 2로 나누어 비교하세요).\"}'></div>");
       draw();
       return {
         judge: function () {
-          if (Math.abs(h - LT) <= 0.3) return { ok: true, msg: V26[1].toFixed(2) + " × 1.496 × 10⁸ km ≈ " + (V26[1] * AU / 1e10).toFixed(2) + " × 10¹⁰ km, ÷ 3.0 × 10⁵ km/s ≈ " + (V26[1] * AU / C / 1e4).toFixed(2) + " × 10⁴ 초 ≈ " + LT.toFixed(1) + " 시간." };
+          if (Math.abs(h - LT) <= 0.5) return { ok: true, msg: V26[1].toFixed(2) + " × 1.496 × 10⁸ km ≈ " + (V26[1] * AU / 1e10).toFixed(2) + " × 10¹⁰ km, ÷ 3.0 × 10⁵ km/s ≈ " + (V26[1] * AU / C / 1e4).toFixed(2) + " × 10⁴ 초 ≈ " + LT.toFixed(1) + " 시간." };
           return { ok: false, msg: h.toFixed(1) + " 시간은 " + (h < LT ? "짧습니다" : "깁니다") + ". 지수끼리 먼저 나누면 계산이 쉬워요(10¹⁰ ÷ 10⁵ = 10⁵)." };
         }
       };
     },
-    hints: [V26[1].toFixed(2) + " × 1.496 × 10⁸ ≈ 2.54 × 10¹⁰ km 입니다(2.5 로 줄이면 답이 0.4 시간쯤 짧아져요).", "2.54 × 10¹⁰ ÷ 3.0 × 10⁵ ≈ 8.5 × 10⁴ 초. 3,600 으로 나누세요."],
+    hints: [V26[1].toFixed(2) + " × 1.496 × 10⁸ ≈ 2.54 × 10¹⁰ km 입니다(2.5 로 줄이면 답이 0.4 시간쯤 짧아지니, 계산 중간에는 세 자리를 남기세요).", "2.54 × 10¹⁰ ÷ 3.0 × 10⁵ ≈ 8.5 × 10⁴ 초. 3,600 으로 나누세요."],
     solution: "약 <b>" + LT.toFixed(1) + " 시간</b> — 하루(24 시간)에 거의 닿았습니다.",
     why: "아주 크거나 작은 수는 a × 10ⁿ 꼴의 과학적 표기로 쓰면 곱셈·나눗셈이 지수의 덧셈·뺄셈이 되어 계산이 쉬워집니다. 보이저 1호는 해마다 약 3.6 au 씩 멀어져, " + V26[0] + "년 말에는 빛으로 꼬박 하루 걸리는 거리(1 광일 ≈ 173 au)에 이릅니다. 지구에서 명령을 보내면 대답을 듣기까지 이틀이 걸리는 셈이에요.<br>"
       + "거리를 km 로만 쓰면 0 이 너무 많아 감이 오지 않습니다. 그래서 천문학에서는 au, 광년 같은 큰 단위를 함께 씁니다."
