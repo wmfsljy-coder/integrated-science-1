@@ -910,7 +910,8 @@ window.sthWork({
     { key: "r2", label: "② 10의 거듭제곱으로 걷기" },
     { key: "r3", label: "③ 0을 세다가 밤을 새운 보고서" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   items: [
     { id: "all", label: "세 사건을 꿰는 한 문장", hint: "화성 궤도선, 손톱에서 우주까지의 걸음, 0이 스물넷인 수. 세 이야기에 공통으로 들어 있는 생각을 ‘기준’과 ‘단위’라는 말을 넣어 쓰세요." },
@@ -926,7 +927,8 @@ window.sthShare({
     { key: "r2", label: "② 10의 거듭제곱으로 걷기" },
     { key: "r3", label: "③ 0을 세다가 밤을 새운 보고서" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
 });

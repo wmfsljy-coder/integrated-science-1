@@ -1208,7 +1208,8 @@ window.sthWork({
     { key: "r2", label: "② 1미터를 다시 정하는 회의" },
     { key: "r3", label: "③ 30 cm 를 다투는 사람들" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   items: [
     { id: "all", label: "세 사건을 꿰는 한 문장", hint: "표적지 넉 장, 금고 속의 금속 막대, 옆 건물에 찍힌 파란 점. 세 이야기에 공통으로 들어 있는 생각을 ‘기준’과 ‘오차’라는 말을 넣어 쓰세요." },
@@ -1224,7 +1225,8 @@ window.sthShare({
     { key: "r2", label: "② 1미터를 다시 정하는 회의" },
     { key: "r3", label: "③ 30 cm 를 다투는 사람들" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
 });
