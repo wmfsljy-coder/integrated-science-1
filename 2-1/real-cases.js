@@ -50,7 +50,7 @@ window.sthLab({
         FR.forEach(function (f) {
           var hi = (f[0] === "C" || f[0] === "F" || f[0] === "G′" || f[0] === "h") ? 1 : ((f[0] === "D₁" || f[0] === "D₂") ? 2 : 0);
           ctx.fillStyle = "#111"; ctx.fillRect(X(f[1]) - 1, 40, 2.2, 60);
-          if (f[0] !== "D₁") H.text(ctx, f[0] === "D₂" ? "D" : f[0], X(f[1]) + (f[0] === "K" ? -2 : (f[0] === "H" ? 2 : 0)), 32, { s: 12, w: "900", a: f[0] === "K" ? "right" : (f[0] === "H" ? "left" : "center"), c: hi === 1 ? H.v("--brand-700") : (hi === 2 ? H.v("--amber-700") : H.v("--mist")) });
+          if (f[0] !== "D₁") H.text(ctx, f[0] === "D₂" ? "D" : f[0], X(f[1]) + (f[0] === "K" || f[0] === "G" ? -2 : (f[0] === "H" || f[0] === "G′" ? 2 : 0)), 32, { s: 12, w: "900", a: f[0] === "K" || f[0] === "G" ? "right" : (f[0] === "H" || f[0] === "G′" ? "left" : "center"), c: hi === 1 ? H.v("--brand-700") : (hi === 2 ? H.v("--amber-700") : H.v("--mist")) });
         });
         H.text(ctx, "햇빛 (검은 선 = 흡수)", x1, 116, { s: 11, w: "700", a: "right", c: H.v("--mist") });
         [400, 500, 600, 700].forEach(function (w) { H.text(ctx, w + " nm", X(w), 116, { s: 10, a: "center", c: H.v("--mist") }); });
