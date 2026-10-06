@@ -12,18 +12,18 @@ window.sthLab({
   {
     id: "c1", tag: "SI 단위 · 환산", title: "약 용량 사고 막기", short: "약 용량",
     who: "🧑‍⚕️", name: "해외 병원 간호사",
-    say: "“열이 나는 아이가 왔어요. 처방은 <b>몸무게 1 kg 당 15 mg</b>. 그런데 진료 기록에 몸무게가 <b>44 lb(파운드)</b>로만 적혀 있네요. 시럽은 <b>5 mL 에 160 mg</b> 들어 있습니다. 주사기에 몇 mL 를 담아야 할까요?”",
+    say: "“열이 나는 아이가 왔어요. 처방은 <b>몸무게 1 kg 당 15 mg</b>. 그런데 진료 기록에 몸무게가 <b>44 lb(파운드)</b>로만 적혀 있네요. 시럽은 <b>5 mL에 160 mg</b> 들어 있습니다. 주사기에 몇 mL를 담아야 할까요?”",
     predict: {
-      q: "간호사가 44 를 그대로 kg 이라고 여기고 약을 재면 어떻게 될까요?",
+      q: "간호사가 44를 그대로 kg이라고 여기고 약을 재면 어떻게 될까요?",
       options: ["㉠ 처방의 두 배가 넘는 약을 준다", "㉡ 처방보다 조금 더 준다", "㉢ 처방과 같다"], answer: 0
     },
-    task: "주사기에 시럽을 담아 <b>아이 몸무게 1 kg 당 15 mg</b>(14.5 ~ 15.5 mg)이 되게 하세요. 1 lb = 0.4536 kg 입니다.",
+    task: "주사기에 시럽을 담아 <b>아이 몸무게 1 kg 당 15 mg</b>(14.5~15.5 mg)이 되게 하세요. 1 lb = 0.4536 kg입니다.",
     build: function (stage, api) {
       var H = api.h, cv = api.canvas(290), ctx = cv.ctx, W = cv.W;
       var vol = 5, CONC = 160 / 5, KG = 44 * 0.4536;
       function draw() {
         H.paper(ctx, W, cv.H);
-        H.text(ctx, "시럽: 5 mL 에 160 mg", 40, 34, { s: 14, w: "900" });
+        H.text(ctx, "시럽: 5 mL에 160 mg", 40, 34, { s: 14, w: "900" });
         var x0 = 110, x1 = 610, y = 140, sc = (x1 - x0) / 25;
         H.box(ctx, x0, y - 30, x1 - x0, 60, H.v("--card-2"));
         H.box(ctx, x0, y - 30, vol * sc, 60, H.v("--coral"), 0.75);
@@ -46,19 +46,19 @@ window.sthLab({
       return {
         judge: function () {
           var perKg = vol * CONC / KG;
-          if (perKg >= 14.5 && perKg <= 15.5) return { ok: true, msg: vol.toFixed(1) + " mL = " + (vol * CONC).toFixed(0) + " mg — 아이 몸무게 " + KG.toFixed(1) + " kg 에 1 kg 당 " + perKg.toFixed(1) + " mg 입니다." };
-          if (Math.abs(vol * CONC - 44 * 15) < 40) return { ok: false, msg: "44 를 kg 으로 계산했나요? 이 양은 1 kg 당 " + perKg.toFixed(1) + " mg — 처방의 " + (perKg / 15).toFixed(1) + " 배입니다." };
-          return { ok: false, msg: "지금은 아이 몸무게 1 kg 당 " + perKg.toFixed(1) + " mg 입니다." };
+          if (perKg >= 14.5 && perKg <= 15.5) return { ok: true, msg: vol.toFixed(1) + " mL = " + (vol * CONC).toFixed(0) + " mg — 아이 몸무게 " + KG.toFixed(1) + " kg에 1 kg 당 " + perKg.toFixed(1) + " mg입니다." };
+          if (Math.abs(vol * CONC - 44 * 15) < 40) return { ok: false, msg: "44를 kg으로 계산했나요? 이 양은 1 kg 당 " + perKg.toFixed(1) + " mg — 처방의 " + (perKg / 15).toFixed(1) + " 배입니다." };
+          return { ok: false, msg: "지금은 아이 몸무게 1 kg 당 " + perKg.toFixed(1) + " mg입니다." };
         }
       };
     },
     hints: [
-      "처방은 <b>kg</b> 기준인데 몸무게는 <b>lb</b> 로 적혀 있습니다. 먼저 단위를 맞추세요. 44 lb × 0.4536 = ?",
-      "필요한 약 = (몸무게 kg) × 15 mg. 시럽 1 mL 에는 160 ÷ 5 = <b>32 mg</b> 이 들어 있습니다."
+      "처방은 <b>kg</b> 기준인데 몸무게는 <b>lb</b>로 적혀 있습니다. 먼저 단위를 맞추세요. 44 lb × 0.4536 = ?",
+      "필요한 약 = (몸무게 kg) × 15 mg. 시럽 1 mL 에는 160 ÷ 5 = <b>32 mg</b>이 들어 있습니다."
     ],
-    solution: "44 lb × 0.4536 ≈ <b>20.0 kg</b> → 20.0 × 15 ≈ <b>300 mg</b> → 300 ÷ 32 ≈ <b>9.4 mL</b>. 9.1 ~ 9.6 mL 사이에 두세요.",
-    why: "같은 44 라도 <b>lb</b> 와 <b>kg</b> 은 2.2 배 차이가 납니다. 숫자만 보고 단위를 확인하지 않으면, 화성 기후 궤도선을 잃게 한 ‘파운드힘과 뉴턴’ 사고와 <b>똑같은 구조</b>의 실수가 사람에게 일어납니다.<br>" +
-      "그래서 과학과 의료는 단위를 <b>국제 단위계(SI)</b>로 통일하고, 계산할 때 단위까지 함께 적어 나갑니다 — (lb) × (kg/lb) = (kg) 처럼 단위가 약분되는지 보면 환산이 맞았는지 스스로 확인할 수 있습니다."
+    solution: "44 lb × 0.4536 ≈ <b>20.0 kg</b> → 20.0 × 15 ≈ <b>300 mg</b> → 300 ÷ 32 ≈ <b>9.4 mL</b>. 9.1~9.6 mL 사이에 두세요.",
+    why: "같은 44 라도 <b>lb</b>와 <b>kg</b>은 2.2 배 차이가 납니다. 숫자만 보고 단위를 확인하지 않으면, 화성 기후 궤도선을 잃게 한 ‘파운드힘과 뉴턴’ 사고와 <b>똑같은 구조</b>의 실수가 사람에게 일어납니다.<br>" +
+      "그래서 과학과 의료는 단위를 <b>국제 단위계(SI)</b>로 통일하고, 계산할 때 단위까지 함께 적어 나갑니다 — (lb) × (kg/lb) = (kg)처럼 단위가 약분되는지 보면 환산이 맞았는지 스스로 확인할 수 있습니다."
   },
 
   /* ------------------------------------------------------------------ 2. 규모 · 과학적 표기 */
@@ -100,27 +100,27 @@ window.sthLab({
         onInput: function (x) { L = x; draw(); } });
       api.slider({ label: "앞자리 수 a", min: 1, max: 9.9, step: 0.1, value: 1, fmt: function (x) { return x.toFixed(1); },
         onInput: function (x) { a = x; draw(); } });
-      api.slider({ label: "10 의 지수 n", min: -9, max: -1, step: 1, value: -3, fmt: function (x) { return "10" + sup(x); },
+      api.slider({ label: "10의 지수 n", min: -9, max: -1, step: 1, value: -3, fmt: function (x) { return "10" + sup(x); },
         onInput: function (x) { n = x; draw(); } });
       api.info("눈금 막대가 사진에서 몇 칸인지 먼저 보세요. 자 끝을 세포 양 끝에 맞추면 됩니다.");
       draw();
       return {
         judge: function () {
           var val = a * Math.pow(10, n), err = Math.abs(val - 3.0e-5) / 3.0e-5;
-          if (err <= 0.035) return { ok: true, msg: "세포 지름 30 µm = " + a.toFixed(1) + " × 10" + sup(n) + " m. 머리카락 굵기의 약 3분의 1 입니다." };
-          if (Math.abs(val - 3.0e-6) / 3.0e-6 <= 0.04) return { ok: false, msg: "10 배 작습니다. 30 µm 를 3.0 으로 바꾸면서 지수를 하나 올려야 합니다." };
+          if (err <= 0.035) return { ok: true, msg: "세포 지름 30 µm = " + a.toFixed(1) + " × 10" + sup(n) + " m. 머리카락 굵기의 약 3분의 1입니다." };
+          if (Math.abs(val - 3.0e-6) / 3.0e-6 <= 0.04) return { ok: false, msg: "10 배 작습니다. 30 µm를 3.0으로 바꾸면서 지수를 하나 올려야 합니다." };
           if (Math.abs(val - 3.0e-4) / 3.0e-4 <= 0.04) return { ok: false, msg: "10 배 큽니다. 지수를 한 번 더 확인하세요." };
           return { ok: false, msg: "기록한 지름 " + a.toFixed(1) + " × 10" + sup(n) + " m — 사진과 맞지 않습니다." };
         }
       };
     },
     hints: [
-      "눈금 막대 <b>20 µm = 160 칸</b>. 그러면 1 µm 는 몇 칸일까요? 자를 세포 양 끝에 맞춰 칸 수를 재 보세요.",
-      "1 µm = 10⁻⁶ m 입니다. 30 µm = 30 × 10⁻⁶ m. 앞자리를 1 과 10 사이로 만들려면 30 → 3.0 으로 바꾸고 지수는?"
+      "눈금 막대 <b>20 µm = 160 칸</b>. 그러면 1 µm는 몇 칸일까요? 자를 세포 양 끝에 맞춰 칸 수를 재 보세요.",
+      "1 µm = 10⁻⁶ m입니다. 30 µm = 30 × 10⁻⁶ m. 앞자리를 1과 10 사이로 만들려면 30 → 3.0으로 바꾸고 지수는?"
     ],
     solution: "세포 지름 240 칸 ÷ 8 칸/µm = <b>30 µm</b> = 30 × 10⁻⁶ m = <b>3.0 × 10⁻⁵ m</b>. a = 3.0, n = −5.",
     why: "사진 속 크기는 배율에 따라 달라지지만, <b>함께 찍힌 눈금 막대</b>와의 비례로 실제 크기를 구할 수 있습니다. 지도에서 축척을 쓰는 것과 같은 원리입니다.<br>" +
-      "과학적 표기법은 앞자리를 1 과 10 사이로 두고 크기를 <b>10 의 거듭제곱</b>에 맡깁니다. 지수만 보면 규모가 바로 보이지요 — 세포(10⁻⁵ m), 머리카락(10⁻⁴ m), 원자(10⁻¹⁰ m) 처럼. 30 µm 는 지수로는 머리카락보다 한 칸 아래이고, 실제 굵기로는 머리카락의 <b>약 3분의 1</b>입니다."
+      "과학적 표기법은 앞자리를 1과 10 사이로 두고 크기를 <b>10의 거듭제곱</b>에 맡깁니다. 지수만 보면 규모가 바로 보이지요 — 세포(10⁻⁵ m), 머리카락(10⁻⁴ m), 원자(10⁻¹⁰ m)처럼. 30 µm는 지수로는 머리카락보다 한 칸 아래이고, 실제 굵기로는 머리카락의 <b>약 3분의 1</b>입니다."
   },
 
   /* ------------------------------------------------------------------ 3. 기본량 → 유도량 */
@@ -132,7 +132,7 @@ window.sthLab({
       q: "압력의 단위(Pa)를 기본 단위로 풀어 쓰면, 기본량이 몇 가지 들어갈까요?",
       options: ["㉠ 한 가지", "㉡ 두 가지", "㉢ 세 가지"], answer: 2
     },
-    task: "kg · m · s 의 지수를 조절해 <b>압력의 단위</b>를 만드세요. 가는 길에 다른 물리량도 찾아보세요.",
+    task: "kg · m · s의 지수를 조절해 <b>압력의 단위</b>를 만드세요. 가는 길에 다른 물리량도 찾아보세요.",
     build: function (stage, api) {
       var H = api.h, cv = api.canvas(260), ctx = cv.ctx, W = cv.W;
       var e = { kg: 0, m: 1, s: 0 }, seen = {};
@@ -164,10 +164,10 @@ window.sthLab({
         });
       }
       cv.canvas._redraw = draw;
-      api.slider({ label: "kg 의 지수", min: -2, max: 2, step: 1, value: 0, fmt: function (x) { return "kg" + sup(x); }, onInput: function (x) { e.kg = x; draw(); } });
-      api.slider({ label: "m 의 지수", min: -3, max: 3, step: 1, value: 1, fmt: function (x) { return "m" + sup(x); }, onInput: function (x) { e.m = x; draw(); } });
-      api.slider({ label: "s 의 지수", min: -3, max: 3, step: 1, value: 0, fmt: function (x) { return "s" + sup(x); }, onInput: function (x) { e.s = x; draw(); } });
-      api.info("지수가 음수이면 ‘나누기’ 입니다. 예) m·s⁻¹ = m/s");
+      api.slider({ label: "kg의 지수", min: -2, max: 2, step: 1, value: 0, fmt: function (x) { return "kg" + sup(x); }, onInput: function (x) { e.kg = x; draw(); } });
+      api.slider({ label: "m의 지수", min: -3, max: 3, step: 1, value: 1, fmt: function (x) { return "m" + sup(x); }, onInput: function (x) { e.m = x; draw(); } });
+      api.slider({ label: "s의 지수", min: -3, max: 3, step: 1, value: 0, fmt: function (x) { return "s" + sup(x); }, onInput: function (x) { e.s = x; draw(); } });
+      api.info("지수가 음수이면 ‘나누기’입니다. 예) m·s⁻¹ = m/s");
       draw();
       return {
         judge: function () {
@@ -178,12 +178,12 @@ window.sthLab({
       };
     },
     hints: [
-      "먼저 <b>힘</b>의 단위를 만들어 보세요. F = ma 이므로 N = kg × m/s² 입니다.",
-      "압력 = 힘 ÷ 넓이. kg·m·s⁻² 을 m² 로 나누면 m 의 지수는 1 − 2 = ?"
+      "먼저 <b>힘</b>의 단위를 만들어 보세요. F = ma이므로 N = kg × m/s²입니다.",
+      "압력 = 힘 ÷ 넓이. kg·m·s⁻²을 m²로 나누면 m의 지수는 1 − 2 = ?"
     ],
     solution: "Pa = N ÷ m² = (kg·m·s⁻²) ÷ m² = <b>kg · m⁻¹ · s⁻²</b>. kg 1, m −1, s −2.",
     why: "힘·에너지·압력처럼 이름이 따로 있는 단위도 <b>기본량(질량·길이·시간…) 몇 개의 조합</b>으로 풀어집니다. 이것이 기본량과 유도량의 관계입니다.<br>" +
-      "이 조합을 알면 공식이 맞는지 <b>단위로 검산</b>할 수 있습니다. 예) 운동 에너지 ½mv² 의 단위는 kg·(m/s)² = kg·m²·s⁻² — 방금 찾은 J 과 같습니다. 단위가 안 맞는 식은 틀린 식입니다."
+      "이 조합을 알면 공식이 맞는지 <b>단위로 검산</b>할 수 있습니다. 예) 운동 에너지 ½mv²의 단위는 kg·(m/s)² = kg·m²·s⁻² — 방금 찾은 J과 같습니다. 단위가 안 맞는 식은 틀린 식입니다."
   }
   ]
 });

@@ -210,10 +210,10 @@ function ticker(box) {
         text(ctx, r[0], 430, yy + 1, { s: 12, c: i < 3 ? v("--brand-700") : v("--mist") });
         text(ctx, r[1], 862, yy + 2, { s: 13, w: "800", a: "right" });
       });
-      text(ctx, "1초 : 2초 : 3초 동안 떨어진 거리는 언제나 1 : 4 : 9 입니다.", 416, 300, { s: 11.5, c: v("--mist") });
+      text(ctx, "1초 : 2초 : 3초 동안 떨어진 거리는 언제나 1 : 4 : 9입니다.", 416, 300, { s: 11.5, c: v("--mist") });
       text(ctx, "질량은 식 어디에도 들어 있지 않습니다.", 416, 322, { s: 11.5, w: "800", c: v("--coral-700") });
 
-      $("a-fall-info").innerHTML = "<b>" + pname + "</b>에서 <b>" + h.toFixed(1) + " m</b> 높이에서 놓으면 <b>" + t.toFixed(2) + "초</b> 뒤 <b>" + vEnd.toFixed(1) + " m/s</b> 로 바닥에 닿습니다. (1 m/s = 시속 3.6 km 이므로 약 시속 " + (vEnd * 3.6).toFixed(0) + " km)";
+      $("a-fall-info").innerHTML = "<b>" + pname + "</b>에서 <b>" + h.toFixed(1) + " m</b> 높이에서 놓으면 <b>" + t.toFixed(2) + "초</b> 뒤 <b>" + vEnd.toFixed(1) + " m/s</b>로 바닥에 닿습니다. (1 m/s = 시속 3.6 km이므로 약 시속 " + (vEnd * 3.6).toFixed(0) + " km)";
       check(t, vEnd);
     }
     function check(t, vEnd) {
@@ -227,7 +227,7 @@ function ticker(box) {
       if (got.a) done("m1-3a");
       if (got.b) done("m1-3b");
       if (got.a && got.b) {
-        window.sthMission("m1-3", true, "<span class='m-tag'>미션 완료</span>같은 높이라도 <b>g</b> 가 크면 빨리 떨어집니다. 낙하를 정하는 것은 질량이 아니라 그 천체의 <b>중력 가속도</b>입니다.");
+        window.sthMission("m1-3", true, "<span class='m-tag'>미션 완료</span>같은 높이라도 <b>g</b>가 크면 빨리 떨어집니다. 낙하를 정하는 것은 질량이 아니라 그 천체의 <b>중력 가속도</b>입니다.");
         ep.clear(2);
       }
     }
@@ -367,12 +367,12 @@ function ticker(box) {
         text(ctx, r[1], 868, yy + 1, { s: 12, w: "800", a: "right" });
       });
       text(ctx, "이심률 0 = 완전한 원, 1 미만 = 타원, 1 이상 = 돌아오지 않음", 508, 316, { s: 10.5, c: v("--mist") });
-      text(ctx, "이 화면은 고도 100 km 에서 쏜다고 보았습니다.", 508, 336, { s: 10.5, c: v("--mist") });
+      text(ctx, "이 화면은 고도 100 km에서 쏜다고 보았습니다.", 508, 336, { s: 10.5, c: v("--mist") });
       text(ctx, "지표면 기준 제1 우주 속도 7.9 km/s, 탈출 속도 11.2 km/s", 508, 356, { s: 10.5, c: v("--mist") });
 
       $("a-cannon-info").innerHTML = o.hit !== null
         ? "속도 <b>" + vk.toFixed(2) + " km/s</b> — 대포알은 약 <b>" + (RE * o.hit * Math.PI / 180 / 1000).toFixed(0) + " km</b> 날아가 땅에 떨어집니다. 더 세게 쏘면 떨어지는 지점이 멀어집니다."
-        : (o.esc ? "속도 <b>" + vk.toFixed(2) + " km/s</b> — 지구의 중력을 이기고 <b>영영 돌아오지 않습니다.</b> 이 속도를 탈출 속도라고 합니다."
+        : (o.esc ? "속도 <b>" + vk.toFixed(2) + " km/s</b> — 지구의 중력을 이기고 <b>영영 돌아오지 않습니다.</b>이 속도를 탈출 속도라고 합니다."
           : "속도 <b>" + vk.toFixed(2) + " km/s</b> — 대포알은 계속 떨어지지만, 떨어지는 만큼 지구 표면도 휘어져 <b>바닥에 닿지 못합니다.</b> 이것이 인공위성입니다. (이심률 " + o.e.toFixed(3) + ")");
 
       var ch = false;
@@ -412,7 +412,7 @@ function ticker(box) {
       { t: "🪶 진공 통 안에서 놓은 깃털", a: "f", why: "공기 저항이 없으니 완전한 자유 낙하입니다." },
       { t: "🔨 달 표면에서 스콧이 놓은 망치", a: "f", why: "달에는 공기가 없어 자유 낙하합니다." },
       { t: "⚾ 절벽에서 수평으로 던진 공", a: "p", why: "수평으로는 등속, 아래로는 자유 낙하하여 포물선을 그립니다." },
-      { t: "📦 날아가는 비행기에서 떨어뜨린 구호 상자", a: "p", why: "떨어지는 순간 비행기와 같은 수평 속도를 가지고 있으므로 포물선을 그립니다.", hint: "상자는 가만히 있다가 떨어졌을까요?" },
+      { t: "📦 날아가는 비행기에서 떨어뜨린 구호 상자", a: "p", why: "떨어지는 순간 비행기와 같은 수평 속도로 날아가고 있으므로 포물선을 그립니다.", hint: "상자는 가만히 있다가 떨어졌을까요?" },
       { t: "🎯 수평으로 쏜 화살", a: "p", why: "수평 방향 등속 + 연직 방향 자유 낙하입니다." },
       { t: "🛰️ 지구를 도는 국제 우주 정거장", a: "o", why: "계속 떨어지지만 수평 속도가 커서 지구를 비켜 갑니다." },
       { t: "🌕 지구 주위를 도는 달", a: "o", why: "달도 지구의 중력에 이끌려 끝없이 떨어지는 중입니다.", hint: "달은 왜 지구로 곤두박질치지 않을까요?" },
@@ -528,7 +528,7 @@ function ticker(box) {
       if (got.b) done("m2-2b");
       if (got.c) done("m2-2c");
       if (got.a && got.b && got.c) {
-        window.sthMission("m2-2", true, "<span class='m-tag'>미션 완료</span>체중계가 재는 것은 질량이 아니라 <b>떠받치는 힘</b>이었습니다. a = −9.8 m/s² 는 줄이 끊어져 <b>자유 낙하</b>하는 상태입니다.");
+        window.sthMission("m2-2", true, "<span class='m-tag'>미션 완료</span>체중계가 재는 것은 질량이 아니라 <b>떠받치는 힘</b>이었습니다. a = −9.8 m/s²는 줄이 끊어져 <b>자유 낙하</b>하는 상태입니다.");
         ep.clear(1);
       }
     }
@@ -542,7 +542,7 @@ function ticker(box) {
       why: ["속도가 아니라 <b>가속도</b>가 눈금을 바꿉니다. 슬라이더를 0에 두고 확인해 보세요.",
         "일정한 속도 = 가속도 0 = 알짜힘 0. 떠받치는 힘은 중력과 똑같아지고 눈금은 그대로입니다.",
         "가속도가 0이면 눈금도 변하지 않습니다.",
-        "눈금이 0이 되려면 아래로 9.8 m/s² 로 가속(자유 낙하)해야 합니다."],
+        "눈금이 0이 되려면 아래로 9.8 m/s²로 가속(자유 낙하)해야 합니다."],
       onDone: function () { got.c = true; window.sthState("elevGot", got); mission(); }
     });
     draw(); mission();
@@ -585,7 +585,7 @@ function ticker(box) {
       if (la > 4) window.drawArrow(ctx, bx, 104, bx + (a > 0 ? la : -la), 104, 12);
       text(ctx, Math.abs(a) < 0.005 ? "가속도 0 — 속도가 변하지 않습니다" : (a > 0 ? "→ 점점 빨라집니다" : "← 점점 느려집니다"), bx, 92, { s: 11.5, w: "800", a: "center", c: v("--brand-700") });
       $("b-a-out").innerHTML = "가속도: <b>" + a.toFixed(2) + " m/s²</b> &nbsp;( a = (F − 마찰력) / m = (" + F + " − " + fe() + ") / " + m + " )" +
-        (f > F ? "<br>바닥이 버틸 수 있는 마찰력(" + f + " N)이 미는 힘보다 큽니다. 이때 마찰력은 미는 힘과 똑같은 " + F + " N 만 작용해(정지 마찰력) 알짜힘이 0 이 되므로, 정지해 있던 로봇은 <b>그대로 멈춰 있습니다</b>. 마찰력이 미는 힘보다 커져 로봇을 뒤로 밀지는 않습니다." : "");
+        (f > F ? "<br>바닥이 버틸 수 있는 마찰력(" + f + " N)이 미는 힘보다 큽니다. 이때 마찰력은 미는 힘과 똑같은 " + F + " N만 작용해(정지 마찰력) 알짜힘이 0이 되므로, 정지해 있던 로봇은 <b>그대로 멈춰 있습니다</b>. 마찰력이 미는 힘보다 커져 로봇을 뒤로 밀지는 않습니다." : "");
       graph();
       check();
     }
@@ -641,9 +641,9 @@ function ticker(box) {
       q: "같은 크기의 알짜힘으로 <b>질량이 2배</b>인 짐을 밀면 가속도는 어떻게 될까요?",
       options: ["2배가 된다", "그대로다", "절반이 된다", "4배가 된다"],
       answer: 2,
-      why: ["a = 알짜힘 ÷ m 입니다. 질량이 커지면 가속도는 작아집니다.",
+      why: ["a = 알짜힘 ÷ m입니다. 질량이 커지면 가속도는 작아집니다.",
         "질량 슬라이더만 움직여 보세요. 가속도가 바뀝니다.",
-        "a = 알짜힘 ÷ m 이므로 질량과 가속도는 <b>반비례</b>합니다. 힘과 가속도는 비례, 질량과 가속도는 반비례.",
+        "a = 알짜힘 ÷ m이므로 질량과 가속도는 <b>반비례</b>합니다. 힘과 가속도는 비례, 질량과 가속도는 반비례.",
         "반비례입니다. 4배가 되려면 질량이 ¼ 이 되어야 합니다."],
       onDone: function () { got.c = true; window.sthState("fmaGot", got); mission(); }
     });
@@ -686,9 +686,9 @@ function ticker(box) {
       /* 계기 */
       text(ctx, "0.5초 동안 200 N → 각자 받은 충격량 100 N·s (크기는 같고 방향만 반대)", 40, 34, { s: 12.5, w: "800", c: v("--brand-700") });
       var rows = [
-        ["서윤 A 의 질량", mA + " kg"],
-        ["서윤 A 의 속도", vA().toFixed(2) + " m/s (왼쪽)"],
-        ["친구 B 의 속도", vB().toFixed(2) + " m/s (오른쪽)"]
+        ["서윤 A의 질량", mA + " kg"],
+        ["서윤 A의 속도", vA().toFixed(2) + " m/s (왼쪽)"],
+        ["친구 B의 속도", vB().toFixed(2) + " m/s (오른쪽)"]
       ];
       rows.forEach(function (r, i) {
         var yy = 62 + i * 28;
@@ -701,7 +701,7 @@ function ticker(box) {
     canvas._redraw = draw;
     function say() {
       if (!ran) { $("b-push-info").innerHTML = "A의 질량을 정하고 ‘0.5초 동안 서로 밀기’를 눌러 보세요."; return; }
-      $("b-push-info").innerHTML = "서윤(" + mA + " kg)은 <b>" + vA().toFixed(2) + " m/s</b>, 친구(60 kg)는 <b>" + vB().toFixed(2) + " m/s</b> 로 밀려났습니다. 받은 <b>힘도 충격량도 크기가 같은데</b> 속도가 다른 것은 <b>질량이 다르기</b> 때문입니다." +
+      $("b-push-info").innerHTML = "서윤(" + mA + " kg)은 <b>" + vA().toFixed(2) + " m/s</b>, 친구(60 kg)는 <b>" + vB().toFixed(2) + " m/s</b>로 밀려났습니다. 받은 <b>힘도 충격량도 크기가 같은데</b> 속도가 다른 것은 <b>질량이 다르기</b> 때문입니다." +
         (mA > MB ? " 무거운 쪽이 덜 밀려납니다." : (mA < MB ? " 가벼운 쪽이 더 많이 밀려납니다." : " 질량이 같으면 똑같이 밀려납니다."));
     }
     function mission() {
@@ -746,12 +746,12 @@ function ticker(box) {
     var p = window.sthState("p2") || "";
     $("e2-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + "<br>" +
       (p.indexOf("㉣") === 0 ? "정확했습니다. 눈금을 바꾼 것은 속도가 아니라 가속도였습니다."
-        : "체중계 화면에서 가속도 슬라이더만 움직여도 눈금이 바뀌었지요. 답은 ㉣ 입니다 — 중력도 그대로였고, 고장도 아니었습니다.");
+        : "체중계 화면에서 가속도 슬라이더만 움직여도 눈금이 바뀌었습니다. 답은 ㉣ 입니다 — 중력도 그대로였고, 고장도 아니었습니다.");
   }
-  function finish() { window.sthState("r2", "해결 · 체중계는 질량이 아니라 떠받치는 힘 N = m(g+a) 를 잰다"); }
+  function finish() { window.sthState("r2", "해결 · 체중계는 질량이 아니라 떠받치는 힘 N = m(g+a)를 잰다"); }
   window.sthPick({
     mount: "s2-q3",
-    q: "같은 트럭이 <b>시속 20 km</b> 로 달릴 때와 <b>시속 80 km</b> 로 달릴 때, 이 트럭의 <b>관성</b>은 어떻게 다를까요?",
+    q: "같은 트럭이 <b>시속 20 km</b>로 달릴 때와 <b>시속 80 km</b>로 달릴 때, 이 트럭의 <b>관성</b>은 어떻게 다를까요?",
     options: ["빠를수록 관성이 크다", "느릴수록 관성이 크다", "속도와 관계없이 같다", "짐의 양에 따라서만 달라진다"],
     answer: 2,
     why: ["빠른 트럭이 멈추기 어려운 것은 <b>운동량(mv)</b>이 커서이지 관성이 커진 것이 아닙니다.",
@@ -766,7 +766,7 @@ function ticker(box) {
     mount: "wk2", unitLabel: "[통합과학1 Ⅲ-2] 이야기 ② 엘리베이터 저울",
     items: [
       { id: "w1", label: "관성은 무엇에 달렸나", hint: "같은 속도로 달리는 트럭과 자전거 중 어느 쪽이 멈추기 어려운지, 그 까닭을 관성으로 설명하세요.", ph: "" },
-      { id: "e2b", label: "서윤이에게 보내는 답장", hint: "엘리베이터 눈금이 55 kg → 50 kg → 45 kg 으로 변한 세 구간에서 각각 가속도의 방향이 어땠는지 쓰고, N = m(g+a) 로 설명하세요.", ph: "0~2초: … / 2~4초: … / 4~6초: …" }
+      { id: "e2b", label: "서윤이에게 보내는 답장", hint: "엘리베이터 눈금이 55 kg → 50 kg → 45 kg으로 변한 세 구간에서 각각 가속도의 방향이 어땠는지 쓰고, N = m(g+a)로 설명하세요.", ph: "0~2초: … / 2~4초: … / 4~6초: …" }
     ]
   });
 })();
@@ -847,7 +847,7 @@ function ticker(box) {
       text(ctx, "A " + ma + "kg × 3.0 m/s + B " + mb + "kg × 0 m/s", 60, 60, { s: 12 });
       text(ctx, "운동량의 합 = " + pB.toFixed(1) + " kg·m/s", 60, 82, { s: 13, w: "900", c: v("--brand-700") });
       text(ctx, "충돌 후 (예상)", 470, 38, { s: 12.5, w: "900", c: v("--mist") });
-      text(ctx, o.merged ? "A+B 가 함께 " + o.va.toFixed(2) + " m/s" : "A " + o.va.toFixed(2) + " m/s, B " + o.vb.toFixed(2) + " m/s", 470, 60, { s: 12 });
+      text(ctx, o.merged ? "A+B가 함께 " + o.va.toFixed(2) + " m/s" : "A " + o.va.toFixed(2) + " m/s, B " + o.vb.toFixed(2) + " m/s", 470, 60, { s: 12 });
       text(ctx, "운동량의 합 = " + pA.toFixed(1) + " kg·m/s", 470, 82, { s: 13, w: "900", c: v("--brand-700") });
       text(ctx, "운동량의 합은 충돌 전후가 언제나 같습니다 (운동량 보존)", 60, 112, { s: 11.5, c: v("--mist") });
       text(ctx, "운동 에너지 " + kB.toFixed(1) + " J → " + kA.toFixed(1) + " J", 470, 112, { s: 11.5, c: v("--mist") });
@@ -867,7 +867,7 @@ function ticker(box) {
       if (got.a) done("m3-2a");
       if (got.b) done("m3-2b");
       if (got.a && got.b) {
-        window.sthMission("m3-2", true, "<span class='m-tag'>미션 완료</span>충돌 방식이 바뀌어도 <b>운동량의 합은 늘 그대로</b>였습니다. 달라진 것은 운동 에너지였지요.");
+        window.sthMission("m3-2", true, "<span class='m-tag'>미션 완료</span>충돌 방식이 바뀌어도 <b>운동량의 합은 늘 그대로</b>였습니다. 달라진 것은 운동 에너지였습니다.");
         ep.clear(1);
       }
     }
@@ -885,11 +885,11 @@ function ticker(box) {
       var pB = ma * V0, pA = ma * res.va + mb * res.vb;
       var kB = 0.5 * ma * V0 * V0, kA = 0.5 * ma * res.va * res.va + 0.5 * mb * res.vb * res.vb;
       $("c-cart-info").innerHTML = "충돌 전 운동량 <b>" + pB.toFixed(2) + " kg·m/s</b> → 충돌 후 <b>" + pA.toFixed(2) + " kg·m/s</b>. <b>운동량은 언제나 보존</b>됩니다. " +
-        (res.merged ? "두 수레가 붙어 <b>" + res.va.toFixed(2) + " m/s</b> 로 함께 굴러갑니다."
-          : "A는 <b>" + res.va.toFixed(2) + " m/s</b>, B는 <b>" + res.vb.toFixed(2) + " m/s</b> 가 되었습니다." + (res.va < 0 ? " A가 <b>뒤로 튕겨</b> 나갔습니다." : ""));
+        (res.merged ? "두 수레가 붙어 <b>" + res.va.toFixed(2) + " m/s</b>로 함께 굴러갑니다."
+          : "A는 <b>" + res.va.toFixed(2) + " m/s</b>, B는 <b>" + res.vb.toFixed(2) + " m/s</b>가 되었습니다." + (res.va < 0 ? " A가 <b>뒤로 튕겨</b> 나갔습니다." : ""));
       $("c-energy").innerHTML = "운동 에너지: 충돌 전 " + kB.toFixed(2) + " J → 충돌 후 " + kA.toFixed(2) + " J" +
         (kind === "elastic" ? " — 완전 탄성 충돌은 <b>운동 에너지도 보존</b>됩니다."
-          : " — 완전 비탄성 충돌은 <b>" + (kB - kA).toFixed(2) + " J 가 사라집니다.</b> 변형·열·소리로 바뀐 것입니다. 그래도 운동량은 그대로입니다.");
+          : " — 완전 비탄성 충돌은 <b>" + (kB - kA).toFixed(2) + " J가 사라집니다.</b> 변형·열·소리로 바뀐 것입니다. 그래도 운동량은 그대로입니다.");
       var ch = false;
       if (res.merged && Math.abs(res.va - V0 / 2) < 0.02 && !got.a) { got.a = true; ch = true; }
       if (!res.merged && res.va < -0.001 && !got.b) { got.b = true; ch = true; }
@@ -972,7 +972,7 @@ function ticker(box) {
       options: ["충격량도 2배, 힘도 2배", "충격량은 그대로, 힘은 절반", "충격량은 절반, 힘은 그대로", "충격량은 그대로, 힘도 그대로"],
       answer: 1,
       why: ["공을 멈추려면 없애야 할 운동량이 정해져 있습니다. 충격량은 달라지지 않습니다.",
-        "충격량 = 운동량의 변화 = 0.145 × 40 = 5.8 N·s 로 고정입니다. F = 충격량 ÷ Δt 이므로 시간이 2배면 힘은 절반입니다.",
+        "충격량 = 운동량의 변화 = 0.145 × 40 = 5.8 N·s로 고정입니다. F = 충격량 ÷ Δt이므로 시간이 2배면 힘은 절반입니다.",
         "충격량은 공의 운동량 변화로 정해져 있어 줄어들지 않습니다.",
         "그래프의 직사각형을 보세요. 가로가 길어지면 넓이가 같으려면 세로가 낮아져야 합니다."],
       onDone: function () { got.b = true; window.sthState("catchGot", got); mission(); }
@@ -1041,7 +1041,7 @@ function ticker(box) {
 
       $("c-crush-info").innerHTML = "찌그러지는 거리 <b>" + d.toFixed(2) + " m</b> → 멈추는 시간 <b>" + dt.toFixed(3) + "초</b>, 탑승자의 감속도 <b>" + gN.toFixed(1) + " g</b>, 평균 힘 <b>" + Math.round(F).toLocaleString() + " N</b>. " +
         (ok ? "🎉 합격입니다. 앞부분이 알맞게 구겨져 멈추는 시간을 늘려 주었습니다."
-          : (!okL ? "너무 무릅니다. 1.20 m 를 넘으면 찌그러짐이 <b>승객실</b>까지 들어옵니다."
+          : (!okL ? "너무 무릅니다. 1.20 m를 넘으면 찌그러짐이 <b>승객실</b>까지 들어옵니다."
             : "너무 단단합니다. 순식간에 멈추면 <b>힘이 커집니다.</b> 거리를 늘려 보세요."));
       var ch = false;
       if (ok && !got.a) { got.a = true; ch = true; }
@@ -1051,7 +1051,7 @@ function ticker(box) {
       if (got.a) done("m3-4a");
       if (got.b) done("m3-4b");
       if (got.a && got.b) {
-        window.sthMission("m3-4", true, "<span class='m-tag'>미션 완료</span>자동차 앞부분은 <b>튼튼하게</b>가 아니라 <b>잘 구겨지게</b> 만듭니다. 대신 승객실은 단단해야 하지요.");
+        window.sthMission("m3-4", true, "<span class='m-tag'>미션 완료</span>자동차 앞부분은 <b>튼튼하게</b>가 아니라 <b>잘 구겨지게</b> 만듭니다. 대신 승객실은 단단해야 합니다.");
         ep.clear(3);
       }
     }

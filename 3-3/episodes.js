@@ -71,7 +71,7 @@ function segWire(id, attr, fn) {
 (function () {
   var ep = window.sthStory({ root: "ep1", key: "ep1", name: "사건 파일 ①", onDone: finish });
 
-  /* 장면 1 — 첫 추리 (기존 저장 키 enzyme 를 그대로 쓴다) */
+  /* 장면 1 — 첫 추리 (기존 저장 키 enzyme를 그대로 쓴다) */
   window.sthGate({
     gate: "g1", key: "enzyme", title: "조사관의 첫 추리",
     question: "과산화 수소에 카탈레이스(효소)를 <b>넣지 않으면</b> 어떻게 될까요?",
@@ -130,7 +130,7 @@ function segWire(id, attr, fn) {
     function draw() {
       paper(ctx, W, H);
       curve(80, 420, 62, 196, -5, 80, tAct, T, "--teal", "보관 온도 (°C) →", "온도에 따른 효소 활성", [-5, 15, 30, 50, 80]);
-      curve(80, 420, 262, 396, 2, 9, pAct, pH, "--violet", "pH →", "pH 에 따른 효소 활성", [2, 4, 5.5, 7, 9]);
+      curve(80, 420, 262, 396, 2, 9, pAct, pH, "--violet", "pH →", "pH에 따른 효소 활성", [2, 4, 5.5, 7, 9]);
 
       var ta = tAct(T), pa = pAct(pH), rate = ta * pa * surv();
       var d = rate <= 1e-6 ? Infinity : BASE / rate;
@@ -144,7 +144,7 @@ function segWire(id, attr, fn) {
       row(ctx, 466, 212, 410, "잘 익는 데 걸리는 시간", daysText(d), isFinite(d) && d <= 7 ? "--green" : "--rose");
 
       /* 두 통 비교 막대 */
-      text(ctx, "같은 온도 · 같은 pH 에서 두 통을 나란히", 470, 256, { s: 11.5, w: "800", c: v("--mist") });
+      text(ctx, "같은 온도 · 같은 pH에서 두 통을 나란히", 470, 256, { s: 11.5, w: "800", c: v("--mist") });
       [["통 ㉮", freshRate, "--teal"], ["통 ㉰", 0, "--rose"]].forEach(function (b, i) {
         var yy = 274 + i * 30;
         text(ctx, b[0], 520, yy + 13, { s: 11.5, w: "800", a: "right", c: v("--mist") });
@@ -152,17 +152,17 @@ function segWire(id, attr, fn) {
         ctx.fillStyle = v(b[2]); ctx.fillRect(532, yy, 260 * clamp(b[1], 0, 1), 16);
         text(ctx, (b[1] * 100).toFixed(1) + " %", 800, yy + 13, { s: 11.5, w: "800" });
       });
-      text(ctx, "통 ㉰ 는 다이얼을 아무리 잘 맞춰도 0 % 입니다.", 470, 350, { s: 11, c: v("--rose-700"), w: "800" });
+      text(ctx, "통 ㉰ 는 다이얼을 아무리 잘 맞춰도 0 %입니다.", 470, 350, { s: 11, c: v("--rose-700"), w: "800" });
       text(ctx, "효소는 단백질이라 한 번 높은 온도에서 모양이 풀리면", 470, 372, { s: 10.5, c: v("--mist") });
       text(ctx, "온도를 내려도 되돌아오지 않습니다 — 이것이 변성입니다.", 470, 390, { s: 10.5, c: v("--mist") });
       text(ctx, "곡선은 효소 자체의 성질이고, 실제로 익는 속도는 여기에 효소가 살아 있는 정도를 곱한 값입니다.", 880, 432, { s: 10.5, a: "right", c: v("--mist") });
 
       $("a-rate-info").innerHTML = "<b>" + (jar === "fresh" ? "통 ㉮" : "통 ㉰") + "</b> · 온도 <b>" + T + " °C</b>, pH <b>" + pH.toFixed(1) + "</b> → 온도 활성 " + (ta * 100).toFixed(0) + " %, pH 활성 " + (pa * 100).toFixed(0) + " %, 종합 속도 <b>" + (rate * 100).toFixed(1) + " %</b>. " +
         (jar === "boiled"
-          ? "이 통의 효소는 이미 <b>변성</b>되어 활성이 0 입니다. 온도와 pH 를 아무리 잘 맞춰도 김치는 익지 않습니다."
+          ? "이 통의 효소는 이미 <b>변성</b>되어 활성이 0입니다. 온도와 pH를 아무리 잘 맞춰도 김치는 익지 않습니다."
           : (d <= 3 ? "🎉 효소가 아주 잘 일하고 있습니다. <b>" + daysText(d) + "</b> 만에 시어집니다."
             : (d <= 30 ? "천천히 익고 있습니다. 다 익는 데 <b>" + daysText(d) + "</b> 걸립니다."
-              : "거의 멈춘 것처럼 보이지만 <b>익고 있습니다.</b> 다만 <b>" + daysText(d) + "</b> 이 걸릴 뿐입니다."))) +
+              : "거의 멈춘 것처럼 보이지만 <b>익고 있습니다.</b> 다만 <b>" + daysText(d) + "</b>이 걸릴 뿐입니다."))) +
         (isFinite(freshD) && T <= 0 && jar === "fresh" ? " — 김치냉장고가 하는 일이 바로 이것입니다." : "");
       check(ta, pa);
     }
@@ -260,11 +260,11 @@ function segWire(id, attr, fn) {
       text(ctx, "효소는 체온 그대로 두고도 반응을 수억 배 빠르게 합니다.", 500, 336, { s: 10.5, c: v("--mist") });
 
       $("a-ea-out").innerHTML = "효소 쪽 <b>" + sci(re) + " 배</b> &nbsp;·&nbsp; 온도 쪽 <b>" + sci(rt) + " 배</b> (25 °C 때와 견줌)";
-      $("a-ea-info").innerHTML = "활성화 에너지가 <b>" + EA0 + " → " + ea + " kJ/mol</b> 로 낮아지면, " + temp + " °C 에서 반응 속도가 <b>" + sci(re) + " 배</b>가 됩니다. " +
+      $("a-ea-info").innerHTML = "활성화 에너지가 <b>" + EA0 + " → " + ea + " kJ/mol</b>로 낮아지면, " + temp + " °C에서 반응 속도가 <b>" + sci(re) + " 배</b>가 됩니다. " +
         (ea >= 74 ? "아직 효소를 넣지 않은 것과 같습니다. 슬라이더를 왼쪽으로 밀어 보세요."
           : (re >= 1e8 ? "🎉 <b>1억 배</b>를 넘겼습니다. 효소가 없으면 보이지도 않던 반응이 눈앞에서 부글거리게 됩니다."
-            : "더 낮춰 보세요. 카탈레이스는 8 kJ/mol 까지 낮춥니다.")) +
-        " 한편 효소 없이 온도만 " + temp + " °C 로 올렸다면 25 °C 때보다 <b>" + sci(rt) + " 배</b> 빨라졌을 뿐입니다.";
+            : "더 낮춰 보세요. 카탈레이스는 8 kJ/mol까지 낮춥니다.")) +
+        " 한편 효소 없이 온도만 " + temp + " °C로 올렸다면 25 °C 때보다 <b>" + sci(rt) + " 배</b> 빨라졌을 뿐입니다.";
       check(re, rt);
     }
     function check(re, rt) {
@@ -278,7 +278,7 @@ function segWire(id, attr, fn) {
       if (got.b) done("m1-3b");
       if (got.c) done("m1-3c");
       if (got.a && got.b && got.c) {
-        window.sthMission("m1-3", true, "<span class='m-tag'>미션 완료</span>온도를 25 °C 나 올려야 겨우 10배였습니다. 효소는 <b>체온 그대로</b> 두고도 억 단위로 빠르게 합니다.");
+        window.sthMission("m1-3", true, "<span class='m-tag'>미션 완료</span>온도를 25 °C나 올려야 겨우 10배였습니다. 효소는 <b>체온 그대로</b> 두고도 억 단위로 빠르게 합니다.");
         ep.clear(2);
       }
     }
@@ -358,8 +358,8 @@ function segWire(id, attr, fn) {
       text(ctx, "10 °C", x0, y1 + 16, { s: 10, c: v("--mist") });
       text(ctx, "90 °C", x1, y1 + 16, { s: 10, c: v("--mist"), a: "right" });
       text(ctx, "물이 뜨겁다고 더 잘 지워지지 않습니다.", 352, 238, { s: 11.5, w: "800", c: v("--brand-700") });
-      text(ctx, "55 °C 를 넘어서면 세제 속 효소도 변성되어 일을 멈춥니다.", 352, 260, { s: 11, c: v("--mist") });
-      text(ctx, "그래서 효소 세제의 권장 수온은 30~40 °C 입니다.", 352, 280, { s: 11, c: v("--mist") });
+      text(ctx, "55 °C를 넘어서면 세제 속 효소도 변성되어 일을 멈춥니다.", 352, 260, { s: 11, c: v("--mist") });
+      text(ctx, "그래서 효소 세제의 권장 수온은 30~40 °C입니다.", 352, 280, { s: 11, c: v("--mist") });
       text(ctx, "소화제 · 연육제 · 콘택트 렌즈 세정제도 모두 같은 원리로", 352, 310, { s: 11, c: v("--mist") });
       text(ctx, "기질에 딱 맞는 효소를 골라 넣은 것입니다.", 352, 330, { s: 11, c: v("--mist") });
 
@@ -398,7 +398,7 @@ function segWire(id, attr, fn) {
         { id: "c", label: "녹말을 분해하는 효소", sub: "밥 · 빵 · 감자" }
       ],
       items: [
-        { t: "🧪 위액 속 펩신", a: "p", why: "펩신은 단백질을 분해하는 소화 효소입니다. 최적 pH 가 2 부근이라 강한 산성인 위 속에서 일합니다." },
+        { t: "🧪 위액 속 펩신", a: "p", why: "펩신은 단백질을 분해하는 소화 효소입니다. 최적 pH가 2 부근이라 강한 산성인 위 속에서 일합니다." },
         { t: "🥩 연육제에 든 파파인(파파야에서 뽑음)", a: "p", why: "고기의 단백질을 끊어 질긴 고기를 부드럽게 만듭니다." },
         { t: "🩸 핏자국 세제에 든 프로테이스", a: "p", why: "핏자국은 단백질이라 단백질 분해 효소가 필요합니다.", hint: "피를 이루는 주된 물질이 무엇일까요?" },
         { t: "🧈 이자액 속 라이페이스", a: "l", why: "라이페이스는 지방을 지방산과 모노글리세리드로 분해합니다." },
@@ -420,18 +420,18 @@ function segWire(id, attr, fn) {
     var p = window.sthState("enzyme") || "";
     $("e1-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + "<br>" +
       (window.sthState("enzymeOK") === "맞음"
-        ? "정확했습니다. 효소가 없어도 반응은 일어납니다 — 다만 아주 느릴 뿐이지요. 김치냉장고 속 김치와 똑같습니다."
+        ? "정확했습니다. 효소가 없어도 반응은 일어납니다 — 다만 아주 느릴 뿐입니다. 김치냉장고 속 김치와 똑같습니다."
         : "정답은 ㉡ 입니다. 효소는 <b>반응물이 아니라 속도를 바꾸는 것</b>이었습니다. 이 한 문장이 김치냉장고의 비밀이기도 했습니다.");
   }
   function finish() { window.sthState("r1", "해결 · 효소는 활성화 에너지를 낮춰 속도만 바꾼다(최적 30 °C · pH 5.5, 변성은 되돌릴 수 없음)"); }
   window.sthPick({
     mount: "s1-q2",
-    q: "김치냉장고를 <b>−2 °C</b> 로 맞춰 두면 김치에는 어떤 일이 일어날까요?",
+    q: "김치냉장고를 <b>−2 °C</b>로 맞춰 두면 김치에는 어떤 일이 일어날까요?",
     options: ["유산균의 효소가 죽어 김치가 영영 익지 않는다", "익는 반응이 아주 느려질 뿐, 김치는 계속 익고 있다", "효소가 변성되어 온도를 올려도 돌아오지 않는다", "저온에서는 활성화 에너지가 0이 되어 반응이 멈춘다"],
     answer: 1,
     why: ["낮은 온도는 효소를 <b>죽이지 않습니다.</b> 움직임이 느려져 일하는 속도가 떨어질 뿐, 온도를 올리면 다시 잘 일합니다.",
       "효소는 <b>속도만</b> 바꿉니다. 최적 조건에서 하루면 될 일이 −2 °C 에서는 몇 달로 늘어난 것뿐입니다. 김치냉장고에 오래 둔 김치가 결국 시어지는 까닭입니다.",
-      "변성은 <b>높은 온도</b>에서 일어납니다. 통 ㉰ 가 그 경우였지요. 낮은 온도는 변성이 아닙니다.",
+      "변성은 <b>높은 온도</b>에서 일어납니다. 통 ㉰ 가 그 경우였습니다. 낮은 온도는 변성이 아닙니다.",
       "활성화 에너지는 반응이 가진 성질이라 온도로 바뀌지 않습니다. 온도가 바꾸는 것은 언덕을 넘을 만큼 에너지가 큰 분자의 <b>비율</b>입니다."],
     onDone: function () { reveal(); ep.clear(4); }
   });
@@ -454,7 +454,7 @@ function segWire(id, attr, fn) {
 
   window.sthGate({
     gate: "g2", key: "metab", title: "조사관의 첫 추리",
-    question: "어떤 사람의 몸에서 지방 <b>10 kg</b> 이 줄었습니다. 그 10 kg 의 질량은 <b>주로</b> 어디로 갔을까요?",
+    question: "어떤 사람의 몸에서 지방 <b>10 kg</b>이 줄었습니다. 그 10 kg의 질량은 <b>주로</b> 어디로 갔을까요?",
     options: ["㉠ 에너지로 바뀌어 사라졌다", "㉡ 대변으로 빠져나갔다", "㉢ 날숨 속 이산화 탄소가 되어 나갔다", "㉣ 땀과 오줌으로 빠져나갔다"],
     onPick: function (i) {
       window.sthState("metabOK", i === 2 ? "맞음" : "어긋남");
@@ -500,11 +500,11 @@ function segWire(id, attr, fn) {
       blob(628, 152, 9, "--brand", "물 6", 6);
       text(ctx, "🫁 날숨으로", 470, 216, { s: 11, a: "center", c: v("--mist") });
       text(ctx, "💧 오줌 · 땀 · 날숨으로", 628, 216, { s: 11, a: "center", c: v("--mist") });
-      text(ctx, "포도당 1분자에서 ATP 가 약 32개 만들어집니다.", 70, 250, { s: 12, w: "800", c: v("--brand-700") });
+      text(ctx, "포도당 1분자에서 ATP가 약 32개 만들어집니다.", 70, 250, { s: 12, w: "800", c: v("--brand-700") });
       text(ctx, "큰 분자를 잘게 쪼개며 에너지를 내놓는 쪽 = 이화 작용", 70, 272, { s: 11.5, c: v("--mist") });
 
       /* 계기 */
-      text(ctx, "포도당 " + glu + " g 을 태우면", 70, 312, { s: 13.5, w: "900" });
+      text(ctx, "포도당 " + glu + " g을 태우면", 70, 312, { s: 13.5, w: "900" });
       row(ctx, 66, 348, 380, "포도당의 몰수 (1 mol = 180 g)", c.mol.toFixed(3) + " mol", null);
       row(ctx, 66, 382, 380, "들이마신 산소", c.o2.toFixed(1) + " g", null);
       row(ctx, 470, 312, 406, "날숨으로 나간 이산화 탄소", c.co2.toFixed(1) + " g", Math.abs(c.co2 - 44) < 0.5 ? "--green" : null);
@@ -512,7 +512,7 @@ function segWire(id, attr, fn) {
       row(ctx, 470, 380, 406, "나온 에너지", Math.round(c.kJ).toLocaleString() + " kJ (" + Math.round(c.kcal).toLocaleString() + " kcal)", c.kcal >= 500 ? "--green" : null);
       text(ctx, "ATP " + c.atp.toFixed(2) + " mol 어치", 66, 414, { s: 11, c: v("--mist") });
 
-      $("b-resp-info").innerHTML = "포도당 <b>" + glu + " g</b> (" + c.mol.toFixed(3) + " mol)을 세포 호흡으로 모두 분해하면 산소 <b>" + c.o2.toFixed(1) + " g</b> 을 쓰고, 이산화 탄소 <b>" + c.co2.toFixed(1) + " g</b> 과 물 <b>" + c.h2o.toFixed(1) + " g</b> 이 생기며 <b>" + Math.round(c.kcal).toLocaleString() + " kcal</b> 의 에너지가 나옵니다. " +
+      $("b-resp-info").innerHTML = "포도당 <b>" + glu + " g</b> (" + c.mol.toFixed(3) + " mol)을 세포 호흡으로 모두 분해하면 산소 <b>" + c.o2.toFixed(1) + " g</b>을 쓰고, 이산화 탄소 <b>" + c.co2.toFixed(1) + " g</b>과 물 <b>" + c.h2o.toFixed(1) + " g</b>이 생기며 <b>" + Math.round(c.kcal).toLocaleString() + " kcal</b>의 에너지가 나옵니다. " +
         (glu === 0 ? "슬라이더를 오른쪽으로 밀어 보세요."
           : "들어간 포도당보다 <b>나온 이산화 탄소가 더 무겁습니다.</b> 산소가 함께 붙어 나갔기 때문이지요 — 원자는 사라지지 않습니다.");
       check(c);
@@ -528,7 +528,7 @@ function segWire(id, attr, fn) {
       if (got.b) done("m2-2b");
       if (got.c) done("m2-2c");
       if (got.a && got.b && got.c) {
-        window.sthMission("m2-2", true, "<span class='m-tag'>미션 완료</span>포도당 30 g 을 태우면 이산화 탄소가 <b>44 g</b> 나옵니다. 몸에서 나간 질량의 상당 부분이 <b>숨으로</b> 빠져나간 셈입니다.");
+        window.sthMission("m2-2", true, "<span class='m-tag'>미션 완료</span>포도당 30 g을 태우면 이산화 탄소가 <b>44 g</b> 나옵니다. 몸에서 나간 질량의 상당 부분이 <b>숨으로</b> 빠져나간 셈입니다.");
         ep.clear(1);
       }
     }
@@ -587,7 +587,7 @@ function segWire(id, attr, fn) {
       text(ctx, "아미노산을 n 개 이으면 결합은 언제나 n − 1 개, 빠져나오는 물도 n − 1 분자입니다.", 66, 340, { s: 11.5, w: "800", c: v("--brand-700") });
       text(ctx, "작은 것을 크게 만드는 이 반응은 에너지를 ‘써야만’ 굴러갑니다 — 동화 작용.", 66, 362, { s: 11, c: v("--mist") });
 
-      $("b-anab-info").innerHTML = "아미노산 <b>" + n + "개</b>를 이으면 펩타이드 결합 <b>" + bonds + "개</b>가 생기고 물 <b>" + water + "분자</b>가 빠져나옵니다. 여기에 ATP 가 약 <b>" + atp + "개</b> 쓰입니다. " +
+      $("b-anab-info").innerHTML = "아미노산 <b>" + n + "개</b>를 이으면 펩타이드 결합 <b>" + bonds + "개</b>가 생기고 물 <b>" + water + "분자</b>가 빠져나옵니다. 여기에 ATP가 약 <b>" + atp + "개</b> 쓰입니다. " +
         (n === 10 ? "🎉 열 개를 이으면 결합과 물은 아홉 개 — 언제나 하나가 적습니다."
           : (atp >= 100 ? "제법 긴 사슬입니다. 헤모글로빈의 β 사슬은 아미노산 146개짜리입니다."
             : "슬라이더를 움직여 사슬을 길게 해 보세요."));
@@ -705,7 +705,7 @@ function segWire(id, attr, fn) {
       row(ctx, 470, 268, 406, "하루에 남거나 모자란 몫", (sur >= 0 ? "+" : "−") + Math.abs(Math.round(sur)).toLocaleString() + " kcal", null);
       row(ctx, 470, 302, 406, "한 달 뒤 몸무게 변화",
         (mo >= 0 ? "+" : "−") + Math.abs(mo).toFixed(2) + " kg", Math.abs(mo) <= 0.2 ? "--green" : null);
-      text(ctx, "지방 1 kg ≒ 7,700 kcal 로 어림했습니다.", 470, 330, { s: 10.5, c: v("--mist") });
+      text(ctx, "지방 1 kg ≒ 7,700 kcal로 어림했습니다.", 470, 330, { s: 10.5, c: v("--mist") });
 
       text(ctx, "기초 대사량은 체온을 지키고 심장을 뛰게 하고 세포가 새 단백질을 짓는 데 쓰입니다.", 66, 344, { s: 11, c: v("--mist") });
       text(ctx, "가만히 누워 있어도 몸속에서는 물질대사가 쉬지 않습니다.", 66, 364, { s: 11.5, w: "800", c: v("--brand-700") });
@@ -744,11 +744,11 @@ function segWire(id, attr, fn) {
       ],
       items: [
         { t: "🌱 식물이 이산화 탄소와 물로 포도당을 만든다 (광합성)", a: "a", why: "작고 간단한 물질을 크고 복잡한 물질로 만들며 빛에너지를 흡수합니다." },
-        { t: "💪 아미노산을 이어 근육 단백질을 만든다", a: "a", why: "앞 장면에서 직접 조립해 본 반응입니다. ATP 를 씁니다." },
+        { t: "💪 아미노산을 이어 근육 단백질을 만든다", a: "a", why: "앞 장면에서 직접 조립해 본 반응입니다. ATP를 씁니다." },
         { t: "🍠 남는 포도당을 이어 붙여 녹말로 저장한다", a: "a", why: "포도당 여러 개를 이어 큰 분자를 만듭니다." },
         { t: "🧈 남은 열량을 지방으로 저장한다", a: "a", why: "작은 분자를 모아 저장용 큰 분자를 만드는 합성 반응입니다." },
-        { t: "🧬 DNA 를 복제해 새 DNA 사슬을 만든다", a: "a", why: "뉴클레오타이드라는 작은 단위를 이어 큰 분자를 만듭니다.", hint: "복제는 만드는 일일까요, 부수는 일일까요?" },
-        { t: "🫁 세포가 포도당을 분해해 ATP 를 얻는다 (세포 호흡)", a: "c", why: "큰 분자를 쪼개며 에너지를 내놓습니다." },
+        { t: "🧬 DNA를 복제해 새 DNA 사슬을 만든다", a: "a", why: "뉴클레오타이드라는 작은 단위를 이어 큰 분자를 만듭니다.", hint: "복제는 만드는 일일까요, 부수는 일일까요?" },
+        { t: "🫁 세포가 포도당을 분해해 ATP를 얻는다 (세포 호흡)", a: "c", why: "큰 분자를 쪼개며 에너지를 내놓습니다." },
         { t: "🍚 입과 위와 소장에서 음식물이 분해된다 (소화)", a: "c", why: "녹말·단백질·지방이라는 큰 분자를 작은 단위로 쪼갭니다." },
         { t: "🥛 유산균이 당을 젖산으로 바꾼다 (발효)", a: "c", why: "김치가 익는 그 반응입니다. 산소 없이도 일어나는 이화 작용입니다.", hint: "이야기 ① 에서 본 반응입니다." },
         { t: "🏃 달릴 때 저장해 둔 지방을 꺼내 쓴다", a: "c", why: "큰 지방 분자를 쪼개 에너지를 꺼냅니다. 그 원자는 이산화 탄소가 되어 날숨으로 나갑니다." },
@@ -778,7 +778,7 @@ function segWire(id, attr, fn) {
     answer: 2,
     why: ["땀으로 나가는 것은 주로 물과 소금입니다. 지방을 이루던 탄소는 땀으로 나가지 않습니다.",
       "오줌으로도 물의 일부가 나가지만 가장 큰 몫은 아닙니다.",
-      "지방 질량의 약 <b>84 %</b> 는 세포 호흡을 거쳐 <b>이산화 탄소</b>가 되어 날숨으로 나갑니다. 나머지는 물이 되어 오줌·땀·날숨으로 나갑니다.",
+      "지방 질량의 약 <b>84 %</b>는 세포 호흡을 거쳐 <b>이산화 탄소</b>가 되어 날숨으로 나갑니다. 나머지는 물이 되어 오줌·땀·날숨으로 나갑니다.",
       "대변의 대부분은 애초에 흡수되지 않은 음식물과 세균입니다. 이미 몸에 저장된 지방이 나가는 길이 아닙니다."],
     onDone: function () {
       var f = document.getElementById("b-kcal");
@@ -907,7 +907,7 @@ function segWire(id, attr, fn) {
       }
       if (rib === 0) text(ctx, "슬라이더를 밀면 리보솜이 코돈을 하나씩 읽습니다.", 200, 356, { s: 11.5, c: v("--mist") });
 
-      text(ctx, "염기 " + (rib * 3) + "개를 읽어 아미노산 " + rib + "개 — 언제나 3 : 1 입니다.", 16, 400, { s: 11.5, w: "800", c: v("--brand-700") });
+      text(ctx, "염기 " + (rib * 3) + "개를 읽어 아미노산 " + rib + "개 — 언제나 3 : 1입니다.", 16, 400, { s: 11.5, w: "800", c: v("--brand-700") });
       text(ctx, "DNA → (전사) → mRNA → (번역) → 단백질. 정보는 한 방향으로만 흐릅니다. 이것을 중심 원리라고 합니다.", 16, 424, { s: 11, c: v("--mist") });
 
       $("c-express-info").innerHTML = rib === 0
@@ -921,7 +921,7 @@ function segWire(id, attr, fn) {
       if (got.a) done("m3-2a");
       if (got.b) done("m3-2b");
       if (got.a && got.b) {
-        window.sthMission("m3-2", true, "<span class='m-tag'>미션 완료</span>전사는 <b>DNA 를 본떠 mRNA 를 만드는 일</b>, 번역은 <b>코돈 세 글자를 아미노산 하나로 바꾸는 일</b>이었습니다.");
+        window.sthMission("m3-2", true, "<span class='m-tag'>미션 완료</span>전사는 <b>DNA를 본떠 mRNA를 만드는 일</b>, 번역은 <b>코돈 세 글자를 아미노산 하나로 바꾸는 일</b>이었습니다.");
         ep.clear(1);
       }
     }
@@ -937,12 +937,12 @@ function segWire(id, attr, fn) {
     window.sthPick({
       mount: "s3-q1",
       q: "전사와 번역에 대한 설명으로 <b>옳은</b> 것은?",
-      options: ["전사는 mRNA 를 본떠 DNA 를 만드는 일이다", "번역은 코돈 한 글자가 아미노산 하나를 지정하는 일이다", "전사로 만들어진 mRNA 의 염기 3개가 아미노산 1개를 지정한다", "단백질의 아미노산 수와 mRNA 의 염기 수는 같다"],
+      options: ["전사는 mRNA를 본떠 DNA를 만드는 일이다", "번역은 코돈 한 글자가 아미노산 하나를 지정하는 일이다", "전사로 만들어진 mRNA의 염기 3개가 아미노산 1개를 지정한다", "단백질의 아미노산 수와 mRNA의 염기 수는 같다"],
       answer: 2,
-      why: ["방향이 반대입니다. <b>DNA 를 본떠 mRNA</b> 를 만드는 일이 전사입니다.",
-        "한 글자가 아니라 <b>세 글자(코돈)</b> 가 아미노산 하나를 지정합니다.",
-        "맞습니다. 염기 3개가 모여 <b>코돈</b> 하나를 이루고, 코돈 하나가 아미노산 하나를 지정합니다. 화면에서 3 : 1 로 세어 보았지요.",
-        "염기 수는 아미노산 수의 <b>약 3배</b> 입니다. 여기에 정지 코돈까지 더해집니다."],
+      why: ["방향이 반대입니다. <b>DNA를 본떠 mRNA</b>를 만드는 일이 전사입니다.",
+        "한 글자가 아니라 <b>세 글자(코돈)</b>가 아미노산 하나를 지정합니다.",
+        "맞습니다. 염기 3개가 모여 <b>코돈</b> 하나를 이루고, 코돈 하나가 아미노산 하나를 지정합니다. 화면에서 3 : 1로 세어 보았습니다.",
+        "염기 수는 아미노산 수의 <b>약 3배</b>입니다. 여기에 정지 코돈까지 더해집니다."],
       onDone: function () { got.b = true; window.sthState("exprGot", got); mission(); }
     });
     draw(); mission();
@@ -1003,7 +1003,7 @@ function segWire(id, attr, fn) {
         for (var j = 0; j < 9; j++) if (o.aas[j] !== NORMAL.aas[j]) { idx = j; break; }
         kind = (idx + 1) + "번째 아미노산이 바뀜";
         tone = o.aas[6] === "Val" ? "--rose" : "--amber";
-        msg = (KOR[NORMAL.aas[idx]] || NORMAL.aas[idx]) + "(" + NORMAL.aas[idx] + ") 이 " + (KOR[o.aas[idx]] || o.aas[idx]) + "(" + o.aas[idx] + ") 로 바뀌었습니다." +
+        msg = (KOR[NORMAL.aas[idx]] || NORMAL.aas[idx]) + "(" + NORMAL.aas[idx] + ")이 " + (KOR[o.aas[idx]] || o.aas[idx]) + "(" + o.aas[idx] + ")로 바뀌었습니다." +
           (idx === 6 && o.aas[6] === "Val" ? " <b>바로 이것이 낫 모양 적혈구 빈혈증입니다.</b>" : "");
       }
       ctx.fillStyle = v(tone === "--mist" ? "--card-2" : tone + "-100");
@@ -1012,7 +1012,7 @@ function segWire(id, attr, fn) {
       text(ctx, "아미노산 " + o.aas.length + "개 : " + (o.aas.length ? o.aas.join("-") : "없음"), 872, 401, { s: 12, w: "800", a: "right" });
       text(ctx, "코돈표에는 같은 아미노산을 가리키는 코돈이 여럿 있습니다. 그래서 한 글자가 바뀌어도 아무 일이 없기도 합니다.", 16, 442, { s: 11, c: v("--mist") });
 
-      $("c-mut-info").innerHTML = (changed ? "주형 가닥 <b>" + pos + "번째</b> 염기를 <b>" + TPL.charAt(pos - 1) + " → " + base + "</b> 로 바꿨습니다. " : "") + msg;
+      $("c-mut-info").innerHTML = (changed ? "주형 가닥 <b>" + pos + "번째</b> 염기를 <b>" + TPL.charAt(pos - 1) + " → " + base + "</b>로 바꿨습니다. " : "") + msg;
       check(o, changed);
     }
     function check(o, changed) {
@@ -1027,7 +1027,7 @@ function segWire(id, attr, fn) {
       if (got.b) done("m3-3b");
       if (got.c) done("m3-3c");
       if (got.a && got.b && got.c) {
-        window.sthMission("m3-3", true, "<span class='m-tag'>미션 완료</span>같은 ‘한 글자’ 인데 결과는 셋이었습니다 — <b>아무 일 없음 · 아미노산 하나 바뀜 · 단백질이 끊김.</b>");
+        window.sthMission("m3-3", true, "<span class='m-tag'>미션 완료</span>같은 ‘한 글자’인데 결과는 셋이었습니다 — <b>아무 일 없음 · 아미노산 하나 바뀜 · 단백질이 끊김.</b>");
         ep.clear(2);
       }
     }
@@ -1056,7 +1056,7 @@ function segWire(id, attr, fn) {
       var bpp = bpPerPx(), view = bpp * BARW;
       var genePx = GENE / bpp, codonPx = 3 / bpp, basePx = 1 / bpp;
 
-      text(ctx, "사람의 DNA 를 자로 재 보기", 60, 36, { s: 14, w: "900", c: v("--brand-700") });
+      text(ctx, "사람의 DNA를 자로 재 보기", 60, 36, { s: 14, w: "900", c: v("--brand-700") });
       text(ctx, "배율 × " + sci(mag()) + " · 화면 가로 한 줄 = " + sci(view) + " 염기쌍", 860, 36, { s: 12, w: "800", a: "right" });
 
       /* 자 */
@@ -1102,10 +1102,10 @@ function segWire(id, attr, fn) {
       row(ctx, 480, 292, 404, "DNA 전체 : 이 유전자", "약 1,940,000 : 1", null);
 
       text(ctx, "DNA 전체를 400 m 트랙에 펼친다면 이 유전자는 그 위의 0.2 mm 짜리 점입니다.", 56, 338, { s: 11.5, w: "800", c: v("--brand-700") });
-      text(ctx, "전사는 이 점 하나만 본떠 RNA 를 만드는 일이지, DNA 전체를 옮겨 적는 일이 아닙니다.", 56, 360, { s: 11, c: v("--mist") });
-      text(ctx, "세포는 필요한 유전자만 골라 그때그때 전사합니다. 그래서 같은 DNA 를 가진 세포들이 서로 다른 일을 합니다.", 56, 382, { s: 11, c: v("--mist") });
+      text(ctx, "전사는 이 점 하나만 본떠 RNA를 만드는 일이지, DNA 전체를 옮겨 적는 일이 아닙니다.", 56, 360, { s: 11, c: v("--mist") });
+      text(ctx, "세포는 필요한 유전자만 골라 그때그때 전사합니다. 그래서 같은 DNA를 가진 세포들이 서로 다른 일을 합니다.", 56, 382, { s: 11, c: v("--mist") });
 
-      $("c-scale-info").innerHTML = "배율 <b>× " + sci(mag()) + "</b> · 화면 가로 한 줄이 <b>" + sci(view) + " 염기쌍</b> 입니다. 이때 유전자의 폭은 <b>" + (genePx < 1 ? genePx.toFixed(3) : genePx.toFixed(1)) + " px</b>. " +
+      $("c-scale-info").innerHTML = "배율 <b>× " + sci(mag()) + "</b> · 화면 가로 한 줄이 <b>" + sci(view) + " 염기쌍</b>입니다. 이때 유전자의 폭은 <b>" + (genePx < 1 ? genePx.toFixed(3) : genePx.toFixed(1)) + " px</b>. " +
         (genePx < 1 ? "아직 머리카락보다도 가늘어 보이지도 않습니다. 더 확대해 보세요."
           : (codonPx >= 10 ? "🎉 코돈 하나하나가 보일 만큼 들어왔습니다. 여기까지 오는 데 배율이 천만 배를 넘었습니다."
             : "유전자가 드디어 눈에 띕니다. 코돈 하나가 보일 때까지 더 확대해 보세요."));
@@ -1133,12 +1133,12 @@ function segWire(id, attr, fn) {
     window.sthPick({
       mount: "s3-q2",
       q: "특정 유전자가 발현될 때 만들어지는 <b>RNA 분자의 크기</b>에 대한 설명으로 옳은 것은?",
-      options: ["DNA 전체가 옮겨 적히므로 DNA 와 크기가 거의 같다", "DNA 전체의 절반 정도 크기다", "유전자 한 토막만 옮겨 적히므로 DNA 에 비해 매우 작다", "RNA 가 DNA 보다 오히려 크다"],
+      options: ["DNA 전체가 옮겨 적히므로 DNA와 크기가 거의 같다", "DNA 전체의 절반 정도 크기다", "유전자 한 토막만 옮겨 적히므로 DNA에 비해 매우 작다", "RNA가 DNA보다 오히려 크다"],
       answer: 2,
       why: ["방금 자로 재 보았습니다. 유전자 하나는 DNA 전체의 약 200만 분의 1 이었습니다.",
-        "절반이 아니라 <b>수백만 분의 일</b> 입니다.",
-        "맞습니다. DNA 에는 수많은 유전자가 있고, 전사될 때는 <b>필요한 유전자 한 토막만</b> 본떠집니다. 그래서 만들어지는 RNA 는 DNA 에 비해 매우 작습니다.",
-        "RNA 는 유전자 한 토막을 본뜬 것이므로 DNA 보다 훨씬 작습니다."],
+        "절반이 아니라 <b>수백만 분의 일</b>입니다.",
+        "맞습니다. DNA 에는 수많은 유전자가 있고, 전사될 때는 <b>필요한 유전자 한 토막만</b> 본떠집니다. 그래서 만들어지는 RNA는 DNA에 비해 매우 작습니다.",
+        "RNA는 유전자 한 토막을 본뜬 것이므로 DNA보다 훨씬 작습니다."],
       onDone: function () { got.c = true; window.sthState("scaleGot", got); mission(); }
     });
     draw(); mission();
@@ -1147,7 +1147,7 @@ function segWire(id, attr, fn) {
   /* 장면 5 — 결말 -------------------------------------------------------- */
   var STEPS = [
     "DNA 주형 가닥의 염기 한 글자가 다른 염기로 바뀐다",
-    "전사된 mRNA 에서 그 자리의 코돈이 GAG 에서 GUG 로 바뀐다",
+    "전사된 mRNA에서 그 자리의 코돈이 GAG에서 GUG로 바뀐다",
     "번역에서 리보솜이 그 코돈을 읽어 글루탐산 대신 발린을 붙인다",
     "아미노산 하나가 달라진 헤모글로빈이 서로 들러붙어 긴 막대를 이룬다",
     "막대에 밀려 적혈구가 낫처럼 길쭉하게 굳는다",

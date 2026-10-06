@@ -1,5 +1,5 @@
 /* 통합과학1 Ⅰ-2 과학의 측정과 우리 사회 — 소단원별 이야기 세 편
-   01 과녁에 남은 자국 / 02 1미터를 다시 정하는 회의 / 03 30 cm 를 다투는 사람들
+   01 과녁에 남은 자국 / 02 1미터를 다시 정하는 회의 / 03 30 cm를 다투는 사람들
    공용 부품: ../assets/theme.js (sthUnit·sthState·sthGate·sthWork·setupCanvas·cssVar·drawArrow),
              ../assets/story.js (sthStory·sthMission·sthSort·sthOrder·sthPick), ../assets/share.js (sthShare) */
 (function () {
@@ -82,7 +82,7 @@ function lcg(seed) {
     var bias = 0, noise = 20;
     var got = window.sthState("aShot") || { a: false, b: false };
 
-    /* 평균이 정확히 0, 중심에서의 제곱평균거리가 정확히 1 이 되도록 다듬은 10발의 흩어짐 */
+    /* 평균이 정확히 0, 중심에서의 제곱평균거리가 정확히 1이 되도록 다듬은 10발의 흩어짐 */
     var U = (function () {
       var raw = [[0.62, -0.31], [-0.44, 0.78], [1.12, 0.36], [-0.85, -0.52], [0.21, 1.04],
                  [-1.06, 0.18], [0.48, -0.92], [-0.29, -1.11], [0.93, 0.71], [-0.72, -0.21]];
@@ -180,7 +180,7 @@ function lcg(seed) {
         (accurate() ? "정확" : "정확하지 않음") + " · " + (precise() ? "정밀" : "정밀하지 않음") + "</b> (" + who() + " 의 표적지)<br>" +
         (who() === "나래" ? "한곳에 빈틈없이 모였는데 중심이 아닙니다. <b>매번 같은 쪽으로 같은 만큼</b> 어긋났으니 사람이 아니라 총을 의심해야 합니다."
          : who() === "다인" ? "평균은 한가운데인데 발마다 흩어졌습니다. 조준선은 멀쩡하고 <b>우연 오차</b>가 큰 경우입니다."
-         : who() === "가온" ? "정확하면서 정밀합니다. 측정이 바라는 모습이지요."
+         : who() === "가온" ? "정확하면서 정밀합니다. 측정이 바라는 모습입니다."
          : "치우치기도 하고 흩어지기도 했습니다. 두 손잡이를 따로 움직여 어느 쪽이 무엇을 바꾸는지 보세요.");
 
       var ch = false;
@@ -280,11 +280,11 @@ function lcg(seed) {
       var note;
       if (Math.abs(z) < 0.05) {
         note = n >= 25
-          ? "영점이 맞은 저울입니다. <b>" + n + "번</b>을 재어 평균을 내니 오차가 <b>" + Math.abs(st.err).toFixed(3) + " g</b> 까지 줄었습니다. 흩어짐(표준편차)은 <b>" + st.sd.toFixed(3) + " g</b> 로 거의 그대로인데 <b>평균</b>만 참값에 다가갔다는 점이 중요합니다."
-          : "아직 <b>" + n + "번</b>뿐입니다. 평균의 오차가 <b>" + Math.abs(st.err).toFixed(3) + " g</b> 입니다. 횟수를 늘려 보세요.";
+          ? "영점이 맞은 저울입니다. <b>" + n + "번</b>을 재어 평균을 내니 오차가 <b>" + Math.abs(st.err).toFixed(3) + " g</b>까지 줄었습니다. 흩어짐(표준편차)은 <b>" + st.sd.toFixed(3) + " g</b>로 거의 그대로인데 <b>평균</b>만 참값에 다가갔다는 점이 중요합니다."
+          : "아직 <b>" + n + "번</b>뿐입니다. 평균의 오차가 <b>" + Math.abs(st.err).toFixed(3) + " g</b>입니다. 횟수를 늘려 보세요.";
       } else {
         note = n >= 25
-          ? "영점이 <b>" + z.toFixed(1) + " g</b> 틀어져 있습니다. <b>" + n + "번</b>이나 재어 평균을 냈는데도 오차가 <b>" + Math.abs(st.err).toFixed(3) + " g</b> 로 남아 있습니다. <b>계통 오차는 반복으로 줄지 않습니다.</b>"
+          ? "영점이 <b>" + z.toFixed(1) + " g</b> 틀어져 있습니다. <b>" + n + "번</b>이나 재어 평균을 냈는데도 오차가 <b>" + Math.abs(st.err).toFixed(3) + " g</b>로 남아 있습니다. <b>계통 오차는 반복으로 줄지 않습니다.</b>"
           : "영점이 <b>" + z.toFixed(1) + " g</b> 틀어져 있습니다. 횟수를 크게 늘려도 평균이 참값으로 돌아오는지 확인해 보세요.";
       }
       $("a-scale-info").innerHTML = note;
@@ -302,11 +302,11 @@ function lcg(seed) {
         { id: "ran", label: "우연 오차", sub: "제멋대로 흩어진다 · 여러 번 재어 평균 내면 줄어든다" }
       ],
       items: [
-        { t: "영점이 0.5 g 틀어진 저울로 잰다", a: "sys", why: "모든 측정값이 같은 쪽으로 0.5 g 씩 밀립니다. 저울을 교정해야 사라집니다." },
+        { t: "영점이 0.5 g 틀어진 저울로 잰다", a: "sys", why: "모든 측정값이 같은 쪽으로 0.5 g씩 밀립니다. 저울을 교정해야 사라집니다." },
         { t: "눈금을 읽을 때마다 눈의 위치가 조금씩 달라진다", a: "ran", why: "위로도 아래로도 어긋나므로 평균을 내면 줄어듭니다." },
         { t: "줄자가 더운 날 늘어난 채로 길이를 잰다", a: "sys", why: "늘어난 줄자는 언제나 실제보다 짧은 값을 내놓습니다.", hint: "매번 같은 쪽으로 틀리나요, 제멋대로 틀리나요?" },
         { t: "초시계를 누르는 반응이 매번 조금씩 빠르거나 늦다", a: "ran", why: "빠를 때도 늦을 때도 있으므로 여러 번 재어 평균을 냅니다." },
-        { t: "언제나 눈금의 위쪽을 보는 버릇이 있다", a: "sys", why: "버릇이 일정하면 모든 값이 같은 쪽으로 치우칩니다. 이것도 계통 오차입니다.", hint: "‘언제나’ 라는 말에 주목하세요." },
+        { t: "언제나 눈금의 위쪽을 보는 버릇이 있다", a: "sys", why: "버릇이 일정하면 모든 값이 같은 쪽으로 치우칩니다. 이것도 계통 오차입니다.", hint: "‘언제나’라는 말에 주목하세요." },
         { t: "실험대가 미세하게 흔들려 저울 값이 떨린다", a: "ran", why: "위아래로 무작위로 흔들리므로 평균을 내면 상쇄됩니다." },
         { t: "온도계를 물에 충분히 담그지 않고 읽는다", a: "sys", why: "언제나 실제보다 낮게(또는 높게) 나오므로 치우친 오차입니다.", hint: "이 실수를 하면 값이 어느 쪽으로 치우칠까요?" },
         { t: "바람이 불었다 말았다 하며 저울 값이 오르내린다", a: "ran", why: "방향이 정해져 있지 않으므로 우연 오차입니다." }
@@ -349,7 +349,7 @@ function lcg(seed) {
     function reading() {
       var step = minDiv / 10;                          /* 어림하는 자리 = 최소 눈금의 1/10 */
       var mm = Math.round(L / step) * step;
-      var dec = Math.round(-Math.log(step) / Math.LN10) + 1;   /* cm 로 적을 때의 소수 자릿수 */
+      var dec = Math.round(-Math.log(step) / Math.LN10) + 1;   /* cm로 적을 때의 소수 자릿수 */
       return { mm: mm, cm: (mm / 10).toFixed(dec), dec: dec, sig: dec + 1, step: step };
     }
     function xOf(mm) { return 80 + mm * 9; }
@@ -380,7 +380,7 @@ function lcg(seed) {
         ctx.beginPath(); ctx.moveTo(x, 110); ctx.lineTo(x, big ? 136 : 124); ctx.stroke();
         if (big) text(ctx, (mm / 10) + "", x, 152, { s: 10, a: "center", c: v("--mist") });
       }
-      if (minDiv === 0.1) text(ctx, "※ 실제로는 0.1 mm 마다 눈금이 있지만 화면에서는 0.5 mm 마다만 그렸습니다", 80, 174, { s: 10, c: v("--mist") });
+      if (minDiv === 0.1) text(ctx, "※ 실제로는 0.1 mm마다 눈금이 있지만 화면에서는 0.5 mm 마다만 그렸습니다", 80, 174, { s: 10, c: v("--mist") });
       text(ctx, "단위: cm", 806, 152, { s: 10.5, w: "800", c: v("--mist") });
 
       /* 막대 끝 표시 */
@@ -397,7 +397,7 @@ function lcg(seed) {
 
       $("a-ruler-info").innerHTML = "최소 눈금 <b>" + (minDiv === 10 ? "1 cm" : minDiv === 1 ? "1 mm" : "0.1 mm") +
         "</b> 자로 읽으면 <b>" + r.cm + " cm</b> (유효숫자 " + r.sig + "자리). " +
-        (minDiv === 10 ? "이 자로 4.27 이라고 적으면 재지도 않은 자리를 적은 것이 됩니다."
+        (minDiv === 10 ? "이 자로 4.27이라고 적으면 재지도 않은 자리를 적은 것이 됩니다."
          : minDiv === 1 ? "마지막 자리는 눈금 사이를 눈으로 <b>어림한</b> 값이므로 사람마다 조금 다를 수 있습니다."
          : "자가 정밀해진 만큼 믿을 수 있는 자리가 한 자리 늘었습니다.");
 
@@ -409,18 +409,18 @@ function lcg(seed) {
 
     window.sthPick({
       mount: "s1-pick",
-      q: "최소 눈금이 1 mm 인 자로 잰 뒤 길이를 <b>4.2700 cm</b> 라고 적었습니다. 무엇이 잘못되었을까요?",
+      q: "최소 눈금이 1 mm 인 자로 잰 뒤 길이를 <b>4.2700 cm</b>라고 적었습니다. 무엇이 잘못되었을까요?",
       options: [
-        "단위를 cm 가 아니라 mm 로 적어야 한다",
+        "단위를 cm가 아니라 mm로 적어야 한다",
         "이 자가 알려 줄 수 없는 자리까지 적었다",
         "소수점 아래는 언제나 두 자리까지만 적는 것이 규칙이다",
         "여러 번 재어 평균을 내지 않아서 틀렸다"
       ],
       answer: 1,
       why: [
-        "단위는 cm 로 적어도 mm 로 적어도 됩니다. 문제는 <b>자릿수</b>입니다.",
-        "1 mm 자는 0.1 mm 자리까지만 어림할 수 있습니다. 4.27 cm 가 맞고, 뒤의 0 두 개는 재지 않은 자리입니다.",
-        "자릿수를 정하는 것은 규칙이 아니라 <b>쓰는 자</b>입니다. 0.1 mm 자라면 4.270 cm 까지 적을 수 있습니다.",
+        "단위는 cm로 적어도 mm로 적어도 됩니다. 문제는 <b>자릿수</b>입니다.",
+        "1 mm 자는 0.1 mm 자리까지만 어림할 수 있습니다. 4.27 cm가 맞고, 뒤의 0 두 개는 재지 않은 자리입니다.",
+        "자릿수를 정하는 것은 규칙이 아니라 <b>쓰는 자</b>입니다. 0.1 mm 자라면 4.270 cm까지 적을 수 있습니다.",
         "평균을 내면 우연 오차는 줄지만, 자가 알려 주지 못하는 자리가 생겨나지는 않습니다."
       ],
       onDone: function () { got.c = true; window.sthState("aRuler", got); mission(); }
@@ -461,7 +461,7 @@ function lcg(seed) {
   function paintVs() {
     var p = window.sthState("p1") || "";
     $("e1-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + "<br>" +
-      (p.indexOf("㉡") === 0 ? "처음부터 정확히 짚었습니다. 이제 숫자로도 증명했네요."
+      (p.indexOf("㉡") === 0 ? "처음부터 정확히 짚었습니다. 이제 숫자로도 증명했습니다."
         : "처음 생각과 달랐지요? 모여 있다는 것은 솜씨가 좋다는 뜻이고, 그래도 중심을 벗어났다면 범인은 기계입니다.") +
       "<br><b>내가 확인한 것</b> 반복 측정은 우연 오차만 줄인다 · 적을 수 있는 자리는 자가 정한다";
   }
@@ -488,7 +488,7 @@ function lcg(seed) {
   /* 장면 1 — 첫 어림 */
   window.sthGate({
     gate: "g2", key: "p2", title: "견학생의 첫 어림",
-    question: "금고 온도가 0 ℃ 에서 20 ℃ 로 오르면, 1 m 짜리 미터원기는 얼마나 길어질까요?",
+    question: "금고 온도가 0 ℃에서 20 ℃로 오르면, 1 m 짜리 미터원기는 얼마나 길어질까요?",
     options: [
       "㉠ 금속이라 전혀 길어지지 않는다",
       "㉡ 머리카락 두세 개 굵기쯤 (약 0.17 mm)",
@@ -534,9 +534,9 @@ function lcg(seed) {
       ctx.beginPath(); ctx.roundRect(bx0, 270, bw * (HAIR / maxUm), 18, 9); ctx.fill();
       text(ctx, HAIR + " µm", 410, 264, { s: 12, w: "900", a: "right", c: v("--mist") });
 
-      /* 오른쪽 — 이 자로 1 km 를 재면 */
+      /* 오른쪽 — 이 자로 1 km를 재면 */
       card(ctx, 460, 166, 380, 140, true, "--violet");
-      text(ctx, "이 원기를 베낀 자로 1 km 를 재면", 650, 190, { s: 11.5, w: "800", a: "center", c: v("--violet-700") });
+      text(ctx, "이 원기를 베낀 자로 1 km를 재면", 650, 190, { s: 11.5, w: "800", a: "center", c: v("--violet-700") });
       text(ctx, (ALPHA * T * 1000 * 1000).toFixed(1) + " mm", 650, 236, { s: 30, w: "900", a: "center", c: v("--violet-700") });
       text(ctx, "만큼 어긋난다", 650, 260, { s: 11.5, a: "center", c: v("--mist") });
       text(ctx, "ΔL = 1 m × 8.7 × 10⁻⁶ /℃ × " + T.toFixed(1) + " ℃", 650, 288, { s: 11.5, a: "center", c: v("--mist") });
@@ -544,10 +544,10 @@ function lcg(seed) {
       text(ctx, "금속은 데우면 늘어납니다. 기준이 ‘물건’이면 기준 자체가 날씨에 따라 달라집니다.", 40, 336, { s: 12, c: v("--mist") });
 
       $("b-bar-info").innerHTML = "금고가 <b>" + T.toFixed(1) + " ℃</b> 일 때 원기는 <b>" + d.toFixed(1) + " µm</b> 늘어납니다" +
-        (d < 1 ? " — 거의 0 입니다. 이 자리가 ‘정확히 1 m’ 입니다." :
+        (d < 1 ? " — 거의 0입니다. 이 자리가 ‘정확히 1 m’입니다." :
           d < HAIR ? " — 아직 머리카락 굵기(70 µm)보다 작습니다." :
           " — 머리카락 " + (d / HAIR).toFixed(1) + "개 굵기입니다.") +
-        " 이 자로 1 km 를 재면 <b>" + (ALPHA * T * 1000 * 1000).toFixed(1) + " mm</b> 어긋납니다.";
+        " 이 자로 1 km를 재면 <b>" + (ALPHA * T * 1000 * 1000).toFixed(1) + " mm</b> 어긋납니다.";
 
       var ch = false;
       if (d >= 99.5 && !got.a) { got.a = true; ch = true; }
@@ -558,7 +558,7 @@ function lcg(seed) {
       if (got.a) done("m2-2a");
       if (got.b) done("m2-2b");
       if (got.a && got.b) {
-        window.sthMission("m2-2", true, "<span class='m-tag'>미션 완료</span>1 ℃ 마다 <b>8.7 µm</b>. 20 ℃ 면 <b>174 µm</b> 로 머리카락 두 개 반, 그 자로 1 km 를 재면 <b>17 cm</b> 넘게 어긋납니다. 기준이 물건이면 기준이 흔들립니다.");
+        window.sthMission("m2-2", true, "<span class='m-tag'>미션 완료</span>1 ℃마다 <b>8.7 µm</b>. 20 ℃면 <b>174 µm</b>로 머리카락 두 개 반, 그 자로 1 km를 재면 <b>17 cm</b> 넘게 어긋납니다. 기준이 물건이면 기준이 흔들립니다.");
         ep.clear(1);
       }
     }
@@ -588,7 +588,7 @@ function lcg(seed) {
     function draw() {
       paper(ctx, W, H);
       var n = spans(), i;
-      text(ctx, mode === "span" ? "상인이 자기 뼘으로 재어 “" + n + " 뼘” 이라고 말했다" : "상인이 미터자로 재어 “" + (L / 100).toFixed(2) + " m” 라고 말했다",
+      text(ctx, mode === "span" ? "상인이 자기 뼘으로 재어 “" + n + " 뼘”이라고 말했다" : "상인이 미터자로 재어 “" + (L / 100).toFixed(2) + " m”라고 말했다",
         40, 36, { s: 13, w: "800", c: v("--teal-700") });
 
       /* 실제 천 */
@@ -603,7 +603,7 @@ function lcg(seed) {
         ctx.fillStyle = v("--card-2"); ctx.beginPath(); ctx.roundRect(60, y, 620, 26, 8); ctx.fill();
         ctx.fillStyle = v(p.c); ctx.globalAlpha = 0.8;
         ctx.beginPath(); ctx.roundRect(60, y, clamp(len * 1.4, 8, 620), 26, 8); ctx.fill(); ctx.globalAlpha = 1;
-        text(ctx, len + " cm 라고 생각한다", 690, y + 18, { s: 12, w: "800", c: v(p.c + "-700") });
+        text(ctx, len + " cm라고 생각한다", 690, y + 18, { s: 12, w: "800", c: v(p.c + "-700") });
       }
       /* 실제 길이 선 */
       vdash(ctx, 60 + L * 1.4, 70, 330, v("--teal"));
@@ -611,13 +611,13 @@ function lcg(seed) {
 
       var lo = loss();
       text(ctx, mode === "span"
-        ? "손님은 실제보다 " + lo + " cm 더 길다고 믿고 값을 치른다 → 손해 " + (lo * 200).toLocaleString() + " 원 (1 cm 에 200원)"
+        ? "손님은 실제보다 " + lo + " cm 더 길다고 믿고 값을 치른다 → 손해 " + (lo * 200).toLocaleString() + " 원 (1 cm에 200원)"
         : "세 사람이 떠올리는 길이가 모두 같다 → 차이 0 cm, 손해 0 원",
         40, 372, { s: 13, w: "900", c: v(mode === "span" ? "--rose-700" : "--green-700") });
 
       $("b-market-info").innerHTML = mode === "span"
-        ? "같은 말 “<b>" + n + " 뼘</b>” 을 듣고도 세 사람이 떠올리는 길이가 <b>" + think(PEOPLE[0]) + " cm · " + think(PEOPLE[1]) + " cm · " + think(PEOPLE[2]) + " cm</b> 로 다릅니다. 손님은 실제보다 <b>" + lo + " cm</b> 더 길다고 믿습니다."
-        : "미터자로 재면 세 사람이 모두 <b>" + L + " cm</b> 를 떠올립니다. 손 크기와 상관없이 <b>같은 기준</b>으로 말하기 때문입니다. 이것이 측정 표준의 쓸모입니다.";
+        ? "같은 말 “<b>" + n + " 뼘</b>”을 듣고도 세 사람이 떠올리는 길이가 <b>" + think(PEOPLE[0]) + " cm · " + think(PEOPLE[1]) + " cm · " + think(PEOPLE[2]) + " cm</b>로 다릅니다. 손님은 실제보다 <b>" + lo + " cm</b> 더 길다고 믿습니다."
+        : "미터자로 재면 세 사람이 모두 <b>" + L + " cm</b>를 떠올립니다. 손 크기와 상관없이 <b>같은 기준</b>으로 말하기 때문입니다. 이것이 측정 표준의 쓸모입니다.";
 
       var ch = false;
       if (mode === "span" && lo >= 140 && !got.a) { got.a = true; ch = true; }
@@ -683,13 +683,13 @@ function lcg(seed) {
       vdash(ctx, xOf(1), 130, 200, v("--teal"));
       text(ctx, "여기가 1 m", xOf(1), 124, { s: 11, w: "800", a: "center", c: v("--teal-700") });
 
-      text(ctx, "1 m 의 정의 (1983년~) : 빛이 진공에서 1/299,792,458 초 동안 간 거리", 450, 268, { s: 13, w: "800", a: "center", c: v("--brand-700") });
-      text(ctx, "곧 3.3356 ns 입니다. 시계만 정확하면 자가 없어도 1 m 를 만들 수 있습니다.", 450, 294, { s: 11.5, a: "center", c: v("--mist") });
+      text(ctx, "1 m의 정의 (1983년~) : 빛이 진공에서 1/299,792,458 초 동안 간 거리", 450, 268, { s: 13, w: "800", a: "center", c: v("--brand-700") });
+      text(ctx, "곧 3.3356 ns입니다. 시계만 정확하면 자가 없어도 1 m를 만들 수 있습니다.", 450, 294, { s: 11.5, a: "center", c: v("--mist") });
 
-      $("b-light-info").innerHTML = "빛이 <b>" + t.toFixed(2) + " ns</b> 동안 간 거리는 <b>" + d.toFixed(4) + " m</b> 입니다. " +
-        (Math.abs(d - 1) <= 0.005 ? "✅ 딱 1 m 입니다. 이때의 시간이 <b>1/299,792,458 초</b> 이지요."
-          : Math.abs(t - 1) <= 0.005 ? "✅ 빛은 10억분의 1초에 <b>약 30 cm</b> 를 갑니다. 손 한 뼘 반쯤이지요."
-          : "손잡이를 움직여 1.000 m 가 되는 시간과, 1.00 ns 일 때의 거리를 찾아보세요.");
+      $("b-light-info").innerHTML = "빛이 <b>" + t.toFixed(2) + " ns</b> 동안 간 거리는 <b>" + d.toFixed(4) + " m</b>입니다. " +
+        (Math.abs(d - 1) <= 0.005 ? "✅ 딱 1 m입니다. 이때의 시간이 <b>1/299,792,458 초</b>입니다."
+          : Math.abs(t - 1) <= 0.005 ? "✅ 빛은 10억분의 1초에 <b>약 30 cm</b>를 갑니다. 손 한 뼘 반쯤입니다."
+          : "손잡이를 움직여 1.000 m가 되는 시간과, 1.00 ns 일 때의 거리를 찾아보세요.");
 
       var ch = false;
       if (Math.abs(d - 1) <= 0.005 && !got.a) { got.a = true; ch = true; }
@@ -707,15 +707,15 @@ function lcg(seed) {
         { t: "사람의 뼘", a: "thing", why: "사람마다 다르고 자라면서 변합니다." },
         { t: "왕의 팔뚝 길이(큐빗)", a: "thing", why: "왕이 바뀌면 기준도 바뀌었습니다." },
         { t: "파리에 보관한 미터원기 막대", a: "thing", why: "금속이라 온도에 따라 늘어나고, 닳거나 잃어버릴 수도 있습니다." },
-        { t: "국제 킬로그램 원기(1889 ~ 2019년)", a: "thing", why: "2019년에 플랑크 상수로 정의가 바뀌면서 물건의 자리에서 내려왔습니다.", hint: "2019년에 무슨 일이 있었나요?" },
+        { t: "국제 킬로그램 원기(1889~2019년)", a: "thing", why: "2019년에 플랑크 상수로 정의가 바뀌면서 물건의 자리에서 내려왔습니다.", hint: "2019년에 무슨 일이 있었나요?" },
         { t: "지구 자오선의 4천만분의 1", a: "thing", why: "자연물이지만 결국 지구를 실제로 측량해야 알 수 있습니다. 당시 측량 오차 때문에 미터원기는 이 길이보다 약 0.2 mm 짧습니다.", hint: "이 기준을 쓰려면 무엇을 직접 재야 할까요?" },
         { t: "빛이 1/299,792,458 초 동안 간 거리 (1 m)", a: "const", why: "빛의 속력을 값으로 못 박아 정의합니다." },
         { t: "세슘-133 원자가 9,192,631,770번 진동하는 시간 (1 s)", a: "const", why: "원자시계의 원리이고, 어디서 재도 같습니다." },
         { t: "플랑크 상수로 정한 1 kg", a: "const", why: "2019년부터 쓰는 킬로그램의 정의입니다." },
         { t: "볼츠만 상수로 정한 1 K", a: "const", why: "온도의 기본단위도 자연 상수에 묶여 있습니다." },
-        { t: "아보가드로수로 정한 1 mol", a: "const", why: "입자 6.02214076 × 10²³ 개를 1 mol 로 못 박았습니다." }
+        { t: "아보가드로수로 정한 1 mol", a: "const", why: "입자 6.02214076 × 10²³ 개를 1 mol로 못 박았습니다." }
       ],
-      doneText: "SI 의 기본단위는 이제 모두 오른쪽에 있습니다.",
+      doneText: "SI의 기본단위는 이제 모두 오른쪽에 있습니다.",
       onDone: function () { window.sthState("bSortDone", 1); mission(); }
     });
 
@@ -725,7 +725,7 @@ function lcg(seed) {
       if (got.b) done("m2-4b");
       if (sorted) done("m2-4c");
       if (got.a && got.b && sorted) {
-        window.sthMission("m2-4", true, "<span class='m-tag'>미션 완료</span>1 m = 빛이 <b>3.3356 ns</b> 동안 간 거리. 기준을 <b>물건</b>에서 <b>자연 상수</b>로 옮기자, 금고를 열지 않아도 세계 어디서나 같은 1 m 를 다시 만들 수 있게 되었습니다.");
+        window.sthMission("m2-4", true, "<span class='m-tag'>미션 완료</span>1 m = 빛이 <b>3.3356 ns</b> 동안 간 거리. 기준을 <b>물건</b>에서 <b>자연 상수</b>로 옮기자, 금고를 열지 않아도 세계 어디서나 같은 1 m를 다시 만들 수 있게 되었습니다.");
         ep.clear(3); ep.clear(4);
       }
     }
@@ -740,13 +740,13 @@ function lcg(seed) {
 
   /* 장면 5 — 결말 */
   function finish() {
-    window.sthState("r2", "해결 · 원기는 20 ℃ 에서 174 µm 늘어남 · 1 m = 빛이 3.3356 ns 동안 간 거리");
+    window.sthState("r2", "해결 · 원기는 20 ℃에서 174 µm 늘어남 · 1 m = 빛이 3.3356 ns 동안 간 거리");
   }
   function paintVs() {
     var p = window.sthState("p2") || "";
     $("e2-vs").innerHTML = "<b>나의 첫 어림</b> " + (p || "기록 없음") + "<br>" +
-      (p.indexOf("㉡") === 0 ? "정확했습니다. 20 ℃ 에서 174 µm, 곧 0.17 mm 였지요."
-        : "20 ℃ 에서 174 µm(0.17 mm)였습니다. 눈에는 안 보이지만, 그 자로 1 km 를 재면 17 cm 가 어긋납니다.") +
+      (p.indexOf("㉡") === 0 ? "정확했습니다. 20 ℃에서 174 µm, 곧 0.17 mm 였습니다."
+        : "20 ℃에서 174 µm(0.17 mm)였습니다. 눈에는 안 보이지만, 그 자로 1 km를 재면 17 cm가 어긋납니다.") +
       "<br><b>내가 찾은 1 m</b> 빛이 3.3356 ns 동안 간 거리";
   }
   ep.onShow(function (i) { if (i === 4) paintVs(); });
@@ -756,13 +756,13 @@ function lcg(seed) {
     mount: "wk2", unitLabel: "[통합과학1 Ⅰ-2] 이야기 ② 1미터를 다시 정하는 회의",
     items: [
       { id: "w2", label: "표준이 필요한 이유", hint: "측정 표준이 없었다면 곤란해졌을 상황을 하나 들고, 왜 그런지 쓰세요." },
-      { id: "e2b", label: "기준을 물건에서 옮긴 까닭", hint: "1 m 의 기준이 금속 막대에서 빛으로 바뀐 까닭을, 이 이야기에서 확인한 숫자를 들어 쓰세요. 2019년 킬로그램 재정의와 묶어 설명하면 좋습니다." }
+      { id: "e2b", label: "기준을 물건에서 옮긴 까닭", hint: "1 m의 기준이 금속 막대에서 빛으로 바뀐 까닭을, 이 이야기에서 확인한 숫자를 들어 쓰세요. 2019년 킬로그램 재정의와 묶어 설명하면 좋습니다." }
     ]
   });
 })();
 
 /* =========================================================================
-   이야기 ③ 30 cm 를 다투는 사람들
+   이야기 ③ 30 cm를 다투는 사람들
    ========================================================================= */
 (function () {
   var ep = window.sthStory({ root: "ep3", key: "ep3", name: "사건 파일 ③", onDone: finish });
@@ -774,7 +774,7 @@ function lcg(seed) {
     var FIELDS = [
       { icon: "🛰️", name: "위성 항법(GPS)", e: -9, unit: "초", desc: "원자시계로 <b>10억분의 1초(ns)</b> 단위의 시간을 재어 거리를 계산합니다. 시간이 곧 위치입니다." },
       { icon: "🏭", name: "반도체 공정", e: -9, unit: "m", desc: "회로의 선폭을 <b>나노미터(10⁻⁹ m)</b> 단위로 재고 다스립니다. 머리카락 굵기의 만분의 일 수준입니다." },
-      { icon: "🏥", name: "의료 영상 진단", e: -3, unit: "m", desc: "MRI·CT 는 몸에서 오는 미세한 신호를 재어 <b>밀리미터</b> 단위의 단면 영상을 만듭니다." },
+      { icon: "🏥", name: "의료 영상 진단", e: -3, unit: "m", desc: "MRI·CT는 몸에서 오는 미세한 신호를 재어 <b>밀리미터</b> 단위의 단면 영상을 만듭니다." },
       { icon: "🌡️", name: "기후 관측", e: -1, unit: "℃", desc: "전 세계 관측소가 <b>같은 표준</b>으로 기온·기압을 재기 때문에, 수십 년치를 한 그래프에 올려 견줄 수 있습니다." },
       { icon: "⚖️", name: "거래와 무역", e: -3, unit: "kg", desc: "질량·부피의 표준 단위가 있어야 <b>공정한 상거래</b>가 됩니다. 저울 검정이 법으로 정해져 있는 까닭입니다." },
       { icon: "🚀", name: "우주 탐사", e: 0, unit: "m", desc: "탐사선의 거리와 속도를 정밀하게 재어 궤도를 계산합니다. 작은 오차가 아홉 달 뒤 큰 어긋남이 됩니다." }
@@ -887,7 +887,7 @@ function lcg(seed) {
       text(ctx, "시계가 1 ns 틀리면 위치가 30 cm,", 600, 272, { s: 11.5, w: "800", c: v("--violet-700") });
       text(ctx, "1 µs(1000 ns) 틀리면 약 300 m 어긋난다", 600, 296, { s: 11.5, w: "800", c: v("--coral-700") });
       text(ctx, "그래서 GPS 위성은 원자시계를 싣는다", 600, 324, { s: 11, c: v("--mist") });
-      text(ctx, "상대성 이론 보정을 하지 않으면 위성 시계는 하루 약 38 µs 어긋나고, 그것은 하루 11 km 가 넘는 위치 오차가 됩니다.", 40, 386, { s: 11, c: v("--mist") });
+      text(ctx, "상대성 이론 보정을 하지 않으면 위성 시계는 하루 약 38 µs 어긋나고, 그것은 하루 11 km가 넘는 위치 오차가 됩니다.", 40, 386, { s: 11, c: v("--mist") });
 
       $("c-gps-info").innerHTML = "시계 오차 <b>" + dt + " ns</b> × 빛의 속력 = 위치 오차 <b>" + e.toFixed(2) + " m</b> · " + verdict +
         "<br>" + (e <= 10 ? "이 정도라야 지도 앱이 건물을 제대로 짚습니다."
@@ -903,7 +903,7 @@ function lcg(seed) {
       if (got.a) done("m3-2a");
       if (got.b) done("m3-2b");
       if (got.a && got.b) {
-        window.sthMission("m3-2", true, "<span class='m-tag'>미션 완료</span>위치를 <b>10 m</b> 안쪽으로 맞추려면 시계가 <b>30 ns</b> 안쪽까지 맞아야 하고, <b>340 ns</b> 만 틀려도 <b>100 m</b> 를 넘어갑니다. 시간을 재는 일이 곧 위치를 재는 일입니다.");
+        window.sthMission("m3-2", true, "<span class='m-tag'>미션 완료</span>위치를 <b>10 m</b> 안쪽으로 맞추려면 시계가 <b>30 ns</b> 안쪽까지 맞아야 하고, <b>340 ns</b>만 틀려도 <b>100 m</b>를 넘어갑니다. 시간을 재는 일이 곧 위치를 재는 일입니다.");
         ep.clear(1);
       }
     }
@@ -980,7 +980,7 @@ function lcg(seed) {
       ctx.beginPath(); ctx.roundRect(80, 318, Math.max(6, 600 * y), 22, 11); ctx.fill();
       text(ctx, "수율 " + (y * 100).toFixed(1) + " %", 700, 336, { s: 17, w: "900", c: v(y >= 0.95 ? "--green-700" : "--rose-700") });
 
-      $("c-chip-info").innerHTML = "목표 선폭 <b>" + w + " nm</b> 의 허용 범위는 <b>± " + tol().toFixed(1) + " nm</b>, 오차는 <b>" + sd.toFixed(1) +
+      $("c-chip-info").innerHTML = "목표 선폭 <b>" + w + " nm</b>의 허용 범위는 <b>± " + tol().toFixed(1) + " nm</b>, 오차는 <b>" + sd.toFixed(1) +
         " nm</b> → 수율 <b>" + (y * 100).toFixed(1) + " %</b>." +
         (y >= 0.95 ? " 쓸 만합니다." : " 너무 많이 버리고 있습니다.") +
         "<br>선폭을 줄이면 허용 범위도 <b>같은 비율로 좁아진다</b>는 점에 주목하세요. 90 nm 에서는 ± 9 nm 지만 10 nm 에서는 ± 1 nm 뿐입니다.";
@@ -994,7 +994,7 @@ function lcg(seed) {
       if (got.a) done("m3-3a");
       if (got.b) done("m3-3b");
       if (got.a && got.b) {
-        window.sthMission("m3-3", true, "<span class='m-tag'>미션 완료</span>같은 오차라도 <b>선폭이 작아지면 치명적</b>이 됩니다. 허용 범위가 목표의 10 % 이기 때문이지요. 더 작게 만들려면 <b>더 정밀하게 재는 기술</b>이 먼저 있어야 합니다.");
+        window.sthMission("m3-3", true, "<span class='m-tag'>미션 완료</span>같은 오차라도 <b>선폭이 작아지면 치명적</b>이 됩니다. 허용 범위가 목표의 10 % 이기 때문입니다. 더 작게 만들려면 <b>더 정밀하게 재는 기술</b>이 먼저 있어야 합니다.");
         ep.clear(2);
       }
     }
@@ -1042,7 +1042,7 @@ function lcg(seed) {
     function drawSamp() {
       paper(ctx, W, H);
       var s = samples(), me = maxErr(s), i;
-      text(ctx, "손목에서 오는 맥박 신호 (1초에 1.2번) 를 1초에 " + rate + "번 잰다", 40, 34, { s: 12.5, w: "800", c: v("--teal-700") });
+      text(ctx, "손목에서 오는 맥박 신호 (1초에 1.2번)를 1초에 " + rate + "번 잰다", 40, 34, { s: 12.5, w: "800", c: v("--teal-700") });
       hline(ctx, 60, 860, sy(0), v("--line"), 1);
 
       /* 원래 신호 */
@@ -1095,7 +1095,7 @@ function lcg(seed) {
     function drawQuant() {
       paper(qx, QW, QH);
       var st = step(), i;
-      text(qx, "체온계가 다루는 30 ℃ ~ 45 ℃ 를 " + Math.pow(2, bits).toLocaleString() + " 칸(" + bits + "비트)으로 쪼갠다", 40, 34,
+      text(qx, "체온계가 다루는 30 ℃~45 ℃를 " + Math.pow(2, bits).toLocaleString() + " 칸(" + bits + "비트)으로 쪼갠다", 40, 34,
         { s: 12.5, w: "800", c: v("--teal-700") });
 
       qx.fillStyle = v("--card-2"); qx.beginPath(); qx.roundRect(80, 84, 740, 44, 8); qx.fill();
@@ -1129,8 +1129,8 @@ function lcg(seed) {
 
       $("c-quant-info").innerHTML = "<b>" + bits + "비트</b> = " + cells.toLocaleString() + "칸 → 한 칸이 <b>" + st.toFixed(4) +
         " ℃</b>, 최대 오차 <b>" + (st / 2).toFixed(4) + " ℃</b>. " +
-        (st / 2 <= 0.05 ? "✅ 0.05 ℃ 까지 구분합니다. 36.5 와 36.7 이 다른 숫자로 찍히지요."
-          : "36.5 ℃ 와 36.7 ℃ 가 같은 숫자로 찍히지 않는지 확인해 보세요. 비트를 올리면 칸이 촘촘해집니다.");
+        (st / 2 <= 0.05 ? "✅ 0.05 ℃까지 구분합니다. 36.5와 36.7이 다른 숫자로 찍힙니다."
+          : "36.5 ℃와 36.7 ℃가 같은 숫자로 찍히지 않는지 확인해 보세요. 비트를 올리면 칸이 촘촘해집니다.");
 
       if (st / 2 <= 0.05 && !got.b) { got.b = true; window.sthState("cAdc", got); mission(); }
     }
@@ -1159,7 +1159,7 @@ function lcg(seed) {
       if (got.b) done("m3-4b");
       if (got.c) done("m3-4c");
       if (got.a && got.b && got.c) {
-        window.sthMission("m3-4", true, "<span class='m-tag'>미션 완료</span>맥박은 <b>1초에 12번 이상</b> 재야 물결이 되살아나고, 체온계는 <b>8비트</b>는 되어야 0.05 ℃ 를 가릅니다. 이어지던 신호는 이 두 단계를 거쳐 <b>디지털 정보</b>가 됩니다.");
+        window.sthMission("m3-4", true, "<span class='m-tag'>미션 완료</span>맥박은 <b>1초에 12번 이상</b> 재야 물결이 되살아나고, 체온계는 <b>8비트</b>는 되어야 0.05 ℃를 가릅니다. 이어지던 신호는 이 두 단계를 거쳐 <b>디지털 정보</b>가 됩니다.");
         ep.clear(3); ep.clear(4);
       }
     }
@@ -1179,20 +1179,20 @@ function lcg(seed) {
 
   /* 장면 5 — 결말 */
   function finish() {
-    window.sthState("r3", "해결 · 시계 오차 1 µs 는 위치 오차 300 m · 맥박은 12번/초, 체온계는 8비트라야 살아난다");
+    window.sthState("r3", "해결 · 시계 오차 1 µs는 위치 오차 300 m · 맥박은 12번/초, 체온계는 8비트라야 살아난다");
   }
   function paintVs() {
     var p = window.sthState("p3") || "";
     $("e3-vs").innerHTML = "<b>나의 첫 어림</b> " + (p || "기록 없음") + "<br>" +
-      (p.indexOf("㉢") === 0 ? "정확했습니다. 빛이 1 µs 동안 가는 거리가 약 300 m 였지요."
-        : "빛은 1초에 약 3억 m 를 갑니다. 그 100만분의 1인 1 µs 면 약 300 m 이지요.") +
+      (p.indexOf("㉢") === 0 ? "정확했습니다. 빛이 1 µs 동안 가는 거리가 약 300 m 였습니다."
+        : "빛은 1초에 약 3억 m를 갑니다. 그 100만분의 1인 1 µs면 약 300 m입니다.") +
       "<br><b>내가 확인한 것</b> 10 m 안쪽으로 맞추려면 시계는 30 ns 안쪽까지 맞아야 한다";
   }
   ep.onShow(function (i) { if (i === 4) paintVs(); });
   paintVs();
 
   window.sthWork({
-    mount: "wk3", unitLabel: "[통합과학1 Ⅰ-2] 이야기 ③ 30 cm 를 다투는 사람들",
+    mount: "wk3", unitLabel: "[통합과학1 Ⅰ-2] 이야기 ③ 30 cm를 다투는 사람들",
     items: [
       { id: "e3a", label: "100만분의 1초가 만든 300 m", hint: "위성 시계의 작은 오차가 왜 큰 위치 오차가 되는지 ‘빛의 속력’과 ‘거리 = 속력 × 시간’이라는 말을 넣어 세 문장으로 설명하세요." },
       { id: "e3b", label: "숫자로 바꾼다는 것", hint: "이어지던 신호를 디지털로 바꾸는 두 단계(표본화·양자화)를 각각 한 문장으로 설명하고, 디지털로 바꾸어 두면 무엇이 좋은지 쓰세요." }
@@ -1206,7 +1206,7 @@ window.sthWork({
   recap: [
     { key: "r1", label: "① 과녁에 남은 자국" },
     { key: "r2", label: "② 1미터를 다시 정하는 회의" },
-    { key: "r3", label: "③ 30 cm 를 다투는 사람들" },
+    { key: "r3", label: "③ 30 cm를 다투는 사람들" },
     { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" },
     { key: "rReal", label: "실제 자료" }
@@ -1223,7 +1223,7 @@ window.sthShare({
   rows: [
     { key: "r1", label: "① 과녁에 남은 자국" },
     { key: "r2", label: "② 1미터를 다시 정하는 회의" },
-    { key: "r3", label: "③ 30 cm 를 다투는 사람들" },
+    { key: "r3", label: "③ 30 cm를 다투는 사람들" },
     { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" },
     { key: "rReal", label: "실제 자료" }

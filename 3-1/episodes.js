@@ -125,7 +125,7 @@ function pointOnCanvas(canvas, e) {
         : cur.name + " : 드나드는 양이 아주 적어 오래 갇혀 있습니다. 빙하와 지하수는 수백 년에서 수만 년까지 머뭅니다.",
         482, 258, 382, 18, { s: 12, w: "700" });
       text(ctx, "순환이 " + k.toFixed(2) + "배로 빨라지면 드나드는 양도 " + k.toFixed(2) + "배가 됩니다.", 482, 258 + n * 18 + 6, { s: 10.5, c: v("--mist") });
-      text(ctx, "지금 지구에서는 해마다 약 505,000 km³ 의 물이 증발하고, 같은 양이 비와 눈으로 내립니다.", 40, 374, { s: 11, c: v("--mist") });
+      text(ctx, "지금 지구에서는 해마다 약 505,000 km³의 물이 증발하고, 같은 양이 비와 눈으로 내립니다.", 40, 374, { s: 11, c: v("--mist") });
       say();
     }
     function say() {
@@ -175,11 +175,11 @@ function pointOnCanvas(canvas, e) {
       { a: 0, b: 1, hx: 338, hy: 105, t: "외권 ↔ 기권", d: "태양 복사 에너지가 대기권 위로 들어와 기권과 지표를 데우고, 지구는 받은 만큼을 적외선으로 우주에 돌려보냅니다(복사 평형). 지구시스템을 움직이는 에너지의 <b>99.9% 이상</b>이 이 길로 들어옵니다." },
       { a: 0, b: 2, hx: 562, hy: 105, t: "외권 ↔ 지권·수권", d: "달과 태양의 인력이 바닷물을 끌어당겨 <b>밀물과 썰물</b>을 일으킵니다. 우주에서 떨어진 운석은 지권에 충돌구를 남기고, 지구의 자전축 기울기는 계절을 만듭니다." },
       { a: 1, b: 2, hx: 450, hy: 158, t: "기권 ↔ 지권", d: "바람이 모래를 날라 바위를 깎고(풍화·침식), 기온이 오르내리며 암석을 부숩니다. 거꾸로 화산이 뿜은 화산재와 기체는 기권의 성분과 기온을 바꿉니다." },
-      { a: 1, b: 3, hx: 250, hy: 247, t: "기권 ↔ 수권", d: "바다에서 물이 증발해 기권으로 가고, 비와 눈이 되어 수권으로 돌아옵니다. 해마다 <b>약 505,000 km³</b> 가 오갑니다. 바다는 대기의 이산화 탄소를 녹여 품기도 합니다." },
+      { a: 1, b: 3, hx: 250, hy: 247, t: "기권 ↔ 수권", d: "바다에서 물이 증발해 기권으로 가고, 비와 눈이 되어 수권으로 돌아옵니다. 해마다 <b>약 505,000 km³</b>가 오갑니다. 바다는 대기의 이산화 탄소를 녹여 품기도 합니다." },
       { a: 2, b: 4, hx: 650, hy: 247, t: "지권 ↔ 생물권", d: "토양은 생물의 서식 기반이 되고, 뿌리와 지의류는 암석의 풍화를 빠르게 합니다. 죽은 생물이 묻혀 <b>석탄·석유</b>가 되기도 합니다." },
       { a: 3, b: 4, hx: 450, hy: 336, t: "수권 ↔ 생물권", d: "생물은 물을 마시고 물속을 서식지로 삼습니다. 바다의 식물성 플랑크톤은 수권에서 광합성을 해 산소를 내놓습니다." },
       { a: 1, b: 4, cx: 330, cy: 300, hx: 390, hy: 274, t: "기권 ↔ 생물권", d: "식물의 광합성과 생물의 호흡이 대기의 산소·이산화 탄소 농도를 바꿉니다. 지금 대기에 산소가 21%나 있는 것은 <b>생물권이 한 일</b>입니다." },
-      { a: 3, b: 2, cx: 570, cy: 194, hx: 510, hy: 221, t: "수권 ↔ 지권", d: "하천과 파도가 지권을 깎아 내고, 깎인 알갱이를 날라 삼각주와 모래 해변을 만듭니다. 강이 해마다 바다로 나르는 퇴적물은 <b>약 200억 t</b> 입니다." }
+      { a: 3, b: 2, cx: 570, cy: 194, hx: 510, hy: 221, t: "수권 ↔ 지권", d: "하천과 파도가 지권을 깎아 내고, 깎인 알갱이를 날라 삼각주와 모래 해변을 만듭니다. 강이 해마다 바다로 나르는 퇴적물은 <b>약 200억 t</b>입니다." }
     ];
     var seen = window.sthState("mapSeen") || {};
     var got = window.sthState("mapGot") || { a: false, b: false };
@@ -334,7 +334,7 @@ function pointOnCanvas(canvas, e) {
       text(ctx, mon + "개월", clamp(mx, gx0, gx1 - 30), gy1 + 18, { s: 10.5, w: "800", a: "center", c: v("--mist") });
       /* 아래 연쇄 */
       var chain = [
-        ["지권", "화산이 이산화 황 " + so2 + " Tg 을 성층권까지 뿜어 올립니다.", "--coral"],
+        ["지권", "화산이 이산화 황 " + so2 + " Tg을 성층권까지 뿜어 올립니다.", "--coral"],
         ["기권", "황산 알갱이가 햇빛을 " + Math.abs(sun(mon)).toFixed(1) + "% 되돌려 보내 지구 평균 기온이 " + now.toFixed(2) + " ℃ 달라집니다.", "--cold"],
         ["생물권", "일조량이 줄어 광합성이 느려지고, 서늘한 여름에 농작물 수확이 줄어듭니다.", "--green"],
         ["수권", "기온이 내려가 증발량과 강수 분포가 달라지고, 바다 표층도 함께 식습니다.", "--brand"]
@@ -353,8 +353,8 @@ function pointOnCanvas(canvas, e) {
     }
     function info() {
       var p = peak(), a = frac(mon);
-      $("a-volc-info").innerHTML = "이산화 황 <b>" + so2 + " Tg</b> → 가장 많이 식었을 때 <b>" + p.toFixed(2) + " ℃</b>. 폭발 <b>" + mon + "개월</b> 뒤에는 에어로졸이 <b>" + (a * 100).toFixed(0) + "%</b> 남아 기온 변화는 <b>" + dT(mon).toFixed(2) + " ℃</b> 입니다. " +
-        (Math.abs(p + 0.5) <= 0.03 ? "🎉 1991년 피나투보와 같은 규모입니다." : "피나투보는 약 20 Tg 을 뿜어 이듬해 지구 평균 기온을 약 0.5 ℃ 낮췄습니다.");
+      $("a-volc-info").innerHTML = "이산화 황 <b>" + so2 + " Tg</b> → 가장 많이 식었을 때 <b>" + p.toFixed(2) + " ℃</b>. 폭발 <b>" + mon + "개월</b> 뒤에는 에어로졸이 <b>" + (a * 100).toFixed(0) + "%</b> 남아 기온 변화는 <b>" + dT(mon).toFixed(2) + " ℃</b>입니다. " +
+        (Math.abs(p + 0.5) <= 0.03 ? "🎉 1991년 피나투보와 같은 규모입니다." : "피나투보는 약 20 Tg을 뿜어 이듬해 지구 평균 기온을 약 0.5 ℃ 낮췄습니다.");
     }
     function check() {
       var ch = false;
@@ -394,7 +394,7 @@ function pointOnCanvas(canvas, e) {
     var p = window.sthState("p1") || "";
     $("e1-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + "<br>" +
       (p.indexOf("㉣") === 0 ? "정확했습니다. 분석표의 조개껍데기 조각(생물권)과 닳은 모서리(수권·기권)가 그 증거였습니다."
-        : "답은 ㉣ 입니다. 석영은 지권에서 왔지만, 그것을 떼어 내고 굴리고 실어 나른 것은 수권·기권·생물권이었습니다. 조개껍데기 조각이 결정적인 증거였지요.") +
+        : "답은 ㉣ 입니다. 석영은 지권에서 왔지만, 그것을 떼어 내고 굴리고 실어 나른 것은 수권·기권·생물권이었습니다. 조개껍데기 조각이 결정적인 증거였습니다.") +
       "<br><b>내가 만든 화산</b> 이산화 황 " + (window.sthState("so2Fit") || "-") + " → 가장 많이 식었을 때 −0.5 ℃";
   }
   function finish() {
@@ -462,7 +462,7 @@ function pointOnCanvas(canvas, e) {
       }
       text(ctx, "전체에서 차지하는 비율 — 태양 99.971% · 지구 내부 0.027% · 조력 0.002%", 40, 246, { s: 11.5, w: "800", c: v("--brand-700") });
       /* 넓이 환산표 */
-      text(ctx, "넓이 " + area.toLocaleString() + " m² 의 땅 위에서 견주면", 40, 278, { s: 13, w: "900" });
+      text(ctx, "넓이 " + area.toLocaleString() + " m²의 땅 위에서 견주면", 40, 278, { s: 13, w: "900" });
       text(ctx, "1 m² 당", 560, 278, { s: 11, a: "right", c: v("--mist") });
       text(ctx, "이 넓이에서", 866, 278, { s: 11, a: "right", c: v("--mist") });
       for (var j = 0; j < S.length; j++) {
@@ -478,7 +478,7 @@ function pointOnCanvas(canvas, e) {
     }
     function info() {
       var inW = perM2(IN_TW) * area, sunW = perM2(SUN_TW) * area;
-      $("b-stove-info").innerHTML = "넓이 <b>" + area.toLocaleString() + " m²</b> 위에서, 태양은 <b>" + Math.round(sunW).toLocaleString() + " W</b>, 땅속에서 올라오는 열은 <b>" + inW.toFixed(1) + " W</b> 입니다. " +
+      $("b-stove-info").innerHTML = "넓이 <b>" + area.toLocaleString() + " m²</b> 위에서, 태양은 <b>" + Math.round(sunW).toLocaleString() + " W</b>, 땅속에서 올라오는 열은 <b>" + inW.toFixed(1) + " W</b>입니다. " +
         (Math.abs(inW - 60) <= 2 ? "🎉 백열전구 한 개(60 W)와 같아졌습니다. 운동장만 한 땅이 통째로 전구 하나인 셈입니다."
           : "지구 내부의 열은 <b>넓게 퍼져 있어 약합니다.</b> 그런데도 화산과 지진을 일으키는 것은, 그 에너지가 판 경계라는 <b>좁은 곳에 몰려</b> 쓰이기 때문입니다.");
     }
@@ -556,7 +556,7 @@ function pointOnCanvas(canvas, e) {
         text(ctx, "온실 효과", 556, air0 - 10, { s: 11.5, w: "800", a: "center", c: v("--violet-700") });
         text(ctx, "+" + gh + " ℃", 556, ground + 26, { s: 12.5, w: "900", a: "center", c: v("--violet-700") });
       }
-      text(ctx, "들어오는 양(흡수) = 나가는 양(적외선) 이면 온도가 더 오르지도 내리지도 않습니다 — 복사 평형", xL, 372, { s: 11.5, w: "800", c: v("--brand-700") });
+      text(ctx, "들어오는 양(흡수) = 나가는 양(적외선)이면 온도가 더 오르지도 내리지도 않습니다 — 복사 평형", xL, 372, { s: 11.5, w: "800", c: v("--brand-700") });
       text(ctx, "이 화면은 지구를 온도가 하나뿐인 공으로 본 단순한 모형입니다.", xL, 392, { s: 10.5, c: v("--mist") });
       /* 오른쪽 계기 */
       var te = teff(), ts = tsurf();
@@ -573,8 +573,8 @@ function pointOnCanvas(canvas, e) {
     }
     function info() {
       var te = teff(), ts = tsurf();
-      $("b-budget-info").innerHTML = "반사율 <b>" + alb + "%</b> 일 때, 지구가 흡수하는 양과 내보내는 양이 같아지는 온도는 <b>" + te.toFixed(1) + " ℃</b> 입니다. 여기에 온실 효과 <b>+" + gh + " ℃</b> 를 더하면 지표의 평균 기온은 <b>" + ts.toFixed(1) + " ℃</b>. " +
-        (Math.abs(te + 18) <= 1.5 ? (Math.abs(ts - 15) <= 1.5 ? "🎉 실제 지구의 장부와 같아졌습니다." : "복사 평형 온도는 맞췄습니다. 이제 온실 효과를 더해 15 ℃ 를 만들어 보세요.") :
+      $("b-budget-info").innerHTML = "반사율 <b>" + alb + "%</b> 일 때, 지구가 흡수하는 양과 내보내는 양이 같아지는 온도는 <b>" + te.toFixed(1) + " ℃</b>입니다. 여기에 온실 효과 <b>+" + gh + " ℃</b>를 더하면 지표의 평균 기온은 <b>" + ts.toFixed(1) + " ℃</b>. " +
+        (Math.abs(te + 18) <= 1.5 ? (Math.abs(ts - 15) <= 1.5 ? "🎉 실제 지구의 장부와 같아졌습니다." : "복사 평형 온도는 맞췄습니다. 이제 온실 효과를 더해 15 ℃를 만들어 보세요.") :
           "반사율을 바꿔 보세요. 많이 반사할수록 흡수가 줄어 평형 온도가 내려갑니다.");
     }
     function check() {
@@ -588,7 +588,7 @@ function pointOnCanvas(canvas, e) {
       if (got.b) done("m2-3b");
       if (got.c) done("m2-3c");
       if (got.a && got.b && got.c) {
-        window.sthMission("m2-3", true, "<span class='m-tag'>미션 완료</span>지구는 받은 만큼 내보내며 <b>복사 평형</b>을 이룹니다. 대기가 없었다면 −18 ℃, 지금의 15 ℃ 는 <b>온실 효과</b>가 더해 준 몫입니다.");
+        window.sthMission("m2-3", true, "<span class='m-tag'>미션 완료</span>지구는 받은 만큼 내보내며 <b>복사 평형</b>을 이룹니다. 대기가 없었다면 −18 ℃, 지금의 15 ℃는 <b>온실 효과</b>가 더해 준 몫입니다.");
         ep.clear(2);
       }
     }
@@ -750,7 +750,7 @@ function pointOnCanvas(canvas, e) {
     mount: "wk2", unitLabel: "[통합과학1 Ⅲ-1] 이야기 ② 세 개의 난로",
     items: [
       { id: "w2", label: "지구 내부 에너지가 하는 일", hint: "태양 에너지로는 설명되지 않는 현상을 하나 들고, 무엇이 그 현상을 일으키는지 쓰세요.", ph: "" },
-      { id: "e2b", label: "−18 ℃ 와 15 ℃ 사이", hint: "대기가 없는 지구의 평균 기온이 −18 ℃ 인데 실제로는 15 ℃ 인 까닭을, ‘흡수’와 ‘방출’이라는 말을 넣어 설명하세요.", ph: "" }
+      { id: "e2b", label: "−18 ℃와 15 ℃ 사이", hint: "대기가 없는 지구의 평균 기온이 −18 ℃인데 실제로는 15 ℃ 인 까닭을, ‘흡수’와 ‘방출’이라는 말을 넣어 설명하세요.", ph: "" }
     ]
   });
 })();
@@ -781,7 +781,7 @@ function pointOnCanvas(canvas, e) {
         txt: "두 판이 서로 멀어지고, 그 틈으로 맨틀 물질이 올라와 <b>새로운 해양 지각</b>이 만들어집니다. 지각이 늘어나므로 정단층이 생기고, 마그마가 얕은 곳에서 올라와 화산 활동이 활발합니다."
       },
       convergent: {
-        name: "수렴형 경계", land: "해구 · 호상 열도 · 습곡 산맥", quake: "얕은 곳 ~ 깊이 700 km 까지",
+        name: "수렴형 경계", land: "해구 · 호상 열도 · 습곡 산맥", quake: "얕은 곳 ~ 깊이 700 km까지",
         place: "일본 해구, 안데스 산맥, 히말라야 산맥", fault: "역단층",
         txt: "두 판이 부딪혀 밀도가 큰 해양판이 다른 판 아래로 <b>섭입</b>하거나, 두 대륙판이 충돌해 <b>습곡 산맥</b>을 만듭니다. 지각이 눌리므로 역단층이 생기고, 섭입하는 판을 따라 지진의 깊이가 점점 깊어집니다."
       },
@@ -869,7 +869,7 @@ function pointOnCanvas(canvas, e) {
     }
     function info() {
       var I = INFO[type], d = dist();
-      $("c-bnd-info").innerHTML = "<b>" + I.name + "</b> — " + I.txt + " 속력 <b>" + vel.toFixed(1) + " cm/년</b> 으로 <b>" + tm.toLocaleString() + "만 년</b> 이 지나면 <b>" + Math.round(d).toLocaleString() + " km</b> 가 " +
+      $("c-bnd-info").innerHTML = "<b>" + I.name + "</b> — " + I.txt + " 속력 <b>" + vel.toFixed(1) + " cm/년</b>으로 <b>" + tm.toLocaleString() + "만 년</b>이 지나면 <b>" + Math.round(d).toLocaleString() + " km</b>가 " +
         (type === "divergent" ? "새로 만들어집니다." : (type === "convergent" ? "사라집니다(섭입)." : "어긋납니다.")) +
         (type === "divergent" && Math.abs(d - 5000) <= 250 ? " 🎉 지금의 대서양 폭과 비슷합니다." : "");
     }
@@ -887,7 +887,7 @@ function pointOnCanvas(canvas, e) {
       if (got.b) done("m3-2b");
       if (got.c) done("m3-2c");
       if (got.a && got.b && got.c) {
-        window.sthMission("m3-2", true, "<span class='m-tag'>미션 완료</span>해마다 몇 cm 에 지나지 않지만, <b>수천만 년</b>이 쌓이면 대양 하나가 생깁니다. 경계의 종류가 지형·지진·단층의 종류를 결정합니다.");
+        window.sthMission("m3-2", true, "<span class='m-tag'>미션 완료</span>해마다 몇 cm에 지나지 않지만, <b>수천만 년</b>이 쌓이면 대양 하나가 생깁니다. 경계의 종류가 지형·지진·단층의 종류를 결정합니다.");
         ep.clear(1);
       }
     }
@@ -1056,7 +1056,7 @@ function pointOnCanvas(canvas, e) {
       info(rv, re);
     }
     function info(rv, re) {
-      $("c-quake-info").innerHTML = "판 경계에서 <b>" + R.toLocaleString() + " km</b> 안쪽에 화산의 <b>" + rv.toFixed(0) + "%</b>, 큰 지진의 <b>" + re.toFixed(0) + "%</b> 가 들어옵니다. " +
+      $("c-quake-info").innerHTML = "판 경계에서 <b>" + R.toLocaleString() + " km</b> 안쪽에 화산의 <b>" + rv.toFixed(0) + "%</b>, 큰 지진의 <b>" + re.toFixed(0) + "%</b>가 들어옵니다. " +
         (R <= 800 && rv >= 70 && re >= 70 ? "🎉 화산과 지진은 지구에 고르게 흩어져 있지 않고 <b>판 경계를 따라 좁은 띠</b>를 이룹니다. 이 띠를 <b>변동대</b>라고 합니다."
           : "거리를 줄여 가며, 어디까지 좁혀도 대부분이 남는지 확인해 보세요.") +
         " 지도의 점을 눌러 보세요 — 하와이·옐로스톤은 판 경계에서 멀리 떨어진 <b>열점</b> 화산이고, 경주·포항은 경계 위가 아닌 <b>판 내부</b>에서 일어난 지진입니다.";
@@ -1086,7 +1086,7 @@ function pointOnCanvas(canvas, e) {
         if (d2 < bd) { bd = d2; best = { t: "⚡ " + EQ[j][2], d: ED[j] }; }
       }
       if (best) {
-        $("c-quake-info").innerHTML = "<b>" + best.t + "</b> — 가장 가까운 판 경계까지 <b>약 " + Math.round(best.d / 10) * 10 + " km</b> 입니다. " +
+        $("c-quake-info").innerHTML = "<b>" + best.t + "</b> — 가장 가까운 판 경계까지 <b>약 " + Math.round(best.d / 10) * 10 + " km</b>입니다. " +
           (/열점|판 내부/.test(best.t)
             ? "판 경계 위가 아닙니다. 열점 위를 판이 지나가며 생긴 화산이거나, 판 내부의 오래된 단층이 다시 움직여 일어난 지진입니다."
             : (best.d <= 300 ? "판 경계를 따라 늘어선 <b>변동대</b> 위에 있습니다."
@@ -1191,7 +1191,7 @@ function pointOnCanvas(canvas, e) {
       info();
     }
     function info() {
-      $("c-hot-info").innerHTML = "속력 <b>" + vp.toFixed(1) + " cm/년</b> 으로 계산하면 카우아이섬(500 km · 500만 년)은 오차 <b>" + (err(DATA[0]) * 100).toFixed(0) + "%</b>, 미드웨이섬(2,400 km · 2,800만 년)은 오차 <b>" + (err(DATA[1]) * 100).toFixed(0) + "%</b> 입니다. " +
+      $("c-hot-info").innerHTML = "속력 <b>" + vp.toFixed(1) + " cm/년</b>으로 계산하면 카우아이섬(500 km · 500만 년)은 오차 <b>" + (err(DATA[0]) * 100).toFixed(0) + "%</b>, 미드웨이섬(2,400 km · 2,800만 년)은 오차 <b>" + (err(DATA[1]) * 100).toFixed(0) + "%</b>입니다. " +
         (fit() ? "🎉 두 자료에 모두 들어맞습니다. 실제로 태평양판의 이동 속력은 이 정도로 알려져 있습니다."
           : (vp * 10 * DATA[1].ma > DATA[1].km ? "너무 빠릅니다. 속력을 줄여 보세요." : "너무 느립니다. 속력을 올려 보세요."));
     }
@@ -1229,7 +1229,7 @@ function pointOnCanvas(canvas, e) {
       var atl = km(2.5);
       card(ctx, 40, 292, 832, 28, v(Math.abs(atl - 1000) <= 50 ? "--green-100" : "--card-2"));
       text(ctx, Math.abs(atl - 1000) <= 50
-        ? "✅ 대서양이 지금보다 1,000 km 넓어졌습니다 — 해마다 2.5 cm 씩 " + ft.toLocaleString() + "만 년"
+        ? "✅ 대서양이 지금보다 1,000 km 넓어졌습니다 — 해마다 2.5 cm씩 " + ft.toLocaleString() + "만 년"
         : "대서양이 지금보다 1,000 km 넓어지는 때를 찾아보세요 (지금 " + Math.round(atl).toLocaleString() + " km)",
         52, 311, { s: 12, w: "800", c: v(Math.abs(atl - 1000) <= 50 ? "--green-700" : "--mist") });
       info();
@@ -1237,7 +1237,7 @@ function pointOnCanvas(canvas, e) {
     function info() {
       var atl = km(2.5);
       $("c-future-info").innerHTML = "<b>" + ft.toLocaleString() + "만 년</b> 뒤 — 대서양은 <b>" + Math.round(atl).toLocaleString() + " km</b> 더 넓어지고, 태평양판은 일본 해구로 <b>" + Math.round(km(8.5)).toLocaleString() + " km</b> 가라앉으며, 인도판은 <b>" + Math.round(km(5.0)).toLocaleString() + " km</b> 북쪽으로 밀고 올라갑니다. " +
-        "해마다 몇 cm 가 쌓여 대륙의 배치를 바꿉니다. 판의 운동은 지권에서 끝나지 않고, 바다의 모양과 대기의 흐름, 생물의 서식지까지 바꿉니다.";
+        "해마다 몇 cm가 쌓여 대륙의 배치를 바꿉니다. 판의 운동은 지권에서 끝나지 않고, 바다의 모양과 대기의 흐름, 생물의 서식지까지 바꿉니다.";
     }
     function check() {
       if (Math.abs(km(2.5) - 1000) <= 50 && !got4.b) { got4.b = true; window.sthState("driftGot", got4); mission4(); }
@@ -1263,7 +1263,7 @@ function pointOnCanvas(canvas, e) {
     $("e3-wrap").hidden = false;
     var p = window.sthState("p3") || "";
     $("e3-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + "<br>" +
-      (p.indexOf("㉡") === 0 ? "정확했습니다. 증거는 충분했지만 <b>원동력</b>이 빠져 있었습니다. 베게너가 지질학자가 아니라 기상학자였던 것도 불신을 키웠지요."
+      (p.indexOf("㉡") === 0 ? "정확했습니다. 증거는 충분했지만 <b>원동력</b>이 빠져 있었습니다. 베게너가 지질학자가 아니라 기상학자였던 것도 불신을 키웠습니다."
         : "답은 ㉡ 입니다. 화석도 빙하 자국도 진짜였습니다. 빠진 것은 대륙을 움직이는 <b>힘</b>이었고, 그 답인 맨틀 대류와 해저 확장은 30년 뒤에야 나왔습니다.") +
       "<br><b>내가 잰 태평양판의 속력</b> " + (window.sthState("vpFit") || "-") + " · <b>내가 좁힌 변동대</b> " + (window.sthState("ringR") || "-");
   }
