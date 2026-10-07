@@ -771,7 +771,7 @@ function pointOnCanvas(canvas, e) {
   /* 장면 2 — 판 경계 실험대 ------------------------------------------------ */
   (function () {
     var canvas = $("c-bnd"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
-    var type = "divergent", vel = 5, tm = 500;
+    var type = "divergent", vel = 5, tm = 500, T = 0;
     var got = window.sthState("bndGot") || { a: false, b: false, c: false };
     var seen = window.sthState("bndSeen") || {};
     var INFO = {
@@ -787,7 +787,7 @@ function pointOnCanvas(canvas, e) {
       },
       transform: {
         name: "보존형 경계", land: "긴 단층 골짜기 (생성·소멸 없음)", quake: "얕은 지진 (규모는 클 수 있다)",
-        place: "산안드레아스 단층, 북아나톨리아 단층, 해령을 가로지르는 변환 단층", fault: "주향이동단층",
+        place: "산안드레아스 단층, 북아나톨리아 단층, 해령을 가로지르는 변환 단층", fault: "변환 단층",
         txt: "두 판이 서로 반대 방향으로 <b>어긋나며 미끄러집니다.</b> 지각이 새로 생기지도, 사라지지도 않습니다. 화산은 거의 없지만 쌓인 힘이 한꺼번에 풀리며 큰 지진이 일어날 수 있습니다."
       }
     };
@@ -798,56 +798,134 @@ function pointOnCanvas(canvas, e) {
       text(ctx, "판 경계 실험대 — " + I.name, 40, 32, { s: 14, w: "900" });
       text(ctx, "판을 움직이는 힘은 맨틀 대류, 그 열원은 지구 내부 에너지입니다.", 40, 52, { s: 10.5, c: v("--mist") });
       var x0 = 40, x1 = 556, surf = 196, mid = (x0 + x1) / 2, ph = 40;
-      /* 맨틀 */
+      /* 맨틀 — 대류가 흐르는 방향으로 점선이 움직인다 */
       ctx.fillStyle = v("--coral-100"); ctx.fillRect(x0, surf + ph, x1 - x0, 170);
       text(ctx, "맨틀", x1 - 10, surf + ph + 160, { s: 11, w: "800", a: "right", c: v("--coral-700") });
-      /* 대류 화살표 */
-      ctx.strokeStyle = v("--coral"); ctx.fillStyle = v("--coral"); ctx.lineWidth = 3;
-      if (type === "divergent") {
-        window.drawArrow(ctx, mid, surf + ph + 150, mid, surf + ph + 20, 10);
-        window.drawArrow(ctx, mid - 30, surf + ph + 30, mid - 120, surf + ph + 30, 10);
-        window.drawArrow(ctx, mid + 30, surf + ph + 30, mid + 120, surf + ph + 30, 10);
-      } else if (type === "convergent") {
-        window.drawArrow(ctx, mid - 150, surf + ph + 40, mid - 40, surf + ph + 40, 10);
-        window.drawArrow(ctx, mid + 150, surf + ph + 40, mid + 40, surf + ph + 40, 10);
-      } else {
-        window.drawArrow(ctx, mid - 40, surf + ph + 40, mid - 150, surf + ph + 40, 10);
-        window.drawArrow(ctx, mid + 40, surf + ph + 40, mid + 150, surf + ph + 40, 10);
+      var pv = 8 + vel * 5;                                   /* 화면에서 판이 움직이는 빠르기(px/초) — 실제 속력에 비례 */
+      function flow(xa, ya, xb, yb) {
+        ctx.strokeStyle = v("--coral"); ctx.fillStyle = v("--coral"); ctx.lineWidth = 3;
+        ctx.setLineDash([10, 8]); ctx.lineDashOffset = -T * pv * 0.8;
+        ctx.beginPath(); ctx.moveTo(xa, ya); ctx.lineTo(xb, yb); ctx.stroke(); ctx.setLineDash([]); ctx.lineDashOffset = 0;
+        var L = Math.hypot(xb - xa, yb - ya), ux = (xb - xa) / L, uy = (yb - ya) / L;
+        window.drawArrow(ctx, xb - ux * 12, yb - uy * 12, xb, yb, 10);
       }
-      /* 판 */
-      ctx.fillStyle = v("--teal");
+      if (type === "divergent") {
+        flow(mid, surf + ph + 150, mid, surf + ph + 20);
+        flow(mid - 30, surf + ph + 30, mid - 120, surf + ph + 30);
+        flow(mid + 30, surf + ph + 30, mid + 120, surf + ph + 30);
+      } else if (type === "convergent") {
+        flow(mid + 160, surf + ph + 40, mid + 50, surf + ph + 40);
+        flow(mid - 160, surf + ph + 120, mid - 60, surf + ph + 60);
+      } else {
+        flow(mid + 40, surf + ph + 40, mid + 150, surf + ph + 40);
+        flow(mid - 40, surf + ph + 40, mid - 150, surf + ph + 40);
+      }
+      /* 판 — 무늬가 판과 함께 움직인다 */
+      function bands(xa, xb, y, h, dirn, c1, c2) {           /* dirn: +1 오른쪽, -1 왼쪽으로 흐르는 줄무늬 */
+        var w = 22, off = ((T * pv) % (2 * w) + 2 * w) % (2 * w);
+        ctx.save(); ctx.beginPath(); ctx.rect(xa, y, xb - xa, h); ctx.clip();
+        var k = 0, x;
+        if (dirn > 0) { for (x = xa - 2 * w + off; x < xb; x += w, k++) { ctx.fillStyle = v(k % 2 ? c2 : c1); ctx.fillRect(x, y, w + 0.5, h); } }
+        else { for (x = xb + 2 * w - off; x > xa - w; x -= w, k++) { ctx.fillStyle = v(k % 2 ? c2 : c1); ctx.fillRect(x - w, y, w + 0.5, h); } }
+        ctx.restore();
+      }
       if (type === "divergent") {
         var gapx = clamp(18 + d / 400, 18, 90);
-        ctx.fillRect(x0, surf, mid - gapx - x0, ph);
-        ctx.fillRect(mid + gapx, surf, x1 - mid - gapx, ph);
+        /* 해령에서 새로 생긴 지각이 줄무늬를 이루며 양쪽으로 밀려 나간다 */
+        bands(x0, mid - gapx, surf, ph, -1, "--teal", "--teal-700");
+        bands(mid + gapx, x1, surf, ph, +1, "--teal", "--teal-700");
         ctx.fillStyle = v("--violet");
         ctx.beginPath(); ctx.moveTo(mid, surf - 26); ctx.lineTo(mid - gapx, surf + ph); ctx.lineTo(mid + gapx, surf + ph); ctx.closePath(); ctx.fill();
-        text(ctx, "새 해양 지각", mid, surf - 36, { s: 11, w: "800", a: "center", c: v("--violet-700") });
-        text(ctx, "해령 · 열곡", mid, surf + ph + 18, { s: 10.5, w: "800", a: "center", c: v("--panel") });
-        ctx.fillStyle = v("--amber");
-        for (var q = 0; q < 5; q++) { ctx.beginPath(); ctx.arc(mid - 60 + q * 30, surf + 14, 4, 0, Math.PI * 2); ctx.fill(); }
-      } else if (type === "convergent") {
-        ctx.fillRect(x0, surf, mid - x0 - 10, ph);
-        ctx.save(); ctx.translate(mid + 4, surf + 4); ctx.rotate(0.5);
-        ctx.fillStyle = v("--brand"); ctx.fillRect(0, 0, 250, ph); ctx.restore();
-        ctx.fillStyle = v("--mist");
-        ctx.beginPath(); ctx.moveTo(mid - 30, surf); ctx.lineTo(mid + 6, surf + 24); ctx.lineTo(mid + 20, surf); ctx.closePath(); ctx.fill();
-        text(ctx, "해구", mid + 30, surf - 10, { s: 10.5, w: "800", c: v("--mist") });
-        ctx.fillStyle = v("--coral");
-        ctx.beginPath(); ctx.moveTo(mid - 110, surf); ctx.lineTo(mid - 80, surf - 40); ctx.lineTo(mid - 50, surf); ctx.closePath(); ctx.fill();
-        text(ctx, "화산 · 습곡 산맥", mid - 80, surf - 50, { s: 10.5, w: "800", a: "center", c: v("--coral-700") });
-        ctx.fillStyle = v("--violet");
-        for (var z = 0; z < 6; z++) {
-          ctx.beginPath(); ctx.arc(mid + 10 + z * 32, surf + 20 + z * 24, 5, 0, Math.PI * 2); ctx.fill();
+        /* 솟아오르는 마그마 */
+        for (var q = 0; q < 14; q++) {
+          var ph2 = (T * 0.35 + q / 14) % 1, my = surf + ph + 150 - ph2 * 170, mx = mid + Math.sin(q * 2.3 + T * 2) * (6 + ph2 * gapx * 0.6);
+          ctx.globalAlpha = 0.25 + 0.65 * ph2; ctx.fillStyle = v(ph2 > 0.8 ? "--coral" : "--amber");
+          ctx.beginPath(); ctx.arc(mx, my, 3 + ph2 * 2.5, 0, Math.PI * 2); ctx.fill();
         }
-        text(ctx, "지진이 점점 깊어짐", mid + 40, surf + 178, { s: 10.5, w: "800", c: v("--violet-700") });
+        ctx.globalAlpha = 1;
+        text(ctx, "새 해양 지각", mid, surf - 36, { s: 11, w: "800", a: "center", c: v("--violet-700") });
+        text(ctx, "▲ 해령 · 열곡", mid, surf - 52, { s: 10.5, w: "800", a: "center", c: v("--coral-700") });
+        /* 얕은 지진 — 해령 곁에서 깜박인다 */
+        for (var e = 0; e < 5; e++) {
+          var bl = Math.max(0, Math.sin(T * 3 + e * 1.9));
+          ctx.globalAlpha = 0.3 + 0.7 * bl; ctx.fillStyle = v("--amber");
+          ctx.beginPath(); ctx.arc(mid - 60 + e * 30, surf + 14, 3 + bl * 3, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      } else if (type === "convergent") {
+        /* 오른쪽 해양판이 해구에서 왼쪽 대륙판 아래로 비스듬히 가라앉는다(섭입) */
+        var ang = 0.62, ca = Math.cos(ang), sa = Math.sin(ang), SL = 200;
+        var tx = mid + 6;                                     /* 해구 */
+        var slabPt = function (s2, off) {                     /* 해양판 위의 한 점: s2 는 판을 따라 잰 길이(오른쪽 끝 0) */
+          var flat = x1 - tx;
+          if (s2 <= flat) return [x1 - s2, surf + 6 + off];
+          var r = s2 - flat; return [tx - r * ca + off * sa, surf + 6 + r * sa + off * ca];
+        };
+        ctx.fillStyle = v("--brand");
+        ctx.beginPath();
+        var top0 = slabPt(0, 0), topK = slabPt(x1 - tx, 0), topE = slabPt(x1 - tx + SL, 0);
+        var botE = slabPt(x1 - tx + SL, ph - 8), botK = slabPt(x1 - tx, ph - 8), bot0 = slabPt(0, ph - 8);
+        ctx.moveTo(top0[0], top0[1]); ctx.lineTo(topK[0], topK[1]); ctx.lineTo(topE[0], topE[1]);
+        ctx.lineTo(botE[0], botE[1]); ctx.lineTo(botK[0], botK[1]); ctx.lineTo(bot0[0], bot0[1]); ctx.closePath(); ctx.fill();
+        /* 판 위의 표시가 해구 쪽으로 흘러가 가라앉는다 */
+        var total = x1 - tx + SL;
+        for (var k2 = 0; k2 < 18; k2++) {
+          var s3 = (T * pv + k2 * total / 18) % total, a1 = slabPt(s3, 3), a2 = slabPt(s3, ph - 11);
+          ctx.strokeStyle = v("--panel"); ctx.globalAlpha = .55; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.moveTo(a1[0], a1[1]); ctx.lineTo(a2[0], a2[1]); ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+        /* 위에 얹힌 대륙판 */
+        ctx.fillStyle = v("--teal"); ctx.beginPath();
+        ctx.moveTo(x0, surf - 6); ctx.lineTo(tx - 8, surf - 6); ctx.lineTo(tx - 30, surf + ph + 6); ctx.lineTo(x0, surf + ph + 6); ctx.closePath(); ctx.fill();
+        text(ctx, "대륙판", x0 + 12, surf + 18, { s: 11, w: "800", c: v("--panel") });
+        text(ctx, "해양판 ←", x1 - 12, surf + 24, { s: 11, w: "800", a: "right", c: v("--panel") });
+        ctx.fillStyle = v("--mist");
+        ctx.beginPath(); ctx.moveTo(tx - 10, surf - 6); ctx.lineTo(tx + 2, surf + 12); ctx.lineTo(tx + 14, surf + 6); ctx.closePath(); ctx.fill();
+        text(ctx, "▼ 해구", tx + 4, surf - 12, { s: 10.5, w: "800", a: "center", c: v("--mist") });
+        /* 화산 — 섭입한 판이 약 100 km 깊이에 닿는 곳 위 */
+        var vx = tx - 150;
+        ctx.fillStyle = v("--coral");
+        ctx.beginPath(); ctx.moveTo(vx - 32, surf - 6); ctx.lineTo(vx, surf - 46); ctx.lineTo(vx + 32, surf - 6); ctx.closePath(); ctx.fill();
+        for (var pf = 0; pf < 4; pf++) {
+          var pp = (T * 0.5 + pf / 4) % 1;
+          ctx.globalAlpha = 0.5 * (1 - pp); ctx.fillStyle = v("--mist");
+          ctx.beginPath(); ctx.arc(vx + pp * 18, surf - 50 - pp * 34, 5 + pp * 9, 0, Math.PI * 2); ctx.fill();
+        }
+        /* 마그마가 섭입판 위에서 화산으로 올라간다 */
+        var src = slabPt(x1 - tx + 150, 0);
+        for (var mg = 0; mg < 8; mg++) {
+          var pm = (T * 0.4 + mg / 8) % 1;
+          ctx.globalAlpha = 0.35 + 0.6 * pm; ctx.fillStyle = v("--amber");
+          ctx.beginPath(); ctx.arc(src[0] + (vx - src[0]) * pm + Math.sin(mg * 1.7 + T * 3) * 4, src[1] + (surf - 4 - src[1]) * pm, 3.5, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        text(ctx, "화산 · 습곡 산맥", vx, surf - 86, { s: 10.5, w: "800", a: "center", c: v("--coral-700") });
+        /* 섭입판을 따라 깊어지는 지진 — 차례로 깜박인다 */
+        for (var z = 0; z < 6; z++) {
+          var q2 = slabPt(x1 - tx + 20 + z * 36, -4), bz = Math.max(0, Math.sin(T * 2.6 - z * 0.9));
+          ctx.globalAlpha = 0.3 + 0.7 * bz; ctx.fillStyle = v("--violet");
+          ctx.beginPath(); ctx.arc(q2[0], q2[1], 3.5 + bz * 3, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        text(ctx, "● 지진 — 섭입하는 판을 따라 점점 깊어짐", tx - 40, surf + 150, { s: 10.5, w: "800", c: v("--violet-700") });
       } else {
-        ctx.fillRect(x0, surf - 4, x1 - x0, ph / 2 - 2);
-        ctx.fillStyle = v("--brand"); ctx.fillRect(x0, surf + ph / 2 + 2, x1 - x0, ph / 2 - 2);
+        /* 두 판이 서로 반대로 미끄러진다. 힘이 쌓이다 한꺼번에 어긋날 때 지진 */
+        bands(x0, x1, surf - 4, ph / 2 - 2, -1, "--teal", "--teal-700");
+        bands(x0, x1, surf + ph / 2 + 2, ph / 2 - 2, +1, "--brand", "--brand-700");
         ctx.strokeStyle = v("--ink"); ctx.setLineDash([7, 5]); ctx.lineWidth = 2;
         ctx.beginPath(); ctx.moveTo(x0, surf + ph / 2); ctx.lineTo(x1, surf + ph / 2); ctx.stroke(); ctx.setLineDash([]);
         text(ctx, "← 위쪽 판", x0 + 12, surf + 12, { s: 11, w: "800", c: v("--panel") });
         text(ctx, "아래쪽 판 →", x1 - 12, surf + ph - 4, { s: 11, w: "800", a: "right", c: v("--panel") });
+        var cyc = T % 3.2, qn = Math.floor(T / 3.2), qx = x0 + 60 + (qn * 173) % (x1 - x0 - 120);
+        if (T > 0 && cyc < 0.6) {
+          var r0 = 6 + cyc * 70;
+          ctx.globalAlpha = 1 - cyc / 0.6; ctx.strokeStyle = v("--amber"); ctx.lineWidth = 3;
+          ctx.beginPath(); ctx.arc(qx, surf + ph / 2, r0, 0, Math.PI * 2); ctx.stroke();
+          ctx.beginPath(); ctx.arc(qx, surf + ph / 2, r0 * 0.55, 0, Math.PI * 2); ctx.stroke();
+          ctx.globalAlpha = 1;
+          text(ctx, "지진!", qx, surf - 14, { s: 11, w: "900", a: "center", c: v("--amber-700") });
+        }
       }
       text(ctx, I.land, x0, 392, { s: 12, w: "800", c: v("--brand-700") });
       text(ctx, "대표 지역 : " + I.place, x0, 412, { s: 10.5, c: v("--mist") });
@@ -865,7 +943,6 @@ function pointOnCanvas(canvas, e) {
       ], 580, 60, 296, 34, { s: 10.5 });
       var n = wrapText(ctx, I.txt.replace(/<[^>]+>/g, ""), 580, 284, 296, 17, { s: 11 });
       text(ctx, "실제 판의 이동 속력은 대개 2~10 cm/년 입니다.", 580, 284 + n * 17 + 10, { s: 10.5, c: v("--mist") });
-      info();
     }
     function info() {
       var I = INFO[type], d = dist();
@@ -896,11 +973,11 @@ function pointOnCanvas(canvas, e) {
       b.addEventListener("click", function () {
         type = b.getAttribute("data-t");
         Array.prototype.forEach.call(document.querySelectorAll("#c-type button"), function (x) { x.classList.toggle("on", x === b); });
-        draw(); check();
+        draw(); info(); check();
       });
     });
-    $("c-v").addEventListener("input", function (e) { vel = +e.target.value; $("c-v-val").textContent = vel.toFixed(1); draw(); check(); });
-    $("c-t").addEventListener("input", function (e) { tm = +e.target.value; $("c-t-val").textContent = tm.toLocaleString() + "만 년"; draw(); check(); });
+    $("c-v").addEventListener("input", function (e) { vel = +e.target.value; $("c-v-val").textContent = vel.toFixed(1); draw(); info(); check(); });
+    $("c-t").addEventListener("input", function (e) { tm = +e.target.value; $("c-t-val").textContent = tm.toLocaleString() + "만 년"; draw(); info(); check(); });
     window.sthPick({
       mount: "s3-q1",
       q: "어느 지역의 지진을 조사했더니 지각이 <b>양옆으로 잡아당겨져</b> 생기는 <b>정단층</b>이었고, 지진은 모두 얕은 곳에서 일어났습니다. 이 지역은 어떤 경계일까요?",
@@ -908,11 +985,12 @@ function pointOnCanvas(canvas, e) {
       answer: 0,
       why: ["지각이 <b>늘어나며</b> 정단층이 생기고, 마그마가 얕은 곳에서 올라오므로 지진도 얕습니다. 해령과 열곡대가 그렇습니다.",
         "수렴형에서는 지각이 눌려 <b>역단층</b>이 생기고, 섭입하는 판을 따라 깊은 지진도 일어납니다.",
-        "보존형에서는 옆으로 미끄러지는 <b>주향이동단층</b>이 생깁니다.",
+        "보존형에서는 옆으로 미끄러지는 <b>변환 단층</b>이 생깁니다.",
         "판 내부에서도 지진이 일어나지만, 잡아당겨져 생긴 정단층과 얕은 지진이 줄지어 나타나는 것은 발산형 경계의 특징입니다."],
       onDone: function () { got.c = true; window.sthState("bndGot", got); mission(); }
     });
-    draw(); mission();
+    draw(); info(); mission();
+    window.sthAnimate(canvas, function (s4) { T = s4; draw(); });
   })();
 
   /* 장면 3 — 불의 고리 ----------------------------------------------------- */
@@ -1133,7 +1211,7 @@ function pointOnCanvas(canvas, e) {
   }
   (function () {
     var canvas = $("c-hot"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
-    var vp = 14;
+    var vp = 14, T = 0;
     var DATA = [{ n: "카우아이섬", km: 500, ma: 5.0 }, { n: "미드웨이섬", km: 2400, ma: 28.0 }];
     function err(d) { return Math.abs(vp * 10 * d.ma - d.km) / d.km; }
     function fit() { return err(DATA[0]) <= 0.15 && err(DATA[1]) <= 0.15; }
@@ -1144,12 +1222,33 @@ function pointOnCanvas(canvas, e) {
       var y = 150, x0 = 48, x1 = 500;
       ctx.fillStyle = v("--brand"); ctx.globalAlpha = .2; ctx.fillRect(x0, y, x1 - x0, 46); ctx.globalAlpha = 1;
       ctx.fillStyle = v("--teal"); ctx.fillRect(x0, y + 46, x1 - x0, 26);
+      /* 판이 열점 위를 지나 북서쪽(왼쪽)으로 흘러간다 — 판 무늬가 움직이고 열점은 제자리 */
+      var pv = 6 + vp * 2.2, bw = 26, off = (T * pv) % (2 * bw);
+      ctx.save(); ctx.beginPath(); ctx.rect(x0, y + 46, x1 - x0, 26); ctx.clip();
+      ctx.fillStyle = v("--teal-700"); ctx.globalAlpha = .5;
+      for (var bx = x1 + 2 * bw - off; bx > x0 - bw; bx -= 2 * bw) ctx.fillRect(bx - bw, y + 46, bw, 26);
+      ctx.restore(); ctx.globalAlpha = 1;
       text(ctx, "태평양판", x0 + 10, y + 64, { s: 11.5, w: "800", c: v("--panel") });
+      /* 열점 위에서 새 섬이 솟았다가 판에 실려 북서쪽으로 옮겨 가며 가라앉는다 */
+      for (var gk = 0; gk < 3; gk++) {
+        var gu = (T * pv / 330 + gk / 3) % 1, gx = 452 - gu * 330, gs = gu < 0.08 ? gu / 0.08 * 15 : 15 * (1 - (gu - 0.08) * 0.9);
+        ctx.globalAlpha = 0.35 * (1 - gu * 0.6); ctx.fillStyle = v(gu < 0.12 ? "--coral" : "--mist");
+        ctx.beginPath(); ctx.moveTo(gx, y - gs); ctx.lineTo(gx - gs, y); ctx.lineTo(gx + gs, y); ctx.closePath(); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      /* 열점에서 솟는 마그마 기둥 */
+      for (var mq = 0; mq < 10; mq++) {
+        var pm = (T * 0.45 + mq / 10) % 1;
+        ctx.globalAlpha = 0.3 + 0.6 * pm; ctx.fillStyle = v(pm > 0.75 ? "--coral" : "--amber");
+        ctx.beginPath(); ctx.arc(452 + Math.sin(mq * 2.1 + T * 2.4) * 5, y + 110 - pm * 64, 3 + pm * 2, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
       ctx.strokeStyle = v("--teal"); ctx.fillStyle = v("--teal"); ctx.lineWidth = 3;
       window.drawArrow(ctx, 250, y - 26, 140, y - 26, 10);
       text(ctx, "판이 움직이는 방향 (북서쪽)", 258, y - 22, { s: 11, w: "800", c: v("--teal-700") });
       /* 열점 */
-      ctx.fillStyle = v("--coral");
+      ctx.fillStyle = v("--coral"); ctx.globalAlpha = 0.25;
+      ctx.beginPath(); ctx.arc(452, y + 110, 22 + 4 * Math.sin(T * 3), 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
       ctx.beginPath(); ctx.arc(452, y + 110, 16, 0, Math.PI * 2); ctx.fill();
       text(ctx, "열점", 452, y + 136, { s: 11, w: "800", a: "center", c: v("--coral-700") });
       ctx.strokeStyle = v("--coral"); ctx.lineWidth = 3;
@@ -1188,7 +1287,6 @@ function pointOnCanvas(canvas, e) {
       text(ctx, "모형 : 거리 = 속력 × 나이", 560, 306, { s: 11.5, w: "800", c: v("--brand-700") });
       text(ctx, "속력 " + vp.toFixed(1) + " cm/년 = " + (vp * 10).toFixed(0) + " km / 백만 년", 560, 326, { s: 11, c: v("--mist") });
       text(ctx, "카우아이 오차 " + (err(DATA[0]) * 100).toFixed(0) + "% · 미드웨이 오차 " + (err(DATA[1]) * 100).toFixed(0) + "%", 560, 346, { s: 11, w: "800", c: v(fit() ? "--green-700" : "--rose-700") });
-      info();
     }
     function info() {
       $("c-hot-info").innerHTML = "속력 <b>" + vp.toFixed(1) + " cm/년</b>으로 계산하면 카우아이섬(500 km · 500만 년)은 오차 <b>" + (err(DATA[0]) * 100).toFixed(0) + "%</b>, 미드웨이섬(2,400 km · 2,800만 년)은 오차 <b>" + (err(DATA[1]) * 100).toFixed(0) + "%</b>입니다. " +
@@ -1199,8 +1297,9 @@ function pointOnCanvas(canvas, e) {
       if (fit() && !got4.a) { got4.a = true; window.sthState("vpFit", vp.toFixed(1) + " cm/년"); window.sthState("driftGot", got4); mission4(); }
     }
     canvas._redraw = draw;
-    $("c-vp").addEventListener("input", function (e) { vp = +e.target.value; $("c-vp-val").textContent = vp.toFixed(1); draw(); check(); });
-    draw();
+    $("c-vp").addEventListener("input", function (e) { vp = +e.target.value; $("c-vp-val").textContent = vp.toFixed(1); draw(); info(); check(); });
+    draw(); info();
+    window.sthAnimate(canvas, function (s4) { T = s4; draw(); });
   })();
 
   (function () {
@@ -1232,7 +1331,6 @@ function pointOnCanvas(canvas, e) {
         ? "✅ 대서양이 지금보다 1,000 km 넓어졌습니다 — 해마다 2.5 cm씩 " + ft.toLocaleString() + "만 년"
         : "대서양이 지금보다 1,000 km 넓어지는 때를 찾아보세요 (지금 " + Math.round(atl).toLocaleString() + " km)",
         52, 311, { s: 12, w: "800", c: v(Math.abs(atl - 1000) <= 50 ? "--green-700" : "--mist") });
-      info();
     }
     function info() {
       var atl = km(2.5);
@@ -1243,7 +1341,24 @@ function pointOnCanvas(canvas, e) {
       if (Math.abs(km(2.5) - 1000) <= 50 && !got4.b) { got4.b = true; window.sthState("driftGot", got4); mission4(); }
     }
     canvas._redraw = draw;
-    $("c-ft").addEventListener("input", function (e) { ft = +e.target.value; $("c-ft-val").textContent = ft.toLocaleString() + "만 년"; draw(); check(); });
+    $("c-ft").addEventListener("input", function (e) { stop(); ft = +e.target.value; $("c-ft-val").textContent = ft.toLocaleString() + "만 년"; draw(); info(); check(); });
+    /* ▶ 시간 흐르게 하기 — 슬라이더를 저절로 밀어 판이 쌓아 가는 거리를 보여 준다. 대서양이 1,000 km 넓어지는 때에 잠깐 멈춘다 */
+    var timer = null, playBtn = $("c-ft-play");
+    function stop() { if (timer) { window.clearInterval(timer); timer = null; } if (playBtn) playBtn.textContent = "▶ 시간 흐르게 하기"; }
+    if (playBtn) playBtn.addEventListener("click", function () {
+      if (timer) { stop(); return; }
+      if (ft >= 10000) ft = 0;
+      playBtn.textContent = "⏸ 멈추기";
+      var paused = 0;
+      timer = window.setInterval(function () {
+        if (paused > 0) { paused--; return; }
+        ft = Math.min(10000, ft + 100);
+        $("c-ft").value = ft; $("c-ft-val").textContent = ft.toLocaleString() + "만 년";
+        draw(); info(); check();
+        if (ft === 4000) paused = 25;                        /* 대서양 +1,000 km — 잠깐 멈춰 보여 준다 */
+        if (ft >= 10000) stop();
+      }, 60);
+    });
     window.sthPick({
       mount: "s3-q2",
       q: "2016년 <b>경주 지진(규모 5.8)</b>은 판 경계에서 수백 km 넘게 떨어진 곳에서 일어났습니다. 어떻게 설명할 수 있을까요?",
@@ -1255,7 +1370,7 @@ function pointOnCanvas(canvas, e) {
         "경주와 백두산은 멀리 떨어져 있고, 경주 지진은 화산이 아니라 <b>단층 운동</b>으로 일어났습니다."],
       onDone: function () { got4.c = true; window.sthState("driftGot", got4); mission4(); }
     });
-    draw(); mission4();
+    draw(); info(); mission4();
   })();
 
   /* 장면 5 — 결말 --------------------------------------------------------- */
