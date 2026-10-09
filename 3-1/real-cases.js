@@ -1,11 +1,18 @@
 /* 통합과학1 Ⅲ-1 지구시스템 — 실제 자료
    r1 2023년 한 해, 규모 5 이상 지진 1,780건은 어디에 몰렸나
    r2 깊은 지진(300 km 아래)은 어디에서 일어나나
+   r3 우리 동네 바다와 공기 — 바닷가 창원과 내륙 대구의 일교차(기상청, 2026)
    자료: data/quakes-world-2023.js (미국 지질조사국 USGS 지진 목록, 공공 영역) */
 (function () {
 "use strict";
 var Q = (window.REAL_QUAKES_WORLD || { rows: [] }).rows;   /* [위도, 경도, 깊이 km, 규모] */
 var SRC = "<small>출처: 미국 지질조사국(USGS) Earthquake Catalog, 2023-01-01~12-31, 규모 5.0 이상 " + Q.length.toLocaleString() + "건. 사본은 이 단원의 data/quakes-world-2023.js.</small>";
+var ZD = window.REAL_CWDG || { cw: [], dg: [] };
+function zMon(a, m) { var r = 0, n = 0, t = 0; a.forEach(function (d) { if (+d[0].slice(0, 2) === m && d[2] != null && d[3] != null) { r += d[2] - d[3]; t += d[1]; n++; } }); return n ? { r: r / n, t: t / n } : { r: 0, t: 0 }; }
+function zAll(a) { var r = 0, n = 0; a.forEach(function (d) { if (d[2] != null && d[3] != null) { r += d[2] - d[3]; n++; } }); return n ? r / n : 0; }
+var ZCW = [], ZDG = []; for (var zm = 1; zm <= 9; zm++) { ZCW.push(zMon(ZD.cw, zm)); ZDG.push(zMon(ZD.dg, zm)); }
+var Z_RC = zAll(ZD.cw), Z_RD = zAll(ZD.dg), Z_DIFF = Z_RD - Z_RC;
+var SRC_Z = "<small>출처: 기상청 날씨누리 과거 관측 일별 자료 — 창원(155, 바닷가 마산합포구 가포동)과 대구(143, 내륙 분지), 2026년 1월 1일 ~ 9월 30일 날마다 최고·최저 기온. 일교차 = 최고 − 최저. 사본은 data/cw-dg-2026.js.</small>";
 var KB = [33, 39, 124, 131];                               /* 한반도 상자: 북위 33~39°, 동경 124~131° */
 
 function world(H, ctx, W, CH, minDepth) {
@@ -110,6 +117,51 @@ window.sthLab({
     solution: "깊이 <b>300 km 이상</b>, 공통점은 <b>해구 근처(섭입대)</b>.",
     why: "해양판이 다른 판 밑으로 들어가는 <b>섭입대</b>에서는 차갑고 단단한 판이 맨틀 속으로 비스듬히 내려가, 깊이 700 km 가까이에서도 지진이 납니다. 해구에서 대륙(섬) 쪽으로 갈수록 진원이 깊어지는 이 지진 띠를 <b>와다티-베니오프대</b>라고 합니다. 해령과 하와이 같은 열점의 지진은 대부분 얕습니다.<br>"
       + "진원의 깊이만 보아도 판이 어디로 내려가는지 알 수 있습니다. 지진은 지구 내부를 들여다보는 창이기도 합니다."
+  },
+  {
+    id: "r3", tag: "실제 자료 · 우리 동네 바다와 공기", title: "바닷가 창원과 내륙 대구, 하루 기온은 얼마나 오르내리나", short: "바다와 일교차",
+    who: "📍", name: "창원기상대(기상청)",
+    say: "“지구시스템에서 수권(바다)과 기권(공기)은 열을 주고받습니다. 진해와 가까운 <b>창원기상대</b>는 바닷가에, <b>대구</b>는 바다에서 멀리 떨어진 분지에 있어요. 아래 막대는 2026년 달마다 <b>하루 최고 기온과 최저 기온의 차이(일교차)</b>를 평균한 것입니다. 1 ~ 9월 전체로 보면 대구의 일교차가 창원보다 몇 °C 큰지 구해 주세요.”",
+    predict: {
+      q: "바닷가와 내륙 가운데 하루 동안 기온이 더 크게 오르내리는 곳은 어디일까요?",
+      options: ["㉠ 바닷가 — 바닷바람이 기온을 크게 흔든다", "㉡ 내륙 — 바다는 천천히 데워지고 천천히 식어 바닷가의 기온 변화를 누그러뜨린다", "㉢ 두 곳이 똑같다"],
+      answer: 1
+    },
+    task: "막대와 오른쪽 값을 보고 <b>대구 일교차 − 창원 일교차(1 ~ 9월 평균)</b>를 슬라이더로 맞추세요(± 0.2 °C).",
+    build: function (stage, api) {
+      var H = api.h, cv = api.canvas(290), ctx = cv.ctx, W = cv.W, k = 0;
+      var x0 = 50, x1 = 640, y0 = 24, y1 = 250, bw = (x1 - x0) / 9;
+      function Y(v) { return y1 - v / 14 * (y1 - y0); }
+      function draw() {
+        H.paper(ctx, W, cv.H); H.axes(ctx, x0, y0, x1, y1);
+        [0, 4, 8, 12].forEach(function (v) { H.text(ctx, v + "°", x0 - 8, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); if (v) H.dash(ctx, x0, Y(v), x1, Y(v), H.v("--line"), 0.5); });
+        H.text(ctx, "일교차 (°C)", x0 + 6, y0 - 8, { s: 11, w: "700", c: H.v("--mist") });
+        for (var i = 0; i < 9; i++) {
+          var cx = x0 + i * bw;
+          H.box(ctx, cx + 8, Y(ZCW[i].r), bw / 2 - 10, y1 - Y(ZCW[i].r), H.v("--brand"), 0.85);
+          H.box(ctx, cx + bw / 2 + 2, Y(ZDG[i].r), bw / 2 - 10, y1 - Y(ZDG[i].r), H.v("--coral-700"), 0.85);
+          H.text(ctx, (i + 1) + "월", cx + bw / 2, y1 + 15, { s: 10, a: "center", c: H.v("--mist") });
+        }
+        H.box(ctx, 680, 30, 12, 12, H.v("--brand")); H.text(ctx, "창원(바닷가)", 698, 41, { s: 12, w: "800" });
+        H.box(ctx, 680, 52, 12, 12, H.v("--coral-700")); H.text(ctx, "대구(내륙)", 698, 63, { s: 12, w: "800" });
+        H.rows(ctx, 680, 96, [["창원 1 ~ 9월 평균", Z_RC.toFixed(2) + " °C", "--brand"], ["대구 1 ~ 9월 평균", Z_RD.toFixed(2) + " °C", "--coral-700"], ["내 답 (대구 − 창원)", "+" + k.toFixed(1) + " °C", null, true]], 52);
+      }
+      cv.canvas._redraw = draw;
+      api.slider({ label: "대구 − 창원", min: 0, max: 4, step: 0.1, value: 0, fmt: function (x) { return "+" + x.toFixed(1) + " °C"; }, onInput: function (x) { k = x; api.changed(); draw(); } });
+      api.info("일교차는 그날 최고 기온 − 최저 기온입니다. 1월 최저 기온의 평균은 창원 " + (function () { var s = 0, n = 0; ZD.cw.forEach(function (d) { if (d[0].slice(0, 2) === "01") { s += d[3]; n++; } }); return (s / n).toFixed(1); })() + " °C, 대구 " + (function () { var s = 0, n = 0; ZD.dg.forEach(function (d) { if (d[0].slice(0, 2) === "01") { s += d[3]; n++; } }); return (s / n).toFixed(1); })() + " °C였습니다. " + SRC_Z
+        + "<div data-link='{\"id\":\"kma-cw155\",\"title\":\"창원 과거 관측 일별 자료\",\"src\":\"기상청 날씨누리\",\"url\":\"https://www.weather.go.kr/w/weather/land/past-obs/obs-by-day.do?stn=155&obs=1\",\"ask\":\"지점을 대구로 바꿔 올해 1월의 가장 낮은 기온을 찾고, 창원과 견주어 오세요.\"}'></div>");
+      draw();
+      return {
+        judge: function () {
+          if (Math.abs(k - Z_DIFF) <= 0.2) return { ok: true, msg: "대구 " + Z_RD.toFixed(2) + " − 창원 " + Z_RC.toFixed(2) + " ≈ " + Z_DIFF.toFixed(1) + " °C. 바닷가인 창원은 하루 기온이 덜 오르내립니다." };
+          return { ok: false, msg: "+" + k.toFixed(1) + " °C는 " + (k < Z_DIFF ? "작습니다" : "큽니다") + ". 오른쪽 두 평균의 차이를 구하세요." };
+        }
+      };
+    },
+    hints: ["오른쪽의 두 평균 값을 보세요.", Z_RD.toFixed(2) + " − " + Z_RC.toFixed(2) + " = ?"],
+    solution: "대구 " + Z_RD.toFixed(2) + " °C − 창원 " + Z_RC.toFixed(2) + " °C ≈ <b>" + Z_DIFF.toFixed(1) + " °C</b>.",
+    why: "물은 같은 양의 열을 받아도 땅보다 훨씬 덜 데워지고(비열이 큼), 바다는 물이 섞이면서 열을 깊이 나눠 가집니다. 그래서 바다는 낮에 공기의 열을 받아 가고 밤에는 열을 내주어, 바닷가의 기온 변화를 누그러뜨립니다. 수권이 기권에 영향을 주는 지구시스템의 상호작용입니다. 겨울밤에 특히 차이가 커서, 2026년 1월 아침 기온은 대구가 창원보다 2 °C쯤 더 낮았습니다.<br>"
+      + "※ 대구는 산으로 둘러싸인 분지라 바다와 먼 것 말고도 지형의 영향을 받습니다. 그리고 한 해 자료이므로 다른 해에도 같은지 날씨누리에서 확인해 보세요."
   }
   ]
 });
