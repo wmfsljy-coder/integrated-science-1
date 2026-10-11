@@ -88,7 +88,7 @@ window.sthLab({
       cv.canvas._redraw = draw;
       api.slider({ label: "신호가 오는 데 걸리는 시간", min: 0, max: 30, step: 0.1, value: 1, fmt: function (x) { return x.toFixed(1) + " 시간"; }, onInput: function (x) { h = x; api.changed(); draw(); } });
       api.info("시간 = 거리 ÷ 속력. 초로 나온 값을 3,600으로 나누면 시간입니다. " + SRC2
-        + "<div data-link='{\"id\":\"voyager-now\",\"title\":\"NASA — 보이저 1·2호는 지금 어디에?\",\"src\":\"미국 항공우주국\",\"url\":\"https://science.nasa.gov/mission/voyager/where-are-voyager-1-and-voyager-2-now/\",\"ask\":\"오늘 보이저 1호까지의 거리(km)와 빛이 오가는 시간(round-trip light time)을 찾아, 이 사례의 값과 비교해 오세요(왕복 시간이므로 2로 나누어 비교하세요).\"}'></div>");
+        + "<div data-link='{\"id\":\"voyager-now\",\"title\":\"NASA — 보이저 1·2호는 지금 어디에?\",\"src\":\"미국 항공우주국\",\"url\":\"https://science.nasa.gov/mission/voyager/where-are-voyager-1-and-voyager-2-now/\",\"ask\":\"쪽 가운데 표(Voyager 1 열)에서 지금 지구와의 거리(Distance from Earth, AU 값)와 빛이 한 번 오는 데 걸리는 시간(One-Way Light Time)을 찾아, 이 사례의 값(2026년 1월 1일)과 비교해 오세요. 그사이 몇 au 더 멀어졌나요?\"}'></div>");
       draw();
       return {
         judge: function () {

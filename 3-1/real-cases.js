@@ -65,7 +65,7 @@ window.sthLab({
       api.seg({ label: "지진이 가장 많이 몰린 곳", value: "even", options: [{ v: "even", t: "고르게 퍼짐" }, { v: "pac", t: "태평양 가장자리" }, { v: "atl", t: "대서양 한가운데" }, { v: "cont", t: "대륙 한가운데" }], onPick: function (x) { where = x; api.changed(); } });
       api.seg({ label: "한반도 상자 안 (규모 5 이상)", value: "many", options: [{ v: "0", t: "0 건" }, { v: "few", t: "1~5 건" }, { v: "mid", t: "6~20 건" }, { v: "many", t: "20 건 넘게" }], onPick: function (x) { kr = x; api.changed(); } });
       api.info("점의 크기는 규모, 색은 깊이입니다. 대서양 한가운데에도 가는 띠가 있습니다. " + SRC
-        + "<div data-link='{\"id\":\"seismic-explorer\",\"title\":\"Seismic Explorer — 지진 탐색기 (교과서 연결 자료)\",\"src\":\"Concord Consortium · 비상교육 통합과학1 103 · 105쪽\",\"url\":\"https://seismic-explorer.concord.org/\",\"ask\":\"판 경계(Plate boundaries) 표시를 켜고, 지진 점들이 판 경계와 어떻게 겹치는지 보세요. 지진이 가장 많이 몰린 경계 한 곳과, 한반도 둘레에 큰 지진 점이 있는지를 적어 오세요.\"}'></div>");
+        + "<div data-link='{\"id\":\"seismic-explorer\",\"title\":\"Seismic Explorer — 지진 탐색기 (교과서 연결 자료)\",\"src\":\"Concord Consortium · 비상교육 통합과학1 103 · 105쪽\",\"url\":\"https://seismic-explorer.concord.org/\",\"ask\":\"아래 Data Type 단추에서 Plate Boundaries(판 경계)를 켜고, Start 를 누르거나 시간 막대를 오른쪽 끝까지 끌어 지진 점을 띄우세요. 지진 점들이 판 경계와 어떻게 겹치는지 보고, 지진이 가장 많이 몰린 경계 한 곳과 한반도 둘레에 큰 지진 점이 있는지를 적어 오세요.\"}'></div>");
       draw();
       var inK = Q.filter(function (q) { return q[0] >= KB[0] && q[0] <= KB[1] && q[1] >= KB[2] && q[1] <= KB[3]; }).length;
       return {
