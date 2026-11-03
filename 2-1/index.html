@@ -58,7 +58,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap"><canvas id="a-spec" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-spec" width="900" height="360"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">판독 커서의 파장<span class="val" id="a-wl-val">550 nm</span></div>
@@ -73,12 +73,13 @@
         <section class="scene" data-title="빅뱅 뒤 3분 — 온도를 낮춰라">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">하린</span>“지문을 읽어 보니 어느 별이든, 어느 은하든 수소와 헬륨이 <b>질량비 약 3 : 1</b>로 나옵니다. 별마다 사정이 다를 텐데 왜 비율이 똑같을까요? 이건 별이 만든 게 아니라 <b>우주가 태어날 때 이미 정해졌다</b>는 뜻입니다. 시계를 빅뱅 직후로 되돌려 보죠. 슬라이더를 오른쪽 끝(뜨거운 초기 우주)에서 왼쪽으로 내리면 시간이 흐릅니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-bang" width="900" height="380"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-bang" width="900" height="380"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">우주의 온도 (10<sup>n</sup> K)<span class="val" id="a-t-val">n = 13.00</span></div>
                 <input type="range" id="a-t" min="3" max="13" step="0.05" value="13">
               </div>
+              <button type="button" class="btn sm" id="a-bang-play">⏸ 움직임 멈추기</button>
             </div>
             <div class="info-card" id="a-bang-info"></div>
           </div>
@@ -88,7 +89,7 @@
         <section class="scene" data-title="벽에 부딪힌 핵합성">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">하린</span>“이상하죠? 그렇게 뜨겁고 양성자·중성자가 넘쳐났는데, 빅뱅이 만든 원소는 수소·헬륨과 아주 약간의 리튬에서 끝났습니다. 탄소도, 산소도, 철도 없어요. <b>원자핵 조립대</b>에서 질량수를 하나씩 올려 보면 까닭이 보입니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-wall" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-wall" width="900" height="340"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">만들어 볼 원자핵의 질량수 A<span class="val" id="a-A-val">A = 1</span></div>
@@ -139,7 +140,7 @@
         <section class="scene" data-title="부엌 열기 — 질량이 메뉴를 정한다">
           <div class="story"><div class="who">🧑‍🚀</div><div class="say"><span class="name">태오</span>“별은 원소를 만드는 부엌입니다. 그런데 부엌마다 불의 세기가 달라요. 별이 무거울수록 중력이 세게 짓눌러 중심이 더 뜨거워지고, 뜨거울수록 더 무거운 원료에 불을 붙일 수 있습니다. 질량을 바꿔 가며 어디까지 태울 수 있는지 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-star" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-star" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">별의 질량 (태양 = 1)<span class="val" id="b-m-val">1.0 M☉</span></div>
@@ -154,7 +155,7 @@
         <section class="scene" data-title="철에서 멈추는 까닭">
           <div class="story"><div class="who">🧑‍🚀</div><div class="say"><span class="name">태오</span>“아무리 무거운 별도 <b>철</b>에서 딱 멈춥니다. 연료가 없어서가 아니에요. 답은 이 곡선에 있습니다. 세로축은 <b>핵자 하나당 결합 에너지</b>, 곧 ‘그 원자핵이 얼마나 단단히 묶여 있는가’입니다. 질량수를 옮겨 가며 곡선의 꼭대기를 찾아보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-bind" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-bind" width="900" height="340"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">원자핵의 질량수 A<span class="val" id="b-a-val">A = 1</span></div>
@@ -170,7 +171,7 @@
         <section class="scene" data-title="우리 몸의 원소는 어디서 왔나">
           <div class="story"><div class="who">🧑‍🚀</div><div class="say"><span class="name">태오</span>“이제 마지막입니다. 조사관님 몸을 저울에 올려 보세요. 몸을 이루는 원소를 하나하나 따라가면, 그 출생지가 전부 하늘에 있습니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-body" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-body" width="900" height="320"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">몸무게<span class="val" id="b-w-val">60 kg</span></div>
@@ -232,12 +233,13 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap"><canvas id="c-esc" width="900" height="380"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-esc" width="900" height="380"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">대기 바깥층의 온도<span class="val" id="c-t-val">300 K</span></div>
                 <input type="range" id="c-t" min="100" max="1500" step="25" value="300">
               </div>
+              <button type="button" class="btn sm" id="c-esc-play">⏸ 움직임 멈추기</button>
             </div>
             <div class="info-card" id="c-esc-info"></div>
           </div>
@@ -257,7 +259,7 @@
               <button class="chip on" data-el="철">철</button>
               <button class="chip" data-el="칼슘">칼슘</button>
             </div>
-            <div class="canvas-wrap"><canvas id="c-bars" width="900" height="330"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-bars" width="900" height="330"></canvas></div>
             <div class="info-card" id="c-bars-info"></div>
           </div>
           <div class="mission" id="m3-3"><span class="m-tag">미션</span>조건에 맞는 원소를 찾아내세요.<ul><li id="m3-3a">우주에는 <b>10% 넘게</b> 있는데 지각에는 <b>1%도 안 되는</b> 원소</li><li id="m3-3b">지각에는 <b>10% 넘게</b> 있는데 사람 몸에는 <b>0.01%도 안 되는</b> 원소</li><li id="m3-3c">우주에는 <b>1%도 안 되는데</b> 사람 몸에는 <b>10%가 넘는</b> 원소</li></ul></div>
@@ -266,7 +268,7 @@
         <section class="scene" data-title="수소와 헬륨을 걷어 내면">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">과학 선생님</span>“마지막 실험이란다. 우주 시료에서 <b>수소와 헬륨만</b> 날려 보내면 무엇이 남을까? 지구가 만들어질 때 실제로 일어난 일이기도 하지. 슬라이더를 끝까지 올려 보렴.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-strip" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-strip" width="900" height="340"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">날려 보낸 수소·헬륨의 비율<span class="val" id="c-s-val">0%</span></div>
@@ -348,6 +350,7 @@
 <script src="../assets/account.js"></script>
 <script src="episodes.js"></script>
 <script src="worked.js"></script>
+<script src="handoff.js"></script>
 <script src="quiz-items.js"></script>
 <script src="../assets/review.js"></script>
 <script src="../assets/peer.js"></script>

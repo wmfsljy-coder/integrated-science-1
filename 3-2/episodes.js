@@ -13,7 +13,60 @@ function v(name) { return window.cssVar(name); }
 function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
 function lerp(a, b, t) { return a + (b - a) * t; }
 function done(id) { var e = $(id); if (e) e.classList.add("done"); }
-function paper(ctx, W, H) { ctx.clearRect(0, 0, W, H); ctx.fillStyle = v("--panel"); ctx.fillRect(0, 0, W, H); }
+/* ---- 무대 그림 도구 (../assets/kit.js) ---- */
+var K = window.sthKit, KS = K.C, REDUCE = K.REDUCE;
+/* 캔버스마다 무대 종류와 별 씨앗 */
+var STAGE = {
+  "c-vac": ["lab", 3], "c-fall": ["lab", 5], "c-proj": ["sky", 7], "c-cannon": ["space", 9],
+  "c-elev": ["lab", 21], "c-fma": ["lab", 23], "c-gr": ["lab", 25], "c-push": ["lab", 27],
+  "c-cart": ["lab", 31], "c-catch": ["lab", 33], "c-crush": ["lab", 35]
+};
+function paper(ctx, W, H) {
+  ctx.clearRect(0, 0, W, H);
+  var s = STAGE[ctx.canvas.id] || ["night", 7];
+  K.stage(ctx, 0, 0, W, H, s[0], { seed: s[1] });
+}
+function col(c) { return !c ? KS.ink : (c.indexOf("--") === 0 ? v(c) : c); }
+function rgbOf(c) {
+  c = col(c);
+  if (c.charAt(0) === "#") {
+    if (c.length === 4) c = "#" + c[1] + c[1] + c[2] + c[2] + c[3] + c[3];
+    return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)];
+  }
+  var m = /(\d+)\D+(\d+)\D+(\d+)/.exec(c); return m ? [+m[1], +m[2], +m[3]] : [200, 210, 255];
+}
+function rgba(c, a) { var r = rgbOf(c); return "rgba(" + r[0] + "," + r[1] + "," + r[2] + "," + a + ")"; }
+function shade(c, k) { var r = rgbOf(c); return "rgb(" + Math.round(r[0] * k) + "," + Math.round(r[1] * k) + "," + Math.round(r[2] * k) + ")"; }
+/* 반투명 이름표 */
+function pill(ctx, s, x, y, o) { o = o || {}; return K.pill(ctx, s, x, y, { a: o.a, s: o.s, w: o.w, c: col(o.c), box: o.box, bg: o.bg, line: o.line }); }
+/* 입체 공(원자·이온·입자) */
+function ball(ctx, x, y, r, c) { var b = col(c); K.planet(ctx, x, y, r, b, shade(b, .38)); }
+/* 빛나는 점(전자·불꽃) */
+function dot(ctx, x, y, r, c, halo) { K.glow(ctx, x, y, r, rgba(c, .95), halo || 3); }
+/* 유리판 상자 */
+function glass(ctx, x, y, w, h, c, r) {
+  var g = ctx.createLinearGradient(x, y, x, y + h);
+  g.addColorStop(0, rgba(c || "--brand", .20)); g.addColorStop(1, rgba(c || "--brand", .05));
+  ctx.fillStyle = g; ctx.beginPath(); ctx.roundRect(x, y, w, h, r == null ? 12 : r); ctx.fill();
+  ctx.strokeStyle = rgba(c || "--brand", .38); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.roundRect(x, y, w, h, r == null ? 12 : r); ctx.stroke();
+}
+/* 빛나는 막대 눈금 */
+function meter(ctx, x, y, w, h, f, c) {
+  ctx.fillStyle = "rgba(255,255,255,.07)"; ctx.beginPath(); ctx.roundRect(x, y, w, h, h / 2); ctx.fill();
+  ctx.strokeStyle = "rgba(200,210,255,.22)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.roundRect(x, y, w, h, h / 2); ctx.stroke();
+  f = clamp(f, 0, 1); if (f <= 0) return;
+  var g = ctx.createLinearGradient(x, 0, x + w * f, 0);
+  g.addColorStop(0, shade(c, .55)); g.addColorStop(1, col(c));
+  ctx.save(); ctx.shadowColor = col(c); ctx.shadowBlur = 10; ctx.fillStyle = g;
+  ctx.beginPath(); ctx.roundRect(x, y, Math.max(h, w * f), h, h / 2); ctx.fill(); ctx.restore();
+  ctx.fillStyle = "rgba(255,255,255,.22)"; ctx.beginPath(); ctx.roundRect(x + 2, y + 2, Math.max(h - 4, w * f - 4), h * .35, h / 4); ctx.fill();
+}
+/* ⏸ 멈추기 단추 연결 */
+function playBtn(id, onLabel, offLabel, get, set) {
+  var b = $(id); if (!b) return;
+  function lab() { b.textContent = get() ? onLabel : offLabel; }
+  b.addEventListener("click", function () { set(!get()); lab(); }); lab();
+}
 function text(ctx, s, x, y, o) {
   o = o || {};
   ctx.font = (o.w || "500") + " " + (o.s || 12) + "px " + FONT;
@@ -55,7 +108,7 @@ function ticker(box) {
     var canvas = $("c-vac"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
     var H0 = 5.0, VB = 93, VF = 1.26;            // 1기압에서의 종단 속도(m/s)
     var air = 60, got = window.sthState("vacGot") || { a: false, b: false };
-    var last = null, shown = { b: 0, f: 0 }, box = { gen: 0 }, run = ticker(box);
+    var last = null, shown = { b: 0, f: 0 }, box = { gen: 0 }, run = ticker(box), vT = 0;
 
     function fallTime(base, f) {
       if (f <= 0) return Math.sqrt(2 * H0 / G);
@@ -70,13 +123,19 @@ function ticker(box) {
     function draw() {
       paper(ctx, W, H);
       var f = air / 100, top = 46, bot = 318;
-      /* 통 */
-      ctx.fillStyle = v("--card-2"); ctx.fillRect(92, top, 336, bot - top);
-      ctx.globalAlpha = 0.10 + 0.45 * f; ctx.fillStyle = v("--brand"); ctx.fillRect(92, top, 336, bot - top); ctx.globalAlpha = 1;
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 3; ctx.strokeRect(92, top, 336, bot - top);
-      ctx.fillStyle = v("--line"); ctx.fillRect(92, bot, 336, 5);
-      text(ctx, f === 0 ? "진공 (공기 0%)" : "공기 " + air + "%", 104, top + 20, { s: 12, w: "800", c: v("--brand-700") });
-      text(ctx, "높이 5.0 m", 416, top + 20, { s: 11, c: v("--mist"), a: "right" });
+      /* 유리 통 — 공기가 많을수록 뿌옇고 공기 분자가 많다 */
+      var tg = ctx.createLinearGradient(92, 0, 428, 0);
+      tg.addColorStop(0, "rgba(160,200,255,.16)"); tg.addColorStop(.12, "rgba(160,200,255,.05)"); tg.addColorStop(.85, "rgba(160,200,255,.04)"); tg.addColorStop(1, "rgba(160,200,255,.14)");
+      ctx.fillStyle = tg; ctx.fillRect(92, top, 336, bot - top);
+      ctx.fillStyle = "rgba(127,211,255," + (0.03 + 0.16 * f) + ")"; ctx.fillRect(92, top, 336, bot - top);
+      var RA = K.rng(9), na = Math.round(90 * f);
+      for (var q = 0; q < na; q++) { var ax = 98 + RA() * 324, ay = top + 6 + RA() * (bot - top - 12); ax += Math.sin(vT / 300 + q) * 3; ay += Math.cos(vT / 340 + q * 1.3) * 3; ctx.fillStyle = "rgba(200,230,255,.55)"; ctx.beginPath(); ctx.arc(ax, ay, 1.3, 0, 6.2832); ctx.fill(); }
+      ctx.fillStyle = "rgba(255,255,255,.10)"; ctx.fillRect(104, top + 4, 8, bot - top - 8);
+      ctx.strokeStyle = "rgba(200,230,255,.55)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(92, top, 336, bot - top, 6); ctx.stroke();
+      var bs = ctx.createLinearGradient(0, bot, 0, bot + 8); bs.addColorStop(0, "#9aa4b8"); bs.addColorStop(1, "#4a5266");
+      ctx.fillStyle = bs; ctx.fillRect(86, bot, 348, 8);
+      pill(ctx, f === 0 ? "진공 (공기 0%)" : "공기 " + air + "%", 262, top + 24, { s: 12, a: "center", c: v("--brand-700") });
+      pill(ctx, "높이 5.0 m", 40, top - 10, { s: 11, c: KS.mute });
       /* 눈금 */
       for (var k = 0; k <= 5; k++) {
         var gy = top + (bot - top - 14) * k / 5;
@@ -88,18 +147,24 @@ function ticker(box) {
       function put(x, frac, kind) {
         var y = top + 12 + (bot - top - 26) * clamp(frac, 0, 1);
         if (kind === "ball") {
-          ctx.fillStyle = v("--violet"); ctx.beginPath(); ctx.arc(x, y, 13, 0, Math.PI * 2); ctx.fill();
-          text(ctx, "쇠공 0.5 kg", x, top - 10, { s: 11, w: "800", a: "center", c: v("--violet-700") });
+          K.planet(ctx, x, y, 13, "#b8c0d0", "#2e3440");
+          pill(ctx, "쇠공 0.5 kg", x, top - 10, { s: 11, a: "center", c: v("--violet-700") });
         } else {
-          ctx.fillStyle = v("--amber"); ctx.beginPath();
-          ctx.ellipse(x, y, 6, 15, 0.5, 0, Math.PI * 2); ctx.fill();
-          text(ctx, "깃털 1 g", x, top - 10, { s: 11, w: "800", a: "center", c: v("--amber-700") });
+          /* 깃털: 깃대와 깃가지 */
+          ctx.save(); ctx.translate(x, y); ctx.rotate(0.5 + (f > 0 && frac < 1 ? Math.sin(vT / 160) * .25 : 0));
+          var fg = ctx.createLinearGradient(-6, 0, 6, 0); fg.addColorStop(0, "rgba(255,240,200,.95)"); fg.addColorStop(1, "rgba(255,200,110,.85)");
+          ctx.fillStyle = fg; ctx.beginPath(); ctx.ellipse(0, 0, 6.5, 16, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.strokeStyle = "#8a6a30"; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(0, -16); ctx.lineTo(0, 19); ctx.stroke();
+          ctx.strokeStyle = "rgba(140,100,40,.45)"; ctx.lineWidth = .8;
+          for (var fb = -12; fb < 14; fb += 4) { ctx.beginPath(); ctx.moveTo(0, fb); ctx.lineTo(-5, fb - 3); ctx.moveTo(0, fb); ctx.lineTo(5, fb - 3); ctx.stroke(); }
+          ctx.restore();
+          pill(ctx, "깃털 1 g", x, top - 10, { s: 11, a: "center", c: v("--amber-700") });
         }
       }
       put(176, shown.b, "ball"); put(348, shown.f, "feather");
       /* 오른쪽 기록 */
       var tb = fallTime(VB, f), tf = fallTime(VF, f);
-      text(ctx, "실험 기록", 470, 44, { s: 14, w: "900" });
+      pill(ctx, "실험 기록", 470, 40, { s: 13, c: KS.blue });
       var rows = [
         ["쇠공의 종단 속도", f === 0 ? "없음(공기 없음)" : (VB / Math.sqrt(f)).toFixed(0) + " m/s"],
         ["깃털의 종단 속도", f === 0 ? "없음(공기 없음)" : (VF / Math.sqrt(f)).toFixed(1) + " m/s"],
@@ -109,7 +174,7 @@ function ticker(box) {
       ];
       rows.forEach(function (r, i) {
         var yy = 78 + i * 30;
-        ctx.fillStyle = v("--card-2"); ctx.beginPath(); ctx.roundRect(466, yy - 16, 410, 25, 8); ctx.fill();
+        glass(ctx, 466, yy - 16, 410, 25, i === 4 ? "--coral" : "#8fa6ff", 8);
         text(ctx, r[0], 478, yy + 1, { s: 12, c: v("--mist") });
         text(ctx, r[1], 866, yy + 1, { s: 12.5, w: "800", a: "right", c: i === 4 ? v("--coral-700") : v("--ink") });
       });
@@ -118,8 +183,7 @@ function ticker(box) {
       text(ctx, "도착 시각 비교", 470, 252, { s: 11.5, w: "800", c: v("--mist") });
       [[tb, "--violet", "쇠공"], [tf, "--amber", "깃털"]].forEach(function (b, i) {
         var yy = 268 + i * 26;
-        ctx.fillStyle = v("--card-2"); ctx.fillRect(530, yy, 280, 14);
-        ctx.fillStyle = v(b[1]); ctx.fillRect(530, yy, 280 * b[0] / tmax, 14);
+        meter(ctx, 530, yy, 280, 14, b[0] / tmax, i ? "--amber" : "#b8c0d0");
         text(ctx, b[2], 522, yy + 12, { s: 11, a: "right", c: v("--mist") });
         text(ctx, b[0].toFixed(2) + "초", 818, yy + 12, { s: 11, w: "800" });
       });
@@ -157,7 +221,7 @@ function ticker(box) {
       run(N, 28, function (u) {                      // 실제 시간 약 1.2초로 압축해 보여 준다
         var t = u * T;
         shown.b = dropped(VB, f, t) / H0; shown.f = dropped(VF, f, t) / H0;
-        draw();
+        vT = t * 1000; draw();
       });
     });
     shown.b = shown.f = 0;
@@ -176,25 +240,33 @@ function ticker(box) {
       var t = Math.sqrt(2 * h / g), vEnd = g * t;
       var top = 54, bot = 336;
       /* 왼쪽: 스트로브 사진 */
-      text(ctx, pname + " · g = " + g.toFixed(2) + " m/s²", 62, 32, { s: 13, w: "900", c: v("--brand-700") });
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(96, top); ctx.lineTo(96, bot); ctx.stroke();
-      ctx.fillStyle = v("--line"); ctx.fillRect(62, bot, 300, 5);
-      text(ctx, "0 m", 90, top + 4, { s: 10.5, c: v("--mist"), a: "right" });
-      text(ctx, h.toFixed(1) + " m", 90, bot + 2, { s: 10.5, c: v("--mist"), a: "right" });
+      pill(ctx, pname + " · g = " + g.toFixed(2) + " m/s²", 62, 30, { s: 12.5, c: v("--brand-700") });
+      /* 스트로브 사진: 어두운 배경 위 섬광에 찍힌 공 */
+      var sg = ctx.createLinearGradient(0, top, 0, bot); sg.addColorStop(0, "rgba(5,8,24,.55)"); sg.addColorStop(1, "rgba(5,8,24,.35)");
+      ctx.fillStyle = sg; ctx.beginPath(); ctx.roundRect(100, top - 8, 260, bot - top + 8, 10); ctx.fill();
+      /* 자(눈금) */
+      var rg = ctx.createLinearGradient(84, 0, 98, 0); rg.addColorStop(0, "#d9b46a"); rg.addColorStop(1, "#a07a38");
+      ctx.fillStyle = rg; ctx.fillRect(84, top, 14, bot - top);
+      ctx.strokeStyle = "rgba(60,40,10,.8)"; ctx.lineWidth = 1;
+      for (var mk = 0; mk <= 20; mk++) { var ry = top + (bot - top - 12) * mk / 20; ctx.beginPath(); ctx.moveTo(98, ry); ctx.lineTo(mk % 5 ? 92 : 86, ry); ctx.stroke(); }
+      var gg = ctx.createLinearGradient(0, bot, 0, bot + 6); gg.addColorStop(0, "#7a8296"); gg.addColorStop(1, "#3a4052");
+      ctx.fillStyle = gg; ctx.fillRect(62, bot, 300, 6);
+      text(ctx, "0 m", 80, top + 4, { s: 10.5, c: v("--mist"), a: "right" });
+      text(ctx, h.toFixed(1) + " m", 80, bot + 2, { s: 10.5, c: v("--mist"), a: "right" });
       var n = 8;
       for (var i = 0; i <= n; i++) {
         var tt = t * i / n, yy = 0.5 * g * tt * tt;
         var py = top + (bot - top - 12) * (yy / h);
-        ctx.globalAlpha = 0.25 + 0.75 * i / n;
-        ctx.fillStyle = v("--coral"); ctx.beginPath(); ctx.arc(150, py, 11, 0, Math.PI * 2); ctx.fill();
+        ctx.globalAlpha = 0.3 + 0.7 * i / n;
+        K.glow(ctx, 150, py, 14, "rgba(255,190,140,.25)", 1.6);
+        ball(ctx, 150, py, 11, "--coral");
         ctx.globalAlpha = 1;
-        if (i % 2 === 0) text(ctx, tt.toFixed(2) + "초", 170, py + 4, { s: 10.5, c: v("--mist") });
+        if (i % 2 === 0) text(ctx, tt.toFixed(2) + "초", 172, py + 4, { s: 10.5, c: "#c6cff5" });
       }
       text(ctx, "같은 시간 간격으로 찍은 사진 — 간격이 점점 벌어집니다", 62, 366, { s: 10.5, c: v("--mist") });
 
       /* 오른쪽: 계산 */
-      text(ctx, "자유 낙하 계산", 420, 32, { s: 14, w: "900" });
+      pill(ctx, "자유 낙하 계산", 420, 30, { s: 13, c: KS.blue });
       var rows = [
         ["떨어진 높이 h", h.toFixed(1) + " m"],
         ["걸린 시간 t = √(2h/g)", t.toFixed(3) + " 초"],
@@ -205,13 +277,12 @@ function ticker(box) {
       ];
       rows.forEach(function (r, i) {
         var yy = 68 + i * 34;
-        ctx.fillStyle = i < 3 ? v("--brand-100") : v("--card-2");
-        ctx.beginPath(); ctx.roundRect(416, yy - 18, 460, 28, 9); ctx.fill();
+        glass(ctx, 416, yy - 18, 460, 28, i < 3 ? "--brand" : "#8fa6ff", 9);
         text(ctx, r[0], 430, yy + 1, { s: 12, c: i < 3 ? v("--brand-700") : v("--mist") });
         text(ctx, r[1], 862, yy + 2, { s: 13, w: "800", a: "right" });
       });
       text(ctx, "1초 : 2초 : 3초 동안 떨어진 거리는 언제나 1 : 4 : 9입니다.", 416, 300, { s: 11.5, c: v("--mist") });
-      text(ctx, "질량은 식 어디에도 들어 있지 않습니다.", 416, 322, { s: 11.5, w: "800", c: v("--coral-700") });
+      pill(ctx, "질량은 식 어디에도 들어 있지 않습니다.", 416, 324, { s: 11.5, c: v("--coral-700") });
 
       $("a-fall-info").innerHTML = "<b>" + pname + "</b>에서 <b>" + h.toFixed(1) + " m</b> 높이에서 놓으면 <b>" + t.toFixed(2) + "초</b> 뒤 <b>" + vEnd.toFixed(1) + " m/s</b>로 바닥에 닿습니다. (1 m/s = 시속 3.6 km이므로 약 시속 " + (vEnd * 3.6).toFixed(0) + " km)";
       check(t, vEnd);
@@ -264,31 +335,40 @@ function ticker(box) {
 
     function draw() {
       paper(ctx, W, H);
-      ctx.fillStyle = v("--line"); ctx.fillRect(40, ground, W - 80, 5);
-      ctx.fillStyle = v("--card-2"); ctx.fillRect(40, top - 14, 68, ground - top + 14);
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 2; ctx.strokeRect(40, top - 14, 68, ground - top + 14);
-      text(ctx, "20 m", 46, top - 22, { s: 11, w: "800", c: v("--mist") });
+      /* 땅(풀밭)과 20 m 높이의 건물 */
+      var gr = ctx.createLinearGradient(0, ground, 0, H); gr.addColorStop(0, "#4f8a3a"); gr.addColorStop(.15, "#356628"); gr.addColorStop(1, "#1c3a16");
+      ctx.fillStyle = gr; ctx.fillRect(0, ground, W, H - ground);
+      var bgd = ctx.createLinearGradient(40, 0, 108, 0); bgd.addColorStop(0, "#8a7a6a"); bgd.addColorStop(.5, "#b0a08c"); bgd.addColorStop(1, "#6a5a4c");
+      ctx.fillStyle = bgd; ctx.fillRect(40, top - 14, 68, ground - top + 14);
+      ctx.fillStyle = "rgba(40,60,90,.55)";
+      for (var wy = top + 4; wy < ground - 16; wy += 26) { ctx.fillRect(50, wy, 16, 14); ctx.fillRect(82, wy, 16, 14); }
+      ctx.fillStyle = "#5a4c40"; ctx.fillRect(36, top - 18, 76, 6);
+      pill(ctx, "20 m", 46, top - 24, { s: 11, c: KS.ink });
+      for (var gi = 1; gi <= 3; gi++) {                 /* 같은 시간 간격의 잔상 */
+        var tg2 = T * gi / 4, ya2 = top + (ground - top - 10) * (0.5 * G * tg2 * tg2) / HH;
+        if (tg2 <= cur * T) { ctx.globalAlpha = .28; ball(ctx, x0, ya2, 9, "--violet"); var xg = x0 + vx * tg2 * SX; if (xg < W - 26) ball(ctx, xg, ya2, 9, "--coral"); ctx.globalAlpha = 1; }
+      }
       /* 같은 높이 표시 선 */
       var t = cur * T;
       var yA = top + (ground - top - 10) * (0.5 * G * t * t) / HH;
       var xB = x0 + vx * t * SX;
-      ctx.strokeStyle = v("--teal"); ctx.setLineDash([5, 5]); ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(x0, yA); ctx.lineTo(Math.min(xB, W - 30), yA); ctx.stroke(); ctx.setLineDash([]);
+      ctx.save(); ctx.shadowColor = "#2ed3bd"; ctx.shadowBlur = 6; ctx.strokeStyle = "#5ff0dc"; ctx.setLineDash([5, 5]); ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(x0, yA); ctx.lineTo(Math.min(xB, W - 30), yA); ctx.stroke(); ctx.restore();
       /* 지나온 길 */
-      ctx.strokeStyle = v("--coral"); ctx.globalAlpha = .45; ctx.lineWidth = 2; ctx.beginPath();
+      ctx.strokeStyle = "#ffb08a"; ctx.globalAlpha = .7; ctx.lineWidth = 2; ctx.setLineDash([3, 4]); ctx.beginPath();
       for (var i = 0; i <= 40; i++) {
         var tt = T * i / 40, yy = top + (ground - top - 10) * (0.5 * G * tt * tt) / HH, xx = x0 + vx * tt * SX;
         if (xx > W - 26) break;
         if (i === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
       }
-      ctx.stroke(); ctx.globalAlpha = 1;
+      ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
       /* 두 공 */
-      ctx.fillStyle = v("--violet"); ctx.beginPath(); ctx.arc(x0, yA, 11, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = v("--coral"); ctx.beginPath(); ctx.arc(Math.min(xB, W - 26), yA, 11, 0, Math.PI * 2); ctx.fill();
-      text(ctx, "그냥 놓은 공", 40, 306, { s: 11.5, w: "800", c: v("--violet-700") });
-      text(ctx, "수평으로 던진 공 (" + vx + " m/s)", 180, 306, { s: 11.5, w: "800", c: v("--coral-700") });
-      text(ctx, "t = " + t.toFixed(2) + "초 · 높이 " + (0.5 * G * t * t).toFixed(1) + " m · 수평 " + (vx * t).toFixed(1) + " m", 880, 306, { s: 11.5, w: "800", a: "right" });
-      text(ctx, "점선은 ‘같은 높이’ — 두 공은 언제나 나란히 내려옵니다", 880, 40, { s: 11, c: v("--mist"), a: "right" });
+      ball(ctx, x0, yA, 11, "--violet");
+      ball(ctx, Math.min(xB, W - 26), yA, 11, "--coral");
+      pill(ctx, "그냥 놓은 공", 40, 306, { s: 11.5, c: v("--violet-700") });
+      pill(ctx, "수평으로 던진 공 (" + vx + " m/s)", 180, 306, { s: 11.5, c: v("--coral-700") });
+      pill(ctx, "t = " + t.toFixed(2) + "초 · 높이 " + (0.5 * G * t * t).toFixed(1) + " m · 수평 " + (vx * t).toFixed(1) + " m", 880, 306, { s: 11.5, a: "right", c: KS.ink });
+      pill(ctx, "점선은 ‘같은 높이’ — 두 공은 언제나 나란히 내려옵니다", 880, 36, { s: 11, a: "right", c: KS.ink });
     }
     canvas._redraw = draw;
     $("a-vx").addEventListener("input", function (e) { vx = +e.target.value; $("a-vx-val").textContent = vx + " m/s"; draw(); });
@@ -304,7 +384,7 @@ function ticker(box) {
     var canvas = $("c-cannon"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
     var GM = 3.986e14, RE = 6.371e6, ALT = 1.0e5, r0 = RE + ALT;
     var VC = Math.sqrt(GM / r0), VE = Math.sqrt(2 * GM / r0);
-    var vk = 3.00, cx = 300, cy = 212, RPX = 176;
+    var vk = 3.00, cx = 300, cy = 212, RPX = 176, cT = 0, cPlay = !REDUCE;
 
     function path(vkm) {                       // 두 물체 문제의 원뿔 곡선
       var vv = vkm * 1000;
@@ -324,34 +404,51 @@ function ticker(box) {
       }
       return { pts: pts, nu0: nu0, e: ecc, hit: hit, esc: esc, rMax: rMax, p: p };
     }
-    function draw() {
+    function draw(quiet) {
       paper(ctx, W, H);
       var o = path(vk);
       var view = Math.max(o.rMax * 1.08, RE * 1.25);
       var S = RPX / view;
-      /* 지구 */
-      ctx.fillStyle = v("--brand"); ctx.globalAlpha = .28;
-      ctx.beginPath(); ctx.arc(cx, cy, RE * S, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
-      ctx.strokeStyle = v("--brand-700"); ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.arc(cx, cy, RE * S, 0, Math.PI * 2); ctx.stroke();
-      text(ctx, "지구", cx, cy + 4, { s: 12, w: "900", a: "center", c: v("--brand-700") });
+      /* 지구 — 대기의 빛과 입체감 */
+      var er = RE * S;
+      var atm = ctx.createRadialGradient(cx, cy, er * .96, cx, cy, er * 1.12);
+      atm.addColorStop(0, "rgba(120,200,255,.45)"); atm.addColorStop(1, "rgba(120,200,255,0)");
+      ctx.fillStyle = atm; ctx.beginPath(); ctx.arc(cx, cy, er * 1.12, 0, Math.PI * 2); ctx.fill();
+      K.earth(ctx, cx, cy, er);
+      ctx.fillStyle = "rgba(90,190,110,.55)";
+      ctx.beginPath(); ctx.ellipse(cx - er * .35, cy + er * .25, er * .28, er * .18, -.4, 0, 6.2832); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cx + er * .3, cy + er * .45, er * .2, er * .12, .5, 0, 6.2832); ctx.fill();
+      var shd = ctx.createRadialGradient(cx - er * .4, cy - er * .4, er * .2, cx, cy, er * 1.05);
+      shd.addColorStop(0, "rgba(0,0,0,0)"); shd.addColorStop(1, "rgba(0,0,20,.55)");
+      ctx.fillStyle = shd; ctx.beginPath(); ctx.arc(cx, cy, er, 0, Math.PI * 2); ctx.fill();
+      pill(ctx, "지구", cx, cy + 5, { s: 12, a: "center", c: "#ffffff" });
       /* 궤도 */
-      ctx.strokeStyle = o.hit !== null ? v("--coral") : (o.esc ? v("--violet") : v("--green"));
+      var oc = o.hit !== null ? "#ff9d63" : (o.esc ? "#b69cff" : "#63e08a");
+      ctx.save(); ctx.shadowColor = oc; ctx.shadowBlur = 10; ctx.strokeStyle = oc;
       ctx.lineWidth = 2.5; ctx.beginPath();
       o.pts.forEach(function (q, i) {
         var phi = -Math.PI / 2 + (q.nu - o.nu0);
         var xx = cx + q.r * S * Math.cos(phi), yy = cy + q.r * S * Math.sin(phi);
         if (i === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
       });
-      ctx.stroke();
-      /* 발사점 */
-      ctx.fillStyle = v("--amber"); ctx.beginPath(); ctx.arc(cx, cy - r0 * S, 6, 0, Math.PI * 2); ctx.fill();
-      text(ctx, "🔫 대포", cx + 12, cy - r0 * S - 8, { s: 11, w: "800", c: v("--amber-700") });
+      ctx.stroke(); ctx.restore();
+      /* 궤도를 따라 도는 대포알 */
+      if (o.pts.length > 1) {
+        var qi = Math.floor((cT / 40) % o.pts.length), qq = o.pts[REDUCE ? o.pts.length - 1 : qi], phq = -Math.PI / 2 + (qq.nu - o.nu0);
+        K.glow(ctx, cx + qq.r * S * Math.cos(phq), cy + qq.r * S * Math.sin(phq), 3.5, "rgba(255,240,200,.95)", 3.6);
+      }
+      /* 발사점 — 높은 산 위의 대포 */
+      var py0 = cy - r0 * S;
+      ctx.fillStyle = "#6b5a48"; ctx.beginPath(); ctx.moveTo(cx - 16, cy - er + 2); ctx.lineTo(cx - 2, py0 + 4); ctx.lineTo(cx + 2, py0 + 4); ctx.lineTo(cx + 16, cy - er + 2); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#3a3f4a"; ctx.save(); ctx.translate(cx, py0); ctx.fillRect(-2, -5, 16, 6); ctx.restore();
+      K.glow(ctx, cx + 16, py0 - 2, 3, "rgba(255,211,107,.95)", 3);
+      pill(ctx, "대포 (고도 100 km)", cx + 22, py0 - 10, { s: 11, c: KS.yellow });
+      K.warn(ctx, 30, H - 14, "⚠ 대포의 높이는 실제 비율이 아님");
       /* 오른쪽 계기판 */
       var kind = o.hit !== null ? "땅에 떨어짐" : (o.esc ? "지구를 벗어남" : (o.e <= 0.03 ? "원에 가까운 궤도" : "타원 궤도"));
       var col = o.hit !== null ? "--coral" : (o.esc ? "--violet" : "--green");
-      text(ctx, "궤도 판정", 512, 46, { s: 14, w: "900" });
-      ctx.fillStyle = v(col); ctx.globalAlpha = .2; ctx.beginPath(); ctx.roundRect(508, 58, 370, 44, 12); ctx.fill(); ctx.globalAlpha = 1;
+      pill(ctx, "궤도 판정", 512, 42, { s: 13, c: KS.blue });
+      glass(ctx, 508, 58, 370, 44, col, 12);
       text(ctx, kind, 524, 86, { s: 18, w: "900", c: v(col + "-700") || v("--ink") });
       var rows = [
         ["대포알의 속도", vk.toFixed(2) + " km/s"],
@@ -362,7 +459,7 @@ function ticker(box) {
       ];
       rows.forEach(function (r, i) {
         var yy = 136 + i * 32;
-        ctx.fillStyle = v("--card-2"); ctx.beginPath(); ctx.roundRect(508, yy - 18, 370, 27, 9); ctx.fill();
+        glass(ctx, 508, yy - 18, 370, 27, "#8fa6ff", 9);
         text(ctx, r[0], 520, yy, { s: 11.5, c: v("--mist") });
         text(ctx, r[1], 868, yy + 1, { s: 12, w: "800", a: "right" });
       });
@@ -370,6 +467,7 @@ function ticker(box) {
       text(ctx, "이 화면은 고도 100 km에서 쏜다고 보았습니다.", 508, 336, { s: 10.5, c: v("--mist") });
       text(ctx, "지표면 기준 제1 우주 속도 7.9 km/s, 탈출 속도 11.2 km/s", 508, 356, { s: 10.5, c: v("--mist") });
 
+      if (quiet === true) return;
       $("a-cannon-info").innerHTML = o.hit !== null
         ? "속도 <b>" + vk.toFixed(2) + " km/s</b> — 대포알은 약 <b>" + (RE * o.hit * Math.PI / 180 / 1000).toFixed(0) + " km</b> 날아가 땅에 떨어집니다. 더 세게 쏘면 떨어지는 지점이 멀어집니다."
         : (o.esc ? "속도 <b>" + vk.toFixed(2) + " km/s</b> — 지구의 중력을 이기고 <b>영영 돌아오지 않습니다.</b>이 속도를 탈출 속도라고 합니다."
@@ -385,6 +483,8 @@ function ticker(box) {
       vk = +e.target.value; $("a-vc-val").textContent = vk.toFixed(2) + " km/s"; draw();
     });
     window.sthState("cirV", (VC / 1000).toFixed(2));
+    playBtn("a-cannon-play", "⏸ 대포알 멈추기", "▶ 대포알 날리기", function () { return cPlay; }, function (q) { cPlay = q; });
+    K.animate(canvas, function (dt) { if (cPlay) { cT += dt; draw(true); } });
     draw(); mission4();
   })();
 
@@ -456,44 +556,55 @@ function ticker(box) {
       var N = Math.max(0, M * (G + a));        // 수직 항력(N)
       var sc = N / G;                          // 체중계 눈금(kg중)
       var top = 40, bot = 344;
-      /* 통로와 엘리베이터 */
-      ctx.fillStyle = v("--card-2"); ctx.fillRect(64, top, 276, bot - top);
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 3; ctx.strokeRect(64, top, 276, bot - top);
-      ctx.fillStyle = v("--panel-2") || v("--card"); ctx.fillRect(96, top + 52, 212, 232);
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 2; ctx.strokeRect(96, top + 52, 212, 232);
-      /* 줄 */
-      ctx.strokeStyle = v("--mist"); ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(202, top); ctx.lineTo(202, top + 52); ctx.stroke();
+      /* 승강로 — 어두운 통로와 레일 */
+      var sh = ctx.createLinearGradient(64, 0, 340, 0); sh.addColorStop(0, "#0b1030"); sh.addColorStop(.5, "#141a44"); sh.addColorStop(1, "#0b1030");
+      ctx.fillStyle = sh; ctx.fillRect(64, top, 276, bot - top);
+      ctx.fillStyle = "#3a4258"; ctx.fillRect(72, top, 6, bot - top); ctx.fillRect(326, top, 6, bot - top);
+      /* 줄(강철 케이블) */
+      ctx.strokeStyle = "#b8c0d0"; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(199, top); ctx.lineTo(199, top + 52); ctx.moveTo(205, top); ctx.lineTo(205, top + 52); ctx.stroke();
+      /* 엘리베이터 칸 — 금속 벽 */
+      var cab = ctx.createLinearGradient(96, 0, 308, 0);
+      cab.addColorStop(0, "#5b6476"); cab.addColorStop(.12, "#9aa4b8"); cab.addColorStop(.5, "#c8d0de"); cab.addColorStop(.88, "#8a94a8"); cab.addColorStop(1, "#4a5266");
+      ctx.fillStyle = cab; ctx.beginPath(); ctx.roundRect(96, top + 52, 212, 232, 6); ctx.fill();
+      ctx.fillStyle = "rgba(10,14,40,.82)"; ctx.fillRect(104, top + 60, 196, 216);
+      var lamp = ctx.createRadialGradient(202, top + 64, 2, 202, top + 64, 160); lamp.addColorStop(0, "rgba(255,240,200,.28)"); lamp.addColorStop(1, "rgba(255,240,200,0)");
+      ctx.fillStyle = lamp; ctx.fillRect(104, top + 60, 196, 216);
       /* 사람 + 체중계 */
       var fy = top + 252;
-      ctx.fillStyle = v("--amber"); ctx.fillRect(160, fy, 84, 16);      // 체중계
-      ctx.strokeStyle = v("--amber-700"); ctx.lineWidth = 2; ctx.strokeRect(160, fy, 84, 16);
-      ctx.fillStyle = v("--coral"); ctx.beginPath(); ctx.arc(202, fy - 64, 17, 0, Math.PI * 2); ctx.fill();
-      ctx.fillRect(190, fy - 46, 24, 46);
-      text(ctx, "서윤 " + M + " kg", 202, top + 44, { s: 11.5, w: "800", a: "center", c: v("--mist") });
+      var scg = ctx.createLinearGradient(0, fy, 0, fy + 16); scg.addColorStop(0, "#f0f2f6"); scg.addColorStop(1, "#9aa0ac");
+      ctx.fillStyle = scg; ctx.beginPath(); ctx.roundRect(160, fy, 84, 16, 4); ctx.fill();
+      ctx.fillStyle = "#0a2a1a"; ctx.fillRect(190, fy + 4, 24, 8);
+      K.t(ctx, sc.toFixed(0), 202, fy + 11.5, { s: 8, a: "center", c: "#7ff0a8" });
+      var bodyG = ctx.createLinearGradient(190, 0, 214, 0); bodyG.addColorStop(0, "#c45a3a"); bodyG.addColorStop(.5, "#ff9d63"); bodyG.addColorStop(1, "#b04a2e");
+      ctx.fillStyle = bodyG; ctx.beginPath(); ctx.roundRect(188, fy - 48, 28, 48, 8); ctx.fill();
+      ball(ctx, 202, fy - 64, 16, "#f3c4a0");
+      pill(ctx, "서윤 " + M + " kg", 202, top + 44, { s: 11.5, a: "center", c: KS.ink });
       /* 힘 화살표 */
-      ctx.strokeStyle = v("--violet"); ctx.fillStyle = v("--violet"); ctx.lineWidth = 3;
-      window.drawArrow(ctx, 136, fy - 20, 136, fy - 20 - clamp(N / 8, 8, 150), 11);
-      text(ctx, "N = " + N.toFixed(0) + " N", 130, fy - 26 - clamp(N / 8, 8, 150), { s: 11.5, w: "800", a: "right", c: v("--violet-700") });
-      ctx.strokeStyle = v("--coral"); ctx.fillStyle = v("--coral"); ctx.lineWidth = 3;
-      window.drawArrow(ctx, 272, fy - 130, 272, fy - 130 + M * G / 8, 11);
-      text(ctx, "mg = " + (M * G).toFixed(0) + " N", 280, fy - 130 + M * G / 8 + 4, { s: 11.5, w: "800", c: v("--coral-700") });
+      ctx.save(); ctx.shadowColor = "#b69cff"; ctx.shadowBlur = 10;
+      if (N > 1) K.arrow(ctx, { x: 136, y: fy - 20 }, { x: 136, y: fy - 20 - clamp(N / 8, 8, 150) }, "#b69cff", 3.5, 13);
+      ctx.shadowColor = "#ff9d63";
+      K.arrow(ctx, { x: 272, y: fy - 130 }, { x: 272, y: fy - 130 + M * G / 8 }, "#ff9d63", 3.5, 13);
+      ctx.restore();
+      pill(ctx, "N = " + N.toFixed(0) + " N", 130, fy - 26 - clamp(N / 8, 8, 150), { s: 11.5, a: "right", c: v("--violet-700") });
+      pill(ctx, "mg = " + (M * G).toFixed(0) + " N", 280, fy - 130 + M * G / 8 + 4, { s: 11.5, c: v("--coral-700") });
       /* 가속도 화살표 */
       if (Math.abs(a) > 0.05) {
-        ctx.strokeStyle = v("--teal"); ctx.fillStyle = v("--teal"); ctx.lineWidth = 4;
         var L = clamp(Math.abs(a) * 8, 12, 46);
-        window.drawArrow(ctx, 348, 190, 348, a > 0 ? 190 - L : 190 + L, 12);
-        text(ctx, "가속도", 356, 190, { s: 11, w: "800", c: v("--teal-700") });
+        ctx.save(); ctx.shadowColor = "#2ed3bd"; ctx.shadowBlur = 10;
+        K.arrow(ctx, { x: 350, y: 190 }, { x: 350, y: a > 0 ? 190 - L : 190 + L }, "#5ff0dc", 4, 13); ctx.restore();
+        pill(ctx, "가속도", 360, 194, { s: 11, c: v("--teal-700") });
       }
-      /* 오른쪽 계기 */
-      text(ctx, "체중계 눈금", 640, 56, { s: 13, w: "800", a: "center", c: v("--mist") });
+      /* 오른쪽 계기 — 디지털 체중계 화면 */
+      pill(ctx, "체중계 눈금", 640, 54, { s: 12.5, a: "center", c: KS.mute });
       var col = sc > 50.5 ? "--rose" : (sc < 49.5 ? "--brand" : "--green");
-      ctx.fillStyle = v(col); ctx.globalAlpha = .18;
-      ctx.beginPath(); ctx.roundRect(470, 70, 340, 92, 20); ctx.fill(); ctx.globalAlpha = 1;
-      text(ctx, sc.toFixed(1) + " kg중", 640, 132, { s: 38, w: "900", a: "center", c: v(col + "-700") || v("--ink") });
+      var lcd = ctx.createLinearGradient(0, 70, 0, 162); lcd.addColorStop(0, "#071a14"); lcd.addColorStop(1, "#0c2a20");
+      ctx.fillStyle = lcd; ctx.beginPath(); ctx.roundRect(470, 70, 340, 92, 20); ctx.fill();
+      ctx.save(); ctx.strokeStyle = v(col); ctx.lineWidth = 2; ctx.shadowColor = v(col); ctx.shadowBlur = 14; ctx.beginPath(); ctx.roundRect(470, 70, 340, 92, 20); ctx.stroke(); ctx.restore();
+      ctx.save(); ctx.shadowColor = v(col); ctx.shadowBlur = 16;
+      text(ctx, sc.toFixed(1) + " kg중", 640, 132, { s: 38, w: "900", a: "center", c: v(col + "-700") || v("--ink") }); ctx.restore();
       /* 막대 */
-      ctx.fillStyle = v("--card-2"); ctx.fillRect(470, 180, 340, 16);
-      ctx.fillStyle = v(col); ctx.fillRect(470, 180, 340 * clamp(sc / 80, 0, 1), 16);
+      meter(ctx, 470, 180, 340, 16, sc / 80, col);
       ctx.strokeStyle = v("--ink"); ctx.lineWidth = 2;
       ctx.beginPath(); ctx.moveTo(470 + 340 * 50 / 80, 174); ctx.lineTo(470 + 340 * 50 / 80, 202); ctx.stroke();
       text(ctx, "실제 질량 50 kg", 470 + 340 * 50 / 80, 216, { s: 10.5, a: "center", c: v("--mist") });
@@ -506,7 +617,7 @@ function ticker(box) {
       ];
       rows.forEach(function (r, i) {
         var yy = 252 + i * 30;
-        ctx.fillStyle = v("--card-2"); ctx.beginPath(); ctx.roundRect(440, yy - 17, 436, 25, 8); ctx.fill();
+        glass(ctx, 440, yy - 17, 436, 25, "#8fa6ff", 8);
         text(ctx, r[0], 452, yy, { s: 11.5, c: v("--mist") });
         text(ctx, r[1], 864, yy + 1, { s: 12, w: "800", a: "right" });
       });
@@ -562,28 +673,40 @@ function ticker(box) {
     function draw() {
       paper(ctx, W, H);
       var a = acc(), net = F - fe(), ground = 236;
-      ctx.fillStyle = v("--line"); ctx.fillRect(40, ground, W - 80, 5);
-      for (var i = 0; i < 26; i++) { ctx.fillStyle = v("--card-2"); ctx.fillRect(44 + i * 32, ground + 5, 18, 7); }
-      var s = 44 + m * 2.4, bx = 452, by = ground - s;
-      ctx.fillStyle = v("--teal"); ctx.beginPath(); ctx.roundRect(bx - s / 2, by, s, s, 8); ctx.fill();
-      text(ctx, m + " kg", bx, by + s / 2 + 5, { s: 13, w: "900", a: "center", c: v("--on-accent") });
+      /* 창고 바닥 — 콘크리트와 줄무늬 */
+      var fl = ctx.createLinearGradient(0, ground, 0, H); fl.addColorStop(0, "#4a5266"); fl.addColorStop(.1, "#2e3446"); fl.addColorStop(1, "#141a2e");
+      ctx.fillStyle = fl; ctx.fillRect(30, ground, W - 60, H - ground - 6);
+      ctx.fillStyle = "#c9d1de"; ctx.fillRect(30, ground, W - 60, 2);
+      for (var i = 0; i < 26; i++) { ctx.fillStyle = "rgba(255,200,60,.35)"; ctx.fillRect(44 + i * 32, ground + 10, 18, 4); }
+      var s = 44 + m * 2.4, bx = 452, by = ground - s - 8;
+      /* 화물 로봇 — 금속 몸체, 바퀴, 눈 */
+      var rb = ctx.createLinearGradient(bx - s / 2, by, bx + s / 2, by + s);
+      rb.addColorStop(0, "#8ff5e4"); rb.addColorStop(.35, "#2ed3bd"); rb.addColorStop(1, "#126a60");
+      ctx.fillStyle = rb; ctx.beginPath(); ctx.roundRect(bx - s / 2, by, s, s, 10); ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1.2; ctx.stroke();
+      ctx.fillStyle = "rgba(5,20,30,.75)"; ctx.beginPath(); ctx.roundRect(bx - s * .3, by + 8, s * .6, 14, 6); ctx.fill();
+      dot(ctx, bx - s * .14, by + 15, 2.2, "#7fffe0", 2.4); dot(ctx, bx + s * .14, by + 15, 2.2, "#7fffe0", 2.4);
+      ball(ctx, bx - s / 2 + 10, ground - 6, 7, "#3a3f4a"); ball(ctx, bx + s / 2 - 10, ground - 6, 7, "#3a3f4a");
+      text(ctx, m + " kg", bx, by + s / 2 + 12, { s: 13, w: "900", a: "center", c: "#06202c" });
       /* 미는 힘 */
-      ctx.strokeStyle = v("--coral"); ctx.fillStyle = v("--coral"); ctx.lineWidth = 5;
       var lf = 20 + F * 2.6;
-      window.drawArrow(ctx, bx - s / 2 - lf, by + s / 2, bx - s / 2 - 6, by + s / 2, 13);
-      text(ctx, "미는 힘 F = " + F + " N", bx - s / 2 - lf - 10, by + s / 2 + 5, { s: 12.5, w: "800", a: "right", c: v("--coral-700") });
-      /* 마찰력 */
-      ctx.strokeStyle = v("--violet"); ctx.fillStyle = v("--violet"); ctx.lineWidth = 5;
+      ctx.save(); ctx.shadowColor = "#ff9d63"; ctx.shadowBlur = 10;
+      if (F > 0) K.arrow(ctx, { x: bx - s / 2 - lf, y: by + s / 2 }, { x: bx - s / 2 - 6, y: by + s / 2 }, "#ff9d63", 5, 15);
+      ctx.shadowColor = "#b69cff";
       var lr = 20 + fe() * 2.6;
-      window.drawArrow(ctx, bx + s / 2 + lr, by + s - 8, bx + s / 2 + 6, by + s - 8, 13);
-      text(ctx, f > F ? "정지 마찰력 = " + F + " N" : "마찰력 f = " + f + " N", bx + s / 2 + lr + 10, by + s - 3, { s: 12.5, w: "800", c: v("--violet-700") });
+      if (fe() > 0) K.arrow(ctx, { x: bx + s / 2 + lr, y: by + s - 8 }, { x: bx + s / 2 + 6, y: by + s - 8 }, "#b69cff", 5, 15);
+      ctx.restore();
+      pill(ctx, "미는 힘 F = " + F + " N", bx - s / 2 - lf - 10, by + s / 2 + 5, { s: 12.5, a: "right", c: v("--coral-700") });
+      /* 마찰력 */
+      pill(ctx, f > F ? "정지 마찰력 = " + F + " N" : "마찰력 f = " + f + " N", bx + s / 2 + lr + 10, by + s - 3, { s: 12.5, c: v("--violet-700") });
       /* 알짜힘 · 가속도 */
-      text(ctx, "알짜힘 = F − (마찰력) = " + F + " − " + fe() + " = " + net + " N", 40, 36, { s: 14, w: "900", c: v("--brand-700") });
-      text(ctx, "가속도 a = 알짜힘 ÷ m = " + net + " ÷ " + m + " = " + a.toFixed(2) + " m/s²", 40, 60, { s: 14, w: "900" });
-      ctx.strokeStyle = v("--brand"); ctx.fillStyle = v("--brand"); ctx.lineWidth = 4;
+      pill(ctx, "알짜힘 = F − (마찰력) = " + F + " − " + fe() + " = " + net + " N", 40, 34, { s: 13.5, c: v("--brand-700") });
+      pill(ctx, "가속도 a = 알짜힘 ÷ m = " + net + " ÷ " + m + " = " + a.toFixed(2) + " m/s²", 40, 62, { s: 13.5, c: KS.ink });
       var la = clamp(Math.abs(a) * 16, 0, 300);
-      if (la > 4) window.drawArrow(ctx, bx, 104, bx + (a > 0 ? la : -la), 104, 12);
-      text(ctx, Math.abs(a) < 0.005 ? "가속도 0 — 속도가 변하지 않습니다" : (a > 0 ? "→ 점점 빨라집니다" : "← 점점 느려집니다"), bx, 92, { s: 11.5, w: "800", a: "center", c: v("--brand-700") });
+      ctx.save(); ctx.shadowColor = "#4fc3ec"; ctx.shadowBlur = 10;
+      if (la > 4) K.arrow(ctx, { x: bx, y: 110 }, { x: bx + (a > 0 ? la : -la), y: 110 }, "#7fd3ff", 4, 13);
+      ctx.restore();
+      pill(ctx, Math.abs(a) < 0.005 ? "가속도 0 — 속도가 변하지 않습니다" : (a > 0 ? "→ 점점 빨라집니다" : "← 점점 느려집니다"), bx, 94, { s: 11.5, a: "center", c: v("--brand-700") });
       $("b-a-out").innerHTML = "가속도: <b>" + a.toFixed(2) + " m/s²</b> &nbsp;( a = (F − 마찰력) / m = (" + F + " − " + fe() + ") / " + m + " )" +
         (f > F ? "<br>바닥이 버틸 수 있는 마찰력(" + f + " N)이 미는 힘보다 큽니다. 이때 마찰력은 미는 힘과 똑같은 " + F + " N만 작용해(정지 마찰력) 알짜힘이 0이 되므로, 정지해 있던 로봇은 <b>그대로 멈춰 있습니다</b>. 마찰력이 미는 힘보다 커져 로봇을 뒤로 밀지는 않습니다." : "");
       graph();
@@ -593,22 +716,16 @@ function ticker(box) {
       paper(ctx2, W2, H2);
       var a = acc(), TM = 5, t = cur * TM;
       var vM = Math.max(Math.abs(a) * TM, 0.01), xM = Math.max(Math.abs(0.5 * a * TM * TM), 0.01);
-      function panel(x0, x1, title, fn, max, col) {
-        var y0 = 46, y1 = H2 - 42;
-        axes(ctx2, x0, y0, x1, y1);
-        text(ctx2, title, x0, 30, { s: 12.5, w: "800" });
-        for (var s = 0; s <= 5; s++) {
-          var gx = x0 + s / 5 * (x1 - x0);
-          text(ctx2, s + "초", gx, y1 + 18, { s: 10.5, c: v("--mist"), a: "center" });
-        }
-        ctx2.strokeStyle = v(col); ctx2.lineWidth = 3; ctx2.beginPath();
-        for (var i = 0; i <= 60; i++) {
-          var tt = t * i / 60, val = fn(tt);
-          var xx = x0 + tt / TM * (x1 - x0), yy = y1 - clamp(Math.abs(val) / max, 0, 1) * (y1 - y0);
-          if (i === 0) ctx2.moveTo(xx, yy); else ctx2.lineTo(xx, yy);
-        }
-        ctx2.stroke();
-        text(ctx2, fn(t).toFixed(1), x1, y1 - clamp(Math.abs(fn(t)) / max, 0, 1) * (y1 - y0) - 8, { s: 12, w: "900", a: "right", c: v(col + "-700") || v("--ink") });
+      function panel(x0, x1, title, fn, max, c) {
+        var g = K.chart(ctx2, { x: x0 - 44, y: 40, w: x1 - x0 + 58, h: H2 - 66, pl: 44, pt: 6, pb: 26, x0: 0, x1: TM, y0: 0, y1: max, xt: 5, yt: 2,
+          xf: function (q) { return Math.round(q) + "초"; } });
+        pill(ctx2, title, x0, 26, { s: 12, c: v(c + "-700") || KS.ink });
+        var pts = [];
+        for (var i = 0; i <= 60; i++) { var tt = t * i / 60; pts.push([tt, clamp(Math.abs(fn(tt)), 0, max)]); }
+        K.plot(ctx2, g, pts, v(c));
+        var ex = g.X(t), ey = g.Y(clamp(Math.abs(fn(t)), 0, max));
+        dot(ctx2, ex, ey, 4.5, c, 3);
+        pill(ctx2, fn(t).toFixed(1), ex - 8, Math.max(g.T + 18, ey - 8), { s: 11.5, a: "right", c: v(c + "-700") || KS.ink, box: [g.L, g.R] });
       }
       panel(64, 414, "속도 v (m/s) — 시간", function (tt) { return a * tt; }, vM, "--teal");
       panel(506, 856, "위치 x (m) — 시간", function (tt) { return 0.5 * a * tt * tt; }, xM, "--coral");
@@ -662,29 +779,43 @@ function ticker(box) {
     function draw() {
       paper(ctx, W, H);
       var ice = 244;
-      ctx.fillStyle = v("--brand-100"); ctx.fillRect(40, ice, W - 80, 30);
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 2; ctx.strokeRect(40, ice, W - 80, 30);
-      text(ctx, "마찰이 거의 없는 얼음판", 48, ice + 48, { s: 11, c: v("--mist") });
+      /* 얼음판 — 반짝이는 푸른 면 */
+      var ig = ctx.createLinearGradient(0, ice, 0, ice + 30); ig.addColorStop(0, "#d8f2ff"); ig.addColorStop(.25, "#8fd0f0"); ig.addColorStop(1, "#3a7ab0");
+      ctx.fillStyle = ig; ctx.beginPath(); ctx.roundRect(40, ice, W - 80, 30, 6); ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,.5)"; ctx.lineWidth = 1;
+      for (var sk = 0; sk < 9; sk++) { ctx.beginPath(); ctx.moveTo(70 + sk * 92, ice + 8 + (sk % 3) * 6); ctx.lineTo(120 + sk * 92, ice + 4 + (sk % 3) * 6); ctx.stroke(); }
+      pill(ctx, "마찰이 거의 없는 얼음판", 48, ice + 50, { s: 11, c: KS.blue });
       var cxA = 380 - cur * vA() * 46, cxB = 520 + cur * vB() * 46;
       cxA = clamp(cxA, 70, 430); cxB = clamp(cxB, 470, 806);
-      function person(x, label, mm, col) {
+      function person(x, label, mm, c) {
         var r = 14 + mm * 0.18;
-        ctx.fillStyle = v(col); ctx.beginPath(); ctx.arc(x, ice - 60, r, 0, Math.PI * 2); ctx.fill();
-        ctx.fillRect(x - r * 0.6, ice - 60 + r, r * 1.2, 46 - r * 0.4);
-        text(ctx, label + " " + mm + " kg", x, ice - 60 - r - 10, { s: 12, w: "800", a: "center", c: v(col + "-700") || v("--ink") });
+        var bg2 = ctx.createLinearGradient(x - r * 0.6, 0, x + r * 0.6, 0);
+        bg2.addColorStop(0, shade(c, .55)); bg2.addColorStop(.5, v(c)); bg2.addColorStop(1, shade(c, .5));
+        ctx.fillStyle = bg2; ctx.beginPath(); ctx.roundRect(x - r * 0.6, ice - 60 + r, r * 1.2, 46 - r * 0.4, 6); ctx.fill();
+        ctx.fillStyle = "#2a2f3a"; ctx.fillRect(x - r * 0.5, ice - 14 + r * 0.6 - 2, r * 1.0, 4);
+        ball(ctx, x, ice - 60, r, "#f3c4a0");
+        ctx.fillStyle = shade(c, .7); ctx.beginPath(); ctx.arc(x, ice - 60, r, Math.PI * 1.05, Math.PI * 1.95); ctx.fill();
+        pill(ctx, label + " " + mm + " kg", x, ice - 60 - r - 10, { s: 12, a: "center", c: v(c + "-700") || KS.ink });
       }
       person(cxA, "서윤 A", mA, "--coral");
       person(cxB, "친구 B", MB, "--teal");
       /* 힘 화살표 (미는 순간에만) */
       if (cur < 0.28) {
-        ctx.strokeStyle = v("--violet"); ctx.fillStyle = v("--violet"); ctx.lineWidth = 5;
-        window.drawArrow(ctx, 452, ice - 74, 392, ice - 74, 13);
-        window.drawArrow(ctx, 452, ice - 74, 512, ice - 74, 13);
-        text(ctx, "200 N", 452, ice - 86, { s: 12, w: "800", a: "center", c: v("--violet-700") });
-        text(ctx, "두 힘은 크기가 같고 방향이 반대입니다", 508, ice - 126, { s: 11, a: "right", c: v("--mist") });
+        ctx.save(); ctx.shadowColor = "#b69cff"; ctx.shadowBlur = 10;
+        K.arrow(ctx, { x: 452, y: ice - 74 }, { x: 392, y: ice - 74 }, "#b69cff", 5, 15);
+        K.arrow(ctx, { x: 452, y: ice - 74 }, { x: 512, y: ice - 74 }, "#b69cff", 5, 15); ctx.restore();
+        pill(ctx, "200 N", 452, ice - 88, { s: 12, a: "center", c: v("--violet-700") });
+        pill(ctx, "두 힘은 크기가 같고 방향이 반대입니다", 508, ice - 128, { s: 11, a: "right", c: KS.mute });
+      }
+      /* 미끄러지는 동안 남는 속도 표시 */
+      if (cur > 0.05) {
+        [[cxA, -vA(), "#ffbb91"], [cxB, vB(), "#74e2d1"]].forEach(function (q) {
+          var L = clamp(Math.abs(q[1]) * 30, 10, 80);
+          K.arrow(ctx, { x: q[0], y: ice + 16 }, { x: q[0] + (q[1] > 0 ? L : -L), y: ice + 16 }, q[2], 3, 10);
+        });
       }
       /* 계기 */
-      text(ctx, "0.5초 동안 200 N → 각자 받은 충격량 100 N·s (크기는 같고 방향만 반대)", 40, 34, { s: 12.5, w: "800", c: v("--brand-700") });
+      pill(ctx, "0.5초 동안 200 N → 각자 받은 충격량 100 N·s (크기는 같고 방향만 반대)", 40, 32, { s: 12.5, c: v("--brand-700") });
       var rows = [
         ["서윤 A의 질량", mA + " kg"],
         ["서윤 A의 속도", vA().toFixed(2) + " m/s (왼쪽)"],
@@ -692,11 +823,11 @@ function ticker(box) {
       ];
       rows.forEach(function (r, i) {
         var yy = 62 + i * 28;
-        ctx.fillStyle = v("--card-2"); ctx.beginPath(); ctx.roundRect(516, yy - 17, 360, 24, 8); ctx.fill();
+        glass(ctx, 516, yy - 17, 360, 24, "#8fa6ff", 8);
         text(ctx, r[0], 528, yy, { s: 11.5, c: v("--mist") });
         text(ctx, r[1], 866, yy, { s: 12, w: "800", a: "right" });
       });
-      text(ctx, "같은 힘을 받아도 질량이 크면 덜 밀려납니다 (a = F/m)", 516, 158, { s: 11, c: v("--mist") });
+      text(ctx, "같은 힘을 받아도 질량이 크면 덜 밀려납니다 (a = F/m)", 48, 60, { s: 11, c: v("--mist") });
     }
     canvas._redraw = draw;
     function say() {
@@ -804,7 +935,9 @@ function ticker(box) {
     function draw() {
       paper(ctx, W, H);
       var rail = 250;
-      ctx.fillStyle = v("--line"); ctx.fillRect(40, rail, W - 80, 5);
+      /* 금속 레일 */
+      var rg = ctx.createLinearGradient(0, rail, 0, rail + 8); rg.addColorStop(0, "#e0e6f0"); rg.addColorStop(.5, "#8a94a8"); rg.addColorStop(1, "#3a4052");
+      ctx.fillStyle = rg; ctx.fillRect(40, rail + 6, W - 80, 7);
       var o = res || outcome();
       var xa, xb;
       if (phase === 0) { xa = 180; xb = 560; }
@@ -814,35 +947,37 @@ function ticker(box) {
         else { xa = 560 - 26 + o.va * u * 52; xb = 560 + o.vb * u * 52; }
       }
       xa = clamp(xa, 70, 796); xb = clamp(xb, 70, 806);
-      function cart(x, mm, label, col) {
-        var w = 34 + mm * 5, h = 26 + mm * 2.4;
-        ctx.fillStyle = v(col); ctx.beginPath(); ctx.roundRect(x - w / 2, rail - h, w, h, 7); ctx.fill();
-        text(ctx, label + " " + mm + "kg", x, rail - h / 2 + 5, { s: 12, w: "900", a: "center", c: v("--on-accent") });
-        ctx.fillStyle = v("--mist");
-        ctx.beginPath(); ctx.arc(x - w / 4, rail + 2, 7, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.arc(x + w / 4, rail + 2, 7, 0, Math.PI * 2); ctx.fill();
+      function body(x, w, h, c, label) {
+        var cg = ctx.createLinearGradient(0, rail - h, 0, rail);
+        cg.addColorStop(0, "rgba(255,255,255,.9)"); cg.addColorStop(.12, v(c)); cg.addColorStop(1, shade(c, .45));
+        ctx.fillStyle = cg; ctx.beginPath(); ctx.roundRect(x - w / 2, rail - h, w, h, 7); ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1; ctx.stroke();
+        text(ctx, label, x, rail - h / 2 + 5, { s: 12, w: "900", a: "center", c: "#06202c" });
+        ball(ctx, x - w / 4, rail + 2, 7, "#5b6476"); ball(ctx, x + w / 4, rail + 2, 7, "#5b6476");
       }
+      function cart(x, mm, label, c) { body(x, 34 + mm * 5, 26 + mm * 2.4, c, label + " " + mm + "kg"); }
       if (o.merged && phase > 0) {
-        var wm = 34 + (ma + mb) * 5, hm = 26 + (ma + mb) * 2.0;
-        ctx.fillStyle = v("--violet"); ctx.beginPath(); ctx.roundRect(xa - wm / 2, rail - hm, wm, hm, 7); ctx.fill();
-        text(ctx, "A+B " + (ma + mb) + "kg", xa, rail - hm / 2 + 5, { s: 12, w: "900", a: "center", c: v("--on-accent") });
+        body(xa, 34 + (ma + mb) * 5, 26 + (ma + mb) * 2.0, "--violet", "A+B " + (ma + mb) + "kg");
       } else { cart(xa, ma, "A", "--teal"); cart(xb, mb, "B", "--coral"); }
+      /* 부딪히는 순간의 섬광 */
+      if (phase > 0 && phase < 0.18) K.glow(ctx, 560 - 4, rail - 20, 10 * (1 - phase / 0.18) + 2, "rgba(255,240,180,.9)", 3);
       /* 속도 화살표 */
       if (phase > 0) {
-        [[xa, o.va, "--teal"], [xb, o.vb, "--coral"]].forEach(function (q) {
+        [[xa, o.va, "#5ff0dc"], [xb, o.vb, "#ffb08a"]].forEach(function (q) {
           if (Math.abs(q[1]) < 0.02) return;
-          ctx.strokeStyle = v(q[2]); ctx.fillStyle = v(q[2]); ctx.lineWidth = 3;
           var L = clamp(Math.abs(q[1]) * 26, 10, 90);
-          window.drawArrow(ctx, q[0], rail + 34, q[0] + (q[1] > 0 ? L : -L), rail + 34, 10);
+          ctx.save(); ctx.shadowColor = q[2]; ctx.shadowBlur = 8;
+          K.arrow(ctx, { x: q[0], y: rail + 34 }, { x: q[0] + (q[1] > 0 ? L : -L), y: rail + 34 }, q[2], 3, 11); ctx.restore();
         });
       } else {
-        ctx.strokeStyle = v("--teal"); ctx.fillStyle = v("--teal"); ctx.lineWidth = 3;
-        window.drawArrow(ctx, xa, rail + 34, xa + 74, rail + 34, 10);
-        text(ctx, "3.0 m/s", xa + 82, rail + 38, { s: 11.5, w: "800", c: v("--teal-700") });
+        ctx.save(); ctx.shadowColor = "#5ff0dc"; ctx.shadowBlur = 8;
+        K.arrow(ctx, { x: xa, y: rail + 34 }, { x: xa + 74, y: rail + 34 }, "#5ff0dc", 3, 11); ctx.restore();
+        pill(ctx, "3.0 m/s", xa + 82, rail + 39, { s: 11.5, c: v("--teal-700") });
       }
       /* 위쪽 표 */
       var pB = ma * V0, pA = ma * o.va + mb * o.vb;
       var kB = 0.5 * ma * V0 * V0, kA = 0.5 * ma * o.va * o.va + 0.5 * mb * o.vb * o.vb;
+      glass(ctx, 48, 18, 400, 76, "#8fa6ff", 10); glass(ctx, 458, 18, 400, 76, "#8fa6ff", 10);
       text(ctx, "충돌 전", 60, 38, { s: 12.5, w: "900", c: v("--mist") });
       text(ctx, "A " + ma + "kg × 3.0 m/s + B " + mb + "kg × 0 m/s", 60, 60, { s: 12 });
       text(ctx, "운동량의 합 = " + pB.toFixed(1) + " kg·m/s", 60, 82, { s: 13, w: "900", c: v("--brand-700") });
@@ -856,11 +991,10 @@ function ticker(box) {
       [["충돌 전 운동량", pB, "--brand"], ["충돌 후 운동량", pA, "--green"]].forEach(function (b, i) {
         var yy = 150 + i * 30;
         text(ctx, b[0], 60, yy + 12, { s: 11, c: v("--mist") });
-        ctx.fillStyle = v("--card-2"); ctx.fillRect(190, yy, 320, 15);
-        ctx.fillStyle = v(b[2]); ctx.fillRect(190, yy, 320 * clamp(b[1] / mx, 0, 1), 15);
+        meter(ctx, 190, yy, 320, 15, b[1] / mx, b[2]);
         text(ctx, b[1].toFixed(1), 520, yy + 13, { s: 11.5, w: "800" });
       });
-      if (o.va < -0.001 && phase > 0) text(ctx, "← A가 뒤로 튕겨 나갔습니다", 60, 320, { s: 12.5, w: "800", c: v("--rose-700") });
+      if (o.va < -0.001 && phase > 0) pill(ctx, "← A가 뒤로 튕겨 나갔습니다", 60, 320, { s: 12.5, c: v("--rose-700") });
     }
     canvas._redraw = draw;
     function mission() {
@@ -910,42 +1044,51 @@ function ticker(box) {
       paper(ctx, W, H);
       var F = DP / t;
       /* 왼쪽 그림 */
-      text(ctx, "야구공 145 g · 40 m/s (시속 144 km)", 56, 36, { s: 12.5, w: "800" });
-      ctx.fillStyle = v("--coral"); ctx.beginPath(); ctx.arc(120, 150, 16, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = v("--coral"); ctx.fillStyle = v("--coral"); ctx.lineWidth = 4;
-      window.drawArrow(ctx, 146, 150, 236, 150, 12);
-      /* 손 */
+      pill(ctx, "야구공 145 g · 40 m/s (시속 144 km)", 56, 34, { s: 12.5, c: KS.ink });
+      /* 야구공: 흰 가죽과 붉은 실밥, 날아오는 잔상 */
+      for (var gh = 3; gh >= 1; gh--) { ctx.globalAlpha = .12 * (4 - gh); K.planet(ctx, 120 - gh * 22, 150, 16, "#f4f1ea", "#9a968c"); }
+      ctx.globalAlpha = 1;
+      K.planet(ctx, 120, 150, 16, "#f4f1ea", "#9a968c");
+      ctx.strokeStyle = "#d0383a"; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.arc(108, 150, 11, -0.9, 0.9); ctx.stroke(); ctx.beginPath(); ctx.arc(132, 150, 11, Math.PI - 0.9, Math.PI + 0.9); ctx.stroke();
+      ctx.save(); ctx.shadowColor = "#ff9d63"; ctx.shadowBlur = 8; K.arrow(ctx, { x: 146, y: 150 }, { x: 236, y: 150 }, "#ff9d63", 4, 14); ctx.restore();
+      /* 글러브 낀 손 */
       var dist = V0 * t / 2;                                   /* 고르게 느려진다고 볼 때 손이 공과 함께 움직인 거리(m) */
       var back = clamp(dist / 0.6, 0, 1) * 96;
-      ctx.fillStyle = v("--amber"); ctx.beginPath(); ctx.roundRect(258 + back, 112, 40, 76, 12); ctx.fill();
-      ctx.strokeStyle = v("--amber-700"); ctx.lineWidth = 2; ctx.strokeRect(258 + back, 112, 40, 76);
-      text(ctx, "손", 278 + back, 158, { s: 13, w: "900", a: "center", c: v("--amber-700") });
+      var gl = ctx.createLinearGradient(258 + back, 112, 298 + back, 188);
+      gl.addColorStop(0, "#d99a5a"); gl.addColorStop(.5, "#a8622e"); gl.addColorStop(1, "#6a3a1a");
+      ctx.fillStyle = gl; ctx.beginPath(); ctx.roundRect(258 + back, 112, 40, 76, 14); ctx.fill();
+      ctx.strokeStyle = "#f0c890"; ctx.lineWidth = 1.2; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.roundRect(262 + back, 116, 32, 68, 12); ctx.stroke(); ctx.setLineDash([]);
+      pill(ctx, "손", 278 + back, 104, { s: 12, a: "center", c: v("--amber-700") });
       if (back > 4) {
-        ctx.strokeStyle = v("--teal"); ctx.fillStyle = v("--teal"); ctx.lineWidth = 3;
-        window.drawArrow(ctx, 258, 214, 258 + back, 214, 10);
-        text(ctx, "손을 뒤로 약 " + (dist < 1 ? (dist * 100).toFixed(0) + " cm" : dist.toFixed(1) + " m") + " 빼며 받는다", 256, 236, { s: 11, c: v("--teal-700"), w: "800" });
+        ctx.save(); ctx.shadowColor = "#2ed3bd"; ctx.shadowBlur = 8; K.arrow(ctx, { x: 258, y: 214 }, { x: 258 + back, y: 214 }, "#5ff0dc", 3, 11); ctx.restore();
+        pill(ctx, "손을 뒤로 약 " + (dist < 1 ? (dist * 100).toFixed(0) + " cm" : dist.toFixed(1) + " m") + " 빼며 받는다", 256, 240, { s: 11, c: v("--teal-700") });
       } else {
-        text(ctx, "손을 고정하고 받으면 아주 짧은 시간에 멈춘다", 256, 236, { s: 11, c: v("--mist") });
+        pill(ctx, "손을 고정하고 받으면 아주 짧은 시간에 멈춘다", 256, 240, { s: 11, c: KS.mute });
       }
-      text(ctx, "충격량 = 운동량의 변화 = 0.145 × 40 = " + DP.toFixed(2) + " N·s (바뀌지 않음)", 56, 290, { s: 12.5, w: "800", c: v("--brand-700") });
+      pill(ctx, "충격량 = 운동량의 변화 = 0.145 × 40 = " + DP.toFixed(2) + " N·s (바뀌지 않음)", 56, 290, { s: 12, c: v("--brand-700") });
       text(ctx, "평균 힘 F = 충격량 ÷ 시간", 56, 314, { s: 12, c: v("--mist") });
 
       /* 오른쪽 힘-시간 그래프 : 넓이가 곧 충격량 */
       var x0 = 470, x1 = 868, y0 = 62, y1 = 280, TM = 0.2, FM = 1200;
+      ctx.fillStyle = "rgba(255,255,255,.03)"; ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
+      ctx.strokeStyle = KS.grid; ctx.lineWidth = 1;
+      for (var gq = 1; gq < 4; gq++) { ctx.beginPath(); ctx.moveTo(x0, y0 + (y1 - y0) * gq / 4); ctx.lineTo(x1, y0 + (y1 - y0) * gq / 4); ctx.stroke(); ctx.beginPath(); ctx.moveTo(x0 + (x1 - x0) * gq / 4, y0); ctx.lineTo(x0 + (x1 - x0) * gq / 4, y1); ctx.stroke(); }
       axes(ctx, x0, y0, x1, y1);
-      text(ctx, "힘 – 시간 그래프 (색칠한 넓이 = 충격량)", x0, 40, { s: 12.5, w: "800" });
+      pill(ctx, "힘 – 시간 그래프 (색칠한 넓이 = 충격량)", x0, 40, { s: 12, c: KS.blue });
       var bw = (x1 - x0) * clamp(t / TM, 0, 1), bh = (y1 - y0) * clamp(F / FM, 0, 1);
-      ctx.fillStyle = v(F > LIM ? "--rose" : "--green"); ctx.globalAlpha = .35;
-      ctx.fillRect(x0, y1 - bh, bw, bh); ctx.globalAlpha = 1;
-      ctx.strokeStyle = v(F > LIM ? "--rose" : "--green"); ctx.lineWidth = 2.5;
-      ctx.strokeRect(x0, y1 - bh, bw, bh);
+      var ac = F > LIM ? "--rose" : "--green";
+      var ag = ctx.createLinearGradient(0, y1 - bh, 0, y1); ag.addColorStop(0, rgba(ac, .6)); ag.addColorStop(1, rgba(ac, .2));
+      ctx.fillStyle = ag; ctx.fillRect(x0, y1 - bh, bw, bh);
+      ctx.save(); ctx.shadowColor = v(ac); ctx.shadowBlur = 10; ctx.strokeStyle = v(ac); ctx.lineWidth = 2.5;
+      ctx.strokeRect(x0, y1 - bh, bw, bh); ctx.restore();
       text(ctx, "0.2초", x1, y1 + 18, { s: 10.5, c: v("--mist"), a: "right" });
       text(ctx, "0", x0 - 6, y1 + 18, { s: 10.5, c: v("--mist"), a: "right" });
       text(ctx, "1200 N", x0 - 6, y0 + 4, { s: 10.5, c: v("--mist"), a: "right" });
       var gy = y1 - (y1 - y0) * LIM / FM;
-      ctx.strokeStyle = v("--amber"); ctx.setLineDash([6, 5]); ctx.lineWidth = 2;
+      ctx.strokeStyle = KS.yellow; ctx.setLineDash([6, 5]); ctx.lineWidth = 2;
       ctx.beginPath(); ctx.moveTo(x0, gy); ctx.lineTo(x1, gy); ctx.stroke(); ctx.setLineDash([]);
-      text(ctx, "합격선 " + LIM + " N", x1, gy - 8, { s: 10.5, w: "800", a: "right", c: v("--amber-700") });
+      pill(ctx, "합격선 " + LIM + " N", x1, gy - 8, { s: 10.5, a: "right", c: KS.yellow });
       text(ctx, "가로 " + t.toFixed(3) + "초 × 세로 " + F.toFixed(0) + " N = " + DP.toFixed(2) + " N·s", x0, y1 + 38, { s: 12, w: "800" });
       text(ctx, "시간을 늘리면 직사각형이 납작해질 뿐 넓이는 그대로입니다.", x0, y1 + 56, { s: 10.5, c: v("--mist") });
 
@@ -993,30 +1136,41 @@ function ticker(box) {
       var okG = gN <= GMAX, okL = d <= LIMIT, ok = okG && okL;
       /* 벽과 자동차 */
       var wall = 470, road = 232;
-      ctx.fillStyle = v("--mist"); ctx.fillRect(wall, 70, 26, road - 70 + 10);
-      ctx.fillStyle = v("--line"); ctx.fillRect(60, road, 430, 5);
+      /* 콘크리트 벽과 도로 */
+      var wg = ctx.createLinearGradient(wall, 0, wall + 26, 0); wg.addColorStop(0, "#c8ccd4"); wg.addColorStop(1, "#7a808c");
+      ctx.fillStyle = wg; ctx.fillRect(wall, 70, 26, road - 70 + 10);
+      ctx.fillStyle = "rgba(255,200,40,.85)"; for (var hz = 0; hz < 6; hz++) ctx.fillRect(wall, 80 + hz * 28, 26, 10);
+      var rdg = ctx.createLinearGradient(0, road, 0, road + 14); rdg.addColorStop(0, "#5a6070"); rdg.addColorStop(1, "#2a2e38");
+      ctx.fillStyle = rdg; ctx.fillRect(60, road, 436, 14);
       var SC = 150;                                     // 1 m → 150 px
       var crush = clamp(d, 0, 1.5) * SC * 0.62;
       var cabinW = 150, front = clamp(LIMIT, 0, 1.5) * SC * 0.62;
       var carL = wall - cabinW - front;
       /* 승객실 */
-      ctx.fillStyle = v("--teal"); ctx.beginPath(); ctx.roundRect(carL, road - 72, cabinW, 72, 8); ctx.fill();
-      text(ctx, "승객실", carL + cabinW / 2, road - 34, { s: 12.5, w: "900", a: "center", c: v("--on-accent") });
+      /* 승객실 — 차체 도장(금속) 과 창 */
+      var cb = ctx.createLinearGradient(0, road - 72, 0, road);
+      cb.addColorStop(0, "#9ff5e8"); cb.addColorStop(.2, "#2ed3bd"); cb.addColorStop(1, "#11665c");
+      ctx.fillStyle = cb; ctx.beginPath(); ctx.roundRect(carL, road - 72, cabinW, 72, 8); ctx.fill();
+      ctx.fillStyle = "rgba(10,30,50,.65)"; ctx.beginPath(); ctx.roundRect(carL + 16, road - 64, cabinW - 40, 24, 5); ctx.fill();
+      ctx.fillStyle = "rgba(255,255,255,.18)"; ctx.fillRect(carL + 20, road - 62, 20, 20);
+      pill(ctx, "승객실", carL + cabinW / 2, road - 14, { s: 12, a: "center", c: "#ffffff" });
       /* 앞부분 (쓸 수 있는 길이) */
-      ctx.strokeStyle = v("--mist"); ctx.setLineDash([4, 4]); ctx.lineWidth = 2;
+      ctx.strokeStyle = "rgba(200,210,255,.6)"; ctx.setLineDash([4, 4]); ctx.lineWidth = 2;
       ctx.strokeRect(carL + cabinW, road - 58, front, 58); ctx.setLineDash([]);
-      /* 실제 찌그러지는 부분 */
-      ctx.fillStyle = v(ok ? "--green" : "--rose"); ctx.globalAlpha = .55;
-      ctx.fillRect(wall - Math.min(crush, front + 90), road - 58, Math.min(crush, front + 90), 58); ctx.globalAlpha = 1;
-      text(ctx, "찌그러짐 " + d.toFixed(2) + " m", carL + cabinW + 4, road - 68, { s: 11.5, w: "800", c: v(ok ? "--green-700" : "--rose-700") });
-      text(ctx, "앞부분 길이 1.20 m", carL + cabinW, road + 26, { s: 10.5, c: v("--mist") });
-      ctx.fillStyle = v("--mist");
-      ctx.beginPath(); ctx.arc(carL + 36, road + 4, 12, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.arc(carL + cabinW - 20, road + 4, 12, 0, Math.PI * 2); ctx.fill();
-      text(ctx, "1,400 kg · 14 m/s (시속 50 km)", 60, 46, { s: 12.5, w: "800" });
-      if (!okL) text(ctx, "⚠ 찌그러짐이 승객실까지 밀고 들어왔습니다", 60, 284, { s: 12.5, w: "800", c: v("--rose-700") });
-      else if (!okG) text(ctx, "⚠ 너무 단단합니다 — 탑승자가 견디지 못합니다", 60, 284, { s: 12.5, w: "800", c: v("--rose-700") });
-      else text(ctx, "✅ 두 기준을 모두 통과했습니다", 60, 284, { s: 12.5, w: "800", c: v("--green-700") });
+      /* 실제 찌그러지는 부분 — 구겨진 금속 */
+      var cw2 = Math.min(crush, front + 90), cc = ok ? "--green" : "--rose";
+      var cg3 = ctx.createLinearGradient(0, road - 58, 0, road); cg3.addColorStop(0, rgba(cc, .75)); cg3.addColorStop(1, rgba(cc, .35));
+      ctx.fillStyle = cg3; ctx.fillRect(wall - cw2, road - 58, cw2, 58);
+      ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1.2; ctx.beginPath();
+      for (var zz = 0; zz <= 8; zz++) { var zx = wall - cw2 + cw2 * zz / 8; ctx.lineTo(zx, road - 58 + (zz % 2 ? 10 : 2)); }
+      ctx.stroke();
+      pill(ctx, "찌그러짐 " + d.toFixed(2) + " m", carL + cabinW + 4, road - 70, { s: 11.5, c: v(ok ? "--green-700" : "--rose-700") });
+      text(ctx, "앞부분 길이 1.20 m", carL + cabinW, road + 32, { s: 10.5, c: v("--mist") });
+      ball(ctx, carL + 36, road + 4, 12, "#3a3f4a"); ball(ctx, carL + cabinW - 20, road + 4, 12, "#3a3f4a");
+      pill(ctx, "1,400 kg · 14 m/s (시속 50 km)", 60, 44, { s: 12.5, c: KS.ink });
+      if (!okL) pill(ctx, "⚠ 찌그러짐이 승객실까지 밀고 들어왔습니다", 60, 284, { s: 12.5, c: v("--rose-700") });
+      else if (!okG) pill(ctx, "⚠ 너무 단단합니다 — 탑승자가 견디지 못합니다", 60, 284, { s: 12.5, c: v("--rose-700") });
+      else pill(ctx, "✅ 두 기준을 모두 통과했습니다", 60, 284, { s: 12.5, c: v("--green-700") });
       text(ctx, "충격량 = 1,400 × 14 = " + J.toLocaleString() + " N·s — 설계를 바꿔도 이 값은 그대로입니다.", 60, 310, { s: 11, c: v("--mist") });
 
       /* 오른쪽 계기 */
@@ -1027,12 +1181,11 @@ function ticker(box) {
         ["감속도 기준 (20 g 이하)", okG ? "통과" : "탈락"],
         ["길이 기준 (1.20 m 이하)", okL ? "통과" : "탈락"]
       ];
-      text(ctx, "시험 결과", 560, 46, { s: 14, w: "900" });
+      pill(ctx, "시험 결과", 560, 44, { s: 13, c: KS.blue });
       rows.forEach(function (r, i) {
         var yy = 82 + i * 34;
         var good = i < 3 ? null : (i === 3 ? okG : okL);
-        ctx.fillStyle = good === null ? v("--card-2") : (good ? v("--green-100") : v("--rose-100"));
-        ctx.beginPath(); ctx.roundRect(556, yy - 19, 320, 28, 9); ctx.fill();
+        glass(ctx, 556, yy - 19, 320, 28, good === null ? "#8fa6ff" : (good ? "--green" : "--rose"), 9);
         text(ctx, r[0], 568, yy, { s: 11.5, c: v("--mist") });
         text(ctx, r[1], 866, yy + 1, { s: 12, w: "800", a: "right", c: good === null ? v("--ink") : (good ? v("--green-700") : v("--rose-700")) });
       });

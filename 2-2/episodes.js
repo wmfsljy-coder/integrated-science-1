@@ -12,7 +12,61 @@ function v(name) { return window.cssVar(name); }
 function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
 function log10(x) { return Math.log(x) / Math.LN10; }
 function done(id) { var e = $(id); if (e) e.classList.add("done"); }
-function paper(ctx, W, H) { ctx.clearRect(0, 0, W, H); ctx.fillStyle = v("--panel"); ctx.fillRect(0, 0, W, H); }
+/* ---- 무대 그림 도구 (../assets/kit.js) ---- */
+var K = window.sthKit, KS = K.C, REDUCE = K.REDUCE;
+/* 캔버스마다 무대 종류와 별 씨앗 */
+var STAGE = {
+  "a-tab": ["lab", 3], "a-trend": ["lab", 5], "a-eka": ["lab", 9], "a-rx": ["lab", 13],
+  "b-make": ["night", 21], "b-prop": ["lab", 23],
+  "c-tet": ["earth", 31], "c-carb": ["night", 33], "c-poly": ["night", 35],
+  "d-band": ["lab", 41], "d-dope": ["night", 43], "d-diode": ["lab", 45]
+};
+function paper(ctx, W, H) {
+  ctx.clearRect(0, 0, W, H);
+  var s = STAGE[ctx.canvas.id] || ["night", 7];
+  K.stage(ctx, 0, 0, W, H, s[0], { seed: s[1] });
+}
+function col(c) { return !c ? KS.ink : (c.indexOf("--") === 0 ? v(c) : c); }
+function rgbOf(c) {
+  c = col(c);
+  if (c.charAt(0) === "#") {
+    if (c.length === 4) c = "#" + c[1] + c[1] + c[2] + c[2] + c[3] + c[3];
+    return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)];
+  }
+  var m = /(\d+)\D+(\d+)\D+(\d+)/.exec(c); return m ? [+m[1], +m[2], +m[3]] : [200, 210, 255];
+}
+function rgba(c, a) { var r = rgbOf(c); return "rgba(" + r[0] + "," + r[1] + "," + r[2] + "," + a + ")"; }
+function shade(c, k) { var r = rgbOf(c); return "rgb(" + Math.round(r[0] * k) + "," + Math.round(r[1] * k) + "," + Math.round(r[2] * k) + ")"; }
+/* 반투명 이름표 */
+function pill(ctx, s, x, y, o) { o = o || {}; return K.pill(ctx, s, x, y, { a: o.a, s: o.s, w: o.w, c: col(o.c), box: o.box, bg: o.bg, line: o.line }); }
+/* 입체 공(원자·이온·입자) */
+function ball(ctx, x, y, r, c) { var b = col(c); K.planet(ctx, x, y, r, b, shade(b, .38)); }
+/* 빛나는 점(전자·불꽃) */
+function dot(ctx, x, y, r, c, halo) { K.glow(ctx, x, y, r, rgba(c, .95), halo || 3); }
+/* 유리판 상자 */
+function glass(ctx, x, y, w, h, c, r) {
+  var g = ctx.createLinearGradient(x, y, x, y + h);
+  g.addColorStop(0, rgba(c || "--brand", .20)); g.addColorStop(1, rgba(c || "--brand", .05));
+  ctx.fillStyle = g; ctx.beginPath(); ctx.roundRect(x, y, w, h, r == null ? 12 : r); ctx.fill();
+  ctx.strokeStyle = rgba(c || "--brand", .38); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.roundRect(x, y, w, h, r == null ? 12 : r); ctx.stroke();
+}
+/* 빛나는 막대 눈금 */
+function meter(ctx, x, y, w, h, f, c) {
+  ctx.fillStyle = "rgba(255,255,255,.07)"; ctx.beginPath(); ctx.roundRect(x, y, w, h, h / 2); ctx.fill();
+  ctx.strokeStyle = "rgba(200,210,255,.22)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.roundRect(x, y, w, h, h / 2); ctx.stroke();
+  f = clamp(f, 0, 1); if (f <= 0) return;
+  var g = ctx.createLinearGradient(x, 0, x + w * f, 0);
+  g.addColorStop(0, shade(c, .55)); g.addColorStop(1, col(c));
+  ctx.save(); ctx.shadowColor = col(c); ctx.shadowBlur = 10; ctx.fillStyle = g;
+  ctx.beginPath(); ctx.roundRect(x, y, Math.max(h, w * f), h, h / 2); ctx.fill(); ctx.restore();
+  ctx.fillStyle = "rgba(255,255,255,.22)"; ctx.beginPath(); ctx.roundRect(x + 2, y + 2, Math.max(h - 4, w * f - 4), h * .35, h / 4); ctx.fill();
+}
+/* ⏸ 멈추기 단추 연결 */
+function playBtn(id, onLabel, offLabel, get, set) {
+  var b = $(id); if (!b) return;
+  function lab() { b.textContent = get() ? onLabel : offLabel; }
+  b.addEventListener("click", function () { set(!get()); lab(); }); lab();
+}
 function text(ctx, s, x, y, o) {
   o = o || {};
   ctx.font = (o.w || "500") + " " + (o.s || 12) + "px " + FONT;
@@ -37,10 +91,10 @@ function onSeg(wrapId, fn) {
     b.addEventListener("click", function () { segOn(wrapId, b); fn(b); });
   });
 }
-function chip(ctx, x, y, w, h, col) { ctx.fillStyle = v(col); ctx.beginPath(); ctx.roundRect(x, y, w, h, 12); ctx.fill(); }
+function chip(ctx, x, y, w, h, c) { glass(ctx, x, y, w, h, c && c !== "--card-2" ? c : "--brand", 12); }
 function mark(ctx, ok, s, x, y, o) {
   o = o || {};
-  text(ctx, (ok ? "✅ " : "⬜ ") + s, x, y, { s: o.s || 12, w: "800", a: o.a || "left", c: ok ? v("--green-700") : v("--mist") });
+  pill(ctx, (ok ? "✔ " : "○ ") + s, x + 7, y, { s: o.s || 12, a: o.a || "left", c: ok ? KS.green : KS.mute, bg: ok ? "rgba(20,70,50,.55)" : KS.pill });
 }
 
 /* =========================================================================
@@ -85,17 +139,21 @@ function mark(ctx, ok, s, x, y, o) {
 
     function drawTable() {
       paper(ctx1, 900, 300);
-      text(ctx1, "주기율표 (원자 번호 1~20)", 40, 26, { s: 13.5, w: "800" });
+      pill(ctx1, "주기율표 · 원자 번호 1~20", 40, 25, { s: 12.5, c: KS.blue });
       var x0 = 40, y0 = 48, cw = 44, ch = 40, i;
       var gl = [1, 2, 13, 14, 15, 16, 17, 18];
-      for (i = 0; i < 8; i++) text(ctx1, gl[i] + "족", x0 + i * cw + (cw - 3) / 2, 42, { s: 9, a: "center", c: v("--mist") });
+      for (i = 0; i < 8; i++) text(ctx1, gl[i] + "족", x0 + i * cw + (cw - 3) / 2, 44, { s: 9, a: "center", c: v("--mist") });
       for (i = 1; i <= 4; i++) text(ctx1, i + "주기", x0 - 8, y0 + (i - 1) * ch + 25, { s: 9, a: "right", c: v("--mist") });
       for (i = 0; i < 20; i++) {
         var x = x0 + colOf(i) * cw, y = y0 + (PER[i] - 1) * ch, on = (i + 1 === z);
-        ctx1.fillStyle = on ? v("--brand") : (METAL[i + 1] ? v("--amber-100") : v("--card-2"));
-        ctx1.fillRect(x, y, cw - 3, ch - 3);
-        ctx1.strokeStyle = on ? v("--brand-700") : v("--line"); ctx1.lineWidth = on ? 2 : 1;
-        ctx1.strokeRect(x, y, cw - 3, ch - 3);
+        var tint = on ? "--brand" : (METAL[i + 1] ? "--amber" : (GRP[i] === 18 ? "--violet" : "--brand"));
+        var tg = ctx1.createLinearGradient(x, y, x, y + ch - 3);
+        tg.addColorStop(0, rgba(tint, on ? .95 : .30)); tg.addColorStop(1, rgba(tint, on ? .55 : .10));
+        ctx1.save();
+        if (on) { ctx1.shadowColor = v("--brand"); ctx1.shadowBlur = 16; }
+        ctx1.fillStyle = tg; ctx1.beginPath(); ctx1.roundRect(x, y, cw - 3, ch - 3, 6); ctx1.fill(); ctx1.restore();
+        ctx1.strokeStyle = on ? "#d8f4ff" : rgba(tint, .45); ctx1.lineWidth = on ? 2 : 1;
+        ctx1.beginPath(); ctx1.roundRect(x, y, cw - 3, ch - 3, 6); ctx1.stroke();
         text(ctx1, SYM[i], x + (cw - 3) / 2, y + 18, { s: 13, w: "900", a: "center", c: on ? v("--on-accent") : v("--ink") });
         text(ctx1, String(val(i)), x + (cw - 3) / 2, y + 31, { s: 9.5, w: "800", a: "center", c: on ? v("--on-accent") : v("--teal-700") });
       }
@@ -103,23 +161,26 @@ function mark(ctx, ok, s, x, y, o) {
 
       /* 전자 껍질 */
       var sh = SHELL[z - 1], cx = 560, cy = 128, k, j;
+      var halo = ctx1.createRadialGradient(cx, cy, 0, cx, cy, 120);
+      halo.addColorStop(0, "rgba(162,136,245,.16)"); halo.addColorStop(1, "rgba(162,136,245,0)");
+      ctx1.fillStyle = halo; ctx1.beginPath(); ctx1.arc(cx, cy, 120, 0, Math.PI * 2); ctx1.fill();
       for (k = 0; k < sh.length; k++) {
-        var r = 26 + k * 22;
-        ctx1.strokeStyle = v("--line"); ctx1.lineWidth = 1.5;
+        var r = 26 + k * 22, last = (k === sh.length - 1);
+        ctx1.strokeStyle = last ? "rgba(255,157,99,.45)" : "rgba(200,210,255,.25)"; ctx1.lineWidth = last ? 1.6 : 1.2;
         ctx1.beginPath(); ctx1.arc(cx, cy, r, 0, Math.PI * 2); ctx1.stroke();
         for (j = 0; j < sh[k]; j++) {
           var a = -Math.PI / 2 + j * 2 * Math.PI / sh[k];
-          var last = (k === sh.length - 1);
-          ctx1.fillStyle = v(last ? "--coral" : "--mist");
-          ctx1.beginPath(); ctx1.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r, last ? 5 : 3.5, 0, Math.PI * 2); ctx1.fill();
+          if (last) dot(ctx1, cx + Math.cos(a) * r, cy + Math.sin(a) * r, 4.2, "--coral", 3.2);
+          else dot(ctx1, cx + Math.cos(a) * r, cy + Math.sin(a) * r, 2.6, "#b8c6f0", 2.4);
         }
       }
-      ctx1.fillStyle = v("--violet"); ctx1.beginPath(); ctx1.arc(cx, cy, 15, 0, Math.PI * 2); ctx1.fill();
-      text(ctx1, "+" + z, cx, cy + 4, { s: 11, w: "900", a: "center", c: v("--on-accent") });
-      text(ctx1, "전자 껍질 — 붉은 점이 원자가 전자", cx, 226, { s: 10.5, a: "center", c: v("--mist") });
+      ball(ctx1, cx, cy, 18, "--violet");
+      text(ctx1, "+" + z, cx, cy + 4, { s: 11, w: "900", a: "center", c: "#ffffff" });
+      pill(ctx1, "전자 껍질 · 주황 점이 원자가 전자", cx, 226, { s: 10.5, a: "center", c: KS.mute });
 
       /* 오른쪽 정보 */
       var ix = 700;
+      glass(ctx1, ix - 14, 44, 186, 172, "--brand", 12);
       text(ctx1, SYM[z - 1] + " · " + KOR[z - 1], ix, 70, { s: 17, w: "900", c: v("--brand-700") });
       text(ctx1, "원자 번호 " + z + " · " + PER[z - 1] + "주기 " + GRP[z - 1] + "족", ix, 92, { s: 11.5, w: "800", c: v("--mist") });
       text(ctx1, "전자 배치  " + sh.join(", "), ix, 120, { s: 12, w: "800" });
@@ -134,36 +195,24 @@ function mark(ctx, ok, s, x, y, o) {
       text(ctx1, "가로줄을 따라가면 원자가 전자가 1개씩 늘어 7개까지 가고, 18족(0개)을 지나 다음 줄에서 다시 1개부터 시작합니다.", 40, 280, { s: 11.5, c: v("--mist") });
     }
 
-    function series(ctx, vals, X0, X1, Y0, Y1, col, title, unit) {
-      var mx = Math.max.apply(null, vals), mn = Math.min.apply(null, vals), i;
-      function px(i) { return X0 + i / 19 * (X1 - X0); }
-      function py(x) { return Y1 - (x - mn) / (mx - mn) * (Y1 - Y0); }
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(X0, Y0 - 6); ctx.lineTo(X0, Y1); ctx.lineTo(X1, Y1); ctx.stroke();
-      ctx.strokeStyle = v(col); ctx.lineWidth = 2.5; ctx.beginPath();
-      for (i = 0; i < 20; i++) { if (i === 0) ctx.moveTo(px(i), py(vals[i])); else ctx.lineTo(px(i), py(vals[i])); }
-      ctx.stroke();
-      for (i = 0; i < 20; i++) {
-        var on = (i + 1 === z);
-        ctx.fillStyle = on ? v("--coral") : v(col);
-        ctx.beginPath(); ctx.arc(px(i), py(vals[i]), on ? 6.5 : 3, 0, Math.PI * 2); ctx.fill();
-      }
-      text(ctx, title, X0, Y0 - 12, { s: 12, w: "800", c: v(col) });
-      text(ctx, "최대 " + mx.toLocaleString() + unit, X1, Y0 - 12, { s: 10.5, a: "right", c: v("--mist") });
-      var lx = clamp(px(z - 1), X0 + 46, X1 - 96);
-      text(ctx, vals[z - 1].toLocaleString() + unit, lx, py(vals[z - 1]) - 12, { s: 11.5, w: "900", a: "center", c: v("--coral-700") });
-      return px;
+    function series(ctx, vals, y, h, Y1, yt, c, title, unit) {
+      var g = K.chart(ctx, { x: 30, y: y, w: 860, h: h, pb: 22, pt: 26, x0: 1, x1: 20, y0: 0, y1: Y1, xt: 19, yt: yt,
+        xf: function (q) { return SYM[Math.round(q) - 1]; }, yf: function (q) { return Math.round(q).toLocaleString(); } });
+      var pts = vals.map(function (q, i) { return [i + 1, q]; }), i;
+      /* 주기 구간 띠 */
+      [[3, 10], [11, 18]].forEach(function (p) { ctx.fillStyle = "rgba(255,255,255,.035)"; ctx.fillRect(g.X(p[0] - .5), g.T, g.X(p[1] + .5) - g.X(p[0] - .5), g.B - g.T); });
+      var zx = g.X(z);
+      K.line(ctx, { x: zx, y: g.T }, { x: zx, y: g.B }, KS.orange, 1.4, [4, 4], .8);
+      K.plot(ctx, g, pts, v(c), { dots: 3 });
+      dot(ctx, zx, g.Y(vals[z - 1]), 5, "--coral", 3.4);
+      pill(ctx, title, g.L + 8, y + 18, { s: 11.5, c: v(c) });
+      pill(ctx, vals[z - 1].toLocaleString() + unit, zx + 12, Math.max(g.T + 30, g.Y(vals[z - 1]) - 8), { s: 11.5, c: KS.orange, box: [g.L, g.R] });
     }
 
     function drawTrend() {
       paper(ctx2, 900, 300);
-      text(ctx2, "원자 번호에 따른 되풀이 — 톱니 모양이 보이나요?", 40, 22, { s: 13.5, w: "800" });
-      var X0 = 70, X1 = 855;
-      series(ctx2, RAD, X0, X1, 62, 140, "--teal", "원자 반지름 (pm)", " pm");
-      var px = series(ctx2, IE, X0, X1, 190, 262, "--violet", "1차 이온화 에너지 (kJ/mol)", "");
-      for (var i = 0; i < 20; i++) {
-        text(ctx2, SYM[i], px(i), 282, { s: 9.5, a: "center", w: (i + 1 === z) ? "900" : "500", c: (i + 1 === z) ? v("--coral-700") : v("--mist") });
-      }
+      series(ctx2, RAD, 4, 146, 250, 2, "--teal", "원자 반지름 (pm) · 주기마다 톱니가 되풀이됩니다", " pm");
+      series(ctx2, IE, 152, 148, 2500, 2, "--violet", "1차 이온화 에너지 (kJ/mol) · 1족에서 뚡 떨어집니다", " kJ/mol");
     }
 
     function say() {
@@ -220,10 +269,13 @@ function mark(ctx, ok, s, x, y, o) {
     var DE_T  = (DE_LR + DE_UD) / 2;             /* 5.32 */
 
     function cell(x, y, w, h, o, hit) {
-      ctx.fillStyle = v(hit ? "--brand-100" : "--card-2");
-      ctx.beginPath(); ctx.roundRect(x, y, w, h, 12); ctx.fill();
-      ctx.strokeStyle = v(hit ? "--brand" : "--line"); ctx.lineWidth = 2;
-      ctx.setLineDash(hit ? [5, 4] : []); ctx.beginPath(); ctx.roundRect(x, y, w, h, 12); ctx.stroke(); ctx.setLineDash([]);
+      if (hit) {
+        var hg = ctx.createRadialGradient(x + w / 2, y + h / 2, 4, x + w / 2, y + h / 2, w);
+        hg.addColorStop(0, "rgba(79,195,236,.35)"); hg.addColorStop(1, "rgba(79,195,236,0)");
+        ctx.fillStyle = hg; ctx.fillRect(x - w / 2, y - h / 2, w * 2, h * 2);
+      }
+      glass(ctx, x, y, w, h, hit ? "--brand" : (o && (o.s === "Ga" || o.s === "Sn") ? "--amber" : "--violet"), 12);
+      if (hit) { ctx.strokeStyle = v("--brand"); ctx.lineWidth = 2; ctx.setLineDash([5, 4]); ctx.beginPath(); ctx.roundRect(x, y, w, h, 12); ctx.stroke(); ctx.setLineDash([]); }
       if (!o) {
         text(ctx, "?", x + w / 2, y + h / 2 + 4, { s: 26, w: "900", a: "center", c: v("--brand-700") });
         text(ctx, "에카규소", x + w / 2, y + h - 8, { s: 10.5, w: "800", a: "center", c: v("--brand-700") });
@@ -238,9 +290,10 @@ function mark(ctx, ok, s, x, y, o) {
     function line(y, lo, hi, cur, lr, ud, tgt, ok, title, fmt, unit) {
       var X0 = 430, X1 = 860;
       function px(x) { return X0 + (clamp(x, lo, hi) - lo) / (hi - lo) * (X1 - X0); }
-      text(ctx, title, X0, y - 50, { s: 12.5, w: "800" });
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(X0, y); ctx.lineTo(X1, y); ctx.stroke();
+      pill(ctx, title, X0, y - 50, { s: 12.5, c: KS.ink });
+      var tg = ctx.createLinearGradient(X0, 0, X1, 0); tg.addColorStop(0, "rgba(127,211,255,.15)"); tg.addColorStop(1, "rgba(182,156,255,.4)");
+      ctx.fillStyle = tg; ctx.beginPath(); ctx.roundRect(X0, y - 4, X1 - X0, 8, 4); ctx.fill();
+      for (var tq = 0; tq <= 10; tq++) { ctx.fillStyle = "rgba(200,210,255,.35)"; ctx.fillRect(X0 + (X1 - X0) * tq / 10 - .5, y + 6, 1, 5); }
       text(ctx, fmt(lo), X0, y + 34, { s: 10, c: v("--mist") });
       text(ctx, fmt(hi), X1, y + 34, { s: 10, a: "right", c: v("--mist") });
       function tick(x, lab, col, up) {
@@ -253,12 +306,12 @@ function mark(ctx, ok, s, x, y, o) {
       tick(ud, "위·아래 평균 " + fmt(ud), "--amber-700", 16);
       if (ok) {
         var tx = px(tgt);
-        ctx.strokeStyle = v("--green"); ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(tx, y - 14); ctx.lineTo(tx, y + 14); ctx.stroke();
+        ctx.save(); ctx.shadowColor = v("--green"); ctx.shadowBlur = 10; ctx.strokeStyle = v("--green"); ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(tx, y - 14); ctx.lineTo(tx, y + 14); ctx.stroke(); ctx.restore();
         text(ctx, "네 이웃 평균 " + fmt(tgt), clamp(tx, X0 + 60, X1 - 60), y + 30, { s: 10.5, w: "900", a: "center", c: v("--green-700") });
       }
       var cx = px(cur);
-      ctx.fillStyle = v("--coral"); ctx.beginPath(); ctx.arc(cx, y, 8, 0, Math.PI * 2); ctx.fill();
+      dot(ctx, cx, y, 7, "--coral", 2.6);
       text(ctx, "내 예측 " + fmt(cur) + unit, clamp(cx, X0 + 62, X1 - 72), y + 48, { s: 12, w: "900", a: "center", c: v("--coral-700") });
     }
 
@@ -266,15 +319,15 @@ function mark(ctx, ok, s, x, y, o) {
 
     function draw() {
       paper(ctx, 900, 420);
-      text(ctx, "1871년 · 빈칸의 성질을 이웃으로 예측하기", 40, 28, { s: 13.5, w: "800" });
+      pill(ctx, "1871년 · 빈칸의 성질을 이웃으로 예측하기", 40, 28, { s: 13, c: KS.blue });
       var cw = 108, chh = 72, cx = 210, cy = 200;
       cell(cx - cw / 2, cy - chh / 2 - 84, cw, chh, N.up, false);
       cell(cx - cw / 2, cy - chh / 2 + 84, cw, chh, N.down, false);
       cell(cx - cw / 2 - 118, cy - chh / 2, cw, chh, N.left, false);
       cell(cx - cw / 2 + 118, cy - chh / 2, cw, chh, N.right, false);
       cell(cx - cw / 2, cy - chh / 2, cw, chh, null, true);
-      text(ctx, "성질이 표를 따라 고르게 변한다면", 210, 320, { s: 11.5, a: "center", c: v("--mist") });
-      text(ctx, "빈칸의 값은 이웃들의 가운데에 있어야 합니다", 210, 338, { s: 11.5, a: "center", c: v("--mist") });
+      text(ctx, "성질이 표를 따라 고르게 변한다면", 210, 344, { s: 11.5, a: "center", c: v("--mist") });
+      text(ctx, "빈칸의 값은 이웃들의 가운데에 있어야 합니다", 210, 362, { s: 11.5, a: "center", c: v("--mist") });
 
       line(120, 60, 86, am, AM_LR, AM_UD, AM_T, got.a, "① 원자량 예측", function (x) { return x.toFixed(1); }, "");
       line(268, 4, 7, de, DE_LR, DE_UD, DE_T, got.d, "② 밀도 예측 (g/cm³)", f2, " g/cm³");
@@ -286,7 +339,7 @@ function mark(ctx, ok, s, x, y, o) {
       } else {
         text(ctx, "두 눈금을 모두 맞히면 1886년의 실측값을 보여 드립니다", 430, 390, { s: 11, c: v("--mist") });
       }
-      text(ctx, "🚧 표의 빈칸", 40, 390, { s: 11.5, w: "800", c: v("--brand-700") });
+      pill(ctx, "🚧 표의 빈칸", 40, 390, { s: 11.5, c: v("--brand-700") });
       say();
     }
     function hint(d, unit) {
@@ -330,7 +383,7 @@ function mark(ctx, ok, s, x, y, o) {
   /* ------------------------------------------------ 장면 4 — 반응 실험대 */
   (function () {
     var cv = $("a-rx"), ctx = window.setupCanvas(cv);
-    var fam = "g1", per = 2;
+    var fam = "g1", per = 2, rxT = 0, rxPlay = !REDUCE;
     var got = window.sthState("pRx") || { a: false, b: false, c: false }, qOK = !!window.sthState("pRxQ");
     var FAM = {
       g1: {
@@ -366,33 +419,83 @@ function mark(ctx, ok, s, x, y, o) {
       return 0;
     }
 
-    function draw() {
+    /* 작은 실험 장면: 1족은 물에 넣기, 17족은 플라스크 속 홌원소, 18족은 방전관 */
+    function vignette(x, y, w, h, R) {
+      var e = cur(), i, cxv = x + w / 2, rr = K.rng(e.p * 7 + 3);
+      ctx.save(); ctx.beginPath(); ctx.roundRect(x, y, w, h, 12); ctx.clip();
+      ctx.fillStyle = "rgba(5,8,24,.55)"; ctx.fillRect(x, y, w, h);
+      if (fam === "g1") {
+        var wy = y + h * .38;
+        var wg = ctx.createLinearGradient(0, wy, 0, y + h); wg.addColorStop(0, "rgba(90,170,255,.55)"); wg.addColorStop(1, "rgba(20,60,150,.75)");
+        ctx.fillStyle = wg; ctx.fillRect(x + 8, wy, w - 16, y + h - wy - 8);
+        ctx.strokeStyle = "rgba(190,225,255,.7)"; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(x + 8, wy); ctx.lineTo(x + w - 8, wy); ctx.stroke();
+        var sp = e.p === 2 ? 0 : (e.p === 3 ? 1 : 1.6);
+        var lx = cxv + Math.sin(rxT / 380) * (w * .28) * sp * .6, ly = wy - 2;
+        var nb = Math.round(R / 7) + 2;
+        /* 수소 기체 거품은 물 위에 떠 있는 금속 덩어리 둘레에서 생긴다 */
+        for (i = 0; i < nb; i++) {
+          var ph = (rxT / (900 - R * 5) + rr()) % 1, bx2 = lx + (rr() - .5) * (16 + R / 4), by2 = ly + 10 - ph * 22;
+          ctx.strokeStyle = "rgba(220,240,255," + (.85 - ph * .7) + ")"; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.arc(bx2 + Math.sin(ph * 9 + i) * 2, by2, 1.4 + rr() * 2, 0, 6.2832); ctx.stroke();
+        }
+        if (e.p >= 3) {
+          var fl = e.p === 4 ? 1 : (Math.sin(rxT / 260) > .55 ? .55 : 0);
+          if (fl > 0) for (i = 0; i < 4; i++) dot(ctx, lx + (rr() - .5) * 8, ly - 10 - i * 8 - Math.sin(rxT / 90 + i) * 3, 5 - i, e.p === 4 ? "#c99cff" : "#ffb347", 3.2);
+        }
+        ctx.fillStyle = "#d9dde6"; ball(ctx, lx, ly - 2, 7, "#cfd6e2");
+      } else if (fam === "g17") {
+        var GC = { 2: ["rgba(240,240,150,", .18], 3: ["rgba(190,230,90,", .35], 4: ["rgba(170,60,30,", .45] }[e.p];
+        var gg = ctx.createLinearGradient(0, y, 0, y + h); gg.addColorStop(0, GC[0] + GC[1] * .6 + ")"); gg.addColorStop(1, GC[0] + GC[1] + ")");
+        ctx.fillStyle = gg; ctx.beginPath(); ctx.ellipse(cxv, y + h * .6, w * .36, h * .32, 0, 0, 6.2832); ctx.fill();
+        if (e.p === 4) { ctx.fillStyle = "rgba(140,40,20,.9)"; ctx.beginPath(); ctx.ellipse(cxv, y + h * .86, w * .26, 8, 0, 0, 6.2832); ctx.fill(); }
+        for (i = 0; i < 14; i++) { var px2 = cxv + Math.sin(rxT / 900 + i * 2.1) * w * .28, py2 = y + h * .6 + Math.cos(rxT / 1100 + i * 1.3) * h * .22; ctx.fillStyle = GC[0] + ".9)"; ctx.beginPath(); ctx.arc(px2, py2, 2, 0, 6.2832); ctx.fill(); }
+        ctx.strokeStyle = "rgba(200,225,255,.6)"; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.ellipse(cxv, y + h * .6, w * .36, h * .32, 0, 0, 6.2832); ctx.stroke();
+        ctx.strokeRect(cxv - 9, y + 12, 18, h * .28 - 10);
+      } else {
+        var NC = { 2: "#ff6a3d", 3: "#c9a2ff", 4: "#e9e6ff" }[e.p], fk = .8 + .2 * Math.sin(rxT / 70) * Math.sin(rxT / 37);
+        var tg2 = ctx.createLinearGradient(x + w * .3, 0, x + w * .7, 0);
+        tg2.addColorStop(0, rgba(NC, .15)); tg2.addColorStop(.5, rgba(NC, .9 * fk)); tg2.addColorStop(1, rgba(NC, .15));
+        ctx.save(); ctx.shadowColor = NC; ctx.shadowBlur = 22 * fk; ctx.fillStyle = tg2;
+        ctx.beginPath(); ctx.roundRect(x + w * .3, y + 26, w * .4, h - 52, 14); ctx.fill(); ctx.restore();
+        ctx.fillStyle = "#8a93a8"; ctx.fillRect(cxv - 8, y + 12, 16, 14); ctx.fillRect(cxv - 8, y + h - 26, 16, 14);
+      }
+      ctx.restore();
+      ctx.strokeStyle = "rgba(200,225,255,.35)"; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.roundRect(x, y, w, h, 12); ctx.stroke();
+      pill(ctx, fam === "g1" ? "물에 넣으면" : (fam === "g17" ? (e.p === 4 ? "액체 · 증기" : "기체의 색") : "전기를 걸면"), cxv, y + h + 18, { s: 10.5, a: "center", c: KS.mute });
+    }
+
+    function draw(quiet) {
       paper(ctx, 900, 400);
       var F = FAM[fam], e = cur(), R = react();
-      text(ctx, F.name + " — " + e.p + "주기 " + e.k, 40, 28, { s: 14, w: "800", c: v(F.col) });
+      pill(ctx, F.name + " — " + e.p + "주기 " + e.k, 40, 28, { s: 13.5, c: v(F.col) });
 
       /* 원자 그림 */
-      var cx = 180, cy = 170, i, j;
+      var cx = 128, cy = 166, i, j;
+      var hal = ctx.createRadialGradient(cx, cy, 0, cx, cy, 110);
+      hal.addColorStop(0, rgba(F.col, .14)); hal.addColorStop(1, rgba(F.col, 0));
+      ctx.fillStyle = hal; ctx.beginPath(); ctx.arc(cx, cy, 110, 0, Math.PI * 2); ctx.fill();
       for (i = 0; i < e.sh.length; i++) {
         var r = 24 + i * 22;
-        ctx.strokeStyle = v("--line"); ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
         var cnt = Math.min(e.sh[i], 12), last = (i === e.sh.length - 1);
+        ctx.strokeStyle = last ? rgba(F.col, .5) : "rgba(200,210,255,.22)"; ctx.lineWidth = 1.3;
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
         for (j = 0; j < cnt; j++) {
           var a = -Math.PI / 2 + j * 2 * Math.PI / cnt;
-          ctx.fillStyle = v(last ? F.col : "--mist");
-          ctx.beginPath(); ctx.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r, last ? 5 : 3, 0, Math.PI * 2); ctx.fill();
+          if (last) dot(ctx, cx + Math.cos(a) * r, cy + Math.sin(a) * r, 4.2, F.col, 3.2);
+          else dot(ctx, cx + Math.cos(a) * r, cy + Math.sin(a) * r, 2.4, "#b8c6f0", 2.4);
         }
-        if (e.sh[i] > 12) text(ctx, "…", cx + r + 10, cy + 4, { s: 11, c: v("--mist") });
+        if (e.sh[i] > 12) text(ctx, "…", cx + r + 6, cy + 4, { s: 11, c: v("--mist") });
       }
-      ctx.fillStyle = v("--violet"); ctx.beginPath(); ctx.arc(cx, cy, 14, 0, Math.PI * 2); ctx.fill();
-      text(ctx, e.s, cx, cy + 4, { s: 12, w: "900", a: "center", c: v("--on-accent") });
-      text(ctx, "원자가 전자 " + F.val + "개" + (F.val === 0 ? " (바깥 껍질은 꽉 참)" : ""), cx, 296, { s: 12.5, w: "900", a: "center", c: v(F.col) });
-      text(ctx, F.act, cx, 316, { s: 11.5, a: "center", c: v("--mist") });
+      ball(ctx, cx, cy, 14, "--violet");
+      text(ctx, e.s, cx, cy + 4, { s: 12, w: "900", a: "center", c: "#ffffff" });
+      vignette(240, 66, 96, 186, R);
+      pill(ctx, "원자가 전자 " + F.val + "개" + (F.val === 0 ? " (바깥 껍질은 꽉 참)" : ""), 180, 296, { s: 12.5, a: "center", c: v(F.col) });
+      text(ctx, F.act, 180, 318, { s: 11.5, a: "center", c: v("--mist") });
 
       /* 오른쪽 */
       var ix = 360;
-      chip(ctx, ix, 52, 500, 62, "--card-2");
+      chip(ctx, ix, 52, 500, 62, F.col);
       text(ctx, "만들어지는 이온", ix + 16, 74, { s: 11, c: v("--mist") });
       text(ctx, F.ion === "없음" ? "이온이 되지 않는다" : e.s + (F.ion === "+1" ? "⁺" : "⁻"), ix + 16, 100, { s: 20, w: "900", c: v(F.col) });
       text(ctx, fam === "g1" ? "이온화 에너지 " + e.n + " kJ/mol" : (fam === "g17" ? "전기음성도 " + e.n.toFixed(2) : "바깥 껍질이 이미 8개"),
@@ -400,9 +503,7 @@ function mark(ctx, ok, s, x, y, o) {
 
       text(ctx, "반응성 (0~100 상대 눈금)", ix, 148, { s: 12, w: "800" });
       var bx = ix, bw = 420;
-      ctx.fillStyle = v("--card-2"); ctx.fillRect(bx, 158, bw, 28);
-      ctx.fillStyle = v(F.col); ctx.fillRect(bx, 158, bw * R / 100, 28);
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 1.5; ctx.strokeRect(bx, 158, bw, 28);
+      meter(ctx, bx, 158, bw, 28, R / 100, F.col);
       text(ctx, R + "", 860, 180, { s: 16, w: "900", a: "right", c: v(F.col) });
 
       /* 같은 족의 세 원소 비교 */
@@ -411,8 +512,7 @@ function mark(ctx, ok, s, x, y, o) {
         var q = F.list[i], on = q.p === per, yy = 230 + i * 26;
         var rr = fam === "g1" ? Math.round((560 - q.n) / 1.6) : (fam === "g17" ? Math.round((q.n - 2.4) / 1.6 * 100) : 0);
         text(ctx, q.p + "주기 " + q.k, ix, yy + 14, { s: 11.5, w: on ? "900" : "500", c: on ? v(F.col) : v("--mist") });
-        ctx.fillStyle = v("--card-2"); ctx.fillRect(ix + 130, yy + 3, 300, 14);
-        ctx.fillStyle = v(on ? F.col : "--line"); ctx.fillRect(ix + 130, yy + 3, 300 * rr / 100, 14);
+        meter(ctx, ix + 130, yy + 3, 300, 14, rr / 100, on ? F.col : "#5b6796");
         text(ctx, String(rr), 860, yy + 14, { s: 11, w: "800", a: "right", c: on ? v(F.col) : v("--mist") });
       }
 
@@ -421,6 +521,7 @@ function mark(ctx, ok, s, x, y, o) {
       mark(ctx, got.c, "이온이 안 되는 줄", 340, 348);
       text(ctx, "세로줄이 같으면 원자가 전자 수가 같고, 행동도 닮습니다", 860, 348, { s: 11, a: "right", c: v("--mist") });
       text(ctx, e.w.replace(/<[^>]+>/g, ""), 40, 380, { s: 11.5, c: v("--mist") });
+      if (quiet === true) return;
       $("a-rx-info").innerHTML = "<b>" + e.k + " (" + e.s + ")</b> — " + e.w + "<br>" +
         (fam === "g1" ? "1족은 아래로 갈수록 원자 반지름이 커져 바깥 전자를 느슨하게 붙잡습니다. 그래서 이온화 에너지가 <b>작아지고</b> 반응은 <b>격렬해집니다</b>."
         : fam === "g17" ? "17족은 위로 갈수록 원자 반지름이 작아 전자를 세게 끌어당깁니다. 그래서 <b>플루오린이 가장 반응성이 큽니다</b>. 1족과 <b>반대 방향</b>이라는 점에 주의하세요."
@@ -444,6 +545,8 @@ function mark(ctx, ok, s, x, y, o) {
       }
     }
     cv._redraw = draw;
+    playBtn("a-rx-play", "⏸ 실험 장면 멈추기", "▶ 실험 장면 움직이기", function () { return rxPlay; }, function (q) { rxPlay = q; });
+    K.animate(cv, function (dt) { if (rxPlay) { rxT += dt; draw(true); } });
     onSeg("a-fam", function (b) { fam = b.getAttribute("data-f"); draw(); check(); });
     $("a-per").addEventListener("input", function (e) { per = +e.target.value; $("a-per-val").textContent = per + "주기"; draw(); check(); });
     window.sthPick({
@@ -509,7 +612,7 @@ function mark(ctx, ok, s, x, y, o) {
   /* ------------------------------------------------ 장면 2 — 전자 조립대 */
   (function () {
     var cv = $("b-make"), ctx = window.setupCanvas(cv);
-    var pair = "nacl", n = 0;
+    var pair = "nacl", n = 0, mkT = 0;
     var got = window.sthState("bMake") || { nacl: false, mgo: false, h2o: false, ch4: false };
     var H2 = { s: "H", k: "수소", v: 1, t: 2 };
     var MAT = {
@@ -528,22 +631,26 @@ function mark(ctx, ok, s, x, y, o) {
     function assign(M, i) { return clamp(n - i * perOut(M), 0, perOut(M)); }
 
     function atom(x, y, r, sym, cnt, col, lab) {
-      ctx.fillStyle = v(col); ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
-      text(ctx, sym, x, y + 6, { s: r > 40 ? 20 : 14, w: "900", a: "center", c: v("--on-accent") });
+      var hg = ctx.createRadialGradient(x, y, r * .6, x, y, r + 26);
+      hg.addColorStop(0, rgba(col, .22)); hg.addColorStop(1, rgba(col, 0));
+      ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(x, y, r + 26, 0, Math.PI * 2); ctx.fill();
+      ball(ctx, x, y, r, col);
+      text(ctx, sym, x + r * .08, y + 6 + r * .1, { s: r > 40 ? 20 : 14, w: "900", a: "center", c: "#ffffff" });
       var i, rr = r + 13;
+      ctx.strokeStyle = "rgba(200,210,255,.18)"; ctx.lineWidth = 1; ctx.setLineDash([2, 4]);
+      ctx.beginPath(); ctx.arc(x, y, rr, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
       for (i = 0; i < cnt; i++) {
         var a = -Math.PI / 2 + i * 2 * Math.PI / Math.max(cnt, 1);
-        ctx.fillStyle = v("--ink");
-        ctx.beginPath(); ctx.arc(x + Math.cos(a) * rr, y + Math.sin(a) * rr, 4.5, 0, Math.PI * 2); ctx.fill();
+        dot(ctx, x + Math.cos(a) * rr, y + Math.sin(a) * rr, 3.6, "#fff6c8", 3);
       }
-      if (lab) text(ctx, lab, x, y + r + 32, { s: 11.5, w: "800", a: "center", c: v("--mist") });
+      if (lab) pill(ctx, lab, x, y + r + 34, { s: 11, a: "center", c: KS.ink });
     }
 
-    function draw() {
+    function draw(quiet) {
       paper(ctx, 900, 420);
       var M = MAT[pair], stable = false, i;
-      text(ctx, M.nm + " 만들기", 40, 28, { s: 14, w: "800", c: v("--brand-700") });
-      text(ctx, "검은 점 = 가장 바깥 껍질의 전자 (원자가 전자)", 860, 28, { s: 11, a: "right", c: v("--mist") });
+      pill(ctx, M.nm + " 만들기", 40, 28, { s: 13.5, c: v("--brand-700") });
+      pill(ctx, "빛나는 점 = 가장 바깥 껍질의 전자 (원자가 전자)", 860, 28, { s: 11, a: "right", c: KS.mute });
 
       if (M.kind === "ion") {
         var bad = n > M.A.v;
@@ -551,18 +658,21 @@ function mark(ctx, ok, s, x, y, o) {
         atom(280, 190, 52, M.A.s, av, "--coral", M.A.k + " · 바깥 전자 " + av + "개");
         atom(620, 190, 52, M.B.s, bv, "--teal", M.B.k + " · 바깥 전자 " + bv + "개");
         if (n > 0 && !bad) {
-          ctx.strokeStyle = v("--amber"); ctx.fillStyle = v("--amber"); ctx.lineWidth = 2.5;
-          for (i = 0; i < n; i++) window.drawArrow(ctx, 346, 172 + i * 22, 554, 172 + i * 22, 10);
-          text(ctx, "전자 " + n + "개 이동", 450, 152, { s: 12, w: "900", a: "center", c: v("--amber-700") });
+          for (i = 0; i < n; i++) {
+            var ay = 172 + i * 22, ph = REDUCE ? .5 : ((mkT / 1400 + i * .3) % 1);
+            K.arrow(ctx, { x: 346, y: ay }, { x: 554, y: ay }, rgba("--amber", .75), 2.2, 11);
+            dot(ctx, 352 + ph * 190, ay, 3.6, "#fff6c8", 3);
+          }
+          pill(ctx, "전자 " + n + "개 이동", 450, 150, { s: 12, a: "center", c: v("--amber-700") });
         }
         stable = (av === 0 && bv === 8 && !bad);
         if (stable) {
           var chg = n === 1 ? "" : sup(n);
-          text(ctx, M.A.s + chg + "⁺", 280, 118, { s: 19, w: "900", a: "center", c: v("--coral-700") });
-          text(ctx, M.B.s + chg + "⁻", 620, 118, { s: 19, w: "900", a: "center", c: v("--teal-700") });
-          ctx.strokeStyle = v("--green"); ctx.lineWidth = 3; ctx.setLineDash([7, 5]);
-          ctx.beginPath(); ctx.moveTo(346, 190); ctx.lineTo(554, 190); ctx.stroke(); ctx.setLineDash([]);
-          text(ctx, "＋ 와 － 가 끌어당긴다 — 이온 결합", 450, 262, { s: 13, w: "900", a: "center", c: v("--green-700") });
+          pill(ctx, M.A.s + chg + "⁺", 280, 118, { s: 18, a: "center", c: v("--coral-700") });
+          pill(ctx, M.B.s + chg + "⁻", 620, 118, { s: 18, a: "center", c: v("--teal-700") });
+          ctx.save(); ctx.shadowColor = v("--green"); ctx.shadowBlur = 10; ctx.strokeStyle = v("--green"); ctx.lineWidth = 3; ctx.setLineDash([7, 5]);
+          ctx.lineDashOffset = -(mkT / 40); ctx.beginPath(); ctx.moveTo(346, 190); ctx.lineTo(554, 190); ctx.stroke(); ctx.restore();
+          pill(ctx, "＋ 와 － 가 끌어당긴다 — 이온 결합", 450, 262, { s: 13, a: "center", c: v("--green-700") });
         }
         text(ctx, bad ? "❌ " + M.A.k + "에는 내줄 전자가 " + M.A.v + "개뿐입니다" :
           (stable ? "✅ 두 원자 모두 안정해졌습니다" : "옮긴 전자 " + n + "개 — 아직 8개(또는 0개)가 되지 않았습니다"),
@@ -578,9 +688,11 @@ function mark(ctx, ok, s, x, y, o) {
         for (i = 0; i < cnt; i++) {
           var a2 = assign(M, i), ov = M.O[i].v + a2;
           if (ov !== M.O[i].t) ok = false;
-          ctx.strokeStyle = v(a2 > 0 ? "--brand" : "--line"); ctx.lineWidth = a2 > 1 ? 7 : (a2 > 0 ? 4 : 1.5);
+          ctx.save();
+          if (a2 > 0) { ctx.shadowColor = v("--brand"); ctx.shadowBlur = 12; }
+          ctx.strokeStyle = a2 > 0 ? v("--brand") : "rgba(200,210,255,.3)"; ctx.lineWidth = a2 > 1 ? 7 : (a2 > 0 ? 4 : 1.5);
           ctx.setLineDash(a2 > 0 ? [] : [5, 4]);
-          ctx.beginPath(); ctx.moveTo(ccx, ccy); ctx.lineTo(pos[i][0], pos[i][1]); ctx.stroke(); ctx.setLineDash([]);
+          ctx.beginPath(); ctx.moveTo(ccx, ccy); ctx.lineTo(pos[i][0], pos[i][1]); ctx.stroke(); ctx.restore();
           atom(pos[i][0], pos[i][1], M.O[i].s === "H" ? 26 : 46, M.O[i].s, ov, M.O[i].s === "H" ? "--amber" : "--teal",
             M.O[i].s + " · " + ov + "개" + (ov === M.O[i].t ? " ✅" : ""));
         }
@@ -605,6 +717,7 @@ function mark(ctx, ok, s, x, y, o) {
         mark(ctx, got.ch4, "메테인", 140, 372, { s: 11.5 });
       }
 
+      if (quiet === true) return stable;
       $("b-make-info").innerHTML = "<b>" + M.nm + "</b> — " + M.w + "<br>" +
         (stable ? "✅ <b>완성</b>. " + (M.kind === "ion" ? "전자를 <b>주고받아</b> 이온이 되었습니다. 금속 원소와 비금속 원소가 만나면 이렇게 <b>이온 결합</b>을 합니다."
                                      : "전자를 <b>같이 써서</b> 분자가 되었습니다. 비금속 원소끼리 만나면 이렇게 <b>공유 결합</b>을 합니다.")
@@ -631,15 +744,17 @@ function mark(ctx, ok, s, x, y, o) {
       $("b-n-val").textContent = n + (M.kind === "ion" ? "개" : "쌍");
     }
     cv._redraw = draw;
-    onSeg("b-pair", function (b) { pair = b.getAttribute("data-p"); label(); check(); });
-    $("b-n").addEventListener("input", function (e) { n = +e.target.value; label(); check(); });
+    /* 전자가 옮겨 가는 모습을 바꾼 뒤 잠깐(약 4초) 보여 준다 */
+    K.animate(cv, function (dt) { if (!REDUCE && mkT < 4200 && MAT[pair].kind === "ion" && n > 0) { mkT += dt; draw(true); } });
+    onSeg("b-pair", function (b) { pair = b.getAttribute("data-p"); mkT = 0; label(); check(); });
+    $("b-n").addEventListener("input", function (e) { n = +e.target.value; mkT = 0; label(); check(); });
     label(); draw(); mission();
   })();
 
   /* ------------------------------------------------ 장면 3 — 성질 시험대 */
   (function () {
     var cv = $("b-prop"), ctx = window.setupCanvas(cv);
-    var sub = "nacl", wet = false, T = 20;
+    var sub = "nacl", wet = false, T = 20, pT = 0, pPlay = !REDUCE;
     var got = window.sthState("bProp") || { a: false, b: false, c: false, d: false };
     var SUB = {
       nacl:  { k: "염화 나트륨", f: "NaCl", bond: "이온 결합", mp: 802, bp: 1413, dis: true, disCond: true, col: "--coral" },
@@ -677,84 +792,97 @@ function mark(ctx, ok, s, x, y, o) {
       return "순수한 물은 대부분 중성 분자라 전기가 거의 통하지 않습니다.";
     }
 
-    function draw() {
+    function draw(quiet) {
       paper(ctx, 900, 400);
-      var S = SUB[sub], md = mode(), ph = phase(S), c = conduct(), i, j;
-      text(ctx, S.k + " (" + S.f + ") · " + S.bond, 40, 28, { s: 14, w: "800", c: v(S.col) });
-      text(ctx, md === "aq" ? "수용액" : (md === "ice" ? "얼어붙음" : ph), 430, 28, { s: 14, w: "900", a: "right", c: v("--violet-700") });
+      var S = SUB[sub], md = mode(), ph = phase(S), c = conduct(), i, j, t = pT / 1000;
+      pill(ctx, S.k + " (" + S.f + ") · " + S.bond, 40, 28, { s: 13.5, c: v(S.col) });
+      pill(ctx, md === "aq" ? "수용액" : (md === "ice" ? "얼어붙음" : ph), 430, 28, { s: 13.5, a: "right", c: v("--violet-700") });
 
-      /* 왼쪽 — 입자 그림 */
+      /* 왼쪽 — 입자 그림 (확대한 모습) */
       var bx = 50, by = 52, bw = 380, bh = 230;
-      ctx.fillStyle = v("--card-2"); ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 14); ctx.fill();
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 14); ctx.stroke();
       var ionic = (sub === "nacl"), metal = (sub === "cu");
-      var free = c && !(metal && false);
-      if (md === "aq") {
-        ctx.globalAlpha = 0.18; ctx.fillStyle = v("--brand");
-        ctx.beginPath(); ctx.roundRect(bx + 6, by + 6, bw - 12, bh - 12, 12); ctx.fill(); ctx.globalAlpha = 1;
-      }
+      var fill = md === "aq" ? "--brand" : (md === "ice" ? "#bfe6ff" : (ph === "고체" ? "#8090c0" : (ph === "기체" ? "#6f7fb0" : "--coral")));
+      var bg = ctx.createLinearGradient(0, by, 0, by + bh);
+      bg.addColorStop(0, rgba(fill, md === "aq" ? .26 : .10)); bg.addColorStop(1, rgba(fill, md === "aq" ? .40 : .20));
+      ctx.fillStyle = bg; ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 14); ctx.fill();
+      ctx.strokeStyle = "rgba(200,225,255,.35)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 14); ctx.stroke();
+      ctx.save(); ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 14); ctx.clip();
+      var ordered = ((ph === "고체" && md !== "aq") || md === "ice");
+      /* 떨림의 크기: 고체는 제자리에서 떨기만, 액체·수용액은 돌아다닌다 */
+      var amp = ordered ? 1.4 + T / 900 : (ph === "기체" && md !== "aq" ? 26 : 14);
       for (i = 0; i < 6; i++) for (j = 0; j < 4; j++) {
-        var ordered = (ph === "고체" && md !== "aq");
+        var k = i * 4 + j;
         var jx = ordered ? 0 : ((i * 37 + j * 53) % 23) - 11;
         var jy = ordered ? 0 : ((i * 61 + j * 29) % 21) - 10;
-        var px = bx + 46 + i * 58 + jx, py = by + 44 + j * 50 + jy;
+        var px = bx + 46 + i * 58 + jx + Math.sin(t * (ordered ? 9 : 1.1) + k * 1.7) * amp;
+        var py = by + 44 + j * 50 + jy + Math.cos(t * (ordered ? 8 : 0.9) + k * 2.3) * amp * (ordered ? 1 : .8);
         if (md === "aq" && !S.dis && !metal) { if (i > 2 || j > 1) continue; }
         if (metal) {
-          ctx.fillStyle = v("--teal"); ctx.beginPath(); ctx.arc(px, py, 13, 0, Math.PI * 2); ctx.fill();
-          ctx.fillStyle = v("--amber"); ctx.beginPath(); ctx.arc(px + 15, py - 13, 4, 0, Math.PI * 2); ctx.fill();
-        } else if (ionic && (md === "aq" || ph !== "고체")) {
+          ball(ctx, px, py, 13, "#d98b5a");
+          text(ctx, "+", px + 1, py + 5, { s: 13, w: "900", a: "center", c: "#fff" });
+        } else if (ionic && !ordered) {
           var pos = (i + j) % 2 === 0;
-          ctx.fillStyle = v(pos ? "--coral" : "--teal");
-          ctx.beginPath(); ctx.arc(px, py, 13, 0, Math.PI * 2); ctx.fill();
-          text(ctx, pos ? "+" : "−", px, py + 5, { s: 14, w: "900", a: "center", c: v("--on-accent") });
+          ball(ctx, px, py, pos ? 11 : 14, pos ? "--coral" : "--teal");
+          text(ctx, pos ? "+" : "−", px + 1, py + 5, { s: 14, w: "900", a: "center", c: "#fff" });
         } else if (ionic) {
-          var pos2 = (i + j) % 2 === 0;
-          ctx.fillStyle = v(pos2 ? "--coral" : "--teal");
-          ctx.fillRect(px - 13, py - 13, 26, 26);
-          text(ctx, pos2 ? "+" : "−", px, py + 5, { s: 14, w: "900", a: "center", c: v("--on-accent") });
+          var pos2 = (i + j) % 2 === 0, sz = pos2 ? 11 : 14;
+          var cg = ctx.createLinearGradient(px - sz, py - sz, px + sz, py + sz);
+          cg.addColorStop(0, "rgba(255,255,255,.85)"); cg.addColorStop(.25, v(pos2 ? "--coral" : "--teal")); cg.addColorStop(1, shade(pos2 ? "--coral" : "--teal", .4));
+          ctx.fillStyle = cg; ctx.beginPath(); ctx.roundRect(px - sz, py - sz, sz * 2, sz * 2, 4); ctx.fill();
+          text(ctx, pos2 ? "+" : "−", px, py + 5, { s: 14, w: "900", a: "center", c: "#fff" });
         } else {
-          ctx.fillStyle = v(S.col); ctx.beginPath(); ctx.arc(px, py, 12, 0, Math.PI * 2); ctx.fill();
-          text(ctx, "0", px, py + 4, { s: 10, w: "800", a: "center", c: v("--on-accent") });
+          ball(ctx, px, py, 12, S.col);
+          text(ctx, "0", px + 1, py + 4, { s: 10, w: "800", a: "center", c: "#fff" });
         }
       }
-      text(ctx, metal ? "🟡 자유 전자가 금속 전체를 돌아다닌다"
-        : (ionic ? ((md === "aq" || ph !== "고체") ? "＋ － 이온이 자유롭게 움직인다" : "＋ － 이온이 제자리에 묶여 있다")
-        : "전하를 띠지 않은 분자뿐"), bx + bw / 2, by + bh + 22, { s: 12, w: "800", a: "center", c: v("--mist") });
+      if (metal) for (k = 0; k < 22; k++) {
+        var ex = bx + ((k * 97 + t * (40 + k * 3)) % bw), ey = by + 20 + ((k * 53) % (bh - 40)) + Math.sin(t * 2 + k) * 8;
+        dot(ctx, ex, ey, 2.4, "#ffd36b", 3);
+      }
+      ctx.restore();
+      pill(ctx, metal ? "빛나는 점 = 자유 전자, 금속 전체를 돌아다닌다"
+        : (ionic ? (!ordered ? "＋ － 이온이 자유롭게 움직인다" : "＋ － 이온이 제자리에 묶여 떨기만 한다")
+        : "전하를 띠지 않은 분자뿐"), bx + bw / 2, by + bh + 19, { s: 12, a: "center", c: KS.ink });
 
       /* 오른쪽 — 회로 */
       var rx = 470;
-      text(ctx, "전기 전도성 시험", rx, 52, { s: 13, w: "800" });
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.moveTo(rx + 20, 200); ctx.lineTo(rx + 20, 110); ctx.lineTo(rx + 150, 110);
-      ctx.moveTo(rx + 230, 110); ctx.lineTo(rx + 360, 110); ctx.lineTo(rx + 360, 200);
-      ctx.stroke();
+      pill(ctx, "전기 전도성 시험", rx, 52, { s: 12.5, c: KS.blue });
+      var path = [[rx + 27, 200], [rx + 27, 110], [rx + 158, 110], [rx + 222, 110], [rx + 353, 110], [rx + 353, 200]];
+      ctx.lineCap = "round"; ctx.strokeStyle = "#8a5a33"; ctx.lineWidth = 5;
+      ctx.beginPath(); ctx.moveTo(path[0][0], path[0][1]); ctx.lineTo(path[1][0], path[1][1]); ctx.lineTo(path[2][0], path[2][1]); ctx.moveTo(path[3][0], path[3][1]); ctx.lineTo(path[4][0], path[4][1]); ctx.lineTo(path[5][0], path[5][1]); ctx.stroke();
+      ctx.strokeStyle = "#e0a070"; ctx.lineWidth = 1.6; ctx.stroke(); ctx.lineCap = "butt";
+      if (c) for (k = 0; k < 10; k++) {
+        /* 회로를 따라 흐르는 전류의 표시 */
+        var u = ((k / 10) + t * .25) % 1, L1 = 90, L2 = 131, Ltot = 2 * (L1 + L2), d = u * Ltot, qx, qy;
+        if (d < L1) { qx = rx + 27; qy = 200 - d; } else if (d < L1 + L2) { qx = rx + 27 + (d - L1); qy = 110; }
+        else if (d < L1 + 2 * L2) { qx = rx + 222 + (d - L1 - L2); qy = 110; } else { qx = rx + 353; qy = 110 + (d - L1 - 2 * L2); }
+        if (qx > rx + 158 && qx < rx + 222) continue;
+        dot(ctx, qx, qy, 2, "#ffe9a8", 3);
+      }
       /* 전구 */
       var lx = rx + 190, ly = 110;
-      ctx.fillStyle = v(c ? "--amber" : "--card-2");
-      ctx.beginPath(); ctx.arc(lx, ly, 32, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = v(c ? "--amber-700" : "--line"); ctx.lineWidth = 2.5;
-      ctx.beginPath(); ctx.arc(lx, ly, 32, 0, Math.PI * 2); ctx.stroke();
-      if (c) {
-        ctx.strokeStyle = v("--amber"); ctx.lineWidth = 3;
-        for (i = 0; i < 8; i++) {
-          var an = i * Math.PI / 4;
-          ctx.beginPath();
-          ctx.moveTo(lx + Math.cos(an) * 40, ly + Math.sin(an) * 40);
-          ctx.lineTo(lx + Math.cos(an) * 52, ly + Math.sin(an) * 52);
-          ctx.stroke();
-        }
-      }
-      text(ctx, c ? "💡" : "○", lx, ly + 8, { s: 22, a: "center", c: v(c ? "--abyss" : "--mist") });
-      text(ctx, c ? "전구가 켜졌다 — 전기가 통한다" : "전구가 켜지지 않는다", lx, ly + 66, { s: 13, w: "900", a: "center", c: v(c ? "--green-700" : "--mist") });
+      if (c) { var fk = REDUCE ? 1 : .92 + .08 * Math.sin(t * 13); K.glow(ctx, lx, ly, 24, "rgba(255,215,110," + (.85 * fk) + ")", 3.4); }
+      var bulb = ctx.createRadialGradient(lx - 10, ly - 12, 3, lx, ly, 32);
+      bulb.addColorStop(0, c ? "#fffbe8" : "rgba(255,255,255,.35)"); bulb.addColorStop(.5, c ? "#ffd25a" : "rgba(160,180,230,.16)"); bulb.addColorStop(1, c ? "rgba(255,170,40,.75)" : "rgba(120,140,200,.10)");
+      ctx.fillStyle = bulb; ctx.beginPath(); ctx.arc(lx, ly, 30, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = c ? "rgba(255,230,160,.9)" : "rgba(200,210,255,.45)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(lx, ly, 30, 0, Math.PI * 2); ctx.stroke();
+      ctx.strokeStyle = c ? "#fff4c0" : "rgba(200,210,255,.5)"; ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.moveTo(lx - 12, ly + 10); ctx.lineTo(lx - 6, ly - 6); ctx.lineTo(lx, ly + 4); ctx.lineTo(lx + 6, ly - 6); ctx.lineTo(lx + 12, ly + 10); ctx.stroke();
+      var bs = ctx.createLinearGradient(lx - 14, 0, lx + 14, 0); bs.addColorStop(0, "#6b7280"); bs.addColorStop(.5, "#d1d5db"); bs.addColorStop(1, "#6b7280");
+      ctx.fillStyle = bs; ctx.fillRect(lx - 13, ly + 28, 26, 14);
+      pill(ctx, c ? "전구가 켜졌다 — 전기가 통한다" : "전구가 켜지지 않는다", lx, ly + 66, { s: 12.5, a: "center", c: c ? v("--green-700") : KS.mute });
       /* 시료 그릇 */
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 3;
+      var vg = ctx.createLinearGradient(0, 224, 0, 272);
+      vg.addColorStop(0, rgba(fill, md === "aq" ? .45 : .30)); vg.addColorStop(1, rgba(fill, md === "aq" ? .70 : .50));
+      ctx.fillStyle = vg; ctx.fillRect(rx + 13, 224, 354, 48);
+      ctx.strokeStyle = "rgba(200,225,255,.6)"; ctx.lineWidth = 2.5;
       ctx.beginPath(); ctx.moveTo(rx + 10, 210); ctx.lineTo(rx + 10, 274); ctx.lineTo(rx + 370, 274); ctx.lineTo(rx + 370, 210); ctx.stroke();
-      ctx.fillStyle = v(md === "aq" ? "--brand-100" : (ph === "고체" ? "--card-2" : "--coral-100"));
-      ctx.fillRect(rx + 13, 224, 354, 48);
-      ctx.fillStyle = v("--mist"); ctx.fillRect(rx + 20, 196, 14, 44); ctx.fillRect(rx + 346, 196, 14, 44);
+      var eg = ctx.createLinearGradient(rx + 20, 0, rx + 34, 0); eg.addColorStop(0, "#5b6475"); eg.addColorStop(.5, "#c9d1de"); eg.addColorStop(1, "#5b6475");
+      ctx.fillStyle = eg; ctx.fillRect(rx + 20, 196, 14, 44);
+      eg = ctx.createLinearGradient(rx + 346, 0, rx + 360, 0); eg.addColorStop(0, "#5b6475"); eg.addColorStop(.5, "#c9d1de"); eg.addColorStop(1, "#5b6475");
+      ctx.fillStyle = eg; ctx.fillRect(rx + 346, 196, 14, 44);
       text(ctx, md === "aq" ? S.k + " 수용액" : S.k + " " + ph, rx + 190, 254, { s: 13, w: "900", a: "center", c: v("--ink") });
-      text(ctx, "나르개: " + (c ? (metal ? "자유 전자" : "이온") : "없음"), rx + 190, 296, { s: 11.5, w: "800", a: "center", c: v("--mist") });
+      pill(ctx, "나르개: " + (c ? (metal ? "자유 전자" : "이온") : "없음"), rx + 190, 298, { s: 11.5, a: "center", c: c ? KS.yellow : KS.mute });
 
       text(ctx, "녹는점 " + S.mp + " ℃" + (S.bp < 9000 ? " · 끓는점 " + S.bp + " ℃" : " (녹으면서 분해)"), 40, 320, { s: 12, w: "800", c: v("--mist") });
       mark(ctx, got.a, "소금 녹이기", 40, 350, { s: 11.5 });
@@ -763,6 +891,7 @@ function mark(ctx, ok, s, x, y, o) {
       mark(ctx, got.d, "구리 녹이기", 460, 350, { s: 11.5 });
       text(ctx, "움직일 수 있는 전하가 있어야 통한다", 860, 350, { s: 11, a: "right", c: v("--mist") });
       text(ctx, "현재 온도 " + T + " ℃ · " + (md === "aq" ? "물에 녹인 상태" : (md === "ice" ? "물이 얼어 있는 상태" : (wet ? "물이 끓어 날아간 상태" : "그대로"))), 40, 380, { s: 11.5, c: v("--mist") });
+      if (quiet === true) return;
       $("b-prop-info").innerHTML = "<b>" + S.k + "</b> · " + S.bond + " · 현재 " + (md === "aq" ? "수용액" : ph) + " · 전기 " + (c ? "<b>통함</b>" : "<b>통하지 않음</b>") + "<br>" + why();
     }
     function check() {
@@ -784,6 +913,8 @@ function mark(ctx, ok, s, x, y, o) {
       }
     }
     cv._redraw = draw;
+    playBtn("b-prop-play", "⏸ 입자 멈추기", "▶ 입자 움직이기", function () { return pPlay; }, function (q) { pPlay = q; });
+    K.animate(cv, function (dt) { if (pPlay) { pT += dt; draw(true); } });
     onSeg("b-sub", function (b) { sub = b.getAttribute("data-s"); draw(); check(); });
     onSeg("b-sol", function (b) { wet = b.getAttribute("data-w") === "wet"; draw(); check(); });
     $("b-t").addEventListener("input", function (e) { T = +e.target.value; $("b-t-val").textContent = T + " ℃"; draw(); check(); });
@@ -897,25 +1028,28 @@ function mark(ctx, ok, s, x, y, o) {
     ];
     function tet(cx, cy, r, shares) {
       var pts = [[0, -r], [r * 0.88, r * 0.52], [-r * 0.88, r * 0.52]], i;
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 2;
-      ctx.beginPath();
+      /* 사면체의 면(반투명 유리) */
+      var fg = ctx.createLinearGradient(cx, cy - r, cx, cy + r * .52);
+      fg.addColorStop(0, "rgba(120,230,215,.20)"); fg.addColorStop(1, "rgba(60,120,160,.10)");
+      ctx.fillStyle = fg; ctx.beginPath();
       for (i = 0; i < 3; i++) { if (i === 0) ctx.moveTo(cx + pts[i][0], cy + pts[i][1]); else ctx.lineTo(cx + pts[i][0], cy + pts[i][1]); }
-      ctx.closePath(); ctx.stroke();
+      ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = "rgba(200,235,255,.55)"; ctx.lineWidth = 1.6; ctx.stroke();
+      ctx.strokeStyle = "rgba(200,235,255,.32)";
       for (i = 0; i < 3; i++) { ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + pts[i][0], cy + pts[i][1]); ctx.stroke(); }
-      for (i = 0; i < 3; i++) {
-        ctx.fillStyle = v(i < shares ? "--amber" : "--coral");
-        ctx.beginPath(); ctx.arc(cx + pts[i][0], cy + pts[i][1], r * 0.21, 0, Math.PI * 2); ctx.fill();
-      }
-      ctx.fillStyle = v(shares > 3 ? "--amber" : "--coral");
-      ctx.beginPath(); ctx.arc(cx, cy - r * 0.42, r * 0.18, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = v("--teal"); ctx.beginPath(); ctx.arc(cx, cy, r * 0.27, 0, Math.PI * 2); ctx.fill();
-      text(ctx, "Si", cx, cy + r * 0.11, { s: r * 0.28, w: "900", a: "center", c: v("--on-accent") });
+      ctx.fillStyle = "rgba(255,255,255,.08)"; ctx.beginPath(); ctx.moveTo(cx, cy - r); ctx.lineTo(cx, cy); ctx.lineTo(cx - r * .88, cy + r * .52); ctx.closePath(); ctx.fill();
+      ball(ctx, cx, cy, r * 0.27, "--teal");
+      text(ctx, "Si", cx, cy + r * 0.11, { s: r * 0.28, w: "900", a: "center", c: "#ffffff" });
+      for (i = 0; i < 3; i++) ball(ctx, cx + pts[i][0], cy + pts[i][1], r * 0.21, i < shares ? "--amber" : "#ff6b5a");
+      ball(ctx, cx, cy - r * 0.42, r * 0.18, shares > 3 ? "--amber" : "#ff6b5a");
     }
     function draw() {
       paper(ctx, 900, 420);
       var S = ST[sh], i, j;
-      text(ctx, "규산염 사면체 — 이웃과 나눠 쓰는 산소 " + sh + "개", 40, 28, { s: 14, w: "800", c: v(S.col) });
-      text(ctx, "🔴 혼자 쓰는 산소   🟠 이웃과 나눠 쓰는 산소   🟢 규소", 40, 48, { s: 11, c: v("--mist") });
+      pill(ctx, "규산염 사면체 — 이웃과 나눠 쓰는 산소 " + sh + "개", 40, 28, { s: 13.5, c: v(S.col) });
+      ball(ctx, 46, 48, 5, "#ff6b5a"); text(ctx, "혼자 쓰는 산소", 56, 52, { s: 11, c: v("--mist") });
+      ball(ctx, 166, 48, 5, "--amber"); text(ctx, "이웃과 나눠 쓰는 산소", 176, 52, { s: 11, c: v("--mist") });
+      ball(ctx, 320, 48, 5, "--teal"); text(ctx, "규소", 330, 52, { s: 11, c: v("--mist") });
       if (sh === 0) {
         for (i = 0; i < 3; i++) tet(150 + i * 170, 190, 44, 0);
       } else if (sh === 1) {
@@ -928,7 +1062,7 @@ function mark(ctx, ok, s, x, y, o) {
         for (j = 0; j < 3; j++) for (i = 0; i < 6; i++) tet(100 + i * 76 + (j % 2 ? 36 : 0), 110 + j * 80, 30, 4);
       }
       var ix = 640;
-      chip(ctx, ix - 10, 66, 250, 224, "--card-2");
+      chip(ctx, ix - 10, 66, 250, 224, S.col);
       text(ctx, S.nm, ix + 4, 96, { s: 20, w: "900", c: v(S.col) });
       text(ctx, "단위 화학식", ix + 4, 126, { s: 10.5, c: v("--mist") });
       text(ctx, S.fx, ix + 4, 148, { s: 17, w: "900" });
@@ -979,16 +1113,18 @@ function mark(ctx, ok, s, x, y, o) {
     function ok() { return shape === "chain" || n >= 3; }
     function nm() { return shape === "chain" ? CNM[n - 1] : RNM[n - 3]; }
     function bp() { return shape === "chain" ? CBP[n - 1] : RBP[n - 3]; }
-    function formula() { return "C" + sup(n) + "H" + sup(shape === "chain" ? 2 * n + 2 : 2 * n); }
+    /* 분자식의 원자 수는 아래 첨자로 쓰고, 1은 쓰지 않는다 (CH₄, C₂H₆ …) */
+    function sub(k) { return k === 1 ? "" : String(k).split("").map(function (c) { return "₀₁₂₃₄₅₆₇₈₉".charAt(+c); }).join(""); }
+    function formula() { return "C" + sub(n) + "H" + sub(shape === "chain" ? 2 * n + 2 : 2 * n); }
     function state() { return bp() > 25 ? "액체" : "기체"; }
 
     function draw() {
       paper(ctx, 900, 400);
-      text(ctx, (shape === "chain" ? "사슬형" : "고리형") + " 탄화수소 · 탄소 " + n + "개", 40, 28, { s: 14, w: "800", c: v("--violet-700") });
-      text(ctx, "탄소는 원자가 전자가 4개 — 결합을 네 개까지 만든다", 860, 28, { s: 11, a: "right", c: v("--mist") });
+      pill(ctx, (shape === "chain" ? "사슬형" : "고리형") + " 탄화수소 · 탄소 " + n + "개", 40, 28, { s: 13.5, c: v("--violet-700") });
+      pill(ctx, "탄소는 원자가 전자가 4개 — 결합을 네 개까지 만든다", 860, 28, { s: 11, a: "right", c: KS.mute });
       var i, x, y;
       if (!ok()) {
-        text(ctx, "🚫 탄소 " + n + "개로는 고리를 만들 수 없습니다", 450, 180, { s: 18, w: "900", a: "center", c: v("--rose-700") });
+        pill(ctx, "🚫 탄소 " + n + "개로는 고리를 만들 수 없습니다", 450, 180, { s: 18, a: "center", c: v("--rose-700") });
         text(ctx, "고리가 되려면 탄소가 적어도 3개는 있어야 합니다.", 450, 212, { s: 13, a: "center", c: v("--mist") });
         $("c-carb-info").innerHTML = "고리를 닫으려면 탄소가 <b>3개 이상</b> 있어야 합니다. 슬라이더를 오른쪽으로 옮기거나 사슬형으로 바꿔 보세요.";
         return;
@@ -997,29 +1133,29 @@ function mark(ctx, ok, s, x, y, o) {
       if (shape === "chain") {
         var sp = Math.min(72, 600 / Math.max(1, n - 1));
         var x0 = cxm - (n - 1) * sp / 2;
-        ctx.strokeStyle = v("--line"); ctx.lineWidth = 3;
+        ctx.strokeStyle = "rgba(197,180,251,.75)"; ctx.lineWidth = 3.4; ctx.shadowColor = "rgba(162,136,245,.8)"; ctx.shadowBlur = 8;
         for (i = 0; i < n - 1; i++) {
           ctx.beginPath();
           ctx.moveTo(x0 + i * sp, cym + (i % 2 ? -26 : 26));
           ctx.lineTo(x0 + (i + 1) * sp, cym + ((i + 1) % 2 ? -26 : 26));
           ctx.stroke();
         }
+        ctx.shadowBlur = 0;
         for (i = 0; i < n; i++) {
           x = x0 + i * sp; y = cym + (i % 2 ? -26 : 26);
           var hs = (i === 0 || i === n - 1) ? (n === 1 ? 4 : 3) : 2;
-          ctx.strokeStyle = v("--amber"); ctx.lineWidth = 2;
+          ctx.strokeStyle = "rgba(255,218,124,.6)"; ctx.lineWidth = 2.2;
           for (var k = 0; k < hs; k++) {
             var a = -Math.PI / 2 + (k - (hs - 1) / 2) * 0.8 + (i % 2 ? Math.PI : 0);
             ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + Math.cos(a) * 30, y + Math.sin(a) * 30); ctx.stroke();
-            ctx.fillStyle = v("--amber");
-            ctx.beginPath(); ctx.arc(x + Math.cos(a) * 30, y + Math.sin(a) * 30, 7, 0, Math.PI * 2); ctx.fill();
+            ball(ctx, x + Math.cos(a) * 30, y + Math.sin(a) * 30, 7.5, "--amber");
           }
-          ctx.fillStyle = v("--violet"); ctx.beginPath(); ctx.arc(x, y, 15, 0, Math.PI * 2); ctx.fill();
-          text(ctx, "C", x, y + 5, { s: 13, w: "900", a: "center", c: v("--on-accent") });
+          ball(ctx, x, y, 15, "--violet");
+          text(ctx, "C", x + 1, y + 5, { s: 13, w: "900", a: "center", c: "#ffffff" });
         }
       } else {
-        var R = 26 + n * 5.4;
-        ctx.strokeStyle = v("--line"); ctx.lineWidth = 3;
+        var R = 26 + n * 5.4; cym = 158;
+        ctx.strokeStyle = "rgba(197,180,251,.75)"; ctx.lineWidth = 3.4; ctx.shadowColor = "rgba(162,136,245,.8)"; ctx.shadowBlur = 8;
         ctx.beginPath();
         for (i = 0; i <= n; i++) {
           var an2 = -Math.PI / 2 + i * 2 * Math.PI / n;
@@ -1027,21 +1163,22 @@ function mark(ctx, ok, s, x, y, o) {
           else ctx.lineTo(cxm + Math.cos(an2) * R, cym + Math.sin(an2) * R);
         }
         ctx.stroke();
+        ctx.shadowBlur = 0;
         for (i = 0; i < n; i++) {
           var an3 = -Math.PI / 2 + i * 2 * Math.PI / n;
           x = cxm + Math.cos(an3) * R; y = cym + Math.sin(an3) * R;
-          ctx.strokeStyle = v("--amber"); ctx.lineWidth = 2;
+          ctx.strokeStyle = "rgba(255,218,124,.6)"; ctx.lineWidth = 2.2;
           for (var k2 = 0; k2 < 2; k2++) {
             var a3 = an3 + (k2 ? 0.45 : -0.45);
             ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + Math.cos(a3) * 28, y + Math.sin(a3) * 28); ctx.stroke();
-            ctx.fillStyle = v("--amber");
-            ctx.beginPath(); ctx.arc(x + Math.cos(a3) * 28, y + Math.sin(a3) * 28, 7, 0, Math.PI * 2); ctx.fill();
+            ball(ctx, x + Math.cos(a3) * 28, y + Math.sin(a3) * 28, 7.5, "--amber");
           }
-          ctx.fillStyle = v("--violet"); ctx.beginPath(); ctx.arc(x, y, 14, 0, Math.PI * 2); ctx.fill();
-          text(ctx, "C", x, y + 5, { s: 12, w: "900", a: "center", c: v("--on-accent") });
+          ball(ctx, x, y, 14, "--violet");
+          text(ctx, "C", x + 1, y + 5, { s: 12, w: "900", a: "center", c: "#ffffff" });
         }
       }
-      text(ctx, "🟠 수소", 40, 52, { s: 11, c: v("--mist") });
+      ball(ctx, 46, 50, 6, "--violet"); text(ctx, "탄소", 57, 54, { s: 11, c: v("--mist") }); ball(ctx, 96, 50, 5, "--amber"); text(ctx, "수소", 106, 54, { s: 11, c: v("--mist") });
+      chip(ctx, 28, 276, 452, 58, "--violet");
       text(ctx, nm(), 40, 296, { s: 19, w: "900", c: v("--violet-700") });
       text(ctx, formula(), 40, 324, { s: 17, w: "900" });
       text(ctx, "끓는점 " + bp() + " ℃", 300, 296, { s: 13, w: "800", c: v("--mist") });
@@ -1090,24 +1227,25 @@ function mark(ctx, ok, s, x, y, o) {
     function draw() {
       paper(ctx, 900, 380);
       var k = kinds(), c = count(), i;
-      text(ctx, bio === "pro" ? "아미노산 20종을 이어 붙여 단백질 만들기" : "뉴클레오타이드 4종을 이어 붙여 DNA 만들기",
-        40, 28, { s: 14, w: "800", c: v(bio === "pro" ? "--coral-700" : "--teal-700") });
-      text(ctx, "단위체 " + k + "종 · " + len + "개를 이어 붙임", 860, 28, { s: 11.5, w: "800", a: "right", c: v("--mist") });
+      pill(ctx, bio === "pro" ? "아미노산 20종을 이어 붙여 단백질 만들기" : "뉴클레오타이드 4종을 이어 붙여 DNA 만들기",
+        40, 28, { s: 13.5, c: v(bio === "pro" ? "--coral-700" : "--teal-700") });
+      pill(ctx, "단위체 " + k + "종 · " + len + "개를 이어 붙임", 860, 28, { s: 11.5, a: "right", c: KS.mute });
 
-      /* 사슬 그림 */
-      var x0 = 50, sp = Math.min(32, 800 / len), r = Math.min(13, sp / 2 - 1), y = 86;
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 3;
-      ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x0 + (len - 1) * sp, y); ctx.stroke();
+      /* 사슬 그림 — 살짝 물결치는 구슬 줄 */
+      var x0 = 50, sp = Math.min(32, 800 / len), r = Math.min(13, sp / 2 - 1), y = 84;
+      function wy(q) { return y + Math.sin(q * .55) * Math.min(8, r * .7); }
+      ctx.save(); ctx.strokeStyle = "rgba(200,210,255,.55)"; ctx.lineWidth = 3; ctx.shadowColor = "rgba(127,211,255,.6)"; ctx.shadowBlur = 6;
+      ctx.beginPath(); for (i = 0; i < len; i++) { if (i) ctx.lineTo(x0 + i * sp, wy(i)); else ctx.moveTo(x0, wy(0)); } ctx.stroke(); ctx.restore();
       for (i = 0; i < len; i++) {
         var ci = (i * 7 + len * 3) % (bio === "pro" ? 8 : 4);
-        ctx.fillStyle = v(COL[ci]);
-        ctx.beginPath(); ctx.arc(x0 + i * sp, y, r, 0, Math.PI * 2); ctx.fill();
+        ball(ctx, x0 + i * sp, wy(i), r, COL[ci]);
+        if (bio === "dna" && r >= 9) text(ctx, "ATGC".charAt(ci), x0 + i * sp + 1, wy(i) + 4, { s: Math.min(11, r), w: "900", a: "center", c: "#ffffff" });
       }
       text(ctx, bio === "pro" ? "구슬 하나 = 아미노산 하나 (20가지 가운데 하나)" : "구슬 하나 = 뉴클레오타이드 하나 (A · T · G · C 가운데 하나)",
-        50, y + 34, { s: 11.5, c: v("--mist") });
+        50, y + 36, { s: 11.5, c: v("--mist") });
 
       /* 가짓수 */
-      chip(ctx, 50, 142, 380, 96, "--card-2");
+      chip(ctx, 50, 142, 380, 96, "--violet");
       text(ctx, "만들 수 있는 서열의 가짓수", 66, 166, { s: 11, c: v("--mist") });
       text(ctx, k + sup(len) + " =", 66, 202, { s: 17, w: "800" });
       text(ctx, sci(c, 2) + " 가지", 414, 202, { s: 21, w: "900", a: "right", c: v("--violet-700") });
@@ -1116,12 +1254,10 @@ function mark(ctx, ok, s, x, y, o) {
 
       /* 로그 막대 */
       var bx = 470, bw = 390, by = 150, bh = 26;
-      text(ctx, "1조(10¹²) 기준선과 견주기 — 한 칸이 10배", bx, 140, { s: 11.5, w: "800" });
+      pill(ctx, "1조(10¹²) 기준선과 견주기 — 한 칸이 10배", bx, 136, { s: 11.5, c: KS.ink });
       var MAX = 34;
-      ctx.fillStyle = v("--card-2"); ctx.fillRect(bx, by, bw, bh);
       var f = clamp(log10(c) / MAX, 0, 1);
-      ctx.fillStyle = v(c > 1e12 ? "--green" : "--mist"); ctx.fillRect(bx, by, bw * f, bh);
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 1.5; ctx.strokeRect(bx, by, bw, bh);
+      meter(ctx, bx, by, bw, bh, f, c > 1e12 ? "--green" : "#8fa0d8");
       var tx = bx + bw * 12 / MAX;
       ctx.strokeStyle = v("--coral"); ctx.lineWidth = 2.5; ctx.setLineDash([5, 4]);
       ctx.beginPath(); ctx.moveTo(tx, by - 10); ctx.lineTo(tx, by + bh + 10); ctx.stroke(); ctx.setLineDash([]);
@@ -1224,7 +1360,7 @@ function mark(ctx, ok, s, x, y, o) {
   /* ------------------------------------------------ 장면 2 — 띠 간격 실험대 */
   (function () {
     var cv = $("d-band"), ctx = window.setupCanvas(cv);
-    var gap = 1.1, T = 300;
+    var gap = 1.1, T = 300, bT = 0, bPlay = !REDUCE;
     var got = window.sthState("dBand") || { a: false, b: false, c: false };
     function ratio() { return Math.exp(-gap / (2 * KB * T)); }
     function kind() { return gap < 0.3 ? 0 : (gap < 3.0 ? 1 : 2); }
@@ -1232,13 +1368,13 @@ function mark(ctx, ok, s, x, y, o) {
     var KC = ["--teal", "--coral", "--violet"];
     var KE = ["구리 · 은 · 철 · 알루미늄", "저마늄 0.67 eV · 규소 1.12 eV", "다이아몬드 5.47 eV · 유리 · 고무"];
 
-    function draw() {
+    function draw(quiet) {
       paper(ctx, 900, 420);
-      var k = kind(), r = ratio(), i;
-      text(ctx, "띠 간격 " + gap.toFixed(1) + " eV · 온도 " + T + " K", 40, 28, { s: 14, w: "800" });
+      var k = kind(), r = ratio(), i, t = bT / 1000;
+      pill(ctx, "띠 간격 " + gap.toFixed(1) + " eV · 온도 " + T + " K", 40, 28, { s: 13.5, c: KS.ink });
 
       /* 왼쪽 — 분류 */
-      chip(ctx, 40, 52, 250, 150, "--card-2");
+      chip(ctx, 40, 52, 250, 150, KC[k]);
       text(ctx, "이 물질은", 56, 78, { s: 11, c: v("--mist") });
       text(ctx, KN[k], 56, 112, { s: 24, w: "900", c: v(KC[k]) });
       text(ctx, "보기", 56, 142, { s: 11, c: v("--mist") });
@@ -1248,25 +1384,33 @@ function mark(ctx, ok, s, x, y, o) {
       /* 가운데 — 띠 */
       var bx = 320, bw = 320, vTop = 330, gpx = gap * 34;
       var cBot = vTop - gpx, cTop = cBot - 50;
-      ctx.fillStyle = v("--mist"); ctx.globalAlpha = 0.45;
-      ctx.fillRect(bx, vTop, bw, 50); ctx.globalAlpha = 1;
-      text(ctx, "원자가 띠 — 전자로 꽉 차 있다", bx + bw / 2, vTop + 30, { s: 11.5, w: "800", a: "center", c: v("--ink") });
-      ctx.fillStyle = v(KC[k]); ctx.globalAlpha = 0.35;
-      ctx.fillRect(bx, cTop, bw, 50); ctx.globalAlpha = 1;
-      text(ctx, "전도띠 — 여기 올라온 전자가 전류를 나른다", bx + bw / 2, cTop + 30, { s: 11.5, w: "800", a: "center", c: v("--ink") });
+      K.t(ctx, "에너지 ↑", bx - 8, cTop - 8 > 52 ? cTop - 8 : 52, { s: 10.5, a: "right", c: KS.mute });
+      /* 원자가 띠: 전자로 꽉 찬 띠 */
+      var vb = ctx.createLinearGradient(0, vTop, 0, vTop + 50);
+      vb.addColorStop(0, "rgba(127,150,230,.55)"); vb.addColorStop(1, "rgba(60,70,140,.55)");
+      ctx.fillStyle = vb; ctx.beginPath(); ctx.roundRect(bx, vTop, bw, 50, 8); ctx.fill();
+      for (i = 0; i < 30; i++) dot(ctx, bx + 12 + (i % 15) * 21.5 + Math.sin(t * 3 + i) * 1.2, vTop + 12 + Math.floor(i / 15) * 26, 2.2, "#c9d6ff", 2.2);
+      pill(ctx, "원자가 띠 — 전자로 꽉 차 있다", bx + bw / 2, vTop + 31, { s: 11.5, a: "center", c: KS.ink });
+      /* 전도띠 */
+      var cb = ctx.createLinearGradient(0, cTop, 0, cTop + 50);
+      cb.addColorStop(0, rgba(KC[k], .45)); cb.addColorStop(1, rgba(KC[k], .15));
+      ctx.fillStyle = cb; ctx.beginPath(); ctx.roundRect(bx, cTop, bw, 50, 8); ctx.fill();
+      ctx.strokeStyle = rgba(KC[k], .6); ctx.lineWidth = 1.2; ctx.stroke();
       if (gpx > 6) {
-        ctx.strokeStyle = v(KC[k]); ctx.lineWidth = 2; ctx.setLineDash([5, 4]);
+        ctx.fillStyle = "rgba(0,0,0,.25)"; ctx.fillRect(bx, cBot, bw, gpx);
+        ctx.strokeStyle = v(KC[k]); ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]);
         ctx.strokeRect(bx, cBot, bw, gpx); ctx.setLineDash([]);
-        text(ctx, "띠 간격 " + gap.toFixed(1) + " eV", bx + bw / 2, cBot + gpx / 2 + 5, { s: 13, w: "900", a: "center", c: v(KC[k]) });
+        pill(ctx, "띠 간격 " + gap.toFixed(1) + " eV", bx + bw / 2, cBot + gpx / 2 + 6, { s: 12.5, a: "center", c: v(KC[k]) });
       } else {
-        text(ctx, "띠가 거의 붙어 있다", bx + bw / 2, cBot - 4, { s: 12, w: "900", a: "center", c: v(KC[k]) });
+        pill(ctx, "띠가 거의 붙어 있다", bx + bw / 2, cBot + 8, { s: 12, a: "center", c: v(KC[k]) });
       }
       var nDot = clamp(Math.round(log10(Math.max(r, 1e-30)) + 13), 0, 12);
       for (i = 0; i < nDot; i++) {
-        ctx.fillStyle = v("--amber");
-        ctx.beginPath(); ctx.arc(bx + 24 + (i % 6) * 55, cTop + 16 + Math.floor(i / 6) * 20, 6, 0, Math.PI * 2); ctx.fill();
+        /* 건너뛴 전자는 전도띠 안을 떠돈다 */
+        var ex = bx + 18 + ((i % 6) * 55 + t * (22 + i * 3)) % (bw - 36), ey = cTop + 14 + Math.floor(i / 6) * 22 + Math.sin(t * 2.4 + i * 1.3) * 3;
+        dot(ctx, ex, ey, 4.5, "#ffd36b", 3.2);
       }
-      text(ctx, "🟡 건너뛴 전자 (그림은 어림)", bx + bw / 2, 398, { s: 11, a: "center", c: v("--mist") });
+      pill(ctx, "빛나는 노란 점 = 건너뛴 전자 (그림은 어림)", bx + bw / 2, 400, { s: 11, a: "center", c: KS.mute });
 
       /* 오른쪽 — 수치 */
       var ix = 670;
@@ -1274,9 +1418,8 @@ function mark(ctx, ok, s, x, y, o) {
       text(ctx, "exp(−Eg / 2kBT)", ix, 98, { s: 10.5, c: v("--mist") });
       text(ctx, r > 1e-30 ? sci(r, 2) : "0에 가깝다", 880, 132, { s: 19, w: "900", a: "right", c: v(KC[k]) });
       var by = 150, bh = 20, bw2 = 210;
-      ctx.fillStyle = v("--card-2"); ctx.fillRect(ix, by, bw2, bh);
       var f = clamp((log10(Math.max(r, 1e-24)) + 24) / 24, 0, 1);
-      ctx.fillStyle = v(KC[k]); ctx.fillRect(ix, by, bw2 * f, bh);
+      meter(ctx, ix, by, bw2, bh, f, KC[k]);
       var mx = ix + bw2 * (log10(1e-6) + 24) / 24;
       ctx.strokeStyle = v("--coral"); ctx.lineWidth = 2.5; ctx.setLineDash([4, 4]);
       ctx.beginPath(); ctx.moveTo(mx, by - 8); ctx.lineTo(mx, by + bh + 8); ctx.stroke(); ctx.setLineDash([]);
@@ -1291,6 +1434,7 @@ function mark(ctx, ok, s, x, y, o) {
       mark(ctx, got.b, "절연체 만들기", 170, 236, { s: 11.5 });
       mark(ctx, got.c, "반도체를 데워 10⁻⁶ 넘기기", 40, 262, { s: 11.5 });
 
+      if (quiet === true) return;
       $("d-band-info").innerHTML = "띠 간격 <b>" + gap.toFixed(1) + " eV</b> · 온도 <b>" + T + " K</b> · 이 물질은 <b style='color:var(" + KC[k] + ")'>" + KN[k] + "</b> · 건너뛴 전자 비율 <b>" + (r > 1e-30 ? sci(r, 2) : "0에 가까움") + "</b><br>" +
         (k === 0 ? "원자가 띠와 전도띠가 겹치거나 틈이 거의 없습니다. 전자가 언제든 움직일 수 있어 <b>온도와 상관없이</b> 전기가 잘 통합니다. 오히려 온도를 올리면 원자의 떨림이 커져 전자가 부딪히므로 저항이 조금 <b>커집니다</b>."
         : k === 1 ? "틈이 어중간해서, 상온에서는 아주 일부만 건너뜁니다. 그런데 온도를 올리면 건너뛰는 전자가 <b>지수 함수로</b> 늘어나 전기가 훨씬 잘 통하게 됩니다. 금속과 정반대입니다."
@@ -1313,6 +1457,8 @@ function mark(ctx, ok, s, x, y, o) {
       }
     }
     cv._redraw = draw;
+    playBtn("d-band-play", "⏸ 전자 멈추기", "▶ 전자 움직이기", function () { return bPlay; }, function (q) { bPlay = q; });
+    K.animate(cv, function (dt) { if (bPlay) { bT += dt; draw(true); } });
     $("d-gap").addEventListener("input", function (e) { gap = +e.target.value; $("d-gap-val").textContent = gap.toFixed(1); draw(); check(); });
     $("d-t").addEventListener("input", function (e) { T = +e.target.value; $("d-t-val").textContent = T + " K"; draw(); check(); });
     draw(); mission();
@@ -1321,50 +1467,62 @@ function mark(ctx, ok, s, x, y, o) {
   /* ------------------------------------------------ 장면 3 — 도핑실 */
   (function () {
     var cv = $("d-dope"), ctx = window.setupCanvas(cv);
-    var type = "pure", dop = 12;
+    var type = "pure", dop = 12, dT = 0, dPlay = !REDUCE;
     var got = window.sthState("dDope") || { a: false, b: false, c: false };
     var NI = 1.0e10;
     function N() { return Math.pow(10, dop); }
     function boost() { return type === "pure" ? 1 : (N() + NI) / NI; }
 
-    function draw() {
+    function draw(quiet) {
       paper(ctx, 900, 420);
-      var b = boost(), i, j;
-      text(ctx, type === "pure" ? "순수한 규소" : (type === "n" ? "인(P)을 섞은 규소 — n형 반도체" : "붕소(B)를 섞은 규소 — p형 반도체"),
-        40, 28, { s: 14, w: "800", c: v(type === "pure" ? "--mist" : (type === "n" ? "--teal-700" : "--coral-700")) });
+      var b = boost(), i, j, t = dT / 1000;
+      pill(ctx, type === "pure" ? "순수한 규소" : (type === "n" ? "인(P)을 섞은 규소 — n형 반도체" : "붕소(B)를 섞은 규소 — p형 반도체"),
+        40, 28, { s: 13.5, c: v(type === "pure" ? "--mist" : (type === "n" ? "--teal-700" : "--coral-700")) });
 
-      /* 규소 격자 */
-      var x0 = 100, y0 = 110, sp = 110;
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 2;
-      for (i = 0; i < 3; i++) for (j = 0; j < 3; j++) {
-        if (i < 2) { ctx.beginPath(); ctx.moveTo(x0 + i * sp + 26, y0 + j * sp); ctx.lineTo(x0 + (i + 1) * sp - 26, y0 + j * sp); ctx.stroke(); }
-        if (j < 2) { ctx.beginPath(); ctx.moveTo(x0 + i * sp, y0 + j * sp + 26); ctx.lineTo(x0 + i * sp, y0 + (j + 1) * sp - 26); ctx.stroke(); }
+      /* 규소 결정 — 결합 하나 = 전자 두 개(전자쌍) */
+      var x0 = 100, y0 = 98, sp = 110;
+      var HB = [[1, 1], [1, 0], [0, 0], [0, 1], [0, 2], [1, 2]], hb = HB[Math.floor(t / 1.4) % HB.length];
+      function bond(ax, ay, bx2, by2, hor, skipOne) {
+        ctx.strokeStyle = "rgba(160,190,255,.35)"; ctx.lineWidth = 1.4;
+        var o = 4;
+        ctx.beginPath();
+        if (hor) { ctx.moveTo(ax, ay - o); ctx.lineTo(bx2, by2 - o); ctx.moveTo(ax, ay + o); ctx.lineTo(bx2, by2 + o); }
+        else { ctx.moveTo(ax - o, ay); ctx.lineTo(bx2 - o, by2); ctx.moveTo(ax + o, ay); ctx.lineTo(bx2 + o, by2); }
+        ctx.stroke();
+        var mx = (ax + bx2) / 2, my = (ay + by2) / 2;
+        dot(ctx, mx + (hor ? -6 : 0), my + (hor ? 0 : -6), 2.4, "#c9d6ff", 2.4);
+        if (!skipOne) dot(ctx, mx + (hor ? 6 : 0), my + (hor ? 0 : 6), 2.4, "#c9d6ff", 2.4);
+        else { ctx.save(); ctx.shadowColor = v("--violet"); ctx.shadowBlur = 10; ctx.strokeStyle = v("--violet"); ctx.lineWidth = 2.2; ctx.setLineDash([3, 2]); ctx.beginPath(); ctx.arc(mx + 6, my, 7, 0, Math.PI * 2); ctx.stroke(); ctx.restore(); text(ctx, "+", mx + 6, my - 10, { s: 12, w: "900", a: "center", c: v("--violet-700") }); }
       }
       for (i = 0; i < 3; i++) for (j = 0; j < 3; j++) {
-        var mid = (i === 1 && j === 1), sym = "Si", col = "--brand";
-        if (mid && type === "n") { sym = "P"; col = "--teal"; }
-        if (mid && type === "p") { sym = "B"; col = "--coral"; }
-        ctx.fillStyle = v(col);
-        ctx.beginPath(); ctx.arc(x0 + i * sp, y0 + j * sp, 25, 0, Math.PI * 2); ctx.fill();
-        text(ctx, sym, x0 + i * sp, y0 + j * sp + 6, { s: 15, w: "900", a: "center", c: v("--on-accent") });
+        if (i < 2) bond(x0 + i * sp + 26, y0 + j * sp, x0 + (i + 1) * sp - 26, y0 + j * sp, true, type === "p" && i === hb[0] && j === hb[1]);
+        if (j < 2) bond(x0 + i * sp, y0 + j * sp + 26, x0 + i * sp, y0 + (j + 1) * sp - 26, false, false);
+      }
+      for (i = 0; i < 3; i++) for (j = 0; j < 3; j++) {
+        var mid = (i === 1 && j === 1), sym = "Si", col2 = "#7d8fb8";
+        if (mid && type === "n") { sym = "P"; col2 = "--teal"; }
+        if (mid && type === "p") { sym = "B"; col2 = "--coral"; }
+        ball(ctx, x0 + i * sp, y0 + j * sp, 25, col2);
+        text(ctx, sym, x0 + i * sp + 2, y0 + j * sp + 7, { s: 15, w: "900", a: "center", c: "#ffffff" });
       }
       if (type === "n") {
-        ctx.fillStyle = v("--amber");
-        ctx.beginPath(); ctx.arc(x0 + sp + 42, y0 + sp - 38, 9, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.arc(52, 362, 7, 0, Math.PI * 2); ctx.fill();
-        text(ctx, "남는 전자 ⊖ — 자유롭게 돌아다닌다", 66, 366, { s: 11.5, w: "800", c: v("--amber-700") });
+        /* 남는 전자가 결정 안을 떠돈다 */
+        var ex = x0 + sp + 42 + Math.sin(t * .9) * 120 + Math.sin(t * 2.3) * 20, ey = y0 + sp - 38 + Math.cos(t * .7) * 70;
+        dot(ctx, ex, ey, 6, "#ffd36b", 3.4);
+        text(ctx, "−", ex, ey + 4, { s: 11, w: "900", a: "center", c: "#3a2a00" });
+        dot(ctx, 52, 362, 5, "#ffd36b", 3);
+        pill(ctx, "남는 전자 ⊖ — 자유롭게 돌아다닌다", 66, 366, { s: 11.5, c: v("--amber-700") });
       } else if (type === "p") {
-        ctx.strokeStyle = v("--violet"); ctx.lineWidth = 2.5; ctx.setLineDash([3, 3]);
-        ctx.beginPath(); ctx.arc(x0 + sp + 42, y0 + sp - 38, 9, 0, Math.PI * 2); ctx.stroke();
-        ctx.beginPath(); ctx.arc(52, 362, 7, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
-        text(ctx, "전자가 빠진 자리 ⊕(양공) — 이 자리가 옮겨 다닌다", 66, 366, { s: 11.5, w: "800", c: v("--violet-700") });
+        /* 양공: 옆 전자가 채우면 빈자리가 다른 결합으로 옮겨 간다 */
+        ctx.save(); ctx.strokeStyle = v("--violet"); ctx.lineWidth = 2.5; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.arc(52, 362, 7, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+        pill(ctx, "전자가 빠진 자리 ⊕(양공) — 이 자리가 옮겨 다닌다", 66, 366, { s: 11.5, c: v("--violet-700") });
       } else {
-        text(ctx, "규소는 원자가 전자가 4개라 이웃 넷과 결합을 꽉 채웁니다", 40, 366, { s: 11.5, c: v("--mist") });
+        pill(ctx, "규소는 원자가 전자가 4개라 이웃 넷과 결합을 꽉 채웁니다", 40, 366, { s: 11.5, c: KS.mute });
       }
 
       /* 오른쪽 */
       var ix = 470;
-      chip(ctx, ix, 52, 390, 104, "--card-2");
+      chip(ctx, ix, 52, 390, 104, type === "n" ? "--teal" : (type === "p" ? "--coral" : "--brand"));
       text(ctx, "1 cm³ 안의 전하 나르개 수", ix + 16, 76, { s: 11, c: v("--mist") });
       text(ctx, type === "pure" ? sci(NI, 1) + " 개 (고유 전자뿐)" : sci(N(), 1) + " 개", ix + 16, 108, { s: 18, w: "900", c: v("--violet-700") });
       text(ctx, type === "pure" ? "온도가 올라야만 늘어납니다" : ("나르개는 " + (type === "n" ? "⊖ 전자" : "⊕ 양공")), ix + 16, 136, { s: 11.5, w: "800", c: v("--mist") });
@@ -1373,9 +1531,8 @@ function mark(ctx, ok, s, x, y, o) {
       text(ctx, b < 10 ? b.toFixed(1) + " 배" : (b >= 1e6 ? sci(b, 1) + " 배" : Math.round(b).toLocaleString() + " 배"),
         860, 226, { s: 24, w: "900", a: "right", c: v(b >= 1e6 ? "--green-700" : "--ink") });
       var by = 240, bw = 390, bh = 22;
-      ctx.fillStyle = v("--card-2"); ctx.fillRect(ix, by, bw, bh);
       var f = clamp(log10(b) / 9, 0, 1);
-      ctx.fillStyle = v(b >= 1e6 ? "--green" : "--brand"); ctx.fillRect(ix, by, bw * f, bh);
+      meter(ctx, ix, by, bw, bh, f, b >= 1e6 ? "--green" : "--brand");
       var mx = ix + bw * 6 / 9;
       ctx.strokeStyle = v("--coral"); ctx.lineWidth = 2.5; ctx.setLineDash([4, 4]);
       ctx.beginPath(); ctx.moveTo(mx, by - 8); ctx.lineTo(mx, by + bh + 8); ctx.stroke(); ctx.setLineDash([]);
@@ -1389,6 +1546,7 @@ function mark(ctx, ok, s, x, y, o) {
       mark(ctx, got.c, "순수한 규소 확인", 470, 388, { s: 11.5 });
       text(ctx, "불순물을 ‘일부러’ 넣어 성질을 고르는 것을 도핑이라고 합니다.", 40, 392, { s: 11.5, c: v("--mist") });
 
+      if (quiet === true) return;
       $("d-dope-info").innerHTML = (type === "pure"
         ? "순수한 규소에서는 열에너지로 스스로 건너뛴 <b>고유 전자</b>(1 cm³ 당 약 10¹⁰ 개)만이 전류를 나릅니다. 구리(약 10²³ 개)와 견주면 터무니없이 적어, 사실상 잘 통하지 않습니다."
         : type === "n"
@@ -1413,6 +1571,8 @@ function mark(ctx, ok, s, x, y, o) {
       }
     }
     cv._redraw = draw;
+    playBtn("d-dope-play", "⏸ 나르개 멈추기", "▶ 나르개 움직이기", function () { return dPlay; }, function (q) { dPlay = q; });
+    K.animate(cv, function (dt) { if (dPlay && type !== "pure") { dT += dt; draw(true); } });
     onSeg("d-type", function (b) { type = b.getAttribute("data-d"); draw(); check(); });
     $("d-dop").addEventListener("input", function (e) {
       dop = +e.target.value;
@@ -1425,7 +1585,7 @@ function mark(ctx, ok, s, x, y, o) {
   /* ------------------------------------------------ 장면 4 — 다이오드 */
   (function () {
     var cv = $("d-diode"), ctx = window.setupCanvas(cv);
-    var V = 0;
+    var V = 0, oT = 0, oPlay = !REDUCE;
     var got = window.sthState("dDio") || { a: false, b: false };
     var sorted = !!window.sthState("dSort"), qOK = !!window.sthState("dQ");
     var I0 = 1e-12, VT = 0.02585, R = 100;
@@ -1438,65 +1598,59 @@ function mark(ctx, ok, s, x, y, o) {
       }
       return (lo + hi) / 2;
     }
-    function draw() {
+    function draw(quiet) {
       paper(ctx, 900, 400);
-      var I = cur(V), mA = I * 1000, fwd = V > 0, i;
-      text(ctx, "p-n 접합 다이오드 · 걸어 준 전압 " + V.toFixed(2) + " V", 40, 28, { s: 14, w: "800" });
+      var I = cur(V), mA = I * 1000, fwd = V > 0, i, t = oT / 1000;
+      pill(ctx, "p-n 접합 다이오드 · 걸어 준 전압 " + V.toFixed(2) + " V", 40, 28, { s: 13.5, c: KS.ink });
 
-      /* 접합 그림 */
-      var jx = 50, jy = 70, jw = 370, jh = 150;
-      ctx.fillStyle = v("--coral-100"); ctx.fillRect(jx, jy, jw / 2, jh);
-      ctx.fillStyle = v("--teal-100"); ctx.fillRect(jx + jw / 2, jy, jw / 2, jh);
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 2; ctx.strokeRect(jx, jy, jw, jh);
-      ctx.beginPath(); ctx.moveTo(jx + jw / 2, jy); ctx.lineTo(jx + jw / 2, jy + jh); ctx.stroke();
-      text(ctx, "p형 — 양공 ⊕", jx + jw / 4, jy + 22, { s: 12, w: "900", a: "center", c: v("--coral-700") });
-      text(ctx, "n형 — 전자 ⊖", jx + jw * 3 / 4, jy + 22, { s: 12, w: "900", a: "center", c: v("--teal-700") });
+      /* 접합 그림 — 순방향이면 양공과 전자가 접합면으로 밀려와 만나고, 역방향이면 가운데가 빈다 */
+      var jx = 50, jy = 70, jw = 370, jh = 150, mid = jx + jw / 2;
+      var pg = ctx.createLinearGradient(jx, jy, jx, jy + jh); pg.addColorStop(0, "rgba(255,157,99,.32)"); pg.addColorStop(1, "rgba(160,80,40,.32)");
+      ctx.fillStyle = pg; ctx.beginPath(); ctx.roundRect(jx, jy, jw / 2, jh, [10, 0, 0, 10]); ctx.fill();
+      var ng = ctx.createLinearGradient(jx, jy, jx, jy + jh); ng.addColorStop(0, "rgba(46,211,189,.30)"); ng.addColorStop(1, "rgba(20,110,100,.30)");
+      ctx.fillStyle = ng; ctx.beginPath(); ctx.roundRect(mid, jy, jw / 2, jh, [0, 10, 10, 0]); ctx.fill();
+      /* 공핍층(나르개가 없는 띠) 폭: 역방향일수록 넓어지고 순방향일수록 좁아진다 */
+      var dep = clamp(18 - V * 22, 4, 62);
+      ctx.fillStyle = "rgba(5,8,24,.55)"; ctx.fillRect(mid - dep, jy, dep * 2, jh);
+      ctx.strokeStyle = "rgba(200,210,255,.45)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.roundRect(jx, jy, jw, jh, 10); ctx.stroke();
+      ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(mid, jy); ctx.lineTo(mid, jy + jh); ctx.stroke(); ctx.setLineDash([]);
+      pill(ctx, "p형 — 양공 ⊕", jx + jw / 4, jy + 22, { s: 12, a: "center", c: v("--coral-700") });
+      pill(ctx, "n형 — 전자 ⊖", jx + jw * 3 / 4, jy + 22, { s: 12, a: "center", c: v("--teal-700") });
+      var on = mA >= 1, spd = on ? clamp(mA / 5, .2, 1) * 60 : 0;
       for (i = 0; i < 8; i++) {
-        ctx.strokeStyle = v("--coral"); ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.arc(jx + 26 + (i % 4) * 38, jy + 62 + Math.floor(i / 4) * 44, 8, 0, Math.PI * 2); ctx.stroke();
-        ctx.fillStyle = v("--teal");
-        ctx.beginPath(); ctx.arc(jx + jw / 2 + 26 + (i % 4) * 38, jy + 62 + Math.floor(i / 4) * 44, 8, 0, Math.PI * 2); ctx.fill();
+        var row = Math.floor(i / 4), cc = i % 4, yy = jy + 62 + row * 44;
+        /* 양공: 왼쪽에서 오른쪽으로, 전자: 오른쪽에서 왼쪽으로 */
+        var span = jw / 2 - dep - 18, hxp = on ? jx + 12 + ((cc * span / 4 + t * spd) % span) : jx + 26 + cc * (jw / 2 - dep - 30) / 4;
+        var exn = on ? mid + jw / 2 - 12 - ((cc * span / 4 + t * spd) % span) : mid + dep + 14 + cc * (jw / 2 - dep - 30) / 4;
+        ctx.save(); ctx.shadowColor = v("--coral"); ctx.shadowBlur = 6; ctx.strokeStyle = v("--coral"); ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(hxp, yy, 8, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+        ball(ctx, exn, yy, 7.5, "--teal");
       }
-      var on = mA >= 1;
-      ctx.strokeStyle = v(on ? "--green" : "--mist"); ctx.fillStyle = v(on ? "--green" : "--mist"); ctx.lineWidth = 3;
-      if (fwd) window.drawArrow(ctx, jx + 40, jy + jh + 28, jx + jw - 40, jy + jh + 28, 12);
-      else window.drawArrow(ctx, jx + jw - 40, jy + jh + 28, jx + 40, jy + jh + 28, 12);
-      text(ctx, V === 0 ? "전압 없음" : (fwd ? (on ? "순방향 — 전류가 흐른다" : "순방향이지만 전압이 모자라다") : "역방향 — 막힌다"),
-        jx + jw / 2, jy + jh + 56, { s: 13.5, w: "900", a: "center", c: v(on ? "--green-700" : "--mist") });
+      if (on) dot(ctx, mid, jy + jh / 2 + Math.sin(t * 7) * 30, 5, "#fff1b0", 3.4);
+      if (on || V < 0) K.arrow(ctx, fwd ? { x: jx + 40, y: jy + jh + 28 } : { x: jx + jw - 40, y: jy + jh + 28 }, fwd ? { x: jx + jw - 40, y: jy + jh + 28 } : { x: jx + 40, y: jy + jh + 28 }, v(on ? "--green" : "--mist"), 3, 13);
+      pill(ctx, V === 0 ? "전압 없음" : (fwd ? (on ? "순방향 — 전류가 흐른다" : "순방향이지만 전압이 모자라다") : "역방향 — 막힌다"),
+        jx + jw / 2, jy + jh + 58, { s: 13, a: "center", c: v(on ? "--green-700" : "--mist") });
       text(ctx, Math.abs(mA) >= 0.001 ? "전류 " + mA.toFixed(3) + " mA" : "전류 " + sci(I, 1) + " A (거의 0)",
         jx + jw / 2, jy + jh + 84, { s: 13, w: "800", a: "center", c: v("--ink") });
 
       /* I-V 곡선 */
-      var X0 = 500, X1 = 870, Y0 = 70, Y1 = 290, VL = -2, VH = 1, IH = 5;
-      function px(x) { return X0 + (x - VL) / (VH - VL) * (X1 - X0); }
-      function py(y) { return Y1 - clamp(y, -0.5, IH) / IH * (Y1 - Y0 - 30) - 22; }
-      text(ctx, "전압 – 전류 곡선", X0, 52, { s: 12.5, w: "800" });
-      ctx.strokeStyle = v("--line"); ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(X0, Y0); ctx.lineTo(X0, Y1); ctx.lineTo(X1, Y1); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(X0, py(0)); ctx.lineTo(X1, py(0)); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(px(0), Y0); ctx.lineTo(px(0), Y1); ctx.stroke();
-      text(ctx, "0 V", px(0), Y1 + 16, { s: 10, a: "center", c: v("--mist") });
-      text(ctx, "−2 V", X0 + 2, Y1 + 16, { s: 10, c: v("--mist") });
-      text(ctx, "+1 V", X1, Y1 + 16, { s: 10, a: "right", c: v("--mist") });
-      text(ctx, "5 mA", X0 - 6, py(5) + 4, { s: 10, a: "right", c: v("--mist") });
-      text(ctx, "1 mA", X0 - 6, py(1) + 4, { s: 10, a: "right", c: v("--coral-700") });
-      ctx.strokeStyle = v("--coral"); ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
-      ctx.beginPath(); ctx.moveTo(X0, py(1)); ctx.lineTo(X1, py(1)); ctx.stroke(); ctx.setLineDash([]);
-      ctx.strokeStyle = v("--brand"); ctx.lineWidth = 3; ctx.beginPath();
-      for (i = 0; i <= 120; i++) {
-        var vv = VL + i / 120 * (VH - VL), yy = py(cur(vv) * 1000);
-        if (i === 0) ctx.moveTo(px(vv), yy); else ctx.lineTo(px(vv), yy);
-      }
-      ctx.stroke();
-      ctx.fillStyle = v("--coral"); ctx.beginPath(); ctx.arc(px(V), py(mA), 7, 0, Math.PI * 2); ctx.fill();
-      text(ctx, "전류 (mA)", X0, Y0 - 4, { s: 10.5, c: v("--mist") });
-      text(ctx, "한쪽으로만 흐른다", X1, Y0 - 4, { s: 10.5, a: "right", c: v("--mist") });
+      pill(ctx, "전압 – 전류 곡선 · 한쪽으로만 흐른다", 500, 52, { s: 12, c: KS.blue });
+      var g = K.chart(ctx, { x: 460, y: 62, w: 420, h: 248, pl: 44, x0: -2, x1: 1, y0: 0, y1: 5, xt: 3, yt: 5,
+        xf: function (q) { return (q > 0 ? "+" : (q < 0 ? "−" : "")) + Math.abs(Math.round(q)) + " V"; }, yf: function (q) { return Math.round(q) + " mA"; } });
+      K.line(ctx, { x: g.X(0), y: g.T }, { x: g.X(0), y: g.B }, "rgba(200,210,255,.4)", 1.2);
+      K.line(ctx, { x: g.L, y: g.Y(1) }, { x: g.R, y: g.Y(1) }, KS.orange, 1.4, [4, 4]);
+      pill(ctx, "1 mA", g.L + 8, g.Y(1) - 6, { s: 10.5, c: KS.orange });
+      var pts = [];
+      for (i = 0; i <= 120; i++) { var vv = -2 + i / 120 * 3; pts.push([vv, clamp(cur(vv) * 1000, 0, 5)]); }
+      K.plot(ctx, g, pts, KS.blue);
+      dot(ctx, g.X(V), g.Y(clamp(mA, 0, 5)), 5.5, "--coral", 3.4);
 
       mark(ctx, got.a, "순방향 1 mA 넘기기", 50, 332, { s: 11.5 });
       mark(ctx, got.b, "역방향에서 막히는 것 확인", 250, 332, { s: 11.5 });
       text(ctx, "이 문 하나가 LED · 태양 전지 · 트랜지스터의 바탕입니다", 870, 332, { s: 11, a: "right", c: v("--mist") });
       text(ctx, "순방향으로 약 0.6 V를 넘겨야 전류가 눈에 띄게 흐르기 시작합니다.", 50, 366, { s: 11.5, c: v("--mist") });
 
+      if (quiet === true) return;
       $("d-diode-info").innerHTML = "전압 <b>" + V.toFixed(2) + " V</b> · 전류 <b>" + (Math.abs(mA) >= 0.001 ? mA.toFixed(3) + " mA" : sci(I, 1) + " A") + "</b><br>" +
         (V > 0
           ? "p형 쪽에 ＋, n형 쪽에 －를 건 <b>순방향</b>입니다. 양공과 전자가 접합면으로 서로 밀려와 만나면서 전류가 흐릅니다. 다만 접합면의 장벽을 넘어야 해서, 약 <b>0.6 V</b>를 넘기기 전에는 전류가 거의 흐르지 않습니다."
@@ -1521,6 +1675,9 @@ function mark(ctx, ok, s, x, y, o) {
       }
     }
     cv._redraw = draw;
+    /* 전류가 흐를 때만 나르개가 움직인다 */
+    playBtn("d-diode-play", "⏸ 나르개 멈추기", "▶ 나르개 움직이기", function () { return oPlay; }, function (q) { oPlay = q; });
+    K.animate(cv, function (dt) { if (oPlay && cur(V) * 1000 >= 1) { oT += dt; draw(true); } });
     $("d-v").addEventListener("input", function (e) { V = +e.target.value; $("d-v-val").textContent = V.toFixed(2) + " V"; draw(); check(); });
     window.sthSort({
       mount: "s4-sort",

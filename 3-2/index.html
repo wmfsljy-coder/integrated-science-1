@@ -48,7 +48,7 @@
         <section class="scene" data-title="진공 통 — 공기를 빼 보자">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">유진</span>“통 안의 <b>공기의 양</b>을 0%까지 줄일 수 있습니다. 공기가 있으면 떨어지는 물체는 <b>공기 저항</b>을 받는데, 이 힘은 빨라질수록 커집니다. 그러다 중력과 크기가 같아지면 더 빨라지지 못하고 일정한 속도(종단 속도)로 떨어지죠. 깃털은 넓고 가벼워서 그 속도가 아주 작습니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-vac" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-vac" width="900" height="360"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">통 안의 공기의 양<span class="val" id="a-air-val">60%</span></div>
@@ -65,7 +65,7 @@
         <section class="scene" data-title="낙하 계산기 — 천체를 바꿔 보자">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">유진</span>“공기가 없을 때 낙하는 <b>오직 중력 가속도 g</b> 하나로 정해집니다. 떨어진 거리는 <b>h = ½gt²</b>, 그 순간의 속도는 <b>v = gt</b>. 천체마다 g가 다르니 같은 높이라도 걸리는 시간이 달라지죠. 계산기를 드릴 테니 직접 맞춰 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-fall" width="900" height="380"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-fall" width="900" height="380"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">떨어뜨리는 천체</div>
@@ -89,7 +89,7 @@
         <section class="scene" data-title="던지면 어떻게 될까 — 포물선에서 궤도까지">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">유진</span>“이번엔 <b>수평으로</b> 던져 봅시다. 던진 공은 앞으로 나아가면서 동시에 아래로 떨어지죠. 그런데 <b>아래로 떨어지는 운동</b>만 떼어 놓고 보면, 그냥 놓은 공과 무엇이 다를까요? 두 공을 나란히 놓고 비교해 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-proj" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-proj" width="900" height="320"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">수평으로 던지는 속도 (m/s)<span class="val" id="a-vx-val">0 m/s</span></div>
@@ -101,12 +101,13 @@
           </div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">유진</span>“그럼 아주 세게 던지면요? <span data-view="who:아이작 뉴턴">뉴턴</span>이 <span data-view="commons:Newton's Principia title page.png|퍼블릭 도메인|뉴턴 『프린키피아』(1687) 초판 속표지">1687년 책</span>에 그려 넣은 생각 실험이 바로 이겁니다. 공기가 없는 높은 산꼭대기에 대포를 놓고 수평으로 쏩니다. 점점 세게 쏘면 떨어지는 지점이 멀어지다가, 어느 순간 <b>땅이 휘어지는 만큼 떨어져</b> 영영 바닥에 닿지 못합니다. 그게 인공위성입니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-cannon" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-cannon" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">대포알의 수평 속도 (km/s)<span class="val" id="a-vc-val">3.00 km/s</span></div>
                 <input type="range" id="a-vc" min="0.5" max="12" step="0.05" value="3">
               </div>
+              <button type="button" class="btn sm" id="a-cannon-play">⏸ 대포알 멈추기</button>
             </div>
             <div class="info-card" id="a-cannon-info"></div>
           </div>
@@ -154,7 +155,7 @@
         <section class="scene" data-title="저울이 재는 것은 무엇인가">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">물리 선생님</span>“체중계는 사실 <b>질량을 재는 기계가 아니란다.</b> 체중계가 재는 것은 <b>발바닥을 떠받치는 힘(수직 항력 N)</b>이야. 엘리베이터가 가속도 a로 움직이면 서윤이에게 작용하는 알짜힘이 ma가 되어야 하니까, <b>N − mg = ma</b>, 곧 <b>N = m(g + a)</b>. 가속도를 직접 바꿔 보렴.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-elev" width="900" height="380"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-elev" width="900" height="380"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">엘리베이터의 가속도 a (위쪽이 +, m/s²)<span class="val" id="b-a-val">0.0</span></div>
@@ -170,7 +171,7 @@
         <section class="scene" data-title="화물 로봇 — F = ma 맞추기">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">물리 선생님</span>“이제 운동 제2법칙을 손으로 만져 보자. 창고의 화물 로봇을 밀고 있는데 바닥에서는 <b>마찰력</b>이 반대로 작용하지. 물체를 움직이는 것은 미는 힘 하나가 아니라 <b>모든 힘을 합친 알짜힘</b>이야. <b>a = (F − f) / m</b>.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-fma" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-fma" width="900" height="300"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">미는 힘 F (N)<span class="val" id="b-F-val">10</span></div>
@@ -192,7 +193,7 @@
               <div class="eyebrow">같은 설정으로 5초 동안</div>
               <h2 class="display" style="font-size:18px;">속도-시간 그래프 · 위치-시간 그래프</h2>
             </div>
-            <div class="canvas-wrap"><canvas id="c-gr" width="900" height="280"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-gr" width="900" height="280"></canvas></div>
             <div class="toggle-row" style="margin:0 22px 18px;"><button class="btn primary" id="b-play" type="button">▶ 5초 동안 달려 보기</button></div>
             <div class="info-card" id="b-gr-info"></div>
           </div>
@@ -204,7 +205,7 @@
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">서윤</span>“선생님, 그럼 제가 친구를 밀면 친구만 밀려나야 하잖아요. 그런데 얼음판에서는 저도 뒤로 밀려나던데요?”</div></div>
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">물리 선생님</span>“그게 운동 제3법칙이야. 힘은 <b>언제나 둘이 짝</b>으로 나타나거든. 네가 친구를 미는 순간 친구도 똑같은 크기의 힘으로 너를 민단다. 마찰이 거의 없는 얼음판에서 직접 확인해 보자. 두 사람이 0.5초 동안 200 N으로 서로를 밀어낸다고 하자.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-push" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-push" width="900" height="320"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">서윤(A)의 질량 (kg)<span class="val" id="b-ma-val">60 kg</span></div>
@@ -260,7 +261,7 @@
         <section class="scene" data-title="수레 두 대 — 충돌 전후에 변하지 않는 것">
           <div class="story"><div class="who">👩‍🔧</div><div class="say"><span class="name">하늘</span>“답을 확인하기 전에 기본부터 봅시다. 마찰이 거의 없는 레일 위에서 수레 A가 <b>3.0 m/s</b>로 굴러와 멈춰 있는 수레 B와 부딪힙니다. <b>운동량 p = mv</b>이고, 충돌 전후의 <b>운동량의 합은 언제나 같습니다.</b> 정말 그런지 여러 조건에서 확인해 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-cart" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-cart" width="900" height="360"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">수레 A의 질량 (kg)<span class="val" id="c-ma-val">4</span></div>
@@ -288,7 +289,7 @@
         <section class="scene" data-title="야구공 받기 — 충격량 = 힘 × 시간">
           <div class="story"><div class="who">👩‍🔧</div><div class="say"><span class="name">하늘</span>“이제 핵심입니다. 운동량을 바꾸려면 <b>힘</b>을 <b>시간</b>만큼 주어야 해요. 이 곱을 <b>충격량</b>이라 하고, <b>충격량 = 운동량의 변화</b>입니다(F·Δt = Δp). 시속 144 km로 날아오는 야구공을 맨손으로 받아 봅시다. 공을 멈추는 데 필요한 충격량은 <b>정해져 있습니다.</b> 우리가 바꿀 수 있는 것은 <b>시간</b>뿐이에요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-catch" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-catch" width="900" height="340"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">손을 뒤로 빼며 공을 멈추는 시간 (초)<span class="val" id="c-t-val">0.010 초</span></div>
@@ -304,7 +305,7 @@
         <section class="scene" data-title="최종 시험 — 자동차 앞부분을 설계하라">
           <div class="story"><div class="who">👩‍🔧</div><div class="say"><span class="name">하늘</span>“마지막 과제입니다. 시속 50 km(14 m/s)로 달리던 1,400 kg 자동차를 벽에 부딪히게 합니다. 앞부분이 <b>찌그러지는 거리</b>를 설계하세요. 너무 단단하면 순식간에 멈춰 탑승자가 못 견디고, 너무 무르면 찌그러짐이 <b>승객실까지</b> 밀고 들어옵니다. 앞부분에 쓸 수 있는 길이는 <b>1.20 m</b>까지예요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-crush" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-crush" width="900" height="340"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">앞부분이 찌그러지는 거리 d (m)<span class="val" id="c-d-val">0.20 m</span></div>
@@ -392,6 +393,7 @@
 <script src="../assets/account.js"></script>
 <script src="episodes.js"></script>
 <script src="worked.js"></script>
+<script src="handoff.js"></script>
 <script src="quiz-items.js"></script>
 <script src="../assets/review.js"></script>
 <script src="../assets/peer.js"></script>

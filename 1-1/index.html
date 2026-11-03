@@ -48,7 +48,7 @@
         <section class="scene" data-title="조사 ① — 두 저울로 같은 힘 재기">
           <div class="story"><div class="who">👩‍🚀</div><div class="say"><span class="name">한나</span>“먼저 두 단위가 얼마나 다른지부터 봅시다. 똑같은 힘을 <b>뉴턴 저울</b>과 <b>파운드힘 저울</b>로 동시에 재는 장치를 만들어 왔어요. 손잡이를 당겨 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-gauge" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-gauge" width="900" height="320"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">당기는 힘 (뉴턴 저울 눈금)<span class="val" id="a-f-val">10.0 N</span></div>
@@ -63,11 +63,13 @@
         <section class="scene" data-title="조사 ② — 궤도를 다시 계산하다">
           <div class="story"><div class="who">👩‍🚀</div><div class="say"><span class="name">한나</span>“이제 사고를 재현합니다. 지상 팀이 보낸 숫자를 항법 컴퓨터에 넣기 전에 <b>환산 계수</b>를 곱해야 해요. 계수를 바꾸면 화성에 닿을 때의 고도가 어떻게 달라지는지 보세요. <b>계수를 1로 두면</b> 단위를 바꾸지 않고 그냥 넣은 셈입니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-orbit" width="900" height="360"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="a-orbit" width="900" height="360"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="a-orbit-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">항법 컴퓨터에 넣기 전 곱하는 환산 계수<span class="val" id="a-k-val">× 1.0</span></div>
                 <input type="range" id="a-k" min="0.5" max="6" step="0.1" value="1">
+                <button type="button" class="btn sm" id="a-orbit-play" style="margin-top:10px">⏸ 움직임 멈추기</button>
               </div>
             </div>
             <div class="info-card" id="a-orbit-info"></div>
@@ -78,17 +80,18 @@
         <section class="scene" data-title="재발 방지 위원회 — 기준을 다시 세우다">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">표준 연구원 도윤</span>“원인은 찾았습니다. 이제 다시는 같은 일이 없도록 <b>기준</b>을 정리해야죠. 세상의 모든 물리량은 단 <b>7개의 기본량</b>에서 나옵니다. 카드를 눌러 하나씩 확인해 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-cards" width="900" height="330"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-cards" width="900" height="330"></canvas></div>
             <div class="info-card" id="a-cards-info">카드를 누르면 그 기본량의 단위와 정의가 여기에 나타납니다.</div>
           </div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">도윤</span>“기본량 가운데 <b>온도</b>는 조금 특별합니다. 우리가 쓰는 섭씨온도(℃)는 SI 기본단위가 아니에요. 기본단위는 <b>켈빈(K)</b>이고, 시작점이 다릅니다. 직접 움직여 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-temp" width="900" height="230"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-temp" width="900" height="230"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">섭씨온도<span class="val" id="a-c-val">25 ℃</span></div>
                 <input type="range" id="a-c" min="-273" max="200" step="1" value="25">
               </div>
+              <button type="button" class="btn sm" id="a-temp-play">⏸ 움직임 멈추기</button>
             </div>
             <div class="info-card" id="a-temp-info"></div>
           </div>
@@ -133,7 +136,7 @@
         <section class="scene" data-title="산책 ① — 배율 손잡이를 돌려라">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">동아리 선생님</span>“직접 걸어 보면 알겠지. 손잡이를 한 칸 움직일 때마다 화면 한 변이 <b>10배</b>가 된다. 가운데가 지금 보이는 것, 양옆은 한 걸음 앞뒤의 모습이야.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-walk" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-walk" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">화면 한 변의 길이 · 10ⁿ m<span class="val" id="b-n-val">n = −2</span></div>
@@ -148,7 +151,7 @@
         <section class="scene" data-title="산책 ② — 두 크기는 몇 배 차이일까">
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">세민</span>“걸음 수를 세면서 알았어요. <b>두 크기의 배율 차이 = 지수의 차</b>네요! 표지 두 개를 꽂아서 확인해 볼래요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-cmp" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-cmp" width="900" height="360"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">표지 A · 10ⁿ m<span class="val" id="b-ea-val">n = 0</span></div>
@@ -168,11 +171,13 @@
         <section class="scene" data-title="산책 ③ — 빛으로 거리를 재다">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">동아리 선생님</span>“우주는 너무 넓어서 미터로 말하면 0이 스무 개도 넘지. 그래서 천문학자들은 <b>빛이 가는 시간</b>으로 거리를 말한단다. 1 m의 정의도 결국 빛이 간 시간이었지? 거리를 바꿔 가며 빛이 얼마나 걸리는지 보렴.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-light" width="900" height="320"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="b-light" width="900" height="320"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="b-light-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">거리 · 10ⁿ m<span class="val" id="b-d-val">n = 7.0</span></div>
                 <input type="range" id="b-d" min="5" max="26" step="0.1" value="7">
+                <button type="button" class="btn sm" id="b-light-play" style="margin-top:10px">⏸ 움직임 멈추기</button>
               </div>
             </div>
             <div class="info-card" id="b-light-info"></div>
@@ -226,7 +231,7 @@
               <button data-t="1">사람 몸의 세포 수</button>
               <button data-t="2">수소 원자의 지름</button>
             </div>
-            <div class="canvas-wrap"><canvas id="c-sci" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-sci" width="900" height="300"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">소수점을 옮긴 칸 수 (왼쪽으로 옮기면 +)<span class="val" id="c-p-val">0칸</span></div>
@@ -241,12 +246,13 @@
         <section class="scene" data-title="구조 ② — 물 한 컵에는 분자가 몇 개">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">과학 선생님</span>“분자는 너무 작아서 한 개씩 셀 수가 없어. 그래서 기본량 가운데 하나인 <b>물질량(mol)</b>이 있는 거야. <b>1 mol = 6.02×10²³ 개</b>. 물은 1 mol이 18.0 g 이란다. 저울에 물을 부어 보렴.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-water" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-water" width="900" height="320"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">비커에 담은 물의 질량<span class="val" id="c-m-val">50 g</span></div>
                 <input type="range" id="c-m" min="0" max="360" step="1" value="50">
               </div>
+              <button type="button" class="btn sm" id="c-water-play">⏸ 움직임 멈추기</button>
             </div>
             <div class="info-card" id="c-water-info"></div>
           </div>
@@ -256,7 +262,7 @@
         <section class="scene" data-title="구조 ③ — 우리 반의 세포를 모두 더하면">
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">세민</span>“이제 자신 있어요! 그런데 보고서 마지막 문장이 남았어요. <b>‘우리 반 전체의 세포 수’</b>… 한 사람이 3.7×10¹³ 개니까, 인원을 바꿔 가며 세어 볼게요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-class" width="900" height="280"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-class" width="900" height="280"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">우리 반 인원<span class="val" id="c-n-val">1명</span></div>
@@ -339,6 +345,7 @@
 <script src="../assets/account.js"></script>
 <script src="episodes.js"></script>
 <script src="worked.js"></script>
+<script src="handoff.js"></script>
 <script src="quiz-items.js"></script>
 <script src="../assets/review.js"></script>
 <script src="../assets/peer.js"></script>

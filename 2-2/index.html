@@ -49,8 +49,8 @@
         <section class="scene" data-title="판독실 — 주기율표를 훑다">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서윤</span>“먼저 표 자체를 읽어야 합니다. 원자 번호를 1부터 20까지 밀어 보세요. 가운데에는 그 원자의 <b>전자 껍질</b>이, 아래에는 원자 반지름과 이온화 에너지가 그려집니다. 어디서 무엇이 <b>되풀이</b>되는지 눈으로 찾아보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-tab" width="900" height="300"></canvas></div>
-            <div class="canvas-wrap"><canvas id="a-trend" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-tab" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-trend" width="900" height="300"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">원자 번호<span class="val" id="a-z-val">1 · 수소</span></div>
@@ -65,7 +65,7 @@
         <section class="scene" data-title="빈칸 예측실 — 에카규소">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서윤</span>“이제 1871년의 멘델레예프가 되어 보세요. 빈칸의 <b>위·아래·왼쪽·오른쪽</b> 네 이웃의 값이 화면에 나와 있습니다. 성질이 표를 따라 <b>고르게</b> 변한다면, 빈칸의 값은 어디쯤에 있어야 할까요? 두 슬라이더를 움직여 예측값을 적어 내세요. ‘높다 · 낮다’로만 알려 드리겠습니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-eka" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-eka" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">예측 · 원자량<span class="val" id="a-am-val">60.0</span></div>
@@ -94,12 +94,13 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap"><canvas id="a-rx" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-rx" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">몇 번째 가로줄(주기)까지 내려갈까<span class="val" id="a-per-val">2주기</span></div>
                 <input type="range" id="a-per" min="2" max="4" step="1" value="2">
               </div>
+              <button type="button" class="btn sm" id="a-rx-play">⏸ 실험 장면 멈추기</button>
             </div>
             <div class="info-card" id="a-rx-info"></div>
           </div>
@@ -157,7 +158,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap"><canvas id="b-make" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-make" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label"><span id="b-n-label">옮길 전자 수</span><span class="val" id="b-n-val">0개</span></div>
@@ -190,12 +191,13 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap"><canvas id="b-prop" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-prop" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">온도<span class="val" id="b-t-val">20 ℃</span></div>
                 <input type="range" id="b-t" min="-40" max="1200" step="20" value="20">
               </div>
+              <button type="button" class="btn sm" id="b-prop-play">⏸ 입자 멈추기</button>
             </div>
             <div class="info-card" id="b-prop-info"></div>
           </div>
@@ -247,7 +249,7 @@
         <section class="scene" data-title="사면체 조립대 — 산소를 몇 개나 나눠 쓸까">
           <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">민주</span>“사면체 하나에는 산소가 4개 있습니다. 그 산소를 <b>옆 사면체와 몇 개나 나눠 쓰느냐</b>를 슬라이더로 정해 보세요. 나눠 쓴 산소는 두 사면체가 반씩 가진 셈이 되니, 규소 하나가 차지하는 산소 수가 줄어듭니다. 그 숫자가 곧 광물의 이름표입니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-tet" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-tet" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">이웃과 나눠 쓰는 산소 수<span class="val" id="c-share-val">0개</span></div>
@@ -271,7 +273,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap"><canvas id="c-carb" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-carb" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">탄소 개수<span class="val" id="c-n-val">1개</span></div>
@@ -295,7 +297,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap"><canvas id="c-poly" width="900" height="380"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-poly" width="900" height="380"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">이어 붙인 단위체 수<span class="val" id="c-len-val">2개</span></div>
@@ -346,7 +348,7 @@
         <section class="scene" data-title="띠 간격 실험대">
           <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">하준</span>“물질 속 전자는 아무 데나 있을 수 없고 <b>띠</b> 안에만 있습니다. 전자로 꽉 찬 아래쪽 띠에서 텅 빈 위쪽 띠로 건너뛰어야 전류가 흐르는데, 그 사이의 틈을 <b>띠 간격</b>이라고 합니다. 틈의 너비와 온도를 바꿔 가며, 건너뛴 전자의 비율이 어떻게 달라지는지 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="d-band" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="d-band" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">띠 간격 E<sub>g</sub> (eV)<span class="val" id="d-gap-val">1.1</span></div>
@@ -356,6 +358,7 @@
                 <div class="ctrl-label">온도<span class="val" id="d-t-val">300 K</span></div>
                 <input type="range" id="d-t" min="100" max="1000" step="20" value="300">
               </div>
+              <button type="button" class="btn sm" id="d-band-play">⏸ 전자 멈추기</button>
             </div>
             <div class="info-card" id="d-band-info"></div>
           </div>
@@ -375,12 +378,13 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap"><canvas id="d-dope" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="d-dope" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">섞는 양 (1 cm³ 안의 불순물 원자 수)<span class="val" id="d-dop-val">10¹²개</span></div>
                 <input type="range" id="d-dop" min="12" max="19" step="0.5" value="12">
               </div>
+              <button type="button" class="btn sm" id="d-dope-play">⏸ 나르개 멈추기</button>
             </div>
             <div class="info-card" id="d-dope-info"></div>
           </div>
@@ -390,12 +394,13 @@
         <section class="scene" data-title="다이오드 시험대 — 한쪽으로만">
           <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">하준</span>“n형과 p형을 맞붙이면 <b>다이오드</b>가 됩니다. 전압의 방향을 바꿔 가며 전류가 얼마나 흐르는지 재 보세요. 이 한 가지 성질이 오늘날 모든 전자 기기의 바탕입니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="d-diode" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="d-diode" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">걸어 준 전압<span class="val" id="d-v-val">0.00 V</span></div>
                 <input type="range" id="d-v" min="-2" max="1" step="0.05" value="0">
               </div>
+              <button type="button" class="btn sm" id="d-diode-play">⏸ 나르개 멈추기</button>
             </div>
             <div class="info-card" id="d-diode-info"></div>
           </div>
@@ -475,6 +480,7 @@
 <script src="../assets/account.js"></script>
 <script src="episodes.js"></script>
 <script src="worked.js"></script>
+<script src="handoff.js"></script>
 <script src="quiz-items.js"></script>
 <script src="../assets/review.js"></script>
 <script src="../assets/peer.js"></script>
