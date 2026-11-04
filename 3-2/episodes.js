@@ -1123,83 +1123,233 @@ function ticker(box) {
     draw(); mission();
   })();
 
-  /* 장면 4 — 크럼플 존 설계 ---------------------------------------------- */
+  /* 장면 4 — 크럼플 존 설계 (아이소메트릭 단면 모형: 벽과 자동차를 반으로 잘라 속을 보여 준다) */
   (function () {
     var canvas = $("c-crush"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
     var MC = 1400, V0 = 14, LIMIT = 1.20, GMAX = 20;
     var d = 0.20;
     var got = window.sthState("crushGot") || { a: false, b: false };
 
-    function draw() {
-      paper(ctx, W, H);
-      var acc = V0 * V0 / (2 * d), gN = acc / G, F = MC * acc, dt = 2 * d / V0, J = MC * V0;
-      var okG = gN <= GMAX, okL = d <= LIMIT, ok = okG && okL;
-      /* 벽과 자동차 */
-      var wall = 470, road = 232;
-      /* 콘크리트 벽과 도로 */
-      var wg = ctx.createLinearGradient(wall, 0, wall + 26, 0); wg.addColorStop(0, "#c8ccd4"); wg.addColorStop(1, "#7a808c");
-      ctx.fillStyle = wg; ctx.fillRect(wall, 70, 26, road - 70 + 10);
-      ctx.fillStyle = "rgba(255,200,40,.85)"; for (var hz = 0; hz < 6; hz++) ctx.fillRect(wall, 80 + hz * 28, 26, 10);
-      var rdg = ctx.createLinearGradient(0, road, 0, road + 14); rdg.addColorStop(0, "#5a6070"); rdg.addColorStop(1, "#2a2e38");
-      ctx.fillStyle = rdg; ctx.fillRect(60, road, 436, 14);
-      var SC = 150;                                     // 1 m → 150 px
-      var crush = clamp(d, 0, 1.5) * SC * 0.62;
-      var cabinW = 150, front = clamp(LIMIT, 0, 1.5) * SC * 0.62;
-      var carL = wall - cabinW - front;
-      /* 승객실 */
-      /* 승객실 — 차체 도장(금속) 과 창 */
-      var cb = ctx.createLinearGradient(0, road - 72, 0, road);
-      cb.addColorStop(0, "#9ff5e8"); cb.addColorStop(.2, "#2ed3bd"); cb.addColorStop(1, "#11665c");
-      ctx.fillStyle = cb; ctx.beginPath(); ctx.roundRect(carL, road - 72, cabinW, 72, 8); ctx.fill();
-      ctx.fillStyle = "rgba(10,30,50,.65)"; ctx.beginPath(); ctx.roundRect(carL + 16, road - 64, cabinW - 40, 24, 5); ctx.fill();
-      ctx.fillStyle = "rgba(255,255,255,.18)"; ctx.fillRect(carL + 20, road - 62, 20, 20);
-      pill(ctx, "승객실", carL + cabinW / 2, road - 14, { s: 12, a: "center", c: "#ffffff" });
-      /* 앞부분 (쓸 수 있는 길이) */
-      ctx.strokeStyle = "rgba(200,210,255,.6)"; ctx.setLineDash([4, 4]); ctx.lineWidth = 2;
-      ctx.strokeRect(carL + cabinW, road - 58, front, 58); ctx.setLineDash([]);
-      /* 실제 찌그러지는 부분 — 구겨진 금속 */
-      var cw2 = Math.min(crush, front + 90), cc = ok ? "--green" : "--rose";
-      var cg3 = ctx.createLinearGradient(0, road - 58, 0, road); cg3.addColorStop(0, rgba(cc, .75)); cg3.addColorStop(1, rgba(cc, .35));
-      ctx.fillStyle = cg3; ctx.fillRect(wall - cw2, road - 58, cw2, 58);
-      ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1.2; ctx.beginPath();
-      for (var zz = 0; zz <= 8; zz++) { var zx = wall - cw2 + cw2 * zz / 8; ctx.lineTo(zx, road - 58 + (zz % 2 ? 10 : 2)); }
-      ctx.stroke();
-      pill(ctx, "찌그러짐 " + d.toFixed(2) + " m", carL + cabinW + 4, road - 70, { s: 11.5, c: v(ok ? "--green-700" : "--rose-700") });
-      text(ctx, "앞부분 길이 1.20 m", carL + cabinW, road + 32, { s: 10.5, c: v("--mist") });
-      ball(ctx, carL + 36, road + 4, 12, "#3a3f4a"); ball(ctx, carL + cabinW - 20, road + 4, 12, "#3a3f4a");
-      pill(ctx, "1,400 kg · 14 m/s (시속 50 km)", 60, 44, { s: 12.5, c: KS.ink });
-      if (!okL) pill(ctx, "⚠ 찌그러짐이 승객실까지 밀고 들어왔습니다", 60, 284, { s: 12.5, c: v("--rose-700") });
-      else if (!okG) pill(ctx, "⚠ 너무 단단합니다 — 탑승자가 견디지 못합니다", 60, 284, { s: 12.5, c: v("--rose-700") });
-      else pill(ctx, "✅ 두 기준을 모두 통과했습니다", 60, 284, { s: 12.5, c: v("--green-700") });
-      text(ctx, "충격량 = 1,400 × 14 = " + J.toLocaleString() + " N·s — 설계를 바꿔도 이 값은 그대로입니다.", 60, 310, { s: 11, c: v("--mist") });
+    /* ── 모형 좌표: x = 벽(먼 쪽) → 차 뒤쪽, y = 차 폭 방향(YC 에서 반으로 자름), z 위. 1 m = M 그림 단위 ── */
+    var DH = 410, M = 70, XW = 40, YA = 37, YC = 100, ZW = 112;
+    var I = K.iso({ ox: 480, oy: 126, s: 0.92, L: 420, D: 150 });
+    var I2 = K.iso({ ox: 480, oy: 126, s: 0.92, L: 420, D: YC });     /* 자른 면(y = YC) 위에 그릴 때 */
+    /* 차 옆모습 윤곽(앞 끝 0 m → 뒤 4.3 m). 셋째 값은 구겨질 때 주름이 지는 방향 */
+    var TOP = [[0, 0.25], [0, 0.55], [0.1, 0.78]], BOT = [[4.0, 0.25], [3.0, 0.25], [2.4, 0.25], [1.2, 0.25], [0.9, 0.25, 1], [0.6, 0.25, -1], [0.3, 0.25, 1]], k;
+    for (k = 1; k <= 15; k++) { var hs = 0.1 + 1.1 * k / 15; TOP.push([hs, 0.78 + 0.12 * (hs - 0.1) / 1.1, k < 15 ? (k % 2 ? 1 : -1) : 0]); }
+    TOP.push([1.75, 1.42], [2.4, 1.43], [3.2, 1.45], [3.85, 1.0], [4.25, 0.95], [4.3, 0.3]);
+    var NT = TOP.length, BODY = TOP.concat(BOT);
 
-      /* 오른쪽 계기 */
-      var rows = [
-        ["멈추는 데 걸리는 시간 Δt", dt.toFixed(3) + " 초"],
-        ["탑승자의 감속도", gN.toFixed(1) + " g  (" + acc.toFixed(0) + " m/s²)"],
-        ["자동차가 받는 평균 힘", Math.round(F).toLocaleString() + " N"],
-        ["감속도 기준 (20 g 이하)", okG ? "통과" : "탈락"],
-        ["길이 기준 (1.20 m 이하)", okL ? "통과" : "탈락"]
-      ];
-      pill(ctx, "시험 결과", 560, 44, { s: 13, c: KS.blue });
-      rows.forEach(function (r, i) {
-        var yy = 82 + i * 34;
-        var good = i < 3 ? null : (i === 3 ? okG : okL);
-        glass(ctx, 556, yy - 19, 320, 28, good === null ? "#8fa6ff" : (good ? "--green" : "--rose"), 9);
-        text(ctx, r[0], 568, yy, { s: 11.5, c: v("--mist") });
-        text(ctx, r[1], 866, yy + 1, { s: 12, w: "800", a: "right", c: good === null ? v("--ink") : (good ? v("--green-700") : v("--rose-700")) });
+    /* 찌그러진 c m 일 때 원래 s 자리가 앞 끝에서 얼마나 떨어져 있나(앞부분 1.2 m 가 고르게 접힌다고 봄) */
+    function sDef(s, c) {
+      if (c <= LIMIT) { var r = (LIMIT - c) / LIMIT; return s < LIMIT ? s * r : s - c; }
+      var e = c - (LIMIT);                       /* 앞부분이 다 접힌 뒤 승객실이 밀린 길이 */
+      if (s < LIMIT) return 0;
+      if (s < 2.4) return (s - LIMIT) * (1.2 - e) / 1.2;
+      return s - c;
+    }
+    function amp(c) { var r = clamp((LIMIT - c) / LIMIT, 0, 1); return 0.09 * Math.sqrt(1 - r * r); }
+    function wx(s, c, gap) { return XW + (gap + sDef(s, c)) * M; }
+    function pc(s, z, c, gap) { return I.P(wx(s, c, gap), YC, z * M); }
+    function pts(c, gap) {
+      var A = amp(c);
+      return BODY.map(function (p) { return { x: wx(p[0], c, gap), z: (p[1] + (p[2] || 0) * A) * M, s: p[0] }; });
+    }
+    function path(list, y) { ctx.beginPath(); list.forEach(function (q, i) { var p = I.P(q.x, y, q.z); if (i) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); }); ctx.closePath(); }
+    function seg(a, b, col2, w) { ctx.strokeStyle = col2; ctx.lineWidth = w; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+
+    function metrics() {
+      var acc = V0 * V0 / (2 * d);
+      return { acc: acc, gN: acc / G, F: MC * acc, dt: 2 * d / V0, J: MC * V0, okG: acc / G <= GMAX, okL: d <= LIMIT };
+    }
+
+    /* 그림 상태: 재생 중이 아니면 충돌이 끝난 모습 */
+    var play = false, ph = 1, APP = 1.1;
+    function view() {
+      if (!play || ph >= 0.92) return { gap: 0, c: d, q: 1 };
+      if (ph < 0.45) return { gap: APP * (1 - ph / 0.45), c: 0, q: 0 };
+      var q = (ph - 0.45) / 0.47;
+      return { gap: 0, c: d * (1 - (1 - q) * (1 - q)), q: q };   /* 고르게 느려지며 멈춘다 */
+    }
+
+    function drawModel(m) {
+      var st = view(), c = st.c, gap = st.gap, ok = m.okG && m.okL, box = [0, W];
+      K.studio(ctx, 0, 0, W, DH, { x: I.P(210, 75, 0).x, y: I.P(420, 150, 0).y - 40, rx: 330, ry: 56 });
+      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, W, DH, 14); ctx.clip();
+      /* 시험장 바닥 */
+      I.box(ctx, 0, 0, -10, 420, 150, 0, "#d9dee5", "#a3abb6", "#8a93a0");
+      ctx.save(); ctx.setLineDash([12, 9]);
+      seg(I.P(60, 128, 0), I.P(420, 128, 0), "rgba(240,190,40,.9)", 2.2);
+      ctx.restore();
+      /* 콘크리트 벽(자른 면이 보이게 반만) */
+      I.box(ctx, 8, 10, 0, XW, YC, ZW, "#d7dbe1", "#a9afb8", "#c3c8cf");
+      I2.face(ctx, "front", function () {
+        ctx.save(); ctx.beginPath(); ctx.rect(8, 0, XW - 8, ZW); ctx.clip();
+        var R = K.rng(41);
+        for (var i = 0; i < 140; i++) { ctx.fillStyle = R() > .5 ? "rgba(255,255,255,.35)" : "rgba(60,60,70,.3)"; ctx.fillRect(8 + R() * (XW - 8), R() * ZW, 1.6, 1.6); }
+        ctx.restore();
       });
-      text(ctx, "찌그러지는 거리가 길수록 멈추는 시간이 늘어", 556, 268, { s: 10.5, c: v("--mist") });
-      text(ctx, "같은 충격량을 더 작은 힘으로 나누어 받습니다.", 556, 288, { s: 10.5, c: v("--mist") });
+      for (k = 0; k < 6; k++) {
+        var z0 = 64 + k * 8, z1 = z0 + 8;
+        I.quad(ctx, I.P(XW, 10, z0), I.P(XW, YC, z0), I.P(XW, YC, z1), I.P(XW, 10, z1), k % 2 ? "#2b2b30" : "#f2c230");
+      }
+      /* 충돌 순간의 차(점선) — 찌그러진 만큼 차가 더 나아갔다 */
+      if (c > 0.005 && gap === 0) {
+        ctx.save(); ctx.setLineDash([5, 4]); path(pts(0, 0), YC); ctx.strokeStyle = "rgba(30,45,70,.55)"; ctx.lineWidth = 1.6; ctx.stroke(); ctx.restore();
+      }
+      /* 차의 먼 쪽 절반 — 윗면과 뒷면 */
+      var P = pts(c, gap), segs = [], i;
+      for (i = 0; i < NT - 1; i++) {
+        var a = P[i], b = P[i + 1], dx = b.x - a.x, dz = b.z - a.z;
+        if (dx > 0.01 || dz < -0.01) segs.push({ a: a, b: b, dx: dx, dz: dz, s: (a.s + b.s) / 2 });
+      }
+      segs.sort(function (u, w) { return (u.a.x + u.b.x) - (w.a.x + w.b.x); });
+      var paint = !m.okL && c > LIMIT ? "#c94f5c" : "#2ba493";
+      segs.forEach(function (g) {
+        var len = Math.sqrt(g.dx * g.dx + g.dz * g.dz) || 1, nz = g.dx / len, nx = -g.dz / len;
+        var glassy = (g.s > 1.2 && g.s < 1.75) || (g.s > 3.2 && g.s < 3.85);
+        var col2 = glassy ? "rgba(40,70,100,.82)" : K.tint(g.s < LIMIT ? (c > 0.02 ? "#3fb7a3" : "#2ba493") : paint, 0.7 + 0.36 * nz + 0.1 * nx);
+        I.quad(ctx, I.P(g.a.x, YA, g.a.z), I.P(g.b.x, YA, g.b.z), I.P(g.b.x, YC, g.b.z), I.P(g.a.x, YC, g.a.z), col2);
+        ctx.strokeStyle = col2; ctx.lineWidth = .6; ctx.stroke();
+      });
+      /* 자른 면: 차 속 */
+      var t0 = I.P(wx(0, c, gap), YC, 100), t1 = I.P(wx(0, c, gap), YC, 0);
+      var ig = ctx.createLinearGradient(0, t0.y, 0, t1.y); ig.addColorStop(0, "#eef2f6"); ig.addColorStop(1, "#c4ccd6");
+      path(P, YC); ctx.fillStyle = ig; ctx.fill(); ctx.strokeStyle = "#1d5f56"; ctx.lineWidth = 2.4; ctx.stroke();
+      /* 옆 유리 */
+      [[1.8, 2.85], [2.95, 3.7]].forEach(function (wv) {
+        var q1 = pc(wv[0], 1.0, c, gap), q2 = pc(wv[0] + 0.02, 1.36, c, gap), q3 = pc(wv[1], 1.38, c, gap), q4 = pc(wv[1], 1.0, c, gap);
+        ctx.beginPath(); ctx.moveTo(q1.x, q1.y); ctx.lineTo(q2.x, q2.y); ctx.lineTo(q3.x, q3.y); ctx.lineTo(q4.x, q4.y); ctx.closePath();
+        ctx.fillStyle = "rgba(120,175,215,.35)"; ctx.fill();
+      });
+      /* 앞부분: 엔진과 구겨지는 뼈대(주황) */
+      var fw = sDef(LIMIT, c), e1 = fw - 0.05, e0 = e1 - 0.55;
+      if (e0 < 0.03) { e0 = 0.03; e1 = 0.58; }
+      var ea = I.P(XW + (gap + e0) * M, YC, 0.32 * M), eb = I.P(XW + (gap + e1) * M, YC, 0.32 * M), ec = I.P(XW + (gap + e1) * M, YC, 0.74 * M), ed = I.P(XW + (gap + e0) * M, YC, 0.74 * M);
+      var eg = ctx.createLinearGradient(0, ed.y, 0, ea.y); eg.addColorStop(0, "#8d96a3"); eg.addColorStop(1, "#4b525d");
+      ctx.beginPath(); ctx.moveTo(ea.x, ea.y); ctx.lineTo(eb.x, eb.y); ctx.lineTo(ec.x, ec.y); ctx.lineTo(ed.x, ed.y); ctx.closePath(); ctx.fillStyle = eg; ctx.fill();
+      var A = amp(c);
+      [0.36, 0.84].forEach(function (zb) {
+        ctx.strokeStyle = "#e07b24"; ctx.lineWidth = 3.4; ctx.lineJoin = "round"; ctx.beginPath();
+        for (var j = 0; j <= 8; j++) { var p = pc(LIMIT * j / 8, zb + (j > 0 && j < 8 ? (j % 2 ? A : -A) : 0), c, gap); if (j) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); }
+        ctx.stroke();
+      });
+      /* 승객실 뼈대 */
+      var cage = !m.okL && c > LIMIT ? "#b3263a" : "#24434d";
+      [[[LIMIT, 0.3], [LIMIT, 0.9]], [[LIMIT, 0.3], [4.0, 0.3]], [[1.25, 0.9], [1.75, 1.4]], [[1.75, 1.4], [3.2, 1.42]], [[2.92, 0.3], [2.92, 1.42]], [[3.2, 1.42], [3.85, 0.98]]].forEach(function (l2) {
+        seg(pc(l2[0][0], l2[0][1], c, gap), pc(l2[1][0], l2[1][1], c, gap), cage, 4.6);
+      });
+      /* 바퀴 */
+      I2.face(ctx, "front", function () {
+        [0.85, 3.6].forEach(function (sw) {
+          var x = XW + (gap + Math.max(sDef(sw, c), 0.34)) * M, r = 0.31 * M;   /* 바퀴는 벽을 뚫지 않는다 */
+          ctx.fillStyle = "#23262c"; ctx.beginPath(); ctx.arc(x, 0.31 * M, r, 0, 6.2832); ctx.fill();
+          ctx.fillStyle = "#aab2bd"; ctx.beginPath(); ctx.arc(x, 0.31 * M, r * .52, 0, 6.2832); ctx.fill();
+        });
+      });
+      /* 의자·탑승자·안전띠·에어백 */
+      seg(pc(2.55, 0.5, c, gap), pc(3.05, 0.45, c, gap), "#3b3f46", 7);
+      seg(pc(3.05, 0.45, c, gap), pc(2.97, 1.12, c, gap), "#3b3f46", 7);
+      var lean = clamp(m.gN / 30, 0, 1) * 0.24 * (play ? st.q : 1);
+      var hip = [2.86, 0.6], sh = [2.8 - lean * 0.7, 1.02], hd = [2.76 - lean, 1.2], kn = [2.45, 0.63], ft = [2.28, 0.32];
+      seg(pc(hip[0], hip[1], c, gap), pc(kn[0], kn[1], c, gap), "#2f3f63", 6);
+      seg(pc(kn[0], kn[1], c, gap), pc(ft[0], ft[1], c, gap), "#2f3f63", 5);
+      seg(pc(hip[0], hip[1], c, gap), pc(sh[0], sh[1], c, gap), "#3f6fb5", 8);
+      seg(pc(sh[0], sh[1], c, gap), pc(2.3, 0.95, c, gap), "#e9b996", 4);
+      seg(pc(2.18, 0.84, c, gap), pc(2.3, 1.06, c, gap), "#1d2026", 3.6);
+      if (c > 0.02) {
+        var bag = pc(2.38, 1.02, c, gap), br = 0.17 * M * 0.92 * clamp(c / 0.12, 0.3, 1);
+        var bg = ctx.createRadialGradient(bag.x - br * .3, bag.y - br * .3, 2, bag.x, bag.y, br);
+        bg.addColorStop(0, "rgba(255,255,255,.98)"); bg.addColorStop(1, "rgba(205,212,222,.92)");
+        ctx.fillStyle = bg; ctx.beginPath(); ctx.arc(bag.x, bag.y, br, 0, 6.2832); ctx.fill();
+      }
+      var hp = pc(hd[0], hd[1], c, gap);
+      ctx.fillStyle = "#f1c7a5"; ctx.beginPath(); ctx.arc(hp.x, hp.y, 6.4, 0, 6.2832); ctx.fill();
+      seg(pc(sh[0] + 0.03, sh[1] + 0.02, c, gap), pc(hip[0] - 0.05, hip[1] + 0.02, c, gap), "#ff9a3c", 2.6);
+      /* 다가가는 동안: 속도 줄 */
+      if (gap > 0) {
+        for (k = 0; k < 4; k++) { var zl = (0.4 + k * 0.25) * M, xr = wx(4.3, 0, gap); seg(I.P(xr + 8, YC + 6, zl), I.P(xr + 30 + k * 6, YC + 6, zl), "rgba(40,60,90,.35)", 2); }
+      }
+      ctx.restore();
 
+      /* 이름표 */
+      I.label(ctx, 20, 10, ZW, "콘크리트 벽", -34, -10, "#f4f0e6", box);
+      if (c <= LIMIT) I.label(ctx, wx(0.55 * LIMIT, c, gap), YC, 0.9 * M, "구겨지는 앞부분(크럼플 존)", -46, 34, "#ffd08a", box);
+      else I.label(ctx, wx(1.5, c, gap), YC, 0.95 * M, "⚠ 승객실이 " + (c - LIMIT).toFixed(2) + " m 밀려 들어옴", -50, 44, "#ff9aac", box);
+      I.label(ctx, wx(2.5, c, gap), YA, 1.44 * M, "단단한 승객실 뼈대", 46, -34, "#bfe6ff", box);
+      I.label(ctx, wx(2.8, c, gap), YC, 1.2 * M, "탑승자 · 안전띠 · 에어백", 130, -6, "#f4f0e6", box);
+      if (c > 0.005 && gap === 0) {
+        var r0 = I.P(wx(4.3, c, 0), 128, 0), r1 = I.P(wx(4.3, 0, 0), 128, 0);
+        seg(r0, r1, "#c0392b", 2.4);
+        seg({ x: r0.x, y: r0.y - 6 }, { x: r0.x, y: r0.y + 6 }, "#c0392b", 2); seg({ x: r1.x, y: r1.y - 6 }, { x: r1.x, y: r1.y + 6 }, "#c0392b", 2);
+        K.pill(ctx, "충돌 뒤 차가 더 나아간 거리 = 찌그러진 거리 " + c.toFixed(2) + " m", (r0.x + r1.x) / 2, r1.y + 30, { s: 11.5, a: "center", c: "#ffd08a", box: box });
+      }
+      /* 큰 글자 */
+      var h1, h2, c2 = "#ffd35a";
+      if (play && ph < 0.45) { h1 = "벽을 향해 시속 50 km"; h2 = "벽까지 " + gap.toFixed(2) + " m · 느린 화면"; c2 = "#ffffff"; }
+      else if (play && ph < 0.92) { h1 = "앞부분이 접히는 중"; h2 = m.dt.toFixed(3) + "초 만에 멈춘다"; c2 = "#ffffff"; }
+      else if (!m.okL) { h1 = "너무 물렀다"; h2 = "찌그러짐이 승객실까지"; c2 = "#ff9aac"; }
+      else if (!m.okG) { h1 = "너무 단단하다"; h2 = "순식간에 멈춰 " + m.gN.toFixed(1) + " g"; c2 = "#ff9aac"; }
+      else { h1 = "알맞게 구겨졌다"; h2 = "승객실은 그대로 · " + m.gN.toFixed(1) + " g"; c2 = "#7ff0c4"; }
+      K.bigText(ctx, h1, 22, 54, 28, "#ffffff");
+      K.bigText(ctx, h2, 22, 88, 18, c2);
+      K.pill(ctx, "1,400 kg · 14 m/s (시속 50 km)", 22, 124, { s: 12, c: "#e8ecff" });
+      K.warn(ctx, W - 14, 30, "⚠ 벽과 차를 반으로 잘라 속을 보임 · 주름은 과장", "right");
+    }
+
+    function drawPanel(m) {
+      var y0 = DH + 8, ok = m.okG && m.okL;
+      K.stage(ctx, 0, y0, W, H - y0, "lab", { seed: 35 });
+      var g = K.chart(ctx, { x: 0, y: y0, w: 520, h: H - y0, pt: 30, pb: 34, x0: 0, x1: 0.24, y0: 0, y1: 1400, xt: 6, yt: 4, xl: "멈추는 데 걸린 시간 Δt (초)", yl: "평균 힘 (kN)", xf: function (q) { return q.toFixed(2); } });
+      var rx1 = g.X(Math.min(m.dt, 0.24)), ry = g.Y(Math.min(m.F / 1000, 1400));
+      ctx.fillStyle = ok ? "rgba(63,211,163,.32)" : "rgba(255,107,129,.30)"; ctx.fillRect(g.L, ry, rx1 - g.L, g.B - ry);
+      ctx.strokeStyle = ok ? KS.green : KS.red; ctx.lineWidth = 2.2; ctx.strokeRect(g.L, ry, rx1 - g.L, g.B - ry);
+      var fy = g.Y(MC * GMAX * G / 1000), lx = g.X(2 * LIMIT / V0);
+      K.line(ctx, { x: g.L, y: fy }, { x: g.R, y: fy }, KS.orange, 1.8, [6, 5]);
+      K.line(ctx, { x: lx, y: g.T }, { x: lx, y: g.B }, KS.violet, 1.8, [6, 5]);
+      pill(ctx, "20 g 한계", g.R - 4, fy - 6, { s: 11, a: "right", c: KS.orange });
+      pill(ctx, "길이 1.20 m 한계", lx + 6, g.T + 30, { s: 11, c: KS.violet });
+      pill(ctx, "넓이 = 충격량 " + m.J.toLocaleString() + " N·s (설계와 상관없이 같음)", g.R, y0 + 18, { s: 11, a: "right", c: KS.yellow });
+      var rows = [
+        ["멈추는 데 걸리는 시간 Δt", m.dt.toFixed(3) + " 초"],
+        ["탑승자의 감속도", m.gN.toFixed(1) + " g  (" + m.acc.toFixed(0) + " m/s²)"],
+        ["자동차가 받는 평균 힘", Math.round(m.F).toLocaleString() + " N"],
+        ["감속도 기준 (20 g 이하)", m.okG ? "통과" : "탈락"],
+        ["길이 기준 (1.20 m 이하)", m.okL ? "통과" : "탈락"]
+      ];
+      pill(ctx, "시험 결과", 540, y0 + 22, { s: 12.5, c: KS.blue });
+      rows.forEach(function (r, i) {
+        var yy = y0 + 54 + i * 27, good = i < 3 ? null : (i === 3 ? m.okG : m.okL);
+        glass(ctx, 532, yy - 17, 352, 24, good === null ? "#8fa6ff" : (good ? "--green" : "--rose"), 8);
+        text(ctx, r[0], 544, yy, { s: 11.5, c: KS.mute });
+        text(ctx, r[1], 874, yy + 1, { s: 12, w: "800", a: "right", c: good === null ? KS.ink : (good ? KS.green : KS.red) });
+      });
+    }
+
+    function paintAll() { var m = metrics(); ctx.clearRect(0, 0, W, H); drawModel(m); drawPanel(m); }
+
+    function draw() {
+      var m = metrics(), acc = m.acc, gN = m.gN, F = m.F, dt = m.dt, ok = m.okG && m.okL;
+      paintAll();
       $("c-crush-info").innerHTML = "찌그러지는 거리 <b>" + d.toFixed(2) + " m</b> → 멈추는 시간 <b>" + dt.toFixed(3) + "초</b>, 탑승자의 감속도 <b>" + gN.toFixed(1) + " g</b>, 평균 힘 <b>" + Math.round(F).toLocaleString() + " N</b>. " +
         (ok ? "🎉 합격입니다. 앞부분이 알맞게 구겨져 멈추는 시간을 늘려 주었습니다."
-          : (!okL ? "너무 무릅니다. 1.20 m를 넘으면 찌그러짐이 <b>승객실</b>까지 들어옵니다."
+          : (!m.okL ? "너무 무릅니다. 1.20 m를 넘으면 찌그러짐이 <b>승객실</b>까지 들어옵니다."
             : "너무 단단합니다. 순식간에 멈추면 <b>힘이 커집니다.</b> 거리를 늘려 보세요."));
       var ch = false;
       if (ok && !got.a) { got.a = true; ch = true; }
       if (ch) { window.sthState("crushGot", got); window.sthState("crushD", d.toFixed(2)); mission(); }
     }
+    /* ▶ 충돌을 느리게 다시 보기 — 그림만 움직인다(미션 판정과 상관없음). 움직임 줄이기 설정이어도 누를 때만 돈다 */
+    var pb = $("c-crush-play");
+    function pbLab() { if (pb) pb.textContent = play ? "⏸ 멈추기" : "▶ 충돌 느리게 보기"; }
+    if (pb) pb.addEventListener("click", function () { if (play) { play = false; } else { play = true; ph = 0; } pbLab(); paintAll(); });
+    pbLab();
+    K.animate(canvas, function (dt2) {
+      if (!play) return;
+      ph += dt2 / 4200;
+      if (ph >= 1) { ph = 1; play = false; pbLab(); }
+      paintAll();
+    }, 30);
     function mission() {
       if (got.a) done("m3-4a");
       if (got.b) done("m3-4b");

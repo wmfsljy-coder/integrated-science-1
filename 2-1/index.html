@@ -139,13 +139,15 @@
 
         <section class="scene" data-title="부엌 열기 — 질량이 메뉴를 정한다">
           <div class="story"><div class="who">🧑‍🚀</div><div class="say"><span class="name">태오</span>“별은 원소를 만드는 부엌입니다. 그런데 부엌마다 불의 세기가 달라요. 별이 무거울수록 중력이 세게 짓눌러 중심이 더 뜨거워지고, 뜨거울수록 더 무거운 원료에 불을 붙일 수 있습니다. 질량을 바꿔 가며 어디까지 태울 수 있는지 보세요.”</div></div>
+          <figure class="hero-art"><img src="img/star-onion.webp" alt="투명한 유리 상자 안에 떠 있는 커다란 별을 4분의 1만큼 잘라 낸 모형. 잘린 면에 바깥 수소층부터 헬륨, 탄소·산소, 네온, 규소 층이 양파 껍질처럼 겹겹이 있고, 한가운데에 빛나지 않는 회색 철 중심핵이 있다." loading="lazy"><figcaption><b>무거운 별의 속은 양파처럼 겹겹이 나뉘어 있습니다</b> 무거운 별이 일생의 끝에 이르면 중심에서 바깥으로 서로 다른 원소가 층을 이루고, 층의 경계마다 서로 다른 핵융합이 일어납니다. 안쪽으로 갈수록 더 무거운 원소가 쌓이는 것은 더 뜨거워야 그 원료에 불이 붙기 때문입니다. 그림의 층 두께는 실제 비율이 아니며, 어떤 별이 어느 층까지 만들 수 있는지는 아래 모형에서 질량을 바꿔 가며 찾아보세요.</figcaption></figure>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="b-star" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap" style="background:#e4eaf1"><canvas id="b-star" width="900" height="640"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">별의 질량 (태양 = 1)<span class="val" id="b-m-val">1.0 M☉</span></div>
                 <input type="range" id="b-m" min="0.1" max="30" step="0.1" value="1">
               </div>
+              <button type="button" class="btn sm" id="b-star-play">⏸ 움직임 멈추기</button>
             </div>
             <div class="info-card" id="b-star-info"></div>
           </div>

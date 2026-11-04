@@ -980,6 +980,132 @@ function pauser(id, st) {
       for (var s = -1; s <= 1; s += 2) { var b = a + s * 0.912; KT.planet(ctx, x + Math.cos(b) * 7, y + Math.sin(b) * 7, 3.3, "#f4f6ff", "#7d86a6"); }
       KT.planet(ctx, x, y, 5.3, "#ff7b7b", "#7a1020");
     }
+    /* ── 잘라 보는 디오라마: 실험대 위 전자저울과, 반으로 잘라 속을 보인 비커 + 분자 확대경 ── */
+    var DH = 410;                                         /* 위 모형 칸 높이(아래는 계산 칸) */
+    var I = KT.iso({ ox: 330, oy: 140, s: 0.72, L: 400, D: 260 });
+    var CX = 200, CY = 150, RB = 64, ZB = 22, ZT = 188;    /* 비커: 중심·반지름·안쪽 바닥·테두리 높이(그림 단위) */
+    var DEG = Math.PI / 180;
+    function zOfG(g) { return ZB + g / 360 * 150; }       /* 물 g → 수면 높이(물 1 g ≈ 1 mL) */
+    var RM = KT.rng(29), mag = [];                        /* 확대경 속 물 분자: 액체라 양과 상관없이 늘 빽빽하다 */
+    for (var gi = 0; gi < 6; gi++) for (var gj = 0; gj < 6; gj++)
+      mag.push({ x: (gi + 0.5) / 6 + (RM() - 0.5) * 0.07, y: (gj + 0.5) / 6 + (RM() - 0.5) * 0.07, a: RM() * 6.28, p: RM() * 6.28, w: 0.6 + RM() * 0.8 });
+    function cp(t, r, z) { return I.P(CX + r * Math.cos(t), CY + r * Math.sin(t), z); }
+    function arcTo(t0, t1, r, z, first) {
+      var n = Math.max(6, Math.round(Math.abs(t1 - t0) / (4 * DEG))), k;
+      for (k = 0; k <= n; k++) { var p = cp(t0 + (t1 - t0) * k / n, r, z); if (first && k === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); }
+    }
+    function band(t0, t1, r, z0, z1, fill) {
+      ctx.beginPath(); arcTo(t0, t1, r, z0, true); arcTo(t1, t0, r, z1, false); ctx.closePath();
+      ctx.fillStyle = fill; ctx.fill();
+    }
+    function pie(t0, t1, r, z, fill, stroke) {
+      var c = I.P(CX, CY, z); ctx.beginPath(); ctx.moveTo(c.x, c.y); arcTo(t0, t1, r, z, false); ctx.closePath();
+      ctx.fillStyle = fill; ctx.fill(); if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1.2; ctx.stroke(); }
+    }
+    function cutFace(t, z0, z1, fill, r0, r1) {           /* 반지름 방향 t 의 자른 면 */
+      var a = cp(t, r0 || 0, z0), b = cp(t, r1 == null ? RB : r1, z0), c = cp(t, r1 == null ? RB : r1, z1), d = cp(t, r0 || 0, z1);
+      I.quad(ctx, a, b, c, d, fill);
+    }
+    function h2oS(x, y, a, k) {
+      for (var s = -1; s <= 1; s += 2) { var b = a + s * 0.912; KT.planet(ctx, x + Math.cos(b) * 7 * k, y + Math.sin(b) * 7 * k, 3.3 * k, "#f4f6ff", "#7d86a6"); }
+      KT.planet(ctx, x, y, 5.3 * k, "#ff7b7b", "#7a1020");
+    }
+    function drawModel(mol, cnt) {
+      var wz = m > 0 ? zOfG(m) : ZB, t;
+      var flo = I.P(400, 260, -36);
+      KT.studio(ctx, 0, 0, W, DH, { x: I.P(200, 130, -36).x, y: flo.y - 16, rx: 300, ry: 46 });
+      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, W, DH, 14); ctx.clip();
+      /* 실험대 · 공책 · 전자저울 */
+      I.box(ctx, 0, 0, -36, 400, 260, 0, "#d2ab7c", "#a97f52", "#8a6540");
+      ctx.strokeStyle = "rgba(90,60,30,.18)"; ctx.lineWidth = 1;
+      for (t = 30; t < 400; t += 46) { var w0 = I.P(t, 0, 0), w1 = I.P(t, 260, 0); ctx.beginPath(); ctx.moveTo(w0.x, w0.y); ctx.lineTo(w1.x, w1.y); ctx.stroke(); }
+      I.box(ctx, 316, 168, 0, 384, 240, 3, "#fbfbf6", "#dcdccf", "#c9c9bb");
+      I.box(ctx, 106, 56, 0, 294, 244, 16, "#e9edf2", "#c7cdd6", "#a6aebb");
+      I.box(ctx, 132, 82, 16, 268, 218, 18, "#f7f9fc", "#d8dde4", "#bcc3cc");
+      var d0 = I.P(150, 244, 3), d1 = I.P(250, 244, 3), d2 = I.P(250, 244, 13), d3 = I.P(150, 244, 13);
+      I.quad(ctx, d0, d1, d2, d3, "#163a2a");
+      ctx.save(); ctx.transform(0.866 * 0.72, 0.5 * 0.72, 0, 0.72, d3.x, d3.y);   /* 표시창 면(앞면)에 맞춰 글자 기울이기 */
+      ctx.font = "800 8px Consolas, monospace"; ctx.fillStyle = "#6dffb0"; ctx.textAlign = "right"; ctx.fillText(m.toFixed(1) + " g", 94, 8); ctx.restore();
+      /* 비커 안쪽 뒷벽(유리 너머로 보이는 쪽) · 유리 바닥 */
+      band(135 * DEG, 315 * DEG, RB - 3, 18, ZT, "rgba(214,232,250,.32)");
+      pie(90 * DEG, 360 * DEG, RB, 18, "rgba(225,240,255,.55)");
+      cutFace(0, 18, ZB, "rgba(235,245,255,.85)"); cutFace(90 * DEG, 18, ZB, "rgba(235,245,255,.85)");
+      /* 물 */
+      if (m > 0) {
+        var wf = ctx.createLinearGradient(0, I.P(CX, CY, wz).y, 0, I.P(CX, CY, ZB).y + 30);
+        wf.addColorStop(0, "rgba(96,178,240,.88)"); wf.addColorStop(1, "rgba(28,92,190,.92)");
+        band(-45 * DEG, 0, RB - 3, ZB, wz, wf); band(90 * DEG, 135 * DEG, RB - 3, ZB, wz, wf);
+        var cf = ctx.createLinearGradient(0, I.P(CX, CY, wz).y, 0, I.P(CX, CY, ZB).y + 20);
+        cf.addColorStop(0, "rgba(120,196,250,.95)"); cf.addColorStop(1, "rgba(40,110,205,.97)");
+        cutFace(0, ZB, wz, cf, 0, RB - 3); cutFace(90 * DEG, ZB, wz, cf, 0, RB - 3);
+        /* 자른 면의 아주 작은 물방울 무늬(분자는 이보다 훨씬 작다) */
+        var RS = KT.rng(5); ctx.fillStyle = "rgba(255,255,255,.22)";
+        for (var q = 0; q < 70; q++) { var side = RS() < .5 ? 0 : 90 * DEG, pp = cp(side, RS() * (RB - 6), ZB + RS() * (wz - ZB)); ctx.fillRect(pp.x, pp.y, 1.4, 1.4); }
+        pie(90 * DEG, 360 * DEG, RB - 3, wz, "rgba(150,212,255,.80)", "rgba(235,248,255,.9)");
+        ctx.strokeStyle = "rgba(255,255,255,.45)"; ctx.lineWidth = 1;
+        for (var rr = 0; rr < 3; rr++) {
+          var ph = tm * 0.0012 + rr * 2.1, rad = (RB - 14) * ((0.3 + ph / 6.28) % 1);
+          ctx.beginPath(); arcTo(100 * DEG, 350 * DEG, Math.max(4, rad), wz, true); ctx.stroke();
+        }
+      }
+      /* 유리: 바깥 앞쪽 띠·자른 단면의 유리 두께·테두리 */
+      band(-45 * DEG, 0, RB, 18, ZT, "rgba(225,240,255,.16)"); band(90 * DEG, 135 * DEG, RB, 18, ZT, "rgba(225,240,255,.16)");
+      cutFace(0, 18, ZT, "rgba(240,248,255,.95)", RB - 3, RB); cutFace(90 * DEG, 18, ZT, "rgba(240,248,255,.95)", RB - 3, RB);
+      ctx.strokeStyle = "rgba(255,255,255,.95)"; ctx.lineWidth = 2;
+      ctx.beginPath(); arcTo(90 * DEG, 360 * DEG, RB, ZT, true); ctx.stroke();
+      ctx.strokeStyle = "rgba(150,170,200,.7)"; ctx.lineWidth = 1.2;
+      ctx.beginPath(); arcTo(-45 * DEG, 0, RB, 18, true); ctx.stroke(); ctx.beginPath(); arcTo(90 * DEG, 135 * DEG, RB, 18, true); ctx.stroke();
+      var e1 = cp(135 * DEG, RB, 18), e2 = cp(135 * DEG, RB, ZT), e3 = cp(-45 * DEG, RB, 18), e4 = cp(-45 * DEG, RB, ZT);
+      ctx.beginPath(); ctx.moveTo(e1.x, e1.y); ctx.lineTo(e2.x, e2.y); ctx.moveTo(e3.x, e3.y); ctx.lineTo(e4.x, e4.y); ctx.stroke();
+      ctx.strokeStyle = "rgba(255,255,255,.5)"; ctx.lineWidth = 3;
+      var h1 = cp(112 * DEG, RB + 0.5, 40), h2 = cp(112 * DEG, RB + 0.5, ZT - 20); ctx.beginPath(); ctx.moveTo(h1.x, h1.y); ctx.lineTo(h2.x, h2.y); ctx.stroke();
+      /* 눈금 100·200·300 mL (오른쪽 앞 유리) */
+      [100, 200, 300].forEach(function (g) {
+        var z = zOfG(g); ctx.strokeStyle = "rgba(40,60,90,.75)"; ctx.lineWidth = 1.4;
+        ctx.beginPath(); arcTo(-40 * DEG, -18 * DEG, RB, z, true); ctx.stroke();
+        var lp = cp(-40 * DEG, RB, z); KT.t(ctx, g + " mL", lp.x + 5, lp.y + 4, { s: 10, c: "#3a4a66", w: "800" });
+      });
+      ctx.restore();
+      /* 분자 확대경 */
+      var MX = 742, MY = 218, MR = 104;
+      var src = m > 0 ? cp(0, RB * 0.55, ZB + (wz - ZB) * 0.5) : cp(0, RB * 0.55, ZB + 10);
+      if (m > 0) {
+        KT.line(ctx, src, { x: MX - MR * 0.92, y: MY + 30 }, "rgba(30,45,70,.55)", 1.4, [5, 4]);
+        KT.line(ctx, src, { x: MX - MR * 0.35, y: MY + MR * 0.93 }, "rgba(30,45,70,.55)", 1.4, [5, 4]);
+        ctx.fillStyle = "#111622"; ctx.beginPath(); ctx.arc(src.x, src.y, 2.6, 0, 6.2832); ctx.fill();
+      }
+      ctx.save(); ctx.beginPath(); ctx.arc(MX, MY, MR, 0, 6.2832); ctx.clip();
+      var mg = ctx.createRadialGradient(MX - 30, MY - 30, 10, MX, MY, MR);
+      if (m > 0) { mg.addColorStop(0, "#2d6fb8"); mg.addColorStop(1, "#0d2650"); } else { mg.addColorStop(0, "#3a4458"); mg.addColorStop(1, "#151a26"); }
+      ctx.fillStyle = mg; ctx.fillRect(MX - MR, MY - MR, MR * 2, MR * 2);
+      if (m > 0) {
+        mag.forEach(function (o) {
+          var x = MX - MR + 6 + o.x * (MR * 2 - 12) + Math.sin(tm * 0.002 * o.w + o.p) * 4;
+          var y = MY - MR + 6 + o.y * (MR * 2 - 12) + Math.cos(tm * 0.0023 * o.w + o.p) * 4;
+          h2oS(x, y, o.a + tm * 0.0015 * o.w, 1.25);
+        });
+      }
+      ctx.restore();
+      ctx.strokeStyle = "#e8edf5"; ctx.lineWidth = 7; ctx.beginPath(); ctx.arc(MX, MY, MR + 3, 0, 6.2832); ctx.stroke();
+      ctx.strokeStyle = "#7f8ba0"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(MX, MY, MR + 7, 0, 6.2832); ctx.stroke();
+      var mbox = [MX - 160, W];
+      KT.pill(ctx, m > 0 ? "🔍 분자 수준으로 확대한 물" : "🔍 물이 없습니다", MX, MY + MR + 30, { a: "center", s: 12, c: KC.blue, box: mbox });
+      if (m > 0) KT.pill(ctx, "빨강 산소 · 흰색 수소 — H₂O", MX, MY + MR + 54, { a: "center", s: 11, c: KC.ink, box: mbox });
+      /* 이름표 */
+      var box = [0, 600];
+      I.label(ctx, 290, 150, 9, "전자저울 " + m + " g", 46, 30, "#bdf5d6", box);
+      I.label(ctx, CX, CY + RB * 0.7, (ZB + ZT) / 2 + 26, "반으로 잘라 본 비커", -100, -38, "#e8ecff", box);
+      if (m > 0) I.label(ctx, CX - 12, CY + RB * 0.5, (ZB + wz) / 2, "물 " + m + " g (약 " + m + " mL)", -96, 26, "#bfe6ff", box);
+      /* 큰 제목 */
+      var l1, l2;
+      if (m === 0) { l1 = "빈 비커"; l2 = "저울에 물을 부어 보세요"; }
+      else if (Math.abs(mol - 1) <= 0.02) { l1 = "딱 1 mol"; l2 = "분자 " + sciStr(cnt, 2) + " 개"; }
+      else if (Math.abs(m - 200) <= 2) { l1 = "물 한 컵 속 분자"; l2 = sciStr(cnt, 1) + " 개"; }
+      else { l1 = "물 " + m + " g 속 분자는?"; l2 = "약 " + sciStr(cnt, 1) + " 개"; }
+      KT.bigText(ctx, l1, 22, 50, 28, "#ffffff");
+      KT.bigText(ctx, l2, 22, 84, 19, "#ffd35a");
+      KT.warn(ctx, W - 14, 30, "⚠ 분자는 약 0.3 nm — 확대한 그림, 실제 개수 아님", "right");
+    }
     function box(x, y, w, h, label, big, col) {
       glass(ctx, x, y, w, h, 14, col, 0.1);
       KT.t(ctx, label, x + w / 2, y + 26, { s: 11, a: "center", c: KC.mute, w: "700" });
@@ -987,49 +1113,23 @@ function pauser(id, st) {
     }
     function render() {
       ctx.clearRect(0, 0, W, H);
-      KT.stage(ctx, 0, 0, W, H, "lab", { seed: 19, title: "물 한 컵에 분자가 몇 개나 들어 있을까?" });
       var mol = m / 18.0, cnt = mol * NA, i;
-      /* 비커 — 유리와 물 */
-      var hgt = (m / 360) * 172, top = 270 - hgt;
-      var gb = ctx.createLinearGradient(70, 0, 210, 0); gb.addColorStop(0, "rgba(255,255,255,.10)"); gb.addColorStop(0.5, "rgba(255,255,255,.03)"); gb.addColorStop(1, "rgba(255,255,255,.09)");
-      ctx.fillStyle = gb; ctx.beginPath(); ctx.moveTo(70, 90); ctx.lineTo(80, 270); ctx.lineTo(200, 270); ctx.lineTo(210, 90); ctx.closePath(); ctx.fill();
-      if (m > 0) {
-        ctx.save();
-        ctx.beginPath(); ctx.moveTo(80 + (top - 270) * 0.055, top); ctx.lineTo(200 - (top - 270) * 0.055, top); ctx.lineTo(200, 270); ctx.lineTo(80, 270); ctx.closePath();
-        var wg = ctx.createLinearGradient(0, top, 0, 270); wg.addColorStop(0, "rgba(110,190,255,.55)"); wg.addColorStop(1, "rgba(30,90,200,.75)");
-        ctx.fillStyle = wg; ctx.fill(); ctx.clip();
-        var nm = clamp(Math.round(m / 360 * 16), 1, 16);
-        for (i = 0; i < nm; i++) {
-          var mo = mols[i], mx = 92 + mo.x * 96 + Math.sin(tm * 0.002 * mo.w + mo.p) * 5, my = top + 10 + mo.y * Math.max(4, hgt - 18) + Math.cos(tm * 0.0023 * mo.w + mo.p) * 4;
-          h2o(mx, my, mo.a + tm * 0.0015 * mo.w);
-        }
-        ctx.restore();
-        ctx.strokeStyle = "rgba(200,235,255,.8)"; ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.moveTo(81 + (top - 270) * 0.055, top); ctx.lineTo(199 - (top - 270) * 0.055, top); ctx.stroke();
-      }
-      for (i = 100; i <= 300; i += 100) {
-        var gy = 270 - i / 360 * 172;
-        ctx.strokeStyle = "rgba(230,236,255,.6)"; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(196 + (270 - gy) * 0.055 - 14, gy); ctx.lineTo(196 + (270 - gy) * 0.055, gy); ctx.stroke();
-        KT.t(ctx, i + "", 192 + (270 - gy) * 0.055 - 16, gy + 4, { s: 9.5, a: "right", c: KC.mute });
-      }
-      ctx.strokeStyle = "rgba(220,230,255,.7)"; ctx.lineWidth = 3; ctx.lineJoin = "round";
-      ctx.beginPath(); ctx.moveTo(64, 88); ctx.lineTo(70, 90); ctx.lineTo(80, 270); ctx.lineTo(200, 270); ctx.lineTo(210, 90); ctx.stroke();
-      ctx.fillStyle = "rgba(255,255,255,.18)"; ctx.fillRect(76, 100, 3, 150);
-      KT.pill(ctx, "물 " + m + " g", 140, 296, { a: "center", s: 13, c: KC.blue });
-      /* 계산 상자 */
-      box(270, 140, 150, 76, "질량", m + " g", KC.blue);
-      box(490, 140, 150, 76, "물질량", mol.toFixed(2) + " mol", KC.violet);
-      box(700, 140, 180, 76, "분자 수", sciStr(cnt, 1) + " 개", KC.orange);
-      KT.arrow(ctx, { x: 428, y: 178 }, { x: 482, y: 178 }, KC.mute, 2, 9);
-      KT.arrow(ctx, { x: 648, y: 178 }, { x: 692, y: 178 }, KC.mute, 2, 9);
-      KT.pill(ctx, "÷ 18.0 g/mol", 455, 128, { a: "center", s: 10.5, c: KC.violet });
-      KT.pill(ctx, "× 6.02×10²³", 670, 128, { a: "center", s: 10.5, c: KC.orange });
-      /* 점으로 보기 */
+      drawModel(mol, cnt);
+      /* 아래 칸: 계산 */
+      var y0 = DH + 6;
+      KT.stage(ctx, 0, y0, W, H - y0, "lab", { seed: 19 });
+      box(30, y0 + 14, 170, 72, "질량", m + " g", KC.blue);
+      box(250, y0 + 14, 170, 72, "물질량", mol.toFixed(2) + " mol", KC.violet);
+      box(470, y0 + 14, 200, 72, "분자 수", sciStr(cnt, 1) + " 개", KC.orange);
+      KT.arrow(ctx, { x: 206, y: y0 + 50 }, { x: 244, y: y0 + 50 }, KC.mute, 2, 9);
+      KT.arrow(ctx, { x: 426, y: y0 + 50 }, { x: 464, y: y0 + 50 }, KC.mute, 2, 9);
+      KT.t(ctx, "÷ 18.0 g/mol → 물질량", 696, y0 + 34, { s: 11.5, c: KC.violet, w: "800" });
+      KT.t(ctx, "× 6.02×10²³ → 분자 수", 696, y0 + 58, { s: 11.5, c: KC.orange, w: "800" });
+      KT.t(ctx, "물 1 mol = 18.0 g", 696, y0 + 82, { s: 11, c: KC.mute, w: "700" });
       var dots = clamp(Math.round(cnt / 1e23), 0, 60);
-      for (i = 0; i < dots; i++) KT.glow(ctx, 280 + (i % 20) * 20, 248 + ((i / 20) | 0) * 22, 3.6, "rgba(63,211,163,.95)", 2.2);
-      KT.t(ctx, "● 하나 = 10²³ 개", 700, 254, { s: 11, c: KC.green, w: "700" });
-      KT.t(ctx, "물 1 mol = 18.0 g", 700, 276, { s: 11, c: KC.mute, w: "700" });
-      KT.t(ctx, "분자 그림은 실제 개수·크기가 아닙니다", 700, 298, { s: 10, c: KC.dim, w: "600" });
+      for (i = 0; i < dots; i++) KT.glow(ctx, 40 + (i % 30) * 20, y0 + 112 + ((i / 30) | 0) * 22, 3.6, "rgba(63,211,163,.95)", 2.2);
+      KT.t(ctx, "● 하나 = 10²³ 개", 696, y0 + 118, { s: 11, c: KC.green, w: "700" });
+      KT.t(ctx, "(60개가 넘으면 더 그리지 않음)", 696, y0 + 140, { s: 10, c: KC.dim, w: "600" });
     }
     function draw() {
       render();

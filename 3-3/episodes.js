@@ -982,14 +982,191 @@ function segWire(id, attr, fn) {
     }
   });
 
-  /* 장면 2 — 전사와 번역 -------------------------------------------------- */
+  /* 장면 2 — 전사와 번역 (위: 세포를 잘라 본 블록 모형 · 아래: 염기 서열 읽기판) -------- */
   (function () {
     var canvas = $("c-express"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
     var rib = 0, box = { gen: 0 }, run = ticker(box);
     var got = window.sthState("exprGot") || { a: false, b: false };
+    var DH = 444;                                     /* 위 모형 칸 높이(아래는 서열 읽기판) */
+    var ph = 0, moving = !REDUCE;
 
-    function draw() {
-      paper(ctx, W, H);
+    /* ── 세포 블록: x 0~L(화면 오른쪽 아래로), y 0~D, z 0~Z. 앞면(y = D)이 잘라 낸 단면 ── */
+    var I = K.iso({ ox: 440, oy: 178, s: 0.66, L: 640, D: 110 });
+    var L = I.L, D = I.D, Z = 240;
+    function F(u, z) { return I.P(u, D, z); }         /* 앞면(단면) 위의 점 → 화면 */
+    var NU = 150, NZ = 120, NR = 75;                   /* 핵 단면: 가운데·반지름(그림 단위) */
+    var PORE = { u: NU + NR * Math.cos(-0.45), z: NZ + NR * Math.sin(-0.45) };
+    var POL = { u: 192, z: 108 };                      /* RNA 중합 효소 */
+    var M0 = 300, MS = 32, MZ = 80;                   /* 세포질 속 mRNA: 첫 코돈 시작, 코돈 폭, 높이 */
+    function mz(u) { return MZ + 3 * Math.sin(u / 23); }
+    function ribU(n) { return n > 0 ? M0 + (n - 0.5) * MS : M0 - 22; }
+    /* mRNA 길: 중합 효소 → 핵공 → 세포질로 나와 리보솜 쪽으로 */
+    function mPath() {
+      var p = [], t;
+      for (t = 0; t <= 1.0001; t += 0.1) p.push({ u: POL.u + (PORE.u - POL.u) * t, z: POL.z + (PORE.z - POL.z) * t + 5 * Math.sin(t * Math.PI) });
+      for (t = 0.05; t <= 1.0001; t += 0.05) {
+        var u = PORE.u + (M0 - 8 - PORE.u) * t, z = PORE.z + (mz(M0 - 8) - PORE.z) * (1 - Math.pow(1 - t, 2));
+        p.push({ u: u, z: z });
+      }
+      for (var uu = M0 - 8; uu <= M0 + 9 * MS + 10; uu += 4) p.push({ u: uu, z: mz(uu) });
+      return p;
+    }
+    var PATH = mPath();
+    function poly(pts, close) {
+      ctx.beginPath();
+      pts.forEach(function (q, i) { var s = F(q.u, q.z); if (i) ctx.lineTo(s.x, s.y); else ctx.moveTo(s.x, s.y); });
+      if (close) ctx.closePath();
+    }
+    function ring(cu, cz, r, n) { var a = []; for (var i = 0; i <= (n || 48); i++) { var t = i / (n || 48) * Math.PI * 2; a.push({ u: cu + r * Math.cos(t), z: cz + r * Math.sin(t) }); } return a; }
+    function oval(cu, cz, ru, rz, n) { var a = []; for (var i = 0; i <= (n || 36); i++) { var t = i / (n || 36) * Math.PI * 2; a.push({ u: cu + ru * Math.cos(t), z: cz + rz * Math.sin(t) }); } return a; }
+
+    /* 단면 속 미토콘드리아 */
+    function mito(cu, cz, ru, rz) {
+      poly(oval(cu, cz, ru, rz), true);
+      var c = F(cu, cz), g = ctx.createRadialGradient(c.x - 6, c.y - 4, 2, c.x, c.y, ru * .6);
+      g.addColorStop(0, "#ffd29a"); g.addColorStop(1, "#e08a3c"); ctx.fillStyle = g; ctx.fill();
+      ctx.strokeStyle = "#a8551c"; ctx.lineWidth = 1.6; ctx.stroke();
+      ctx.strokeStyle = "rgba(150,70,20,.75)"; ctx.lineWidth = 1.2;
+      for (var k = -2; k <= 2; k++) {
+        var uu = cu + k * ru * .32;
+        poly([{ u: uu, z: cz - rz * .75 }, { u: uu + ru * .08, z: cz }, { u: uu, z: cz + rz * .75 }]); ctx.stroke();
+      }
+    }
+
+    function drawCell() {
+      var lp = Math.sin(ph * 2.2) * 1.2;                /* 리보솜 살짝 들썩임 */
+      K.studio(ctx, 0, 0, W, DH, { x: 600, y: 410, rx: 300, ry: 40 });
+      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, W, DH, 14); ctx.clip();
+
+      /* 블록 세 면 */
+      var a = I.P(0, 0, Z), c2 = I.P(L, D, Z);
+      var tg = ctx.createLinearGradient(a.x, a.y, c2.x, c2.y); tg.addColorStop(0, "#fbe6e0"); tg.addColorStop(1, "#f0c4ba");
+      I.plane(ctx, Z, tg, "rgba(160,90,80,.35)");
+      I.quad(ctx, I.P(L, 0, 0), I.P(L, D, 0), I.P(L, D, Z), I.P(L, 0, Z), "#cf8f86");
+      var fa = F(0, Z), fb = F(0, 0), fg = ctx.createLinearGradient(fa.x, fa.y, fb.x, fb.y + 60);
+      fg.addColorStop(0, "#f8d8d1"); fg.addColorStop(1, "#e6aaa1");
+      I.quad(ctx, F(0, 0), F(L, 0), F(L, Z), F(0, Z), fg);
+
+      /* 윗면: 세포질 속에 흩어진 것들 */
+      var R = K.rng(41), i;
+      for (i = 0; i < 70; i++) { var q = I.P(R() * L, R() * D, Z); ctx.fillStyle = "rgba(120,70,150," + (.25 + R() * .25).toFixed(2) + ")"; ctx.beginPath(); ctx.arc(q.x, q.y, 1.3, 0, 6.283); ctx.fill(); }
+      [[100, 40], [420, 66], [590, 30]].forEach(function (m) {
+        var q = I.P(m[0], m[1], Z); ctx.save(); ctx.translate(q.x, q.y); ctx.scale(1, .55); ctx.rotate(.5);
+        var g = ctx.createRadialGradient(-4, -3, 1, 0, 0, 16); g.addColorStop(0, "#ffd29a"); g.addColorStop(1, "#e08a3c");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(0, 0, 17, 8, 0, 0, 6.283); ctx.fill(); ctx.strokeStyle = "#a8551c"; ctx.lineWidth = 1.4; ctx.stroke(); ctx.restore();
+      });
+      /* 윗면 아래로 비치는 핵 */
+      var nt = I.P(NU, D - 55, Z); ctx.fillStyle = "rgba(150,120,210,.20)"; ctx.beginPath(); ctx.ellipse(nt.x, nt.y, 46, 22, 0, 0, 6.283); ctx.fill();
+
+      /* 앞면(단면) 안쪽만 */
+      ctx.save(); poly([{ u: 0, z: 0 }, { u: L, z: 0 }, { u: L, z: Z }, { u: 0, z: Z }], true); ctx.clip();
+      for (i = 0; i < 160; i++) { var fu = R() * L, fz = R() * Z; var fq = F(fu, fz); ctx.fillStyle = "rgba(110,60,140," + (.2 + R() * .3).toFixed(2) + ")"; ctx.beginPath(); ctx.arc(fq.x, fq.y, 1.2, 0, 6.283); ctx.fill(); }
+      mito(40, 212, 30, 13);
+      mito(612, 206, 30, 13);
+      mito(410, 30, 34, 12);
+
+      /* 핵: 두 겹 핵막, 핵공, 인 */
+      poly(ring(NU, NZ, NR + 3), true); ctx.fillStyle = "rgba(120,80,170,.35)"; ctx.fill();
+      poly(ring(NU, NZ, NR), true);
+      var nc = F(NU, NZ), ng = ctx.createRadialGradient(nc.x - 10, nc.y - 10, 4, nc.x, nc.y, 48);
+      ng.addColorStop(0, "#d9cbf2"); ng.addColorStop(1, "#a993d8"); ctx.fillStyle = ng; ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = "#5b3f9a"; poly(ring(NU, NZ, NR + 3)); ctx.stroke(); poly(ring(NU, NZ, NR)); ctx.stroke();
+      var pa = Math.atan2(PORE.z - NZ, PORE.u - NU);
+      [pa, pa + 1.9, pa + 3.3, pa - 1.5].forEach(function (t, k) {      /* 핵공(핵막의 구멍) */
+        var p1 = F(NU + (NR - 2) * Math.cos(t), NZ + (NR - 2) * Math.sin(t));
+        ctx.fillStyle = k === 0 ? "#ffe9a8" : "#f2e6ff"; ctx.strokeStyle = "#5b3f9a"; ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.arc(p1.x, p1.y, k === 0 ? 4.6 : 3.2, 0, 6.283); ctx.fill(); ctx.stroke();
+      });
+      var nl = F(NU - 30, NZ + 34); ctx.fillStyle = "rgba(90,60,150,.55)"; ctx.beginPath(); ctx.ellipse(nl.x, nl.y, 14, 10, -.4, 0, 6.283); ctx.fill();
+
+      /* DNA 이중 나선(핵 안에만) */
+      ctx.save(); poly(ring(NU, NZ, NR - 3), true); ctx.clip();
+      for (var sgn = -1; sgn <= 1; sgn += 2) {
+        var pts = []; for (var u = NU - NR; u <= NU + NR; u += 2) pts.push({ u: u, z: NZ - 12 + sgn * 8 * Math.sin(u / 8) });
+        ctx.strokeStyle = sgn < 0 ? "#2d4fa3" : "#c43d6e"; ctx.lineWidth = 2.4; poly(pts); ctx.stroke();
+      }
+      ctx.strokeStyle = "rgba(60,60,110,.45)"; ctx.lineWidth = 1;
+      for (u = NU - NR; u <= NU + NR; u += 5) { if (Math.abs(u - POL.u) < 10) continue; var r1 = F(u, NZ - 12 - 8 * Math.sin(u / 8)), r2 = F(u, NZ - 12 + 8 * Math.sin(u / 8)); ctx.beginPath(); ctx.moveTo(r1.x, r1.y); ctx.lineTo(r2.x, r2.y); ctx.stroke(); }
+      ctx.restore();
+
+      /* mRNA: 중합 효소에서 나와 핵공을 지나 세포질로 */
+      ctx.save(); ctx.lineCap = "round"; ctx.lineJoin = "round";
+      ctx.strokeStyle = "rgba(255,255,255,.7)"; ctx.lineWidth = 5.5; poly(PATH); ctx.stroke();
+      ctx.strokeStyle = "#0e9b88"; ctx.lineWidth = 3; poly(PATH); ctx.stroke(); ctx.restore();
+      /* 코돈 아홉 칸: 읽은 칸은 밝게 */
+      for (i = 0; i <= 9; i++) {
+        var cu = M0 + i * MS, t1 = F(cu, mz(cu) - 5), t2 = F(cu, mz(cu) + 5);
+        ctx.strokeStyle = "#0b6e61"; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(t1.x, t1.y); ctx.lineTo(t2.x, t2.y); ctx.stroke();
+      }
+      for (i = 0; i < Math.min(rib, 9); i++) {
+        var seg = []; for (var su = M0 + i * MS; su <= M0 + (i + 1) * MS; su += 4) seg.push({ u: su, z: mz(su) });
+        ctx.strokeStyle = "rgba(95,240,220,.9)"; ctx.lineWidth = 4.5; poly(seg); ctx.stroke();
+      }
+      /* 정보가 흐르는 방향: 길을 따라 움직이는 빛 */
+      var n = PATH.length;
+      for (var k2 = 0; k2 < 3; k2++) {
+        var idx = Math.floor((((ph * .12) + k2 / 3) % 1) * (n - 1)), pp = F(PATH[idx].u, PATH[idx].z);
+        K.glow(ctx, pp.x, pp.y, 3.2, "rgba(120,255,230,.95)", 2.6);
+      }
+
+      /* RNA 중합 효소 */
+      var pc = F(POL.u, POL.z), pg = ctx.createRadialGradient(pc.x - 3, pc.y - 4, 1, pc.x, pc.y, 13);
+      pg.addColorStop(0, "#b6f0c8"); pg.addColorStop(1, "#2f9a5e"); ctx.fillStyle = pg;
+      ctx.beginPath(); ctx.ellipse(pc.x, pc.y, 12, 9, -.5, 0, 6.283); ctx.fill(); ctx.strokeStyle = "#1d6b40"; ctx.lineWidth = 1.2; ctx.stroke();
+
+      /* 폴리펩타이드: 새 아미노산이 리보솜 옆에 붙고, 먼저 붙은 것이 멀리 밀려난다 */
+      var ru = ribU(rib), rz = mz(ru), chainEnd = null;
+      for (var j = rib; j >= 1; j--) {
+        var kk = rib - j + 1;                       /* 1 = 방금 붙은 것 */
+        var bu = ru - 14 * kk + 6 * Math.sin(kk * 1.3), bz = rz + 24 + 6.4 * kk;
+        var bp = F(bu, bz);
+        if (kk > 1) { var prv = F(ru - 14 * (kk - 1) + 6 * Math.sin((kk - 1) * 1.3), rz + 24 + 6.4 * (kk - 1)); ctx.strokeStyle = "#b5481f"; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(prv.x, prv.y); ctx.lineTo(bp.x, bp.y); ctx.stroke(); }
+        K.planet(ctx, bp.x, bp.y, 5.4, "#ff9a5a", "#b5481f");
+        if (j === 1) chainEnd = { u: bu, z: bz };
+      }
+      /* 리보솜: 큰 단위체(위)·작은 단위체(아래)가 mRNA를 물고 있다 */
+      var rp = F(ru, rz), al = rib > 0 ? 1 : .55;
+      ctx.globalAlpha = al;
+      K.planet(ctx, rp.x + 1, rp.y - 9 + lp, 15, "#f6c565", "#b77a1c");
+      ctx.save(); ctx.translate(rp.x, rp.y + 7 - lp * .5); ctx.scale(1, .62); K.planet(ctx, 0, 0, 12, "#f3d28c", "#b58a2c"); ctx.restore();
+      ctx.globalAlpha = 1;
+      ctx.restore();                                /* 앞면 자르기 끝 */
+
+      I.edges(ctx, Z, Z);
+      /* 윗면·앞면 경계 밝은 선 */
+      var e1 = F(0, Z), e2 = F(L, Z); ctx.strokeStyle = "rgba(255,255,255,.75)"; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(e1.x, e1.y); ctx.lineTo(e2.x, e2.y); ctx.stroke();
+
+      /* 이름표 */
+      var bx = [0, W];
+      I.label(ctx, 110, D, 180, "핵 — DNA 원본은 여기 머문다", -70, -8, "#e8ecff", bx);
+      I.label(ctx, POL.u, D, POL.z, "RNA 중합 효소 — 전사", -150, 34, "#b6f0c8", bx);
+      I.label(ctx, PORE.u, D, PORE.z, "핵공 — 핵막의 구멍", -60, 80, "#ffe9a8", bx);
+      I.label(ctx, 380, D, mz(380), "mRNA — DNA를 본뜬 복사본", -40, 80, "#7ff5e2", bx);
+      I.label(ctx, ru, D, rz - 6, rib > 0 ? "리보솜 — 번역" : "리보솜 — 아직 읽기 전", 18, 78, "#ffd36b", bx);
+      if (chainEnd) I.label(ctx, chainEnd.u, D, chainEnd.z, "폴리펩타이드 — 아미노산 " + rib + "개", 50, -62, "#ffb08a", bx);
+      I.label(ctx, 600, D, 218, "미토콘드리아 — ATP 공급", 34, 62, "#ffd29a", bx);
+
+      /* 큰 글자 · 상태 */
+      if (rib === 0) { K.bigText(ctx, "설계도를 읽기 전", 22, 52, 28, "#ffffff"); K.bigText(ctx, "mRNA가 핵공을 지나 나왔다", 22, 86, 18, "#7ff5e2"); }
+      else if (rib < 9) { K.bigText(ctx, "리보솜이 mRNA를 읽는다", 22, 52, 28, "#ffffff"); K.bigText(ctx, "코돈 " + rib + "개 → 아미노산 " + rib + "개", 22, 86, 19, "#ffd36b"); }
+      else { K.bigText(ctx, "β 사슬 첫 아홉 자리 완성", 22, 52, 28, "#ffd36b"); K.bigText(ctx, "실제 사슬은 146개까지 이어진다", 22, 86, 18, "#ffffff"); }
+      K.warn(ctx, W - 14, 30, "⚠ 세포 속 구조의 크기·개수는 보기 쉽게 과장", "right");
+      pill(ctx, "🩸 적혈구가 되기 전의 세포 — 헤모글로빈을 만드는 중", 22, 428, { s: 11.5, c: "#e8ecff" });
+      ctx.restore();
+    }
+
+    /* 아래: 염기 서열 읽기판 (예전 그림 그대로) — 따로 그린 뒤 모형 아래에 붙인다 */
+    var off = document.createElement("canvas"), octx = null;
+    function detailCtx() {
+      var k = canvas.width / W, w = canvas.width, h = Math.round((H - DH) * k);
+      if (!octx || off.width !== w || off.height !== h) { off.width = w; off.height = h; off._w = W; off._h = H - DH; off.id = "c-express-detail"; octx = off.getContext("2d"); }
+      octx.setTransform(k, 0, 0, k, 0, 0); octx.clearRect(0, 0, W, H - DH);
+      return octx;
+    }
+    function drawDetail() {
+      var ctx = detailCtx();
+      ctx.save();
+      K.stage(ctx, 0, 0, W, H - DH, "night", { seed: 31 });
       var coding = "";
       for (var k = 0; k < TPL.length; k++) coding += COMP[TPL.charAt(k)];
       pill(ctx, "사람 헤모글로빈 β 유전자의 앞부분 (염기 27개)", 16, 32, { s: 13, c: v("--brand-700") });
@@ -1039,7 +1216,12 @@ function segWire(id, attr, fn) {
 
       pill(ctx, "염기 " + (rib * 3) + "개를 읽어 아미노산 " + rib + "개 — 언제나 3 : 1입니다.", 16, 400, { s: 11.5, c: v("--brand-700") });
       text(ctx, "DNA → (전사) → mRNA → (번역) → 단백질. 정보는 한 방향으로만 흐릅니다. 이것을 중심 원리라고 합니다.", 16, 424, { s: 11, c: v("--mist") });
+      ctx.restore();
+    }
+    function paint() { ctx.clearRect(0, 0, W, H); drawCell(); drawDetail(); ctx.drawImage(off, 0, DH, W, H - DH); }
 
+    function draw() {
+      paint();
       $("c-express-info").innerHTML = rib === 0
         ? "아직 아무것도 번역하지 않았습니다. 리보솜 슬라이더를 밀거나 자동 진행 단추를 눌러 보세요."
         : "mRNA 염기 <b>" + (rib * 3) + "개</b>를 읽어 아미노산 <b>" + rib + "개</b>를 이었습니다 — <b>" + NORMAL.aas.slice(0, rib).join("-") + "</b>. " +
@@ -1064,6 +1246,9 @@ function segWire(id, attr, fn) {
         draw();
       });
     });
+    /* 움직임(정보가 흐르는 빛·리보솜 들썩임) — 그림만 다시 그린다 */
+    playBtn("c-expr-anim", "⏸ 움직임 멈추기", "▶ 움직임 보기", function () { return moving; }, function (q) { moving = q; });
+    K.animate(canvas, function (dt) { if (moving) { ph += dt / 1000; ctx.clearRect(0, 0, W, DH); drawCell(); } }, 24);
     window.sthPick({
       mount: "s3-q1",
       q: "전사와 번역에 대한 설명으로 <b>옳은</b> 것은?",

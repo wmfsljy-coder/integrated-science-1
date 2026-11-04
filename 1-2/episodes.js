@@ -536,57 +536,169 @@ function lcg(seed) {
     onPick: function () { ep.clear(0); }
   });
 
-  /* 장면 2 — 원기의 열팽창 (계산 모형: ΔL = L·α·ΔT) */
+  /* 장면 2 — 원기의 열팽창 (계산 모형: ΔL = L·α·ΔT)
+     그림: 세브르 국제도량형국 지하 금고를 블록처럼 잘라 낸 모형(아이소메트릭) + 원자 확대경, 아래는 늘어남 읽음판 */
   (function () {
     var canvas = $("b-bar"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
     var T = 5;
     var got = window.sthState("bBar") || { a: false, b: false };
+    var mv = { on: !REDUCE }, ph = 0;
 
     function dL() { return ALPHA * T * 1e6; }              /* µm */
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      var d = dL(), heat = clamp(T / 40, 0, 1);
-      KT.stage(ctx, 0, 0, W, H, "lab", { seed: 23 });
-      KT.pill(ctx, "국제 미터원기 — 1889년의 정의는 ‘얼음이 녹는 온도(0 ℃)에서의 길이’", 16, 30, { s: 12.5, c: KC.blue });
 
-      /* 막대 — 백금·이리듐 금속, 데우면 따뜻한 빛을 띈다 */
-      var mg = ctx.createLinearGradient(0, 78, 0, 122);
-      mg.addColorStop(0, "#f4f6fb"); mg.addColorStop(0.35, "#b9c0cf"); mg.addColorStop(0.55, "#7d8698"); mg.addColorStop(1, "#454c5e");
-      ctx.save(); ctx.shadowColor = heat > 0.3 ? "rgba(255,140,80," + (heat * 0.8) + ")" : "rgba(0,0,0,.5)"; ctx.shadowBlur = 8 + heat * 16;
-      ctx.fillStyle = mg; ctx.beginPath(); ctx.roundRect(80, 78, 740, 44, 8); ctx.fill(); ctx.restore();
-      ctx.fillStyle = "rgba(255,120,60," + (heat * 0.22) + ")"; ctx.beginPath(); ctx.roundRect(80, 78, 740, 44, 8); ctx.fill();
-      ctx.fillStyle = "rgba(255,255,255,.45)"; ctx.fillRect(88, 82, 724, 2);
-      text(ctx, "백금 90 % · 이리듐 10 % · 길이 1 m", 450, 106, { s: 13, w: "800", a: "center", c: "#1b1f2e" });
-      KT.t(ctx, "0 m", 80, 140, { s: 10.5, a: "center", c: KC.mute, w: "700" });
-      KT.t(ctx, "1 m", 820, 140, { s: 10.5, a: "center", c: KC.mute, w: "700" });
-      /* 늘어난 만큼(과장) */
-      if (d > 0.5) {
-        var ax = 826 + clamp(d / 350, 0, 1) * 50;
-        KT.arrow(ctx, { x: 824, y: 100 }, { x: ax + 6, y: 100 }, KC.orange, 3, 9);
+    /* ── 금고 모형: x = 막대 방향, y = 깊이, z = 위. 벽 두께 50, 땅 높이 ZG ── */
+    var DH = 410, ZG = 110, WT = 50;
+    var I = KT.iso({ ox: 372, oy: 150, s: 0.6, L: 560, D: 300 });
+    var L = I.L, D = I.D;
+    var BX0 = 130, BX1 = 470, BY = 175, BZ = 34;            /* 막대(1 m)가 놓인 자리 */
+    function strata(Lw, z0, z1) {                           /* 잘린 면: 흙·자갈·암반 띠 (face 안에서 u, z 좌표) */
+      var bands = [["#5d8f43", ZG - 6, ZG], ["#7a5a3c", 78, ZG - 6], ["#9b7a52", 46, 78], ["#b59a72", 14, 46], ["#8d8a84", z0, 14]];
+      bands.forEach(function (b) { if (b[2] > z0 && b[1] < z1) { ctx.fillStyle = b[0]; ctx.fillRect(0, Math.max(b[1], z0), Lw, Math.min(b[2], z1) - Math.max(b[1], z0)); } });
+      var R = KT.rng(7 + Math.round(Lw));
+      for (var i = 0; i < Lw * 1.2; i++) { ctx.fillStyle = R() > .5 ? "rgba(255,255,255,.16)" : "rgba(40,25,10,.22)"; ctx.fillRect(R() * Lw, z0 + R() * (z1 - z0), 1.8, 1.8); }
+    }
+    function stone(i) { return i % 2 ? "#cfc8bb" : "#c6bfb1"; }
+    function heatCol(a) {                                   /* 차가우면 푸른빛, 데우면 주황빛 */
+      var h = clamp(T / 40, 0, 1);
+      return h < 0.05 ? "rgba(120,190,255," + a + ")" : "rgba(255," + Math.round(160 - h * 60) + ",70," + (a * (0.35 + h)) + ")";
+    }
+
+    function drawModel(d) {
+      var heat = clamp(T / 40, 0, 1), box = [0, W];
+      KT.studio(ctx, 0, 0, W, DH, { x: I.P(L, D, 0).x - 150, y: I.P(L, D, -20).y - 26, rx: 330, ry: 52 });
+      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, W, DH, 14); ctx.clip();
+
+      /* 뒤 벽(땅) — 안쪽 벽면은 돌, 오른쪽 잘린 면은 지층 */
+      I.box(ctx, 0, 0, -20, L, WT, ZG, "#6ea24f", "#d8d1c4", "#9b7a52");
+      I.face(ctx, "right", function () { ctx.save(); ctx.beginPath(); ctx.rect(0, -20, WT, ZG + 20); ctx.clip(); strata(WT, -20, ZG); ctx.restore(); });
+      /* 안쪽 벽면 줄눈 */
+      ctx.strokeStyle = "rgba(90,80,64,.28)"; ctx.lineWidth = 1;
+      for (var z = 14; z < ZG; z += 16) { var a = I.P(WT, WT, z), b = I.P(L, WT, z); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+      /* 왼쪽 벽(땅) */
+      I.box(ctx, 0, WT, -20, WT, D, ZG, "#6ea24f", "#9b7a52", "#d2cbbd");
+      I.face(ctx, "front", function () { ctx.save(); ctx.beginPath(); ctx.rect(0, -20, WT, ZG + 20); ctx.clip(); strata(WT, -20, ZG); ctx.restore(); });
+      for (z = 14; z < ZG; z += 16) { var c1 = I.P(WT, WT, z), c2 = I.P(WT, D, z); ctx.beginPath(); ctx.moveTo(c1.x, c1.y); ctx.lineTo(c2.x, c2.y); ctx.stroke(); }
+      /* 바닥 — 돌판 */
+      I.box(ctx, WT, WT, -20, L, D, 0, "#cfc8bb", "#8d8a84", "#7b7872");
+      for (var i = 0; i < 9; i++) I.plane(ctx, 0, stone(i), "rgba(120,110,95,.35)", WT + (L - WT) * i / 9, WT + (L - WT) * (i + 1) / 9, WT, D);
+      /* 금고 공기의 온도 빛 */
+      I.plane(ctx, 0.5, heatCol(0.22), null, WT, L, WT, D);
+
+      /* 땅 위: 국제도량형국 건물과 나무 */
+      I.house(ctx, 250, 6, ZG, 120, 38, 26, "#55657c");
+      [[22, 90], [18, 170], [30, 250], [120, 22], [470, 20], [520, 26]].forEach(function (t, k) { I.tree(ctx, t[0], t[1], ZG, 0.9 + (k % 3) * .12); });
+
+      /* 받침대(돌) + 받침 롤러 두 개 */
+      I.box(ctx, BX0 - 30, BY - 30, 0, BX1 + 30, BY + 30, 26, "#5b5f6b", "#474b56", "#3a3d47");
+      /* 0 ℃에 가까우면 얼음을 채운 홈 */
+      if (T <= 1) {
+        var R = KT.rng(11);
+        for (var k = 0; k < 26; k++) {
+          var ix = BX0 - 20 + R() * (BX1 - BX0 + 40), iy = (k % 2 ? BY - 26 : BY + 12) + R() * 10;
+          I.box(ctx, ix, iy, 26, ix + 9, iy + 8, 32, "rgba(240,250,255,.95)", "rgba(190,225,250,.9)", "rgba(160,205,240,.9)");
+        }
       }
-      glowText(ctx, "🌡 " + T.toFixed(1) + " ℃", 450, 66, { s: 12.5, w: "900", a: "center", c: T <= 0.6 ? KC.blue : KC.orange, blur: 10 });
+      [BX0 + 0.21 * (BX1 - BX0), BX1 - 0.21 * (BX1 - BX0)].forEach(function (rx) {
+        I.box(ctx, rx - 5, BY - 12, 26, rx + 5, BY + 12, BZ, "#8a8f99", "#6d727c", "#585d66");
+      });
+      /* 미터원기 막대 — 늘어난 끝은 보기 쉽게 크게 과장 */
+      var ext = clamp(d / 350, 0, 1) * 40;
+      var tg = heat > 0.02 ? KT.tint("#c9cfda", 1 + heat * .08) : "#d9dee8";
+      I.box(ctx, BX0, BY - 7, BZ, BX1 + ext, BY + 7, BZ + 12, tg, "#9aa2b2", "#6f7788");
+      if (heat > 0.05) I.box(ctx, BX0, BY - 7, BZ, BX1 + ext, BY + 7, BZ + 12, "rgba(255,130,60," + (heat * .28).toFixed(2) + ")", "rgba(255,120,60," + (heat * .22).toFixed(2) + ")", "rgba(255,110,50," + (heat * .2).toFixed(2) + ")");
+      /* 눈금선 두 개(0 m, 1 m) */
+      [BX0 + 8, BX1 - 8 + ext].forEach(function (mx) { var p1 = I.P(mx, BY - 7, BZ + 12), p2 = I.P(mx, BY + 7, BZ + 12); ctx.strokeStyle = "#1b1f2e"; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke(); });
+      if (ext > 1) {
+        var e0 = I.P(BX1, BY + 7, BZ + 20), e1 = I.P(BX1 + ext + 10, BY + 7, BZ + 20);
+        KT.arrow(ctx, e0, e1, KC.orange, 3, 9);
+      }
 
-      /* 왼쪽 — 확대해 본 늘어남 */
-      card(ctx, 60, 166, 380, 140, true, "--coral");
-      text(ctx, "막대 끝을 크게 확대해 보면", 250, 190, { s: 11.5, w: "800", a: "center", c: KC.orange });
-      var maxUm = 350, bx0 = 90, bw = 320;
-      text(ctx, "늘어난 길이", 90, 218, { s: 10.5, c: KC.mute });
-      glowBar(ctx, bx0, 224, bw, 18, d / maxUm, KC.orange);
-      text(ctx, d.toFixed(1) + " µm", 410, 218, { s: 12, w: "900", a: "right", c: KC.orange });
-      text(ctx, "머리카락 굵기", 90, 264, { s: 10.5, c: KC.mute });
-      glowBar(ctx, bx0, 270, bw, 18, HAIR / maxUm, "#c9cfe6");
-      text(ctx, HAIR + " µm", 410, 264, { s: 12, w: "900", a: "right", c: KC.ink });
+      /* 뒤 벽의 온도계 */
+      var tx = 520, t0 = I.P(tx, WT + 1, 18), t1 = I.P(tx, WT + 1, 98), tm = I.P(tx, WT + 1, 18 + 80 * clamp(T / 40, 0, 1));
+      ctx.strokeStyle = "#f4f6fb"; ctx.lineWidth = 7; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(t0.x, t0.y); ctx.lineTo(t1.x, t1.y); ctx.stroke();
+      ctx.strokeStyle = T <= 0.6 ? "#3f8fe0" : "#e0473f"; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(t0.x, t0.y); ctx.lineTo(tm.x, tm.y + 0.01); ctx.stroke(); ctx.lineCap = "butt";
+      ctx.fillStyle = T <= 0.6 ? "#3f8fe0" : "#e0473f"; ctx.beginPath(); ctx.arc(t0.x, t0.y + 3, 5.5, 0, 6.2832); ctx.fill();
 
+      /* 연구원 */
+     I.edges(ctx, 0, ZG);
+      ctx.restore();
+
+      /* 이름표 */
+      I.label(ctx, 310, 20, ZG + 40, "국제도량형국 (프랑스 세브르)", -150, -20, "#e8ecff", box);
+      I.label(ctx, (BX0 + BX1) / 2 - 40, BY + 7, BZ + 6, "국제 미터원기 — 백금 90 %·이리듐 10 %", -150, 70, "#e8ecff", box);
+      I.label(ctx, tx, WT + 1, 98, "금고 온도계 " + T.toFixed(1) + " ℃", 44, 52, T <= 0.6 ? "#bfe6ff" : "#ffc29a", box);
+      I.label(ctx, 20, D, 60, "땅속 금고 — 바깥 날씨에서 떨어진 곳", -6, 54, "#e8ecff", box);
+      if (T <= 1) I.label(ctx, BX0 - 10, BY - 24, 32, "얼음을 채워 0 ℃에 맞춤", -40, -46, "#bfe6ff", box);
+      if (ext > 1) { var epx = I.P(BX1 + ext + 12, BY + 7, BZ + 20); KT.pill(ctx, "+" + d.toFixed(1) + " µm", epx.x + 8, epx.y + 4, { s: 12, c: KC.orange, box: box }); }
+
+      /* 큰 제목 */
+      var h1, h2;
+      if (d <= 5) { h1 = "얼음 녹는 온도의 1 m"; h2 = "늘어난 길이 " + d.toFixed(1) + " µm — 거의 그대로"; }
+      else if (d < HAIR) { h1 = "눈에 안 보이게 늘어났다"; h2 = T.toFixed(1) + " ℃ · " + d.toFixed(1) + " µm"; }
+      else if (d < 99.5) { h1 = "머리카락 한 올보다 길어졌다"; h2 = T.toFixed(1) + " ℃ · " + d.toFixed(1) + " µm"; }
+      else { h1 = "1 m가 1 m보다 길어졌다"; h2 = T.toFixed(1) + " ℃ · +" + (d / 1000).toFixed(2) + " mm"; }
+      KT.bigText(ctx, h1, 22, 50, 27, "#ffffff");
+      KT.bigText(ctx, h2, 22, 84, 17, d <= 5 ? "#bfe6ff" : "#ffd35a");
+      KT.warn(ctx, W - 14, 30, "⚠ 크기 비율은 실제와 다름 · 늘어남·원자 흔들림은 크게 과장", "right");
+
+      drawLens(heat);
+    }
+
+    /* 원자 확대경 — 데울수록 원자가 크게 흔들리고 사이가 벌어진다(과장) */
+    function drawLens(heat) {
+      var cx = 792, cy = 168, r = 66;
+      ctx.save();
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, 6.2832);
+      var g = ctx.createRadialGradient(cx - 20, cy - 20, 8, cx, cy, r); g.addColorStop(0, "#2a3158"); g.addColorStop(1, "#141a36");
+      ctx.fillStyle = g; ctx.fill(); ctx.clip();
+      var sp = 21 * (1 + heat * 0.22), amp = 0.8 + heat * 4.2, R = KT.rng(5);
+      for (var j = -3; j <= 3; j++) for (var i = -3; i <= 3; i++) {
+        var p = R() * 6.28, q = R() * 6.28;
+        var x = cx + i * sp + Math.sin(ph * 1.9 + p) * amp, y = cy + j * sp + Math.cos(ph * 2.3 + q) * amp;
+        var ag = ctx.createRadialGradient(x - 2, y - 2, 1, x, y, 7);
+        ag.addColorStop(0, "#ffffff"); ag.addColorStop(.5, heat > 0.05 ? KT.tint("#d4b48a", 1 + heat * .1) : "#b9c3d6"); ag.addColorStop(1, heat > 0.05 ? "#8a5a3a" : "#6f7a90");
+        ctx.fillStyle = ag; ctx.beginPath(); ctx.arc(x, y, 6.5, 0, 6.2832); ctx.fill();
+      }
+      ctx.restore();
+      ctx.strokeStyle = "#e8ecf2"; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 6.2832); ctx.stroke();
+      ctx.strokeStyle = "#8a93a5"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, r + 3, 0, 6.2832); ctx.stroke();
+      var tip = I.P(BX1 - 20, BY - 7, BZ + 12);
+      ctx.save(); ctx.setLineDash([5, 4]); ctx.strokeStyle = "rgba(40,50,80,.55)"; ctx.lineWidth = 1.3;
+      ctx.beginPath(); ctx.moveTo(tip.x, tip.y); ctx.lineTo(cx - r * 0.7, cy + r * 0.7); ctx.stroke(); ctx.restore();
+      KT.pill(ctx, "🔍 원자 확대 — 데울수록 크게 흔들림", cx, cy + r + 24, { s: 11, a: "center", c: KC.ink, box: [0, W - 6] });
+    }
+
+    function drawPanel(d) {
+      var y0 = DH + 8, h = H - y0;
+      KT.stage(ctx, 0, y0, W, h, "lab", { seed: 23 });
+      /* 왼쪽 — 늘어난 길이와 머리카락 */
+      card(ctx, 20, y0 + 12, 420, 128, true, "--coral");
+      text(ctx, "막대 끝을 크게 확대해 보면", 230, y0 + 34, { s: 11.5, w: "800", a: "center", c: KC.orange });
+      var maxUm = 350, bx0 = 44, bw = 372;
+      text(ctx, "늘어난 길이", bx0, y0 + 60, { s: 10.5, c: KC.mute });
+      glowBar(ctx, bx0, y0 + 66, bw, 16, d / maxUm, KC.orange);
+      text(ctx, d.toFixed(1) + " µm", bx0 + bw, y0 + 60, { s: 12, w: "900", a: "right", c: KC.orange });
+      text(ctx, "머리카락 굵기", bx0, y0 + 102, { s: 10.5, c: KC.mute });
+      glowBar(ctx, bx0, y0 + 108, bw, 16, HAIR / maxUm, "#c9cfe6");
+      text(ctx, HAIR + " µm", bx0 + bw, y0 + 102, { s: 12, w: "900", a: "right", c: KC.ink });
       /* 오른쪽 — 이 자로 1 km를 재면 */
-      card(ctx, 460, 166, 380, 140, true, "--violet");
-      text(ctx, "이 원기를 베낀 자로 1 km를 재면", 650, 190, { s: 11.5, w: "800", a: "center", c: KC.violet });
-      glowText(ctx, (ALPHA * T * 1000 * 1000).toFixed(1) + " mm", 650, 236, { s: 30, w: "900", a: "center", c: KC.violet });
-      text(ctx, "만큼 어긋난다", 650, 260, { s: 11.5, a: "center", c: KC.mute });
-      text(ctx, "ΔL = 1 m × 8.7 × 10⁻⁶ /℃ × " + T.toFixed(1) + " ℃", 650, 288, { s: 11.5, a: "center", c: KC.ink });
+      card(ctx, 460, y0 + 12, 420, 128, true, "--violet");
+      text(ctx, "이 원기를 베낀 자로 1 km를 재면", 670, y0 + 34, { s: 11.5, w: "800", a: "center", c: KC.violet });
+      glowText(ctx, (ALPHA * T * 1000 * 1000).toFixed(1) + " mm", 670, y0 + 78, { s: 30, w: "900", a: "center", c: KC.violet });
+      text(ctx, "만큼 어긋난다", 670, y0 + 100, { s: 11.5, a: "center", c: KC.mute });
+      text(ctx, "ΔL = 1 m × 8.7 × 10⁻⁶ /℃ × " + T.toFixed(1) + " ℃", 670, y0 + 126, { s: 11.5, a: "center", c: KC.ink });
+      KT.t(ctx, "금속은 데우면 늘어납니다. 기준이 ‘물건’이면 기준 자체가 날씨에 따라 달라집니다.", 24, H - 14, { s: 12, c: KC.mute, w: "600" });
+    }
 
-      KT.t(ctx, "금속은 데우면 늘어납니다. 기준이 ‘물건’이면 기준 자체가 날씨에 따라 달라집니다.", 40, 340, { s: 12, c: KC.mute, w: "600" });
-      KT.warn(ctx, 884, 340, "⚠ 막대 끝 화살표는 약 200배 과장", "right");
-
+    function paint() {
+      var d = dL();
+      ctx.clearRect(0, 0, W, H);
+      drawModel(d);
+      drawPanel(d);
+    }
+    function draw() {
+      var d = dL();
+      paint();
       $("b-bar-info").innerHTML = "금고가 <b>" + T.toFixed(1) + " ℃</b> 일 때 원기는 <b>" + d.toFixed(1) + " µm</b> 늘어납니다" +
         (d < 1 ? " — 거의 0입니다. 이 자리가 ‘정확히 1 m’입니다." :
           d < HAIR ? " — 아직 머리카락 굵기(70 µm)보다 작습니다." :
@@ -611,6 +723,8 @@ function lcg(seed) {
       T = +e.target.value; $("b-t-val").textContent = T.toFixed(1) + " ℃"; draw();
     });
     $("b-t-val").textContent = T.toFixed(1) + " ℃";
+    pauser("b-bar-play", mv);
+    KT.animate(canvas, function (dt) { if (!mv.on) return; ph += dt / 1000 * 6; paint(); }, 24);
     draw(); mission();
     if (ep.cleared(1)) window.sthMission("m2-2", true);
   })();
