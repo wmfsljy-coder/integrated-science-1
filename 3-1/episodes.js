@@ -358,55 +358,152 @@ function pointOnCanvas(canvas, e) {
     function dT(t) { return peak() * frac(t); }
     function sun(t) { return -2.5 * (so2 / 20) * frac(t); }          /* 지표에 닿는 햇빛 변화(%) */
 
-    function draw(quiet) {
-      paper(ctx, W, H);
-      pill(ctx, "화산 폭발이 만드는 연쇄 — 지권에서 시작해 네 권역으로", 40, 30, { s: 13.5, c: KS.ink });
-      var a = frac(mon), now = dT(mon), t = vT / 1000, i;
-      /* 왼쪽 그림 — 낮 하늘, 성층권의 황산 알갱이 층, 화산 */
-      var x0 = 40, x1 = 430, sky = 54, ground = 292;
-      K.stage(ctx, x0, sky, x1 - x0, ground - sky + 10, "sky", { r: 12 });
-      ctx.save(); ctx.beginPath(); ctx.roundRect(x0, sky, x1 - x0, ground - sky + 10, 12); ctx.clip();
-      var haze = clamp(0.10 + 0.75 * a * (so2 / 30), 0, 0.85);
-      var hz = ctx.createLinearGradient(0, sky + 18, 0, sky + 74);
-      hz.addColorStop(0, "rgba(230,225,210,0)"); hz.addColorStop(.5, "rgba(230,225,210," + haze + ")"); hz.addColorStop(1, "rgba(230,225,210,0)");
-      ctx.fillStyle = hz; ctx.fillRect(x0, sky + 18, x1 - x0, 56);
-      var na = Math.round(60 * haze);
-      for (i = 0; i < na; i++) { var hx = x0 + ((i * 53.3 + t * 6) % (x1 - x0)), hy = sky + 30 + ((i * 37) % 32); ctx.fillStyle = "rgba(255,250,235,.75)"; ctx.beginPath(); ctx.arc(hx, hy, 1.2, 0, 6.2832); ctx.fill(); }
-      /* 땅 */
-      var gr = ctx.createLinearGradient(0, ground, 0, ground + 10); gr.addColorStop(0, "#5a4636"); gr.addColorStop(1, "#2a1f1a");
-      ctx.fillStyle = gr; ctx.fillRect(x0, ground, x1 - x0, 10);
-      /* 화산: 암석 질감 */
-      var vg = ctx.createLinearGradient(300, ground - 92, 404, ground);
-      vg.addColorStop(0, "#8a6a55"); vg.addColorStop(.55, "#5b4234"); vg.addColorStop(1, "#2e2018");
-      ctx.fillStyle = vg; ctx.beginPath(); ctx.moveTo(296, ground); ctx.lineTo(344, ground - 90); ctx.lineTo(360, ground - 90); ctx.lineTo(408, ground); ctx.closePath(); ctx.fill();
-      K.glow(ctx, 352, ground - 90, 5, "rgba(255,140,60,.9)", 4);
-      /* 분연 기둥: 성층권까지 올라가는 화산 가스·재 */
-      var pa = clamp(0.25 + a, 0, 1);
-      for (i = 0; i < 9; i++) {
-        var u = i / 8, px = 352 - u * 40 + Math.sin(t * 1.3 + i) * 4, py = ground - 96 - u * (ground - 96 - sky - 50), pr = 9 + u * 16;
-        var pg = ctx.createRadialGradient(px - pr * .3, py - pr * .3, 1, px, py, pr);
-        pg.addColorStop(0, "rgba(220,215,205," + (.85 * pa) + ")"); pg.addColorStop(1, "rgba(120,110,100," + (.15 * pa) + ")");
-        ctx.fillStyle = pg; ctx.beginPath(); ctx.arc(px, py, pr, 0, 6.2832); ctx.fill();
+    /* ── 위: 바다·땅·화산을 블록으로 잘라 낸 모형(아이소메트릭) + 성층권 장막 · 아래: 그래프·표·네 권역 연쇄 ──
+       x 오른쪽 아래(바다 → 땅), y 왼쪽 아래, z 위(그림 단위). 높이·크기는 보기 쉽게 바꾸었다(실제 비율 아님). */
+    var DH = 412;
+    var I = K.iso({ ox: 520, oy: 166, s: 0.6, L: 560, D: 230 });
+    var BL = I.L, BD = I.D, SL = 56, STR = 262;            /* 해수면 · 성층권 장막 높이 */
+    var VX = 380, VY = 150, VR = 112, VH = 104;               /* 화산 자리·반지름·높이 */
+    function vcone(x, y) {
+      var r = Math.sqrt((x - VX) * (x - VX) + (y - VY) * (y - VY)); if (r > VR) return -1;
+      var h = SL + 12 + VH * Math.pow(1 - r / VR, 1.25); if (r < 11) h -= (11 - r) * 1.3; return h;
+    }
+    function coast(y) { return 200 + 22 * Math.sin(y / 37); }
+    function ground(x, y) {
+      var c = coast(y), z = x < c ? SL - 30 + 28 * Math.pow(x / c, 3) + 1.5 * Math.sin(x / 23) * Math.cos(y / 19)
+                                  : SL - 2 + Math.min(14, (x - c) * .3) + 1.6 * Math.sin(x / 31 + y / 43);
+      return Math.max(z, vcone(x, y));
+    }
+    function mixHex(a, b, t) {
+      var p = parseInt(a.slice(1), 16), q = parseInt(b.slice(1), 16);
+      function ch(s) { return Math.round(((p >> s) & 255) * (1 - t) + ((q >> s) & 255) * t); }
+      var n = (ch(16) << 16) | (ch(8) << 8) | ch(0); return "#" + ("000000" + n.toString(16)).slice(-6);
+    }
+    function lerp(a, b, t) { return a + (b - a) * t; }
+    var COOL = 0;                                          /* 0 보통 ~ 1 가장 서늘함(색만 바꾼다) */
+    function landCol(x, y, z, light) {
+      var c;
+      if (z < SL - 1) c = "#b39d78";                                     /* 바다 밑 모래 */
+      else if (z < SL + 2.5) c = "#dcc590";                              /* 바닷가 */
+      else if (vcone(x, y) >= z - .3 && z > SL + 34) c = z > SL + VH ? "#4f4039" : "#6f5a4c";   /* 화산 사면 */
+      else if (x > 410 && y < 96) c = Math.floor((x * .9 + y * .35) / 17) % 2 ? mixHex("#8fbf4a", "#c9b26a", COOL) : mixHex("#6fa63e", "#b3a05a", COOL); /* 논밭 */
+      else c = mixHex("#4f8f3c", "#7d8a4a", COOL * .8);                 /* 숲 */
+      return K.tint(c, light);
+    }
+    function faceZ(side) { return function (u) { return side === "front" ? ground(u, BD) : ground(BL, u); }; }
+    var RAYS = [[250, 60], [330, 210], [470, 60]];            /* 햇빛이 닿는 땅·바다 자리 */
+
+    function drawModel(a, now, t, haze) {
+      var box = [0, W], wz = SL;
+      K.studio(ctx, 0, 0, W, DH, { x: I.P(BL, BD, 0).x - 150, y: I.P(BL, BD, 0).y - 18, rx: 320, ry: 46 });
+      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, W, DH, 14); ctx.clip();
+      /* 해: 오른쪽 위 */
+      K.glow(ctx, 856, 44, 20, "rgba(255,206,84,.98)", 2.6);
+      /* 지형 + 칸마다 바닷물 */
+      I.field(ctx, function (x, y) { return ground(x, y); }, landCol, 56, 23, function (c, x0, y0, x1, y1, zMax, zMin) {
+        if (wz > zMin + 0.2) {
+          var p1 = I.P(x0, y0, wz), p2 = I.P(x1, y0, wz), p3 = I.P(x1, y1, wz), p4 = I.P(x0, y1, wz);
+          var dp = wz - zMin, al = Math.min(.82, .34 + dp / 50);
+          c.beginPath(); c.moveTo(p1.x, p1.y); c.lineTo(p2.x, p2.y); c.lineTo(p3.x, p3.y); c.lineTo(p4.x, p4.y); c.closePath();
+          c.fillStyle = "rgba(" + Math.round(lerp(60, 80, COOL) - dp * .5) + "," + Math.round(lerp(150, 140, COOL) - dp * .6) + "," + Math.round(lerp(222, 205, COOL)) + "," + al.toFixed(2) + ")"; c.fill();
+        }
+      });
+      /* 앞면·오른쪽 면: 땅속 단면 */
+      ["front", "right"].forEach(function (side) {
+        var zf = faceZ(side);
+        I.face(ctx, side, function (Lw) {
+          I.profile(ctx, side, zf, 0);
+          var g = ctx.createLinearGradient(0, 0, 0, 130); g.addColorStop(0, "#4a3f39"); g.addColorStop(.6, "#7d6a58"); g.addColorStop(1, "#a88f70");
+          ctx.fillStyle = g; ctx.fill();
+          ctx.save(); I.profile(ctx, side, zf, 0); ctx.clip();
+          var R = K.rng(side === "front" ? 41 : 43);
+          for (var i = 0; i < Lw * 1.2; i++) { ctx.fillStyle = R() > .5 ? "rgba(255,255,255,.14)" : "rgba(40,28,18,.25)"; ctx.fillRect(R() * Lw, R() * 130, 1.6, 1.6); }
+          ctx.strokeStyle = "rgba(50,35,20,.28)"; ctx.lineWidth = 1;
+          for (var y2 = 12; y2 < 120; y2 += 13) { ctx.beginPath(); ctx.moveTo(0, y2); ctx.lineTo(Lw, y2 + 2); ctx.stroke(); }
+          if (side === "front") {
+            /* 화산 아래 마그마 굄과 화도(지각 속, 앞면 단면에 드러남) */
+            var mg = ctx.createRadialGradient(VX, 16, 2, VX, 16, 42);
+            mg.addColorStop(0, "#ffd27a"); mg.addColorStop(.45, "#f0782e"); mg.addColorStop(1, "rgba(150,40,20,0)");
+            ctx.fillStyle = mg; ctx.beginPath(); ctx.ellipse(VX, 16, 40, 10, 0, 0, 6.283); ctx.fill();
+            ctx.strokeStyle = "#ff8a3a"; ctx.lineWidth = 3.2; ctx.beginPath(); ctx.moveTo(VX, 22);
+            ctx.quadraticCurveTo(VX + 4, (22 + zf(VX)) / 2, VX - 1, zf(VX) - 1); ctx.stroke();
+          }
+          ctx.restore();
+        });
+      });
+      I.water(ctx, wz, function (u, side) { return faceZ(side)(u); }, { surface: false });
+      I.shade(ctx, "front", function (u) { return Math.max(ground(u, BD), wz); });
+      I.shade(ctx, "right", function (u) { return Math.max(ground(BL, u), wz); });
+      I.edges(ctx, ground(BL, BD), ground(BL, BD));
+      /* 마을·숲 */
+      [[470, 150], [500, 175], [452, 196]].forEach(function (h, i) { I.house(ctx, h[0], h[1], ground(h[0] + 7, h[1] + 7), 14, 12, 10, ["#c0553f", "#3f6fb5", "#d08a2e"][i]); });
+      [[262, 140], [280, 196], [300, 20], [520, 120], [540, 214], [255, 30], [520, 22]].forEach(function (q, i) { I.tree(ctx, q[0], q[1], ground(q[0], q[1]), .75 + (i % 3) * .1); });
+      /* 분연 기둥: 화구에서 성층권까지 */
+      var cr = I.P(VX, VY, SL + 12 + VH - 6), top = I.P(VX, VY, STR), pa = clamp(.4 + a * .8, 0, 1) * (so2 > 0 ? 1 : 0);
+      K.glow(ctx, cr.x, cr.y, 4.5, "rgba(255,130,50,.95)", 3);
+      if (pa > 0) {
+        var sz = .6 + so2 / 40;
+        for (var k = 0; k < 18; k++) {
+          var u = ((k / 18) + t * .06) % 1, px = cr.x + Math.sin(t * 1.4 + k * 1.7) * 2.5 * (1 + u), py = lerp(cr.y - 2, top.y + 4, u), pr = 3.5 + u * 9 * sz;
+          var pg = ctx.createRadialGradient(px - pr * .3, py - pr * .3, 1, px, py, pr);
+          pg.addColorStop(0, "rgba(176,168,158," + (.92 * pa).toFixed(3) + ")"); pg.addColorStop(1, "rgba(80,72,66," + (.25 * pa).toFixed(3) + ")");
+          ctx.fillStyle = pg; ctx.beginPath(); ctx.arc(px, py, pr, 0, 6.2832); ctx.fill();
+        }
+        /* 성층권에 닿아 옆으로 퍼지는 우산 모양 구름 */
+        for (var e = 0; e < 7; e++) {
+          var sp = (e - 3) / 3, ex = top.x + sp * (30 + 70 * a * sz) + Math.sin(t * .8 + e) * 3, ey = top.y + 6 + Math.abs(sp) * 4, er = 14 * sz * (1 - Math.abs(sp) * .35);
+          ctx.fillStyle = "rgba(196,188,176," + (.55 * pa * (1 - Math.abs(sp) * .4)).toFixed(3) + ")";
+          ctx.beginPath(); ctx.ellipse(ex, ey, er * 1.8, er * .7, 0, 0, 6.2832); ctx.fill();
+        }
       }
+      /* 성층권 장막: 황산 알갱이(에어로졸) 층 */
+      I.plane(ctx, STR, "rgba(238,226,196," + (haze * .62).toFixed(3) + ")", "rgba(120,130,160," + (.35 + haze * .4).toFixed(2) + ")");
+      var R2 = K.rng(77), nd = Math.round(90 * haze);
+      for (var d = 0; d < nd; d++) {
+        var qx = (R2() * BL + t * (4 + R2() * 6)) % BL, qy = R2() * BD, q = I.P(qx, qy, STR + R2() * 6);
+        ctx.fillStyle = "rgba(150,120,60,.55)"; ctx.beginPath(); ctx.arc(q.x, q.y, 1.4, 0, 6.2832); ctx.fill();
+      }
+      /* 햇빛: 장막에서 일부가 되돌아가고 나머지가 지표에 닿는다 */
+      var thru = clamp(1 - haze * .8, .25, 1);
+      RAYS.forEach(function (r) {
+        var pp = I.P(r[0], r[1], STR), gp = I.P(r[0], r[1], Math.max(ground(r[0], r[1]), SL));
+        ctx.save(); ctx.shadowColor = "#ffcf4a"; ctx.shadowBlur = 8;
+        K.line(ctx, { x: 846, y: 54 }, pp, "#f2b01e", 3);
+        K.arrow(ctx, pp, gp, "rgba(242,176,30," + thru.toFixed(2) + ")", 1 + 2.2 * thru, 10);
+        if (haze > .07) K.arrow(ctx, pp, { x: pp.x - 46, y: pp.y - 40 }, "rgba(70,140,220," + clamp(haze * 1.3, .25, 1).toFixed(2) + ")", 1.2 + 2 * haze, 9);
+        ctx.restore();
+      });
       ctx.restore();
-      pill(ctx, "성층권 에어로졸(황산 알갱이)", x1 - 8, sky + 22, { s: 10.5, a: "right", c: KS.ink });
-      /* 햇빛 */
-      ctx.save(); ctx.shadowColor = "#ffd36b"; ctx.shadowBlur = 10;
-      K.arrow(ctx, { x: x0 + 40, y: sky + 6 }, { x: x0 + 96, y: ground - 10 }, "#ffc42e", 3.4, 12);
-      K.arrow(ctx, { x: x0 + 120, y: sky + 52 }, { x: x0 + 176, y: sky + 8 }, "#e0f4ff", 3, 11); ctx.restore();
-      pill(ctx, "일부는 되돌아감", x0 + 182, sky + 48, { s: 10.5, c: KS.blue });
-      pill(ctx, "지권 — 이산화 황 " + so2 + " Tg 분출", x0 + 8, ground + 30, { s: 11.5, c: v("--coral-700") });
-      text(ctx, "이산화 황은 성층권에서 작은 황산 알갱이(에어로졸)가 되어 햇빛을 되돌려 보냅니다.", x0, ground + 50, { s: 10.5, c: v("--mist") });
-      /* 오른쪽 표 */
-      rows(ctx, [
-        ["분출한 이산화 황", so2 + " Tg (피나투보 ≈ 20 Tg)"],
-        ["가장 많이 식었을 때", peak().toFixed(2) + " ℃"],
-        ["지금 남은 에어로졸", (a * 100).toFixed(0) + " %"],
-        ["폭발 " + mon + "개월 뒤 기온 변화", now.toFixed(2) + " ℃", Math.abs(now) > 0.25 ? "--brand-100" : null, Math.abs(now) > 0.25 ? "--brand-700" : null],
-        ["지표에 닿는 햇빛", sun(mon).toFixed(1) + " %"]
-      ], 460, 50, 416, 30);
-      /* 그래프 */
-      var g = K.chart(ctx, { x: 450, y: 206, w: 430, h: 144, pl: 48, pt: 10, pb: 26, x0: 0, x1: 48, y0: -1, y1: 0, xt: 4, yt: 2,
+
+      /* 이름표 — 네 권역 */
+      var dTxt = (now <= -0.005 ? "−" + Math.abs(now).toFixed(2) : "0.00") + " ℃";
+      I.label(ctx, 40, 200, STR, "② 기권 — 성층권 황산 알갱이층" + (haze > .07 ? " · 햇빛 일부를 되돌림" : " · 지금은 맑음"), -24, 40, "#e8ecff", box);
+      I.label(ctx, VX + 30, VY + 20, ground(VX + 30, VY + 20), (so2 > 0 ? "① 지권 — 화산이 이산화 황 " + so2 + " Tg 분출" : "① 지권 — 화산이 잠잠함"), 150, 70, "#ffd2b0", box);
+      I.label(ctx, 500, 40, ground(500, 40), "③ 생물권 — " + (COOL > .35 ? "일조량이 줄어 작물이 덜 자람" : "햇빛을 받아 광합성"), 60, -34, COOL > .35 ? "#ffe39a" : "#bff0b5", box);
+      I.label(ctx, 90, 150, SL, "④ 수권 — 바다 표층 " + dTxt, -60, 34, "#bfe6ff", box);
+      I.label(ctx, 300, BD, 16, "마그마", -60, 40, "#ffcf9a", box);
+      K.warn(ctx, W - 14, DH - 16, "⚠ 높이·크기는 보기 쉽게 바꾼 것 (성층권은 지상 약 10~50 km)", "right");
+      /* 큰 글자 */
+      var head, sub, hc = "#ffffff", sc = "#ffd35a";
+      if (so2 === 0) { head = "화산이 조용한 해"; sub = "성층권이 맑아 햇빛이 그대로 닿습니다"; }
+      else if (mon === 0) { head = "막 터진 화산"; sub = "이산화 황 " + so2 + " Tg이 하늘로 올라가는 중"; }
+      else if (a < .2) { head = "장막이 걷혔다"; sub = mon + "개월 뒤 · 에어로졸 " + Math.round(a * 100) + "% · " + dTxt; hc = "#bfe6ff"; }
+      else if (Math.abs(peak() + 0.5) <= 0.03) { head = "피나투보급 — 지구가 식는다"; sub = "폭발 " + mon + "개월 뒤 · 지구 평균 기온 " + dTxt; hc = "#ffd35a"; sc = "#ffffff"; }
+      else { head = "화산 하나가 지구를 식힌다"; sub = "이산화 황 " + so2 + " Tg · " + mon + "개월 뒤 " + dTxt; }
+      K.bigText(ctx, head, 22, 48, 25, hc);
+      K.bigText(ctx, sub, 22, 80, 15, sc);
+    }
+
+    function draw(quiet) {
+      ctx.clearRect(0, 0, W, H);
+      var a = frac(mon), now = dT(mon), t = vT / 1000, i;
+      var haze = so2 > 0 ? clamp(0.06 + 0.75 * a * (so2 / 30), 0, 0.85) : 0;
+      COOL = clamp(-now / 0.7, 0, 1);
+      drawModel(a, now, t, haze);
+      /* ── 아래 판: 그래프 · 표 · 연쇄 ── */
+      var Y0 = DH + 8;
+      K.stage(ctx, 0, Y0, W, H - Y0, "lab", { seed: 9 });
+      var g = K.chart(ctx, { x: 6, y: Y0 + 12, w: 510, h: 168, pl: 52, pt: 12, pb: 26, x0: 0, x1: 48, y0: -1, y1: 0, xt: 4, yt: 2,
         xf: function (q) { return Math.round(q) + "개월"; }, yf: function (q) { return (q < 0 ? "−" : "") + Math.abs(q).toFixed(1) + " ℃"; } });
       var pts = [];
       for (i = 0; i <= 96; i++) { var tt = 48 * i / 96; pts.push([tt, clamp(dT(tt), -1, 0)]); }
@@ -414,21 +511,28 @@ function pointOnCanvas(canvas, e) {
       var mx = g.X(mon), my = g.Y(clamp(now, -1, 0));
       K.line(ctx, { x: mx, y: g.T }, { x: mx, y: g.B }, "rgba(200,210,255,.6)", 1.3, [4, 4]);
       dot(ctx, mx, my, 5, "--coral", 3.4);
-      pill(ctx, "폭발 뒤 기온 변화", g.R - 6, g.B - 10, { s: 11, a: "right", c: KS.orange });
-      pill(ctx, mon + "개월 · " + now.toFixed(2) + " ℃", mx + 10, Math.min(g.B - 30, my + 22), { s: 10.5, c: KS.ink, box: [g.L, g.R] });
-      /* 아래 연쇄 */
+      pill(ctx, "폭발 뒤 지구 평균 기온 변화", g.R - 6, g.B - 10, { s: 11, a: "right", c: KS.orange });
+      pill(ctx, mon + "개월 · " + now.toFixed(2) + " ℃", mx + 10, Math.min(g.B - 34, my + 22), { s: 10.5, c: KS.ink, box: [g.L, g.R] });
+      rows(ctx, [
+        ["분출한 이산화 황", so2 + " Tg (피나투보 ≈ 20 Tg)"],
+        ["가장 많이 식었을 때", peak().toFixed(2) + " ℃"],
+        ["지금 남은 에어로졸", (a * 100).toFixed(0) + " %"],
+        ["폭발 " + mon + "개월 뒤 기온 변화", now.toFixed(2) + " ℃", Math.abs(now) > 0.25 ? "--brand-100" : null, Math.abs(now) > 0.25 ? "--brand-700" : null],
+        ["지표에 닿는 햇빛", sun(mon).toFixed(1) + " %"]
+      ], 534, Y0 + 14, 352, 34);
       var chain = [
         ["지권", "화산이 이산화 황 " + so2 + " Tg을 성층권까지 뿜어 올립니다.", "--coral"],
         ["기권", "황산 알갱이가 햇빛을 " + Math.abs(sun(mon)).toFixed(1) + "% 되돌려 보내 지구 평균 기온이 " + now.toFixed(2) + " ℃ 달라집니다.", "--cold"],
         ["생물권", "일조량이 줄어 광합성이 느려지고, 서늘한 여름에 농작물 수확이 줄어듭니다.", "--green"],
         ["수권", "기온이 내려가 증발량과 강수 분포가 달라지고, 바다 표층도 함께 식습니다.", "--brand"]
       ];
+      var cy = Y0 + 196;
       for (var c = 0; c < chain.length; c++) {
-        var bx = 40 + c * 215;
-        glass(ctx, bx, 354, 196, 64, chain[c][2], 10);
-        text(ctx, (c + 1) + ". " + chain[c][0], bx + 10, 370, { s: 11.5, w: "900", c: v(chain[c][2] + "-700") || v("--ink") });
-        wrapText(ctx, chain[c][1], bx + 10, 384, 176, 12, { s: 9.6, c: "#c6cff5" });
-        if (c > 0) K.arrow(ctx, { x: bx - 17, y: 386 }, { x: bx - 3, y: 386 }, KS.mute, 2, 7);
+        var bx = 16 + c * 220;
+        glass(ctx, bx, cy, 200, 66, chain[c][2], 10);
+        text(ctx, (c + 1) + ". " + chain[c][0], bx + 10, cy + 17, { s: 11.5, w: "900", c: v(chain[c][2] + "-700") || v("--ink") });
+        wrapText(ctx, chain[c][1], bx + 10, cy + 33, 180, 13, { s: 10, c: "#c6cff5" });
+        if (c > 0) K.arrow(ctx, { x: bx - 18, y: cy + 33 }, { x: bx - 4, y: cy + 33 }, KS.mute, 2, 7);
       }
       if (quiet !== true) info();
     }
