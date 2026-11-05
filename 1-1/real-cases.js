@@ -6,6 +6,26 @@
 "use strict";
 var LOD = (window.REAL_LOD || { rows: [] }).rows;               /* [연도, 초과 ms, 윤초 수, 날수] */
 var VOY = (window.REAL_VOYAGER || { rows: [] }).rows;           /* [연도, au] */
+/* ---- 밝은 스튜디오 말투 (../assets/kit.js 의 K.studio · K.chart · K.card) ---- */
+var KT = window.sthKit, LC = KT.LT;
+function lt(ctx, s, x, y, o) { o = o || {}; KT.t(ctx, s, x, y, { s: o.s || 12, w: o.w || "700", a: o.a, c: o.c || LC.ink }); }
+function floorShadow(ctx, x, y, rx, ry, a) {
+  var g = ctx.createRadialGradient(x, y, 2, x, y, rx);
+  g.addColorStop(0, "rgba(20,30,50," + (a || 0.28) + ")"); g.addColorStop(0.6, "rgba(20,30,50,.07)"); g.addColorStop(1, "rgba(20,30,50,0)");
+  ctx.save(); ctx.translate(x, y); ctx.scale(1, ry / rx); ctx.translate(-x, -y);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, rx, 0, 6.2832); ctx.fill(); ctx.restore();
+}
+function metal(ctx, x0, y0, x1, y1, a, b, c) {
+  var g = ctx.createLinearGradient(x0, y0, x1, y1); g.addColorStop(0, a || "#f6f8fb"); g.addColorStop(0.5, b || "#aab3c3"); g.addColorStop(1, c || "#5b6476"); return g;
+}
+/* 앞에서 비스듬히 내려다본 판(윗면이 조금 보이는 미니어처): 앞면 + 윗면 + 오른쪽 옆면 */
+function slab(ctx, x, y, w, h, d, cTop, cFront, cSide) {
+  ctx.fillStyle = cTop; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + d, y - d * 0.6); ctx.lineTo(x + w + d, y - d * 0.6); ctx.lineTo(x + w, y); ctx.closePath(); ctx.fill();
+  if (cSide) { ctx.fillStyle = cSide; ctx.beginPath(); ctx.moveTo(x + w, y); ctx.lineTo(x + w + d, y - d * 0.6); ctx.lineTo(x + w + d, y + h - d * 0.6); ctx.lineTo(x + w, y + h); ctx.closePath(); ctx.fill(); }
+  ctx.fillStyle = cFront; ctx.fillRect(x, y, w, h);
+}
+/* 오른쪽 흰 판정 카드 한 벌 */
+function sideCard(ctx, x, W, H, title) { KT.card(ctx, x, 0, W - x, H, title); return { px: x + 18, R: W - 18, w: W - x - 36 }; }
 function lodOf(y) { for (var i = 0; i < LOD.length; i++) if (LOD[i][0] === y) return LOD[i]; return null; }
 var L72 = lodOf(1972) || [1972, 3.1, 0], DRIFT = L72[1] * 365.25 / 1000;
 var LEAPS = LOD.reduce(function (s, r) { return s + r[2]; }, 0), LASTLEAP = LOD.reduce(function (s, r) { return r[2] ? r[0] : s; }, 0);
@@ -34,16 +54,25 @@ window.sthLab({
       function Y(v) { return y1 - (v + 1) / 5 * (y1 - y0); }
       function draw() {
         H.paper(ctx, W, cv.H); H.axes(ctx, x0, y0, x1, y1);
-        [-1, 0, 1, 2, 3, 4].forEach(function (v) { H.text(ctx, v + " ms", x0 - 6, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-        H.dash(ctx, x0, Y(0), x1, Y(0), H.v("--line"), 1);
-        [1970, 1980, 1990, 2000, 2010, 2020].forEach(function (y) { H.text(ctx, y, X(y), y1 + 15, { s: 10, a: "center", c: H.v("--mist") }); });
-        LOD.forEach(function (r) { if (r[2]) H.box(ctx, X(r[0]) - 2, y1 - r[2] * 10, 4, r[2] * 10, H.v("--coral-700"), 0.8); });
-        H.line(ctx, LOD.map(function (r) { return [X(r[0]), Y(r[1])]; }), H.v("--brand"), 2.2);
-        var R = lodOf(yr) || L72; H.dot(ctx, X(yr), Y(R[1]), 6, H.v("--amber-700"));
-        H.text(ctx, "빨간 막대 = 그해 넣은 윤초(1 초)", x0 + 8, y0 + 4, { s: 11, w: "800", c: H.v("--coral-700") });
-        H.rows(ctx, 680, 40, [["고른 해", yr + "년", "--amber-700"], ["하루가 더 길었던 시간", R[1].toFixed(2) + " ms"], ["그해 윤초", R[2] + " 번"], ["내 답 (한 해 어긋남)", g.toFixed(2) + " 초", null, true]], 52);
+        ctx.clearRect(0, 0, W, cv.H);
+        var CH = cv.H, R = lodOf(yr) || L72;
+        KT.studio(ctx, 0, 0, 650, CH, null);
+        var gc = KT.chart(ctx, { x: 8, y: 30, w: 636, h: CH - 34, x0: 1962, x1: 2026, y0: -1, y1: 4, xt: 8, yt: 5, light: true, xl: "연도", yl: "하루가 86,400 초보다 길었던 시간 (ms)", xf: function (v2) { return String(Math.round(v2)); } });
+        KT.line(ctx, { x: gc.L, y: gc.Y(0) }, { x: gc.R, y: gc.Y(0) }, LC.line, 1.2, [5, 4]);
+        LOD.forEach(function (r) { if (r[2]) { ctx.fillStyle = "rgba(224,49,49,.75)"; ctx.fillRect(gc.X(r[0]) - 2.5, gc.B - r[2] * 12, 5, r[2] * 12); } });
+        KT.plot(ctx, gc, LOD.map(function (r) { return [r[0], r[1]]; }), LC.blue, { light: true, w: 2.6 });
+        KT.line(ctx, { x: gc.X(yr), y: g.T }, { x: gc.X(yr), y: g.B }, LC.orange, 1.2, [3, 3]);
+        KT.planet(ctx, gc.X(yr), gc.Y(R[1]), 6.5, "#ffd8a8", "#d9480f");
+        KT.pill(ctx, "빨간 막대 = 그해 넣은 윤초(1 초)", gc.R - 6, gc.T + 20, { a: "right", s: 11, c: "#ffa8a8" });
+        var cd = sideCard(ctx, 660, W, CH, "원자시계로 잰 하루");
+        lt(ctx, R[1].toFixed(2) + " ms", cd.px, 64, { s: 24, w: "900", c: LC.blue });
+        KT.row(ctx, "고른 해", yr + "년", cd.px, cd.R, 100, LC.orange);
+        KT.row(ctx, "그해 윤초", R[2] + " 번", cd.px, cd.R, 126, LC.red);
+        KT.row(ctx, "1 ms", "0.001 초", cd.px, cd.R, 152);
+        KT.row(ctx, "내 답 (한 해 어긋남)", g.toFixed(2) + " 초", cd.px, cd.R, 186, LC.violet);
+        KT.tip(ctx, "하루치 × 365.25 = 한 해치", cd.px - 4, 204, cd.w + 8, null);
       }
-      cv.canvas._redraw = draw;
+            cv.canvas._redraw = draw;
       api.slider({ label: "읽을 해", min: 1962, max: 2026, step: 1, value: 1972, fmt: function (x) { return x + "년"; }, onInput: function (x) { yr = x; draw(); } });
       api.slider({ label: "1972년 한 해 동안 쌓인 어긋남", min: 0, max: 3, step: 0.02, value: 0, fmt: function (x) { return x.toFixed(2) + " 초"; }, onInput: function (x) { g = x; api.changed(); draw(); } });
       api.info("1 ms = 0.001 초. 하루마다 조금씩 길어진 시간을 1년치 모두 더해 보세요. " + SRC1
@@ -78,12 +107,26 @@ window.sthLab({
       function Y(a) { return y1 - a / 180 * (y1 - y0); }
       function draw() {
         H.paper(ctx, W, cv.H); H.axes(ctx, x0, y0, x1, y1);
-        [0, 50, 100, 150].forEach(function (a) { H.text(ctx, a + " au", x0 - 6, Y(a) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-        [1980, 1990, 2000, 2010, 2020].forEach(function (y) { H.text(ctx, y, X(y), y1 + 15, { s: 10, a: "center", c: H.v("--mist") }); });
-        H.line(ctx, VOY.map(function (r) { return [X(r[0]), Y(r[1])]; }), H.v("--brand"), 2.5);
-        H.dot(ctx, X(V26[0]), Y(V26[1]), 6, H.v("--amber-700"));
-        H.text(ctx, "명왕성 궤도 ≈ 40 au", X(1981), Y(40) - 6, { s: 10, c: H.v("--mist") }); H.dash(ctx, x0, Y(40), x1, Y(40), H.v("--line"), 1);
-        H.rows(ctx, 640, 40, [[V26[0] + "년 거리", V26[1].toFixed(2) + " au"], ["1 au", "1.496 × 10⁸ km"], ["내 답 (빛이 오는 시간)", h.toFixed(1) + " 시간", null, true]], 60);
+        ctx.clearRect(0, 0, W, cv.H);
+        var CH = cv.H;
+        KT.studio(ctx, 0, 0, 650, CH, null);
+        var gr = KT.chart(ctx, { x: 8, y: 30, w: 636, h: CH - 34, x0: 1978, x1: 2028, y0: 0, y1: 200, xt: 5, yt: 4, light: true, xl: "연도", yl: "지구에서 보이저 1호까지 (au)", xf: function (v2) { return String(Math.round(v2)); } });
+        KT.line(ctx, { x: gr.L, y: gr.Y(40) }, { x: gr.R, y: gr.Y(40) }, LC.violet, 1.4, [5, 4]);
+        KT.pill(ctx, "명왕성 궤도 ≈ 40 au", gr.X(1981), gr.Y(40) - 8, { s: 10.5, c: "#d0bfff" });
+        KT.plot(ctx, gr, VOY.map(function (r) { return [r[0], r[1]]; }), LC.blue, { light: true, w: 2.8 });
+        /* 끝점의 작은 탐사선 */
+        var ex = gr.X(V26[0]), ey = gr.Y(V26[1]);
+        ctx.fillStyle = "#eef1f6"; ctx.beginPath(); ctx.arc(ex - 2, ey - 14, 9, Math.PI * 0.1, Math.PI * 0.9, true); ctx.fill();
+        ctx.strokeStyle = "#6b7384"; ctx.lineWidth = 1; ctx.stroke();
+        ctx.fillStyle = metal(ctx, ex - 5, 0, ex + 5, 0, "#fff3b8", "#e2a52a", "#8a5a10"); ctx.fillRect(ex - 5, ey - 12, 10, 8);
+        KT.planet(ctx, ex, ey, 5, "#ffd8a8", "#d9480f");
+        var cd = sideCard(ctx, 660, W, CH, "빛 소식이 오는 시간");
+        lt(ctx, h.toFixed(1) + " 시간", cd.px, 64, { s: 24, w: "900", c: LC.violet });
+        KT.row(ctx, V26[0] + "년 거리", V26[1].toFixed(2) + " au", cd.px, cd.R, 100, LC.blue);
+        KT.row(ctx, "1 au", "1.496 × 10⁸ km", cd.px, cd.R, 126);
+        KT.row(ctx, "빛의 속력", "2.998 × 10⁵ km/s", cd.px, cd.R, 152);
+        KT.tip(ctx, "시간 = 거리 ÷ 속력", cd.px - 4, 172, cd.w + 8, null);
+        lt(ctx, "초 ÷ 3,600 = 시간", cd.px, 236, { s: 11, c: LC.mute });
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "신호가 오는 데 걸리는 시간", min: 0, max: 30, step: 0.1, value: 1, fmt: function (x) { return x.toFixed(1) + " 시간"; }, onInput: function (x) { h = x; api.changed(); draw(); } });

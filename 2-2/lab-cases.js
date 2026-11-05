@@ -2,6 +2,34 @@
 (function () {
 "use strict";
 
+/* ---- 밝은 스튜디오 + 입체 미니어처 (../assets/kit.js 의 K.studio · K.card) ---- */
+var KK = window.sthKit, LT = KK.LT;
+function lt(ctx, s, x, y, o) { o = o || {}; KK.t(ctx, s, x, y, { s: o.s || 12, w: o.w || "700", a: o.a, c: o.c || LT.ink }); }
+function floorShadow(ctx, x, y, rx, ry, a) {
+  var g = ctx.createRadialGradient(x, y, 2, x, y, rx);
+  g.addColorStop(0, "rgba(20,30,50," + (a || 0.28) + ")"); g.addColorStop(0.6, "rgba(20,30,50,.07)"); g.addColorStop(1, "rgba(20,30,50,0)");
+  ctx.save(); ctx.translate(x, y); ctx.scale(1, ry / rx); ctx.translate(-x, -y);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, rx, 0, 6.2832); ctx.fill(); ctx.restore();
+}
+function slab(ctx, x, y, w, h, d, cTop, cFront, cSide) {
+  ctx.fillStyle = cTop; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + d, y - d * 0.6); ctx.lineTo(x + w + d, y - d * 0.6); ctx.lineTo(x + w, y); ctx.closePath(); ctx.fill();
+  if (cSide) { ctx.fillStyle = cSide; ctx.beginPath(); ctx.moveTo(x + w, y); ctx.lineTo(x + w + d, y - d * 0.6); ctx.lineTo(x + w + d, y + h - d * 0.6); ctx.lineTo(x + w, y + h); ctx.closePath(); ctx.fill(); }
+  ctx.fillStyle = cFront; ctx.fillRect(x, y, w, h);
+}
+function bar3(ctx, x, y, w, h, d, hex) {
+  var g = ctx.createLinearGradient(0, y, 0, y + Math.max(1, h)); g.addColorStop(0, KK.tint(hex, 1.1)); g.addColorStop(1, KK.tint(hex, .85));
+  slab(ctx, x, y, w, h, d, KK.tint(hex, 1.25), g, KK.tint(hex, .68));
+}
+function sideCard(ctx, x, W, H, title) { KK.card(ctx, x, 0, W - x, H, title); return { px: x + 18, R: W - 18, w: W - x - 36 }; }
+function ball(ctx, x, y, r, hex) { KK.planet(ctx, x, y, r, hex, KK.tint(hex, 0.4)); }
+/* 핵자 공을 둥글게 쌓은 원자핵 (반지름 R, 공 n개) */
+function nucleus(ctx, cx, cy, R, n) {
+  var rb = Math.max(3, R / (1.25 * Math.sqrt(n)) * 1.05), sp = [], k;
+  for (k = 0; k < n; k++) { var a = k * 2.39996, d = rb * 1.25 * Math.sqrt(k); sp.push([cx + Math.cos(a) * d, cy + Math.sin(a) * d * .92, k]); }
+  sp.sort(function (p, q) { return p[1] - q[1]; });
+  sp.forEach(function (p) { ball(ctx, p[0], p[1], rb, p[2] % 2 ? "#d5dae8" : "#ff7b6b"); });
+}
+
 /* 태양(5778 K 흑체) 광자로 얻을 수 있는 궁극 효율 — 띠 간격 Eg(eV)의 함수 */
 var KT = 8.617e-5 * 5778, DEN = Math.pow(Math.PI, 4) / 15;
 function integ(f, a, b, n) { var h = (b - a) / n, s = 0; for (var i = 0; i < n; i++) s += f(a + (i + 0.5) * h); return s * h; }
@@ -30,18 +58,32 @@ window.sthLab({
       function X(p) { return x0 + (p - 1.5) / 5 * (x1 - x0); }
       function Y(t) { return y1 - t / 200 * (y1 - y0); }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        H.text(ctx, "1족 금속의 녹는점", 40, 32, { s: 14, w: "900" });
-        H.axes(ctx, x0, y0, x1, y1);
-        [0, 50, 100, 150, 200].forEach(function (t) { H.text(ctx, t + " ℃", x0 - 8, Y(t) + 4, { s: 10.5, a: "right", c: H.v("--mist") }); });
+        var CH = cv.H;
+        ctx.clearRect(0, 0, W, CH);
+        KK.studio(ctx, 0, 0, 640, CH, null);
+        function Yc(t) { return y1 - t / 200 * (y1 - 108); }
+        KK.bigText(ctx, "루비듐 예측 " + guess + " ℃", 18, 40, 22, "#ffffff");
+        [0, 50, 100, 150, 200].forEach(function (t) { KK.line(ctx, { x: x0, y: Yc(t) }, { x: x1 + 20, y: Yc(t) }, "rgba(20,40,90,.10)", 1); lt(ctx, t + " ℃", x0 - 8, Yc(t) + 4, { s: 10.5, a: "right", c: LT.mute }); });
+        floorShadow(ctx, (x0 + x1) / 2, y1 + 6, 240, 10, .2);
+        slab(ctx, x0 - 10, y1, x1 - x0 + 40, 6, 12, "#eef2f7", "#c9d1dc", "#9ea8b6");
         DATA.forEach(function (d) {
-          H.text(ctx, d[0] + " (" + d[1] + "주기)", X(d[1]), y1 + 20, { s: 11, a: "center", c: H.v("--mist") });
-          if (d[2] != null) { H.dot(ctx, X(d[1]), Y(d[2]), 8, H.v("--teal")); H.text(ctx, d[2].toFixed(1), X(d[1]) + 12, Y(d[2]) - 8, { s: 11.5, w: "800", c: H.v("--teal-700") }); }
+          var x = X(d[1]) - 18, t = d[2] == null ? guess : d[2], h = Math.max(3, y1 - Yc(t));
+          if (d[2] == null) { ctx.globalAlpha = .82; bar3(ctx, x, y1 - h, 36, h, 12, "#ff922b"); ctx.globalAlpha = 1; ctx.save(); ctx.setLineDash([4, 3]); ctx.strokeStyle = "#d9480f"; ctx.lineWidth = 1.6; ctx.strokeRect(x, y1 - h, 36, h); ctx.restore(); }
+          else bar3(ctx, x, y1 - h, 36, h, 12, "#adb5bd");
+          /* 은빛 금속 조각 */
+          var mg = ctx.createLinearGradient(x, 0, x + 30, 0); mg.addColorStop(0, "#f8f9fa"); mg.addColorStop(.5, "#ced4da"); mg.addColorStop(1, "#868e96");
+          slab(ctx, x + 6, y1 - h - 18, 22, 12, 8, "#f1f3f5", mg, "#868e96");
+          lt(ctx, (d[2] == null ? guess : d[2].toFixed(1)) + "", x + 18, y1 - h - 30, { s: 11.5, w: "900", a: "center", c: d[2] == null ? LT.orange : LT.ink });
+          lt(ctx, d[0] + " (" + d[1] + "주기)", x + 18, y1 + 26, { s: 11.5, w: "800", a: "center", c: d[2] == null ? LT.orange : LT.mute });
         });
-        H.dot(ctx, X(5), Y(guess), 9, H.v("--coral"));
-        H.text(ctx, "내 예측 " + guess + " ℃", X(5) + 12, Y(guess) + 4, { s: 12, w: "900", c: H.v("--coral-700") });
-        H.dash(ctx, X(4), Y(63.5), X(6), Y(28.4), H.v("--mist"), 1);
-        H.rows(ctx, 580, 70, [["칼륨 K (위)", "63.5 ℃"], ["루비듐 Rb (예측)", guess + " ℃", "--coral-700", true], ["세슘 Cs (아래)", "28.4 ℃"]], 56);
+        KK.line(ctx, { x: X(4) + 6, y: Yc(63.5) - 20 }, { x: X(6) + 6, y: Yc(28.4) - 20 }, LT.mute, 1.4, [5, 4]);
+        var cd = sideCard(ctx, 652, W, CH, "아래로 갈수록");
+        lt(ctx, "녹는점이 낮아진다", cd.px, 60, { s: 17, w: "900", c: LT.blue });
+        KK.row(ctx, "칼륨 K (위)", "63.5 ℃", cd.px, cd.R, 96);
+        KK.row(ctx, "루비듐 Rb (예측)", guess + " ℃", cd.px, cd.R, 122, LT.orange);
+        KK.row(ctx, "세슘 Cs (아래)", "28.4 ℃", cd.px, cd.R, 148);
+        KK.tip(ctx, guess < 28.4 || guess > 63.5 ? "위·아래 이웃 사이를 벗어남" : "이웃 사이에 있음", cd.px - 4, 166, cd.w + 8, !(guess < 28.4 || guess > 63.5));
+        lt(ctx, "⚠ 막대 위 금속 조각은 장식", cd.px, 246, { s: 11, c: LT.dim });
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "루비듐 녹는점 예측", min: 0, max: 150, step: 1, value: 100, fmt: function (x) { return x + " ℃"; }, onInput: function (x) { guess = x; draw(); } });
@@ -83,41 +125,69 @@ window.sthLab({
         var hard = n === 4 ? "매우 단단하다" : (n === 3 ? (layer === "weak" ? "무르다 — 층이 미끄러진다" : "(이런 탄소는 자연에 없다)") : "—");
         return { free: free, cond: cond, hard: hard };
       }
+      function cball(x, y, r) { ball(ctx, x, y, r || 7, "#5c6370"); }
+      function bond(a, b) { ctx.strokeStyle = "#495057"; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var p = props();
-        H.text(ctx, "탄소 원자 하나가 이웃 " + n + "개와 공유 결합", 40, 32, { s: 14, w: "900" });
-        var cx = 250, cy = 170;
+        var CH = cv.H, p = props(), i, j, k;
+        ctx.clearRect(0, 0, W, CH);
+        KK.studio(ctx, 0, 0, 640, CH, null);
+        KK.bigText(ctx, "이웃 " + n + "개와 공유 결합", 18, 40, 22, "#ffffff");
+        KK.bigText(ctx, n === 4 ? "다이아몬드" : (n === 3 ? "흑연 (연필심)" : "사슬 (불안정)"), 18, 66, 15, "#ffd35a");
+        var cx = 230, cy = 180;
+        floorShadow(ctx, cx, 286, 190, 14, .2);
         if (n === 4) {
-          for (var i = -2; i <= 2; i++) for (var j = -2; j <= 2; j++) {
-            var x = cx + i * 48 + (j % 2 ? 24 : 0), y = cy + j * 36;
-            if (i < 2) H.line(ctx, [[x, y], [x + 48, y]], H.v("--line"), 2);
-            if (j < 2) H.line(ctx, [[x, y], [x + 24, y + 36]], H.v("--line"), 2);
-            H.dot(ctx, x, y, 7, H.v("--ink"));
-          }
-        } else if (n === 3) {
-          [0, 1, 2].forEach(function (k) {
-            var y = 90 + k * 70;
-            for (var i = 0; i < 7; i++) {
-              var x = 120 + i * 44;
-              H.line(ctx, [[x, y], [x + 22, y - 12], [x + 44, y]], H.v("--line"), 2);
-              H.dot(ctx, x, y, 6, H.v("--ink"));
-              H.dot(ctx, x + 22 + ((i * 0.37 + k * 0.21) % 1) * 20, y - 20, 3, H.v("--amber"));
+          /* 다이아몬드: 입체 그물 (앞뒤 두 겹) */
+          [0, 1].forEach(function (z) {
+            var ox = z ? 18 : 0, oy = z ? -14 : 0;
+            ctx.globalAlpha = z ? .5 : 1;
+            for (i = -2; i <= 2; i++) for (j = -2; j <= 2; j++) {
+              var x = cx + i * 48 + (j % 2 ? 24 : 0) + ox, y = cy + j * 36 + oy;
+              if (i < 2) bond([x, y], [x + 48, y]); if (j < 2) bond([x, y], [x + 24, y + 36]);
             }
-            if (k < 2) {
-              if (layer === "weak") H.dash(ctx, 110, y + 35, 430, y + 35, H.v("--mist"), 1);
-              else H.line(ctx, [[110, y + 35], [430, y + 35]], H.v("--coral"), 3);
-            }
+            for (i = -2; i <= 2; i++) for (j = -2; j <= 2; j++) cball(cx + i * 48 + (j % 2 ? 24 : 0) + ox, cy + j * 36 + oy, 8);
+            ctx.globalAlpha = 1;
           });
-          H.text(ctx, "노란 점 = 결합에 쓰이지 않고 층을 따라 움직이는 전자", 110, 290, { s: 11, c: H.v("--amber-700") });
+        } else if (n === 3) {
+          /* 흑연: 비스듬히 놓인 판 세 장 */
+          for (k = 2; k >= 0; k--) {
+            var y0 = 96 + k * 62;
+            ctx.fillStyle = "rgba(73,80,87,.12)"; ctx.beginPath(); ctx.moveTo(100, y0 + 16); ctx.lineTo(380, y0 + 16); ctx.lineTo(410, y0 - 14); ctx.lineTo(130, y0 - 14); ctx.closePath(); ctx.fill();
+            for (i = 0; i < 6; i++) {
+              var x = 116 + i * 44, y = y0;
+              bond([x, y], [x + 22, y - 12]); bond([x + 22, y - 12], [x + 44, y]);
+              cball(x, y, 6.5); cball(x + 22, y - 12, 6.5);
+              ball(ctx, x + 22 + ((i * 0.37 + k * 0.21) % 1) * 18, y - 24, 3.4, "#fab005");
+            }
+            cball(116 + 6 * 44, y0, 6.5);
+            if (k < 2) { if (layer === "weak") KK.line(ctx, { x: 110, y: y0 + 32 }, { x: 420, y: y0 + 32 }, LT.mute, 1.2, [4, 4]); else KK.line(ctx, { x: 110, y: y0 + 32 }, { x: 420, y: y0 + 32 }, LT.red, 3); }
+          }
+          lt(ctx, "노란 공 = 층을 따라 움직이는 전자", 110, 292, { s: 11, c: LT.orange, w: "800" });
         } else {
-          for (var i2 = 0; i2 < 9; i2++) { H.dot(ctx, 90 + i2 * 44, cy, 7, H.v("--ink")); if (i2 < 8) H.line(ctx, [[90 + i2 * 44, cy], [134 + i2 * 44, cy]], H.v("--line"), 3); }
+          for (i = 0; i < 9; i++) { if (i < 8) bond([70 + i * 44, cy], [114 + i * 44, cy]); }
+          for (i = 0; i < 9; i++) cball(70 + i * 44, cy, 8);
         }
-        H.rows(ctx, 520, 70, [
-          ["결합에 쓰이지 않은 전자 (탄소 1개당)", p.free + " 개"],
-          ["전기", p.cond, n === 3 ? "--green-700" : "--rose-700"],
-          ["단단함", p.hard, n === 4 ? "--brand-700" : (layer === "weak" && n === 3 ? "--green-700" : "--mist")]
-        ], 62);
+        /* 회로 미니어처: 전지 — 시료 — 전구 */
+        var lit = n === 3, bx = 470, by = 250;
+        floorShadow(ctx, 548, by + 30, 90, 10, .25);
+        ctx.strokeStyle = "#c2410c"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(492, by); ctx.lineTo(492, 120); ctx.lineTo(548, 120); ctx.moveTo(604, 120); ctx.lineTo(604, by); ctx.stroke();
+        slab(ctx, bx, by, 60, 24, 12, "#f1f3f5", "#343a40", "#212529");
+        KK.t(ctx, "전지", bx + 30, by + 17, { s: 11, w: "900", a: "center", c: "#ffffff" });
+        var sg = ctx.createLinearGradient(560, 0, 620, 0); sg.addColorStop(0, n === 4 ? "#f8f9fa" : "#6c757d"); sg.addColorStop(1, n === 4 ? "#ced4da" : "#343a40");
+        slab(ctx, 575, by, 58, 22, 10, n === 4 ? "#ffffff" : "#868e96", sg, n === 4 ? "#adb5bd" : "#212529");
+        KK.t(ctx, "시료", 604, by + 16, { s: 11, w: "900", a: "center", c: n === 4 ? LT.ink : "#ffffff" });
+        ctx.beginPath(); ctx.moveTo(530, by + 12); ctx.lineTo(575, by + 12); ctx.stroke();
+        if (lit) KK.glow(ctx, 576, 112, 12, "rgba(255,212,90,.98)", 3.4);
+        var bg2 = ctx.createRadialGradient(572, 106, 2, 576, 112, 18); bg2.addColorStop(0, lit ? "#fffbe6" : "#f8f9fa"); bg2.addColorStop(1, lit ? "#ffd43b" : "#ced4da");
+        ctx.fillStyle = bg2; ctx.beginPath(); ctx.arc(576, 106, 17, 0, 6.2832); ctx.fill(); ctx.strokeStyle = "rgba(60,70,90,.5)"; ctx.lineWidth = 1; ctx.stroke();
+        ctx.fillStyle = "#868e96"; ctx.fillRect(569, 121, 14, 9);
+        KK.pill(ctx, lit ? "전구 켜짐" : "전구 꺼짐", 576, 82, { a: "center", s: 11.5, c: lit ? "#ffe066" : "#e8ecff" });
+        /* 판정 카드 */
+        var cd = sideCard(ctx, 652, W, CH, "탄소 1개당");
+        KK.row(ctx, "결합에 안 쓰인 전자", p.free + " 개", cd.px, cd.R, 60, LT.orange);
+        lt(ctx, "전기", cd.px, 96, { s: 12, c: LT.mute }); lt(ctx, p.cond, cd.px, 118, { s: 13.5, w: "900", c: n === 3 ? LT.green : LT.red });
+        lt(ctx, "단단함", cd.px, 150, { s: 12, c: LT.mute }); lt(ctx, p.hard, cd.px, 172, { s: 13.5, w: "900", c: n === 4 ? LT.blue : (layer === "weak" && n === 3 ? LT.green : LT.mute) });
+        KK.tip(ctx, n === 3 ? "남는 전자 1개가 전기를 나른다" : (n === 4 ? "전자 4개가 모두 결합에 묶임" : "탄소는 결합 넷을 만들려 한다"), cd.px - 4, 190, cd.w + 8, n === 3 ? true : null);
+        lt(ctx, "⚠ 원자 크기·간격은 어림", cd.px, 290, { s: 11, c: LT.dim });
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "탄소 하나가 공유 결합하는 이웃 수", value: 4, options: [{ v: 2, t: "2개" }, { v: 3, t: "3개" }, { v: 4, t: "4개" }], onPick: function (x) { n = x; draw(); } });
@@ -161,23 +231,40 @@ window.sthLab({
       var NMAX = 0; for (var e0 = 0.05; e0 < 4; e0 += 0.05) NMAX = Math.max(NMAX, n(e0));
       function Y(v) { return y1 - v / NMAX * (y1 - y0) * 0.95; }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        H.text(ctx, "햇빛의 광자 수 — 광자 에너지별", 40, 32, { s: 14, w: "900" });
-        H.axes(ctx, x0, y0, x1, y1);
-        for (var e = 0.02; e < 4; e += 0.02) {
-          var h = y1 - Y(n(e));
-          H.box(ctx, X(e), Y(n(e)), X(0.02) - X(0) + 0.5, h, e < Eg ? H.v("--mist") : H.v("--amber"), e < Eg ? 0.35 : 0.8);
+        var CH = cv.H, best = cur >= 0.98 * EFF_MAX, e;
+        ctx.clearRect(0, 0, W, CH);
+        KK.studio(ctx, 0, 0, 640, CH, null);
+        KK.bigText(ctx, "효율 한계 " + (cur * 100).toFixed(1) + " %", 18, 40, 24, best ? "#8ce99a" : "#ffffff");
+        KK.bigText(ctx, "띠 간격 " + Eg.toFixed(2) + " eV", 18, 66, 15, "#ffd35a");
+        var g = KK.chart(ctx, { x: 8, y: 80, w: 432, h: CH - 84, x0: 0, x1: 4, y0: 0, y1: NMAX * 1.05, xt: 4, yt: 2, light: true, xl: "광자 에너지 (eV)", yl: "광자 수 (상대)", yf: function () { return ""; } });
+        for (e = 0.02; e < 4; e += 0.02) {
+          var top = g.Y(n(e)); ctx.fillStyle = e < Eg ? "rgba(134,142,150,.35)" : "#fcc419"; ctx.fillRect(g.X(e), top, g.X(0.02) - g.X(0) + .5, g.B - top);
         }
-        H.dash(ctx, X(Eg), y0 - 6, X(Eg), y1, H.v("--brand"), 2);
-        H.text(ctx, "띠 간격 " + Eg.toFixed(2) + " eV", X(Eg) + 6, y0 + 4, { s: 12, w: "900", c: H.v("--brand-700") });
-        [0, 1, 2, 3, 4].forEach(function (k) { H.text(ctx, k + " eV", X(k), y1 + 18, { s: 10.5, a: "center", c: H.v("--mist") }); });
-        H.text(ctx, "회색 = 에너지가 모자라 그냥 지나가는 빛   노랑 = 흡수되는 빛", x0, y1 + 40, { s: 11, c: H.v("--mist") });
-        H.rows(ctx, 610, 70, [
-          ["흡수되는 광자", (100 * integ(function (x) { return x * x / (Math.exp(x) - 1); }, Eg / KT, 40, 600) / 2.404).toFixed(0) + " %"],
-          ["광자 하나에서 얻는 에너지", Eg.toFixed(2) + " eV"],
-          ["햇빛 에너지 가운데 쓰는 몫", (cur * 100).toFixed(1) + " %", cur >= 0.98 * EFF_MAX ? "--green-700" : "--brand-700", true]
-        ], 60);
-        H.text(ctx, "참고: 규소 1.12 eV · 비소화 갈륨 1.42 eV", 610, 270, { s: 11, c: H.v("--mist") });
+        KK.line(ctx, { x: g.X(Eg), y: g.T }, { x: g.X(Eg), y: g.B }, LT.blue, 2.2, [6, 4]);
+        KK.pill(ctx, "회색 = 지나감 · 노랑 = 흡수", g.R - 4, g.T + 16, { a: "right", s: 11, c: "#ffe066", box: [0, 440] });
+        /* 태양 전지판 미니어처 */
+        KK.sun(ctx, 600, 104, 9);
+        for (var k = 0; k < 4; k++) KK.arrow(ctx, { x: 586 - k * 8, y: 118 + k * 6 }, { x: 540 - k * 14, y: 178 + k * 4 }, "rgba(245,159,0,.75)", 2, 8);
+        floorShadow(ctx, 530, 284, 90, 12, .26);
+        var p0 = { x: 460, y: 262 }, p1 = { x: 580, y: 262 }, p2 = { x: 610, y: 196 }, p3 = { x: 490, y: 196 };
+        ctx.fillStyle = "#adb5bd"; ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y); ctx.lineTo(p1.x, p1.y + 8); ctx.lineTo(p0.x, p0.y + 8); ctx.closePath(); ctx.fill();
+        var pg = ctx.createLinearGradient(p3.x, p3.y, p1.x, p1.y); pg.addColorStop(0, "#364fc7"); pg.addColorStop(1, "#1c2a6b");
+        ctx.fillStyle = pg; ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.lineTo(p3.x, p3.y); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = "rgba(200,215,255,.6)"; ctx.lineWidth = 1;
+        for (k = 1; k < 4; k++) { var t = k / 4; ctx.beginPath(); ctx.moveTo(p0.x + (p1.x - p0.x) * t, p0.y); ctx.lineTo(p3.x + (p2.x - p3.x) * t, p3.y); ctx.stroke(); }
+        for (k = 1; k < 3; k++) { var u = k / 3; ctx.beginPath(); ctx.moveTo(p0.x + (p3.x - p0.x) * u, p0.y + (p3.y - p0.y) * u); ctx.lineTo(p1.x + (p2.x - p1.x) * u, p1.y + (p2.y - p1.y) * u); ctx.stroke(); }
+        ctx.fillStyle = "#868e96"; ctx.fillRect(528, 262, 8, 18);
+        KK.pill(ctx, "태양 전지판", 530, 312, { a: "center", s: 11, c: "#e8ecff" });
+        /* 판정 카드 */
+        var cd = sideCard(ctx, 652, W, CH, "이 재료로 만들면");
+        KK.row(ctx, "흡수되는 광자", (100 * integ(function (x) { return x * x / (Math.exp(x) - 1); }, Eg / KT, 40, 600) / 2.404).toFixed(0) + " %", cd.px, cd.R, 60, LT.orange);
+        KK.row(ctx, "광자 하나에서 얻는 에너지", Eg.toFixed(2) + " eV", cd.px, cd.R, 86, LT.blue);
+        KK.row(ctx, "햇빛 에너지 가운데 쓰는 몫", (cur * 100).toFixed(1) + " %", cd.px, cd.R, 112, best ? LT.green : LT.ink);
+        KK.bar(ctx, cd.px, 124, cd.w, cur / EFF_MAX, best ? LT.green : LT.blue);
+        KK.tip(ctx, best ? "가장 좋은 띠 간격 근처" : (Eg > 1.6 ? "많은 광자가 그냥 지나감" : "광자당 얻는 에너지가 작음"), cd.px - 4, 146, cd.w + 8, best ? true : false);
+        lt(ctx, "참고: 규소 1.12 eV", cd.px, 224, { s: 11.5, c: LT.mute });
+        lt(ctx, "비소화 갈륨 1.42 eV", cd.px, 244, { s: 11.5, c: LT.mute });
+        lt(ctx, "햇빛 = 5778 K 흑체로 어림", cd.px, 280, { s: 11, c: LT.dim });
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "재료의 띠 간격", min: 0.3, max: 3, step: 0.05, value: 2.5, fmt: function (x) { return x.toFixed(2) + " eV"; },

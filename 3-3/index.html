@@ -43,13 +43,14 @@
           <div class="story"><div class="who">👩‍🍳</div><div class="say"><span class="name">급식실 조리사 정 선생님</span>“과학 동아리 학생이라고 들었어요. 좀 봐 주세요. 같은 날 같은 양념으로 담근 김치 세 통인데, 하나는 3주가 지나도 <b>아삭아삭 생김치 그대로</b>예요. 하나는 하루 만에 시어 터졌고요. 그리고 마지막 한 통은… 제가 남은 <b>뜨거운 국물</b>을 아깝다고 부어 담갔는데, 식힌 뒤로 한 달이 지나도 아무 일도 안 일어나요.”</div></div>
           <div class="case-file"><b class="k">사건 기록</b> 통 ㉮ 김치냉장고 <b>−2 °C</b> → 3주째 안 익음 &nbsp;|&nbsp; 통 ㉯ 실온 <b>20 °C</b> → 하루 만에 시어짐 &nbsp;|&nbsp; 통 ㉰ <b>80 °C</b> 국물을 붓고 식혀 20 °C 보관 → 한 달째 변화 없음 &nbsp;|&nbsp; 세 통 모두 같은 배추·같은 양념</div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">동아리 지도 · 생명과학 선생님</span>“조사에 들어가기 전에 하나만 묻자. 효소가 무엇을 하는 물질인지 아직 헷갈리는 사람이 많거든. 상처에 바르는 과산화 수소수 이야기로 물어볼게.”</div></div>
+          <figure class="hero-art"><img src="img/kimchi-jars.webp" alt="급식실 조리대 모형. 왼쪽 김치냉장고 속 투명 통의 김치는 성에가 낀 채 차갑게 식어 있고, 가운데 실온의 통은 붉은 국물 속으로 작은 기포가 올라오며 뚜껑이 부풀어 있다. 오른쪽 통에는 냄비에서 김이 나는 뜨거운 국물을 붓고 있고, 조리대에는 온도계와 pH 시험지가 놓여 있다." width="900" height="900" loading="lazy"><figcaption><b>같은 날 담근 김치가 세 가지 다른 길을 갑니다</b> 왼쪽 통은 영하의 김치냉장고 속에, 가운데 통은 실온에 있고, 오른쪽 통에는 끓는 국물을 붓고 있습니다. 가운데 통에서 기포가 오르는 것은 김치 속 미생물이 당을 분해하며 기체를 내기 때문입니다. 같은 배추, 같은 양념인데 무엇이 세 통의 운명을 갈랐는지 온도계와 pH 시험지로 찾아봅니다.</figcaption></figure>
           <div class="gate loose" id="g1"></div>
         </section>
 
         <section class="scene" data-title="온도와 pH 다이얼 — 속도 곡선을 직접 그리다">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“효소는 <b>단백질</b>로 만들어져 있고, 단백질은 접힌 모양이 정확히 맞아야 일을 한다. 그래서 효소에는 가장 빠르게 일하는 <b>최적 온도</b>와 <b>최적 pH</b>가 있지. 김치 유산균의 효소를 실험대에 올려 두었으니, 다이얼을 직접 돌려 봐. 오른쪽에는 문제의 <b>통 ㉰</b>(끓는 국물을 부었다 식힌 통)도 같이 올려 두었다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-rate" width="900" height="440"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-rate" width="900" height="440"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">살펴볼 김치통</div>
@@ -80,7 +81,7 @@
         <section class="scene" data-title="효소는 무엇을 낮추는가">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“이제 핵심이다. 화학 반응이 일어나려면 넘어야 할 <b>언덕</b>이 있어. 그 언덕의 높이를 <b>활성화 에너지</b>라고 한다. 효소는 반응물을 없애거나 새로 만들어 내는 것이 아니라, <b>언덕을 낮춰 주는</b> 일만 해. 상처에 바르는 과산화 수소수로 확인해 보자. 과산화 수소가 저절로 분해될 때 넘어야 하는 언덕은 약 <b>75 kJ/mol</b>이고, 우리 몸속 효소 <b><span data-view="mol:1DGH|사람 적혈구의 카탈레이스">카탈레이스</span></b>가 붙으면 <b>8 kJ/mol</b>까지 내려간다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-ea" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-ea" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">효소가 낮춰 준 활성화 에너지 (kJ/mol)<span class="val" id="a-ea-val">75</span></div>
@@ -107,7 +108,7 @@
           <div class="story"><div class="who">👩‍🍳</div><div class="say"><span class="name">정 선생님</span>“그런데 이상해요. 김치통 옆에 둔 <b>과산화 수소수</b> 병에는 아무 일도 안 일어나던데요? 김치 속 효소가 그렇게 대단하면 그것도 분해해야 하는 거 아닌가요?”</div></div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“좋은 질문이에요. 효소는 <b>아무 물질에나 붙지 않습니다.</b> 효소에는 반응할 물질(<b>기질</b>)이 꼭 맞게 들어가는 홈이 있어서, 마치 <b>자물쇠와 열쇠</b>처럼 짝이 맞는 기질에만 작용하죠. 이것을 <b>기질 특이성</b>이라고 합니다. 이 성질을 사람이 가장 많이 써먹는 곳이 바로 세탁기예요. 급식실 앞치마의 얼룩으로 시험해 봅시다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-wash" width="900" height="380"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-wash" width="900" height="380"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">앞치마의 얼룩</div>
@@ -178,13 +179,14 @@
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">동아리 부장 하윤</span>“어? 저는 이게 왜 어려운 질문인지 모르겠는데요. 그냥… 없어지는 거 아니에요? 아니면 땀으로 나가거나요.”</div></div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“물질은 <b>없어지지 않아.</b> 지방을 이루던 탄소와 수소 원자는 반드시 어딘가로 <b>나갔어야</b> 해. 몸에서 나가는 길은 몇 개뿐이지 — 날숨, 오줌, 땀, 대변. 원자를 따라가 보면 답은 하나로 좁혀진다.”</div></div>
           <div class="case-file"><b class="k">단서</b> 지방 1분자는 주로 <b>탄소 · 수소 · 산소</b>로 되어 있다 &nbsp;|&nbsp; 몸에서 밖으로 나가는 길: 날숨 · 오줌 · 땀 · 대변 &nbsp;|&nbsp; 살이 빠지는 동안 사람은 계속 <b>산소를 들이마시고 이산화 탄소를 내쉰다</b></div>
+          <figure class="hero-art"><img src="img/fat-to-breath.webp" alt="체육관 바닥을 블록처럼 잘라 낸 모형. 얼굴 없는 흰 인형이 러닝머신 위를 달리고, 그 앞에 노란 지방 방울이 가득 찬 유리 상자와 3분의 1만 남은 유리 상자가 나란히 놓여 있다. 바닥에는 체중계, 물병, 수건이 있다." width="900" height="900" loading="lazy"><figcaption><b>다이어트로 줄어든 지방은 몸 밖 어딘가로 나갔습니다</b> 왼쪽 유리 상자는 달리기 전, 오른쪽 유리 상자는 몇 달 동안 꾸준히 달린 뒤의 지방이라고 생각해 보세요. 물질은 없어지지 않으므로, 사라진 노란 방울을 이루던 원자들은 반드시 몸 밖 어딘가로 나갔어야 합니다. 체중계, 물병, 수건 가운데 무엇이 그 길을 가리키고 있을까요? <span class="art-note">⚠ 지방 방울의 크기는 실제 비율이 아닙니다.</span></figcaption></figure>
           <div class="gate loose" id="g2"></div>
         </section>
 
         <section class="scene" data-title="세포 호흡 계량기 — 포도당을 태우다">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“답을 확인하기 전에 기본부터. 우리 세포가 포도당에서 에너지를 꺼내는 과정을 <b>세포 호흡</b>이라 한다. 식으로 쓰면 <b>C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O</b>이고, 이때 나온 에너지의 일부가 <b>ATP</b>에 담긴다. 크고 복잡한 물질을 작게 쪼개며 에너지를 <b>내놓는</b> 쪽 — 이것이 <b>이화 작용</b>이야. 계량기를 줄 테니 포도당의 양을 직접 바꿔 봐.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-resp" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-resp" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">세포가 태운 포도당 (g)<span class="val" id="b-glu-val">18</span></div>
@@ -205,7 +207,7 @@
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">하윤</span>“그럼 몸은 부수기만 하나요? 근육이 붙거나 키가 크는 건 뭐예요?”</div></div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“정반대 방향도 쉬지 않고 돌아가. 작은 아미노산을 줄줄이 이어 <b>단백질</b>을 짓는 일 — 작고 간단한 물질을 크고 복잡한 물질로 <b>합성</b>하며 에너지를 <b>쓰는</b> 쪽, 이것이 <b>동화 작용</b>이다. 아미노산 두 개가 이어질 때마다 <b>물 한 분자가 빠져나오고</b>, 그 자리에 <b>펩타이드 결합</b>이 생기지. 공장을 돌려 봐.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-anab" width="900" height="380"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-anab" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">이어 붙일 아미노산의 개수<span class="val" id="b-n-val">3</span></div>
@@ -216,7 +218,7 @@
           </div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“두 방향을 나란히 놓고 보면 더 또렷해진다. 진행률을 끝까지 밀어 보면서, 에너지 막대가 어느 쪽으로 움직이는지 봐 둬.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-flow" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-flow" width="900" height="340"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">작용 고르기</div>
@@ -242,7 +244,7 @@
         <section class="scene" data-title="하루의 수지 맞추기">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“이제 네 몸으로 계산해 보자. 숨만 쉬고 가만히 누워 있어도 심장은 뛰고 체온은 유지되고 세포는 새 단백질을 짓는다. 이렇게 <b>살아 있기만 해도</b> 쓰는 최소한의 에너지가 <b>기초 대사량</b>이야. 여기에 움직인 만큼을 더하면 하루 소비가 되고, 먹은 것과 견주면 남거나 모자란 몫이 나온다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-bmr" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-bmr" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">성별 (만 17세 · 키 170 cm로 고정)</div>
@@ -340,7 +342,7 @@
         <section class="scene" data-title="한 글자 바꾸기">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“이제 잉그램이 찾아낸 것을 우리 손으로 재현해 보자. 자리를 고르고 염기 버튼을 누르면, DNA 주형 가닥의 그 자리 <b>한 글자만</b> 바뀐다. 자리 슬라이더를 다시 움직이면 서열은 원래대로 돌아오니 마음껏 시험해도 돼. 바뀐 글자가 mRNA와 아미노산을 어떻게 흔드는지 봐라.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-mut" width="900" height="460"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-mut" width="900" height="460"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">바꿀 자리 (DNA 주형 가닥의 몇 번째 염기)<span class="val" id="c-pos-val">20</span></div>
@@ -367,7 +369,7 @@
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">하윤</span>“잠깐만요. 그럼 전사를 할 때 우리 <b>DNA 전체</b>가 통째로 RNA로 바뀌는 건가요? 그렇게 긴 RNA가 핵 밖으로 어떻게 나가요?”</div></div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">생명과학 선생님</span>“많이들 그렇게 생각하지. 얼마나 다른지 <b>자로 재 보자.</b> 배율 다이얼을 돌려 사람의 DNA 전체에서 헤모글로빈 β 유전자를 찾아봐. 화면 가로 한 줄이 몇 염기쌍인지 옆에 적어 두었다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-scale" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-scale" width="900" height="430"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">배율 다이얼<span class="val" id="c-zoom-val">×1.00</span></div>

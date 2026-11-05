@@ -48,7 +48,7 @@
         <section class="scene" data-title="물의 여행 — 어디에 얼마나 머무는가">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서하</span>“이 알갱이를 산에서 바다까지 실어 나른 것은 <b>물</b>입니다. 그런데 물은 한곳에 가만히 있지 않아요. 바다에서 증발해 기권으로 올라가고, 비가 되어 땅에 내리고, 강을 따라 다시 바다로 갑니다. 이렇게 <b>같은 물이 권역 사이를 돌고 도는 것</b>을 물의 순환이라고 하죠. 그럼 물 한 방울은 각 저장고에 <b>얼마나 오래</b> 머물까요? 계산은 간단합니다. <b>머무는 시간 = 저장량 ÷ 해마다 드나드는 양</b>.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-water" width="900" height="390"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-water" width="900" height="430"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">들여다볼 저장고</div>
@@ -73,7 +73,7 @@
         <section class="scene" data-title="권역 지도 — 서로 주고받는 것들">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서하</span>“이제 전체 지도를 봅시다. 지구시스템은 <b>지권·수권·기권·생물권</b>, 그리고 대기권 바깥의 <b>외권</b>으로 이루어져 있습니다. 지구 자체도 <b>태양계라는 더 큰 시스템의 한 부품</b>이라, 시스템을 돌리는 에너지는 거의 다 바깥에서 들어오죠. 지도 위의 <b>동그란 표시</b>를 하나씩 눌러 보세요. 두 권역 사이에 무엇이 오가는지 나옵니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-map" width="900" height="440"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-map" width="900" height="440"></canvas></div>
             <div class="controls"><button type="button" class="btn sm" id="a-map-play">⏸ 흐름 멈추기</button></div>
             <div class="info-card" id="a-map-info">지도 위의 작은 동그라미(상호 작용 표시)나 권역의 원을 눌러 보세요.</div>
           </div>
@@ -86,7 +86,7 @@
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서하</span>“모래 한 알에 섞여 있던 <b>화산 유리 3%</b> 기억하시죠? 지권에서 나온 것이 기권으로 올라가 햇빛을 가리고, 기온이 내려가면 생물권의 광합성과 수권의 증발까지 달라집니다. 분출량을 바꿔 가며 <b>얼마나 뿜어야 0.5 ℃가 내려가는지</b> 직접 맞춰 보세요.”</div></div>
           <figure class="hero-art"><img src="img/volcanic-veil.webp" alt="바닷가와 화산, 논밭이 있는 땅을 블록처럼 잘라 낸 모형. 화산이 뿜은 잿빛 분연 기둥이 하늘 높이 올라가 위쪽에서 얇고 넓은 누런 장막으로 퍼지고, 오른쪽 위에서 비치는 햇빛 일부가 그 장막에 막힌다. 앞면 단면에는 갈색 지층과 화산 아래 마그마가 지나는 좁은 통로가 보인다." width="900" height="900" loading="lazy"><figcaption><b>화산 하나가 지구 전체의 여름을 식혔습니다</b> 1991년 필리핀 피나투보 화산이 뿜어 올린 이산화 황은 성층권에서 아주 작은 황산 알갱이가 되어 몇 해 동안 지구를 감쌌습니다. 이 얇은 장막이 햇빛 일부를 우주로 되돌려 보내자, 이듬해 지구 평균 기온이 약 0.5 ℃ 내려갔습니다. 지권에서 시작된 사건이 기권을 거쳐 생물권과 수권까지 바꾼 것입니다. <span class="art-note">⚠ 화산과 장막의 높이, 땅의 넓이는 실제 비율이 아닙니다.</span></figcaption></figure>
           <div class="stage-card">
-            <div class="canvas-wrap" style="background:#e4eaf1"><canvas id="c-volc" width="900" height="690"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-volc" width="900" height="690"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">성층권으로 올라간 이산화 황의 양 (Tg = 100만 t)<span class="val" id="a-so2-val">6 Tg</span></div>
@@ -145,7 +145,7 @@
         <section class="scene" data-title="난로 세 대의 크기를 재다">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">정우</span>“숫자만 보면 감이 안 오죠. 두 가지 방법으로 봅시다. 하나는 <b>막대 그래프의 척도를 바꿔 보는 것</b>, 또 하나는 <b>같은 넓이의 땅 위에서 견주는 것</b>입니다. 운동장만 한 땅 위에 태양이 쏟아붓는 에너지와, 그 땅 밑에서 올라오는 지구 내부의 열을 같은 단위(W)로 비교해 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-stove" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-stove" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">그래프 척도</div>
@@ -167,7 +167,7 @@
         <section class="scene" data-title="들어온 만큼 내보낸다 — 지구의 에너지 수지">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">정우</span>“태양 난로가 저렇게 큰데 지구는 왜 계속 뜨거워지지 않을까요? <b>들어오는 만큼 내보내고 있기</b> 때문입니다. 이것을 <b>복사 평형</b>이라 하고, 들어오고 나가는 에너지의 장부를 <b>에너지 수지</b>라고 부르죠. 장부를 직접 맞춰 봅시다. 반사율을 바꾸면 흡수하는 양이 달라지고, 대기의 <span data-view="law:온실 효과">온실 효과</span>는 지표를 한 번 더 데웁니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-budget" width="900" height="410"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-budget" width="900" height="410"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">지구의 반사율(알베도) <span class="val" id="b-alb-val">10 %</span></div>
@@ -188,7 +188,7 @@
         <section class="scene" data-title="달이 끌어올린 바다, 그리고 난로 가려내기">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">정우</span>“세 번째 난로, 조력입니다. 바닷물을 하루 두 번 부풀리는 힘은 <b>달과 태양의 인력</b>에서 옵니다. 달이 태양보다 훨씬 작은데도 <b>더 가깝기 때문에</b> 조석을 일으키는 힘은 달이 태양의 두 배쯤 됩니다. 달의 위상을 돌려 보면 둘의 힘이 겹칠 때와 어긋날 때가 보일 거예요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-tide" width="900" height="370"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-tide" width="900" height="370"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">달의 위상 (0°=삭, 90°=상현, 180°=보름, 270°=하현)<span class="val" id="b-ph-val">45°</span></div>
@@ -235,6 +235,7 @@
         <section class="scene" data-title="맞물리는 해안선">
           <div class="story narr"><div class="who">🗺️</div><div class="say"><span class="name">이야기</span>1912년, 독일의 기상학자 <b><span data-view="who:알프레트 베게너">알프레트 베게너</span></b>가 이상한 주장을 내놓았습니다. “<span data-place=-5,-20,3,sv>대서양 양쪽 해안선</span>은 퍼즐처럼 맞물린다. 옛날에 대륙은 하나였고(<b>판게아</b>), 그 뒤 갈라져 이동했다.” 증거도 함께 내놓았지만, 지질학자들은 거의 받아들이지 않았습니다. 베게너는 1930년 그린란드 탐사 중에 숨졌고, 그의 생각이 되살아난 것은 <b>30년이 더 지나서</b>였습니다.</div></div>
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">지질 조사단장 민서</span>“조사관님, 오늘 사건은 <b>왜 이렇게 좋은 증거를 두고도 틀렸다고 했는가</b>입니다. 증거 목록을 보시죠. 해안선, 화석, 빙하, 산맥까지 다 맞아떨어집니다. 그런데도 학계는 고개를 저었어요. 무엇이 빠져 있었을까요?”</div></div>
+          <figure class="hero-art"><img src="img/atlantic-rift.webp" alt="갈라지는 대서양을 블록처럼 잘라 낸 모형. 왼쪽에는 남아메리카 같은 대륙, 오른쪽에는 해안선 모양이 맞물리는 아프리카 같은 대륙이 있고, 그 사이 바다 밑 한가운데로 해령이 길게 솟아 있다. 앞면 단면에는 얇고 검은 해양 지각과 두꺼운 대륙 지각, 그 아래 맨틀이 보이며, 해령 바로 아래에서 마그마가 올라오고 맨틀이 양옆으로 퍼져 나가는 흐름이 곡선으로 그려져 있다." width="900" height="900" loading="lazy"><figcaption><b>맞물리는 두 대륙은 해마다 몇 cm씩 멀어지고 있습니다</b> 남아메리카와 아프리카의 해안선이 맞물리는 것은 우연이 아닙니다. 대서양 한가운데 해령에서 새 해양 지각이 만들어지며 두 대륙을 양쪽으로 밀어내고 있습니다. 베게너는 이 ‘미는 힘’을 설명하지 못했고, 해령이 발견되기까지 30년이 넘게 걸렸습니다. <span class="art-note">⚠ 해령의 높이와 지각 두께는 보기 쉽게 과장했습니다.</span></figcaption></figure>
           <div class="case-file"><b class="k">베게너가 내놓은 증거</b> 대서양 양쪽 해안선이 맞물림 &nbsp;|&nbsp; 남아메리카와 아프리카에서 같은 민물 파충류(<b>메소사우루스</b>) 화석 &nbsp;|&nbsp; 남아메리카·아프리카·인도·오스트레일리아·남극에 같은 <b>글로소프테리스</b> 화석 &nbsp;|&nbsp; 따뜻한 지역에 남은 <b>빙하가 긁은 자국</b>, 그 방향이 여러 대륙에서 이어짐 &nbsp;|&nbsp; 떨어진 대륙의 산맥과 암석 나이가 이어짐</div>
           <div class="gate loose" id="g3"></div>
         </section>
@@ -242,7 +243,7 @@
         <section class="scene" data-title="판 경계 실험대">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">민서</span>“빠져 있던 것은 <b>움직이게 하는 힘</b>이었습니다. 1960년대에 해저 지형과 고지자기 줄무늬가 밝혀지고 <b><span data-view="law:해저확장설">해저 확장설</span></b>이 나오면서, 지구의 겉껍질이 여러 장의 <b>판</b>으로 나뉘어 <b>맨틀의 대류</b>를 타고 움직인다는 <b><span data-view="law:판 구조론">판구조론</span></b>이 자리를 잡았죠. 판을 움직이는 에너지는 <b>지구 내부 에너지</b>입니다. 자, 경계를 직접 만들어 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-bnd" width="900" height="430"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-bnd" width="900" height="470"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">판 경계 유형</div>
@@ -272,7 +273,7 @@
         <section class="scene" data-title="불의 고리 — 왜 하필 그 자리인가">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">민서</span>“이제 세계 지도를 펴 봅시다. 화산과 큰 지진이 일어난 자리를 찍어 보면 지구 전체에 고르게 흩어져 있지 않아요. <b>가느다란 띠</b>를 이룹니다. 그 띠가 무엇과 겹치는지, 거리를 재면서 확인해 보세요. 지도 위의 점을 누르면 어떤 화산·지진인지 나옵니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-quake" width="900" height="520"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-quake" width="900" height="520"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">판 경계에서 이 거리 안쪽을 세어 봅니다 (km)<span class="val" id="c-r-val">2,000 km</span></div>
@@ -288,7 +289,7 @@
         <section class="scene" data-title="하와이가 알려 준 속도, 5천만 년 뒤의 지도">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">민서</span>“판이 정말 움직인다면 <b>속도를 잴 수 있어야</b> 합니다. 하와이 열도가 자입니다. <span data-view="mymap:15PN10J5cnnwi0bF_vb08MdVo26GHfA0|20,-170|3|판 구조 지도 · Bird(2003) PB2002 · 구글 내 지도" data-ask="하와이 열도의 섬들이 늘어선 방향으로 보면, 태평양판은 어느 쪽으로 움직였을까?">태평양판</span> 아래 한자리에 고정된 <b>열점</b>에서 마그마가 올라와 섬을 만드는데, 판이 지나가는 동안 섬이 줄지어 늘어서죠. 그래서 <b>열점에서 멀어질수록 섬이 오래된</b> 겁니다. 속도를 맞춰 실제 섬의 나이와 거리에 들어맞게 해 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-hot" width="900" height="370"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-hot" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">태평양판의 이동 속력 (cm/년)<span class="val" id="c-vp-val">14.0</span></div>
@@ -300,7 +301,7 @@
           </div>
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">민서</span>“속도를 알면 <b>미래</b>도 그려집니다. 지금 이 순간에도 대서양은 넓어지고, 태평양판은 <span data-place=38.3,143.6,5,sv>일본 해구</span>로 가라앉고, <span data-view="mymap:15PN10J5cnnwi0bF_vb08MdVo26GHfA0|25,85|3|판 구조 지도 · Bird(2003) PB2002 · 구글 내 지도" data-ask="히말라야 산맥은 발산·수렴·보존 가운데 어느 경계에 있을까?">인도판</span>은 북쪽으로 밀고 올라가 <span data-place=27.9881,86.9252,7,s>히말라야</span>를 더 높이고 있어요. 시간을 앞으로 돌려 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-future" width="900" height="330"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-future" width="900" height="360"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">앞으로 흐를 시간 (만 년)<span class="val" id="c-ft-val">0만 년</span></div>

@@ -4,6 +4,35 @@
    자료는 이 파일 안에 숫자로 적어 두었다(수업 중 접속 실패 대비). */
 (function () {
 "use strict";
+
+/* ---- 밝은 스튜디오 + 입체 미니어처 (../assets/kit.js 의 K.studio · K.card) ---- */
+var KT = window.sthKit, LT = KT.LT;
+function lt(ctx, s, x, y, o) { o = o || {}; KT.t(ctx, s, x, y, { s: o.s || 12, w: o.w || "700", a: o.a, c: o.c || LT.ink }); }
+function floorShadow(ctx, x, y, rx, ry, a) {
+  var g = ctx.createRadialGradient(x, y, 2, x, y, rx);
+  g.addColorStop(0, "rgba(20,30,50," + (a || 0.28) + ")"); g.addColorStop(0.6, "rgba(20,30,50,.07)"); g.addColorStop(1, "rgba(20,30,50,0)");
+  ctx.save(); ctx.translate(x, y); ctx.scale(1, ry / rx); ctx.translate(-x, -y);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, rx, 0, 6.2832); ctx.fill(); ctx.restore();
+}
+function slab(ctx, x, y, w, h, d, cTop, cFront, cSide) {
+  ctx.fillStyle = cTop; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + d, y - d * 0.6); ctx.lineTo(x + w + d, y - d * 0.6); ctx.lineTo(x + w, y); ctx.closePath(); ctx.fill();
+  if (cSide) { ctx.fillStyle = cSide; ctx.beginPath(); ctx.moveTo(x + w, y); ctx.lineTo(x + w + d, y - d * 0.6); ctx.lineTo(x + w + d, y + h - d * 0.6); ctx.lineTo(x + w, y + h); ctx.closePath(); ctx.fill(); }
+  ctx.fillStyle = cFront; ctx.fillRect(x, y, w, h);
+}
+function bar3(ctx, x, y, w, h, d, hex) {
+  var g = ctx.createLinearGradient(0, y, 0, y + Math.max(1, h)); g.addColorStop(0, KT.tint(hex, 1.1)); g.addColorStop(1, KT.tint(hex, .85));
+  slab(ctx, x, y, w, h, d, KT.tint(hex, 1.25), g, KT.tint(hex, .68));
+}
+function sideCard(ctx, x, W, H, title) { KT.card(ctx, x, 0, W - x, H, title); return { px: x + 18, R: W - 18, w: W - x - 36 }; }
+function ball(ctx, x, y, r, hex) { KT.planet(ctx, x, y, r, hex, KT.tint(hex, 0.4)); }
+/* 핵자 공을 둥글게 쌓은 원자핵 (반지름 R, 공 n개) */
+function nucleus(ctx, cx, cy, R, n) {
+  var rb = Math.max(3, R / (1.25 * Math.sqrt(n)) * 1.05), sp = [], k;
+  for (k = 0; k < n; k++) { var a = k * 2.39996, d = rb * 1.25 * Math.sqrt(k); sp.push([cx + Math.cos(a) * d, cy + Math.sin(a) * d * .92, k]); }
+  sp.sort(function (p, q) { return p[1] - q[1]; });
+  sp.forEach(function (p) { ball(ctx, p[0], p[1], rb, p[2] % 2 ? "#d5dae8" : "#ff7b6b"); });
+}
+
 /* 태양 스펙트럼의 주요 흡수선 — 프라운호퍼가 붙인 이름, 파장(nm), 실제 원인 */
 var FR = [["A", 759.37, "O₂"], ["B", 686.72, "O₂"], ["C", 656.28, "H"], ["D₁", 589.59, "Na"], ["D₂", 589.00, "Na"], ["E", 527.04, "Fe"],
   ["b₁", 518.36, "Mg"], ["F", 486.13, "H"], ["G′", 434.05, "H"], ["G", 430.79, "Fe"], ["h", 410.17, "H"], ["H", 396.85, "Ca⁺"], ["K", 393.37, "Ca⁺"]];
@@ -41,26 +70,48 @@ window.sthLab({
     },
     task: "원소를 바꿔 가며 밝은 선(실험실)과 검은 선(햇빛)을 겹쳐 보고, <b>C·F·G′·h 선의 주인</b>과 <b>D 선의 주인</b>을 고르세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(250), ctx = cv.ctx, W = cv.W, g1 = "He", g2 = "He";
-      var x0 = 40, x1 = W - 40;
+      var H = api.h, cv = api.canvas(290), ctx = cv.ctx, W = cv.W, g1 = "He", g2 = "He";
+      var x0 = 30, x1 = 612;
       function X(w) { return x0 + (w - 380) / (780 - 380) * (x1 - x0); }
+      function hits(el, names) { return FR.filter(function (f) { return names.indexOf(f[0]) >= 0 && LAB[el].l.some(function (w) { return Math.abs(w - f[1]) < 0.05; }); }).length; }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        for (var w = 380; w < 780; w += 0.5) { ctx.fillStyle = wlColor(w); ctx.fillRect(X(w), 40, X(w + 0.5) - X(w) + 0.6, 60); }
+        var CH = cv.H, w;
+        ctx.clearRect(0, 0, W, CH);
+        KT.studio(ctx, 0, 0, 640, CH, null);
+        /* 햇빛 → 프리즘 미니어처 */
+        KT.sun(ctx, 30, 30, 8);
+        ctx.fillStyle = "rgba(255,230,160,.5)"; ctx.fillRect(40, 28, 52, 4);
+        var pg = ctx.createLinearGradient(92, 14, 120, 46); pg.addColorStop(0, "rgba(235,245,255,.95)"); pg.addColorStop(1, "rgba(140,180,225,.8)");
+        ctx.fillStyle = pg; ctx.beginPath(); ctx.moveTo(92, 46); ctx.lineTo(124, 46); ctx.lineTo(108, 14); ctx.closePath(); ctx.fill(); ctx.strokeStyle = "rgba(60,90,130,.6)"; ctx.lineWidth = 1; ctx.stroke();
+        var fg = ctx.createLinearGradient(x0, 0, x1, 0); for (w = 0; w <= 8; w++) fg.addColorStop(w / 8, wlColor(380 + w * 50));
+        ctx.save(); ctx.globalAlpha = .22; ctx.fillStyle = fg; ctx.beginPath(); ctx.moveTo(116, 34); ctx.lineTo(x1, 76); ctx.lineTo(x0 + 120, 76); ctx.closePath(); ctx.fill(); ctx.restore();
+        lt(ctx, "햇빛 (검은 선 = 흡수)", x1, 26, { s: 11.5, w: "800", a: "right", c: LT.mute });
+        slab(ctx, x0, 82, x1 - x0, 54, 8, "#e9ecef", "#000", "#868e96");
+        for (w = 380; w < 780; w += 0.5) { ctx.fillStyle = wlColor(w); ctx.fillRect(X(w), 82, X(w + 0.5) - X(w) + 0.6, 54); }
         FR.forEach(function (f) {
           var hi = (f[0] === "C" || f[0] === "F" || f[0] === "G′" || f[0] === "h") ? 1 : ((f[0] === "D₁" || f[0] === "D₂") ? 2 : 0);
-          ctx.fillStyle = "#111"; ctx.fillRect(X(f[1]) - 1, 40, 2.2, 60);
-          if (f[0] !== "D₁") H.text(ctx, f[0] === "D₂" ? "D" : f[0], X(f[1]) + (f[0] === "K" || f[0] === "G" ? -2 : (f[0] === "H" || f[0] === "G′" ? 2 : 0)), 32, { s: 12, w: "900", a: f[0] === "K" || f[0] === "G" ? "right" : (f[0] === "H" || f[0] === "G′" ? "left" : "center"), c: hi === 1 ? H.v("--brand-700") : (hi === 2 ? H.v("--amber-700") : H.v("--mist")) });
+          ctx.fillStyle = "#111"; ctx.fillRect(X(f[1]) - 1, 82, 2.2, 54);
+          if (f[0] !== "D₁") lt(ctx, f[0] === "D₂" ? "D" : f[0], X(f[1]) + (f[0] === "K" || f[0] === "G" ? -2 : (f[0] === "H" || f[0] === "G′" ? 2 : 0)), 74, { s: 12, w: "900", a: f[0] === "K" || f[0] === "G" ? "right" : (f[0] === "H" || f[0] === "G′" ? "left" : "center"), c: hi === 1 ? LT.blue : (hi === 2 ? LT.orange : LT.mute) });
         });
-        H.text(ctx, "햇빛 (검은 선 = 흡수)", x1, 116, { s: 11, w: "700", a: "right", c: H.v("--mist") });
-        [400, 500, 600, 700].forEach(function (w) { H.text(ctx, w + " nm", X(w), 116, { s: 10, a: "center", c: H.v("--mist") }); });
-        function labRow(el, y, col, label) {
-          ctx.fillStyle = "#15171c"; ctx.fillRect(x0, y, x1 - x0, 34);
-          LAB[el].l.forEach(function (w) { ctx.fillStyle = wlColor(w); ctx.fillRect(X(w) - 1.2, y, 2.6, 34); });
-          H.text(ctx, label + LAB[el].n + " (가열한 기체의 밝은 선)", x0, y + 48, { s: 11.5, w: "800", c: col });
+        [400, 500, 600, 700].forEach(function (q) { lt(ctx, q + " nm", X(q), 152, { s: 10, a: "center", c: LT.mute }); });
+        function labRow(el, y, colr, label) {
+          slab(ctx, x0, y, x1 - x0, 32, 7, "#e9ecef", "#15171c", "#868e96");
+          LAB[el].l.forEach(function (q) { ctx.save(); ctx.shadowColor = wlColor(q); ctx.shadowBlur = 6; ctx.fillStyle = wlColor(q); ctx.fillRect(X(q) - 1.2, y, 2.6, 32); ctx.restore(); });
+          lt(ctx, label + LAB[el].n + " (가열한 기체의 밝은 선)", x0, y + 48, { s: 11.5, w: "800", c: colr });
         }
-        labRow(g1, 128, H.v("--brand-700"), "C·F·G′·h 후보: ");
-        labRow(g2, 190, H.v("--amber-700"), "D 후보: ");
+        labRow(g1, 166, LT.blue, "C·F·G′·h 후보: ");
+        labRow(g2, 232 - 6, LT.orange, "D 후보: ");
+        /* 판정 카드 */
+        var a = hits(g1, ["C", "F", "G′", "h"]), b = hits(g2, ["D₁", "D₂"]), cd = sideCard(ctx, 652, W, CH, "선 맞추기");
+        lt(ctx, a === 4 && b === 2 ? "두 주인 모두 찾음" : "겹쳐 보는 중", cd.px, 60, { s: 18, w: "900", c: a === 4 && b === 2 ? LT.green : LT.orange });
+        KT.row(ctx, "C·F·G′·h 후보", LAB[g1].n, cd.px, cd.R, 94, LT.blue);
+        KT.row(ctx, "맞는 검은 선", a + " / 4", cd.px, cd.R, 118, a === 4 ? LT.green : LT.red);
+        KT.bar(ctx, cd.px, 128, cd.w, a / 4, LT.blue);
+        KT.row(ctx, "D 후보", LAB[g2].n, cd.px, cd.R, 166, LT.orange);
+        KT.row(ctx, "맞는 검은 선", b + " / 2", cd.px, cd.R, 190, b === 2 ? LT.green : LT.red);
+        KT.bar(ctx, cd.px, 200, cd.w, b / 2, LT.orange);
+        lt(ctx, "0.05 nm 안에서 겹치면 맞음", cd.px, 244, { s: 11, c: LT.mute });
+        lt(ctx, "자료: NIST 원자 스펙트럼", cd.px, 264, { s: 11, c: LT.dim });
       }
       cv.canvas._redraw = draw;
       var opts = Object.keys(LAB).map(function (k) { return { v: k, t: LAB[k].n }; });
@@ -96,25 +147,41 @@ window.sthLab({
     },
     task: "표의 log ε 값을 읽고, <b>수소 원자 수 ÷ 헬륨 원자 수</b>를 슬라이더로 맞추세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(260), ctx = cv.ctx, W = cv.W, r = 3;
+      var H = api.h, cv = api.canvas(290), ctx = cv.ctx, W = cv.W, r = 3;
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var x0 = 70, y1 = 220, y0 = 30;
+        var CH = cv.H, x0 = 52, y1 = 250, y0 = 70, i;
         function Y(e) { return y1 - (e - 6) / 6.5 * (y1 - y0); }
-        H.axes(ctx, x0, y0, 560, y1);
-        [6, 8, 10, 12].forEach(function (e) { H.text(ctx, e, x0 - 8, Y(e) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-        H.text(ctx, "log ε", x0 + 6, y0 - 8, { s: 11, w: "700", c: H.v("--mist") });
-        AB.forEach(function (a, i) {
-          var x = x0 + 18 + i * 52;
-          H.box(ctx, x, Y(a[2]), 34, y1 - Y(a[2]), i < 2 ? H.v("--brand") : H.v("--line"), 0.85);
-          H.text(ctx, a[0], x + 17, y1 + 16, { s: 12, w: "900", a: "center" });
-          H.text(ctx, a[2].toFixed(2), x + 17, Y(a[2]) - 6, { s: 10, w: "700", a: "center", c: H.v("--mist") });
+        ctx.clearRect(0, 0, W, CH);
+        KT.studio(ctx, 0, 0, 640, CH, null);
+        KT.bigText(ctx, "수소 ÷ 헬륨 = " + r.toFixed(1) + " 배", 18, 40, 22, Math.abs(r - Math.pow(10, 1.07)) <= 0.5 ? "#8ce99a" : "#ffffff");
+        for (i = 6; i <= 12; i += 2) { KT.line(ctx, { x: x0, y: Y(i) }, { x: 420, y: Y(i) }, "rgba(20,40,90,.10)", 1); lt(ctx, i + "", x0 - 8, Y(i) + 4, { s: 10.5, a: "right", c: LT.mute }); }
+        lt(ctx, "log ε (태양 광구)", x0 - 30, y0 - 8, { s: 11, c: LT.mute });
+        floorShadow(ctx, 236, y1 + 8, 200, 10, .18);
+        slab(ctx, x0 - 6, y1, 376, 6, 10, "#eef2f7", "#c9d1dc", "#9ea8b6");
+        AB.forEach(function (a, k) {
+          var x = x0 + 8 + k * 40;
+          bar3(ctx, x, Y(a[2]), 26, y1 - Y(a[2]), 8, k === 0 ? "#ff922b" : (k === 1 ? "#845ef7" : "#adb5bd"));
+          lt(ctx, a[0], x + 13, y1 + 22, { s: 12, w: "900", a: "center" });
+          lt(ctx, a[2].toFixed(2), x + 13, Y(a[2]) - 10, { s: 10, w: "800", a: "center", c: LT.mute });
         });
-        H.rows(ctx, 610, 50, [
-          ["내가 맞춘 비 (수소 ÷ 헬륨)", r.toFixed(1) + " 배", null, true],
-          ["그렇다면 질량으로는 헬륨이", (100 * (4 / r) / (1 + 4 / r)).toFixed(0) + " %", "--brand-700"],
-          ["로그 차이 12.00 − 10.93", "1.07"]
-        ], 62);
+        /* 태양 겉면 한 조각 속 원자 수 (내가 맞춘 비) */
+        var bx = 440, by = 94, bw = 180, bh = 150, n = Math.min(30, Math.round(r));
+        floorShadow(ctx, bx + bw / 2, by + bh + 10, 110, 10, .22);
+        ctx.fillStyle = "rgba(255,190,110,.20)"; ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 14); ctx.fill();
+        ctx.strokeStyle = "rgba(200,120,40,.5)"; ctx.lineWidth = 1.4; ctx.stroke();
+        var R0 = KT.rng(11);
+        for (i = 0; i < n; i++) ball(ctx, bx + 16 + R0() * (bw - 32), by + 16 + R0() * (bh - 32), 6, "#ff922b");
+        ball(ctx, bx + bw / 2, by + bh / 2, 11, "#845ef7");
+        KT.pill(ctx, "수소 " + n + " : 헬륨 1 (원자 수)", bx + bw / 2, by + bh + 34, { a: "center", s: 11.5, c: "#ffd8a8", box: [bx - 20, 640] });
+        /* 판정 카드 */
+        var cd = sideCard(ctx, 652, W, CH, "원자 수의 비");
+        lt(ctx, r.toFixed(1) + " 배", cd.px, 62, { s: 24, w: "900", c: LT.blue });
+        KT.row(ctx, "로그 차이 12.00 − 10.93", "1.07", cd.px, cd.R, 98);
+        KT.row(ctx, "질량으로 헬륨은", (100 * (4 / r) / (1 + 4 / r)).toFixed(0) + " %", cd.px, cd.R, 124, LT.violet);
+        KT.tip(ctx, "차이 1 = 10배, 1.07 = 10의 1.07제곱", cd.px - 4, 142, cd.w + 8, null);
+        lt(ctx, "헬륨 원자는 수소보다", cd.px, 212, { s: 11.5, c: LT.mute });
+        lt(ctx, "약 4배 무겁습니다", cd.px, 232, { s: 11.5, c: LT.mute });
+        lt(ctx, "자료: Asplund 외 (2009)", cd.px, 266, { s: 11, c: LT.dim });
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "수소 원자 수 ÷ 헬륨 원자 수", min: 1, max: 30, step: 0.5, value: 3, fmt: function (x) { return x.toFixed(1) + " 배"; }, onInput: function (x) { r = x; api.changed(); draw(); } });

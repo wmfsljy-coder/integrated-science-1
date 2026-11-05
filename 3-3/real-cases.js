@@ -15,10 +15,14 @@ var LEN = (function () { var p = tr(INS, 0), n = p.indexOf("*"); return n < 0 ? 
 var COL = { A: "#e4572e", T: "#f3a712", G: "#29a36a", C: "#1f8fbf" };
 var SRC = "<small>출처: 미국 국립생물공학정보센터(NCBI) RefSeq — 사람 인슐린 NM_000207.3, 헤모글로빈 β NM_000518.5의 단백질 암호화 부분(CDS). 코돈표는 표준 유전 암호. 사본은 data/genes.js.</small>";
 
-function dna(H, ctx, s, from, n, x0, y, cw, hiFrom, hiTo) {
+function dna(H, ctx, s, from, n, x0, y, cw, hiFrom, hiTo) {     /* 염기 한 칸 = 작은 입체 블록 */
+  var K = window.sthKit;
   for (var i = 0; i < n && from + i < s.length; i++) {
-    var b = s[from + i], on = from + i >= hiFrom && from + i < hiTo;
-    H.box(ctx, x0 + i * cw + 1, y, cw - 2, 26, COL[b], on ? 0.95 : 0.45);
+    var b = s[from + i], on = from + i >= hiFrom && from + i < hiTo, c = COL[b], x = x0 + i * cw + 1, w = cw - 2, h = 26, d = on ? 5 : 3;
+    ctx.globalAlpha = on ? 1 : .55;
+    ctx.fillStyle = K.tint(c, 1.25); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + d, y - d); ctx.lineTo(x + w + d, y - d); ctx.lineTo(x + w, y); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = K.tint(c, .7); ctx.beginPath(); ctx.moveTo(x + w, y); ctx.lineTo(x + w + d, y - d); ctx.lineTo(x + w + d, y + h - d); ctx.lineTo(x + w, y + h); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = c; ctx.fillRect(x, y, w, h); ctx.globalAlpha = 1;
     H.text(ctx, b, x0 + i * cw + cw / 2, y + 18, { s: 12, w: "900", a: "center", c: "#fff" });
   }
 }
@@ -41,19 +45,29 @@ window.sthLab({
       var H = api.h, cv = api.canvas(260), ctx = cv.ctx, W = cv.W, f = 1, n = 50;
       function draw() {
         H.paper(ctx, W, cv.H);
-        var cw = 22, x0 = 20, per = 36;
-        H.text(ctx, "DNA(암호화 가닥) 처음 " + per + " 글자", x0, 24, { s: 11, w: "800", c: H.v("--mist") });
-        dna(H, ctx, INS, 0, per, x0, 32, cw, f, per);
+        var cw = 22, x0 = 20, per = 36, K = window.sthKit, LT = K.LT;
+        K.t(ctx, "DNA(암호화 가닥) 처음 " + per + " 글자", x0, 22, { s: 11, w: "800", c: LT.mute });
+        dna(H, ctx, INS, 0, per, x0, 34, cw, f, per);
         var p = tr(INS, f), stop = p.indexOf("*");
-        H.text(ctx, "번역 (" + (f + 1) + "번째 글자부터 세 글자씩)", x0, 88, { s: 11, w: "800", c: H.v("--mist") });
-        for (var k = 0; k < 11; k++) {
-          var x = x0 + (f + k * 3) * cw;
-          if (x + 3 * cw > W) break;
-          H.box(ctx, x + 1, 96, 3 * cw - 2, 26, p[k] === "*" ? H.v("--rose-700") : (p[k] === "M" && k === 0 ? H.v("--green-700") : H.v("--brand")), 0.85);
-          H.text(ctx, KO[p[k]] || p[k], x + 1.5 * cw, 114, { s: 10.5, w: "800", a: "center", c: "#fff" });
+        K.t(ctx, "번역 (" + (f + 1) + "번째 글자부터 세 글자씩)", x0, 88, { s: 11, w: "800", c: LT.mute });
+        var nK = 0; while (nK < 11 && x0 + (f + nK * 3) * cw + 3 * cw <= W && (nK === 0 || p[nK - 1] !== "*")) nK++;
+        if (nK > 1) { ctx.strokeStyle = "#8a96a8"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x0 + f * cw + 1.5 * cw, 118); ctx.lineTo(x0 + (f + (nK - 1) * 3) * cw + 1.5 * cw, 118); ctx.stroke(); }
+        for (var k2 = 0; k2 < nK; k2++) {
+          var x = x0 + (f + k2 * 3) * cw + 1.5 * cw;
+          if (x + 1.5 * cw > W) break;
+          var cc = p[k2] === "*" ? "#e03131" : (p[k2] === "M" && k2 === 0 ? "#0f9f76" : "#4dabf7");
+          ctx.fillStyle = "rgba(20,30,50,.14)"; ctx.beginPath(); ctx.ellipse(x + 3, 140, 22, 4, 0, 0, 6.2832); ctx.fill();
+          K.planet(ctx, x, 118, 25, cc, K.tint(cc, .45));
+          K.t(ctx, KO[p[k2]] || p[k2], x, 122, { s: 9, w: "800", a: "center", c: "#fff" });
+          if (p[k2] === "*") break;
         }
-        H.rows(ctx, 20, 160, [["이 틀의 첫 아미노산", KO[p[0]] || p[0], p[0] === "M" ? "--green-700" : "--rose-700"], ["이 틀에서 처음 멈춤 코돈", stop < 0 ? "없음" : (stop + 1) + "번째 코돈"]], 50);
-        H.rows(ctx, 420, 160, [["내 답 (아미노산 수)", n + " 개", null, true]], 50);
+        K.card(ctx, 14, 156, 420, 90, null);
+        K.row(ctx, "이 틀의 첫 아미노산", KO[p[0]] || p[0], 32, 418, 188, p[0] === "M" ? LT.green : LT.red);
+        K.row(ctx, "처음 멈춤 코돈", stop < 0 ? "없음" : (stop + 1) + "번째 코돈", 32, 418, 220);
+        K.card(ctx, 450, 156, 436, 90, null);
+        K.t(ctx, "내 답 (아미노산 수)", 470, 186, { s: 12, w: "800", c: LT.mute });
+        K.t(ctx, n + " 개", 470, 224, { s: 24, w: "900", c: LT.ink });
+        K.t(ctx, "염기 " + INS.length + "개 ÷ 3 = 코돈 수", 866, 224, { s: 11.5, w: "700", a: "right", c: LT.mute });
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "읽는 틀", value: "1", options: [{ v: "0", t: "1번째 글자부터" }, { v: "1", t: "2번째 글자부터" }, { v: "2", t: "3번째 글자부터" }], onPick: function (x) { f = +x; api.changed(); draw(); } });
@@ -88,17 +102,35 @@ window.sthLab({
       var H = api.h, cv = api.canvas(250), ctx = cv.ctx, W = cv.W, k = 1, nb = "A";
       function draw() {
         H.paper(ctx, W, cv.H);
-        var cw = 22, x0 = 20, per = 36, p = tr(HBB, 0);
-        H.text(ctx, "헤모글로빈 β DNA 처음 " + per + " 글자 (코돈 " + per / 3 + "개)", x0, 24, { s: 11, w: "800", c: H.v("--mist") });
-        dna(H, ctx, HBB, 0, per, x0, 32, cw, (k - 1) * 3, k * 3);
+        var cw = 22, x0 = 20, per = 36, p = tr(HBB, 0), K = window.sthKit, LT = K.LT;
+        var old = HBB.substr((k - 1) * 3, 3), nw = old[0] + nb + old[2], hit = CODE[old] === "E" && CODE[nw] === "V";
+        K.t(ctx, "헤모글로빈 β DNA 처음 " + per + " 글자 (코돈 " + per / 3 + "개)", x0, 22, { s: 11, w: "800", c: LT.mute });
+        dna(H, ctx, HBB, 0, per, x0, 34, cw, (k - 1) * 3, k * 3);
+        ctx.strokeStyle = "#8a96a8"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x0 + 1.5 * cw, 96); ctx.lineTo(x0 + (per - 1.5) * cw, 96); ctx.stroke();
         for (var j = 0; j < per / 3; j++) {
-          var x = x0 + j * 3 * cw;
-          H.box(ctx, x + 1, 64, 3 * cw - 2, 22, j === k - 1 ? H.v("--amber-700") : H.v("--brand"), j === k - 1 ? 0.95 : 0.6);
-          H.text(ctx, (j + 1) + " " + p[j], x + 1.5 * cw, 80, { s: 10.5, w: "800", a: "center", c: "#fff" });
+          var x = x0 + j * 3 * cw + 3 * cw / 2, on = j === k - 1, cc = on ? "#f59f00" : "#4dabf7";
+          K.planet(ctx, x, 96, on ? 15 : 12, cc, K.tint(cc, .45));
+          K.t(ctx, p[j], x, 100, { s: 11, w: "900", a: "center", c: "#fff" });
+          K.t(ctx, String(j + 1), x, 124, { s: 9.5, w: "700", a: "center", c: LT.mute });
         }
-        var old = HBB.substr((k - 1) * 3, 3), nw = old[0] + nb + old[2];
-        H.rows(ctx, 20, 120, [[k + "번째 코돈", old + " → " + nw], ["아미노산", (KO[CODE[old]] || "?") + " → " + (KO[CODE[nw]] || "?"), CODE[old] === "E" && CODE[nw] === "V" ? "--green-700" : "--ink", true]], 56);
-        H.text(ctx, "A 알라닌 · E 글루탐산 · V 발린 · L 류신 · H 히스티딘 · T 트레오닌 · P 프롤린 · K 라이신 · M 메싸이오닌 · S 세린", 20, 238, { s: 10, c: H.v("--mist") });
+        K.card(ctx, 14, 140, 420, 96, null);
+        K.row(ctx, k + "번째 코돈", old + " → " + nw, 32, 418, 172);
+        K.row(ctx, "아미노산", (KO[CODE[old]] || "?") + " → " + (KO[CODE[nw]] || "?"), 32, 418, 200, hit ? LT.green : LT.ink);
+        K.t(ctx, "E 글루탐산 · V 발린 · L 류신 · H 히스티딘 · T 트레오닌", 32, 224, { s: 10, c: LT.mute });
+        /* 적혈구 미니어처 */
+        K.card(ctx, 450, 140, 436, 96, null);
+        var sick = hit && k === 7, rx = 520, ry = 186;
+        ctx.fillStyle = "rgba(20,30,50,.18)"; ctx.beginPath(); ctx.ellipse(rx + 4, ry + 26, 42, 6, 0, 0, 6.2832); ctx.fill();
+        if (!sick) {
+          var g = ctx.createRadialGradient(rx - 12, ry - 8, 3, rx, ry, 40); g.addColorStop(0, "#ff8787"); g.addColorStop(1, "#a51111");
+          ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(rx, ry, 40, 22, 0, 0, 6.2832); ctx.fill();
+          ctx.fillStyle = "rgba(130,10,10,.55)"; ctx.beginPath(); ctx.ellipse(rx + 2, ry + 2, 20, 9, 0, 0, 6.2832); ctx.fill();
+        } else {
+          var g2 = ctx.createLinearGradient(rx - 40, ry - 20, rx + 40, ry + 20); g2.addColorStop(0, "#ff8787"); g2.addColorStop(1, "#8f1010");
+          ctx.fillStyle = g2; ctx.beginPath(); ctx.moveTo(rx - 44, ry + 8); ctx.quadraticCurveTo(rx, ry - 40, rx + 44, ry + 8); ctx.quadraticCurveTo(rx, ry - 12, rx - 44, ry + 8); ctx.closePath(); ctx.fill();
+        }
+        K.t(ctx, sick ? "낫 모양 적혈구" : "정상 적혈구 (가운데가 눌린 원반)", 580, 180, { s: 14, w: "900", c: sick ? LT.red : LT.green });
+        K.t(ctx, sick ? "β 사슬 6번째(β6) Glu → Val" : "코돈의 가운데 글자를 바꿔 보세요", 580, 204, { s: 11.5, w: "700", c: LT.mute });
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "코돈 번호", min: 1, max: 12, step: 1, value: 1, fmt: function (x) { return x + "번째"; }, onInput: function (x) { k = x; api.changed(); draw(); } });

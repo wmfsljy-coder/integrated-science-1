@@ -41,6 +41,7 @@
         <section class="scene" data-title="무지개에 찍힌 지문">
           <div class="story narr"><div class="who">🔭</div><div class="say"><span class="name">이야기</span>1868년 8월, 인도 상공의 개기 일식. 두 천문학자가 달에 가려진 태양의 가장자리에서 새어 나온 빛을 프리즘으로 펼쳤습니다. 거기에는 그때까지 지구에서 한 번도 본 적 없는 <b>노란 선</b>이 하나 끼어 있었습니다. 사람들은 이 미지의 원소에 그리스어로 태양을 뜻하는 <b>헬리오스</b>를 따 <b>헬륨</b>이라는 이름을 붙였습니다. 지구에서 헬륨을 실제로 손에 넣은 것은 그로부터 27년이 지난 1895년이었습니다.</div></div>
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">분광 연구실 하린</span>“가 본 적도, 만져 본 적도 없는 태양의 성분을 어떻게 알아냈을까요? 답은 <b>빛</b>입니다. 오늘 조사관님이 하실 일은 별빛에 찍힌 지문을 읽는 겁니다. 그런데 그 전에, 하나만 여쭐게요.”</div></div>
+          <figure class="hero-art"><img src="img/eclipse-spectrum.webp" alt="땅을 블록처럼 잘라 낸 언덕 위 관측대 모형. 개기 일식으로 하늘이 어두워졌고 왼쪽 위에 검은 달이 태양을 가린 채 흰 코로나가 둘러싸고 있다. 놋쇠 망원경이 가려진 태양을 겨누고, 망원경 끝의 프리즘에서 나온 빛이 이젤 위 흰 판에 무지개 띠를 비추는데 띠 위에 가느다란 밝은 노란 선이 있다." width="900" height="900" loading="lazy"><figcaption><b>1868년 일식 때 태양 가장자리의 빛을 프리즘으로 펼쳤습니다</b> 달이 태양의 밝은 면을 가린 몇 분 동안, 가장자리에서 솟은 뜨거운 기체의 빛만 망원경으로 모아 프리즘에 통과시켰습니다. 펼친 빛에는 그때까지 알려진 어떤 원소와도 맞지 않는 노란 선이 있었고, 이 선이 헬륨의 첫 흔적이 되었습니다. <span class="art-note">⚠ 장치·천체 크기와 선의 위치·개수는 실제와 다르게 그린 상상도입니다.</span></figcaption></figure>
           <div class="case-file"><b class="k">증거물 ①</b> 하늘의 어느 방향을 보아도 똑같이 쏟아지는 온도 <b>2.7 K</b>의 복사(우주 배경 복사) &nbsp;|&nbsp; <b class="k">증거물 ②</b> 우주 어디를 관측해도 수소 : 헬륨 질량비가 <b>약 3 : 1</b> &nbsp;|&nbsp; <b class="k">증거물 ③</b> 리튬보다 무거운 원소는 우주 초기 물질에서 거의 보이지 않는다</div>
           <div class="gate loose" id="g1"></div>
         </section>
@@ -58,7 +59,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap stage"><canvas id="a-spec" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-spec" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">판독 커서의 파장<span class="val" id="a-wl-val">550 nm</span></div>
@@ -73,7 +74,7 @@
         <section class="scene" data-title="빅뱅 뒤 3분 — 온도를 낮춰라">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">하린</span>“지문을 읽어 보니 어느 별이든, 어느 은하든 수소와 헬륨이 <b>질량비 약 3 : 1</b>로 나옵니다. 별마다 사정이 다를 텐데 왜 비율이 똑같을까요? 이건 별이 만든 게 아니라 <b>우주가 태어날 때 이미 정해졌다</b>는 뜻입니다. 시계를 빅뱅 직후로 되돌려 보죠. 슬라이더를 오른쪽 끝(뜨거운 초기 우주)에서 왼쪽으로 내리면 시간이 흐릅니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="a-bang" width="900" height="380"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-bang" width="900" height="440"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">우주의 온도 (10<sup>n</sup> K)<span class="val" id="a-t-val">n = 13.00</span></div>
@@ -89,7 +90,7 @@
         <section class="scene" data-title="벽에 부딪힌 핵합성">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">하린</span>“이상하죠? 그렇게 뜨겁고 양성자·중성자가 넘쳐났는데, 빅뱅이 만든 원소는 수소·헬륨과 아주 약간의 리튬에서 끝났습니다. 탄소도, 산소도, 철도 없어요. <b>원자핵 조립대</b>에서 질량수를 하나씩 올려 보면 까닭이 보입니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="a-wall" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-wall" width="900" height="380"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">만들어 볼 원자핵의 질량수 A<span class="val" id="a-A-val">A = 1</span></div>
@@ -141,7 +142,7 @@
           <div class="story"><div class="who">🧑‍🚀</div><div class="say"><span class="name">태오</span>“별은 원소를 만드는 부엌입니다. 그런데 부엌마다 불의 세기가 달라요. 별이 무거울수록 중력이 세게 짓눌러 중심이 더 뜨거워지고, 뜨거울수록 더 무거운 원료에 불을 붙일 수 있습니다. 질량을 바꿔 가며 어디까지 태울 수 있는지 보세요.”</div></div>
           <figure class="hero-art"><img src="img/star-onion.webp" alt="투명한 유리 상자 안에 떠 있는 커다란 별을 4분의 1만큼 잘라 낸 모형. 잘린 면에 바깥 수소층부터 헬륨, 탄소·산소, 네온, 규소 층이 양파 껍질처럼 겹겹이 있고, 한가운데에 빛나지 않는 회색 철 중심핵이 있다." width="900" height="900" loading="lazy"><figcaption><b>무거운 별의 속은 양파처럼 겹겹이 나뉘어 있습니다</b> 무거운 별이 일생의 끝에 이르면 중심에서 바깥으로 서로 다른 원소가 층을 이루고, 층의 경계마다 서로 다른 핵융합이 일어납니다. 안쪽으로 갈수록 더 무거운 원소가 쌓이는 것은 더 뜨거워야 그 원료에 불이 붙기 때문입니다. 그림의 층 두께는 실제 비율이 아니며, 어떤 별이 어느 층까지 만들 수 있는지는 아래 모형에서 질량을 바꿔 가며 찾아보세요.</figcaption></figure>
           <div class="stage-card">
-            <div class="canvas-wrap" style="background:#e4eaf1"><canvas id="b-star" width="900" height="640"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-star" width="900" height="640"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">별의 질량 (태양 = 1)<span class="val" id="b-m-val">1.0 M☉</span></div>
@@ -157,7 +158,7 @@
         <section class="scene" data-title="철에서 멈추는 까닭">
           <div class="story"><div class="who">🧑‍🚀</div><div class="say"><span class="name">태오</span>“아무리 무거운 별도 <b>철</b>에서 딱 멈춥니다. 연료가 없어서가 아니에요. 답은 이 곡선에 있습니다. 세로축은 <b>핵자 하나당 결합 에너지</b>, 곧 ‘그 원자핵이 얼마나 단단히 묶여 있는가’입니다. 질량수를 옮겨 가며 곡선의 꼭대기를 찾아보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="b-bind" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-bind" width="900" height="380"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">원자핵의 질량수 A<span class="val" id="b-a-val">A = 1</span></div>
@@ -173,7 +174,7 @@
         <section class="scene" data-title="우리 몸의 원소는 어디서 왔나">
           <div class="story"><div class="who">🧑‍🚀</div><div class="say"><span class="name">태오</span>“이제 마지막입니다. 조사관님 몸을 저울에 올려 보세요. 몸을 이루는 원소를 하나하나 따라가면, 그 출생지가 전부 하늘에 있습니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="b-body" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-body" width="900" height="380"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">몸무게<span class="val" id="b-w-val">60 kg</span></div>
@@ -218,6 +219,7 @@
           <div class="story narr"><div class="who">🧾</div><div class="say"><span class="name">이야기</span>과학실 캐비닛을 정리하다가 분석표 세 장이 바닥에 떨어졌습니다. 이름표는 모두 뜯겨 나갔고, 남은 것은 원소별 질량 백분율뿐입니다.</div></div>
           <div class="case-file"><b class="k">분석표 A</b> 산소 46.6% · 규소 27.7% · 알루미늄 8.1% · 철 5.0% &nbsp;|&nbsp; <b class="k">분석표 B</b> 수소 73.8% · 헬륨 24.9% · 산소 0.58% &nbsp;|&nbsp; <b class="k">분석표 C</b> 산소 65% · 탄소 18.5% · 수소 9.5% · 질소 3.2%</div>
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">과학 선생님</span>“셋 다 <b>같은 우주</b>에서 온 시료란다. 하나는 우주 전체, 하나는 지각, 하나는 사람의 몸이지. 그런데 구성이 이렇게까지 다르구나. 먼저 하나 물어보자.”</div></div>
+          <figure class="hero-art"><img src="img/three-samples.webp" alt="과학실 캐비닛 옆 실험대 위에 똑같은 유리 시료병 세 개가 놓여 있다. 첫째 병에는 별이 반짝이는 소용돌이 성운이, 둘째 병에는 화강암·석영 조각이, 셋째 병에는 물과 초록 잎, 뼈, 구슬로 만든 DNA 모형이 들어 있다. 병 앞에는 막대그래프가 그려진 분석표 세 장이 있고 이름표는 뜯겨 바닥에 흩어져 있다." width="900" height="900" loading="lazy"><figcaption><b>같은 우주에서 온 세 시료에서 이름표가 사라졌습니다</b> 하나는 우주 전체, 하나는 지각, 하나는 사람의 몸입니다. 셋 다 결국 빅뱅과 별이 만든 원자로 지어졌는데, 원소 비율은 놀랄 만큼 다릅니다. 무엇이 비율을 바꿔 놓았는지가 이 사건의 열쇠입니다. <span class="art-note">⚠ 병 속 내용물은 세 시료를 상징으로 나타낸 그림입니다.</span></figcaption></figure>
           <div class="gate loose" id="g3"></div>
         </section>
 
@@ -235,7 +237,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap stage"><canvas id="c-esc" width="900" height="380"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-esc" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">대기 바깥층의 온도<span class="val" id="c-t-val">300 K</span></div>
@@ -261,7 +263,7 @@
               <button class="chip on" data-el="철">철</button>
               <button class="chip" data-el="칼슘">칼슘</button>
             </div>
-            <div class="canvas-wrap stage"><canvas id="c-bars" width="900" height="330"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-bars" width="900" height="360"></canvas></div>
             <div class="info-card" id="c-bars-info"></div>
           </div>
           <div class="mission" id="m3-3"><span class="m-tag">미션</span>조건에 맞는 원소를 찾아내세요.<ul><li id="m3-3a">우주에는 <b>10% 넘게</b> 있는데 지각에는 <b>1%도 안 되는</b> 원소</li><li id="m3-3b">지각에는 <b>10% 넘게</b> 있는데 사람 몸에는 <b>0.01%도 안 되는</b> 원소</li><li id="m3-3c">우주에는 <b>1%도 안 되는데</b> 사람 몸에는 <b>10%가 넘는</b> 원소</li></ul></div>
@@ -270,7 +272,7 @@
         <section class="scene" data-title="수소와 헬륨을 걷어 내면">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">과학 선생님</span>“마지막 실험이란다. 우주 시료에서 <b>수소와 헬륨만</b> 날려 보내면 무엇이 남을까? 지구가 만들어질 때 실제로 일어난 일이기도 하지. 슬라이더를 끝까지 올려 보렴.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-strip" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-strip" width="900" height="380"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">날려 보낸 수소·헬륨의 비율<span class="val" id="c-s-val">0%</span></div>

@@ -14,20 +14,42 @@ var PRE = D1.filter(function (r) { return r[1] < EQ - 0.001; }).map(function (r)
 var JUMP = mean(POST) - mean(PRE);
 var SRC = "<small>출처: 네바다 대학교 측지 연구소(Nevada Geodetic Laboratory) GPS 시계열, 수원 SUWN 관측소(북위 37.28°, 동경 127.05°), IGS20 좌표계 하루 해. Blewitt, Hammond & Kreemer (2018). 사본은 data/gps-suwn.js.</small>";
 
+/* ---- 밝은 스튜디오 말투 (../assets/kit.js 의 K.studio · K.card) ---- */
+var KT = window.sthKit, LT = KT.LT;
 function plot(H, ctx, W, CH, rows, ix, iy, col, opt) {
-  H.paper(ctx, W, CH);
-  var x0 = 70, x1 = 640, y0 = 24, y1 = CH - 36;
+  ctx.clearRect(0, 0, W, CH);
+  KT.studio(ctx, 0, 0, 650, CH, null);
+  var x0 = 70, x1 = 636, y0 = 24, y1 = CH - 36;
   var xs = rows.map(function (r) { return r[ix]; }), ys = rows.map(function (r) { return r[iy]; });
   var xa = Math.min.apply(null, xs), xb = Math.max.apply(null, xs), ya = opt.ya != null ? opt.ya : Math.min.apply(null, ys), yb = opt.yb != null ? opt.yb : Math.max.apply(null, ys);
   function X(v) { return x0 + (v - xa) / (xb - xa || 1) * (x1 - x0); }
   function Y(v) { return y1 - (v - ya) / (yb - ya || 1) * (y1 - y0); }
-  H.axes(ctx, x0, y0, x1, y1);
-  (opt.yt || []).forEach(function (v) { H.text(ctx, v + " mm", x0 - 6, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-  (opt.xt || []).forEach(function (t) { H.text(ctx, t[1], X(t[0]), y1 + 15, { s: 10, a: "center", c: H.v("--mist") }); });
-  rows.forEach(function (r) { H.dot(ctx, X(r[ix]), Y(r[iy]), opt.r || 2.4, H.v(col)); });
+  ctx.fillStyle = "rgba(255,255,255,.78)"; ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
+  (opt.yt || []).forEach(function (v) {
+    ctx.strokeStyle = LT.grid; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x0, Y(v)); ctx.lineTo(x1, Y(v)); ctx.stroke();
+    KT.t(ctx, v + " mm", x0 - 6, Y(v) + 4, { s: 10.5, a: "right", c: LT.mute, w: "700" });
+  });
+  (opt.xt || []).forEach(function (t) {
+    ctx.strokeStyle = LT.grid; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X(t[0]), y0); ctx.lineTo(X(t[0]), y1); ctx.stroke();
+    KT.t(ctx, t[1], X(t[0]), y1 + 16, { s: 10.5, a: "center", c: LT.mute, w: "700" });
+  });
+  ctx.strokeStyle = LT.line; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
+  var r0 = opt.r || 2.4;
+  rows.forEach(function (r) {
+    var px = X(r[ix]), py = Y(r[iy]);
+    if (r0 >= 3) KT.planet(ctx, px, py, r0 + 0.6, "#74c0fc", "#1864ab");
+    else { ctx.fillStyle = LT.blue; ctx.beginPath(); ctx.arc(px, py, r0, 0, 6.2832); ctx.fill(); }
+  });
   return { X: X, Y: Y };
 }
-
+/* 오른쪽 흰 카드에 한 줄씩: [이름, 값, 색 토큰, 굵게] */
+function cardRows(ctx, W, CH, title, rows) {
+  KT.card(ctx, 660, 0, W - 660, CH, title);
+  rows.forEach(function (r, i) {
+    var y = 66 + i * 30, col = r[3] ? LT.violet : LT.ink;
+    KT.row(ctx, r[0], r[1], 678, W - 18, y, col);
+  });
+}
 window.sthLab({
   mount: "real", key: "real", result: "rReal", label: "실제 자료",
   doneNote: "정리하기 탭에서 정밀한 측정이 사회에 어떻게 쓰이는지 실제 자료로 설명해 보세요.",
@@ -47,8 +69,8 @@ window.sthLab({
       var rows = D4.map(function (r, i) { return [r[1], RES4[i]]; });
       function draw() {
         var p = plot(H, ctx, W, cv.H, rows, 0, 1, "--brand", { ya: -4, yb: 4, yt: [-4, -2, 0, 2, 4], xt: [[2024.1393, "2월 21일"], [2024.1639, "3월 1일"], [2024.2459, "4월 1일"]], r: 3.4 });
-        H.dash(ctx, 70, p.Y(SD4), 640, p.Y(SD4), H.v("--amber-700"), 1); H.dash(ctx, 70, p.Y(-SD4), 640, p.Y(-SD4), H.v("--amber-700"), 1);
-        H.rows(ctx, 680, 50, [["측정한 날", D4.length + " 일"], ["가장 크게 벗어난 값", Math.max.apply(null, RES4.map(Math.abs)).toFixed(1) + " mm"], ["노란 점선", "± 표준 편차"]], 60);
+        H.dash(ctx, 70, p.Y(SD4), 640, p.Y(SD4), "#e67700", 1); H.dash(ctx, 70, p.Y(-SD4), 640, p.Y(-SD4), "#e67700", 1);
+        cardRows(ctx, W, cv.H, "수원 관측소 · 동쪽 위치", [["측정한 날", D4.length + " 일"], ["가장 크게 벗어난 값", Math.max.apply(null, RES4.map(Math.abs)).toFixed(1) + " mm"], ["노란 점선", "± 표준 편차"]]);
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "하루하루 위치의 흩어짐", value: "m", options: [{ v: "m", t: "약 1 m" }, { v: "cm", t: "약 1 cm" }, { v: "mm", t: "약 1 mm" }, { v: "um", t: "약 0.001 mm" }], onPick: function (x) { pick = x; api.changed(); } });
@@ -83,17 +105,17 @@ window.sthLab({
         if (view === "q") {
           var lo = Math.floor(Math.min.apply(null, D1.map(function (r) { return r[2]; })) / 10) * 10;
           var p = plot(H, ctx, W, cv.H, D1, 1, 2, "--brand", { ya: lo, yb: lo + 60, yt: [lo, lo + 20, lo + 40, lo + 60], xt: [[2011.085, "2월"], [2011.162, "3월"], [2011.247, "4월"]], r: 3 });
-          H.dash(ctx, p.X(EQ), 24, p.X(EQ), cv.H - 36, H.v("--coral-700"), 1.5);
-          H.text(ctx, "3월 11일", p.X(EQ) + 4, 36, { s: 11, w: "800", c: H.v("--coral-700") });
-          H.dash(ctx, 70, p.Y(mean(PRE)), p.X(EQ), p.Y(mean(PRE)), H.v("--amber-700"), 1.2);
-          H.dash(ctx, p.X(EQ), p.Y(mean(PRE) + g), 640, p.Y(mean(PRE) + g), H.v("--amber-700"), 2);
-          H.text(ctx, "노란 선 = 지진 전 평균 + 내 답", 80, 36, { s: 10.5, w: "700", c: H.v("--amber-700") });
+          H.dash(ctx, p.X(EQ), 24, p.X(EQ), cv.H - 36, LT.red, 1.5);
+          H.text(ctx, "3월 11일", p.X(EQ) + 4, 36, { s: 11, w: "800", c: LT.red });
+          H.dash(ctx, 70, p.Y(mean(PRE)), p.X(EQ), p.Y(mean(PRE)), "#e67700", 1.2);
+          H.dash(ctx, p.X(EQ), p.Y(mean(PRE) + g), 640, p.Y(mean(PRE) + g), "#e67700", 2);
+          H.text(ctx, "노란 선 = 지진 전 평균 + 내 답", 80, 36, { s: 10.5, w: "700", c: "#e67700" });
         } else {
           var lo2 = Math.min.apply(null, G.weekly.map(function (r) { return r[1]; }));
           plot(H, ctx, W, cv.H, G.weekly, 0, 1, "--brand", { ya: lo2, yb: Math.max.apply(null, G.weekly.map(function (r) { return r[1]; })), yt: [0, 200, 400, 600, 800], xt: [[2000, "2000"], [2010, "2010"], [2020, "2020"]], r: 1.4 });
-          H.text(ctx, "1997년 말 ~ 2026 주간 평균: 한 해에 약 3 cm씩 동쪽으로", 80, 36, { s: 10.5, w: "700", c: H.v("--mist") });
+          H.text(ctx, "1997년 말 ~ 2026 주간 평균: 한 해에 약 3 cm씩 동쪽으로", 80, 36, { s: 10.5, w: "700", c: LT.mute });
         }
-        H.rows(ctx, 680, 60, [["내 답 (동쪽으로)", g + " mm", null, true]], 60);
+        cardRows(ctx, W, cv.H, "2011년 3월 11일 동일본 대지진", [["내 답 (동쪽으로)", g + " mm", null, true], ["지진 전 평균", "노란 가는 선"], ["지진 뒤 (내 답)", "노란 굵은 선"]]);
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "보기", value: "q", options: [{ v: "q", t: "2011년 2~4월" }, { v: "all", t: "1997~2026 전체" }], onPick: function (x) { view = x; draw(); } });

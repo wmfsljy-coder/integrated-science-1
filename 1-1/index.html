@@ -41,6 +41,7 @@
         <section class="scene" data-title="교신이 끊긴 아침">
           <div class="story narr"><div class="who">🛰️</div><div class="say"><span class="name">이야기</span>1999년 9월 23일. 9개월 반 동안 우주를 날아온 <b>화성 기후 궤도선(Mars Climate Orbiter)</b>이 화성 뒤편으로 들어갔습니다. 몇 분 뒤 다시 나타나야 할 전파는 끝내 오지 않았습니다. 궤도선은 화성 대기 속으로 너무 깊이 들어가 부서진 것으로 추정되었습니다.</div></div>
           <div class="story"><div class="who">👩‍🚀</div><div class="say"><span class="name">사고 조사관 한나</span>“엔진도, 안테나도, 통신도 모두 정상이었습니다. 계획대로라면 화성 상공 <b>226 km</b>를 스쳐 지나가야 했는데, 마지막 계산으로는 <b>57 km</b>까지 내려갔어요. 조사관님, 두 숫자 사이에서 무슨 일이 있었을까요?”</div></div>
+          <figure class="hero-art"><img src="img/mars-orbiter.webp" alt="반으로 자른 화성 모형과 옅은 대기층. 금박을 두른 궤도선 하나가 다가오고, 파란 점선 궤도는 대기 위를 높이 지나가지만 빨간 점선 궤도는 대기 속 깊이 파고들어 주황빛을 낸다." width="900" height="900" loading="lazy"><figcaption><b>같은 숫자, 다른 단위 — 궤도선은 대기 속으로 파고들었습니다</b> 파란 길은 계획했던 226 km 높이의 길, 빨간 길은 단위가 어긋난 채 계산된 실제 길입니다. 궤도선은 살아남을 수 있는 높이(약 80 km)보다 훨씬 아래로 내려갔습니다. <span class="art-note">⚠ 대기의 두께와 궤도선 크기는 실제 비율이 아닙니다.</span></figcaption></figure>
           <div class="case-file"><b class="k">증거물 ①</b> 지상 팀의 소프트웨어는 분사의 <b>충격량(힘 × 시간)</b>을 <b>파운드힘초(lbf·s)</b> 단위로 출력했다. &nbsp;|&nbsp; <b class="k">증거물 ②</b> 항법 팀의 소프트웨어는 같은 숫자를 <b>뉴턴초(N·s)</b>로 읽었다. &nbsp;|&nbsp; <b class="k">증거물 ③</b> 살아남을 수 있는 최저 고도는 약 <b>80 km</b>였다.</div>
           <div class="gate loose" id="g1"></div>
         </section>
@@ -48,7 +49,7 @@
         <section class="scene" data-title="조사 ① — 두 저울로 같은 힘 재기">
           <div class="story"><div class="who">👩‍🚀</div><div class="say"><span class="name">한나</span>“먼저 두 단위가 얼마나 다른지부터 봅시다. 똑같은 힘을 <b>뉴턴 저울</b>과 <b>파운드힘 저울</b>로 동시에 재는 장치를 만들어 왔어요. 손잡이를 당겨 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="a-gauge" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-gauge" width="900" height="372"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">당기는 힘 (뉴턴 저울 눈금)<span class="val" id="a-f-val">10.0 N</span></div>
@@ -63,7 +64,7 @@
         <section class="scene" data-title="조사 ② — 궤도를 다시 계산하다">
           <div class="story"><div class="who">👩‍🚀</div><div class="say"><span class="name">한나</span>“이제 사고를 재현합니다. 지상 팀이 보낸 숫자를 항법 컴퓨터에 넣기 전에 <b>환산 계수</b>를 곱해야 해요. 계수를 바꾸면 화성에 닿을 때의 고도가 어떻게 달라지는지 보세요. <b>계수를 1로 두면</b> 단위를 바꾸지 않고 그냥 넣은 셈입니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="a-orbit" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-orbit" width="900" height="400"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="a-orbit-read"></div>
               <div class="ctrl-group">
@@ -80,12 +81,12 @@
         <section class="scene" data-title="재발 방지 위원회 — 기준을 다시 세우다">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">표준 연구원 도윤</span>“원인은 찾았습니다. 이제 다시는 같은 일이 없도록 <b>기준</b>을 정리해야죠. 세상의 모든 물리량은 단 <b>7개의 기본량</b>에서 나옵니다. 카드를 눌러 하나씩 확인해 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="a-cards" width="900" height="330"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-cards" width="900" height="330"></canvas></div>
             <div class="info-card" id="a-cards-info">카드를 누르면 그 기본량의 단위와 정의가 여기에 나타납니다.</div>
           </div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">도윤</span>“기본량 가운데 <b>온도</b>는 조금 특별합니다. 우리가 쓰는 섭씨온도(℃)는 SI 기본단위가 아니에요. 기본단위는 <b>켈빈(K)</b>이고, 시작점이 다릅니다. 직접 움직여 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="a-temp" width="900" height="230"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-temp" width="900" height="262"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">섭씨온도<span class="val" id="a-c-val">25 ℃</span></div>
@@ -130,13 +131,14 @@
           <div class="story narr"><div class="who">📜</div><div class="say"><span class="name">실제로 있었던 일</span>1977년, 미국의 디자이너 <b><span data-view="who:찰스 임스">찰스 임스</span></b>와 <b>레이 임스</b> 부부가 9분짜리 짧은 영화 「<b>10의 거듭제곱</b>(Powers of Ten)」을 만들었습니다. <span data-place=41.8628,-87.6140,17,s>시카고 호숫가</span>에서 소풍을 즐기는 두 사람을 가로 1 m로 비춘 화면이 <b>10초마다 10배씩</b> 넓어져 은하 너머까지 나갔다가, 다시 손등의 피부 속으로 들어가 원자핵까지 내려갑니다. 동아리 게시판에 붙은 사진 한 장은 바로 이 영화를 흉내 낸 것이었습니다.</div></div>
           <div class="story narr"><div class="who">📷</div><div class="say"><span class="name">이야기</span>과학 동아리 게시판에 사진 한 장이 붙었습니다. 가로가 딱 <b>1 cm(10⁻² m)</b>인 정사각형 사진, 찍힌 것은 누군가의 <b>손톱</b>입니다. 아래에는 이렇게 적혀 있습니다. “이 사진에서 한 걸음마다 가로를 10배씩 넓혀 보세요. <b>관측 가능한 우주(약 10²⁶ m)</b>가 한 화면에 들어올 때까지 몇 걸음일까요?”</div></div>
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">동아리원 세민</span>“10배씩이면… 엄청 오래 걸릴 것 같은데요. 100만 번은 눌러야 하지 않아요?”</div></div>
+          <figure class="hero-art"><img src="img/powers-of-ten.webp" alt="호숫가 공원을 블록처럼 잘라 낸 모형. 잔디밭 한가운데 작은 체크무늬 돗자리에 두 사람이 누워 있고, 바로 위에 드론 카메라가 아래를 내려다본다. 왼쪽은 돛단배가 뜬 호수, 오른쪽은 도시의 거리와 건물이다." width="900" height="900" loading="lazy"><figcaption><b>카메라가 한 번 물러날 때마다 화면은 10배씩 넓어집니다</b> 돗자리 위 1 m 화면에서 시작해 10 m, 100 m, 1 km …로 넓히면 금세 공원과 도시, 지구 밖까지 나갑니다. 몇 번만 물러나면 될지 어림해 보세요. <span class="art-note">⚠ 드론과 사람의 크기는 실제 비율이 아닙니다.</span></figcaption></figure>
           <div class="gate loose" id="g2"></div>
         </section>
 
         <section class="scene" data-title="산책 ① — 배율 손잡이를 돌려라">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">동아리 선생님</span>“직접 걸어 보면 알겠지. 손잡이를 한 칸 움직일 때마다 화면 한 변이 <b>10배</b>가 된다. 가운데가 지금 보이는 것, 양옆은 한 걸음 앞뒤의 모습이야.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="b-walk" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-walk" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">화면 한 변의 길이 · 10ⁿ m<span class="val" id="b-n-val">n = −2</span></div>
@@ -151,7 +153,7 @@
         <section class="scene" data-title="산책 ② — 두 크기는 몇 배 차이일까">
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">세민</span>“걸음 수를 세면서 알았어요. <b>두 크기의 배율 차이 = 지수의 차</b>네요! 표지 두 개를 꽂아서 확인해 볼래요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="b-cmp" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-cmp" width="900" height="340"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">표지 A · 10ⁿ m<span class="val" id="b-ea-val">n = 0</span></div>
@@ -171,7 +173,7 @@
         <section class="scene" data-title="산책 ③ — 빛으로 거리를 재다">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">동아리 선생님</span>“우주는 너무 넓어서 미터로 말하면 0이 스무 개도 넘지. 그래서 천문학자들은 <b>빛이 가는 시간</b>으로 거리를 말한단다. 1 m의 정의도 결국 빛이 간 시간이었지? 거리를 바꿔 가며 빛이 얼마나 걸리는지 보렴.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="b-light" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-light" width="900" height="320"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="b-light-read"></div>
               <div class="ctrl-group">
@@ -231,7 +233,7 @@
               <button data-t="1">사람 몸의 세포 수</button>
               <button data-t="2">수소 원자의 지름</button>
             </div>
-            <div class="canvas-wrap stage"><canvas id="c-sci" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-sci" width="900" height="300"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">소수점을 옮긴 칸 수 (왼쪽으로 옮기면 +)<span class="val" id="c-p-val">0칸</span></div>
@@ -247,7 +249,7 @@
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">과학 선생님</span>“분자는 너무 작아서 한 개씩 셀 수가 없어. 그래서 기본량 가운데 하나인 <b>물질량(mol)</b>이 있는 거야. <b>1 mol = 6.02×10²³ 개</b>. 물은 1 mol이 18.0 g 이란다. 저울에 물을 부어 보렴.”</div></div>
           <figure class="hero-art"><img src="img/water-molecules.webp" alt="나무 실험대 위 전자저울에 물이 담긴 유리 비커가 놓여 있고, 비커는 세로로 잘린 단면이 보인다. 옆의 둥근 확대경 속에는 빨간 산소 공 하나에 흰 수소 공 둘이 굽은 모양으로 붙은 물 분자들이 빽빽하게 모여 있다." width="900" height="900" loading="lazy"><figcaption><b>분자 하나는 저울에 잡히지 않아도, 분자의 수는 저울로 셀 수 있습니다</b> 물 분자는 지름이 약 0.3 nm여서, 아무리 정밀한 저울로도 하나씩 달 수 없습니다. 그래서 과학자들은 아주 많은 입자를 정해진 개수씩 묶어 세는 기본량인 물질량(mol)을 씁니다. 저울에 오른 물의 질량에서 분자 수를 어떻게 꺼내는지 아래 모형에서 직접 확인해 보세요.</figcaption></figure>
           <div class="stage-card">
-            <div class="canvas-wrap" style="background:#e4eaf1"><canvas id="c-water" width="900" height="590"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-water" width="900" height="590"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">비커에 담은 물의 질량<span class="val" id="c-m-val">50 g</span></div>
@@ -263,7 +265,7 @@
         <section class="scene" data-title="구조 ③ — 우리 반의 세포를 모두 더하면">
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">세민</span>“이제 자신 있어요! 그런데 보고서 마지막 문장이 남았어요. <b>‘우리 반 전체의 세포 수’</b>… 한 사람이 3.7×10¹³ 개니까, 인원을 바꿔 가며 세어 볼게요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-class" width="900" height="280"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-class" width="900" height="300"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">우리 반 인원<span class="val" id="c-n-val">1명</span></div>

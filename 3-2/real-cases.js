@@ -9,22 +9,48 @@ var CUM = [1.89, 2.88, 3.78, 4.64, 5.47, 6.29, 7.10, 7.92, 8.75, 9.58];   /* 10 
 var SPL = CUM.map(function (t, i) { return +(t - (i ? CUM[i - 1] : 0)).toFixed(2); });
 var SRC = "<small>출처: 국제육상경기연맹(IAAF) 2009 베를린 세계선수권 생체역학 보고서(Graubner & Nixdorf, 2011), 우사인 볼트 9.58 초 결승의 10 m 구간 기록. 첫 구간에는 출발 신호에 반응한 시간 0.146 초가 들어 있습니다.</small>";
 
-function bars(H, ctx, W, CH, pick) {
-  H.paper(ctx, W, CH);
-  var x0 = 60, y0 = 24, y1 = CH - 40, bw = 52;
-  function Y(t) { return y1 - t / 2 * (y1 - y0); }
-  H.axes(ctx, x0, y0, x0 + 10 * (bw + 8) + 10, y1);
-  [0, 0.5, 1, 1.5, 2].forEach(function (t) { H.text(ctx, t.toFixed(1), x0 - 8, Y(t) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-  H.text(ctx, "10 m를 달리는 데 걸린 시간 (초)", x0 + 6, y0 - 8, { s: 11, w: "700", c: H.v("--mist") });
-  SPL.forEach(function (s, i) {
-    var x = x0 + 10 + i * (bw + 8), on = pick === i + 1;
-    H.box(ctx, x, Y(s), bw, y1 - Y(s), on ? H.v("--coral-700") : H.v("--brand"), on ? 0.95 : 0.6);
-    H.text(ctx, s.toFixed(2), x + bw / 2, Y(s) - 5, { s: 11, w: "800", a: "center", c: on ? H.v("--coral-700") : H.v("--mist") });
-    H.text(ctx, (i * 10) + "~" + (i * 10 + 10), x + bw / 2, y1 + 15, { s: 10, a: "center", c: H.v("--mist") });
-  });
-  H.text(ctx, "구간 (m)", x0 + 10 * (bw + 8) - 30, y1 + 30, { s: 10, w: "700", c: H.v("--mist") });
+/* ---- 밝은 스튜디오: 입체 막대 + 아래 100 m 트랙 미니어처(고른 구간에 달리는 사람) + 오른쪽 흰 카드 ---- */
+var K = window.sthKit, LT = K.LT;
+function lt(ctx, s, x, y, o) { o = o || {}; K.t(ctx, s, x, y, { s: o.s || 12, w: o.w || "700", a: o.a, c: o.c || LT.ink }); }
+function bar3(ctx, x, yb, w, h, d, col) {
+  if (h < .5) return;
+  ctx.fillStyle = K.tint(col, 1.2); ctx.beginPath(); ctx.moveTo(x, yb - h); ctx.lineTo(x + d, yb - h - d * .55); ctx.lineTo(x + w + d, yb - h - d * .55); ctx.lineTo(x + w, yb - h); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = K.tint(col, .72); ctx.beginPath(); ctx.moveTo(x + w, yb - h); ctx.lineTo(x + w + d, yb - h - d * .55); ctx.lineTo(x + w + d, yb - d * .55); ctx.lineTo(x + w, yb); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = col; ctx.fillRect(x, yb - h, w, h);
 }
-
+function bars(H, ctx, W, CH, pick) {
+  ctx.clearRect(0, 0, W, CH);
+  K.studio(ctx, 0, 0, 672, CH, null);
+  var x0 = 60, y0 = 28, y1 = CH - 76, bw = 46;
+  function Y(t) { return y1 - t / 2 * (y1 - y0); }
+  var g = K.chart(ctx, { x: x0 - 44, y: y0 - 14, w: 10 * (bw + 12) + 64, h: y1 - y0 + 40, pl: 44, pt: 14, pb: 26, light: true, x0: 0, x1: 10, y0: 0, y1: 2, xt: 10, yt: 4, xf: function () { return ""; }, yf: function (q) { return q.toFixed(1); } });
+  lt(ctx, "10 m를 달리는 데 걸린 시간 (초)", g.L + 6, g.T + 12, { s: 11, c: LT.mute });
+  SPL.forEach(function (s, i) {
+    var x = x0 + 8 + i * (bw + 12), on = pick === i + 1;
+    bar3(ctx, x, y1, bw, y1 - Y(s), 8, on ? "#e8590c" : "#4dabf7");
+    lt(ctx, s.toFixed(2), x + bw / 2, Y(s) - 9, { s: 11, w: "800", a: "center", c: on ? LT.orange : LT.mute });
+    lt(ctx, (i * 10) + "~" + (i * 10 + 10), x + bw / 2, y1 + 16, { s: 10, a: "center", c: LT.mute });
+  });
+  /* 트랙 미니어처 */
+  var ty = CH - 22, tx0 = x0 + 8, tx1 = x0 + 8 + 10 * (bw + 12) - 12;
+  ctx.fillStyle = "#c2553f"; ctx.beginPath(); ctx.moveTo(tx0, ty); ctx.lineTo(tx0 + 14, ty - 18); ctx.lineTo(tx1 + 14, ty - 18); ctx.lineTo(tx1, ty); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = "#9c3f2e"; ctx.fillRect(tx0, ty, tx1 - tx0, 7);
+  ctx.strokeStyle = "rgba(255,255,255,.8)"; ctx.lineWidth = 1;
+  for (var i = 0; i <= 10; i++) { var lx = tx0 + i * (tx1 - tx0) / 10; ctx.beginPath(); ctx.moveTo(lx, ty); ctx.lineTo(lx + 14, ty - 18); ctx.stroke(); }
+  if (pick) {
+    var rx = tx0 + (pick - .5) * (tx1 - tx0) / 10 + 7, ry = ty - 9;
+    ctx.fillStyle = "rgba(20,30,50,.25)"; ctx.beginPath(); ctx.ellipse(rx + 2, ry + 2, 8, 2.5, 0, 0, 6.2832); ctx.fill();
+    ctx.strokeStyle = "#ffd43b"; ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(rx, ry - 14); ctx.lineTo(rx - 5, ry); ctx.moveTo(rx, ry - 14); ctx.lineTo(rx + 6, ry - 2); ctx.stroke(); ctx.lineCap = "butt";
+    ctx.fillStyle = "#ffd43b"; ctx.beginPath(); ctx.roundRect(rx - 4, ry - 26, 8, 13, 3); ctx.fill();
+    K.planet(ctx, rx + 1, ry - 31, 4.2, "#8a5a3c", "#3a2414");
+  }
+  lt(ctx, "구간 (m)", tx1 + 4, y1 + 16, { s: 10, w: "800", c: LT.mute, a: "right" });
+}
+function card(ctx, W, CH, title, rows, tipS, good) {
+  var x = 682; K.card(ctx, x, 0, W - x, CH, title);
+  rows.forEach(function (r, i) { K.row(ctx, r[0], r[1], x + 18, W - 18, 62 + i * 26, r[2]); });
+  if (tipS) K.tip(ctx, tipS, x + 14, 62 + rows.length * 26, W - x - 28, good);
+}
 window.sthLab({
   mount: "real", key: "real", result: "rReal", label: "실제 자료",
   doneNote: "정리하기 탭에서 속력과 가속도로 볼트의 달리기를 설명해 보세요.",
@@ -40,11 +66,11 @@ window.sthLab({
     },
     task: "슬라이더로 구간을 골라 <b>10 m를 가장 짧은 시간에 달린 구간</b>을 찾으세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(270), ctx = cv.ctx, W = cv.W, k = 1;
+      var H = api.h, cv = api.canvas(300), ctx = cv.ctx, W = cv.W, k = 1;
       function draw() {
         bars(H, ctx, W, cv.H, k);
         var v = 10 / SPL[k - 1];
-        H.rows(ctx, 690, 50, [["고른 구간", ((k - 1) * 10) + " ~ " + (k * 10) + " m"], ["걸린 시간", SPL[k - 1].toFixed(2) + " 초"], ["평균 속력", v.toFixed(2) + " m/s", "--coral-700", true]], 56);
+        card(ctx, W, cv.H, "고른 구간 " + ((k - 1) * 10) + " ~ " + (k * 10) + " m", [["걸린 시간", SPL[k - 1].toFixed(2) + " 초"], ["평균 속력", v.toFixed(2) + " m/s", LT.orange], ["= 시속", (v * 3.6).toFixed(1) + " km"]], k === 7 ? "가장 짧은 구간!" : "속력 = 10 m ÷ 시간", k === 7 ? true : null);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "구간", min: 1, max: 10, step: 1, value: 1, fmt: function (x) { return ((x - 1) * 10) + " ~ " + (x * 10) + " m"; }, onInput: function (x) { k = x; api.changed(); draw(); } });
@@ -75,10 +101,10 @@ window.sthLab({
     },
     task: "가장 빠른 구간의 평균 속력을 km/h로 바꿔 슬라이더로 맞추세요(± 0.6 km/h).",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(270), ctx = cv.ctx, W = cv.W, kmh = 30;
+      var H = api.h, cv = api.canvas(300), ctx = cv.ctx, W = cv.W, kmh = 30;
       function draw() {
         bars(H, ctx, W, cv.H, 7);
-        H.rows(ctx, 690, 50, [["내가 맞춘 최고 속력", kmh.toFixed(1) + " km/h", null, true], ["= 초속", (kmh / 3.6).toFixed(2) + " m/s"], ["100 m 평균", (100 / 9.58 * 3.6).toFixed(1) + " km/h"]], 56);
+        card(ctx, W, cv.H, "60~70 m 구간 0.81 초", [["내가 맞춘 최고 속력", kmh.toFixed(1) + " km/h", LT.orange], ["= 초속", (kmh / 3.6).toFixed(2) + " m/s"], ["100 m 평균", (100 / 9.58 * 3.6).toFixed(1) + " km/h"]], Math.abs(kmh - 10 / .81 * 3.6) <= .6 ? "최고 속력과 같음" : "m/s 를 구한 뒤 × 3.6", Math.abs(kmh - 10 / .81 * 3.6) <= .6 ? true : null);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "최고 속력", min: 30, max: 60, step: 0.5, value: 30, fmt: function (x) { return x.toFixed(1) + " km/h"; }, onInput: function (x) { kmh = x; api.changed(); draw(); } });

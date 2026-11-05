@@ -15,35 +15,51 @@ var Z_RC = zAll(ZD.cw), Z_RD = zAll(ZD.dg), Z_DIFF = Z_RD - Z_RC;
 var SRC_Z = "<small>출처: 기상청 날씨누리 과거 관측 일별 자료 — 창원(155, 바닷가 마산합포구 가포동)과 대구(143, 내륙 분지), 2026년 1월 1일 ~ 9월 30일 날마다 최고·최저 기온. 일교차 = 최고 − 최저. 사본은 data/cw-dg-2026.js.</small>";
 var KB = [33, 39, 124, 131];                               /* 한반도 상자: 북위 33~39°, 동경 124~131° */
 
+/* ---- 밝은 스튜디오 + 블록 모형 (../assets/kit.js 의 K.studio · K.iso · K.card) ---- */
+var K = window.sthKit, LT = K.LT;
+function lt(ctx, s, x, y, o) { o = o || {}; K.t(ctx, s, x, y, { s: o.s || 12, w: o.w || "700", a: o.a, c: o.c || LT.ink }); }
+function sideCard(ctx, x, W, H, title) { K.card(ctx, x, 0, W - x, H, title); return { px: x + 18, R: W - 18, w: W - x - 36 }; }
+/* 입체 막대(앞면·윗면·옆면) */
+function bar3(ctx, x, yb, w, h, d, col) {
+  if (h < .5) return;
+  ctx.fillStyle = K.tint(col, 1.2); ctx.beginPath(); ctx.moveTo(x, yb - h); ctx.lineTo(x + d, yb - h - d * .55); ctx.lineTo(x + w + d, yb - h - d * .55); ctx.lineTo(x + w, yb - h); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = K.tint(col, .72); ctx.beginPath(); ctx.moveTo(x + w, yb - h); ctx.lineTo(x + w + d, yb - h - d * .55); ctx.lineTo(x + w + d, yb - d * .55); ctx.lineTo(x + w, yb); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = col; ctx.fillRect(x, yb - h, w, h);
+}
 function world(H, ctx, W, CH, minDepth) {
-  H.paper(ctx, W, CH);
+  /* 두께가 있는 세계 지도판(태평양이 가운데)을 스튜디오에 놓고, 지진을 깊이별 색 점으로 찍는다 */
+  var FH = ctx.canvas._h || CH + 18;
+  ctx.clearRect(0, 0, W, FH);
+  K.studio(ctx, 0, 0, W, FH, { x: W / 2, y: CH - 10, rx: W * .48, ry: 16 });
   var x0 = 30, x1 = W - 30, y0 = 14, y1 = CH - 26;
-  /* 태평양이 가운데 오게 경도 20°를 왼쪽 끝으로 둔다 */
   function X(lon) { var l = lon - 20; if (l < 0) l += 360; return x0 + l / 360 * (x1 - x0); }
   function Y(lat) { return y0 + (80 - lat) / 150 * (y1 - y0); }
-  ctx.fillStyle = H.v("--panel-2") || "rgba(120,140,170,.08)"; ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
-  ctx.save(); ctx.strokeStyle = H.v("--line"); ctx.lineWidth = 1;
+  ctx.save(); ctx.shadowColor = "rgba(20,30,60,.3)"; ctx.shadowBlur = 14; ctx.shadowOffsetY = 6;
+  ctx.fillStyle = "#8e9aac"; ctx.beginPath(); ctx.roundRect(x0, y0 + 7, x1 - x0, y1 - y0, 8); ctx.fill(); ctx.restore();
+  var sea = ctx.createLinearGradient(0, y0, 0, y1); sea.addColorStop(0, "#b5dcf4"); sea.addColorStop(1, "#7cbde8");
+  ctx.fillStyle = sea; ctx.beginPath(); ctx.roundRect(x0, y0, x1 - x0, y1 - y0, 8); ctx.fill();
+  ctx.save(); ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.lineWidth = 1;
   for (var la = -60; la <= 60; la += 30) { ctx.beginPath(); ctx.moveTo(x0, Y(la)); ctx.lineTo(x1, Y(la)); ctx.stroke(); }
   for (var lo = 20; lo < 380; lo += 60) { ctx.beginPath(); ctx.moveTo(X(lo), y0); ctx.lineTo(X(lo), y1); ctx.stroke(); }
   ctx.restore();
-  [0, 30, 60, -30, -60].forEach(function (la) { H.text(ctx, (la > 0 ? "북위 " : (la < 0 ? "남위 " : "적도 ")) + (la ? Math.abs(la) + "°" : ""), x0 + 4, Y(la) - 3, { s: 9.5, c: H.v("--mist") }); });
-  [80, 140, -160, -100, -40].forEach(function (lo) { H.text(ctx, (lo > 0 ? "동경 " : "서경 ") + Math.abs(lo) + "°", X(lo), y1 + 14, { s: 9.5, a: "center", c: H.v("--mist") }); });
-  var n = 0;
+  [0, 30, 60, -30, -60].forEach(function (la) { lt(ctx, (la > 0 ? "북위 " : (la < 0 ? "남위 " : "적도 ")) + (la ? Math.abs(la) + "°" : ""), x0 + 6, Y(la) - 3, { s: 9.5, c: "#3d5a78" }); });
+  [80, 140, -160, -100, -40].forEach(function (lo) { lt(ctx, (lo > 0 ? "동경 " : "서경 ") + Math.abs(lo) + "°", X(lo), y1 + 20, { s: 9.5, a: "center", c: LT.mute }); });
+  var n = 0, COL = { s: ["#4dabf7", "#1864ab"], m: ["#ffc078", "#d9480f"], d: ["#ff8787", "#a51111"] };
   Q.forEach(function (q) {
     if (q[2] < minDepth) return; n++;
-    var col = q[2] >= 300 ? "--rose-700" : (q[2] >= 70 ? "--amber-700" : "--brand");
-    H.dot(ctx, X(q[1]), Y(q[0]), 1.2 + (q[3] - 5) * 1.1, H.v(col));
+    var c = q[2] >= 300 ? COL.d : (q[2] >= 70 ? COL.m : COL.s), r = 1.4 + (q[3] - 5) * 1.2;
+    ctx.fillStyle = c[0]; ctx.beginPath(); ctx.arc(X(q[1]), Y(q[0]), r, 0, 6.2832); ctx.fill();
+    if (r > 2.2) { ctx.strokeStyle = c[1]; ctx.lineWidth = .8; ctx.stroke(); }
   });
-  ctx.save(); ctx.strokeStyle = H.v("--green-700"); ctx.lineWidth = 2; ctx.strokeRect(X(KB[2]), Y(KB[1]), X(KB[3]) - X(KB[2]), Y(KB[0]) - Y(KB[1])); ctx.restore();
-  H.text(ctx, "한반도", X(KB[2]) - 4, Y(KB[1]) - 4, { s: 10.5, w: "900", a: "right", c: H.v("--green-700") });
+  ctx.save(); ctx.strokeStyle = LT.green; ctx.lineWidth = 2.4; ctx.strokeRect(X(KB[2]), Y(KB[1]), X(KB[3]) - X(KB[2]), Y(KB[0]) - Y(KB[1])); ctx.restore();
+  K.pill(ctx, "한반도", X(KB[2]) - 4, Y(KB[1]) - 6, { s: 11, a: "right", c: "#b2f2bb" });
   return n;
 }
 function legend(H, ctx, x, y) {
-  [["--brand", "70 km보다 얕음"], ["--amber-700", "중간 (70~300 km)"], ["--rose-700", "깊음 (300 km 아래)"]].forEach(function (l, i) {
-    H.dot(ctx, x + i * 150, y, 4, H.v(l[0])); H.text(ctx, l[1], x + i * 150 + 9, y + 4, { s: 10.5, w: "700", c: H.v("--mist") });
+  [["#4dabf7", "70 km보다 얕음"], ["#ffc078", "중간 (70~300 km)"], ["#ff8787", "깊음 (300 km 아래)"]].forEach(function (l, i) {
+    ctx.fillStyle = l[0]; ctx.beginPath(); ctx.arc(x + i * 150, y, 4.5, 0, 6.2832); ctx.fill(); lt(ctx, l[1], x + i * 150 + 9, y + 4, { s: 10.5, c: LT.mute });
   });
 }
-
 window.sthLab({
   mount: "real", key: "real", result: "rReal", label: "실제 자료",
   doneNote: "정리하기 탭에서 지진이 몰린 곳과 판의 경계를 이어 적어 보세요.",
@@ -129,22 +145,35 @@ window.sthLab({
     },
     task: "막대와 오른쪽 값을 보고 <b>대구 일교차 − 창원 일교차(1 ~ 9월 평균)</b>를 슬라이더로 맞추세요(± 0.2 °C).",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(290), ctx = cv.ctx, W = cv.W, k = 0;
+      var H = api.h, cv = api.canvas(320), ctx = cv.ctx, W = cv.W, k = 0;
       var x0 = 50, x1 = 640, y0 = 24, y1 = 250, bw = (x1 - x0) / 9;
       function Y(v) { return y1 - v / 14 * (y1 - y0); }
       function draw() {
-        H.paper(ctx, W, cv.H); H.axes(ctx, x0, y0, x1, y1);
-        [0, 4, 8, 12].forEach(function (v) { H.text(ctx, v + "°", x0 - 8, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); if (v) H.dash(ctx, x0, Y(v), x1, Y(v), H.v("--line"), 0.5); });
-        H.text(ctx, "일교차 (°C)", x0 + 6, y0 - 8, { s: 11, w: "700", c: H.v("--mist") });
-        for (var i = 0; i < 9; i++) {
+        /* 입체 막대(달마다 창원·대구 일교차) + 오른쪽 위 작은 블록 모형(바닷가 창원 · 산으로 둘러싸인 대구 분지) */
+        var CH = cv.H, i;
+        ctx.clearRect(0, 0, W, CH);
+        K.studio(ctx, 0, 0, 660, CH, { x: 340, y: y1 + 18, rx: 320, ry: 16 });
+        var g = K.chart(ctx, { x: x0 - 44, y: y0 - 14, w: x1 - x0 + 58, h: y1 - y0 + 46, pl: 44, pt: 14, pb: 32, light: true, x0: 0, x1: 9, y0: 0, y1: 14, xt: 9, yt: 7, xf: function () { return ""; }, yf: function (q) { return q + "°"; } });
+        lt(ctx, "일교차 (°C)", g.L + 6, g.T + 12, { s: 11, c: LT.mute });
+        for (i = 0; i < 9; i++) {
           var cx = x0 + i * bw;
-          H.box(ctx, cx + 8, Y(ZCW[i].r), bw / 2 - 10, y1 - Y(ZCW[i].r), H.v("--brand"), 0.85);
-          H.box(ctx, cx + bw / 2 + 2, Y(ZDG[i].r), bw / 2 - 10, y1 - Y(ZDG[i].r), H.v("--coral-700"), 0.85);
-          H.text(ctx, (i + 1) + "월", cx + bw / 2, y1 + 15, { s: 10, a: "center", c: H.v("--mist") });
+          bar3(ctx, cx + 8, y1, bw / 2 - 12, y1 - Y(ZCW[i].r), 8, "#1c7ed6");
+          bar3(ctx, cx + bw / 2 + 2, y1, bw / 2 - 12, y1 - Y(ZDG[i].r), 8, "#e8590c");
+          lt(ctx, (i + 1) + "월", cx + bw / 2, y1 + 16, { s: 10, a: "center", c: LT.mute });
         }
-        H.box(ctx, 680, 30, 12, 12, H.v("--brand")); H.text(ctx, "창원(바닷가)", 698, 41, { s: 12, w: "800" });
-        H.box(ctx, 680, 52, 12, 12, H.v("--coral-700")); H.text(ctx, "대구(내륙)", 698, 63, { s: 12, w: "800" });
-        H.rows(ctx, 680, 96, [["창원 1 ~ 9월 평균", Z_RC.toFixed(2) + " °C", "--brand"], ["대구 1 ~ 9월 평균", Z_RD.toFixed(2) + " °C", "--coral-700"], ["내 답 (대구 − 창원)", "+" + k.toFixed(1) + " °C", null, true]], 52);
+        var cd = sideCard(ctx, 670, W, CH, "바닷가와 내륙");
+        /* 작은 블록 모형 */
+        var I = K.iso({ ox: 760, oy: 60, s: .46, L: 240, D: 120 });
+        I.field(ctx, function (x, y) { var hills = 26 * Math.exp(-Math.pow((x - 200) / 30, 2)) + 22 * Math.exp(-Math.pow((x - 130) / 22, 2)) * (y < 50 || y > 80 ? 1 : .3); return x < 70 ? 6 + x * .05 : 14 + hills; },
+          function (x, y, z, l) { return K.tint(x < 60 ? "#c9b38a" : (z > 30 ? "#7a8a5a" : "#8fbf55"), l); }, 24, 12, function (c, a0, b0, a1, b1, zMax, zMin) { if (12 > zMin + .2 && a1 <= 72) I.quad(c, I.P(a0, b0, 12), I.P(a1, b0, 12), I.P(a1, b1, 12), I.P(a0, b1, 12), "rgba(60,150,225,.75)"); });
+        var pc = I.P(80, 60, 15), pd = I.P(172, 64, 15);
+        K.planet(ctx, pc.x, pc.y - 6, 4.5, "#74c0fc", "#1864ab"); K.planet(ctx, pd.x, pd.y - 6, 4.5, "#ffa94d", "#d9480f");
+        lt(ctx, "창원", pc.x - 6, pc.y - 14, { s: 11, a: "right", c: LT.blue, w: "900" }); lt(ctx, "대구", pd.x + 8, pd.y - 14, { s: 11, c: LT.orange, w: "900" });
+        lt(ctx, "바다", I.P(20, 80, 12).x - 8, I.P(20, 80, 12).y + 10, { s: 10, c: LT.mute });
+        K.row(ctx, "창원 1~9월 평균", Z_RC.toFixed(2) + " °C", cd.px, cd.R, 176, LT.blue);
+        K.row(ctx, "대구 1~9월 평균", Z_RD.toFixed(2) + " °C", cd.px, cd.R, 200, LT.orange);
+        K.row(ctx, "내 답 (대구 − 창원)", "+" + k.toFixed(1) + " °C", cd.px, cd.R, 232, LT.ink);
+        K.tip(ctx, Math.abs(k - Z_DIFF) <= .2 ? "두 평균의 차이와 같음" : "두 평균의 차이를 구하세요", cd.px - 4, 248, cd.w + 8, Math.abs(k - Z_DIFF) <= .2 ? true : null);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "대구 − 창원", min: 0, max: 4, step: 0.1, value: 0, fmt: function (x) { return "+" + x.toFixed(1) + " °C"; }, onInput: function (x) { k = x; api.changed(); draw(); } });

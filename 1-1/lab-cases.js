@@ -3,6 +3,27 @@
 "use strict";
 var SUP = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
 function sup(n) { return String(n).split("").map(function (ch) { return SUP[ch] || ch; }).join(""); }
+/* ---- 밝은 스튜디오 말투 (../assets/kit.js 의 K.studio · K.card) ---- */
+var KT = window.sthKit, LT = KT.LT;
+function lt(ctx, s, x, y, o) { o = o || {}; KT.t(ctx, s, x, y, { s: o.s || 12, w: o.w || "700", a: o.a, c: o.c || LT.ink }); }
+function floorShadow(ctx, x, y, rx, ry, a) {
+  var g = ctx.createRadialGradient(x, y, 2, x, y, rx);
+  g.addColorStop(0, "rgba(20,30,50," + (a || 0.28) + ")"); g.addColorStop(0.6, "rgba(20,30,50,.07)"); g.addColorStop(1, "rgba(20,30,50,0)");
+  ctx.save(); ctx.translate(x, y); ctx.scale(1, ry / rx); ctx.translate(-x, -y);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, rx, 0, 6.2832); ctx.fill(); ctx.restore();
+}
+function metal(ctx, x0, y0, x1, y1, a, b, c) {
+  var g = ctx.createLinearGradient(x0, y0, x1, y1); g.addColorStop(0, a || "#f6f8fb"); g.addColorStop(0.5, b || "#aab3c3"); g.addColorStop(1, c || "#5b6476"); return g;
+}
+/* 앞에서 비스듬히 내려다본 판(윗면이 조금 보이는 미니어처): 앞면 + 윗면 + 오른쪽 옆면 */
+function slab(ctx, x, y, w, h, d, cTop, cFront, cSide) {
+  ctx.fillStyle = cTop; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + d, y - d * 0.6); ctx.lineTo(x + w + d, y - d * 0.6); ctx.lineTo(x + w, y); ctx.closePath(); ctx.fill();
+  if (cSide) { ctx.fillStyle = cSide; ctx.beginPath(); ctx.moveTo(x + w, y); ctx.lineTo(x + w + d, y - d * 0.6); ctx.lineTo(x + w + d, y + h - d * 0.6); ctx.lineTo(x + w, y + h); ctx.closePath(); ctx.fill(); }
+  ctx.fillStyle = cFront; ctx.fillRect(x, y, w, h);
+}
+/* 오른쪽 흰 판정 카드 한 벌 */
+function sideCard(ctx, x, W, H, title) { KT.card(ctx, x, 0, W - x, H, title); return { px: x + 18, R: W - 18, w: W - x - 36 }; }
+
 
 window.sthLab({
   mount: "lab", key: "lab", result: "rLab",
@@ -22,23 +43,47 @@ window.sthLab({
       var H = api.h, cv = api.canvas(290), ctx = cv.ctx, W = cv.W;
       var vol = 5, CONC = 160 / 5, KG = 44 * 0.4536;
       function draw() {
-        H.paper(ctx, W, cv.H);
-        H.text(ctx, "시럽: 5 mL에 160 mg", 40, 34, { s: 14, w: "900" });
-        var x0 = 110, x1 = 610, y = 140, sc = (x1 - x0) / 25;
-        H.box(ctx, x0, y - 30, x1 - x0, 60, H.v("--card-2"));
-        H.box(ctx, x0, y - 30, vol * sc, 60, H.v("--coral"), 0.75);
-        ctx.strokeStyle = H.v("--line"); ctx.lineWidth = 2; ctx.strokeRect(x0, y - 30, x1 - x0, 60);
-        H.box(ctx, x0 + vol * sc - 6, y - 44, 10, 88, H.v("--ink"));
-        H.box(ctx, x0 - 40, y - 5, 40, 10, H.v("--mist"));
-        for (var i = 0; i <= 25; i++) {
+        var CH = cv.H, LW = 650, x0 = 150, sc = 12, by = 150, bh = 46, px = x0 + vol * sc, i;
+        ctx.clearRect(0, 0, W, CH);
+        KT.studio(ctx, 0, 0, LW, CH, null);
+        KT.bigText(ctx, "약 " + (vol * CONC).toFixed(0) + " mg", 18, 44, 26, "#ffffff");
+        KT.bigText(ctx, "몸무게는 44 lb — kg 로는?", 18, 72, 16, "#ffd35a");
+        /* 시럽 병(갈색 유리) */
+        floorShadow(ctx, 70, 258, 40, 6, 0.25);
+        var bg = ctx.createLinearGradient(40, 0, 100, 0); bg.addColorStop(0, "#6b3a12"); bg.addColorStop(0.35, "#c47a2c"); bg.addColorStop(1, "#5a2e0c");
+        ctx.fillStyle = bg; ctx.beginPath(); ctx.roundRect(40, 150, 60, 104, 10); ctx.fill(); ctx.fillRect(56, 130, 28, 24);
+        ctx.fillStyle = "#f1f3f6"; ctx.fillRect(52, 120, 36, 14);
+        ctx.fillStyle = "#fffaf0"; ctx.fillRect(44, 182, 52, 40);
+        lt(ctx, "시럽", 70, 198, { s: 11, w: "900", a: "center", c: "#7a3b0a" });
+        lt(ctx, "5 mL:160 mg", 70, 214, { s: 8.5, w: "900", a: "center", c: "#7a3b0a" });
+        /* 주사기: 피스톤 막대(길이 일정) → 투명 유리 통 → 바늘 */
+        ctx.fillStyle = metal(ctx, 0, by - 6, 0, by + 6, "#ffffff", "#c9d0da", "#7d8698");
+        ctx.fillRect(px, by - 5, 170, 10);
+        ctx.fillRect(px + 166, by - 22, 10, 44);
+        var lq = ctx.createLinearGradient(0, by - bh / 2, 0, by + bh / 2); lq.addColorStop(0, "#ffb3a7"); lq.addColorStop(0.5, "#e8735c"); lq.addColorStop(1, "#b5432c");
+        ctx.fillStyle = lq; ctx.fillRect(x0, by - bh / 2 + 3, vol * sc, bh - 6);
+        ctx.fillStyle = "#2b2f3a"; ctx.fillRect(px - 2, by - bh / 2 + 3, 8, bh - 6);
+        ctx.fillStyle = "rgba(220,235,250,.35)"; ctx.fillRect(x0, by - bh / 2, 300, bh);
+        ctx.strokeStyle = "rgba(90,110,140,.8)"; ctx.lineWidth = 1.5; ctx.strokeRect(x0, by - bh / 2, 300, bh);
+        ctx.fillStyle = "rgba(255,255,255,.65)"; ctx.fillRect(x0 + 4, by - bh / 2 + 4, 292, 5);
+        ctx.fillStyle = "rgba(200,215,235,.8)"; ctx.fillRect(x0 + 296, by - bh / 2 - 8, 8, bh + 16);
+        ctx.fillStyle = metal(ctx, 0, by - 3, 0, by + 3); ctx.fillRect(x0 - 16, by - 5, 16, 10); ctx.fillRect(x0 - 60, by - 1.5, 46, 3);
+        for (i = 0; i <= 25; i++) {
           var xx = x0 + i * sc;
-          ctx.strokeStyle = H.v("--ink"); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(xx, y + 30); ctx.lineTo(xx, y + (i % 5 ? 38 : 46)); ctx.stroke();
-          if (i % 5 === 0) H.text(ctx, i + " mL", xx, y + 64, { s: 11, a: "center", c: H.v("--mist") });
+          ctx.strokeStyle = LT.ink; ctx.lineWidth = i % 5 ? 0.8 : 1.4; ctx.beginPath(); ctx.moveTo(xx, by + bh / 2); ctx.lineTo(xx, by + bh / 2 - (i % 5 ? 7 : 14)); ctx.stroke();
+          if (i % 5 === 0) lt(ctx, i + " mL", xx, by + bh / 2 + 18, { s: 10.5, a: "center", c: LT.ink, w: "900" });
         }
-        H.text(ctx, "진료 기록: 몸무게 44 lb", x0, 250, { s: 13, w: "800", c: H.v("--brand-700") });
-        H.rows(ctx, 680, 80, [["담은 부피", vol.toFixed(1) + " mL"], ["들어 있는 약", (vol * CONC).toFixed(0) + " mg", "--coral-700", true]], 44);
-      }
-      cv.canvas._redraw = draw;
+        floorShadow(ctx, 380, by + 52, 260, 8, 0.2);
+        /* 오른쪽 카드 */
+        var cd = sideCard(ctx, 660, W, CH, "주사기에 담은 양");
+        lt(ctx, vol.toFixed(1) + " mL", cd.px, 64, { s: 24, w: "900", c: LT.orange });
+        KT.row(ctx, "들어 있는 약", (vol * CONC).toFixed(0) + " mg", cd.px, cd.R, 100, LT.red);
+        KT.row(ctx, "시럽 1 mL 에", "32 mg", cd.px, cd.R, 126);
+        KT.row(ctx, "처방", "1 kg 당 15 mg", cd.px, cd.R, 152, LT.blue);
+        KT.row(ctx, "진료 기록 몸무게", "44 lb", cd.px, cd.R, 178, LT.violet);
+        KT.tip(ctx, "1 lb = 0.4536 kg", cd.px - 4, 198, cd.w + 8, null);
+        lt(ctx, "단위부터 맞춘 뒤 계산하세요", cd.px, 262, { s: 11, c: LT.mute });
+      }      cv.canvas._redraw = draw;
       api.slider({ label: "주사기에 담는 시럽", min: 0, max: 25, step: 0.1, value: 5, fmt: function (x) { return x.toFixed(1) + " mL"; },
         onInput: function (x) { vol = x; draw(); } });
       api.info("약의 양은 mg, 처방은 kg 당 mg, 몸무게는 lb. 세 단위가 섞여 있습니다.");
@@ -75,27 +120,40 @@ window.sthLab({
       var H = api.h, cv = api.canvas(350), ctx = cv.ctx, W = cv.W;
       var L = 120, a = 1.0, n = -3, PX = 8;          /* 사진에서 1 µm = 8 px, 세포 지름 240 px = 30 µm */
       function draw() {
-        H.paper(ctx, W, cv.H);
-        H.box(ctx, 30, 40, 490, 270, H.v("--card-2"));
-        ctx.save(); ctx.globalAlpha = 0.28; ctx.fillStyle = H.v("--teal");
-        ctx.beginPath(); ctx.arc(270, 170, 120, 0, Math.PI * 2); ctx.fill(); ctx.restore();
-        ctx.strokeStyle = H.v("--teal-700"); ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(270, 170, 120, 0, Math.PI * 2); ctx.stroke();
-        H.dot(ctx, 290, 160, 34, H.v("--violet")); H.text(ctx, "핵", 290, 165, { s: 12, w: "900", a: "center", c: "#fff" });
-        H.box(ctx, 350, 285, 160, 8, H.v("--ink"));
-        H.text(ctx, "20 µm", 430, 278, { s: 12, w: "900", a: "center" });
-        /* 자 */
-        ctx.strokeStyle = H.v("--coral"); ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(150, 325); ctx.lineTo(150 + L, 325); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(150, 315); ctx.lineTo(150, 335); ctx.moveTo(150 + L, 315); ctx.lineTo(150 + L, 335); ctx.stroke();
-        H.dash(ctx, 150, 170, 150, 315, H.v("--coral"), 1); H.dash(ctx, 150 + L, 170, 150 + L, 315, H.v("--coral"), 1);
-        H.text(ctx, "현미경 사진", 40, 30, { s: 14, w: "900" });
-        H.rows(ctx, 580, 70, [
-          ["자로 잰 길이", L + " 칸 → " + (L / PX).toFixed(1) + " µm", "--coral-700"],
-          ["내가 기록한 지름", a.toFixed(1) + " × 10" + sup(n) + " m", "--brand-700", true],
-          ["비교: 머리카락", "약 1 × 10⁻⁴ m"]
-        ], 58);
-      }
-      cv.canvas._redraw = draw;
+        var CH = cv.H, i;
+        ctx.clearRect(0, 0, W, CH);
+        KT.studio(ctx, 0, 0, 570, CH, { x: 280, y: 330, rx: 260, ry: 12 });
+        /* 인화한 현미경 사진(흰 테두리 + 그림자) */
+        ctx.save(); ctx.shadowColor = "rgba(20,30,60,.3)"; ctx.shadowBlur = 14; ctx.shadowOffsetY = 6;
+        ctx.fillStyle = "#ffffff"; ctx.beginPath(); ctx.roundRect(22, 32, 506, 286, 6); ctx.fill(); ctx.restore();
+        var bf = ctx.createRadialGradient(270, 170, 30, 270, 170, 300); bf.addColorStop(0, "#f5f8f2"); bf.addColorStop(1, "#c9d6c8");
+        ctx.fillStyle = bf; ctx.fillRect(30, 40, 490, 270);
+        /* 세포(입체 음영) — 지름 240칸 */
+        var cg = ctx.createRadialGradient(240, 135, 20, 270, 170, 122); cg.addColorStop(0, "rgba(180,235,225,.9)"); cg.addColorStop(0.8, "rgba(90,190,175,.75)"); cg.addColorStop(1, "rgba(40,130,120,.9)");
+        ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(270, 170, 120, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = "#0c8599"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(270, 170, 120, 0, Math.PI * 2); ctx.stroke();
+        var R = KT.rng(11); for (i = 0; i < 26; i++) { var a0 = R() * 6.28, d0 = 30 + R() * 80; KT.planet(ctx, 270 + Math.cos(a0) * d0, 170 + Math.sin(a0) * d0, 2.5 + R() * 3, "#e9fbf5", "#2b8a7e"); }
+        KT.planet(ctx, 290, 160, 34, "#d0bfff", "#5f3dc4");
+        lt(ctx, "핵", 290, 166, { s: 12, w: "900", a: "center", c: "#ffffff" });
+        ctx.fillStyle = "#111622"; ctx.fillRect(350, 285, 160, 8);
+        lt(ctx, "20 µm", 430, 278, { s: 12, w: "900", a: "center", c: "#111622" });
+        lt(ctx, "현미경 사진", 30, 24, { s: 13, w: "900", c: LT.mute });
+        /* 투명 플라스틱 자(입체) */
+        KT.line(ctx, { x: 150, y: 170 }, { x: 150, y: 315 }, LT.orange, 1.5, [4, 4]); KT.line(ctx, { x: 150 + L, y: 170 }, { x: 150 + L, y: 315 }, LT.orange, 1.5, [4, 4]);
+        ctx.fillStyle = "rgba(255,146,43,.35)"; ctx.fillRect(150, 316, L, 18);
+        ctx.fillStyle = "rgba(255,255,255,.5)"; ctx.fillRect(150, 316, L, 4);
+        ctx.strokeStyle = LT.orange; ctx.lineWidth = 2.5; ctx.strokeRect(150, 316, L, 18);
+        for (i = 0; i <= L; i += 10) { ctx.strokeStyle = "#d9480f"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(150 + i, 316); ctx.lineTo(150 + i, 322); ctx.stroke(); }
+        /* 오른쪽 카드 */
+        var cd = sideCard(ctx, 580, W, CH, "세포 지름 기록");
+        lt(ctx, a.toFixed(1) + " × 10" + sup(n) + " m", cd.px, 64, { s: 22, w: "900", c: LT.blue });
+        KT.row(ctx, "자로 잰 길이", L + " 칸", cd.px, cd.R, 102, LT.orange);
+        KT.row(ctx, "→ 실제 길이", (L / PX).toFixed(1) + " µm", cd.px, cd.R, 128, LT.orange);
+        KT.row(ctx, "눈금 막대", "160 칸 = 20 µm", cd.px, cd.R, 154);
+        KT.row(ctx, "비교: 머리카락", "약 1 × 10⁻⁴ m", cd.px, cd.R, 180, LT.violet);
+        KT.tip(ctx, "1 µm = 10⁻⁶ m", cd.px - 4, 200, cd.w + 8, null);
+        lt(ctx, "자 끝을 세포 양 끝에 맞추세요", cd.px, 262, { s: 11, c: LT.mute });
+      }      cv.canvas._redraw = draw;
       api.slider({ label: "자 길이 (사진 칸)", min: 40, max: 400, step: 5, value: 120, fmt: function (x) { return x + " 칸"; },
         onInput: function (x) { L = x; draw(); } });
       api.slider({ label: "앞자리 수 a", min: 1, max: 9.9, step: 0.1, value: 1, fmt: function (x) { return x.toFixed(1); },
@@ -134,8 +192,7 @@ window.sthLab({
     },
     task: "kg · m · s의 지수를 조절해 <b>압력의 단위</b>를 만드세요. 가는 길에 다른 물리량도 찾아보세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(260), ctx = cv.ctx, W = cv.W;
-      var e = { kg: 0, m: 1, s: 0 }, seen = {};
+      var H = api.h, cv = api.canvas(300), ctx = cv.ctx, W = cv.W;      var e = { kg: 0, m: 1, s: 0 }, seen = {};
       var BOOK = {
         "0,1,0": "길이 (m)", "0,2,0": "넓이 (m²)", "0,3,0": "부피 (m³)", "1,0,0": "질량 (kg)", "0,0,1": "시간 (s)",
         "0,1,-1": "속력 (m/s)", "0,1,-2": "가속도 (m/s²)", "1,-3,0": "밀도 (kg/m³)", "1,1,-2": "힘 (N, 뉴턴)",
@@ -154,16 +211,30 @@ window.sthLab({
         H.paper(ctx, W, cv.H);
         var key = e.kg + "," + e.m + "," + e.s, name = BOOK[key];
         if (name) seen[key] = name;
-        H.text(ctx, "지금 만든 단위", 40, 40, { s: 13, w: "800", c: H.v("--mist") });
-        H.text(ctx, unitText(), 40, 100, { s: 40, w: "900", c: H.v("--brand-700") });
-        H.text(ctx, name ? "이 단위로 재는 양: " + name : "아직 이름이 붙지 않은 조합", 40, 150,
-          { s: 16, w: "900", c: name ? H.v("--teal-700") : H.v("--mist") });
-        H.text(ctx, "찾은 물리량 " + Object.keys(seen).length + "개", 560, 40, { s: 13, w: "800", c: H.v("--mist") });
-        Object.keys(seen).slice(-8).forEach(function (k, i) {
-          H.text(ctx, "· " + seen[k], 560, 66 + i * 22, { s: 12.5, c: H.v("--ink") });
+        ctx.clearRect(0, 0, W, cv.H);
+        var CH = cv.H, LW = 560;
+        KT.studio(ctx, 0, 0, LW, CH, null);
+        KT.bigText(ctx, unitText(), 18, 46, 28, "#ffffff");
+        KT.bigText(ctx, name ? name : "아직 이름이 붙지 않은 조합", 18, 74, 15, name ? "#8ce99a" : "#ffd35a");
+        /* 선반: 위로 쌓으면 곱하기, 아래로 매달면 나누기 */
+        slab(ctx, 250, 176, 290, 10, 8, "#e9ecf2", "#c3ccd9", "#a9b2c2");
+        lt(ctx, "▲ 곱하는 단위", 236, 160, { s: 11.5, w: "900", a: "right", c: LT.green });
+        lt(ctx, "▼ 나누는 단위", 236, 214, { s: 11.5, w: "900", a: "right", c: LT.red });
+        [["kg", e.kg, "#ff922b", 310], ["m", e.m, "#4dabf7", 400], ["s", e.s, "#9775fa", 490]].forEach(function (c) {
+          var nAbs = Math.abs(c[1]), k;
+          for (k = 0; k < nAbs; k++) {
+            var y = c[1] > 0 ? 176 - (k + 1) * 28 : 188 + k * 28;
+            if (c[1] > 0) slab(ctx, c[3] - 13, y, 26, 26, 8, KT.tint(c[2], 1.18), c[2], KT.tint(c[2], 0.72));
+            else { ctx.save(); ctx.globalAlpha = 0.55; slab(ctx, c[3] - 13, y, 26, 26, 8, KT.tint(c[2], 1.18), c[2], KT.tint(c[2], 0.72)); ctx.restore();
+              ctx.save(); ctx.setLineDash([3, 2]); ctx.strokeStyle = KT.tint(c[2], 0.6); ctx.lineWidth = 1.2; ctx.strokeRect(c[3] - 13, y, 26, 26); ctx.restore(); }
+            lt(ctx, c[0], c[3], y + 17, { s: 10.5, w: "900", a: "center", c: "#ffffff" });
+          }
+          lt(ctx, c[0] + (c[1] === 0 ? "⁰" : sup(c[1])), c[3], 290, { s: 13, w: "900", a: "center", c: KT.tint(c[2], 0.75) });
         });
-      }
-      cv.canvas._redraw = draw;
+        /* 오른쪽 카드: 찾은 물리량 */
+        var cd = sideCard(ctx, 570, W, CH, "찾은 물리량 " + Object.keys(seen).length + "개");
+        Object.keys(seen).slice(-9).forEach(function (k2, i2) { lt(ctx, "· " + seen[k2], cd.px, 62 + i2 * 25, { s: 12.5, w: "800", c: k2 === key ? LT.green : LT.ink }); });
+      }      cv.canvas._redraw = draw;
       api.slider({ label: "kg의 지수", min: -2, max: 2, step: 1, value: 0, fmt: function (x) { return "kg" + sup(x); }, onInput: function (x) { e.kg = x; draw(); } });
       api.slider({ label: "m의 지수", min: -3, max: 3, step: 1, value: 1, fmt: function (x) { return "m" + sup(x); }, onInput: function (x) { e.m = x; draw(); } });
       api.slider({ label: "s의 지수", min: -3, max: 3, step: 1, value: 0, fmt: function (x) { return "s" + sup(x); }, onInput: function (x) { e.s = x; draw(); } });

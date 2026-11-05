@@ -2,6 +2,27 @@
 (function () {
 "use strict";
 
+/* ---- 밝은 스튜디오 말투 (../assets/kit.js 의 K.studio · K.chart · K.card) ---- */
+var KT = window.sthKit, LT = KT.LT;
+function lt(ctx, s, x, y, o) { o = o || {}; KT.t(ctx, s, x, y, { s: o.s || 12, w: o.w || "700", a: o.a, c: o.c || LT.ink }); }
+function floorShadow(ctx, x, y, rx, ry, a) {
+  var g = ctx.createRadialGradient(x, y, 2, x, y, rx);
+  g.addColorStop(0, "rgba(20,30,50," + (a || 0.28) + ")"); g.addColorStop(0.6, "rgba(20,30,50,.07)"); g.addColorStop(1, "rgba(20,30,50,0)");
+  ctx.save(); ctx.translate(x, y); ctx.scale(1, ry / rx); ctx.translate(-x, -y);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, rx, 0, 6.2832); ctx.fill(); ctx.restore();
+}
+function metal(ctx, x0, y0, x1, y1, a, b, c) {
+  var g = ctx.createLinearGradient(x0, y0, x1, y1); g.addColorStop(0, a || "#f6f8fb"); g.addColorStop(0.5, b || "#aab3c3"); g.addColorStop(1, c || "#5b6476"); return g;
+}
+/* 앞에서 비스듬히 내려다본 판(윗면이 조금 보이는 미니어처): 앞면 + 윗면 + 오른쪽 옆면 */
+function slab(ctx, x, y, w, h, d, cTop, cFront, cSide) {
+  ctx.fillStyle = cTop; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + d, y - d * 0.6); ctx.lineTo(x + w + d, y - d * 0.6); ctx.lineTo(x + w, y); ctx.closePath(); ctx.fill();
+  if (cSide) { ctx.fillStyle = cSide; ctx.beginPath(); ctx.moveTo(x + w, y); ctx.lineTo(x + w + d, y - d * 0.6); ctx.lineTo(x + w + d, y + h - d * 0.6); ctx.lineTo(x + w, y + h); ctx.closePath(); ctx.fill(); }
+  ctx.fillStyle = cFront; ctx.fillRect(x, y, w, h);
+}
+/* 오른쪽 흰 판정 카드 한 벌 */
+function sideCard(ctx, x, W, H, title) { KT.card(ctx, x, 0, W - x, H, title); return { px: x + 18, R: W - 18, w: W - x - 36 }; }
+
 window.sthLab({
   mount: "lab", key: "lab", result: "rLab",
   cases: [
@@ -24,23 +45,38 @@ window.sthLab({
       function B() { return BN.map(function (d) { return 51.5 + d + off; }); }
       function mean(a) { return a.reduce(function (s, x) { return s + x; }, 0) / a.length; }
       function spread(a) { return Math.max.apply(null, a) - Math.min.apply(null, a); }
-      function X(kg) { return 80 + (kg - 47) / 8 * 720; }
+      function X(kg) { return 150 + (kg - 47) / 8 * 480; }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        H.text(ctx, "50.00 kg 기준 추를 열 번씩 잰 값", 40, 32, { s: 14, w: "900" });
-        H.dash(ctx, X(50), 50, X(50), 250, H.v("--green"), 2);
-        H.text(ctx, "참값 50.00", X(50), 268, { s: 11.5, w: "800", a: "center", c: H.v("--green-700") });
-        for (var k = 47; k <= 55; k++) H.text(ctx, k + "", X(k), 290, { s: 10.5, a: "center", c: H.v("--mist") });
-        [["A", A, 100, "--coral"], ["B", B(), 190, "--brand"]].forEach(function (s) {
-          H.text(ctx, "체중계 " + s[0], 40, s[2] + 5, { s: 13, w: "900", c: H.v(s[3] + "-700") });
-          s[1].forEach(function (x, i) { H.dot(ctx, X(x), s[2] + (i % 3 - 1) * 9, 6, H.v(s[3])); });
+        var CH = cv.H, k;
+        ctx.clearRect(0, 0, W, CH);
+        KT.studio(ctx, 0, 0, 650, CH, null);
+        KT.bigText(ctx, "50.00 kg 기준 추를 열 번씩", 18, 38, 19, "#ffffff");
+        for (k = 47; k <= 55; k++) {
+          KT.line(ctx, { x: X(k), y: 62 }, { x: X(k), y: 246 }, "rgba(20,40,90,.08)", 1);
+          lt(ctx, k + "", X(k), 290, { s: 11, a: "center", c: LT.mute, w: "800" });
+        }
+        KT.pill(ctx, "참값 50.00", X(50), 270, { a: "center", s: 11, c: "#8ce99a" });
+        [["A", A, 112, "#ff922b", "#d9480f"], ["B", B(), 200, "#4dabf7", "#1864ab"]].forEach(function (s) {
+          /* 체중계 미니어처 */
+          floorShadow(ctx, 72, s[2] + 22, 52, 6, 0.22);
+          slab(ctx, 22, s[2] - 6, 96, 22, 12, "#f6f8fb", "#c9d0da", "#9aa3b0");
+          ctx.fillStyle = "#1e3a2c"; ctx.fillRect(50, s[2] - 2, 40, 13);
+          lt(ctx, "체중계 " + s[0], 70, s[2] - 22, { s: 13, w: "900", a: "center", c: s[4] });
+          ctx.fillStyle = "rgba(255,255,255,.8)"; ctx.beginPath(); ctx.roundRect(140, s[2] - 30, 500, 60, 12); ctx.fill();
+          s[1].forEach(function (x, i) { KT.planet(ctx, X(x), s[2] + (i % 3 - 1) * 12, 6.5, s[3], s[4]); });
           var m = mean(s[1]);
-          ctx.strokeStyle = H.v("--ink"); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(X(m), s[2] - 24); ctx.lineTo(X(m), s[2] + 24); ctx.stroke();
-          var right = X(m) > 520;
-          H.text(ctx, "평균 " + m.toFixed(2) + " · 흩어진 폭 " + spread(s[1]).toFixed(2) + " kg", right ? X(m) - 10 : X(m) + 10, s[2] - 28, { s: 11.5, w: "800", a: right ? "right" : "left", c: H.v(s[3] + "-700") });
+          ctx.strokeStyle = LT.ink; ctx.lineWidth = 3.5; ctx.beginPath(); ctx.moveTo(X(m), s[2] - 30); ctx.lineTo(X(m), s[2] + 30); ctx.stroke();
         });
-      }
-      cv.canvas._redraw = draw;
+        KT.line(ctx, { x: X(50), y: 58 }, { x: X(50), y: 250 }, LT.green, 2.2, [6, 4]);
+        var cd = sideCard(ctx, 660, W, CH, "열 번 잰 결과"), bb = B();
+        KT.row(ctx, "A 평균", mean(A).toFixed(2) + " kg", cd.px, cd.R, 62, LT.orange);
+        KT.row(ctx, "A 흩어진 폭", spread(A).toFixed(2) + " kg", cd.px, cd.R, 88, LT.orange);
+        KT.row(ctx, "B 평균", mean(bb).toFixed(2) + " kg", cd.px, cd.R, 124, LT.blue);
+        KT.row(ctx, "B 흩어진 폭", spread(bb).toFixed(2) + " kg", cd.px, cd.R, 150, LT.blue);
+        KT.row(ctx, "B 영점 조절", (off >= 0 ? "+" : "") + off.toFixed(1) + " kg", cd.px, cd.R, 186, LT.violet);
+        KT.tip(ctx, "검은 선 = 평균 · 초록 점선 = 참값", cd.px - 4, 204, cd.w + 8, null);
+        lt(ctx, "영점은 모든 값을 한꺼번에 옮깁니다", cd.px, 266, { s: 11, c: LT.mute });
+      }      cv.canvas._redraw = draw;
       api.slider({ label: "B의 영점 조절", min: -3, max: 3, step: 0.1, value: 0, fmt: function (x) { return (x >= 0 ? "+" : "") + x.toFixed(1) + " kg"; },
         onInput: function (x) { off = x; draw(); } });
       api.info("검은 세로선이 평균, 초록 점선이 참값입니다. 영점을 옮기며 <b>흩어진 폭</b> 숫자도 함께 보세요.");
@@ -79,23 +115,32 @@ window.sthLab({
       var LEN = { v: 4.37, e: 0.005 };
       function roundSF(x, n) { var p = Math.floor(Math.log(x) / Math.LN10), k = Math.pow(10, p - n + 1); return { v: Math.round(x / k) * k, k: k }; }
       function fmt(x, k) { var d = Math.max(0, -Math.round(Math.log(k) / Math.LN10)); return x.toFixed(d); }
-      function X(a) { return 90 + (a - 13.4) / 1.2 * 720; }
+      function X(a) { return 40 + (a - 13.4) / 1.2 * 580; }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var w = width(), lo = (LEN.v - LEN.e) * (w.v - w.e), hi = (LEN.v + LEN.e) * (w.v + w.e), mid = LEN.v * w.v;
-        var r = roundSF(mid, sf), rlo = r.v - r.k / 2, rhi = r.v + r.k / 2;
-        H.text(ctx, "가로 " + LEN.v.toFixed(2) + " m × 세로 " + (tool === "stick" ? "3.2" : "3.21") + " m = " + mid.toFixed(4) + " m² (계산기)", 40, 34, { s: 14, w: "900" });
-        H.axes(ctx, 90, 70, 810, 230);
-        for (var t = 13.4; t <= 14.6 + 1e-9; t += 0.2) H.text(ctx, t.toFixed(1), X(t), 250, { s: 10.5, a: "center", c: H.v("--mist") });
-        H.box(ctx, X(lo), 100, X(hi) - X(lo), 44, H.v("--teal"), 0.35);
-        H.text(ctx, "실제 넓이가 있을 수 있는 범위  " + lo.toFixed(2) + " ~ " + hi.toFixed(2), X(lo), 94, { s: 11.5, w: "800", c: H.v("--teal-700") });
-        var over = (rhi - rlo) < (hi - lo) * 0.5;
-        H.box(ctx, Math.max(90, X(rlo)), 170, Math.max(3, Math.min(810, X(rhi)) - Math.max(90, X(rlo))), 34, over ? H.v("--rose") : H.v("--brand"), 0.45);
-        H.text(ctx, "내가 적은 값 " + fmt(r.v, r.k) + " m²  (이 값이 뜻하는 범위 " + fmt(rlo, r.k / 10) + " ~ " + fmt(rhi, r.k / 10) + ")", 90, 164,
-          { s: 11.5, w: "800", c: over ? H.v("--rose-700") : H.v("--brand-700") });
-        H.text(ctx, over ? "적은 값이 실제로 잰 것보다 훨씬 좁은 범위를 주장합니다" : "", 90, 222, { s: 11.5, w: "800", c: H.v("--rose-700") });
-      }
-      cv.canvas._redraw = draw;
+        var CH = cv.H, w = width(), lo = (LEN.v - LEN.e) * (w.v - w.e), hi = (LEN.v + LEN.e) * (w.v + w.e), mid = LEN.v * w.v;
+        var r = roundSF(mid, sf), rlo = r.v - r.k / 2, rhi = r.v + r.k / 2, over = (rhi - rlo) < (hi - lo) * 0.5;
+        ctx.clearRect(0, 0, W, CH);
+        KT.studio(ctx, 0, 0, 650, CH, null);
+        KT.bigText(ctx, fmt(r.v, r.k) + " m²", 18, 44, 28, over ? "#ff8787" : "#8ce99a");
+        KT.bigText(ctx, "가로 " + LEN.v.toFixed(2) + " m × 세로 " + (tool === "stick" ? "3.2" : "3.21") + " m", 18, 72, 15, "#ffffff");
+        for (var t = 13.4; t <= 14.6 + 1e-9; t += 0.2) {
+          KT.line(ctx, { x: X(t), y: 96 }, { x: X(t), y: 236 }, "rgba(20,40,90,.10)", 1);
+          lt(ctx, t.toFixed(1), X(t), 256, { s: 11, a: "center", c: LT.mute, w: "800" });
+        }
+        lt(ctx, "넓이 (m²)", 630, 276, { s: 11, a: "right", c: LT.mute });
+        slab(ctx, X(lo), 120, Math.max(3, X(hi) - X(lo)), 30, 9, "#96f2d7", "#20c997", "#0ca678");
+        lt(ctx, "실제 넓이가 있을 수 있는 범위 " + lo.toFixed(2) + " ~ " + hi.toFixed(2), KT.clamp(X(lo), 40, 330), 108, { s: 11.5, w: "900", c: LT.teal });
+        var a0 = Math.max(40, X(rlo)), a1 = Math.min(620, X(rhi));
+        slab(ctx, a0, 190, Math.max(3, a1 - a0), 30, 9, over ? "#ffc9c9" : "#a5d8ff", over ? "#fa5252" : "#339af0", over ? "#c92a2a" : "#1864ab");
+        lt(ctx, "내가 적은 값이 뜻하는 범위 " + fmt(rlo, r.k / 10) + " ~ " + fmt(rhi, r.k / 10), 40, 178, { s: 11.5, w: "900", c: over ? LT.red : LT.blue });
+        var cd = sideCard(ctx, 660, W, CH, "넓이를 몇 자리로 적을까");
+        lt(ctx, sf + " 자리", cd.px, 62, { s: 24, w: "900", c: over ? LT.red : LT.green });
+        KT.row(ctx, "계산기 값", mid.toFixed(4) + " m²", cd.px, cd.R, 98);
+        KT.row(ctx, "세로를 잰 도구", tool === "stick" ? "1 m 눈금 막대" : "10 cm 줄자", cd.px, cd.R, 124, LT.blue);
+        KT.row(ctx, "내가 적은 값", fmt(r.v, r.k) + " m²", cd.px, cd.R, 150, over ? LT.red : LT.green);
+        KT.tip(ctx, over ? "잰 것보다 좁은 범위를 주장합니다" : "잰 만큼만 적었습니다", cd.px - 4, 170, cd.w + 8, !over);
+        lt(ctx, "청록 = 실제 범위, 파랑·빨강 = 내 주장", cd.px, 236, { s: 10.5, c: LT.mute });
+      }      cv.canvas._redraw = draw;
       api.seg({ label: "세로를 잰 도구", value: "stick", options: [{ v: "stick", t: "1 m 눈금 막대 (3.2 m)" }, { v: "tape", t: "10 cm 눈금 줄자 (3.21 m)" }],
         onPick: function (x) { tool = x; draw(); } });
       api.slider({ label: "적을 유효숫자 개수", min: 1, max: 5, step: 1, value: 5, fmt: function (x) { return x + " 자리"; },
@@ -144,36 +189,37 @@ window.sthLab({
       function mem() { return Math.round(1440 / dt * bits / 8); }
       function draw() {
         H.paper(ctx, W, cv.H);
-        var x0 = 70, x1 = 620, y0 = 50, y1 = 250;
-        function X(m) { return x0 + m / 1440 * (x1 - x0); }
-        function Y(t) { return y1 - (t - 0) / 26 * (y1 - y0); }
-        H.text(ctx, "하루 기온 — 실제(회색)와 기록기가 남긴 값(파랑)", 40, 32, { s: 14, w: "900" });
-        H.axes(ctx, x0, y0, x1, y1);
-        [0, 6, 12, 18, 24].forEach(function (h) { H.text(ctx, h + "시", X(h * 60), y1 + 18, { s: 10.5, a: "center", c: H.v("--mist") }); });
-        var pts = []; for (var m = 0; m <= 1440; m += 2) pts.push([X(m), Y(T(m))]);
-        H.line(ctx, pts, H.v("--mist"), 2);
+        var CH = cv.H;
+        ctx.clearRect(0, 0, W, CH);
+        KT.studio(ctx, 0, 0, 650, CH, null);
+        var g = KT.chart(ctx, { x: 8, y: 44, w: 636, h: CH - 48, x0: 0, x1: 1440, y0: 0, y1: 25, xt: 4, yt: 5, light: true, xl: "시각", yl: "기온 (℃)", xf: function (v2) { return Math.round(v2 / 60) + "시"; } });
+        function X(m) { return g.X(m); }
+        function Y(t) { return g.Y(t); }
+        ctx.fillStyle = "rgba(240,62,62,.14)"; ctx.fillRect(X(840), g.T, X(850) - X(840), g.B - g.T);
+        KT.pill(ctx, "전선 통과", X(845), g.T + 18, { a: "center", s: 11, c: "#ffa8a8" });
+        var pts = []; for (var m = 0; m <= 1440; m += 2) pts.push([m, T(m)]);
+        KT.plot(ctx, g, pts, "#8a96a8", { light: true, w: 2.2, glow: false });
         var q = res(), rec = [];
         for (var m2 = 0; m2 <= 1440; m2 += dt) {
           var v = Math.round(T(m2) / q) * q;
-          if (rec.length) rec.push([X(m2), rec[rec.length - 1][1]]);
-          rec.push([X(m2), Y(v)]);
+          if (rec.length) rec.push([m2, rec[rec.length - 1][1]]);
+          rec.push([m2, v]);
         }
-        H.line(ctx, rec, H.v("--brand"), 2.5);
-        H.box(ctx, X(840), y0, X(850) - X(840), y1 - y0, H.v("--rose"), 0.15);
-        H.text(ctx, "전선 통과", X(845), y0 - 6, { s: 11, w: "800", a: "center", c: H.v("--rose-700") });
-        var n10 = inside();
-        var okT = n10 >= 1, okR = q <= 0.1 + 1e-9, okM = mem() <= 400;
-        H.rows(ctx, 660, 60, [
-          ["떨어지는 도중의 기록", n10 + " 번 " + (okT ? "✅" : "✗"), okT ? "--green-700" : "--rose-700"],
-          ["구분할 수 있는 온도", q.toFixed(3) + " ℃ " + (okR ? "✅" : "✗"), okR ? "--green-700" : "--rose-700"],
-          ["하루 저장 공간", mem() + " 바이트 " + (okM ? "✅" : "✗"), okM ? "--green-700" : "--rose-700"]
-        ], 58);
-        H.box(ctx, 660, 250, 200, 12, H.v("--card-2"));
-        H.box(ctx, 660, 250, Math.min(200, mem() / 800 * 200), 12, okM ? H.v("--teal") : H.v("--rose"));
-        H.box(ctx, 760, 244, 3, 24, H.v("--rose"));
-        H.text(ctx, "400", 761, 284, { s: 10.5, a: "center", c: H.v("--rose-700") });
-      }
-      cv.canvas._redraw = draw;
+        KT.plot(ctx, g, rec, LT.blue, { light: true, w: 2.6 });
+        KT.bigText(ctx, "하루 기온 기록", 18, 34, 19, "#ffffff");
+        KT.pill(ctx, "회색 = 실제 · 파랑 = 기록기", 630, 30, { a: "right", s: 11, c: "#a5d8ff" });
+        var n10 = inside(), okT = n10 >= 1, okR = q <= 0.1 + 1e-9, okM = mem() <= 400;
+        var cd = sideCard(ctx, 660, W, CH, "기록기 설계 점검");
+        KT.row(ctx, "떨어지는 도중의 기록", n10 + " 번 " + (okT ? "✓" : "✗"), cd.px, cd.R, 64, okT ? LT.green : LT.red);
+        KT.row(ctx, "구분하는 온도", q.toFixed(3) + " ℃ " + (okR ? "✓" : "✗"), cd.px, cd.R, 94, okR ? LT.green : LT.red);
+        KT.row(ctx, "하루 저장 공간", mem() + " 바이트 " + (okM ? "✓" : "✗"), cd.px, cd.R, 124, okM ? LT.green : LT.red);
+        lt(ctx, "저장 공간 (한도 400 바이트)", cd.px, 160, { s: 11, c: LT.mute });
+        KT.bar(ctx, cd.px, 168, cd.w, mem() / 800, okM ? LT.teal : LT.red);
+        ctx.fillStyle = LT.red; ctx.fillRect(cd.px + cd.w / 2 - 1.5, 162, 3, 22);
+        lt(ctx, "400", cd.px + cd.w / 2, 198, { s: 10.5, a: "center", c: LT.red, w: "900" });
+        KT.tip(ctx, okT && okR && okM ? "세 조건을 모두 만족" : "세 조건을 모두 맞춰 보세요", cd.px - 4, 214, cd.w + 8, okT && okR && okM ? true : null);
+        lt(ctx, "자주·촘촘히 잴수록 저장 공간이 는다", cd.px, 282, { s: 10.5, c: LT.mute });
+      }      cv.canvas._redraw = draw;
       api.seg({ label: "기록 간격", value: 30, options: [1, 2, 5, 10, 15, 30].map(function (m) { return { v: m, t: m + "분" }; }),
         onPick: function (x) { dt = x; draw(); } });
       api.slider({ label: "한 번 기록에 쓰는 비트 수", min: 4, max: 12, step: 1, value: 6, fmt: function (x) { return x + " 비트 (" + Math.pow(2, x) + " 단계)"; },
