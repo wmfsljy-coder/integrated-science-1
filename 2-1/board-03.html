@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 원소의 존재비 (통합과학1 Ⅱ-1 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  .tabs3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .tabs3 .card { padding: 22px 26px; }
+  .tabs3 .card h3 { font-size: 32px; margin-bottom: 8px; }
+  .tabs3 .card p { font-size: 27px; margin: 0 0 4px; }
+  table.grid { border-collapse: collapse; width: 100%; }
+  table.grid th, table.grid td { border-bottom: 2px solid var(--line); padding: 10px 12px; text-align: center; font-size: 27px; }
+  table.grid th { font-size: 23px; color: var(--mute); }
+  table.grid td:first-child, table.grid th:first-child { text-align: left; }
+  .run { color: var(--red); font-weight: 900; } .stay { color: var(--green); font-weight: 900; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg id="coverSvg" viewBox="0 0 1600 520" aria-label="실험대 위의 똑같은 시료병 세 개. 첫째에는 별이 반짝이는 성운, 둘째에는 암석 조각, 셋째에는 물방울과 잎이 들어 있고 이름표는 뜯겨 있다"></svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅱ-1 자연의 구성 원소 · 03</p>
+    <h1>원소의 존재비</h1>
+    <p class="sub" data-step="1">같은 우주에서 온 세 시료, 구성은 왜 이렇게 다를까</p>
+  </div>
+  <aside class="script">
+    <p>지난 두 시간 동안 원소가 어디서 만들어졌는지 보았습니다. 오늘은 그 원소들이 우주, 지각, 사람의 몸에 얼마나 들어 있는지 견줘 봅니다.</p>
+    <p data-at="1">셋 다 같은 우주의 원자로 지어졌는데 비율은 놀랄 만큼 다릅니다. 무엇이 비율을 바꿨는지가 오늘의 열쇠입니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="이름표가 떨어진 분석표" data-part="도입">
+  <p class="kicker">도입 · 과학실 캐비닛에서 떨어진 분석표 세 장 (질량 백분율)</p>
+  <h2>셋 중 하나는 우주, 하나는 지각, 하나는 사람</h2>
+  <div class="tabs3">
+    <div class="card"><h3>분석표 A</h3><p>산소 46.6%</p><p>규소 27.7%</p><p>알루미늄 8.1%</p><p>철 5.0%</p></div>
+    <div class="card"><h3>분석표 B</h3><p>수소 73.8%</p><p>헬륨 24.9%</p><p>산소 0.58%</p></div>
+    <div class="card"><h3>분석표 C</h3><p>산소 65%</p><p>탄소 18.5%</p><p>수소 9.5%</p><p>질소 3.2%</p></div>
+  </div>
+  <div class="card yel mt">
+    <h3 style="margin-bottom:10px">우주에서 가장 많은 원소는 수소. 지각에서도 수소가 가장 많을까?</h3>
+    <div class="opts" style="grid-template-columns:1fr 1fr">
+      <div class="opt">㉠ 그렇다. 우주의 조성이 그대로 이어졌다</div>
+      <div class="opt">㉡ 아니다. 산소가 가장 많다</div>
+      <div class="opt">㉢ 아니다. 규소가 가장 많다</div>
+      <div class="opt">㉣ 아니다. 철이 가장 많다</div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>이름표가 모두 뜯겨 나간 분석표 세 장입니다. 어느 것이 어느 것인지는 아직 말하지 않습니다.</p>
+    <p>첫 추리를 고르게 하고 까닭을 한 문장으로 묻습니다. 답은 주지 않습니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>원소 존재비</b><span>원소가 얼마나 들어 있는지의 비율</span></div>
+    <div class="card"><b>탈출 속도</b><span>천체의 중력을 벗어나는 데 필요한 속력</span></div>
+    <div class="card"><b>규산염</b><span>산소와 규소가 결합한 암석의 재료</span></div>
+    <div class="card"><b>생명체 구성 원소</b><span>산소·탄소·수소·질소</span></div>
+    <div class="card"><b>로그 눈금</b><span>한 칸이 10배인 눈금</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~13번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 우주의 조성 -->
+<section class="slide" id="s-univ" data-title="우주 전체의 조성" data-part="① 우주의 존재비">
+  <p class="kicker">① 우주의 존재비 · 태양의 빛으로 읽은 우주의 조성</p>
+  <h2>우주는 거의 수소와 헬륨이다</h2>
+  <svg id="univSvg" viewBox="0 0 1400 300" width="1400" height="300" aria-label="질량 백분율 띠: 수소 73.8%, 헬륨 24.9%, 나머지 원소 1.34%"></svg>
+  <div class="tight">
+    <p data-step="1">원소가 질량으로 얼마나 들어 있는지의 비율: <b class="blank" data-n="1" data-step="1">원소 존재비</b></p>
+    <p data-step="2">수소 73.8% + 헬륨 24.9% = 98.7% → 둘 다 <b class="blank" data-n="2" data-step="2">빅뱅</b>이 만든 원소</p>
+    <p data-step="3">나머지 약 1.3%가 별이 만든 무거운 원소 (산소·탄소·철 …)</p>
+  </div>
+  <p class="note">단원 화면의 우주 존재비는 태양 광구의 분석값(수소 73.8%, 헬륨 24.9%, 나머지 1.34%)입니다. 자료마다 값이 조금씩 다릅니다.</p>
+  <aside class="script">
+    <p>첫 시간에 배운 스펙트럼으로 태양의 조성을 읽으면 우주 전체의 조성을 어림할 수 있습니다.</p>
+    <p data-at="1">원소가 얼마나 들어 있는지를 질량 백분율로 나타낸 것, 빈칸 1번, 원소 존재비.</p>
+    <p data-at="2">수소와 헬륨이 98.7%. 둘 다 빈칸 2번, 빅뱅이 만든 원소입니다.</p>
+    <p data-at="3">우리 몸과 지구를 이루는 무거운 원소는 다 합쳐도 1.3%쯤뿐입니다.</p>
+  </aside>
+</section>
+
+<!-- 5 나머지 확대 -->
+<section class="slide" id="s-rest" data-title="나머지 1.3%를 확대하면" data-part="① 우주의 존재비">
+  <p class="kicker">① 우주의 존재비 · 수소·헬륨을 뺀 나머지만 크게</p>
+  <h2>수소·헬륨 다음은 산소다</h2>
+  <div class="cols" style="grid-template-columns:760px 1fr;align-items:center">
+    <svg id="restSvg" viewBox="0 0 760 450" width="760" height="450" aria-label="우주의 무거운 원소 질량 백분율 막대: 산소 0.58, 탄소 0.24, 네온 0.17, 철 0.13, 질소 0.07, 규소 0.07, 마그네슘 0.06, 황 0.03"></svg>
+    <div class="lines">
+      <p data-step="1">무거운 원소 가운데 1위: <b class="blank" data-n="3" data-step="1">산소</b> (0.58%)</p>
+      <p data-step="2">수소·헬륨을 모두 걷어 내면 산소 약 43%, 탄소 약 18%</p>
+      <p class="small" data-step="3">네온은 다른 원소와 결합하지 않는 기체라 지구가 붙잡지 못해 지각에는 거의 없다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>나머지 1.3%를 크게 늘려 봅니다. 모두 별이 만든 원소입니다.</p>
+    <p data-at="1">1위는 빈칸 3번, 산소. 별 속에서 헬륨을 태울 때 탄소와 함께 많이 만들어집니다.</p>
+    <p data-at="2">단원 화면 장면 4처럼 수소와 헬륨을 모두 날려 보내면 산소가 약 43%로 1위, 탄소가 약 18%로 2위가 됩니다. 지구가 만들어질 때 실제로 이런 일이 일어났어요.</p>
+    <p data-at="3">다만 네온은 다른 원소와 결합하지 않아 암석에 붙잡히지 못했습니다.</p>
+  </aside>
+</section>
+
+<!-- 6 분자의 속력 -->
+<section class="slide soft" id="s-speed" data-title="가벼운 기체는 빠르다" data-part="② 지구가 놓친 수소">
+  <p class="kicker">② 지구가 놓친 수소 · 300 K에서 기체 분자의 평균 속력</p>
+  <h2>가벼운 기체일수록 빠르게 움직인다</h2>
+  <div class="cols" style="grid-template-columns:800px 1fr;align-items:center">
+    <svg id="spSvg" viewBox="0 0 800 430" width="800" height="430" aria-label="300 K에서 평균 속력 막대: 수소 1.93, 헬륨 1.37, 질소 0.52, 산소 0.48, 이산화 탄소 0.41 km/s"></svg>
+    <div class="lines">
+      <p data-step="1">같은 온도에서 분자가 <b class="blank" data-n="4" data-step="1">가벼울수록</b> 빠르다</p>
+      <p data-step="2">온도가 높을수록 빠르다 (4배 뜨거우면 2배 빠르다)</p>
+      <p class="small" data-step="2">단원 화면 모형: 평균 속력 v = √(3RT ÷ M)</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>우주의 74%가 수소인데 지각에는 0.14%뿐입니다. 수소는 어디로 갔을까요? 먼저 기체 분자의 속력을 봅니다.</p>
+    <p data-at="1">같은 300 K에서 수소 분자는 초속 약 1.9 km, 산소 분자는 약 0.5 km입니다. 빈칸 4번, 가벼울수록 빠릅니다.</p>
+    <p data-at="2">온도가 높을수록 더 빨라집니다. 속력은 온도의 제곱근에 비례해서, 4배 뜨거우면 2배 빠릅니다.</p>
+  </aside>
+</section>
+
+<!-- 7 탈출 속도 -->
+<section class="slide" id="s-esc" data-title="탈출 속도와 6분의 1" data-part="② 지구가 놓친 수소">
+  <p class="kicker">② 지구가 놓친 수소 · 천체마다 다른 탈출 속도</p>
+  <h2>평균 속력이 탈출 속도의 6분의 1을 넘으면 달아난다</h2>
+  <svg id="escSvg" viewBox="0 0 1400 380" width="1400" height="380" aria-label="탈출 속도 막대: 달 2.38, 화성 5.03, 지구 11.2, 목성 59.5 km/s와 각각의 6분의 1인 0.40, 0.84, 1.87, 9.92 km/s"></svg>
+  <div class="tight">
+    <p data-step="1">천체의 중력을 벗어나는 데 필요한 속력: <b class="blank" data-n="5" data-step="1">탈출 속도</b> (질량이 클수록 크다)</p>
+    <p data-step="2">기체 분자의 평균 속력이 탈출 속도의 <b class="blank" data-n="6" data-step="2">6분의 1</b>을 넘으면 오랜 세월에 걸쳐 우주로 달아난다</p>
+  </div>
+  <p class="note">‘6분의 1’은 오래 쓰여 온 어림 기준입니다. 실제 대기 탈출에는 태양풍, 자기장, 화학 반응, 천체의 나이가 함께 작용합니다.</p>
+  <aside class="script">
+    <p>공을 아무리 세게 던져도 떨어지지만, 충분히 빠르면 지구를 벗어날 수 있습니다.</p>
+    <p data-at="1">그 속력이 빈칸 5번, 탈출 속도. 지구는 초속 11.2 km, 달은 2.38 km, 목성은 59.5 km입니다. 무거운 천체일수록 큽니다.</p>
+    <p data-at="2">기체 분자는 속력이 제각각이라 평균이 탈출 속도의 빈칸 6번, 6분의 1만 넘어도 빠른 분자들이 조금씩 새어 나가 오랜 세월에 걸쳐 사라집니다. 지구라면 초속 1.87 km가 기준선입니다.</p>
+  </aside>
+</section>
+
+<!-- 8 천체별 판정 -->
+<section class="slide" id="s-judge" data-title="어떤 기체가 남을까" data-part="② 지구가 놓친 수소">
+  <p class="kicker">② 지구가 놓친 수소 · 대기 바깥층 1,000 K로 맞춘 단원 화면 모형</p>
+  <h2>천체의 크기가 남는 기체를 고른다</h2>
+  <table class="grid">
+    <tr><th style="width:300px">천체 · 기준선(÷ 6)</th><th>수소 H₂<br>3.53 km/s</th><th>헬륨 He<br>2.50</th><th>질소 N₂<br>0.94</th><th>산소 O₂<br>0.88</th><th>이산화 탄소<br>0.75</th></tr>
+    <tr data-step="1"><td><b>지구</b> · 1.87 km/s</td><td class="run">달아남</td><td class="run">달아남</td><td class="stay">남음</td><td class="stay">남음</td><td class="stay">남음</td></tr>
+    <tr data-step="2"><td><b>달</b> · 0.40 km/s</td><td class="run">달아남</td><td class="run">달아남</td><td class="run">달아남</td><td class="run">달아남</td><td class="run">달아남</td></tr>
+    <tr data-step="2"><td><b>화성</b> · 0.84 km/s</td><td class="run">달아남</td><td class="run">달아남</td><td class="run">달아남</td><td class="run">달아남</td><td class="stay">남음</td></tr>
+    <tr data-step="3"><td><b>목성</b> · 9.92 km/s</td><td class="stay">남음</td><td class="stay">남음</td><td class="stay">남음</td><td class="stay">남음</td><td class="stay">남음</td></tr>
+  </table>
+  <div class="tight mt">
+    <p data-step="1">지구: 수소·헬륨은 놓치고 질소·산소는 붙잡는다</p>
+    <p data-step="3">수소까지 붙잡는 <b class="blank" data-n="7" data-step="3">목성</b>은 지금도 대부분 수소·헬륨 · 달은 아무것도 붙잡지 못한다</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면 장면 2의 계산기를 대기 바깥층 1,000 K로 맞춰 네 천체를 견줘 봅니다. 맨 윗줄 숫자가 1,000 K에서의 평균 속력입니다.</p>
+    <p data-at="1">지구의 기준선은 1.87 km/s. 수소와 헬륨은 이보다 빨라 달아나고, 질소·산소·이산화 탄소는 남습니다.</p>
+    <p data-at="2">달은 기준선이 0.40 km/s라 모두 놓칩니다. 화성은 이 온도에서 이산화 탄소만 남아요.</p>
+    <p data-at="3">빈칸 7번, 목성. 기준선이 약 9.9 km/s라 수소까지 붙잡습니다. 그래서 목성은 우주의 조성과 비슷하게 대부분 수소·헬륨입니다.</p>
+  </aside>
+</section>
+
+<!-- 9 지각 -->
+<section class="slide soft" id="s-crust" data-title="지각의 조성" data-part="② 지구가 놓친 수소">
+  <p class="kicker">② 지구가 놓친 수소 · 남은 원소로 지은 암석</p>
+  <h2>지각은 산소와 규소로 지은 암석이다</h2>
+  <div class="cols" style="grid-template-columns:760px 1fr;align-items:center">
+    <svg id="crSvg" viewBox="0 0 760 450" width="760" height="450" aria-label="지각의 질량 백분율 막대: 산소 46.6, 규소 27.7, 알루미늄 8.1, 철 5.0, 칼슘 3.6, 그 밖 9.0, 그리고 규소 하나를 산소 넷이 둘러싼 규산염의 기본 구조"></svg>
+    <div class="lines">
+      <p data-step="1">지각 1위 산소 46.6%, 2위 <b class="blank" data-n="8" data-step="1">규소</b> 27.7% (수소는 0.14%)</p>
+      <p data-step="2">산소가 규소와 강하게 결합한 광물: <b class="blank" data-n="9" data-step="2">규산염</b></p>
+      <p data-step="3">녹는점이 높아 암석으로 남았다 → 지각의 대부분</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>수소와 헬륨이 빠져나간 뒤 남은 것으로 지구가 지어졌습니다.</p>
+    <p data-at="1">지각은 산소가 46.6%로 1위, 빈칸 8번, 규소가 27.7%로 2위입니다. 첫 추리의 답은 ㉡ 산소예요.</p>
+    <p data-at="2">산소는 규소와 강하게 결합합니다. 규소 하나를 산소 넷이 둘러싼 구조가 기본이에요. 빈칸 9번, 규산염.</p>
+    <p data-at="3">규산염은 녹는점이 높아 뜨거운 원시 지구에서도 암석으로 남았습니다.</p>
+  </aside>
+</section>
+
+<!-- 10 생명체 -->
+<section class="slide" id="s-life" data-title="사람 몸의 조성" data-part="③ 생명체의 존재비">
+  <p class="kicker">③ 생명체의 존재비 · 사람 몸의 질량 백분율</p>
+  <h2>생명체는 물과 탄소 화합물로 되어 있다</h2>
+  <svg id="lifeSvg" viewBox="0 0 1400 300" width="1400" height="300" aria-label="사람 몸의 질량 백분율 띠: 산소 65, 탄소 18.5, 수소 9.5, 질소 3.2, 그 밖 3.8. 오른쪽에 물 분자와 탄소 사슬 그림"></svg>
+  <div class="tight">
+    <p data-step="1">몸의 많은 부분이 <b class="blank" data-n="10" data-step="1">물</b>(H₂O) → 산소·수소가 많다</p>
+    <p data-step="2">2위 <b class="blank" data-n="11" data-step="2">탄소</b> 18.5%: 단백질·지방·탄수화물·DNA 같은 탄소 화합물의 뼈대</p>
+    <p data-step="3">산소·탄소·수소·질소가 96% 이상 = 생명체 구성 원소의 중심</p>
+  </div>
+  <aside class="script">
+    <p>이번에는 분석표 C, 사람의 몸입니다.</p>
+    <p data-at="1">몸무게의 절반 넘게 빈칸 10번, 물입니다. 그래서 산소와 수소가 많아요.</p>
+    <p data-at="2">2위는 빈칸 11번, 탄소. 탄소는 다른 원자와 네 개의 결합을 만들어 긴 사슬과 고리를 이룹니다. 몸을 이루는 큰 분자의 뼈대예요.</p>
+    <p data-at="3">산소, 탄소, 수소, 질소 넷을 합치면 96%가 넘습니다.</p>
+  </aside>
+</section>
+
+<!-- 11 로그 눈금 -->
+<section class="slide soft" id="s-log" data-title="같은 원소, 다른 비율" data-part="③ 생명체의 존재비">
+  <p class="kicker">③ 생명체의 존재비 · 원소 하나를 세 시료에서 나란히</p>
+  <h2>같은 원소인데 비율은 수천 배 차이</h2>
+  <svg id="logSvg" viewBox="0 0 1400 420" width="1400" height="420" aria-label="로그 눈금 막대 비교. 수소: 우주 73.8, 지각 0.14, 사람 9.5%. 규소: 우주 0.07, 지각 27.7, 사람 0.002%. 탄소: 우주 0.24, 지각 0.02, 사람 18.5%"></svg>
+  <div class="tight">
+    <p data-step="1">한 칸이 10배씩 커지는 눈금: <b class="blank" data-n="12" data-step="1">로그 눈금</b></p>
+    <p data-step="2">수소: 우주 73.8% → 지각 0.14% (약 530배 줄어듦) · 규소: 지각 27.7% → 사람 0.002%</p>
+    <p data-step="3">탄소: 우주 0.24% → 사람 18.5% (약 77배) → 생명체가 탄소를 골라 모았다</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면 장면 3의 비교 막대입니다. 차이가 너무 커서 보통 눈금으로는 작은 값이 보이지 않습니다.</p>
+    <p data-at="1">그래서 한 칸이 10배인 빈칸 12번, 로그 눈금을 씁니다. 0.001%, 0.01%, 0.1%, 1%, 10%, 100%가 같은 간격이에요.</p>
+    <p data-at="2">우주에 그렇게 많던 수소가 지각에서는 약 530배 줄었습니다. 지각에 흔한 규소는 사람 몸에 거의 없어요.</p>
+    <p data-at="3">반대로 탄소는 우주보다 사람 몸에 약 77배 많습니다. 생명체가 탄소를 골라 모은 셈입니다.</p>
+  </aside>
+</section>
+
+<!-- 12 확인 -->
+<section class="slide" id="s-check" data-title="이름표 되찾기" data-part="③ 생명체의 존재비">
+  <p class="kicker">③ 생명체의 존재비 · 확인</p>
+  <h2>분석표 A, B, C의 주인은?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ A 우주 · B 지각 · C 사람의 몸</div>
+    <div class="opt right" data-step="1">㉡ A 지각 · B 우주 · C 사람의 몸</div>
+    <div class="opt wrong" data-step="1">㉢ A 사람의 몸 · B 우주 · C 지각</div>
+    <div class="opt wrong" data-step="1">㉣ A 지각 · B 사람의 몸 · C 우주</div>
+  </div>
+  <p data-step="1" style="margin-top:40px">헬륨 24.9%는 우주뿐 · 규소 27.7%는 암석뿐 · 탄소 18.5%는 생명체뿐</p>
+  <aside class="script">
+    <p>도입의 분석표 세 장을 다시 떠올리게 하고 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ㉡. 그 시료에만 유난히 많은 원소가 이름표 노릇을 합니다.</p>
+  </aside>
+</section>
+
+<!-- 13 거른 방식 -->
+<section class="slide soft" id="s-filter" data-title="세 시료를 거른 방식" data-part="③ 생명체의 존재비">
+  <p class="kicker">③ 생명체의 존재비 · 사건 파일 ③ 재구성</p>
+  <h2>같은 재료를 서로 다르게 걸러 냈다</h2>
+  <svg id="fiSvg" viewBox="0 0 1400 400" width="1400" height="400" aria-label="우주(수소·헬륨 98.7%)에서 화살표가 지구로 가며 수소·헬륨이 달아나고, 지구에서 지각(규산염: 산소·규소)과 생명체(물·탄소 화합물: 산소·탄소·수소·질소)로 갈라지는 흐름도"></svg>
+  <div class="tight">
+    <p data-step="3">천체의 <b class="blank" data-n="13" data-step="3">중력</b>과 온도가 남길 기체를 고르고, 화학 결합이 암석과 생명의 재료를 고른다</p>
+  </div>
+  <aside class="script">
+    <p>세 시료가 다른 까닭을 한 그림으로 정리합니다. 학생에게 다음 칸을 먼저 말하게 한 뒤 엽니다.</p>
+    <p data-at="1">우주에는 빅뱅이 만든 수소·헬륨이 98.7%. 지구는 이 가벼운 기체를 붙잡지 못했습니다.</p>
+    <p data-at="2">남은 원소 가운데 산소와 규소가 결합해 규산염 암석, 곧 지각이 되었고, 생명체는 물과 탄소 화합물로 산소·탄소·수소·질소를 모았습니다.</p>
+    <p data-at="3">빈칸 13번, 중력. 천체의 중력과 온도, 그리고 원소끼리의 결합이 비율을 바꿔 놓았습니다. 지구와 생명의 역사는 우주 역사의 한 대목입니다.</p>
+  </aside>
+</section>
+
+<!-- 14 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>A는 지각, B는 우주, C는 사람의 몸</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>우주</b>: 수소 73.8% · 헬륨 24.9% (빅뱅이 만든 원소가 98.7%), 그다음은 산소</li>
+    <li data-k="2" data-step="2"><b>탈출 속도</b>: 평균 속력이 탈출 속도의 6분의 1을 넘으면 달아남 → 지구는 가벼운 수소·헬륨을 놓쳤다</li>
+    <li data-k="3" data-step="3"><b>지각</b>: 산소 46.6% · 규소 27.7% → 녹는점이 높은 <b>규산염</b> 암석</li>
+    <li data-k="4" data-step="4"><b>생명체</b>: 물과 탄소 화합물 → 산소·탄소·수소·질소가 96% 이상 (규소는 거의 없음)</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 15 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 지구 대기에 수소 기체가 거의 없는 까닭으로 알맞은 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 수소는 처음부터 우주에 드물었다</div>
+        <div class="opt right" data-step="1">㉡ 가벼워 빠르게 움직여 지구의 중력을 벗어났다</div>
+        <div class="opt wrong" data-step="1">㉢ 모두 규산염 암석이 되었다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 지각에는 흔하지만 사람 몸에는 0.01%도 안 되는 원소는?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 산소</div>
+        <div class="opt right" data-step="2">㉡ 규소</div>
+        <div class="opt wrong" data-step="2">㉢ 탄소</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 수소는 우주에서 가장 흔하지만, 가벼워서 평균 속력이 지구 기준선을 넘었습니다.</p>
+    <p data-at="2">2번은 ㉡ 규소. 지각에는 27.7%인데 사람 몸에는 0.002%입니다. 산소는 둘 다 1위예요.</p>
+  </aside>
+</section>
+
+<!-- 16 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ③ 「존재비 저울」</h2>
+  <div class="cols">
+    <div class="card"><h3>이름표를 직접 되찾아 보세요</h3><p>천체와 온도를 바꿔 달아나는 기체 찾기, 세 시료에서 원소 비율 견주기, 수소·헬륨을 걷어 내 1위 원소 확인하기, 단서 6개에 이름표 붙이기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 단원 · Ⅱ-2 물질의 규칙성과 성질</h3><p>별이 만든 원소들은 어떤 규칙으로 늘어서 있을까요? 원소의 주기성에서 이어집니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ③을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function L(v) { return Math.log(v) / Math.LN10; }
+
+  /* 표지 — 시료병 셋 */
+  (function () {
+    var s = "<defs><radialGradient id='c3-neb'><stop offset='0' stop-color='#d0bfff'/><stop offset='.6' stop-color='#7048e8'/><stop offset='1' stop-color='#1b1f3a'/></radialGradient></defs>";
+    s += "<rect x='200' y='430' width='1200' height='26' rx='6' fill='#495057'/>";
+    var X = [450, 800, 1150];
+    X.forEach(function (x, i) {
+      s += "<rect x='" + (x - 110) + "' y='120' width='220' height='300' rx='30' fill='rgba(255,255,255,.08)' stroke='#ced4da' stroke-width='5'/>";
+      s += "<rect x='" + (x - 60) + "' y='90' width='120' height='34' rx='8' fill='#868e96'/>";
+    });
+    s += "<circle cx='450' cy='300' r='92' fill='url(#c3-neb)'/>";
+    [[410, 260], [480, 330], [440, 350], [500, 270], [420, 310]].forEach(function (p) { s += "<circle cx='" + p[0] + "' cy='" + p[1] + "' r='4' fill='#fff'/>"; });
+    s += "<polygon points='730,410 770,330 820,350 870,410' fill='#adb5bd'/><polygon points='760,410 800,360 850,410' fill='#868e96'/><polygon points='770,330 790,290 820,350' fill='#e9ecef'/>";
+    s += "<path d='M1090 410 Q1150 330 1210 410 Z' fill='#4dabf7' opacity='.8'/><path d='M1120 300 Q1150 230 1185 300 Q1150 330 1120 300 Z' fill='#51cf66'/><line x1='1150' y1='300' x2='1150' y2='360' stroke='#2f9e44' stroke-width='5'/>";
+    s += "<g data-step='1' font-size='40' font-weight='900' fill='#ffd43b' text-anchor='middle'><text x='450' y='80'>?</text><text x='800' y='80'>?</text><text x='1150' y='80'>?</text></g>";
+    s += "<text x='1560' y='510' fill='#9aa4b5' font-size='18' text-anchor='end'>⚠ 병 속 내용물은 세 시료를 상징으로 그린 것</text>";
+    document.getElementById("coverSvg").innerHTML = s;
+  })();
+
+  /* 우주의 조성 띠 */
+  (function () {
+    var D = [["수소", 73.8, "#ff8a6a"], ["헬륨", 24.9, "#9775fa"], ["나머지", 1.34, "#20c997"]], X0 = 0, W = 1400, x = X0, s = "";
+    D.forEach(function (d, i) {
+      var w = W * d[1] / 100;
+      s += "<g data-step='" + (i < 2 ? 1 : 3) + "'><rect x='" + x.toFixed(1) + "' y='60' width='" + w.toFixed(1) + "' height='110' fill='" + d[2] + "' stroke='#fff' stroke-width='2'/>";
+      if (w > 200) s += "<text x='" + (x + w / 2).toFixed(1) + "' y='110' font-size='34' font-weight='900' fill='#fff' text-anchor='middle'>" + d[0] + "</text><text x='" + (x + w / 2).toFixed(1) + "' y='152' font-size='28' font-weight='900' fill='#fff' text-anchor='middle'>" + d[1] + "%</text>";
+      s += "</g>";
+      d.x = x; d.w = w; x += w;
+    });
+    s += "<g data-step='3'><path d='M" + (D[2].x + D[2].w / 2).toFixed(1) + " 175 V205 H1180' fill='none' stroke='#0ca678' stroke-width='4'/><text x='1170' y='236' font-size='26' font-weight='900' fill='#0ca678' text-anchor='end'>나머지 원소 1.34% · 별이 만든 무거운 원소</text></g>";
+    s += "<g data-step='2'><path d='M0 46 H" + (D[1].x + D[1].w).toFixed(1) + "' stroke='#161b28' stroke-width='4'/><text x='" + ((D[1].x + D[1].w) / 2).toFixed(1) + "' y='34' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>빅뱅이 만든 원소 98.7%</text></g>";
+    document.getElementById("univSvg").innerHTML = s;
+  })();
+
+  /* 막대 그래프 도우미 */
+  function hbars(id, D, max, opt) {
+    var X0 = opt.x0 || 170, W = opt.w || 480, Y0 = opt.y0 || 30, RH = opt.rh || 48, s = opt.pre || "";
+    D.forEach(function (d, i) {
+      var y = Y0 + i * RH, w = Math.max(4, W * d[1] / max), st = d[3] ? " data-step='" + d[3] + "'" : "";
+      s += "<g" + st + "><text x='" + (X0 - 14) + "' y='" + (y + 28) + "' font-size='24' font-weight='900' fill='#161b28' text-anchor='end'>" + d[0] + "</text>";
+      s += "<rect x='" + X0 + "' y='" + (y + 6) + "' width='" + w.toFixed(1) + "' height='" + (RH - 14) + "' rx='6' fill='" + d[2] + "'/>";
+      s += "<text x='" + (X0 + w + 12).toFixed(1) + "' y='" + (y + 30) + "' font-size='23' font-weight='900' fill='#161b28'>" + (opt.fmt ? opt.fmt(d[1]) : d[1]) + "</text></g>";
+    });
+    document.getElementById(id).innerHTML = s + (opt.post || "");
+  }
+
+  /* 나머지 확대 — 단원 화면 Z 값 */
+  hbars("restSvg", [["산소", 0.58, "#4dabf7"], ["탄소", 0.24, "#845ef7"], ["네온", 0.17, "#adb5bd"], ["철", 0.13, "#ff922b"], ["질소", 0.07, "#20c997"], ["규소", 0.07, "#fcc419"], ["마그네슘", 0.06, "#51cf66"], ["황", 0.03, "#f06595"]], 0.6,
+    { x0: 170, w: 450, y0: 20, rh: 50, fmt: function (v) { return v + "%"; },
+      post: "<rect x='166' y='16' width='584' height='50' rx='10' fill='none' stroke='#f08c00' stroke-width='5' data-step='1'/><text x='0' y='442' font-size='18' fill='#5f6b80'>우주 전체 질량 백분율 · 단원 화면 값</text>" });
+
+  /* 300 K 평균 속력 — v = √(3RT/M) */
+  (function () {
+    var G = [["수소 H₂", 0.002, "#ff8a6a"], ["헬륨 He", 0.004, "#9775fa"], ["질소 N₂", 0.028, "#20c997"], ["산소 O₂", 0.032, "#4dabf7"], ["이산화 탄소", 0.044, "#51cf66"]];
+    var D = G.map(function (g) { return [g[0], Math.sqrt(3 * 8.314 * 300 / g[1]) / 1000, g[2]]; });
+    hbars("spSvg", D, 2.2, { x0: 190, w: 470, y0: 30, rh: 70, fmt: function (v) { return v.toFixed(2) + " km/s"; },
+      post: "<text x='0' y='428' font-size='18' fill='#5f6b80'>300 K에서 평균 제곱근 속력 (단원 화면 계산식)</text>" });
+  })();
+
+  /* 탈출 속도와 기준선 */
+  (function () {
+    var B = [["달", 2380, "#adb5bd"], ["화성", 5030, "#ff8a6a"], ["지구", 11200, "#4dabf7"], ["목성", 59500, "#fcc419"]];
+    var X0 = 140, W = 1080, Y0 = 20, RH = 84, MX = 60000, s = "";
+    function X(v) { return X0 + v / MX * W; }
+    B.forEach(function (b, i) {
+      var y = Y0 + i * RH;
+      s += "<text x='" + (X0 - 16) + "' y='" + (y + 44) + "' font-size='28' font-weight='900' fill='#161b28' text-anchor='end'>" + b[0] + "</text>";
+      s += "<g data-step='1'><rect x='" + X0 + "' y='" + (y + 10) + "' width='" + (X(b[1]) - X0).toFixed(1) + "' height='50' rx='8' fill='" + b[2] + "'/>";
+      s += "<text x='" + (X(b[1]) + 12).toFixed(1) + "' y='" + (y + 46) + "' font-size='24' font-weight='900' fill='#161b28'>" + (b[1] / 1000) + " km/s</text></g>";
+      s += "<g data-step='2'><rect x='" + X0 + "' y='" + (y + 10) + "' width='" + Math.max(5, (X(b[1] / 6) - X0)).toFixed(1) + "' height='50' rx='4' fill='none' stroke='#c92a2a' stroke-width='5'/>";
+      s += "<text x='" + (i === 3 ? (X(b[1] / 6) - 10).toFixed(1) : (X(b[1]) + 190).toFixed(1)) + "' y='" + (y + 46) + "' font-size='22' font-weight='900' fill='#c92a2a'" + (i === 3 ? " text-anchor='end'" : "") + ">÷ 6 = " + (b[1] / 6000).toFixed(2) + "</text></g>";
+    });
+    s += "<text x='" + (X0 + W) + "' y='366' font-size='18' fill='#5f6b80' text-anchor='end'>막대 길이 = 탈출 속도 · 빨간 테두리 = 6분의 1 기준선</text>";
+    document.getElementById("escSvg").innerHTML = s;
+  })();
+
+  /* 지각 — 단원 화면 값 + 규산염 사면체 */
+  hbars("crSvg", [["산소", 46.6, "#4dabf7"], ["규소", 27.7, "#fcc419"], ["알루미늄", 8.1, "#adb5bd"], ["철", 5.0, "#ff922b"], ["칼슘", 3.6, "#20c997"], ["그 밖", 9.0, "#dee2e6"]], 50,
+    { x0: 150, w: 300, y0: 20, rh: 54, fmt: function (v) { return v.toFixed(1) + "%"; },
+      post: "<g data-step='2'>" +
+        [[640, 96], [566, 222], [714, 222], [640, 262]].map(function (p) { return "<line x1='640' y1='180' x2='" + p[0] + "' y2='" + p[1] + "' stroke='#495057' stroke-width='4'/><circle cx='" + p[0] + "' cy='" + p[1] + "' r='24' fill='#4dabf7' stroke='#1864ab' stroke-width='3'/><text x='" + p[0] + "' y='" + (p[1] + 8) + "' font-size='21' font-weight='900' fill='#fff' text-anchor='middle'>O</text>"; }).join("") +
+        "<circle cx='640' cy='180' r='30' fill='#fcc419' stroke='#a06400' stroke-width='3'/><text x='640' y='189' font-size='24' font-weight='900' fill='#5c3c00' text-anchor='middle'>Si</text>" +
+        "<text x='640' y='318' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle'>규산염의 기본 단위</text></g><text x='0' y='442' font-size='18' fill='#5f6b80'>지각 질량 백분율 · 단원 화면 값 · ⚠ 구조는 모식도</text>" });
+
+  /* 사람 몸 띠 */
+  (function () {
+    var D = [["산소", 65, "#4dabf7", 1], ["탄소", 18.5, "#845ef7", 2], ["수소", 9.5, "#ff922b", 1], ["질소", 3.2, "#20c997", 3], ["그 밖", 3.8, "#dee2e6", 3]], X0 = 0, W = 1000, x = X0, s = "";
+    D.forEach(function (d) {
+      var w = W * d[1] / 100;
+      s += "<g data-step='" + d[3] + "'><rect x='" + x.toFixed(1) + "' y='40' width='" + w.toFixed(1) + "' height='120' fill='" + d[2] + "' stroke='#fff' stroke-width='2'/>";
+      if (w > 80) s += "<text x='" + (x + w / 2).toFixed(1) + "' y='95' font-size='28' font-weight='900' fill='#fff' text-anchor='middle'>" + d[0] + "</text><text x='" + (x + w / 2).toFixed(1) + "' y='134' font-size='24' font-weight='900' fill='#fff' text-anchor='middle'>" + d[1] + "%</text>";
+      s += "</g>"; x += w;
+    });
+    s += "<g data-step='3'><path d='M0 180 H" + (W * 0.962).toFixed(1) + "' stroke='#161b28' stroke-width='4'/><text x='" + (W * 0.48).toFixed(1) + "' y='214' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>산소 + 탄소 + 수소 + 질소 = 96.2%</text></g>";
+    s += "<g data-step='1'><circle cx='1150' cy='100' r='34' fill='#ff6b6b'/><circle cx='1105' cy='140' r='20' fill='#dee2e6'/><circle cx='1195' cy='140' r='20' fill='#dee2e6'/><text x='1150' y='110' font-size='26' font-weight='900' fill='#fff' text-anchor='middle'>O</text><text x='1105' y='148' font-size='20' font-weight='900' fill='#343a40' text-anchor='middle'>H</text><text x='1195' y='148' font-size='20' font-weight='900' fill='#343a40' text-anchor='middle'>H</text><text x='1150' y='200' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle'>물</text></g>";
+    s += "<g data-step='2'>";
+    [[1260, 80], [1310, 110], [1360, 80], [1310, 160]].forEach(function (p, i, a) { if (i) s += "<line x1='" + a[i === 3 ? 1 : i - 1][0] + "' y1='" + a[i === 3 ? 1 : i - 1][1] + "' x2='" + p[0] + "' y2='" + p[1] + "' stroke='#495057' stroke-width='5'/>"; });
+    [[1260, 80], [1310, 110], [1360, 80], [1310, 160]].forEach(function (p) { s += "<circle cx='" + p[0] + "' cy='" + p[1] + "' r='18' fill='#343a40'/><text x='" + p[0] + "' y='" + (p[1] + 7) + "' font-size='19' font-weight='900' fill='#fff' text-anchor='middle'>C</text>"; });
+    s += "<text x='1310' y='210' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle'>탄소 뼈대</text></g>";
+    s += "<text x='1396' y='290' font-size='18' fill='#5f6b80' text-anchor='end'>사람 몸 질량 백분율 · 단원 화면 값 · ⚠ 분자 그림은 모식도</text>";
+    document.getElementById("lifeSvg").innerHTML = s;
+  })();
+
+  /* 로그 눈금 비교 — 단원 화면 D 값 */
+  (function () {
+    var E = [["수소", [73.8, 0.14, 9.5], 2], ["규소", [0.07, 27.7, 0.002], 2], ["탄소", [0.24, 0.02, 18.5], 3]];
+    var R = [["우주", "#845ef7"], ["지각", "#ff922b"], ["사람", "#20c997"]];
+    var X0 = 260, X1 = 1300, LO = -3, HI = 2, s = "";
+    function X(p) { return X0 + (L(p) - LO) / (HI - LO) * (X1 - X0); }
+    s += "<g data-step='1'>";
+    for (var e = LO; e <= HI; e++) {
+      var lab = e < 0 ? (Math.pow(10, e)).toFixed(-e) + "%" : Math.pow(10, e) + "%";
+      s += "<line x1='" + X(Math.pow(10, e)) + "' y1='20' x2='" + X(Math.pow(10, e)) + "' y2='370' stroke='#ced4da' stroke-width='2' stroke-dasharray='6 6'/><text x='" + X(Math.pow(10, e)) + "' y='398' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + lab + "</text>";
+    }
+    s += "</g>";
+    E.forEach(function (el, i) {
+      var y0 = 24 + i * 118;
+      s += "<g data-step='" + el[2] + "'><text x='20' y='" + (y0 + 66) + "' font-size='30' font-weight='900' fill='#161b28'>" + el[0] + "</text>";
+      el[1].forEach(function (p, j) {
+        var y = y0 + j * 34;
+        s += "<text x='" + (X0 - 14) + "' y='" + (y + 24) + "' font-size='20' font-weight='800' fill='" + R[j][1] + "' text-anchor='end'>" + R[j][0] + "</text>";
+        s += "<rect x='" + X0 + "' y='" + (y + 6) + "' width='" + (X(p) - X0).toFixed(1) + "' height='24' rx='5' fill='" + R[j][1] + "'/>";
+        s += "<text x='" + (X(p) + 10).toFixed(1) + "' y='" + (y + 25) + "' font-size='20' font-weight='900' fill='#161b28'>" + p + "%</text>";
+      });
+      s += "</g>";
+    });
+    s += "<text x='1396' y='16' font-size='18' fill='#5f6b80' text-anchor='end'>로그 눈금 · 한 칸 = 10배</text>";
+    document.getElementById("logSvg").innerHTML = s;
+  })();
+
+  /* 거른 방식 흐름도 */
+  (function () {
+    var s = "<defs><marker id='s13-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#495057'/></marker></defs>";
+    function box(x, y, w, h, fill, t1, t2, st) {
+      return "<g" + (st ? " data-step='" + st + "'" : "") + "><rect x='" + x + "' y='" + y + "' width='" + w + "' height='" + h + "' rx='18' fill='" + fill + "'/>" +
+        "<text x='" + (x + w / 2) + "' y='" + (y + 46) + "' font-size='30' font-weight='900' fill='#fff' text-anchor='middle'>" + t1 + "</text>" +
+        "<text x='" + (x + w / 2) + "' y='" + (y + 84) + "' font-size='22' font-weight='800' fill='#fff' text-anchor='middle'>" + t2 + "</text></g>";
+    }
+    s += box(20, 140, 300, 110, "#7048e8", "우주 (B)", "수소·헬륨 98.7%");
+    s += "<g data-step='1'><line x1='330' y1='195' x2='540' y2='195' stroke='#495057' stroke-width='5' marker-end='url(#s13-a)'/>";
+    s += "<text x='435' y='176' font-size='21' font-weight='900' fill='#c92a2a' text-anchor='middle'>수소·헬륨 달아남</text>";
+    s += "<path d='M540 160 q10 -40 30 -70' fill='none' stroke='#ff8a6a' stroke-width='4' stroke-dasharray='6 6'/><circle cx='572' cy='84' r='8' fill='#ff8a6a'/></g>";
+    s += box(550, 140, 260, 110, "#1971c2", "원시 지구", "남은 무거운 원소", 1);
+    s += "<g data-step='2'><line x1='820' y1='175' x2='990' y2='90' stroke='#495057' stroke-width='5' marker-end='url(#s13-a)'/><line x1='820' y1='215' x2='990' y2='300' stroke='#495057' stroke-width='5' marker-end='url(#s13-a)'/>";
+    s += "<text x='890' y='108' font-size='20' font-weight='900' fill='#495057' text-anchor='middle'>규산염</text><text x='900' y='304' font-size='20' font-weight='900' fill='#495057' text-anchor='end'>물·탄소 화합물</text></g>";
+    s += box(1000, 30, 380, 110, "#e8590c", "지각 (A)", "산소 46.6% · 규소 27.7%", 2);
+    s += box(1000, 250, 380, 110, "#0ca678", "생명체 (C)", "산소·탄소·수소·질소 96%", 2);
+    s += "<text x='1396' y='394' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 흐름을 단순하게 줄인 모식도</text>";
+    document.getElementById("fiSvg").innerHTML = s;
+  })();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 측정 표준의 유용성 (통합과학1 Ⅰ-2 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 14px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  table.ledger td { font-size: 27px; padding: 9px 14px; }
+  table.ledger th { padding: 6px 14px; }
+  .tagS { display: inline-block; font-size: 24px; font-weight: 900; padding: 4px 16px; border-radius: 999px; color: #fff; }
+  .tagS.thing { background: #e8590c; } .tagS.const { background: #198a4a; }
+  .ev p { font-size: 28px; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="어두운 금고 안 받침대 위에 놓인 X자 단면의 금속 막대와 온도계">
+      <defs>
+        <linearGradient id="c2-bar" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f1f3f5"/><stop offset=".5" stop-color="#adb5bd"/><stop offset="1" stop-color="#5c636e"/></linearGradient>
+        <radialGradient id="c2-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd43b" stop-opacity=".22"/><stop offset="1" stop-color="#ffd43b" stop-opacity="0"/></radialGradient>
+      </defs>
+      <ellipse cx="800" cy="250" rx="640" ry="220" fill="url(#c2-glow)"/>
+      <rect x="260" y="226" width="1080" height="46" rx="6" fill="url(#c2-bar)"/>
+      <line x1="330" y1="232" x2="330" y2="266" stroke="#161b28" stroke-width="4"/><line x1="1270" y1="232" x2="1270" y2="266" stroke="#161b28" stroke-width="4"/>
+      <rect x="360" y="272" width="40" height="120" fill="#495057"/><rect x="1200" y="272" width="40" height="120" fill="#495057"/>
+      <rect x="300" y="392" width="1000" height="22" rx="6" fill="#343a40"/>
+      <path d="M330 170 H1270" stroke="#ffd43b" stroke-width="4"/><path d="M330 158 v24 M1270 158 v24" stroke="#ffd43b" stroke-width="4"/>
+      <text x="800" y="150" font-size="34" font-weight="900" fill="#ffd43b" text-anchor="middle">1 m</text>
+      <g transform="translate(1420 120)"><rect x="-14" y="0" width="28" height="220" rx="14" fill="#e9ecef"/><rect x="-6" y="120" width="12" height="96" fill="#e03131"/><circle cx="0" cy="226" r="26" fill="#e03131"/>
+        <text x="0" y="-16" font-size="24" font-weight="900" fill="#c9d1df" text-anchor="middle">0 ℃?</text></g>
+      <g data-step="1"><path d="M140 300 l40 -150 h40 l-40 150 Z" fill="#9aa4b5" opacity=".5"/><text x="180" y="340" font-size="24" font-weight="900" fill="#c9d1df" text-anchor="middle">X자 단면</text></g>
+      <text x="1560" y="505" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 모식도 · 실제 원기는 길이 약 1 m 남짓의 X자 단면 막대</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅰ-2 과학의 측정과 우리 사회 · 02</p>
+    <h1>측정 표준의 유용성</h1>
+    <p class="sub" data-step="1">세계의 1 m가 금고 속 막대 하나였던 시절</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 ‘1 m는 누가 정했나’라는 질문에서 출발합니다. 그리고 표준이 없으면 무슨 일이 생기는지 봅니다.</p>
+    <p data-at="1">1889년부터 오랫동안, 세상의 모든 1 m는 프랑스 세브르의 금고 속 막대 하나를 베껴 만들었습니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="금고의 온도가 오르면" data-part="도입">
+  <p class="kicker">도입 · 1889년, 국제도량형국 지하 금고</p>
+  <h2>금고가 20 ℃가 되면 ‘1 m’는?</h2>
+  <div class="cols">
+    <div class="card ev">
+      <p><b>증거물 ①</b> 원기는 백금 90 %와 이리듐 10 %의 합금, 선팽창 계수 약 8.7 × 10⁻⁶ /℃</p>
+      <p><b>증거물 ②</b> 사람 머리카락의 굵기는 약 70 µm</p>
+      <p><b>증거물 ③</b> 1889년의 정의: 얼음이 녹는 온도(0 ℃)에서의 길이를 1 m로</p>
+      <p class="small mt">µm(마이크로미터) = 100만분의 1 m = 1000분의 1 mm</p>
+    </div>
+    <div class="card yel">
+      <h3>0 ℃ → 20 ℃, 원기는 얼마나 길어질까?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 금속이라 전혀 안 길어진다</div>
+        <div class="opt">㉡ 머리카락 두세 개 굵기쯤</div>
+        <div class="opt">㉢ 손가락 한 마디쯤 (2 cm)</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>도량형국 연구원 마농은 금속이 따뜻해지면 늘어난다고 말합니다. 그렇다면 얼마나 늘어날까요?</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 곧 직접 계산해 봅니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>미터원기</b><span>1889년부터 1 m의 기준이던 금속 막대</span></div>
+    <div class="card"><b>열팽창</b><span>온도가 오르면 물체가 늘어나는 것</span></div>
+    <div class="card"><b>측정 표준</b><span>누구나 같은 자로 재게 하는 약속</span></div>
+    <div class="card"><b>자연 상수</b><span>언제 어디서나 변하지 않는 값</span></div>
+    <div class="card"><b>SI 기본단위</b><span>m·s·kg 등 일곱 가지 기준 단위</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~12번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 미터원기 -->
+<section class="slide" id="s-proto" data-title="금고 속의 1미터" data-part="① 물건에 매인 기준">
+  <p class="kicker">① 물건에 매인 기준 · 1889년 국제도량형국</p>
+  <h2>세상의 모든 1 m가 막대 하나를 베꼈다</h2>
+  <div class="cols" style="grid-template-columns:640px 1fr;align-items:center">
+    <svg viewBox="0 0 640 470" width="640" height="470" aria-label="X자 단면 막대와 막대 윗면에 새긴 두 눈금, 눈금 사이가 1 m이고 옆에 0 ℃ 온도계">
+      <defs><linearGradient id="s4-bar" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f8f9fa"/><stop offset=".5" stop-color="#adb5bd"/><stop offset="1" stop-color="#6c757d"/></linearGradient></defs>
+      <rect x="20" y="120" width="600" height="48" rx="6" fill="url(#s4-bar)" stroke="#495057" stroke-width="2"/>
+      <g data-step="1">
+        <line x1="60" y1="124" x2="60" y2="164" stroke="#161b28" stroke-width="5"/><line x1="580" y1="124" x2="580" y2="164" stroke="#161b28" stroke-width="5"/>
+        <path d="M60 80 H580 M60 66 v28 M580 66 v28" stroke="#1462d8" stroke-width="5" fill="none"/>
+        <text x="320" y="62" font-size="28" font-weight="900" fill="#1462d8" text-anchor="middle">두 눈금 사이 = 1 m</text>
+      </g>
+      <g data-step="2">
+        <g fill="#ced4da" stroke="#495057" stroke-width="3"><rect x="120" y="263" width="120" height="26" rx="5" transform="rotate(45 180 276)"/><rect x="120" y="263" width="120" height="26" rx="5" transform="rotate(-45 180 276)"/></g>
+        <text x="180" y="370" font-size="24" font-weight="900" fill="#495057" text-anchor="middle">X자 단면</text>
+        <text x="180" y="400" font-size="22" font-weight="800" fill="#5f6b80" text-anchor="middle">휘지 않게</text>
+        <text x="420" y="270" font-size="26" font-weight="900" fill="#161b28" text-anchor="middle">백금 90 %</text>
+        <text x="420" y="306" font-size="26" font-weight="900" fill="#161b28" text-anchor="middle">+ 이리듐 10 %</text>
+      </g>
+      <g data-step="3"><g transform="translate(580 220)"><rect x="-14" y="0" width="28" height="170" rx="14" fill="#e9ecef" stroke="#868e96" stroke-width="2"/><rect x="-6" y="110" width="12" height="56" fill="#1c7ed6"/><circle cx="0" cy="178" r="22" fill="#1c7ed6"/>
+        <text x="-30" y="190" font-size="26" font-weight="900" fill="#1c7ed6" text-anchor="end">0 ℃</text></g></g>
+      <text x="20" y="462" font-size="18" fill="#5f6b80">⚠ 모식도 · 단면은 크게 그림</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">1889년, 세계 1 m의 원본 → 국제 <b class="blank" data-n="1" data-step="1">미터원기</b></p>
+      <p data-step="2">백금–이리듐 합금, 휘지 않게 X자 단면</p>
+      <p data-step="3">조건: 얼음이 녹는 온도, 곧 <b class="blank" data-n="2" data-step="3">0 ℃</b>에서의 길이</p>
+      <p class="small" data-step="3">온도 조건이 붙은 까닭은 무엇일까?</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>프랑스 세브르의 국제도량형국 지하 금고에 놓인 막대입니다.</p>
+    <p data-at="1">막대 윗면의 두 눈금 사이가 1 m. 세상의 모든 1 m가 이 막대를 베껴 만들어졌습니다. 빈칸 1번, 미터원기.</p>
+    <p data-at="2">잘 닳지 않는 백금과 이리듐을 섞었고, 휘지 않게 단면을 X자로 만들었습니다.</p>
+    <p data-at="3">그런데 정의에 조건이 하나 붙어 있었어요. 얼음이 녹는 온도, 빈칸 2번, 0 ℃. 왜 이런 조건이 필요했을까요?</p>
+  </aside>
+</section>
+
+<!-- 5 열팽창 -->
+<section class="slide" id="s-expand" data-title="금고의 온도를 올려 보다" data-part="① 물건에 매인 기준">
+  <p class="kicker">① 물건에 매인 기준 · 온도에 따라 늘어난 길이 (단원 화면 모형)</p>
+  <h2>1 ℃마다 8.7 µm씩 늘어난다</h2>
+  <div class="cols" style="grid-template-columns:760px 1fr;align-items:center">
+    <svg id="expSvg" viewBox="0 0 760 470" width="760" height="470" aria-label="온도에 따라 늘어난 길이 그래프. 0 ℃에서 0, 20 ℃에서 174 µm, 머리카락 굵기 70 µm 기준선"></svg>
+    <div class="lines">
+      <p data-step="1">금속은 따뜻해지면 늘어난다 → <b class="blank" data-n="3" data-step="1">열팽창</b></p>
+      <p data-step="2">20 ℃에서: 8.7 µm × 20 = <b class="blank" data-n="4" data-step="2">174 µm</b></p>
+      <p data-step="3">약 0.17 mm, 머리카락 두 개 반 굵기</p>
+    </div>
+  </div>
+  <p class="note">선팽창 계수 8.7 × 10⁻⁶ /℃는 어림값으로, 온도 범위와 합금 조성에 따라 조금씩 달라집니다.</p>
+  <aside class="script">
+    <p>단원 화면에서 금고의 온도 손잡이를 올려 본 것을 그래프로 그립니다.</p>
+    <p data-at="1">온도가 오르면 물체가 늘어나는 현상, 빈칸 3번, 열팽창입니다. 1 m 막대는 1 ℃마다 8.7 µm씩 늘어납니다.</p>
+    <p data-at="2">20 ℃면 8.7 곱하기 20, 빈칸 4번, 174 µm. 첫 추리의 답은 ㉡입니다.</p>
+    <p data-at="3">머리카락이 약 70 µm니까 두 개 반 굵기예요. 눈에 안 보이는 양이지만, 세상의 기준으로는 큰 문제입니다.</p>
+  </aside>
+</section>
+
+<!-- 6 1 km와 약점 -->
+<section class="slide soft" id="s-weak" data-title="물건 기준의 약점" data-part="① 물건에 매인 기준">
+  <p class="kicker">① 물건에 매인 기준 · 작은 차이가 쌓이면</p>
+  <h2>그 자로 1 km를 재면 어긋남이 쌓인다</h2>
+  <svg id="kmSvg" viewBox="0 0 1400 300" width="1400" height="300" aria-label="1 m마다 174 µm씩 차이 나는 자를 1000번 이어 1 km를 재면 차이가 17.4 cm가 된다"></svg>
+  <div class="tight mt">
+    <p data-step="1">1 m마다 174 µm × 1000번 = 174 mm = <b class="blank" data-n="5" data-step="1">17.4 cm</b> 어긋난다</p>
+  </div>
+  <div class="cols c4 mt" data-step="2">
+    <div class="card center" style="padding:24px 16px"><p style="margin:0;font-size:27px"><b>온도에 따라 늘어난다</b></p></div>
+    <div class="card center" style="padding:24px 16px"><p style="margin:0;font-size:27px"><b>세상에 하나뿐이다</b></p></div>
+    <div class="card center" style="padding:24px 16px"><p style="margin:0;font-size:27px"><b>닳고 오염된다</b></p></div>
+    <div class="card center" style="padding:24px 16px"><p style="margin:0;font-size:27px"><b>잃어버릴 수 있다</b></p></div>
+  </div>
+  <aside class="script">
+    <p>174 µm가 왜 문제일까요? 이 원기를 베낀 자로 먼 거리를 잰다고 해 봅시다.</p>
+    <p data-at="1">1 m마다 174 µm씩 차이가 나니 1 km, 곧 1000번이면 174 mm. 빈칸 5번, 17.4 cm입니다. 다리나 철도를 놓을 때 무시할 수 없는 차이죠.</p>
+    <p data-at="2">게다가 물건인 이상 세상에 하나뿐이고, 닳고 오염되고, 전쟁이나 사고로 잃어버릴 수도 있습니다. 기준이 물건이면 기준이 흔들립니다.</p>
+  </aside>
+</section>
+
+<!-- 7 표준이 없던 시장 -->
+<section class="slide" id="s-market" data-title="표준이 없던 시장" data-part="② 표준이 없다면">
+  <p class="kicker">② 표준이 없다면 · 천을 뼘으로 팔던 옛 시장</p>
+  <h2>같은 “스물다섯 뼘”, 사람마다 다른 길이</h2>
+  <svg id="mkSvg" viewBox="0 0 1400 400" width="1400" height="400" aria-label="한 뼘이 12 cm인 상인, 15 cm인 장터 심판, 18 cm인 손님이 스물다섯 뼘을 각각 300 cm, 375 cm, 450 cm로 떠올린다"></svg>
+  <div class="tight mt">
+    <p data-step="4">손님이 믿은 길이 − 실제 길이 = 450 cm − 300 cm = 150 cm → 1 cm에 200원이면 <b class="c-red">30,000원</b> 손해</p>
+  </div>
+  <aside class="script">
+    <p>마농은 표준이 아예 없던 시절로 데려갑니다. 손이 12 cm인 상인이 천을 재고 “스물다섯 뼘”이라고 말합니다.</p>
+    <p data-at="1">상인의 뼘으로 스물다섯이면 12 곱하기 25, 300 cm. 이것이 실제 천의 길이입니다.</p>
+    <p data-at="2">손이 15 cm인 장터 심판은 같은 말을 듣고 375 cm를 떠올립니다.</p>
+    <p data-at="3">손이 18 cm인 손님은 450 cm를 떠올리고 값을 치릅니다.</p>
+    <p data-at="4">150 cm만큼 더 길다고 믿은 셈이에요. 1 cm에 200원이니 3만 원을 더 낸 것입니다.</p>
+  </aside>
+</section>
+
+<!-- 8 측정 표준 -->
+<section class="slide soft" id="s-std" data-title="같은 자 위에 올려놓기" data-part="② 표준이 없다면">
+  <p class="kicker">② 표준이 없다면 · 재는 방법을 미터자로 바꾸면</p>
+  <h2>같은 자로 재면 차이가 0이 된다</h2>
+  <div class="cols" style="grid-template-columns:660px 1fr;align-items:center">
+    <svg id="stdSvg" viewBox="0 0 660 360" width="660" height="360" aria-label="상인, 심판, 손님 모두 같은 미터자로 재어 300 cm를 떠올린다"></svg>
+    <div class="lines">
+      <p data-step="1">“3.00 m 주세요” → 누구에게나 300 cm, 차이 0</p>
+      <p data-step="2">서로 다른 사람의 측정을 같은 자 위에 올려놓는 약속 → <b class="blank" data-n="6" data-step="2">측정 표준</b></p>
+      <p data-step="3">거래가 공정해지고, 실험 결과를 견주고 나눌 수 있다</p>
+      <p class="small" data-step="3">그래서 상점의 저울은 법으로 정한 검정을 받는다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>이번엔 재는 방법을 미터자로 바꿉니다.</p>
+    <p data-at="1">손 크기와 상관없이 셋 모두 300 cm를 떠올립니다. 차이가 0이에요.</p>
+    <p data-at="2">이렇게 서로 다른 사람의 측정을 같은 자 위에 올려놓는 약속이 빈칸 6번, 측정 표준입니다.</p>
+    <p data-at="3">표준이 있어야 거래가 공정하고, 다른 나라의 실험 결과와도 견줄 수 있습니다. 상점 저울이 검정을 받는 까닭도 여기 있습니다.</p>
+  </aside>
+</section>
+
+<!-- 9 확인 -->
+<section class="slide" id="s-check1" data-title="스무 뼘의 계산" data-part="② 표준이 없다면">
+  <p class="kicker">② 표준이 없다면 · 확인</p>
+  <h2>상인(손 12 cm)이 “스무 뼘”이라 했다. 손님(손 18 cm)이 떠올리는 길이는?</h2>
+  <div class="opts" style="max-width:1100px">
+    <div class="opt wrong" data-step="1">㉠ 240 cm</div>
+    <div class="opt wrong" data-step="1">㉡ 300 cm</div>
+    <div class="opt right" data-step="1">㉢ 360 cm</div>
+  </div>
+  <p data-step="1" style="margin-top:34px">실제 천은 12 cm × 20 = 240 cm, 손님은 18 cm × 20 = 360 cm → 120 cm 차이</p>
+  <aside class="script">
+    <p>30초 동안 계산하게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">정답은 ㉢. ㉠ 240 cm는 실제 천의 길이입니다. 같은 숫자라도 기준이 다르면 다른 길이가 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 10 빛으로 만든 자 -->
+<section class="slide" id="s-light" data-title="빛으로 만든 자" data-part="③ 자연 상수로">
+  <p class="kicker">③ 자연 상수로 · 1983년, 1 m의 새 정의</p>
+  <h2>1 m = 빛이 진공에서 1/299,792,458 초 동안 간 거리</h2>
+  <svg id="ltSvg" viewBox="0 0 1400 260" width="1400" height="260" aria-label="빛이 1 ns마다 약 0.30 m씩 나아가 3.3356 ns에 1 m에 닿는 그림"></svg>
+  <div class="tight mt">
+    <p data-step="1">기준은 <b class="blank" data-n="7" data-step="1">빛의 속력</b> · 299,792,458 m/s를 값으로 못 박았다</p>
+    <p data-step="2">1 ns(10억분의 1초) 동안 약 30 cm (0.2998 m)</p>
+    <p data-step="3">1 m = 빛이 <b class="blank" data-n="8" data-step="3">3.3356 ns</b> 동안 간 거리</p>
+  </div>
+  <p class="note">1983년의 재정의는 1 m의 길이를 바꾼 것이 아니라 정의하는 방법을 바꾼 것입니다. 그 전후로 1 m의 길이는 사실상 같습니다.</p>
+  <aside class="script">
+    <p>결론은 기준을 물건에 두지 말자는 것이었습니다. 1983년부터 1 m는 빛으로 정합니다.</p>
+    <p data-at="1">빈칸 7번, 빛의 속력. 진공에서 초속 299,792,458 m를 정확한 값으로 정해 버렸습니다.</p>
+    <p data-at="2">빛은 1 ns, 10억분의 1초 동안 약 30 cm를 갑니다.</p>
+    <p data-at="3">그러니 1 m를 가려면 빈칸 8번, 3.3356 ns가 걸립니다. 단원 화면에서 하윤이가 손잡이로 맞춰 본 그 시간이에요.</p>
+  </aside>
+</section>
+
+<!-- 11 원자시계 -->
+<section class="slide soft" id="s-cs" data-title="1초를 정하는 원자" data-part="③ 자연 상수로">
+  <p class="kicker">③ 자연 상수로 · 시계만 정확하면 어디서든 1 m</p>
+  <h2>1초도 원자의 진동으로 정한다</h2>
+  <svg id="csSvg" viewBox="0 0 1400 250" width="1400" height="250" aria-label="세슘-133 원자가 내는 복사선의 진동을 세어 9,192,631,770번이 되면 1초"></svg>
+  <div class="tight mt">
+    <p data-step="1">1 초 = <b class="blank" data-n="9" data-step="1">세슘-133</b> 원자가 내는 특정 복사선이 9,192,631,770번 진동하는 시간</p>
+    <p data-step="2">이 진동을 세는 시계 → <b class="blank" data-n="10" data-step="2">원자시계</b></p>
+    <p data-step="3">정확한 시계 + 빛의 속력 → 서울에서도 남극에서도 화성에서도 같은 1 m</p>
+  </div>
+  <aside class="script">
+    <p>견학 온 하윤이가 말했죠. 시계만 정확하면 어디서든 1 m를 만들 수 있겠다고. 그 시계는 무엇으로 정할까요?</p>
+    <p data-at="1">빈칸 9번, 세슘-133 원자. 이 원자가 내는 특정 복사선이 92억 번 남짓, 정확히 9,192,631,770번 진동하는 시간이 1초입니다.</p>
+    <p data-at="2">이 진동을 세는 시계가 빈칸 10번, 원자시계입니다. 다음 시간에 GPS 위성에서 다시 만납니다.</p>
+    <p data-at="3">누구도 금고를 열 필요가 없습니다. 같은 방법이면 어디서든 같은 1 m를 다시 만들 수 있어요.</p>
+  </aside>
+</section>
+
+<!-- 12 SI -->
+<section class="slide" id="s-si" data-title="킬로그램 원기도 물러나다" data-part="③ 자연 상수로">
+  <p class="kicker">③ 자연 상수로 · 2019년, SI 일곱 기본단위</p>
+  <h2>이제 모든 기본단위가 자연 상수에 묶였다</h2>
+  <div class="cols" style="grid-template-columns:1fr 560px;gap:34px">
+    <table class="ledger">
+      <tr><th>양</th><th>단위</th><th>묶인 자연 상수</th></tr>
+      <tr><td>시간</td><td><b>s</b></td><td>세슘-133의 진동수</td></tr>
+      <tr><td>길이</td><td><b>m</b></td><td>빛의 속력</td></tr>
+      <tr data-step="1"><td>질량</td><td><b>kg</b></td><td><b>플랑크 상수</b> (2019년부터)</td></tr>
+      <tr data-step="2"><td>전류</td><td><b>A</b></td><td>기본 전하</td></tr>
+      <tr data-step="2"><td>온도</td><td><b>K</b></td><td>볼츠만 상수</td></tr>
+      <tr data-step="2"><td>물질량</td><td><b>mol</b></td><td>아보가드로수</td></tr>
+      <tr data-step="2"><td>광도</td><td><b>cd</b></td><td>발광 효율</td></tr>
+    </table>
+    <div class="lines">
+      <p data-step="1">2019년 국제 킬로그램 원기가 물러나고 → <b class="blank" data-n="11" data-step="1">플랑크 상수</b></p>
+      <p data-step="3">SI의 일곱 기본단위는 모두 변하지 않는 <b class="blank" data-n="12" data-step="3">자연 상수</b>에 묶여 있다</p>
+      <p class="small" data-step="3">기준을 물건에서 자연으로 옮겼다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>시간과 길이는 이미 자연 상수로 정해져 있었습니다. 마지막까지 물건으로 남은 것이 질량이었어요.</p>
+    <p data-at="1">1889년부터 쓰던 국제 킬로그램 원기가 2019년에 물러나고, 그 자리를 빈칸 11번, 플랑크 상수가 대신합니다.</p>
+    <p data-at="2">전류, 온도, 물질량, 광도도 각각 자연 상수에 묶였습니다. 이름을 외울 필요는 없습니다.</p>
+    <p data-at="3">이제 SI의 일곱 기본단위는 모두 빈칸 12번, 자연 상수에 묶여 있습니다.</p>
+  </aside>
+</section>
+
+<!-- 13 확인: 분류 -->
+<section class="slide soft" id="s-sort" data-title="어디에 매인 기준일까" data-part="③ 자연 상수로">
+  <p class="kicker">③ 자연 상수로 · 확인</p>
+  <h2>물건에 매인 기준인가, 자연 상수에 매인 기준인가</h2>
+  <table class="ledger">
+    <tr><th>기준</th><th style="width:300px">매인 곳</th></tr>
+    <tr><td>사람의 뼘</td><td><span class="tagS thing" data-step="1">물건·몸</span></td></tr>
+    <tr><td>파리에 보관한 미터원기 막대</td><td><span class="tagS thing" data-step="1">물건·몸</span></td></tr>
+    <tr><td>국제 킬로그램 원기 (1889~2019년)</td><td><span class="tagS thing" data-step="1">물건·몸</span></td></tr>
+    <tr><td>빛이 1/299,792,458 초 동안 간 거리</td><td><span class="tagS const" data-step="1">자연 상수</span></td></tr>
+    <tr><td>세슘-133 원자가 9,192,631,770번 진동하는 시간</td><td><span class="tagS const" data-step="1">자연 상수</span></td></tr>
+    <tr><td>플랑크 상수로 정한 1 kg</td><td><span class="tagS const" data-step="1">자연 상수</span></td></tr>
+  </table>
+  <aside class="script">
+    <p>짝과 함께 왼쪽, 오른쪽으로 나눠 보게 합니다.</p>
+    <p data-at="1">물건이나 몸에 매인 기준은 늘어나고 닳고 잃어버릴 수 있습니다. 자연 상수에 매인 기준은 언제 어디서든 다시 만들 수 있어요.</p>
+  </aside>
+</section>
+
+<!-- 14 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>기준을 물건에서 자연 상수로 옮겼다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>미터원기</b>(1889년): 0 ℃에서 두 눈금 사이 = 1 m · 1 ℃마다 8.7 µm 늘어나 20 ℃면 174 µm</li>
+    <li data-k="2" data-step="2">물건 기준의 약점: 열팽창, 하나뿐, 닳음·오염·분실 → 1 km를 재면 17.4 cm 어긋남</li>
+    <li data-k="3" data-step="3"><b>측정 표준</b>: 서로 다른 사람의 측정을 같은 자 위에 올려놓는 약속 → 공정한 거래, 견줄 수 있는 실험</li>
+    <li data-k="4" data-step="4">1 m = 빛이 1/299,792,458 초 동안 간 거리 · 1 초 = 세슘-133 진동 · 1 kg = 플랑크 상수 (2019년)</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 15 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 미터원기(1 m)의 온도가 10 ℃ 오르면 늘어나는 길이는? (선팽창 계수 8.7 × 10⁻⁶ /℃)</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 8.7 µm</div>
+        <div class="opt right" data-step="1">㉡ 87 µm</div>
+        <div class="opt wrong" data-step="1">㉢ 8.7 mm</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 1983년 1 m를 새로 정할 때 기준으로 삼은 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 지구 자오선의 길이</div>
+        <div class="opt right" data-step="2">㉡ 빛의 속력</div>
+        <div class="opt wrong" data-step="2">㉢ 백금–이리듐 막대</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 1 m × 8.7 × 10⁻⁶ × 10 = 87 × 10⁻⁶ m, 곧 87 µm입니다.</p>
+    <p data-at="2">2번은 ㉡. 빛의 속력을 정확한 값으로 정하고 1 m를 빛이 간 거리로 정의했습니다.</p>
+  </aside>
+</section>
+
+<!-- 16 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ② 「1미터를 다시 정하는 회의」</h2>
+  <div class="cols">
+    <div class="card"><h3>회의에 참석해 보세요</h3><p>금고 온도를 올려 원기 늘리기, 뼘으로 천을 사고팔기, 빛을 달리게 해 1 m 만들기, 열 가지 기준 분류가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 03 측정과 현대 문명</h3><p>지도 앱이 나를 옆 건물에 찍었다. 위성의 시계가 100만분의 1초 틀리면 무슨 일이 생길까요?</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ②를 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function T(x, y, s, o) { o = o || {}; return "<text x='" + x + "' y='" + y + "' font-size='" + (o.s || 24) + "' font-weight='" + (o.w || 900) + "' fill='" + (o.c || "#161b28") + "' text-anchor='" + (o.a || "middle") + "'" + (o.halo ? " stroke='#fff' stroke-width='7' paint-order='stroke'" : "") + ">" + s + "</text>"; }
+
+  /* 열팽창 그래프 — 단원 화면 모형 ΔL = 8.7 µm/℃ × T (1 m 막대) */
+  (function () {
+    var X0 = 110, X1 = 720, Y0 = 30, Y1 = 400;
+    function X(t) { return X0 + t / 40 * (X1 - X0); }
+    function Y(u) { return Y1 - u / 350 * (Y1 - Y0); }
+    var h = "";
+    [50, 100, 150, 200, 250, 300, 350].forEach(function (u) { h += "<line x1='" + X0 + "' y1='" + Y(u) + "' x2='" + X1 + "' y2='" + Y(u) + "' stroke='#e8edf4' stroke-width='2'/>"; });
+    [0, 100, 200, 300].forEach(function (u) { h += "<text x='" + (X0 - 12) + "' y='" + (Y(u) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + u + "</text>"; });
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 10, 20, 30, 40].forEach(function (t) { h += "<text x='" + X(t) + "' y='" + (Y1 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + t + "</text>"; });
+    h += T(X1, Y1 + 60, "금고 온도 (℃)", { s: 20, c: "#5f6b80", a: "end" }) + T(X0 + 12, Y0 + 4, "늘어난 길이 (µm)", { s: 20, c: "#5f6b80", a: "start" });
+    h += "<g data-step='1'><line x1='" + X(0) + "' y1='" + Y(0) + "' x2='" + X(40) + "' y2='" + Y(348) + "' stroke='#e8590c' stroke-width='5'/>";
+    h += T(X(31), Y(300), "1 ℃마다 8.7 µm", { s: 22, c: "#e8590c", a: "end", halo: 1 }) + "</g>";
+    h += "<g data-step='2'><line x1='" + X(20) + "' y1='" + Y1 + "' x2='" + X(20) + "' y2='" + Y(174) + "' stroke='#d9302c' stroke-width='3' stroke-dasharray='8 6'/><line x1='" + X0 + "' y1='" + Y(174) + "' x2='" + X(20) + "' y2='" + Y(174) + "' stroke='#d9302c' stroke-width='3' stroke-dasharray='8 6'/>";
+    h += "<circle cx='" + X(20) + "' cy='" + Y(174) + "' r='10' fill='#d9302c'/>" + T(X(20) + 18, Y(174) + 34, "20 ℃ → 174 µm", { s: 24, c: "#d9302c", a: "start", halo: 1 }) + "</g>";
+    h += "<g data-step='3'><line x1='" + X0 + "' y1='" + Y(70) + "' x2='" + X1 + "' y2='" + Y(70) + "' stroke='#495057' stroke-width='4' stroke-dasharray='4 6'/>";
+    h += T(X1, Y(70) - 12, "머리카락 굵기 약 70 µm", { s: 21, c: "#495057", a: "end", halo: 1 }) + "</g>";
+    document.getElementById("expSvg").innerHTML = h;
+  })();
+
+  /* 1 km = 1 m × 1000 */
+  (function () {
+    var h = "", i;
+    for (i = 0; i < 10; i++) {
+      var x = 20 + i * 100;
+      h += "<rect x='" + x + "' y='40' width='92' height='50' rx='6' fill='#dce9ff' stroke='#1462d8' stroke-width='3'/>" + T(x + 46, 74, "1 m", { s: 22, c: "#1462d8" });
+      h += "<rect x='" + (x + 88) + "' y='40' width='6' height='50' fill='#d9302c'/>";
+    }
+    h += T(1110, 76, "… × 1000번", { s: 30, a: "start" });
+    h += T(20, 128, "빨간 띠 하나 = 174 µm (크게 과장)", { s: 20, w: 800, c: "#d9302c", a: "start" });
+    h += "<g data-step='1'><rect x='20' y='170' width='" + (174 * 3) + "' height='46' rx='6' fill='#d9302c'/>" + T(20 + 174 * 3 + 20, 204, "모두 합치면 17.4 cm", { s: 28, c: "#d9302c", a: "start" });
+    h += "<rect x='20' y='232' width='" + (300 * 3) + "' height='26' rx='4' fill='#fff3bf' stroke='#c99a2e' stroke-width='2'/>";
+    for (i = 0; i <= 30; i++) h += "<line x1='" + (20 + i * 30) + "' y1='232' x2='" + (20 + i * 30) + "' y2='" + (i % 5 ? 244 : 252) + "' stroke='#161b28' stroke-width='2'/>";
+    h += T(20 + 900 + 16, 254, "30 cm 자와 견주면", { s: 20, w: 800, c: "#5f6b80", a: "start" }) + "</g>";
+    h += "<text x='1395' y='292' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 아래 두 막대는 같은 비율</text>";
+    document.getElementById("kmSvg").innerHTML = h;
+  })();
+
+  /* 시장 — 상인 12 cm, 심판 15 cm, 손님 18 cm, 스물다섯 뼘 */
+  (function () {
+    var K = 1.75, X0 = 300, P = [["🧑‍🌾 상인", 12, "#e8590c"], ["🧑‍⚖️ 장터 심판", 15, "#6741d9"], ["🧑 손님", 18, "#1462d8"]];
+    var h = "";
+    P.forEach(function (p, k) {
+      var y = 40 + k * 120, len = p[1] * 25, w = len * K, i, g = "<g data-step='" + (k + 1) + "'>";
+      g += T(20, y + 36, p[0], { s: 28, a: "start", c: p[2] });
+      g += T(20, y + 70, "한 뼘 " + p[1] + " cm", { s: 22, w: 800, a: "start", c: "#5f6b80" });
+      g += "<rect x='" + X0 + "' y='" + y + "' width='" + w + "' height='52' rx='8' fill='" + p[2] + "' opacity='.18'/><rect x='" + X0 + "' y='" + y + "' width='" + w + "' height='52' rx='8' fill='none' stroke='" + p[2] + "' stroke-width='3'/>";
+      for (i = 1; i < 25; i++) g += "<line x1='" + (X0 + i * p[1] * K) + "' y1='" + (y + 8) + "' x2='" + (X0 + i * p[1] * K) + "' y2='" + (y + 44) + "' stroke='" + p[2] + "' stroke-width='2'/>";
+      g += T(X0 + w + 16, y + 36, p[1] + " × 25 = " + len + " cm", { s: 26, a: "start", c: p[2] });
+      h += g + "</g>";
+    });
+    h += "<line x1='" + (X0 + 300 * K) + "' y1='20' x2='" + (X0 + 300 * K) + "' y2='390' stroke='#161b28' stroke-width='3' stroke-dasharray='8 6'/>";
+    h += T(X0 + 300 * K, 18, "실제 천 300 cm", { s: 20, c: "#161b28" });
+    document.getElementById("mkSvg").innerHTML = h;
+  })();
+
+  /* 미터자로 재면 */
+  (function () {
+    var P = [["🧑‍🌾 상인", "#e8590c"], ["🧑‍⚖️ 심판", "#6741d9"], ["🧑 손님", "#1462d8"]], h = "", K = 1.2;
+    P.forEach(function (p, k) {
+      var y = 30 + k * 100;
+      h += T(10, y + 36, p[0], { s: 24, a: "start", c: p[1] });
+      h += "<g data-step='1'><rect x='160' y='" + y + "' width='" + (300 * K) + "' height='50' rx='8' fill='" + p[1] + "' opacity='.18'/><rect x='160' y='" + y + "' width='" + (300 * K) + "' height='50' rx='8' fill='none' stroke='" + p[1] + "' stroke-width='3'/>";
+      h += T(160 + 300 * K + 14, y + 34, "300 cm", { s: 24, a: "start", c: p[1] }) + "</g>";
+    });
+    h += "<g data-step='1'>" + T(370, 345, "차이 0 cm", { s: 30, c: "#198a4a" }) + "</g>";
+    document.getElementById("stdSvg").innerHTML = h;
+  })();
+
+  /* 빛의 걸음 — 1 ns마다 0.2998 m */
+  (function () {
+    var X0 = 80, K = 1050, C = 0.299792458, h = "", i;
+    function X(m) { return X0 + m * K; }
+    h += "<defs><linearGradient id='s10-beam' x1='0' x2='1'><stop offset='0' stop-color='#ffd43b' stop-opacity='.15'/><stop offset='1' stop-color='#ff922b'/></linearGradient></defs>";
+    h += "<line x1='" + X0 + "' y1='150' x2='" + X(1.2) + "' y2='150' stroke='#161b28' stroke-width='4'/>";
+    for (i = 0; i <= 12; i++) { h += "<line x1='" + X(i / 10) + "' y1='150' x2='" + X(i / 10) + "' y2='" + (i % 5 ? 164 : 174) + "' stroke='#161b28' stroke-width='3'/>"; if (i % 5 === 0 || i === 12) h += T(X(i / 10), 204, (i / 10).toFixed(1) + " m", { s: 22, w: 800 }); }
+    h += "<g data-step='1'><rect x='" + X0 + "' y='110' width='" + (X(1) - X0) + "' height='16' rx='8' fill='url(#s10-beam)'/><circle cx='" + X(1) + "' cy='118' r='14' fill='#ff922b'/>" + T(X0, 90, "빛 →", { s: 24, c: "#e8590c", a: "start" }) + "</g>";
+    h += "<g data-step='2'>";
+    for (i = 1; i <= 3; i++) h += "<line x1='" + X(C * i) + "' y1='132' x2='" + X(C * i) + "' y2='150' stroke='#1462d8' stroke-width='5'/>" + T(X(C * i), 240, i + " ns", { s: 22, c: "#1462d8" });
+    h += "</g>";
+    h += "<g data-step='3'><line x1='" + X(1) + "' y1='60' x2='" + X(1) + "' y2='186' stroke='#d9302c' stroke-width='5'/>" + T(X(1) - 14, 52, "1.000 m · 3.3356 ns", { s: 26, c: "#d9302c", a: "end" }) + "</g>";
+    document.getElementById("ltSvg").innerHTML = h;
+  })();
+
+  /* 세슘 진동 세기 */
+  (function () {
+    var h = "", pts = [], x, N = 36, X0 = 40, X1 = 1180;
+    for (x = 0; x <= 1; x += 0.0015) pts.push((X0 + x * (X1 - X0)).toFixed(1) + " " + (110 - 46 * Math.sin(2 * Math.PI * N * x)).toFixed(1));
+    h += "<polyline points='" + pts.join(" ") + "' fill='none' stroke='#6741d9' stroke-width='4'/>";
+    h += "<g data-step='1'><circle cx='" + (X0 - 10) + "' cy='110' r='26' fill='#ffd43b' stroke='#e8590c' stroke-width='4'/>" + T(X0 - 10, 118, "Cs", { s: 22 }) + "</g>";
+    h += "<g data-step='2'><rect x='1200' y='60' width='190' height='100' rx='14' fill='#161b28'/>" + T(1295, 102, "9,192,631,770", { s: 22, c: "#8ce99a" }) + T(1295, 140, "번 = 1 초", { s: 24, c: "#fff" }) + "</g>";
+    h += "<path d='M" + X0 + " 190 H" + X1 + " M" + X0 + " 178 v24 M" + X1 + " 178 v24' stroke='#5f6b80' stroke-width='3' fill='none'/>" + T((X0 + X1) / 2, 228, "진동을 하나하나 센다", { s: 22, w: 800, c: "#5f6b80" });
+    h += "<text x='1390' y='244' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 진동 수는 크게 줄여 그림</text>";
+    document.getElementById("csSvg").innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

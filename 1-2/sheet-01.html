@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 정밀도와 정확도 (통합과학1 Ⅰ-2 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격·여백을 줄인다 */ p, li { font-size: 12.8px; line-height: 1.62; } table { font-size: 12px; } td, th { padding: 2px 7px; line-height: 1.42; } h2 { font-size: 14.5px; margin: 7px 0 3px; padding: 3px 10px; } header { margin-bottom: 8px; } .guide { margin-bottom: 6px; } .write { height: 40px; } .foot { margin-top: 6px; } p, li { line-height: 1.55; } .write { height: 36px; }</style>
+</head>
+
+<body>
+<div class="tools">
+  <a href="board-01.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅰ-2 과학의 측정과 우리 사회 · 01 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 정밀도와 정확도</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~12)</p>
+
+  <h2>① 정확도와 정밀도 — 사격부 표적지 넉 장</h2>
+  <ul>
+    <li>맞혀야 할 자리, 곧 참된 값 → <b class="blank" data-n="1">참값</b></li>
+    <li>측정값의 평균이 참값에 가까운 정도 → <b class="blank" data-n="2">정확도</b></li>
+    <li>측정값끼리 모여 있는 정도 → <b class="blank" data-n="3">정밀도</b> · 흩어진 정도는 <b class="blank" data-n="4">표준편차</b>로 나타낸다(작을수록 정밀)</li>
+  </ul>
+  <table>
+    <tr><th style="width:16%"></th><th>정밀 ○ (모였다)</th><th>정밀 ✕ (흩어졌다)</th></tr>
+    <tr><th>정확 ○ (중심 맞음)</th><td>가온 — 이상적인 측정</td><td>다인 — 우연 오차가 크다</td></tr>
+    <tr><th>정확 ✕ (치우침)</th><td>나래 — 계통 오차가 있다</td><td>라온 — 두 오차 모두 크다</td></tr>
+  </table>
+  <p style="font-size:11.5px;color:#5f6b80">단원 화면 모형: 평균이 중심에서 10 mm 이내면 ‘정확’, 열 발의 표준편차가 8 mm 이하면 ‘정밀’</p>
+
+  <h2>② 두 가지 오차</h2>
+  <table>
+    <tr><th style="width:16%"></th><th>어떻게 틀리나</th><th>원인의 예</th><th style="width:24%">줄이는 방법</th></tr>
+    <tr><td><b class="blank" data-n="5">계통 오차</b></td><td>매번 같은 쪽으로 같은 만큼</td><td>총의 조준선이 틀어짐, 저울의 <b class="blank" data-n="6">영점</b>이 어긋남, 늘 같은 버릇</td><td>기기를 <b class="blank" data-n="7">교정</b>한다</td></tr>
+    <tr><td><b class="blank" data-n="8">우연 오차</b></td><td>위로도 아래로도 제멋대로</td><td>손떨림, 눈금을 읽는 눈의 위치, 초시계 반응, 바람·진동</td><td>여러 번 재어 <b class="blank" data-n="9">평균</b>을 낸다</td></tr>
+  </table>
+  <ul>
+    <li>50.00 g 분동(단원 화면 모형): 영점이 맞은 저울은 6번 평균 49.894 g → 25번 평균 49.995 g으로 참값에 다가감 · 영점이 +0.5 g 틀어진 저울은 60번 재도 평균 50.482 g</li>
+    <li><b>우연 오차는 반복이 줄이지만, 계통 오차는 아무리 반복해도 줄지 않는다</b> → 재기 전에 교정부터</li>
+  </ul>
+
+  <h2>③ 유효숫자와 어림 — 같은 막대(실제 42.7 mm)를 세 가지 자로</h2>
+  <ul>
+    <li>눈금으로 읽을 수 있는 자리까지 읽고, 그다음 한 자리만 <b class="blank" data-n="10">어림</b>해서 적는다</li>
+  </ul>
+  <table>
+    <tr><th>자의 최소 눈금</th><th>적은 값</th><th>눈금으로 읽은 자리</th><th>어림한 자리</th><th>유효숫자</th></tr>
+    <tr><td>1 cm</td><td>4.3 cm</td><td>4</td><td>3</td><td>2자리</td></tr>
+    <tr><td>1 mm</td><td>4.27 cm</td><td>4, 2</td><td>7</td><td>3자리</td></tr>
+    <tr><td>0.1 mm</td><td>4.270 cm</td><td>4, 2, 7</td><td>0</td><td>4자리</td></tr>
+  </table>
+  <ul>
+    <li>눈금으로 읽은 자리 + 어림한 한 자리 → <b class="blank" data-n="11">유효숫자</b> · 몇 자리까지 적을지는 자의 <b class="blank" data-n="12">최소 눈금</b>이 정한다</li>
+    <li>자리를 늘려 적는다고 더 정확해지지 않는다. 재지 않은 자리를 잰 척하는 일이다.</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 영점이 1.0 g 틀어진 저울로 같은 물체를 100번 재어 평균을 내면? <span class="ans">→ ㉡</span><br>
+      ㉠ 평균의 오차가 거의 0이 된다 &nbsp; ㉡ 평균이 약 1.0 g 어긋난 채 남는다 &nbsp; ㉢ 평균의 오차가 100배로 커진다</p>
+    <p>2. 최소 눈금이 1 cm인 자로 잰 값으로 알맞은 것은? (4 cm / 4.3 cm / 4.27 cm) <span class="ans">→ 4.3 cm</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>나래는 총을 고치고 다인은 연습을 해야 하는 까닭을, 두 가지 오차의 이름을 넣어 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-01.html · 이야기 ① 「과녁에 남은 자국」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

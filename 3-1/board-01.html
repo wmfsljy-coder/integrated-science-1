@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 지구시스템의 구성 (통합과학1 Ⅲ-1 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes grainIn { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: none; } }
+  .current .art .gwrap { animation: grainIn 1.2s ease both; transform-origin: 800px 260px; }
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  #s-check1 .opt { font-size: 29px; padding: 14px 24px; }
+  #s-hook .opt { font-size: 28px; padding: 14px 22px; }
+  #s-hook table.ledger { font-size: 26px; }
+  #s-hook table.ledger td { padding: 9px 12px; }
+  #s-sort .card { padding: 24px 22px; }
+  #s-sort .card h3 { font-size: 30px; margin-bottom: 12px; }
+  #s-sort .card p { font-size: 25px; line-height: 1.5; margin-bottom: 12px; }
+  .chain { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px; }
+  .chain .card { position: relative; padding: 20px 22px; }
+  .chain .card h3 { font-size: 29px; margin-bottom: 8px; }
+  .chain .card p { font-size: 24px; line-height: 1.45; margin: 0; }
+  .chain .card + .card::before { content: "→"; position: absolute; left: -31px; top: 50%; transform: translateY(-50%); font-size: 30px; font-weight: 900; color: var(--mute); }
+  .formcard { display: inline-block; font-size: 30px; font-weight: 900; padding: 12px 26px; border-radius: 16px; background: var(--blue-2); }
+  .three .card { padding: 22px 24px; }
+  .three .card h3 { font-size: 32px; margin-bottom: 6px; }
+  .three .card p { font-size: 24px; line-height: 1.45; margin-bottom: 6px; }
+  #s-sort .card p, .chain .card p, .lines p { line-height: 1.75; }
+  svg .halo { paint-order: stroke; stroke: #fff; stroke-width: 7px; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="크게 확대한 투명한 모래 한 알과, 그 알갱이에 찍힌 네 권역의 주소">
+      <defs>
+        <radialGradient id="c1-grain" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff8e6"/><stop offset=".55" stop-color="#e9d3a6"/><stop offset="1" stop-color="#a88a58"/></radialGradient>
+      </defs>
+      <g class="gwrap">
+        <path d="M700 180 Q760 120 850 140 Q930 150 960 220 Q990 300 920 360 Q850 400 760 380 Q670 360 650 290 Q640 220 700 180Z" fill="url(#c1-grain)" stroke="#f4e3bd" stroke-width="4"/>
+        <path d="M720 200 Q760 170 810 175" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".7"/>
+      </g>
+      <g data-step="1" font-size="27" font-weight="800">
+        <g stroke="#6b7385" stroke-width="3" stroke-dasharray="6 6"><path d="M690 210 L470 120"/><path d="M955 210 L1150 120"/><path d="M670 330 L470 410"/><path d="M940 340 L1150 410"/></g>
+        <text x="460" y="112" fill="#ff9f7a" text-anchor="end">지권 · 화강암의 석영</text>
+        <text x="1160" y="112" fill="#ffe066">기권 · 바람과 기온 변화</text>
+        <text x="460" y="425" fill="#74b6ff" text-anchor="end">수권 · 강물이 날라 옴</text>
+        <text x="1160" y="425" fill="#69db9c">생물권 · 조개껍데기 조각</text>
+      </g>
+      <text x="1560" y="510" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 지름 0.3 mm 알갱이를 크게 확대해 그렸습니다</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅲ-1 지구시스템 · 01</p>
+    <h1>지구시스템의 구성</h1>
+    <p class="sub" data-step="1">해변에서 주운 모래 한 알에 네 곳의 주소가 찍혀 있었다</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 지구를 하나의 시스템으로 보는 법을 배웁니다. 여러분은 지구시스템 관측소의 조사관입니다.</p>
+    <p data-at="1">여름 방학에 동해안 해수욕장에서 주운 모래 한 알을 분석했더니, 이 작은 알갱이에 네 곳의 주소가 찍혀 있었습니다. 오늘 그 여행 경로를 따라갑니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="모래 한 알의 분석표" data-part="도입">
+  <p class="kicker">도입 · 지구시스템 관측소 분석표</p>
+  <h2>이 모래 한 알은 어디를 거쳐 왔을까?</h2>
+  <div class="cols w64">
+    <div class="card">
+      <h3>분석표 · 지름 0.3 mm</h3>
+      <table class="ledger">
+        <tr><td>석영 (화강암에서 떨어져 나온 알갱이)</td><td class="v">78%</td></tr>
+        <tr><td>장석</td><td class="v">12%</td></tr>
+        <tr><td>조개껍데기 조각</td><td class="v">7%</td></tr>
+        <tr><td>화산 유리</td><td class="v">3%</td></tr>
+        <tr><td>모서리</td><td class="v">둥글게 닳음</td></tr>
+      </table>
+    </div>
+    <div class="card yel">
+      <h3>여러분의 답은?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 지권 한 곳</div>
+        <div class="opt">㉡ 지권과 수권 두 곳</div>
+        <div class="opt">㉢ 지권·수권·기권 세 곳</div>
+        <div class="opt">㉣ 네 권역 모두</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>연구원 서하의 말입니다. 지구를 따로 노는 네 덩어리로 보면 이 알갱이는 설명이 안 되고, 서로 주고받는 하나의 시스템으로 볼 때만 여행 경로가 보인다고 합니다.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 분석표의 어느 줄을 근거로 골랐는지 들어 두세요. 오늘 끝에 다시 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>네 권역</b><span>지권 · 수권 · 기권 · 생물권</span></div>
+    <div class="card"><b>외권</b><span>대기권 바깥의 우주 공간</span></div>
+    <div class="card"><b>물질 순환</b><span>같은 물질이 권역 사이를 돌고 도는 것</span></div>
+    <div class="card"><b>에너지 흐름</b><span>물질을 움직이는 에너지가 함께 흐른다</span></div>
+    <div class="card"><b>상호 작용</b><span>권역끼리 영향을 주고받는 것</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~15번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 다섯 권역 -->
+<section class="slide" id="s-sph" data-title="지구시스템의 다섯 구성 요소" data-part="① 권역">
+  <p class="kicker">① 지구시스템의 구성 요소 · 서로 영향을 주고받는 요소들의 모임 = 시스템</p>
+  <h2>지구시스템은 다섯 권역으로 이루어진다</h2>
+  <div class="cols" style="grid-template-columns:720px 1fr;align-items:center">
+    <svg viewBox="0 0 720 520" width="720" height="520" aria-label="우주 공간 아래 대기, 그 아래 산과 바다가 있는 땅의 단면. 숲과 물고기가 땅과 바다와 대기에 걸쳐 있다">
+      <defs>
+        <linearGradient id="s4-sky" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#9fd0ff"/><stop offset="1" stop-color="#e3f2ff"/></linearGradient>
+        <linearGradient id="s4-sea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4dabf7"/><stop offset="1" stop-color="#1864ab"/></linearGradient>
+      </defs>
+      <rect x="0" y="0" width="720" height="90" rx="14" fill="#1b2233"/>
+      <g fill="#fff"><circle cx="60" cy="30" r="2.5"/><circle cx="180" cy="60" r="2"/><circle cx="300" cy="24" r="2.5"/><circle cx="420" cy="55" r="2"/><circle cx="520" cy="28" r="2"/></g>
+      <circle cx="650" cy="45" r="30" fill="#ffd43b"/>
+      <rect x="0" y="90" width="720" height="170" fill="url(#s4-sky)"/>
+      <path d="M0 330 L120 300 L230 180 L300 230 L360 300 L400 330 L400 520 L0 520Z" fill="#b08968"/>
+      <path d="M0 400 L400 400 L400 520 L0 520Z" fill="#8a6a45"/>
+      <rect x="400" y="320" width="320" height="200" fill="url(#s4-sea)"/>
+      <path d="M400 330 Q420 470 720 480 L720 520 L400 520Z" fill="#7b5a3a"/>
+      <path d="M200 205 L230 180 L262 207 Q232 196 200 205Z" fill="#fff"/>
+      <g fill="#2f9e44"><path d="M60 310 l14 -40 l14 40Z"/><path d="M90 304 l14 -44 l14 44Z"/><path d="M330 300 l12 -34 l12 34Z"/></g>
+      <g fill="#ffa94d"><path d="M520 390 q22 -14 44 0 q-22 14 -44 0Z"/><path d="M564 390 l14 -10 v20Z"/><path d="M600 440 q18 -11 36 0 q-18 11 -36 0Z"/><path d="M636 440 l11 -8 v16Z"/></g>
+      <g data-step="1"><rect x="20" y="440" width="150" height="46" rx="12" fill="#fff" opacity=".92"/><text x="95" y="472" font-size="26" font-weight="900" fill="#c2410c" text-anchor="middle">지권</text></g>
+      <g data-step="2"><rect x="560" y="330" width="140" height="46" rx="12" fill="#fff" opacity=".92"/><text x="630" y="362" font-size="26" font-weight="900" fill="#1462d8" text-anchor="middle">수권</text></g>
+      <g data-step="3"><rect x="430" y="150" width="140" height="46" rx="12" fill="#fff" opacity=".92"/><text x="500" y="182" font-size="26" font-weight="900" fill="#0b7f99" text-anchor="middle">기권</text></g>
+      <g data-step="4"><rect x="20" y="236" width="150" height="46" rx="12" fill="#fff" opacity=".92"/><text x="95" y="268" font-size="26" font-weight="900" fill="#198a4a" text-anchor="middle">생물권</text>
+        <path d="M95 284 L80 298 M170 260 L320 286 M170 262 L515 384" stroke="#198a4a" stroke-width="3" stroke-dasharray="6 5" fill="none"/></g>
+      <g data-step="5"><rect x="240" y="22" width="140" height="46" rx="12" fill="#fff" opacity=".92"/><text x="310" y="54" font-size="26" font-weight="900" fill="#6741d9" text-anchor="middle">외권</text></g>
+      <text x="715" y="512" font-size="18" fill="#fff" text-anchor="end">⚠ 높이와 두께는 실제 비율이 아닙니다</text>
+    </svg>
+    <div class="lines" style="font-size:28px">
+      <p data-step="1">지구의 표면과 내부(지각·맨틀·핵) → <b class="blank" data-n="1" data-step="1">지권</b></p>
+      <p data-step="2">바다·빙하·지하수·하천·호수 → <b class="blank" data-n="2" data-step="2">수권</b></p>
+      <p data-step="3">지구를 둘러싼 대기 → <b class="blank" data-n="3" data-step="3">기권</b></p>
+      <p data-step="4">모든 생명체와 사는 공간, 다른 세 권역에 걸쳐 있다 → <b class="blank" data-n="4" data-step="4">생물권</b></p>
+      <p data-step="5">대기권 바깥의 우주 공간 → <b class="blank" data-n="5" data-step="5">외권</b> · 지구는 태양계라는 더 큰 시스템의 구성 요소</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>서로 영향을 주고받는 구성 요소들의 모임을 시스템이라고 합니다. 지구시스템의 구성 요소를 하나씩 엽니다.</p>
+    <p data-at="1">빈칸 1번, 지권. 지구의 표면과 그 안쪽, 지각·맨틀·외핵·내핵입니다.</p>
+    <p data-at="2">빈칸 2번, 수권. 바다뿐 아니라 빙하, 지하수, 하천, 호수까지 물이 있는 곳은 모두 수권입니다.</p>
+    <p data-at="3">빈칸 3번, 기권. 지구를 둘러싼 대기입니다.</p>
+    <p data-at="4">빈칸 4번, 생물권. 숲은 땅에, 물고기는 바다에, 새는 대기에 걸쳐 삽니다. 생물권은 다른 세 권역에 걸쳐 있어요.</p>
+    <p data-at="5">빈칸 5번, 외권. 대기권 바깥의 우주입니다. 지구도 태양계라는 더 큰 시스템의 한 부품이라, 시스템을 돌리는 에너지가 거의 다 바깥에서 들어옵니다.</p>
+  </aside>
+</section>
+
+<!-- 5 권역 들여다보기 -->
+<section class="slide soft" id="s-look" data-title="권역마다 들여다보기" data-part="① 권역">
+  <p class="kicker">① 지구시스템의 구성 요소 · 세 권역의 속</p>
+  <h2>권역마다 들여다보기</h2>
+  <div class="cols c3 three">
+    <div class="card" data-step="1">
+      <h3 class="c-teal">기권</h3>
+      <svg viewBox="0 0 380 250" width="380" height="250" aria-label="아래에서 위로 대류권, 성층권, 중간권, 열권">
+        <rect x="0" y="0" width="380" height="60" rx="8" fill="#e5dbff"/><rect x="0" y="62" width="380" height="60" fill="#d0ebff"/><rect x="0" y="124" width="380" height="60" fill="#c5f6fa"/><rect x="0" y="186" width="380" height="60" rx="8" fill="#d3f9d8"/>
+        <g font-size="24" font-weight="900" fill="#161b28" text-anchor="middle"><text x="190" y="39">열권</text><text x="190" y="101">중간권</text><text x="190" y="163">성층권</text><text x="190" y="225">대류권 (날씨)</text></g>
+      </svg>
+      <p class="mt">질소 약 78%, 산소 약 21%</p>
+      <p>높이에 따라 네 층으로 나뉜다</p>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="c-orange">지권</h3>
+      <svg viewBox="0 0 380 250" width="380" height="250" aria-label="바깥에서 안으로 지각, 맨틀, 외핵, 내핵">
+        <circle cx="125" cy="125" r="120" fill="#8a6a45"/><circle cx="125" cy="125" r="114" fill="#e8590c"/><circle cx="125" cy="125" r="66" fill="#fab005"/><circle cx="125" cy="125" r="23" fill="#fff3bf"/>
+        <g stroke="#161b28" stroke-width="2" fill="none"><path d="M218 50 L262 40"/><path d="M215 100 L262 95"/><path d="M170 150 L262 150"/><path d="M135 135 L180 205 H262"/></g>
+        <g font-size="22" font-weight="900" fill="#161b28"><text x="268" y="48">지각</text><text x="268" y="103">맨틀</text><text x="268" y="158">외핵</text><text x="268" y="213">내핵</text></g>
+      </svg>
+      <p class="mt">지각 · 맨틀 · 외핵 · 내핵</p>
+      <p class="small">⚠ 지각의 두께는 과장했습니다</p>
+    </div>
+    <div class="card" data-step="3">
+      <h3 class="c-blue">수권</h3>
+      <svg viewBox="0 0 380 250" width="380" height="250" aria-label="지구의 물 가운데 바닷물이 약 96.5퍼센트, 빙하와 지하수가 각각 약 1.7퍼센트">
+        <rect x="20" y="10" width="110" height="230" rx="8" fill="#1462d8"/>
+        <rect x="20" y="10" width="110" height="8" fill="#a5d8ff"/>
+        <text x="75" y="140" font-size="22" font-weight="900" fill="#fff" text-anchor="middle">바닷물</text>
+        <path d="M130 14 L160 14" stroke="#161b28" stroke-width="2"/>
+        <g font-size="21" font-weight="800" fill="#161b28"><text x="166" y="22">빙하 약 1.7%</text><text x="166" y="52">지하수 약 1.7%</text><text x="166" y="82">하천·대기 등</text><text x="166" y="106">아주 적음</text>
+          <text x="166" y="200" font-size="26" font-weight="900" fill="#1462d8">바닷물</text><text x="166" y="232" font-size="26" font-weight="900" fill="#1462d8">약 96.5%</text></g>
+      </svg>
+      <p class="mt">지구의 물 대부분이 바닷물</p>
+      <p>비열이 커서 기온 변화를 누그러뜨린다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>세 권역의 속을 잠깐 봅니다. 빈칸은 없습니다.</p>
+    <p data-at="1">기권은 질소 약 78%, 산소 약 21%이고, 높이에 따라 대류권·성층권·중간권·열권으로 나뉩니다. 날씨는 맨 아래 대류권에서 일어나요. 성층권은 오늘 화산 이야기에서 다시 나옵니다.</p>
+    <p data-at="2">지권은 지각·맨틀·외핵·내핵입니다. 지각은 실제로 아주 얇은데 보이게 하려고 두껍게 그렸어요.</p>
+    <p data-at="3">수권의 물은 대부분 바닷물, 약 96.5%입니다. 단원 화면 저장량으로 나누면 빙하와 지하수가 각각 1.7% 정도이고, 하천과 대기 속 물은 아주 적습니다. 바닷물은 비열이 커서 기온 변화를 누그러뜨립니다.</p>
+  </aside>
+</section>
+
+<!-- 6 물의 순환 -->
+<section class="slide" id="s-water" data-title="물 한 방울은 얼마나 머물까" data-part="② 순환과 상호 작용">
+  <p class="kicker">② 물질 순환과 상호 작용 · 물의 저장고 (단원 화면 추정값)</p>
+  <h2>물 한 방울은 저장고에 얼마나 머물까</h2>
+  <svg viewBox="0 0 1400 330" width="1400" height="330" aria-label="왼쪽은 바다에서 증발해 구름이 되고 비로 내려 강을 따라 바다로 돌아오는 물의 순환, 오른쪽은 저장고별로 머무는 시간 막대: 대기 약 9.3일, 하천 약 21.5일, 바닷물 약 3,083년">
+    <defs>
+      <marker id="s6-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#1462d8"/></marker>
+    </defs>
+    <rect x="0" y="0" width="560" height="320" rx="18" fill="#f2f5f9"/>
+    <path d="M0 250 L280 250 L280 320 L0 320Z" fill="#1c7ed6" opacity=".85"/>
+    <path d="M280 250 Q360 200 420 140 L560 120 L560 320 L280 320Z" fill="#b08968"/>
+    <path d="M520 130 Q450 200 290 252" fill="none" stroke="#4dabf7" stroke-width="10" stroke-linecap="round"/>
+    <g fill="#fff" stroke="#adb5bd" stroke-width="3"><ellipse cx="300" cy="100" rx="70" ry="30"/><ellipse cx="360" cy="90" rx="60" ry="28"/></g>
+    <g data-step="1" fill="none" stroke="#1462d8" stroke-width="5" marker-end="url(#s6-a)">
+      <path d="M120 240 Q150 180 230 120"/>
+      <path d="M380 128 L410 170 M420 125 L450 167"/>
+      <path d="M420 230 Q360 260 300 262"/>
+    </g>
+    <g data-step="1" font-size="22" font-weight="900" fill="#1462d8"><text x="40" y="170">증발</text><text x="440" y="120">비·눈</text><text x="350" y="300" fill="#fff">강물</text></g>
+    <g font-size="22" font-weight="900" fill="#161b28"><text x="20" y="40">해마다 약 505,000 km³가 오간다</text></g>
+    <g font-size="23" font-weight="900" fill="#161b28"><text x="640" y="40">머무는 시간 (가로는 10배씩 늘어나는 눈금)</text></g>
+    <g font-size="23" font-weight="900" fill="#161b28" text-anchor="end"><text x="790" y="112">대기</text><text x="790" y="192">하천</text><text x="790" y="272">바닷물</text></g>
+    <g data-step="2"><rect x="810" y="84" width="130" height="40" rx="8" fill="#e8590c"/><text x="955" y="113" font-size="23" font-weight="900" fill="#e8590c">약 9.3일</text></g>
+    <g data-step="2"><rect x="810" y="164" width="170" height="40" rx="8" fill="#0b7f99"/><text x="995" y="193" font-size="23" font-weight="900" fill="#0b7f99">약 21.5일</text></g>
+    <g data-step="3"><rect x="810" y="244" width="500" height="40" rx="8" fill="#1462d8"/><text x="1300" y="273" font-size="23" font-weight="900" fill="#fff" text-anchor="end">약 3,083년</text></g>
+    <text x="1395" y="318" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 막대 길이는 로그 눈금의 모식도</text>
+  </svg>
+  <p class="row" style="margin:16px 0 12px"><span class="formcard">머무는 시간 = 저장량 ÷ 해마다 드나드는 양</span></p>
+  <div class="tight">
+    <p data-step="1">같은 물이 증발 → 비 → 강물로 권역 사이를 돌고 돈다 → <b class="blank" data-n="6" data-step="1">물의 순환</b></p>
+    <p data-step="2">12,900 km³ ÷ 505,000 km³/년 → 약 9.3일 · 가장 빨리 갈아치워지는 저장고는 <b class="blank" data-n="7" data-step="2">대기</b></p>
+    <p data-step="3">바닷물: 1,338,000,000 km³ ÷ 434,000 km³/년 → 약 <b class="blank" data-n="8" data-step="3">3,083</b>년</p>
+  </div>
+  <aside class="script">
+    <p>모래를 산에서 바다까지 실어 나른 것은 물입니다. 그런데 물은 한곳에 가만히 있지 않아요. 계산식은 간단합니다. 머무는 시간은 저장량 나누기 해마다 드나드는 양.</p>
+    <p data-at="1">바다에서 증발해 기권으로, 비가 되어 땅으로, 강을 따라 다시 바다로. 빈칸 6번, 물의 순환입니다. 해마다 약 505,000 km³가 증발하고 같은 양이 내립니다.</p>
+    <p data-at="2">대기 속 물은 12,900 km³뿐인데 해마다 505,000 km³가 드나듭니다. 나누면 약 9.3일. 빈칸 7번, 대기가 가장 빨리 갈아치워지는 저장고입니다. 하천은 약 21.5일이에요.</p>
+    <p data-at="3">바닷물은 약 3,083년. 빈칸 8번입니다. 왜 이렇게 오래 머물까요? 다음 장면에서 고릅니다.</p>
+  </aside>
+</section>
+
+<!-- 7 확인 -->
+<section class="slide" id="s-check1" data-title="바닷물은 왜 오래 머물까" data-part="② 순환과 상호 작용">
+  <p class="kicker">② 물질 순환과 상호 작용 · 확인</p>
+  <h2>바닷물이 대기 속 물보다 훨씬 오래 머무는 까닭은?</h2>
+  <div class="opts" style="max-width:1300px">
+    <div class="opt wrong" data-step="1">① 바닷물은 증발하지 않기 때문이다</div>
+    <div class="opt right" data-step="1">② 저장량에 견주어 해마다 드나드는 양이 아주 적기 때문이다</div>
+    <div class="opt wrong" data-step="1">③ 바닷물은 무거워서 순환에 끼지 않기 때문이다</div>
+    <div class="opt wrong" data-step="1">④ 대기 속 물이 바닷물보다 더 많기 때문이다</div>
+  </div>
+  <p class="small mt" data-step="2">순환이 지금의 1.55배로 빨라지면 바닷물이 머무는 시간은 약 3,083 ÷ 1.55 ≈ 1,989년으로 짧아진다</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ②. 바닷물도 해마다 434,000 km³나 증발합니다. 다만 저장량이 13억 km³가 넘어서, 그에 견주면 드나드는 양이 아주 적은 거예요. 저장량이 커서가 아니라 비율의 문제입니다.</p>
+    <p data-at="2">단원 화면 미션처럼 순환을 1.55배로 빠르게 하면 2,000년 아래로 내려갑니다. 순환이 빨라지면 머무는 시간은 그만큼 짧아집니다.</p>
+  </aside>
+</section>
+
+<!-- 8 권역 지도 -->
+<section class="slide" id="s-map" data-title="권역 사이를 오가는 여덟 길" data-part="② 순환과 상호 작용">
+  <p class="kicker">② 물질 순환과 상호 작용 · 권역 지도</p>
+  <h2>권역 사이를 오가는 여덟 길</h2>
+  <div class="cols" style="grid-template-columns:700px 1fr;align-items:center">
+    <svg viewBox="0 0 700 500" width="700" height="500" aria-label="외권, 기권, 지권, 수권, 생물권 다섯 원 사이를 잇는 여덟 갈래의 길">
+      <g stroke-width="6" fill="none" stroke-linecap="round">
+        <g data-step="1" stroke="#6741d9"><path d="M310 92 L190 170"/><path d="M390 92 L510 170"/></g>
+        <g data-step="2" stroke="#0b7f99"><path d="M210 190 L490 190"/><path d="M150 230 L150 330"/><path d="M200 230 Q300 330 480 370"/></g>
+        <g data-step="3" stroke="#198a4a"><path d="M550 230 L550 330"/><path d="M210 380 L490 380"/><path d="M200 340 Q330 270 480 225"/></g>
+      </g>
+      <g font-size="26" font-weight="900" text-anchor="middle">
+        <circle cx="350" cy="62" r="52" fill="#ece5ff" stroke="#6741d9" stroke-width="4"/><text x="350" y="71" fill="#6741d9">외권</text>
+        <circle cx="150" cy="190" r="56" fill="#e3fafc" stroke="#0b7f99" stroke-width="4"/><text x="150" y="199" fill="#0b7f99">기권</text>
+        <circle cx="550" cy="190" r="56" fill="#fff4e6" stroke="#e8590c" stroke-width="4"/><text x="550" y="199" fill="#c2410c">지권</text>
+        <circle cx="150" cy="380" r="56" fill="#e7f5ff" stroke="#1462d8" stroke-width="4"/><text x="150" y="389" fill="#1462d8">수권</text>
+        <circle cx="550" cy="380" r="56" fill="#ebfbee" stroke="#198a4a" stroke-width="4"/><text x="550" y="389" fill="#198a4a">생물권</text>
+      </g>
+      <g font-size="20" font-weight="800" fill="#161b28" class="halo">
+        <g data-step="1"><text x="140" y="110">태양 복사</text><text x="470" y="110">인력·운석</text></g>
+        <g data-step="2"><text x="290" y="178">바람·화산재</text><text x="20" y="290">증발·비</text><text x="250" y="320">광합성·호흡</text></g>
+        <g data-step="3"><text x="560" y="290">토양·풍화</text><text x="290" y="410">서식지·플랑크톤</text><text x="350" y="252">하천·파도</text></g>
+      </g>
+      <text x="690" y="492" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 길은 대표적인 것만 그렸습니다</text>
+    </svg>
+    <div class="lines" style="font-size:28px">
+      <p data-step="1">외권 → 태양 복사 에너지가 들어온다 (시스템을 움직이는 에너지의 99.9% 이상) · 달과 태양의 인력은 밀물과 썰물</p>
+      <p data-step="2">기권 ↔ 수권: 해마다 약 505,000 km³가 증발하고 내린다</p>
+      <p data-step="3">수권 → 지권: 강이 해마다 약 200억 t의 퇴적물을 바다로 나른다</p>
+      <p data-step="4">권역끼리 영향을 주고받는 것 → <b class="blank" data-n="9" data-step="4">상호 작용</b> · 오가는 것은 물질과 <b class="blank" data-n="10" data-step="4">에너지</b></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>이제 전체 지도입니다. 다섯 권역 사이에 무엇이 오가는지 길을 하나씩 엽니다.</p>
+    <p data-at="1">외권에서 들어오는 두 길. 태양 복사 에너지가 대기권 위로 들어오고, 지구는 받은 만큼을 적외선으로 돌려보냅니다. 시스템을 움직이는 에너지의 99.9% 이상이 이 길로 들어와요. 달과 태양의 인력은 밀물과 썰물을 일으킵니다.</p>
+    <p data-at="2">기권을 둘러싼 길. 바람이 바위를 깎고 화산재가 대기를 바꿉니다. 바다와 대기 사이에는 해마다 약 505,000 km³의 물이 오가고, 광합성과 호흡은 대기의 산소와 이산화 탄소를 바꿉니다.</p>
+    <p data-at="3">나머지 길. 뿌리와 지의류는 풍화를 빠르게 하고, 하천과 파도는 땅을 깎아 해마다 약 200억 t의 퇴적물을 바다로 나릅니다. 모래 한 알이 온 길이죠.</p>
+    <p data-at="4">이렇게 권역끼리 영향을 주고받는 것이 빈칸 9번, 상호 작용입니다. 오가는 것은 물질만이 아니라 빈칸 10번, 에너지도 함께입니다.</p>
+  </aside>
+</section>
+
+<!-- 9 원인과 결과 -->
+<section class="slide soft" id="s-sort" data-title="무엇이 무엇을 바꾸었나" data-part="② 순환과 상호 작용">
+  <p class="kicker">② 물질 순환과 상호 작용 · 실제로 일어난 일 여덟 가지</p>
+  <h2>무엇이 무엇을 바꾸었나</h2>
+  <div class="cols c4">
+    <div class="card" data-step="1"><h3 class="c-orange">지권 → 기권</h3><p>🌋 피나투보 화산재가 성층권을 덮어 기온이 내려갔다</p><p>🏜️ 봄마다 중국 내륙의 흙먼지가 하늘을 덮는다 (황사)</p></div>
+    <div class="card" data-step="2"><h3 class="c-teal">기권 → 지권</h3><p>🪨 바람에 실린 모래가 바위 아래를 깎아 버섯바위를 만든다</p><p>❄️ 기온이 오르내리며 바위가 팽창·수축하다 부서진다</p></div>
+    <div class="card" data-step="3"><h3 class="c-green">생물권 → 기권</h3><p>🦠 약 24억 년 전, 광합성 생물이 늘며 대기에 쌓이기 시작했다</p><p style="margin-top:16px">→ <b class="blank" data-n="11" data-step="3">산소</b></p><p>🌳 숲이 이산화 탄소를 빨아들여 대기 중 농도를 낮춘다</p></div>
+    <div class="card" data-step="4"><h3 class="c-blue">수권 → 지권</h3><p>🏞️ 강물이 산을 깎고 알갱이를 날라 하구에 삼각주를 쌓는다</p><p>🌊 파도가 해안 절벽을 깎아 해식 동굴을 만든다</p></div>
+  </div>
+  <aside class="script">
+    <p>단원 화면에서 나눈 여덟 가지 사건입니다. 어느 쪽이 원인이고 어느 쪽이 결과인지 가려내는 것이 시스템으로 보는 첫걸음입니다.</p>
+    <p data-at="1">땅에서 나온 것이 대기를 바꾼 경우. 화산재와 황사입니다.</p>
+    <p data-at="2">대기가 땅을 깎고 부순 경우. 바람의 침식과 기온 변화에 따른 풍화입니다.</p>
+    <p data-at="3">생물이 대기의 성분을 바꾼 경우. 약 24억 년 전 광합성 생물이 늘면서 대기에 빈칸 11번, 산소가 쌓이기 시작했습니다. 지금 대기에 산소가 21%나 있는 것은 생물권이 한 일이에요.</p>
+    <p data-at="4">물이 땅을 깎고 쌓은 경우. 모래 한 알이 바다까지 온 길이 바로 이것입니다.</p>
+  </aside>
+</section>
+
+<!-- 10 피나투보 -->
+<section class="slide" id="s-pina" data-title="화산 하나가 식힌 지구" data-part="③ 화산과 연쇄">
+  <p class="kicker">③ 화산이 일으킨 연쇄 · 1991년 6월 필리핀 피나투보 화산</p>
+  <h2>화산 하나가 지구 전체를 식혔다</h2>
+  <svg viewBox="0 0 1400 360" width="1400" height="360" aria-label="화산이 이산화 황을 성층권까지 뿜어 올리고, 황산 알갱이 장막이 햇빛 일부를 우주로 되돌려 보내 지표 기온이 내려간다">
+    <defs>
+      <linearGradient id="s10-sky" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d0e4ff"/><stop offset="1" stop-color="#f2f8ff"/></linearGradient>
+      <marker id="s10-y" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#f08c00"/></marker>
+    </defs>
+    <rect x="0" y="0" width="1400" height="300" rx="18" fill="url(#s10-sky)"/>
+    <rect x="0" y="40" width="1400" height="90" fill="#e5dbff" opacity=".7"/>
+    <text x="20" y="72" font-size="22" font-weight="900" fill="#6741d9">성층권</text>
+    <text x="20" y="200" font-size="22" font-weight="900" fill="#5f6b80">대류권</text>
+    <path d="M140 300 L300 190 Q320 176 340 190 L500 300Z" fill="#8a6a45"/>
+    <rect x="0" y="300" width="1400" height="56" rx="8" fill="#b08968"/>
+    <g data-step="1">
+      <path d="M310 186 Q290 140 320 110 Q300 70 340 60 Q390 50 420 80" fill="#868e96" opacity=".8"/>
+      <path d="M330 186 Q350 140 330 105" fill="none" stroke="#495057" stroke-width="10" opacity=".6"/>
+      <text x="470" y="232" font-size="22" font-weight="900" fill="#161b28">↖ 이산화 황 약 20 Tg</text>
+    </g>
+    <g data-step="2" fill="#fab005" opacity=".9">
+      <circle cx="440" cy="70" r="5"/><circle cx="520" cy="95" r="5"/><circle cx="600" cy="62" r="5"/><circle cx="680" cy="100" r="5"/><circle cx="760" cy="70" r="5"/><circle cx="840" cy="96" r="5"/><circle cx="920" cy="64" r="5"/><circle cx="1000" cy="98" r="5"/><circle cx="1080" cy="70" r="5"/><circle cx="1160" cy="95" r="5"/><circle cx="1240" cy="66" r="5"/><circle cx="1320" cy="96" r="5"/>
+      <circle cx="480" cy="84" r="4"/><circle cx="640" cy="82" r="4"/><circle cx="800" cy="84" r="4"/><circle cx="960" cy="82" r="4"/><circle cx="1120" cy="84" r="4"/><circle cx="1280" cy="82" r="4"/>
+    </g>
+    <g data-step="2"><text x="700" y="160" font-size="22" font-weight="900" fill="#b35c00" text-anchor="middle">황산 알갱이(에어로졸) 장막</text></g>
+    <g data-step="3" stroke="#f08c00" stroke-width="6" fill="none" marker-end="url(#s10-y)">
+      <path d="M960 0 L1010 72"/><path d="M1010 72 L1060 2"/>
+      <path d="M1140 0 L1260 280"/>
+    </g>
+    <g data-step="3">
+      <text x="940" y="30" font-size="21" font-weight="900" fill="#b35c00" text-anchor="end">일부는 우주로</text>
+      <rect x="760" y="196" width="34" height="96" rx="17" fill="#fff" stroke="#161b28" stroke-width="3"/><rect x="768" y="250" width="18" height="36" rx="9" fill="#1462d8"/>
+      <text x="810" y="262" font-size="24" font-weight="900" fill="#1462d8">이듬해 지구 평균 기온 약 −0.5 ℃</text>
+    </g>
+    <text x="1395" y="350" font-size="18" fill="#fff" text-anchor="end">⚠ 높이는 실제 비율이 아닙니다 · 1 Tg = 100만 t</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">지권: 화산이 이산화 황을 <b class="blank" data-n="12" data-step="1">성층권</b>까지 뿜어 올렸다</p>
+    <p data-step="2">기권: 이산화 황이 아주 작은 황산 알갱이가 되어 몇 해 동안 지구를 감쌌다</p>
+    <p data-step="3">장막이 햇빛 일부를 우주로 되돌려 보내 이듬해 지구 평균 기온이 약 <b class="blank" data-n="13" data-step="3">0.5</b> ℃ 내려갔다</p>
+  </div>
+  <aside class="script">
+    <p>모래 한 알에 섞여 있던 화산 유리 3%를 기억하나요? 이번에는 화산 하나가 지구 전체를 바꾼 사건입니다. 1991년 6월, 필리핀 피나투보 화산이 20세기에 손꼽히는 큰 분화를 했습니다.</p>
+    <p data-at="1">이산화 황 약 20 Tg, 그러니까 2,000만 t이 빈칸 12번, 성층권까지 올라갔습니다.</p>
+    <p data-at="2">성층권에서 이산화 황은 아주 작은 황산 알갱이, 에어로졸이 되어 지구를 한 바퀴 둘렀습니다. 성층권에는 비가 내리지 않아 오래 머뭅니다.</p>
+    <p data-at="3">이 얇은 장막이 햇빛 일부를 우주로 되돌려 보내자, 이듬해 지구 평균 기온이 빈칸 13번, 약 0.5 ℃ 내려갔습니다. 관측과 모형으로 추정한 값입니다.</p>
+  </aside>
+</section>
+
+<!-- 11 그래프 -->
+<section class="slide" id="s-curve" data-title="식히는 효과는 얼마나 갈까" data-part="③ 화산과 연쇄">
+  <p class="kicker">③ 화산이 일으킨 연쇄 · 폭발 뒤 기온 변화 (단원 화면 모형, 이산화 황 20 Tg)</p>
+  <h2>식히는 효과는 얼마나 갈까</h2>
+  <div class="cols" style="grid-template-columns:760px 1fr;align-items:center">
+    <svg id="curveSvg" viewBox="0 0 760 440" width="760" height="440" aria-label="폭발 뒤 기온 변화 그래프: 6개월 뒤 약 −0.5 ℃로 가장 많이 식고, 그 뒤 서서히 회복되어 약 15개월 뒤에는 절반 아래로 줄어든다"></svg>
+    <div class="lines">
+      <p data-step="1">폭발 약 6개월 뒤 가장 많이 식는다: 약 −0.5 ℃</p>
+      <p data-step="2">약 15개월이 지나면 식히는 효과가 절반 아래로</p>
+      <p data-step="3">에어로졸은 몇 해 안에 가라앉는다 → 화산의 냉각은 <b class="blank" data-n="14" data-step="3">일시적</b></p>
+      <p class="small" data-step="4">화산이 내뿜는 이산화 탄소는 사람이 화석 연료로 내놓는 양의 1% 안팎 → 짧게 보면 식히는 쪽</p>
+    </div>
+  </div>
+  <p class="note">단원 화면 모형: 가장 많이 식는 정도는 이산화 황의 양에 비례(20 Tg → −0.5 ℃), 6개월 뒤부터 약 1년의 시간 척도로 줄어든다고 본 단순 모형입니다.</p>
+  <aside class="script">
+    <p>단원 화면의 모형으로 피나투보 규모, 이산화 황 20 Tg을 넣은 그래프입니다. 가로는 폭발 뒤 지난 개월 수예요.</p>
+    <p data-at="1">약 6개월 뒤 가장 많이 식어 −0.5 ℃입니다.</p>
+    <p data-at="2">그 뒤 에어로졸이 줄면서 회복됩니다. 약 15개월이 지나면 식히는 효과가 절반 아래로 줄어요.</p>
+    <p data-at="3">황산 알갱이는 몇 해 안에 가라앉습니다. 그래서 화산의 냉각은 빈칸 14번, 일시적입니다.</p>
+    <p data-at="4">화산은 이산화 탄소도 내뿜지만, 그 양은 사람이 화석 연료를 태워 내놓는 양의 1% 안팎이라 짧게 보면 식히는 효과가 훨씬 큽니다.</p>
+  </aside>
+</section>
+
+<!-- 12 연쇄 -->
+<section class="slide soft" id="s-chain" data-title="연쇄는 네 권역을 돈다" data-part="③ 화산과 연쇄">
+  <p class="kicker">③ 화산이 일으킨 연쇄 · 한곳의 변화는 다른 곳에 나타난다</p>
+  <h2>연쇄는 네 권역을 돈다</h2>
+  <p class="c-mute" style="font-size:26px;font-weight:800;margin-bottom:10px">화산이 폭발하면</p>
+  <div class="chain" data-step="1">
+    <div class="card"><h3 class="c-orange">지권</h3><p>이산화 황을 성층권까지 뿜어 올린다</p></div>
+    <div class="card"><h3 class="c-teal">기권</h3><p>황산 알갱이가 햇빛을 되돌려 기온이 내려간다</p></div>
+    <div class="card"><h3 class="c-green">생물권</h3><p>일조량이 줄어 광합성이 느려지고 수확이 준다</p></div>
+    <div class="card"><h3 class="c-blue">수권</h3><p>증발량과 강수 분포가 바뀌고 바다 표층이 식는다</p></div>
+  </div>
+  <p class="c-mute" style="font-size:26px;font-weight:800;margin:26px 0 10px">오랫동안 비가 거의 오지 않으면</p>
+  <div class="chain">
+    <div class="card" data-step="2"><h3 class="c-teal">기권</h3><p>강수량이 크게 줄어드는 이상 기후</p></div>
+    <div class="card" data-step="3"><h3 class="c-blue">수권</h3><p>하천과 호수의 수위, 지하수면이 내려간다</p></div>
+    <div class="card" data-step="4"><h3 class="c-green">생물권</h3><p>식생이 말라 죽고 농작물 수확량이 준다</p></div>
+    <div class="card" data-step="5"><h3 class="c-orange">지권</h3><p>식생이 사라진 토양이 바람에 깎인다</p><p style="margin-top:16px">→ <b class="blank" data-n="15" data-step="5">사막화</b></p></div>
+  </div>
+  <aside class="script">
+    <p>지권에서 시작된 사건이 어디까지 퍼지는지 사슬로 그려 봅니다.</p>
+    <p data-at="1">화산이 폭발하면 지권에서 기권으로, 기온이 내려가면 생물권의 광합성과 농작물, 수권의 증발과 바다 표층까지 바뀝니다.</p>
+    <p data-at="2">단원 화면 마지막 순서 맞히기입니다. 오랫동안 비가 오지 않으면 기권에서 시작합니다.</p>
+    <p data-at="3">하천과 호수의 수위가 낮아지고 지하수면이 내려갑니다.</p>
+    <p data-at="4">물이 부족해 식생이 말라 죽고 수확이 줄어듭니다.</p>
+    <p data-at="5">식생이 사라진 토양은 바람에 쉽게 깎여 빈칸 15번, 사막화가 진행됩니다. 연쇄가 네 권역을 한 바퀴 돌았습니다.</p>
+  </aside>
+</section>
+
+<!-- 13 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>모래 한 알은 네 권역을 모두 지나왔다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1">지구시스템 = <b>지권 · 수권 · 기권 · 생물권 · 외권</b> · 지구도 태양계라는 더 큰 시스템의 구성 요소</li>
+    <li data-k="2" data-step="2"><b>물질 순환</b>: 같은 물이 권역 사이를 돈다 · 머무는 시간 = 저장량 ÷ 해마다 드나드는 양 (대기 약 9.3일, 바닷물 약 3,083년)</li>
+    <li data-k="3" data-step="3"><b>상호 작용</b>: 권역 사이에 물질과 에너지가 오가므로 한곳의 변화는 다른 곳에 반드시 나타난다</li>
+    <li data-k="4" data-step="4">피나투보: 지권 → 기권 → 생물권 · 수권으로 이어진 연쇄, 지구 평균 기온 약 0.5 ℃ 하강 (일시적)</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 첫 추리로 돌아갑니다. 답은 ㉣ 네 권역 모두입니다. 석영은 지권의 화강암에서 왔지만, 그것을 떼어 내고 굴리고 나른 것은 빗물과 강물(수권), 바람과 기온 변화(기권), 뿌리와 지의류(생물권)였고, 조개껍데기 조각이 결정적인 증거였습니다.</p></aside>
+</section>
+
+<!-- 14 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 생물권이 기권을 바꾼 예는?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 봄마다 흙먼지가 하늘을 덮는다</div>
+        <div class="opt right" data-step="1">㉡ 숲이 이산화 탄소를 빨아들인다</div>
+        <div class="opt wrong" data-step="1">㉢ 파도가 해안 절벽을 깎는다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 하천의 물은 저장량 2,120 km³, 해마다 드나드는 양 36,000 km³이다. 머무는 시간은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 약 2일</div>
+        <div class="opt right" data-step="2">㉡ 약 21일</div>
+        <div class="opt wrong" data-step="2">㉢ 약 17년</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. ㉠은 지권이 기권을, ㉢은 수권이 지권을 바꾼 예입니다.</p>
+    <p data-at="2">2번은 ㉡. 2,120 ÷ 36,000 ≈ 0.059년, 날수로 약 21일입니다. ㉢은 거꾸로 나눈 값이에요.</p>
+  </aside>
+</section>
+
+<!-- 15 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ① 「모래 한 알의 여행」</h2>
+  <div class="cols">
+    <div class="card"><h3>직접 맞춰 보세요</h3><p>저장고마다 머무는 시간 재기, 권역 지도의 여덟 길 찾기, 이산화 황의 양을 바꿔 피나투보처럼 −0.5 ℃ 만들기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 02 지구시스템의 에너지원</h3><p>내일 아침 태양이 빛을 잃는다면, 그래도 한동안 계속될 일은 무엇일까요? 지구에 있는 난로 세 대의 크기를 잽니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ①을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* 폭발 뒤 기온 변화 — 단원 화면 모형: 최대 냉각 = −0.5 × (이산화 황 Tg ÷ 20), 6개월까지 선형으로 커지고 그 뒤 exp(−(t−6)/12) */
+  var svg = document.getElementById("curveSvg"), X0 = 100, X1 = 730, Y0 = 70, Y1 = 360;
+  function frac(t) { return t <= 6 ? t / 6 : Math.exp(-(t - 6) / 12); }
+  function X(t) { return X0 + t / 48 * (X1 - X0); }
+  function Y(d) { return Y0 + (-d) / 0.6 * (Y1 - Y0); }
+  var h = "<text x='" + (X0 - 80) + "' y='34' font-size='20' font-weight='900' fill='#5f6b80'>기온 변화 (℃)</text>";
+  [0, -0.2, -0.4, -0.6].forEach(function (d) {
+    h += "<line x1='" + X0 + "' y1='" + Y(d) + "' x2='" + X1 + "' y2='" + Y(d) + "' stroke='#e8edf4' stroke-width='2'/>";
+    h += "<text x='" + (X0 - 12) + "' y='" + (Y(d) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + (d === 0 ? "0" : "−" + Math.abs(d).toFixed(1)) + "</text>";
+  });
+  h += "<line x1='" + X0 + "' y1='" + Y(0) + "' x2='" + X1 + "' y2='" + Y(0) + "' stroke='#161b28' stroke-width='4'/>";
+  [0, 12, 24, 36, 48].forEach(function (t) { h += "<text x='" + X(t) + "' y='" + (Y1 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + t + "</text>"; });
+  h += "<text x='" + X1 + "' y='" + (Y1 + 60) + "' font-size='20' font-weight='900' fill='#5f6b80' text-anchor='end'>폭발 뒤 지난 시간 (개월)</text>";
+  var p = "", area = "M" + X(0) + " " + Y(0);
+  for (var i = 0; i <= 96; i++) { var t = 48 * i / 96, d = -0.5 * frac(t); p += (i ? " L" : "M") + X(t).toFixed(1) + " " + Y(d).toFixed(1); area += " L" + X(t).toFixed(1) + " " + Y(d).toFixed(1); }
+  area += " L" + X(48) + " " + Y(0) + "Z";
+  h += "<path d='" + area + "' fill='rgba(20,98,216,.10)'/><path d='" + p + "' fill='none' stroke='#1462d8' stroke-width='5'/>";
+  h += "<g data-step='1'><circle cx='" + X(6) + "' cy='" + Y(-0.5) + "' r='9' fill='#e8590c'/><text x='" + (X(6) + 16) + "' y='" + (Y(-0.5) + 8) + "' font-size='21' font-weight='900' fill='#e8590c'>6개월 · −0.5 ℃</text></g>";
+  var t15 = 15, d15 = -0.5 * frac(t15);
+  h += "<g data-step='2'><line x1='" + X(t15) + "' y1='" + Y(0) + "' x2='" + X(t15) + "' y2='" + Y(-0.6) + "' stroke='#495057' stroke-width='3' stroke-dasharray='8 6'/><circle cx='" + X(t15) + "' cy='" + Y(d15) + "' r='8' fill='#495057'/><text x='" + (X(t15) + 14) + "' y='" + (Y(d15) + 40) + "' font-size='21' font-weight='900' fill='#495057'>15개월 · 약 " + d15.toFixed(2).replace("-", "−") + " ℃ (절반 아래)</text></g>";
+  h += "<g data-step='3'><text x='" + X(38) + "' y='" + Y(-0.17) + "' font-size='21' font-weight='900' fill='#198a4a' text-anchor='middle'>몇 해 뒤 거의 회복</text></g>";
+  svg.innerHTML = h;
+})();
+</script>
+</body>
+</html>

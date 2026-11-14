@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 별에서 만들어지는 원소 (통합과학1 Ⅱ-1 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  table.ledger td { font-size: 27px; padding: 14px 12px; vertical-align: middle; }
+  table.ledger th { padding: 8px 12px; }
+  .born { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 26px; }
+  .born .card { text-align: center; padding: 26px 22px; }
+  .born .card h3 { font-size: 32px; margin-bottom: 4px; }
+  .born .card .sub { font-size: 23px; color: var(--mute); margin: 0 0 16px; }
+  .born .els { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .born .el { width: 92px; height: 92px; border-radius: 16px; background: #fff; border: 4px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .born .el b { font-size: 36px; line-height: 1; }
+  .born .el span { font-size: 19px; font-weight: 800; color: var(--mute); margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg id="coverSvg" viewBox="0 0 1600 520" aria-label="속을 잘라 낸 무거운 별. 바깥 수소층부터 헬륨, 탄소·산소, 네온·마그네슘, 규소·황 층이 겹겹이 있고 가운데에 회색 철 중심핵이 있다. 오른쪽에서는 두 중성자별이 부딪쳐 빛난다"></svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅱ-1 자연의 구성 원소 · 02</p>
+    <h1>별에서 만들어지는 원소</h1>
+    <p class="sub" data-step="1">내 몸의 탄소와 반지의 금은 어느 부엌에서 만들어졌을까</p>
+  </div>
+  <aside class="script">
+    <p>지난 시간에 빅뱅은 수소와 헬륨, 아주 약간의 리튬만 남겼다고 했습니다. 오늘은 그 밖의 원소가 만들어진 곳을 찾아갑니다.</p>
+    <p data-at="1">별은 원소를 만드는 부엌입니다. 부엌마다 불의 세기가 다르다는 것이 오늘의 열쇠입니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="금이 만들어지는 현장" data-part="도입">
+  <p class="kicker">도입 · 2017년 8월 17일, 1억 3천만 광년 밖에서 온 떨림</p>
+  <h2>인류가 처음 본 ‘금이 만들어지는 현장’</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p>중력파 관측소들이 <b>두 중성자별의 충돌</b> 신호를 붙잡았다</p>
+      <p>곧바로 전 세계 망원경이 겨눈 빛 속에서 <b class="c-orange">금·백금 같은 무거운 원소</b>가 새로 만들어진 흔적</p>
+      <p class="small mt">지각에는 철이 5%, 사람 몸의 18.5%는 탄소입니다. 빅뱅은 이런 원소를 만들지 못했습니다.</p>
+    </div>
+    <div class="card yel">
+      <h3>내 몸의 탄소와 반지의 금은 어디서 만들어졌을까?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 빅뱅 때 한꺼번에 다 만들어졌다</div>
+        <div class="opt">㉡ 지구가 만들어질 때 지구 안에서</div>
+        <div class="opt">㉢ 별의 속과 별의 최후에서</div>
+        <div class="opt">㉣ 원소는 원래부터 그냥 있었다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>2017년, 중력파와 빛으로 같은 사건을 동시에 본 첫 사례입니다. 그 빛 속에서 금이 만들어진 흔적이 보였어요.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 별의 질량을 바꿔 가며 직접 확인하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>핵융합</b><span>가벼운 원자핵이 합쳐지며 에너지를 내는 반응</span></div>
+    <div class="card"><b>별의 질량</b><span>어디까지 태울 수 있는지 정하는 불의 세기</span></div>
+    <div class="card"><b>결합 에너지</b><span>원자핵이 얼마나 단단히 묶였는가</span></div>
+    <div class="card"><b>초신성</b><span>무거운 별이 무너지며 터지는 폭발</span></div>
+    <div class="card"><b>중성자별 충돌</b><span>금처럼 무거운 원소가 생기는 곳</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~13번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 핵융합 -->
+<section class="slide" id="s-fusion" data-title="별이 빛나는 까닭" data-part="① 별의 부엌">
+  <p class="kicker">① 별의 부엌 · 태양 중심에서 일어나는 일</p>
+  <h2>가벼운 원자핵을 합쳐 빛을 낸다</h2>
+  <div class="cols" style="grid-template-columns:720px 1fr;align-items:center">
+    <svg id="fuSvg" viewBox="0 0 720 440" width="720" height="440" aria-label="수소 원자핵 네 개가 합쳐져 헬륨 원자핵 하나가 되며 빛 에너지가 나오는 모식도"></svg>
+    <div class="lines">
+      <p data-step="1">가벼운 원자핵이 합쳐져 무거운 원자핵이 되며 에너지를 내놓는 반응: <b class="blank" data-n="1" data-step="1">핵융합</b></p>
+      <p data-step="2">태양 중심(약 1,500만 K): 수소 → <b class="blank" data-n="2" data-step="2">헬륨</b></p>
+      <p class="small" data-step="3">태양의 질량비: 수소 약 74% · 헬륨 약 25% · 나머지 약 1.3% (증거물 ①)</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>별은 무엇으로 빛날까요? 원자핵이 합쳐지는 반응입니다.</p>
+    <p data-at="1">가벼운 원자핵이 합쳐져 무거운 원자핵이 될 때 에너지가 나옵니다. 빈칸 1번, 핵융합.</p>
+    <p data-at="2">태양 중심은 약 1,500만 K. 이 온도에서 수소 원자핵 넷이 여러 단계를 거쳐 빈칸 2번, 헬륨 원자핵 하나가 됩니다. 그림은 중간 단계를 생략했어요.</p>
+    <p data-at="3">태양은 아직 대부분 수소입니다. 수소를 다 태우면 그다음엔 무엇을 태울까요?</p>
+  </aside>
+</section>
+
+<!-- 5 질량이 메뉴를 정한다 -->
+<section class="slide" id="s-mass" data-title="질량이 메뉴를 정한다" data-part="① 별의 부엌">
+  <p class="kicker">① 별의 부엌 · 단원 화면 모형: 별의 질량과 일생 동안 중심의 최고 온도</p>
+  <h2>무거운 별일수록 더 무거운 원료에 불이 붙는다</h2>
+  <svg id="massSvg" viewBox="0 0 1400 400" width="1400" height="400" aria-label="가로축 별의 질량(태양 = 1, 로그 눈금), 세로축 중심 최고 온도(로그 눈금). 질량이 클수록 온도가 높고, 0.5배에서 헬륨, 8배에서 탄소, 약 10배에서 규소가 타는 온도에 닿는다"></svg>
+  <div class="tight">
+    <p data-step="1">질량이 클수록 중력이 세게 짓눌러 <b class="blank" data-n="3" data-step="1">중심 온도</b>가 높다</p>
+    <p data-step="3">태양의 0.5~8배인 별: 헬륨을 태워 <b class="blank" data-n="4" data-step="3">탄소·산소</b>까지 만들고 끝 (0.5배 미만은 헬륨에 불이 붙지 않음)</p>
+    <p data-step="4">8배가 넘으면 탄소에 불, 약 10배가 넘으면 규소까지 태워 철을 만든다</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면 장면 2에서 질량 슬라이더를 움직인 것을 그래프로 옮겼습니다. 가로축과 세로축 모두 한 칸이 10배인 로그 눈금이에요.</p>
+    <p data-at="1">별이 무거울수록 중력이 세게 짓눌러 중심이 더 뜨거워집니다. 빈칸 3번, 중심 온도.</p>
+    <p data-at="2">헬륨에 불을 붙이려면 1억 K가 필요합니다. 태양 질량의 0.5배가 안 되는 별은 여기에 못 미쳐요.</p>
+    <p data-at="3">태양처럼 0.5~8배인 별은 헬륨을 태워 빈칸 4번, 탄소·산소까지 만들고 끝납니다.</p>
+    <p data-at="4">8배가 넘어야 6억 K에 이르러 탄소에 불이 붙고, 약 10배가 넘으면 27억 K를 넘겨 규소까지 태워 철을 만듭니다.</p>
+  </aside>
+</section>
+
+<!-- 6 양파 껍질 -->
+<section class="slide soft" id="s-onion" data-title="양파처럼 층층이 탄다" data-part="① 별의 부엌">
+  <p class="kicker">① 별의 부엌 · 일생의 끝에 이른 무거운 별의 속</p>
+  <h2>안쪽일수록 무거운 원소가 쌓인다</h2>
+  <div class="cols" style="grid-template-columns:620px 1fr;align-items:center">
+    <svg id="onSvg" viewBox="0 0 620 470" width="620" height="470" aria-label="무거운 별의 단면. 바깥부터 수소, 헬륨, 탄소·산소, 네온·마그네슘, 규소·황 층이 동심원으로 있고 가운데 철 중심핵이 있다"></svg>
+    <table class="ledger">
+      <tr><th>타는 원료 → 만들어지는 원소</th><th style="width:170px">필요한 온도</th></tr>
+      <tr data-step="1"><td>수소 → 헬륨</td><td>1,000만 K</td></tr>
+      <tr data-step="1"><td>헬륨 → 탄소·산소</td><td>1억 K</td></tr>
+      <tr data-step="2"><td>탄소 → 네온·마그네슘</td><td>6억 K</td></tr>
+      <tr data-step="2"><td>네온·산소 → 규소·황</td><td>15억 K</td></tr>
+      <tr data-step="2"><td>규소 → 철</td><td>27억 K</td></tr>
+    </table>
+  </div>
+  <p class="tight" data-step="3" style="position:absolute;left:100px;right:100px;top:735px">더 뜨거워야 불이 붙는 <b class="blank" data-n="5" data-step="3">무거운 원소</b>일수록 별의 중심 가까이에 쌓인다</p>
+  <aside class="script">
+    <p>단원 화면 장면 2의 그림처럼 무거운 별을 잘라 봅니다. 층의 두께는 실제 비율이 아닙니다.</p>
+    <p data-at="1">바깥에서는 수소가 헬륨으로, 그 안쪽에서는 헬륨이 탄소·산소로 탑니다.</p>
+    <p data-at="2">더 안쪽은 탄소, 네온·산소, 규소가 차례로 타고, 한가운데에 철이 쌓입니다. 필요한 온도가 점점 높아지죠.</p>
+    <p data-at="3">빈칸 5번, 무거운 원소. 더 뜨거워야 불이 붙는 원소일수록 가장 뜨거운 중심 가까이에 쌓입니다.</p>
+  </aside>
+</section>
+
+<!-- 7 결합 에너지 곡선 -->
+<section class="slide" id="s-bind" data-title="결합 에너지 곡선" data-part="② 철에서 멈추는 까닭">
+  <p class="kicker">② 철에서 멈추는 까닭 · 단원 화면의 결합 에너지 곡선</p>
+  <h2>곡선의 꼭대기에 철이 있다</h2>
+  <svg id="bindSvg" viewBox="0 0 1400 410" width="1400" height="410" aria-label="가로축 질량수, 세로축 핵자 하나당 결합 에너지. 수소에서 급하게 올라가 질량수 56인 철에서 약 8.79 MeV로 가장 높고 우라늄 쪽으로 서서히 내려간다"></svg>
+  <div class="tight">
+    <p data-step="1">원자핵이 얼마나 단단히 묶였는가: 핵자 하나당 <b class="blank" data-n="6" data-step="1">결합 에너지</b></p>
+    <p data-step="2">꼭대기는 질량수 56인 <b class="blank" data-n="7" data-step="2">철-56</b> (약 8.79 MeV) → 가장 단단한 원자핵</p>
+    <p data-step="3">꼭대기보다 가벼운 쪽은 합칠수록, 무거운 쪽은 쪼갤수록 에너지가 나온다</p>
+  </div>
+  <aside class="script">
+    <p>아무리 무거운 별도 철에서 딱 멈춥니다. 연료가 없어서가 아닙니다. 답은 이 곡선에 있어요.</p>
+    <p data-at="1">세로축은 핵자 하나가 얼마나 단단히 묶여 있는가입니다. 빈칸 6번, 결합 에너지.</p>
+    <p data-at="2">곡선의 꼭대기는 질량수 56, 빈칸 7번, 철-56입니다. 약 8.79 MeV로 가장 단단해요.</p>
+    <p data-at="3">더 단단한 쪽으로 갈 때 에너지가 나옵니다. 가벼운 원자핵은 합쳐서 꼭대기로 올라가며 에너지를 내고, 우라늄 같은 무거운 원자핵은 쪼개져야 에너지가 나옵니다.</p>
+  </aside>
+</section>
+
+<!-- 8 초신성 -->
+<section class="slide soft" id="s-sn" data-title="무너지고 터지는 별" data-part="② 철에서 멈추는 까닭">
+  <p class="kicker">② 철에서 멈추는 까닭 · 철이 쌓인 별의 마지막</p>
+  <h2>철이 쌓이면 별은 무너지고 터진다</h2>
+  <div class="cols" style="grid-template-columns:700px 1fr;align-items:center">
+    <svg id="snSvg" viewBox="0 0 700 460" width="700" height="460" aria-label="철 중심핵이 쌓인 별이 안으로 무너진 뒤 바깥층이 폭발하며 원소를 사방으로 뿌리는 세 단계 모식도"></svg>
+    <div class="lines">
+      <p data-step="1">철보다 무거운 핵을 융합으로 만들려면 에너지를 오히려 넣어 주어야 한다</p>
+      <p data-step="2">더는 버틸 에너지가 없어 중심핵이 순식간에 무너진다</p>
+      <p data-step="3">바깥층이 폭발하며 날아간다: <b class="blank" data-n="8" data-step="3">초신성</b> → 별이 만든 원소를 우주로 뿌린다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>철이 중심에 쌓이면 무슨 일이 일어날까요?</p>
+    <p data-at="1">철을 더 합치려면 에너지를 내놓는 대신 빨아들입니다. 별은 중력을 버틸 힘을 잃습니다.</p>
+    <p data-at="2">중심핵이 순식간에 안으로 무너집니다.</p>
+    <p data-at="3">그 반동으로 바깥층이 폭발합니다. 빈칸 8번, 초신성. 별이 일생 동안 만든 탄소, 산소, 철이 이때 우주로 흩어집니다.</p>
+  </aside>
+</section>
+
+<!-- 9 별의 최후 -->
+<section class="slide" id="s-fate" data-title="질량에 따른 별의 최후" data-part="② 철에서 멈추는 까닭">
+  <p class="kicker">② 철에서 멈추는 까닭 · 단원 화면 모형으로 본 별의 일생</p>
+  <h2>질량이 별의 마지막 모습을 정한다</h2>
+  <table class="ledger">
+    <tr><th style="width:250px">별의 질량 (태양 = 1)</th><th style="width:400px">만드는 원소</th><th>최후</th></tr>
+    <tr data-step="1"><td><b>0.5 미만</b></td><td>헬륨까지</td><td>적색왜성 · 수명이 우주 나이보다 길어 아직 하나도 죽지 않음</td></tr>
+    <tr data-step="2"><td><b>0.5~8</b> (태양)</td><td>탄소·산소까지</td><td>적색거성 → 바깥층은 <b class="blank" data-n="9" data-step="2">행성상 성운</b>, 중심은 <b class="blank" data-n="10" data-step="2">백색왜성</b></td></tr>
+    <tr data-step="3"><td><b>8 넘음</b></td><td>탄소에 불 · 약 10 넘으면 철까지</td><td>초신성 폭발 → 중성자별 (약 25 넘으면 블랙홀)</td></tr>
+  </table>
+  <p class="mt" data-step="4">무거운 별일수록 빨리 탄다: 태양 약 100억 년, 10배인 별 약 3,000만 년</p>
+  <p class="note">단원 화면 모형의 주계열 수명 t ≈ 100억 년 × M<sup>−2.5</sup> (10배이면 약 3,160만 년). 8~10 M☉ 사이는 지금도 연구 중인 경계입니다.</p>
+  <aside class="script">
+    <p>질량에 따라 만드는 원소도, 마지막 모습도 달라집니다.</p>
+    <p data-at="1">아주 가벼운 별은 헬륨까지만 만들고, 수명이 너무 길어 아직 죽은 별이 하나도 없습니다.</p>
+    <p data-at="2">태양 같은 별은 탄소·산소까지 만든 뒤 바깥층을 날려 보냅니다. 빈칸 9번, 행성상 성운. 중심에는 빈칸 10번, 백색왜성이 남아요.</p>
+    <p data-at="3">8배가 넘는 별은 초신성으로 폭발하고 중성자별이나 블랙홀을 남깁니다.</p>
+    <p data-at="4">무거운 별은 연료가 많아도 훨씬 빨리 태웁니다. 10배인 별의 수명은 태양의 300분의 1쯤입니다.</p>
+  </aside>
+</section>
+
+<!-- 10 철보다 무거운 원소 -->
+<section class="slide" id="s-heavy" data-title="철보다 무거운 원소" data-part="③ 무거운 원소와 우리 몸">
+  <p class="kicker">③ 무거운 원소와 우리 몸 · 금·우라늄은 어디서?</p>
+  <h2>중성자가 쏟아지는 곳에서만 만들어진다</h2>
+  <div class="cols" style="grid-template-columns:700px 1fr;align-items:center">
+    <svg id="hvSvg" viewBox="0 0 700 460" width="700" height="460" aria-label="두 중성자별이 서로 돌다 부딪치며 중성자와 빛을 내뿜고, 그 속에서 금 원자핵이 만들어지는 모식도"></svg>
+    <div class="lines">
+      <p data-step="1">철보다 무거운 원소(금·백금·우라늄)는 핵융합으로 만들 수 없다</p>
+      <p data-step="2">중성자가 폭포처럼 쏟아지는 곳: 초신성 폭발과 <b class="blank" data-n="11" data-step="2">중성자별 충돌</b></p>
+      <p class="small" data-step="3">2017년 8월 17일: 1억 3천만 광년 밖 중성자별 충돌 → 중력파와 함께 금·백금이 생긴 흔적 관측</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>철에서 핵융합이 멈춘다면, 반지의 금은 어디서 왔을까요?</p>
+    <p data-at="1">금은 철보다 훨씬 무겁습니다. 별 속의 핵융합으로는 만들 수 없어요.</p>
+    <p data-at="2">원자핵이 중성자를 한꺼번에 많이 붙잡아야 하는데, 그런 곳은 초신성 폭발과 빈칸 11번, 중성자별 충돌입니다.</p>
+    <p data-at="3">2017년, 인류가 처음으로 그 현장을 보았습니다. 오늘 도입 이야기의 사건이에요.</p>
+  </aside>
+</section>
+
+<!-- 11 원소의 출생지 -->
+<section class="slide soft" id="s-born" data-title="원소의 출생지" data-part="③ 무거운 원소와 우리 몸">
+  <p class="kicker">③ 무거운 원소와 우리 몸 · 원소 9개를 출생지별로</p>
+  <h2>출생지는 세 곳으로 갈린다</h2>
+  <div class="born">
+    <div class="card" data-step="1"><h3>빅뱅</h3><p class="sub">우주 탄생 뒤 약 3분</p>
+      <div class="els"><div class="el"><b>H</b><span>수소</span></div><div class="el"><b>He</b><span>헬륨</span></div></div></div>
+    <div class="card" data-step="2"><h3>별 속의 핵융합</h3><p class="sub">별이 살아 있는 동안</p>
+      <div class="els"><div class="el"><b>C</b><span>탄소</span></div><div class="el"><b>N</b><span>질소</span></div><div class="el"><b>O</b><span>산소</span></div><div class="el"><b>Si</b><span>규소</span></div><div class="el"><b>Fe</b><span>철</span></div></div></div>
+    <div class="card" data-step="3"><h3>별의 마지막 순간</h3><p class="sub">초신성 · 중성자별 충돌</p>
+      <div class="els"><div class="el"><b>Au</b><span>금</span></div><div class="el"><b>U</b><span>우라늄</span></div></div></div>
+  </div>
+  <p data-step="3" style="margin-top:44px">우주의 헬륨은 대부분 빅뱅에서 · 철은 별이 살아 있는 동안 · 철보다 무거운 원소는 별의 최후에</p>
+  <aside class="script">
+    <p>단원 화면 장면 4의 분류 활동입니다. 학생에게 먼저 분류하게 한 뒤 엽니다.</p>
+    <p data-at="1">수소와 헬륨은 빅뱅. 별도 헬륨을 만들지만 우주의 헬륨은 대부분 빅뱅에서 왔습니다.</p>
+    <p data-at="2">탄소, 질소, 산소, 규소, 철은 별 속의 핵융합. 철은 별이 살아 있는 동안 만들어집니다.</p>
+    <p data-at="3">금과 우라늄은 결합 에너지 곡선의 오른쪽, 별의 마지막 순간에 만들어집니다.</p>
+  </aside>
+</section>
+
+<!-- 12 우리 몸 -->
+<section class="slide" id="s-body" data-title="우리 몸의 원소는 어디서" data-part="③ 무거운 원소와 우리 몸">
+  <p class="kicker">③ 무거운 원소와 우리 몸 · 몸무게 60 kg을 저울에 올리면</p>
+  <h2>몸의 약 90%는 별에서 왔다</h2>
+  <svg id="bodySvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="몸무게 60 kg을 원소별로 나눈 띠: 산소 39 kg, 탄소 11.1 kg, 수소 5.7 kg, 질소 1.9 kg, 칼슘 0.9 kg, 인 0.6 kg, 그 밖 0.8 kg. 수소만 빅뱅에서, 나머지 54.3 kg은 별에서"></svg>
+  <div class="tight">
+    <p data-step="1">사람 몸(질량비): 산소 65% · 탄소 18.5% · 수소 9.5% · 질소 3.2% · 칼슘 1.5% · 인 1.0%</p>
+    <p data-step="2">빅뱅에서 온 것은 <b class="blank" data-n="12" data-step="2">수소</b> 9.5%뿐 (60 kg이면 5.7 kg)</p>
+    <p data-step="3">나머지 90.5%(54.3 kg)는 별이 만든 원소 → 우리는 <b class="blank" data-n="13" data-step="3">별의 먼지</b>로 지어졌다</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면 장면 4의 저울입니다. 몸무게 60 kg을 원소별로 나눠 봅시다.</p>
+    <p data-at="1">산소가 가장 많고, 탄소, 수소, 질소 순입니다. 물과 탄소 화합물이 몸의 대부분이라서 그래요.</p>
+    <p data-at="2">이 가운데 빅뱅에서 온 것은 빈칸 12번, 수소뿐입니다. 9.5%, 60 kg이면 5.7 kg.</p>
+    <p data-at="3">나머지 54.3 kg은 모두 어느 별의 속과 마지막 순간에 만들어져 우주로 흩어졌다가 지구에 모인 것입니다. 빈칸 13번, 별의 먼지. 몸무게가 달라져도 이 비율은 그대로예요.</p>
+  </aside>
+</section>
+
+<!-- 13 확인 -->
+<section class="slide" id="s-check" data-title="금반지의 출생지" data-part="③ 무거운 원소와 우리 몸">
+  <p class="kicker">③ 무거운 원소와 우리 몸 · 확인</p>
+  <h2>반지의 금이 만들어진 곳은?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ 빅뱅 뒤 약 3분 동안</div>
+    <div class="opt wrong" data-step="1">㉡ 태양 중심의 핵융합</div>
+    <div class="opt wrong" data-step="1">㉢ 아주 무거운 별 중심의 핵융합</div>
+    <div class="opt right" data-step="1">㉣ 중성자별 충돌이나 초신성 폭발</div>
+  </div>
+  <p data-step="1" style="margin-top:40px">아무리 무거운 별도 핵융합은 철까지. 금은 중성자가 쏟아지는 별의 마지막 순간에.</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. ㉢을 고르는 학생이 많습니다.</p>
+    <p data-at="1">정답은 ㉣. 무거운 별의 부엌도 철에서 문을 닫습니다. 처음 고른 첫 추리와 비교해 보게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 14 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>원소의 출생지는 별의 일생에 있다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>핵융합</b>: 가벼운 원자핵이 합쳐지며 에너지 → 별이 빛난다 (태양 중심 약 1,500만 K, 수소 → 헬륨)</li>
+    <li data-k="2" data-step="2">별의 <b>질량</b>이 중심 온도를 정한다: 0.5배 미만 헬륨까지 · 0.5~8배 탄소·산소까지 · 약 10배 넘으면 철까지</li>
+    <li data-k="3" data-step="3"><b>결합 에너지</b> 꼭대기가 철-56 → 철에서 핵융합이 멈추고 무거운 별은 <b>초신성</b>으로 폭발</li>
+    <li data-k="4" data-step="4">철보다 무거운 원소는 초신성·<b>중성자별 충돌</b>에서 · 우리 몸의 약 90%는 별에서 왔다</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 15 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 태양과 질량이 같은 별이 일생 동안 만들 수 있는 가장 무거운 원소는?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 헬륨</div>
+        <div class="opt right" data-step="1">㉡ 탄소·산소</div>
+        <div class="opt wrong" data-step="1">㉢ 철</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 몸무게 60 kg인 사람의 몸에서 별이 만든 원소의 질량은 약?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 약 5.7 kg</div>
+        <div class="opt wrong" data-step="2">㉡ 약 30 kg</div>
+        <div class="opt right" data-step="2">㉢ 약 54 kg</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 태양은 0.5~8배 범위라 헬륨을 태워 탄소·산소까지 만들고 끝납니다.</p>
+    <p data-at="2">2번은 ㉢. 빅뱅에서 온 수소 9.5%를 빼면 90.5%, 60 × 0.905 ≈ 54.3 kg입니다. ㉠은 빅뱅에서 온 수소의 질량이에요.</p>
+  </aside>
+</section>
+
+<!-- 16 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ② 「별의 부엌」</h2>
+  <div class="cols">
+    <div class="card"><h3>별의 질량을 직접 정해 보세요</h3><p>헬륨까지만 만드는 별, 탄소·산소에서 멈추는 가장 무거운 별, 철까지 가는 가장 가벼운 별 찾기, 결합 에너지 곡선의 꼭대기 찾기, 원소 9개 분류가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 03 원소의 존재비</h3><p>우주의 74%는 수소인데 지각에는 0.14%뿐입니다. 이름표가 떨어진 분석표 세 장의 주인을 찾습니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ②를 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function L(v) { return Math.log(v) / Math.LN10; }
+  function nuc(x, y, r, kind, lab) {
+    var f = kind === "p" ? "#ff6b6b" : (kind === "n" ? "#ced4da" : "#9775fa"), st = kind === "p" ? "#7a1a14" : (kind === "n" ? "#495057" : "#5f3dc4");
+    return "<circle cx='" + x + "' cy='" + y + "' r='" + r + "' fill='" + f + "' stroke='" + st + "' stroke-width='2'/>" +
+      (lab ? "<text x='" + x + "' y='" + (y + r * 0.36) + "' font-size='" + Math.round(r) + "' font-weight='900' fill='" + (kind === "n" ? "#343a40" : "#fff") + "' text-anchor='middle'>" + lab + "</text>" : "");
+  }
+
+  /* 표지 — 무거운 별 단면 + 중성자별 충돌 */
+  (function () {
+    var C = ["#ff9a7a", "#ffd36b", "#7ff0c4", "#7fd3ff", "#b69cff", "#8d929c"], R = [230, 190, 150, 112, 76, 42], s = "";
+    s += "<defs><radialGradient id='c2-gl'><stop offset='0' stop-color='#ffe8cc'/><stop offset='1' stop-color='#ff922b' stop-opacity='0'/></radialGradient></defs>";
+    s += "<circle cx='520' cy='265' r='300' fill='url(#c2-gl)' opacity='.35'/>";
+    R.forEach(function (r, i) { s += "<circle cx='520' cy='265' r='" + r + "' fill='" + C[i] + "'/>"; });
+    var LB = ["H", "He", "C·O", "Ne·Mg", "Si·S", "Fe"];
+    LB.forEach(function (t, i) { var y = 265 - (i < 5 ? (R[i] + R[i + 1]) / 2 : 0); s += "<text x='520' y='" + (y + 9) + "' font-size='26' font-weight='900' fill='#1b2233' text-anchor='middle'>" + t + "</text>"; });
+    s += "<g data-step='1'><circle cx='1160' cy='250' r='28' fill='#dbe4ff'/><circle cx='1270' cy='250' r='28' fill='#dbe4ff'/>";
+    s += "<circle cx='1215' cy='250' r='100' fill='none' stroke='#ffd43b' stroke-width='5'/><circle cx='1215' cy='250' r='135' fill='none' stroke='#ffd43b' stroke-width='3' opacity='.6'/>";
+    s += "<text x='1215' y='428' font-size='30' font-weight='900' fill='#ffd43b' text-anchor='middle'>Au · Pt</text></g>";
+    s += "<text x='1560' y='510' fill='#9aa4b5' font-size='18' text-anchor='end'>⚠ 층 두께·크기·거리는 실제 비율이 아닌 모식도</text>";
+    document.getElementById("coverSvg").innerHTML = s;
+  })();
+
+  /* 핵융합 모식도 */
+  (function () {
+    var s = "<defs><marker id='s4-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#161b28'/></marker></defs>";
+    s += "<rect x='0' y='0' width='720' height='400' rx='22' fill='#fff4e6'/>";
+    s += "<text x='24' y='42' font-size='22' font-weight='900' fill='#d9480f'>태양 중심 · 약 1,500만 K</text>";
+    [[90, 140], [170, 120], [100, 250], [180, 270]].forEach(function (p) { s += nuc(p[0], p[1], 30, "p", "p"); });
+    s += "<text x='135' y='350' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle'>수소 원자핵 4개</text>";
+    s += "<g data-step='1'><line x1='250' y1='200' x2='390' y2='200' stroke='#161b28' stroke-width='5' marker-end='url(#s4-a)'/>";
+    s += "<circle cx='490' cy='200' r='74' fill='#f3f0ff' stroke='#6741d9' stroke-width='4'/>" + nuc(466, 176, 26, "p", "p") + nuc(514, 224, 26, "p", "p") + nuc(514, 176, 26, "n", "n") + nuc(466, 224, 26, "n", "n");
+    s += "<text x='490' y='310' font-size='22' font-weight='900' fill='#6741d9' text-anchor='middle'>헬륨 원자핵 1개</text>";
+    s += "<g stroke='#f59f00' stroke-width='5' fill='none'><path d='M580 140 q16 -12 32 0 q16 12 32 0'/><path d='M590 200 q16 -12 32 0 q16 12 32 0'/><path d='M580 260 q16 -12 32 0 q16 12 32 0'/></g>";
+    s += "<text x='640' y='310' font-size='22' font-weight='900' fill='#e67700' text-anchor='middle'>에너지</text></g>";
+    s += "<text x='0' y='432' font-size='18' fill='#5f6b80'>⚠ 중간 단계를 생략한 모식도 (양성자 둘은 도중에 중성자로 바뀐다)</text>";
+    document.getElementById("fuSvg").innerHTML = s;
+  })();
+
+  /* 질량-중심 온도 — 단원 화면 ANCH 값을 로그-로그로 잇는다 */
+  (function () {
+    var ANCH = [[0.08, 1.0e7], [0.5, 1.0e8], [1, 1.5e8], [2, 2.2e8], [8, 6.0e8], [9, 1.6e9], [10, 3.0e9], [30, 5.0e9]];
+    var X0 = 170, X1 = 1180, Y0 = 20, Y1 = 330;
+    function X(m) { return X0 + (L(m) - L(0.1)) / (L(30) - L(0.1)) * (X1 - X0); }
+    function Y(t) { return Y1 - (L(t) - 7) / (L(1e10) - 7) * (Y1 - Y0); }
+    function T(m) { for (var i = 1; i < ANCH.length; i++) if (m <= ANCH[i][0]) { var a = ANCH[i - 1], b = ANCH[i], f = (L(m) - L(a[0])) / (L(b[0]) - L(a[0])); return Math.pow(10, L(a[1]) + f * (L(b[1]) - L(a[1]))); } return ANCH[ANCH.length - 1][1]; }
+    var s = "<text x='" + (X0 + 14) + "' y='18' font-size='20' font-weight='900' fill='#5f6b80'>중심 최고 온도 (K)</text>";
+    s += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [[1e7, "10⁷"], [1e8, "10⁸"], [1e9, "10⁹"], [1e10, "10¹⁰"]].forEach(function (t) { s += "<text x='" + (X0 - 12) + "' y='" + (Y(t[0]) + 8) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='end'>" + t[1] + "</text>"; });
+    [0.1, 0.5, 1, 2, 8, 10, 30].forEach(function (m) { s += "<line x1='" + X(m) + "' y1='" + Y1 + "' x2='" + X(m) + "' y2='" + (Y1 + 8) + "' stroke='#161b28' stroke-width='2'/><text x='" + X(m) + "' y='" + (Y1 + 32) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + m + "</text>"; });
+    s += "<text x='" + X1 + "' y='" + (Y1 + 62) + "' font-size='20' font-weight='900' fill='#5f6b80' text-anchor='end'>별의 질량 (태양 = 1)</text>";
+    var TH = [[1e8, "헬륨에 불 · 1억 K", "#e8590c", 2, 0.5], [6e8, "탄소에 불 · 6억 K", "#0b7f99", 4, 8], [2.7e9, "규소 → 철 · 27억 K", "#6741d9", 4, 9.82]];
+    TH.forEach(function (t) {
+      s += "<g data-step='" + t[3] + "'><line x1='" + X0 + "' y1='" + Y(t[0]) + "' x2='" + X1 + "' y2='" + Y(t[0]) + "' stroke='" + t[2] + "' stroke-width='3' stroke-dasharray='10 7'/>";
+      s += "<text x='" + (X1 + 12) + "' y='" + (Y(t[0]) + 7) + "' font-size='21' font-weight='900' fill='" + t[2] + "'>" + t[1] + "</text>";
+      s += "<circle cx='" + X(t[4]) + "' cy='" + Y(t[0]) + "' r='11' fill='" + t[2] + "'/></g>";
+    });
+    var pts = [], m;
+    for (m = 0.1; m <= 30.001; m *= 1.02) pts.push(X(m).toFixed(1) + " " + Y(T(m)).toFixed(1));
+    s += "<g data-step='1'><polyline points='" + pts.join(" ") + "' fill='none' stroke='#e03131' stroke-width='5'/>";
+    s += "<circle cx='" + X(1) + "' cy='" + Y(1.5e8) + "' r='10' fill='#ffd43b' stroke='#161b28' stroke-width='3'/><text x='" + (X(1) - 14) + "' y='" + (Y(1.5e8) - 18) + "' font-size='22' font-weight='900' fill='#161b28' text-anchor='end'>태양</text></g>";
+    s += "<g data-step='3'><rect x='" + X(0.5) + "' y='" + Y0 + "' width='" + (X(8) - X(0.5)) + "' height='" + (Y1 - Y0) + "' fill='#ffd43b' opacity='.16'/><text x='" + ((X(0.5) + X(8)) / 2) + "' y='" + (Y0 + 30) + "' font-size='22' font-weight='900' fill='#a06400' text-anchor='middle'>0.5~8 · 탄소·산소까지</text></g>";
+    document.getElementById("massSvg").innerHTML = s;
+  })();
+
+  /* 양파 껍질 */
+  (function () {
+    var C = ["#ff9a7a", "#ffd36b", "#7ff0c4", "#7fd3ff", "#b69cff", "#8d929c"], R = [220, 180, 140, 102, 66, 32], LB = ["수소", "헬륨", "탄소·산소", "네온·마그네슘", "규소·황", "철"], ST = [1, 1, 1, 2, 2, 2];
+    var cx = 225, cy = 240, s = "";
+    R = [210, 172, 134, 98, 64, 30];
+    R.forEach(function (r, i) { s += "<circle cx='" + cx + "' cy='" + cy + "' r='" + r + "' fill='" + C[i] + "' stroke='#fff' stroke-width='2'" + (i >= 3 ? " data-step='2'" : "") + "/>"; });
+    LB.forEach(function (t, i) {
+      var rr = i < 5 ? (R[i] + R[i + 1]) / 2 : 0, y = cy - rr, ty = 50 + i * 72;
+      s += "<g" + (ST[i] > 1 ? " data-step='2'" : "") + "><line x1='" + cx + "' y1='" + y + "' x2='452' y2='" + ty + "' stroke='#495057' stroke-width='2'/>";
+      s += "<circle cx='" + cx + "' cy='" + y + "' r='5' fill='#161b28'/><text x='458' y='" + (ty + 8) + "' font-size='22' font-weight='900' fill='#161b28'>" + t + "</text></g>";
+    });
+    s += "<g data-step='3'><text x='" + cx + "' y='" + (cy + 222) + "' font-size='21' font-weight='900' fill='#d9480f' text-anchor='middle'>중심으로 갈수록 더 뜨겁다</text></g>";
+    s += "<text x='0' y='16' font-size='18' fill='#5f6b80'>⚠ 층 두께는 실제 비율이 아님</text>";
+    document.getElementById("onSvg").innerHTML = s;
+  })();
+
+  /* 결합 에너지 곡선 — 단원 화면 BE 값 */
+  (function () {
+    var BE = [[1, 0], [2, 1.112], [3, 2.827], [4, 7.074], [6, 5.332], [7, 5.606], [9, 6.463], [12, 7.680], [16, 7.976], [20, 8.032], [24, 8.261], [28, 8.448], [40, 8.551], [56, 8.790], [84, 8.717], [107, 8.554], [132, 8.428], [144, 8.288], [184, 8.065], [208, 7.867], [238, 7.570]];
+    var X0 = 110, X1 = 1360, Y0 = 30, Y1 = 330, MX = 10;
+    function X(a) { return X0 + a / 240 * (X1 - X0); }
+    function Y(b) { return Y1 - b / MX * (Y1 - Y0); }
+    var s = "<text x='10' y='20' font-size='20' font-weight='900' fill='#5f6b80'>핵자 하나당 결합 에너지 (MeV)</text>";
+    [0, 2, 4, 6, 8].forEach(function (b) { s += "<line x1='" + X0 + "' y1='" + Y(b) + "' x2='" + X1 + "' y2='" + Y(b) + "' stroke='#e8edf4' stroke-width='2'/><text x='" + (X0 - 12) + "' y='" + (Y(b) + 7) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='end'>" + b + "</text>"; });
+    s += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 50, 100, 150, 200, 238].forEach(function (a) { s += "<text x='" + X(a) + "' y='" + (Y1 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + a + "</text>"; });
+    s += "<text x='" + X1 + "' y='" + (Y1 + 62) + "' font-size='20' font-weight='900' fill='#5f6b80' text-anchor='end'>질량수 A</text>";
+    var pts = BE.map(function (p) { return X(p[0]).toFixed(1) + " " + Y(p[1]).toFixed(1); });
+    s += "<g data-step='1'><polyline points='" + pts.join(" ") + "' fill='none' stroke='#1462d8' stroke-width='5'/>";
+    s += "<circle cx='" + X(4) + "' cy='" + Y(7.074) + "' r='8' fill='#1462d8'/><line x1='" + X(4) + "' y1='" + Y(7.074) + "' x2='" + X(22) + "' y2='" + Y(5.6) + "' stroke='#1462d8' stroke-width='2'/><text x='" + (X(22) + 6) + "' y='" + (Y(5.6) + 8) + "' font-size='21' font-weight='900' fill='#1462d8'>헬륨-4</text>";
+    s += "<circle cx='" + X(12) + "' cy='" + Y(7.68) + "' r='8' fill='#1462d8'/><text x='" + (X(12) + 14) + "' y='" + (Y(7.68) + 30) + "' font-size='21' font-weight='900' fill='#1462d8'>탄소-12</text>";
+    s += "<circle cx='" + X(238) + "' cy='" + Y(7.57) + "' r='8' fill='#1462d8'/><text x='" + X(238) + "' y='" + (Y(7.57) - 16) + "' font-size='21' font-weight='900' fill='#1462d8' text-anchor='end'>우라늄-238</text>";
+    s += "</g><g data-step='2'><circle cx='" + X(56) + "' cy='" + Y(8.79) + "' r='16' fill='#f08c00' stroke='#fff' stroke-width='4'/>";
+    s += "<text x='" + X(56) + "' y='" + (Y(8.79) - 26) + "' font-size='24' font-weight='900' fill='#d9480f' text-anchor='middle'>철-56 · 8.79 MeV</text></g>";
+    s += "<defs><marker id='s7-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#2f9e44'/></marker></defs>";
+    s += "<g data-step='3' stroke='#2f9e44' stroke-width='6' fill='none' marker-end='url(#s7-a)'><path d='M" + X(30) + " " + Y(3.2) + " Q" + X(40) + " " + Y(5.6) + " " + X(50) + " " + Y(6.9) + "'/><path d='M" + X(200) + " " + Y(6.0) + " Q" + X(130) + " " + Y(5.8) + " " + X(80) + " " + Y(6.9) + "'/></g>";
+    s += "<g data-step='3' font-size='22' font-weight='900' fill='#2f9e44'><text x='" + X(14) + "' y='" + Y(2.4) + "'>합치면 에너지 (핵융합)</text><text x='" + X(205) + "' y='" + Y(5.2) + "' text-anchor='middle'>쪼개면 에너지 (핵분열)</text></g>";
+    document.getElementById("bindSvg").innerHTML = s;
+  })();
+
+  /* 초신성 세 단계 */
+  (function () {
+    var s = "<defs><marker id='s8-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#e03131'/></marker>";
+    s += "<radialGradient id='s8-bl'><stop offset='0' stop-color='#fff3bf'/><stop offset='.6' stop-color='#ffa94d'/><stop offset='1' stop-color='#ff6b6b' stop-opacity='0'/></radialGradient></defs>";
+    function star(cx, cy, k) { return "<circle cx='" + cx + "' cy='" + cy + "' r='" + (90 * k) + "' fill='#ffd36b'/><circle cx='" + cx + "' cy='" + cy + "' r='" + (60 * k) + "' fill='#7fd3ff'/><circle cx='" + cx + "' cy='" + cy + "' r='" + (30 * k) + "' fill='#8d929c'/>"; }
+    s += "<g data-step='1'>" + star(120, 190, 1) + "<text x='120' y='196' font-size='22' font-weight='900' fill='#fff' text-anchor='middle'>Fe</text><text x='120' y='330' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle'>철 중심핵</text></g>";
+    s += "<g data-step='2'>" + star(350, 190, 1) + "<circle cx='350' cy='190' r='14' fill='#343a40'/>";
+    for (var k = 0; k < 8; k++) { var a = k * Math.PI / 4, x1 = 350 + Math.cos(a) * 80, y1 = 190 + Math.sin(a) * 80, x2 = 350 + Math.cos(a) * 34, y2 = 190 + Math.sin(a) * 34; s += "<line x1='" + x1.toFixed(1) + "' y1='" + y1.toFixed(1) + "' x2='" + x2.toFixed(1) + "' y2='" + y2.toFixed(1) + "' stroke='#e03131' stroke-width='5' marker-end='url(#s8-a)'/>"; }
+    s += "<text x='350' y='330' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle'>순식간에 무너짐</text></g>";
+    s += "<g data-step='3'><circle cx='590' cy='190' r='105' fill='url(#s8-bl)'/><circle cx='590' cy='190' r='10' fill='#343a40'/>";
+    var EL = ["C", "O", "Si", "Fe", "Ne", "Mg"];
+    EL.forEach(function (e, i) { var a = i * Math.PI / 3 + 0.3, x = 590 + Math.cos(a) * 92, y = 190 + Math.sin(a) * 92; s += "<text x='" + x.toFixed(0) + "' y='" + (y + 8).toFixed(0) + "' font-size='22' font-weight='900' fill='#862e9c' text-anchor='middle'>" + e + "</text>"; });
+    s += "<text x='590' y='330' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle'>초신성 · 원소를 뿌림</text></g>";
+    s += "<text x='0' y='452' font-size='18' fill='#5f6b80'>⚠ 크기·층 비율은 모식도</text>";
+    document.getElementById("snSvg").innerHTML = s;
+  })();
+
+  /* 중성자별 충돌 */
+  (function () {
+    var s = "<rect x='0' y='0' width='700' height='420' rx='22' fill='#10172a'/>";
+    s += "<path d='M120 210 A200 110 0 1 1 580 210 A200 110 0 1 1 120 210' fill='none' stroke='#5c7cfa' stroke-width='3' stroke-dasharray='10 8' data-hide='2'/>";
+    s += "<g data-hide='2'><circle cx='170' cy='210' r='30' fill='#dbe4ff'/><circle cx='530' cy='210' r='30' fill='#dbe4ff'/><text x='350' y='390' font-size='22' font-weight='900' fill='#dbe4ff' text-anchor='middle'>서로 돌며 가까워지는 두 중성자별</text></g>";
+    s += "<g data-step='2'><circle cx='350' cy='210' r='130' fill='#ffd43b' opacity='.18'/><circle cx='350' cy='210' r='70' fill='#ffe066' opacity='.5'/><circle cx='350' cy='210' r='26' fill='#fff'/>";
+    for (var k = 0; k < 14; k++) { var a = k * 0.449, r = 110 + (k % 3) * 30; s += "<circle cx='" + (350 + Math.cos(a) * r).toFixed(0) + "' cy='" + (210 + Math.sin(a) * r * 0.8).toFixed(0) + "' r='9' fill='#ced4da'/>"; }
+    s += "<text x='350' y='390' font-size='22' font-weight='900' fill='#ffe066' text-anchor='middle'>충돌 · 중성자가 쏟아진다 (회색 = 중성자)</text></g>";
+    s += "<g data-step='3'><rect x='470' y='30' width='200' height='70' rx='14' fill='#ffd43b'/><text x='570' y='76' font-size='30' font-weight='900' fill='#5c3c00' text-anchor='middle'>Au · Pt</text></g>";
+    s += "<text x='0' y='450' font-size='18' fill='#5f6b80'>⚠ 크기·거리는 실제 비율이 아닌 모식도</text>";
+    document.getElementById("hvSvg").innerHTML = s;
+  })();
+
+  /* 몸무게 60 kg 띠 — 단원 화면 EL 값 */
+  (function () {
+    var EL = [["산소", 65.0, "#4dabf7"], ["탄소", 18.5, "#845ef7"], ["수소", 9.5, "#ff922b"], ["질소", 3.2, "#20c997"], ["칼슘", 1.5, "#fcc419"], ["인", 1.0, "#f06595"], ["그 밖", 1.3, "#adb5bd"]];
+    var X0 = 20, W = 1360, Y = 70, Hh = 90, x = X0, s = "";
+    s += "<text x='" + X0 + "' y='40' font-size='22' font-weight='900' fill='#161b28'>몸무게 60 kg</text>";
+    EL.forEach(function (e, i) {
+      var w = W * e[1] / 100, kg = (60 * e[1] / 100).toFixed(1);
+      s += "<g data-step='1'><rect x='" + x.toFixed(1) + "' y='" + Y + "' width='" + w.toFixed(1) + "' height='" + Hh + "' fill='" + e[2] + "' stroke='#fff' stroke-width='2'/>";
+      if (w > 120) s += "<text x='" + (x + w / 2).toFixed(1) + "' y='" + (Y + 40) + "' font-size='24' font-weight='900' fill='#fff' text-anchor='middle'>" + e[0] + "</text><text x='" + (x + w / 2).toFixed(1) + "' y='" + (Y + 72) + "' font-size='21' font-weight='800' fill='#fff' text-anchor='middle'>" + kg + " kg</text>";
+      s += "</g>";
+      e.x = x; e.w = w; x += w;
+    });
+    s += "<text x='" + (X0 + W) + "' y='40' font-size='19' font-weight='800' fill='#5f6b80' text-anchor='end'>질소 1.9 · 칼슘 0.9 · 인 0.6 · 그 밖 0.8 kg</text>";
+    var h = EL[2];
+    s += "<g data-step='2'><rect x='" + h.x.toFixed(1) + "' y='" + (Y - 6) + "' width='" + h.w.toFixed(1) + "' height='" + (Hh + 12) + "' fill='none' stroke='#d9480f' stroke-width='6'/>";
+    s += "<path d='M" + (h.x + h.w / 2).toFixed(1) + " " + (Y + Hh + 8) + " V230' stroke='#d9480f' stroke-width='4'/><text x='" + (h.x + h.w / 2).toFixed(1) + "' y='262' font-size='26' font-weight='900' fill='#d9480f' text-anchor='middle'>빅뱅에서 · 5.7 kg</text></g>";
+    s += "<g data-step='3'><path d='M" + X0 + " " + (Y + Hh + 30) + " H" + (h.x - 10).toFixed(1) + "' stroke='#6741d9' stroke-width='5'/><path d='M" + (h.x + h.w + 10).toFixed(1) + " " + (Y + Hh + 30) + " H" + (X0 + W) + "' stroke='#6741d9' stroke-width='5'/>";
+    s += "<text x='" + (X0 + 20) + "' y='" + (Y + Hh + 70) + "' font-size='26' font-weight='900' fill='#6741d9'>별에서 · 나머지 54.3 kg (90.5%)</text></g>";
+    s += "<text x='1396' y='326' font-size='18' fill='#5f6b80' text-anchor='end'>단원 화면 값 · 질량 백분율</text>";
+    document.getElementById("bodySvg").innerHTML = s;
+  })();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 판구조론과 지권의 변화 (통합과학1 Ⅲ-1 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes mapIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .current .art .mwrap { animation: mapIn 1.2s ease both; }
+  .lines p { margin-bottom: 12px; line-height: 1.75; }
+  .tight p { font-size: 28px; margin-bottom: 8px; line-height: 1.7; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  #s-check1 .opt { font-size: 29px; padding: 14px 24px; }
+  #s-hook .opt { font-size: 27px; padding: 13px 20px; }
+  #s-hook .card p { font-size: 26px; line-height: 1.55; margin-bottom: 10px; }
+  .ev .card { padding: 22px 22px; }
+  .ev .card h3 { font-size: 30px; margin-bottom: 8px; }
+  .ev .card p { font-size: 24px; line-height: 1.6; margin: 0; }
+  .tl { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+  .tl .card { padding: 18px 18px; }
+  .tl .card .yr { font-size: 24px; font-weight: 900; color: var(--blue); margin-bottom: 6px; }
+  .tl .card p { font-size: 23px; line-height: 1.8; margin: 0; }
+  table.ledger.flt { font-size: 24px; }
+  table.ledger.flt td, table.ledger.flt th { padding: 8px 10px; vertical-align: middle; }
+  table.ledger.flt th { font-size: 21px; }
+  svg .halo { paint-order: stroke; stroke: #fff; stroke-width: 7px; stroke-linejoin: round; }
+  .sea-halo { paint-order: stroke; stroke: #dbeeff; stroke-width: 7px; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="대서양을 사이에 두고 마주 보는 남아메리카와 아프리카. 두 해안선이 퍼즐처럼 맞물린다">
+      <g class="mwrap">
+        <path d="M520 80 L600 70 L680 110 L700 170 L660 240 L620 300 L590 380 L560 460 L540 470 L545 380 L520 300 L480 220 L470 150Z" fill="#69db7c" opacity=".85"/>
+        <path d="M880 60 L1000 50 L1080 90 L1100 150 L1080 200 L1030 260 L1010 340 L980 420 L940 440 L920 380 L900 300 L890 250 L840 210 L820 160 L840 100Z" fill="#ffd8a8" opacity=".9"/>
+        <path d="M770 40 L770 480" stroke="#4dabf7" stroke-width="5" stroke-dasharray="14 10"/>
+      </g>
+      <g data-step="1" stroke="#ffe066" stroke-width="4" fill="none" stroke-dasharray="8 8">
+        <path d="M705 170 Q760 160 815 165"/><path d="M665 240 Q740 230 850 215"/><path d="M625 300 Q760 300 895 300"/>
+      </g>
+      <g data-step="1" font-size="26" font-weight="900" text-anchor="middle"><text x="560" y="510" fill="#8ce99a">남아메리카</text><text x="980" y="500" fill="#ffc078">아프리카</text><text x="770" y="30" fill="#74b6ff">대서양</text></g>
+      <text x="1560" y="510" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 대륙 윤곽은 단순화한 모식도</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅲ-1 지구시스템 · 03</p>
+    <h1>판구조론과 지권의 변화</h1>
+    <p class="sub" data-step="1">1912년, 비웃음을 산 지도 한 장에서 시작한다</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 땅이 움직인다는 생각이 어떻게 과학이 되었는지, 그리고 움직이는 땅이 지구에 무엇을 일으키는지 봅니다.</p>
+    <p data-at="1">대서양 양쪽의 해안선을 보세요. 퍼즐처럼 맞물립니다. 1912년 한 과학자가 이것을 보고 이상한 주장을 내놓았습니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="베게너의 증거" data-part="도입">
+  <p class="kicker">도입 · 지질 조사단의 증거 목록</p>
+  <h2>증거가 이렇게 많은데 왜 거절당했을까?</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p>1912년 독일의 기상학자 <b>베게너</b>: “옛날에 대륙은 하나였고, 그 뒤 갈라져 이동했다.”</p>
+      <p>· 대서양 양쪽 해안선이 맞물림</p>
+      <p>· 같은 화석이 바다 건너 여러 대륙에서</p>
+      <p>· 빙하가 긁은 자국이 여러 대륙에서 이어짐</p>
+      <p>· 떨어진 대륙의 산맥과 암석 나이가 이어짐</p>
+      <p class="small">그래도 지질학자들은 거의 받아들이지 않았다. 베게너는 1930년 그린란드 탐사 중 숨졌다.</p>
+    </div>
+    <div class="card yel">
+      <h3>여러분의 답은?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 화석 증거가 가짜로 밝혀져서</div>
+        <div class="opt">㉡ 대륙을 움직이는 힘을 설명하지 못해서</div>
+        <div class="opt">㉢ 해안선이 맞물리는 것이 우연임이 증명되어서</div>
+        <div class="opt">㉣ 지구 팽창설이 이미 증명되어 있어서</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>지질 조사단장 민서의 질문입니다. 오늘 사건은 왜 이렇게 좋은 증거를 두고도 틀렸다고 했는가입니다.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 무엇이 빠져 있었을지 들어 두세요.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>대륙 이동설</b><span>대륙이 갈라져 이동했다는 베게너의 생각</span></div>
+    <div class="card"><b>판구조론</b><span>여러 장의 판이 움직인다는 이론</span></div>
+    <div class="card"><b>맨틀 대류</b><span>판을 움직이는 힘</span></div>
+    <div class="card"><b>판의 경계</b><span>발산형 · 수렴형 · 보존형</span></div>
+    <div class="card"><b>변동대</b><span>화산과 지진이 모인 띠</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~16번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 증거 -->
+<section class="slide" id="s-evid" data-title="베게너가 내놓은 증거" data-part="① 판구조론">
+  <p class="kicker">① 대륙 이동설에서 판구조론으로 · 1912년 베게너</p>
+  <h2>베게너가 내놓은 네 가지 증거</h2>
+  <div class="cols c4 ev">
+    <div class="card" data-step="1">
+      <svg viewBox="0 0 280 120" width="280" height="120" aria-label="맞물리는 두 해안선"><path d="M20 10 L90 14 L120 50 L96 90 L70 116 L40 60Z" fill="#69db7c"/><path d="M160 20 L250 12 L262 60 L220 110 L180 80 L150 54Z" fill="#ffc078"/><path d="M124 50 L150 54" stroke="#e8590c" stroke-width="4" stroke-dasharray="5 4"/></svg>
+      <h3>해안선</h3><p>대서양 양쪽 해안선이 퍼즐처럼 맞물린다</p></div>
+    <div class="card" data-step="2">
+      <svg viewBox="0 0 280 120" width="280" height="120" aria-label="바다를 사이에 둔 두 대륙에서 같은 파충류 화석"><rect x="0" y="0" width="280" height="120" rx="10" fill="#d0ebff"/><rect x="10" y="20" width="90" height="80" rx="10" fill="#69db7c"/><rect x="180" y="20" width="90" height="80" rx="10" fill="#ffc078"/><g fill="#495057"><path d="M30 60 q20 -14 40 0 q-20 10 -40 0Z M70 60 l14 -6 v12Z"/><path d="M200 60 q20 -14 40 0 q-20 10 -40 0Z M240 60 l14 -6 v12Z"/></g></svg>
+      <h3>화석</h3><p>민물 파충류 메소사우루스 화석이 남아메리카와 아프리카에서, 글로소프테리스는 다섯 대륙에서</p></div>
+    <div class="card" data-step="3">
+      <svg viewBox="0 0 280 120" width="280" height="120" aria-label="따뜻한 지역 바위에 남은 빙하의 긁힌 자국"><rect x="0" y="0" width="280" height="120" rx="10" fill="#e9ecef"/><g stroke="#495057" stroke-width="4" stroke-linecap="round"><path d="M30 30 L120 60"/><path d="M40 60 L140 90"/><path d="M150 30 L250 64"/><path d="M160 64 L250 96"/></g><text x="270" y="22" font-size="18" text-anchor="end">❄</text></svg>
+      <h3>빙하 자국</h3><p>지금 따뜻한 지역에 빙하가 긁은 자국, 방향이 여러 대륙에서 이어진다</p></div>
+    <div class="card" data-step="4">
+      <svg viewBox="0 0 280 120" width="280" height="120" aria-label="바다 건너 이어지는 산맥"><rect x="0" y="0" width="280" height="120" rx="10" fill="#d0ebff"/><rect x="0" y="30" width="100" height="90" fill="#69db7c"/><rect x="180" y="30" width="100" height="90" fill="#ffc078"/><path d="M20 90 L45 50 L70 90Z M60 90 L80 60 L100 90Z" fill="#8a6a45"/><path d="M180 90 L200 58 L220 90Z M210 90 L235 52 L260 90Z" fill="#8a6a45"/><path d="M100 70 L180 70" stroke="#8a6a45" stroke-width="3" stroke-dasharray="6 5"/></svg>
+      <h3>산맥·암석</h3><p>떨어진 대륙의 산맥과 암석 나이가 이어진다</p></div>
+  </div>
+  <div class="tight mt">
+    <p data-step="5">대륙은 원래 하나였다가 갈라져 이동했다 → <b class="blank" data-n="1" data-step="5">대륙 이동설</b> · 하나였던 초대륙 <b class="blank" data-n="2" data-step="5">판게아</b></p>
+  </div>
+  <aside class="script">
+    <p>베게너가 내놓은 증거를 하나씩 봅니다.</p>
+    <p data-at="1">첫째, 대서양 양쪽 해안선이 퍼즐처럼 맞물립니다.</p>
+    <p data-at="2">둘째, 민물에 살던 파충류 메소사우루스의 화석이 바다 건너 남아메리카와 아프리카에서 나옵니다. 민물 파충류가 대서양을 헤엄쳐 건넜을 리는 없죠. 식물 글로소프테리스 화석은 남아메리카·아프리카·인도·오스트레일리아·남극 다섯 곳에서 나옵니다.</p>
+    <p data-at="3">셋째, 지금은 따뜻한 지역에 빙하가 긁은 자국이 있고, 그 방향이 여러 대륙에서 이어집니다.</p>
+    <p data-at="4">넷째, 떨어진 대륙의 산맥과 암석 나이가 이어집니다.</p>
+    <p data-at="5">그래서 베게너는 빈칸 1번, 대륙 이동설을 내놓았습니다. 하나였던 초대륙의 이름이 빈칸 2번, 판게아입니다.</p>
+  </aside>
+</section>
+
+<!-- 5 판구조론까지 -->
+<section class="slide soft" id="s-time" data-title="빠져 있던 힘" data-part="① 판구조론">
+  <p class="kicker">① 대륙 이동설에서 판구조론으로 · 50년의 기록</p>
+  <h2>빠져 있던 것은 움직이게 하는 힘이었다</h2>
+  <div class="tl">
+    <div class="card" data-step="1"><div class="yr">1912년</div><p>베게너의 대륙 이동설. 대륙을 움직이는 힘을 설명하지 못해 거절당한다</p></div>
+    <div class="card" data-step="2"><div class="yr">1920~30년대</div><p>홈스가 <b class="blank" data-n="3" data-step="2">맨틀 대류</b>를 원동력으로 제안한다</p></div>
+    <div class="card" data-step="3"><div class="yr">1950~60년대</div><p>음향 측심으로 해령과 해구 같은 해저 지형이 드러난다</p></div>
+    <div class="card" data-step="4"><div class="yr">1962년</div><p>헤스 등의 <b class="blank" data-n="4" data-step="4">해저 확장설</b>, 해령을 축으로 대칭인 고지자기 줄무늬</p></div>
+    <div class="card" data-step="5"><div class="yr">1960년대 후반</div><p>겉껍질을 여러 장의 판으로 보는 <b class="blank" data-n="5" data-step="5">판구조론</b></p></div>
+  </div>
+  <svg class="mt" viewBox="0 0 1400 190" width="1400" height="190" data-step="4" aria-label="해령을 가운데 두고 양쪽에 같은 폭의 줄무늬가 대칭으로 늘어선 해저">
+    <defs><marker id="s5-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#161b28"/></marker></defs>
+    <g>
+      <rect x="380" y="40" width="640" height="90" fill="#e9ecef"/>
+      <g fill="#495057"><rect x="380" y="40" width="50" height="90"/><rect x="490" y="40" width="70" height="90"/><rect x="610" y="40" width="40" height="90"/><rect x="680" y="40" width="40" height="90"/><rect x="750" y="40" width="40" height="90"/><rect x="840" y="40" width="70" height="90"/><rect x="970" y="40" width="50" height="90"/></g>
+      <path d="M700 30 V140" stroke="#e03131" stroke-width="6"/>
+      <g stroke="#161b28" stroke-width="5" marker-end="url(#s5-a)"><path d="M660 160 L520 160"/><path d="M740 160 L880 160"/></g>
+      <text x="700" y="22" font-size="22" font-weight="900" fill="#c92a2a" text-anchor="middle">해령</text>
+      <text x="360" y="95" font-size="21" font-weight="800" fill="#161b28" text-anchor="end">고지자기 줄무늬</text>
+      <text x="1040" y="78" font-size="20" font-weight="800" fill="#161b28">■ 지금과 같은 방향</text>
+      <text x="1040" y="108" font-size="20" font-weight="800" fill="#5f6b80">□ 거꾸로 된 방향</text>
+      <text x="700" y="188" font-size="20" font-weight="800" fill="#5f6b80" text-anchor="middle">새 해양 지각이 양쪽으로 밀려난다</text>
+    </g>
+  </svg>
+  <aside class="script">
+    <p>베게너 이후 50년의 기록입니다. 단원 화면의 순서 맞히기와 같습니다.</p>
+    <p data-at="1">1912년, 증거는 많았지만 대륙을 움직이는 힘을 설명하지 못했습니다. 기상학자라는 점도 불신을 키웠어요.</p>
+    <p data-at="2">1920~30년대 홈스가 빈칸 3번, 맨틀 대류를 원동력으로 제안합니다. 하지만 증거가 부족했습니다.</p>
+    <p data-at="3">1950~60년대 음향 측심으로 바다 밑을 재 보니 해령과 해구가 드러났습니다.</p>
+    <p data-at="4">1962년 헤스 등이 빈칸 4번, 해저 확장설을 내놓습니다. 해령에서 새 지각이 생겨 양쪽으로 밀려난다는 것이죠. 해령을 가운데 두고 대칭인 고지자기 줄무늬가 이를 뒷받침했습니다.</p>
+    <p data-at="5">1960년대 후반, 지구의 겉껍질을 여러 장의 판으로 보는 빈칸 5번, 판구조론이 자리를 잡습니다.</p>
+  </aside>
+</section>
+
+<!-- 6 맨틀 대류 -->
+<section class="slide" id="s-conv" data-title="판을 움직이는 맨틀 대류" data-part="① 판구조론">
+  <p class="kicker">① 대륙 이동설에서 판구조론으로 · 판과 맨틀의 단면</p>
+  <h2>판은 맨틀 대류를 타고 움직인다</h2>
+  <svg viewBox="0 0 1400 360" width="1400" height="360" aria-label="맨틀이 두 개의 고리로 천천히 대류한다. 올라오는 곳에는 해령, 내려가는 곳에서는 판이 가라앉는 해구가 생긴다">
+    <defs>
+      <linearGradient id="s6-m" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffc078"/><stop offset="1" stop-color="#e8590c"/></linearGradient>
+      <marker id="s6-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#c92a2a"/></marker>
+      <marker id="s6-k" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#161b28"/></marker>
+    </defs>
+    <rect x="0" y="0" width="1400" height="70" rx="12" fill="#d0ebff"/>
+    <rect x="0" y="100" width="1400" height="260" rx="12" fill="url(#s6-m)"/>
+    <path d="M60 70 L660 70 L700 52 L740 70 L1240 70 L1260 100 L1300 300 L1280 300 L1240 100 L740 100 L700 90 L660 100 L60 100Z" fill="#495057"/>
+    <path d="M1250 70 L1400 50 L1400 100 L1265 100Z" fill="#8a6a45"/>
+    <g data-step="1" fill="none" stroke="#c92a2a" stroke-width="7" marker-end="url(#s6-r)">
+      <path d="M680 330 Q690 170 600 130 Q350 120 220 180 Q120 260 300 330 Q480 350 650 335"/>
+      <path d="M720 330 Q710 170 800 130 Q1050 120 1180 180 Q1250 260 1100 330 Q920 350 750 335"/>
+    </g>
+    <g data-step="2" stroke="#161b28" stroke-width="6" marker-end="url(#s6-k)"><path d="M620 86 L460 86"/><path d="M780 86 L940 86"/></g>
+    <g data-step="2" font-size="22" font-weight="900" fill="#fff" text-anchor="middle"><text x="300" y="92">판(암석권)</text><text x="1080" y="92">판(암석권)</text></g>
+    <g data-step="3" font-size="23" font-weight="900" text-anchor="middle">
+      <text x="700" y="36" fill="#c92a2a">해령: 올라오는 곳, 새 지각이 생긴다</text>
+      <text x="1230" y="36" fill="#1462d8">해구: 판이 가라앉는다</text>
+    </g>
+    <text x="20" y="130" font-size="22" font-weight="900" fill="#7a2e00">맨틀</text>
+    <text x="1395" y="352" font-size="18" fill="#fff" text-anchor="end">⚠ 두께·대류 모양은 모식도 · 실제 맨틀은 고체 상태로 아주 느리게 흐른다</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">맨틀을 아주 천천히 대류시키는 에너지 → <b class="blank" data-n="6" data-step="1">지구 내부 에너지</b></p>
+    <p data-step="2">지구의 겉껍질은 여러 장의 판으로 나뉘어 맨틀 대류를 타고 해마다 몇 cm씩 움직인다</p>
+    <p data-step="3">대류가 올라오는 곳에 해령, 판이 가라앉는 곳에 해구</p>
+  </div>
+  <aside class="script">
+    <p>판구조론이 말하는 지구의 단면입니다. 지난 시간 세 개의 난로 가운데 하나가 여기서 일합니다.</p>
+    <p data-at="1">맨틀은 고체지만 아주 오랜 시간에 걸쳐 천천히 흐르며 대류합니다. 이 대류를 일으키는 에너지가 빈칸 6번, 지구 내부 에너지입니다.</p>
+    <p data-at="2">그 위에 얹힌 판, 지각과 맨틀 윗부분을 합친 암석권이 해마다 몇 cm씩 움직입니다.</p>
+    <p data-at="3">대류가 올라오는 곳에서는 해령이 생겨 새 지각이 만들어지고, 판이 가라앉는 곳에는 해구가 생깁니다. 다음 장면에서 경계를 세 가지로 나눕니다.</p>
+  </aside>
+</section>
+
+<!-- 7 경계 세 가지 -->
+<section class="slide" id="s-bnd" data-title="판 경계 세 가지" data-part="② 판의 경계">
+  <p class="kicker">② 판의 경계 · 두 판이 만나는 방식</p>
+  <h2>판 경계는 세 가지</h2>
+  <svg viewBox="0 0 1400 330" width="1400" height="330" aria-label="왼쪽: 두 판이 멀어지며 마그마가 올라온다. 가운데: 해양판이 대륙판 아래로 가라앉으며 해구와 화산이 생긴다. 오른쪽: 위에서 본 두 판이 반대 방향으로 미끄러진다">
+    <defs>
+      <marker id="s7-k" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#161b28"/></marker>
+      <marker id="s7-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#c92a2a"/></marker>
+    </defs>
+    <rect x="0" y="0" width="440" height="320" rx="18" fill="#f2f5f9"/>
+    <rect x="480" y="0" width="440" height="320" rx="18" fill="#f2f5f9"/>
+    <rect x="960" y="0" width="440" height="320" rx="18" fill="#f2f5f9"/>
+    <g data-step="1">
+      <rect x="20" y="110" width="400" height="40" fill="#74c0fc"/>
+      <path d="M20 150 L195 150 L215 132 L220 210 L20 210Z" fill="#495057"/><path d="M420 150 L245 150 L225 132 L220 210 L420 210Z" fill="#495057"/>
+      <rect x="20" y="210" width="400" height="90" fill="#ffa94d"/>
+      <path d="M220 290 L220 150" stroke="#c92a2a" stroke-width="7" marker-end="url(#s7-r)"/>
+      <g stroke="#161b28" stroke-width="6" marker-end="url(#s7-k)"><path d="M170 80 L60 80"/><path d="M270 80 L380 80"/></g>
+      <text x="220" y="40" font-size="24" font-weight="900" fill="#161b28" text-anchor="middle">멀어진다</text>
+      <text x="220" y="185" font-size="20" font-weight="900" fill="#fff" text-anchor="middle" class="sea-halo" style="stroke:#495057">해령</text>
+    </g>
+    <g data-step="2">
+      <rect x="500" y="110" width="250" height="40" fill="#74c0fc"/>
+      <path d="M500 150 L750 150 L900 300 L840 300 L720 190 L500 190Z" fill="#495057"/>
+      <path d="M750 110 L790 80 L820 100 L900 104 L900 230 L790 160 L760 150Z" fill="#8a6a45"/>
+      <path d="M800 84 L815 60 L830 84Z" fill="#e03131"/>
+      <g stroke="#161b28" stroke-width="6" marker-end="url(#s7-k)"><path d="M540 80 L660 80"/></g>
+      <text x="700" y="40" font-size="24" font-weight="900" fill="#161b28" text-anchor="middle">부딪힌다</text>
+      <text x="750" y="140" font-size="19" font-weight="900" fill="#1462d8" text-anchor="middle" class="halo">해구</text>
+      <text x="610" y="182" font-size="19" font-weight="900" fill="#fff" text-anchor="middle">해양판</text>
+      <text x="865" y="136" font-size="19" font-weight="900" fill="#fff" text-anchor="middle">대륙판</text>
+      <text x="760" y="262" font-size="19" font-weight="900" fill="#161b28" text-anchor="middle" class="halo">섭입</text>
+    </g>
+    <g data-step="3">
+      <rect x="990" y="70" width="380" height="110" fill="#ced4da"/><rect x="990" y="180" width="380" height="110" fill="#adb5bd"/>
+      <path d="M990 180 H1370" stroke="#c92a2a" stroke-width="6"/>
+      <g stroke="#161b28" stroke-width="6" marker-end="url(#s7-k)"><path d="M1240 125 L1110 125"/><path d="M1120 235 L1250 235"/></g>
+      <text x="1180" y="40" font-size="24" font-weight="900" fill="#161b28" text-anchor="middle">어긋난다 (위에서 본 모습)</text>
+    </g>
+    <text x="1395" y="316" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 단면 모식도</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">두 판이 멀어진다 → <b class="blank" data-n="7" data-step="1">발산형</b> 경계: 해령·열곡, 맨틀 물질이 올라와 새 해양 지각이 생긴다</p>
+    <p data-step="2">두 판이 부딪힌다 → <b class="blank" data-n="8" data-step="2">수렴형</b> 경계: 무거운 해양판이 섭입해 해구·호상 열도, 대륙끼리는 습곡 산맥</p>
+    <p data-step="3">두 판이 어긋난다 → <b class="blank" data-n="9" data-step="3">보존형</b> 경계: 지각이 생기지도 사라지지도 않는다</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면의 판 경계 실험대입니다. 두 판이 어떻게 만나느냐로 세 가지가 나뉩니다.</p>
+    <p data-at="1">빈칸 7번, 발산형 경계. 두 판이 멀어지고 그 틈으로 맨틀 물질이 올라와 새로운 해양 지각이 만들어집니다. 대서양 중앙 해령, 동아프리카 열곡대, 아이슬란드가 여기예요.</p>
+    <p data-at="2">빈칸 8번, 수렴형 경계. 밀도가 큰 해양판이 다른 판 아래로 섭입하면 해구와 호상 열도가, 두 대륙판이 충돌하면 히말라야 같은 습곡 산맥이 생깁니다.</p>
+    <p data-at="3">빈칸 9번, 보존형 경계. 두 판이 반대 방향으로 어긋나며 미끄러집니다. 지각이 새로 생기지도 사라지지도 않습니다.</p>
+  </aside>
+</section>
+
+<!-- 8 단층과 지진 -->
+<section class="slide soft" id="s-fault" data-title="경계마다 다른 단층과 지진" data-part="② 판의 경계">
+  <p class="kicker">② 판의 경계 · 지진이 일어날 때 생기는 단층</p>
+  <h2>경계마다 단층과 지진이 다르다</h2>
+  <table class="ledger flt">
+    <tr><th style="width:200px">단층 모양</th><th style="width:150px">경계 · 힘</th><th style="width:210px">단층</th><th>지진</th><th>대표 지역</th></tr>
+    <tr data-step="1">
+      <td><svg viewBox="0 0 180 90" width="180" height="90" aria-label="정단층: 경사진 단층면 위쪽 덩어리가 아래로 내려갔다"><path d="M10 20 L80 20 L104 86 L10 86Z" fill="#c49a6c"/><path d="M86 36 L170 36 L170 86 L104 86Z" fill="#a8845a"/><path d="M78 14 L108 97" stroke="#c92a2a" stroke-width="3"/><path d="M40 10 L4 10 M140 26 L176 26" stroke="#161b28" stroke-width="3"/><path d="M4 10 l8 -5 v10Z M176 26 l-8 -5 v10Z" fill="#161b28"/></svg></td>
+      <td><b>발산형</b><br><span class="c-mute">잡아당김</span></td><td><b class="blank" data-n="10" data-step="1">정단층</b></td><td>얕은 지진 (깊이 70 km 이내)</td><td>대서양 중앙 해령, 동아프리카 열곡대</td></tr>
+    <tr data-step="2">
+      <td><svg viewBox="0 0 180 90" width="180" height="90" aria-label="역단층: 경사진 단층면 위쪽 덩어리가 위로 올라갔다"><path d="M10 36 L80 36 L98 86 L10 86Z" fill="#c49a6c"/><path d="M74 20 L170 20 L170 86 L98 86Z" fill="#a8845a"/><path d="M71 11 L102 97" stroke="#c92a2a" stroke-width="3"/><path d="M4 26 L40 26 M176 10 L140 10" stroke="#161b28" stroke-width="3"/><path d="M40 26 l-8 -5 v10Z M140 10 l8 -5 v10Z" fill="#161b28"/></svg></td>
+      <td><b>수렴형</b><br><span class="c-mute">눌림</span></td><td><b class="blank" data-n="11" data-step="2">역단층</b></td><td>얕은 곳 ~ 깊이 700 km</td><td>일본 해구, 안데스 산맥, 히말라야 산맥</td></tr>
+    <tr data-step="3">
+      <td><svg viewBox="0 0 180 90" width="180" height="90" aria-label="변환 단층을 위에서 본 모습: 두 덩어리가 단층을 따라 반대로 미끄러진다"><rect x="10" y="8" width="160" height="36" fill="#c49a6c"/><rect x="10" y="46" width="160" height="36" fill="#a8845a"/><path d="M10 45 H170" stroke="#c92a2a" stroke-width="3"/><path d="M120 26 L60 26 M60 64 L120 64" stroke="#161b28" stroke-width="3"/><path d="M56 26 l9 -5 v10Z M124 64 l-9 -5 v10Z" fill="#161b28"/></svg></td>
+      <td><b>보존형</b><br><span class="c-mute">어긋남</span></td><td><b class="blank" data-n="12" data-step="3">변환 단층</b></td><td>얕은 지진, 규모는 클 수 있다</td><td>산안드레아스 단층, 북아나톨리아 단층</td></tr>
+  </table>
+  <p class="small mt" data-step="4">거꾸로, 지진 때 생긴 단층의 종류를 분석하면 그 지역이 어떤 판 경계에 놓여 있는지 알 수 있다</p>
+  <aside class="script">
+    <p>판 경계에서 지진이 일어나면 땅이 끊어져 어긋나는 단층이 생깁니다. 경계마다 단층이 다릅니다.</p>
+    <p data-at="1">발산형에서는 지각이 양옆으로 잡아당겨져 늘어나므로, 단층면 위쪽 덩어리가 미끄러져 내려가는 빈칸 10번, 정단층이 생깁니다. 지진은 얕습니다.</p>
+    <p data-at="2">수렴형에서는 지각이 눌리므로 위쪽 덩어리가 밀려 올라가는 빈칸 11번, 역단층이 생깁니다. 섭입하는 판을 따라 지진이 점점 깊어져 700 km까지 내려갑니다.</p>
+    <p data-at="3">보존형에서는 옆으로 스쳐 지나가는 빈칸 12번, 변환 단층이 생깁니다. 화산은 거의 없지만 쌓인 힘이 한꺼번에 풀리며 큰 지진이 날 수 있습니다.</p>
+    <p data-at="4">그래서 지진의 단층을 분석하면 거꾸로 그곳이 어떤 경계인지도 알 수 있습니다.</p>
+  </aside>
+</section>
+
+<!-- 9 확인 -->
+<section class="slide" id="s-check1" data-title="깊어지는 지진" data-part="② 판의 경계">
+  <p class="kicker">② 판의 경계 · 확인</p>
+  <h2>지진이 바다 쪽에서 육지 쪽으로 점점 깊어진다면?</h2>
+  <p style="font-size:28px;margin:-18px 0 22px">해구 근처에서는 얕고, 대륙 안쪽으로 갈수록 깊이 수백 km까지 내려가는 지진대가 있다. 이곳은 어떤 곳일까?</p>
+  <div class="opts" style="max-width:1300px">
+    <div class="opt wrong" data-step="1">① 두 판이 멀어지며 새 지각이 생기는 발산형 경계</div>
+    <div class="opt right" data-step="1">② 해양판이 대륙판 아래로 비스듬히 가라앉는 수렴형 경계</div>
+    <div class="opt wrong" data-step="1">③ 두 판이 옆으로 어긋나는 보존형 경계</div>
+    <div class="opt wrong" data-step="1">④ 판 경계에서 멀리 떨어진 판의 한가운데</div>
+  </div>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ②. 지진은 가라앉는 판을 따라 일어나므로, 판이 비스듬히 내려가는 방향으로 점점 깊어집니다. 발산형과 보존형의 지진은 얕습니다. 단원 응용 실험실의 ‘지진 깊이로 가라앉는 판 찾기’가 바로 이 원리입니다.</p>
+  </aside>
+</section>
+
+<!-- 10 변동대 -->
+<section class="slide" id="s-ring" data-title="화산과 지진이 그리는 띠" data-part="③ 변동대와 판의 속력">
+  <p class="kicker">③ 변동대와 판의 속력 · 화산과 큰 지진이 일어난 자리</p>
+  <h2>화산과 지진은 띠를 이룬다</h2>
+  <div class="cols" style="grid-template-columns:820px 1fr;align-items:center">
+    <svg viewBox="0 0 820 470" width="820" height="470" aria-label="태평양을 가운데 둔 단순한 세계 지도. 화산과 지진이 태평양 둘레의 판 경계를 따라 띠를 이루고, 하와이와 우리나라는 띠에서 떨어져 있다">
+      <rect x="0" y="0" width="820" height="440" rx="16" fill="#dbeeff"/>
+      <path d="M0 30 L170 20 L230 60 L250 120 L215 160 L190 200 L150 230 L60 240 L0 230Z" fill="#e9dcc4"/>
+      <path d="M150 300 Q210 270 260 300 Q280 350 230 370 Q170 380 150 340Z" fill="#e9dcc4"/>
+      <path d="M600 30 L780 20 L800 120 L740 190 L690 230 L650 200 L620 120Z" fill="#e9dcc4"/>
+      <path d="M690 250 L760 240 L790 300 L750 400 L715 430 L700 360 L680 300Z" fill="#e9dcc4"/>
+      <g data-step="2" fill="none" stroke="#c92a2a" stroke-width="4" stroke-dasharray="10 6">
+        <path d="M250 60 Q420 0 610 50"/><path d="M262 90 L270 160 L282 240 L310 330 L340 420"/><path d="M630 110 L660 200 L675 260 L690 340 L700 430"/><path d="M520 440 L560 300 L640 230"/>
+      </g>
+      <g data-step="1">
+        <g fill="#e03131"><path d="M255 112 l8 -14 l8 14Z"/><path d="M262 170 l8 -14 l8 14Z"/><path d="M276 238 l8 -14 l8 14Z"/><path d="M300 318 l8 -14 l8 14Z"/><path d="M330 30 l8 -14 l8 14Z"/><path d="M450 18 l8 -14 l8 14Z"/><path d="M560 34 l8 -14 l8 14Z"/><path d="M640 160 l8 -14 l8 14Z"/><path d="M672 252 l8 -14 l8 14Z"/><path d="M686 330 l8 -14 l8 14Z"/><path d="M694 404 l8 -14 l8 14Z"/><path d="M574 213 l8 -14 l8 14Z"/></g>
+        <g fill="#1462d8"><circle cx="248" cy="80" r="6"/><circle cx="278" cy="140" r="6"/><circle cx="290" cy="200" r="6"/><circle cx="300" cy="280" r="6"/><circle cx="330" cy="380" r="6"/><circle cx="390" cy="28" r="6"/><circle cx="510" cy="22" r="6"/><circle cx="620" cy="80" r="6"/><circle cx="650" cy="130" r="6"/><circle cx="668" cy="210" r="6"/><circle cx="682" cy="300" r="6"/><circle cx="698" cy="380" r="6"/><circle cx="540" cy="360" r="6"/></g>
+        <path d="M470 210 l8 -14 l8 14Z" fill="#e03131"/><circle cx="215" cy="110" r="6" fill="#1462d8"/>
+      </g>
+      <g data-step="3" font-size="21" font-weight="900" text-anchor="middle"><text x="460" y="120" fill="#c92a2a" class="sea-halo">불의 고리</text><text x="460" y="146" fill="#c92a2a" font-size="18" class="sea-halo">(태평양 둘레)</text></g>
+      <g data-step="4" font-size="18" font-weight="900">
+        <text x="490" y="232" fill="#161b28" class="sea-halo">하와이 (열점)</text>
+        <text x="200" y="134" fill="#161b28" text-anchor="end" class="halo">경주·포항 (판 내부)</text>
+      </g>
+      <g font-size="18" font-weight="800" fill="#161b28"><path d="M20 455 l7 -12 l7 12Z" fill="#e03131"/><text x="40" y="456">화산</text><circle cx="110" cy="450" r="6" fill="#1462d8"/><text x="122" y="456">큰 지진</text><path d="M200 450 h30" stroke="#c92a2a" stroke-width="4" stroke-dasharray="8 5"/><text x="238" y="456">판 경계</text></g>
+      <text x="815" y="466" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 대륙 윤곽·경계선·점 위치는 모식도</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">화산과 큰 지진은 지구에 고르게 흩어져 있지 않다</p>
+      <p data-step="2">판 경계를 따라 좁은 띠를 이룬다 → <b class="blank" data-n="13" data-step="2">변동대</b></p>
+      <p data-step="3">태평양을 둘러싼 띠 = 불의 고리 · 단원 화면: 경계 800 km 안쪽에 화산·지진이 각각 70% 넘게</p>
+      <p class="small" data-step="4">띠 밖의 예외: 하와이 같은 열점 화산, 경주(2016년, 규모 5.8)·포항(2017년, 규모 5.4) 같은 판 내부 지진</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>세계 지도를 펴 봅시다. 화산과 큰 지진이 일어난 자리를 찍습니다.</p>
+    <p data-at="1">지구 전체에 고르게 흩어져 있지 않고 가느다란 띠를 이룹니다.</p>
+    <p data-at="2">그 띠가 판 경계와 겹칩니다. 판 경계를 따라 화산과 지진이 모인 띠가 빈칸 13번, 변동대입니다.</p>
+    <p data-at="3">태평양을 둘러싼 띠가 ‘불의 고리’입니다. 단원 화면에서 거리를 800 km까지 좁혀도 화산과 지진이 각각 70% 넘게 들어옵니다. 다만 화면에 찍은 것은 대표적인 것만이라 정확한 통계값은 아닙니다.</p>
+    <p data-at="4">예외도 있습니다. 하와이는 판 경계에서 멀리 떨어진 열점 화산이고, 경주와 포항 지진은 판 내부의 오래된 단층이 다시 움직여 일어났습니다. 우리나라는 변동대에서 벗어나 있어 큰 지진이 드물지만, 안전지대는 아닙니다.</p>
+  </aside>
+</section>
+
+<!-- 11 하와이 -->
+<section class="slide soft" id="s-hot" data-title="하와이 열도로 잰 판의 속력" data-part="③ 변동대와 판의 속력">
+  <p class="kicker">③ 변동대와 판의 속력 · 하와이 열도 (단원 화면 자료)</p>
+  <h2>하와이 열도는 판이 남긴 발자국</h2>
+  <svg viewBox="0 0 1400 330" width="1400" height="330" aria-label="태평양판이 왼쪽으로 움직이고, 오른쪽 아래 고정된 열점에서 마그마가 올라와 하와이섬을 만든다. 왼쪽으로 갈수록 섬이 오래되고 낮다: 카우아이섬 500 km 500만 년, 미드웨이섬 2,400 km 2,800만 년">
+    <defs>
+      <linearGradient id="s11-m" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffc078"/><stop offset="1" stop-color="#e8590c"/></linearGradient>
+      <marker id="s11-k" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#161b28"/></marker>
+    </defs>
+    <rect x="0" y="40" width="1400" height="110" fill="#a5d8ff"/>
+    <rect x="0" y="150" width="1400" height="50" fill="#495057"/>
+    <rect x="0" y="200" width="1400" height="100" fill="url(#s11-m)"/>
+    <g fill="#5c7a5f">
+      <path d="M1200 150 L1250 72 L1300 150Z"/><path d="M1150 150 L1190 92 L1230 150Z"/><path d="M1080 150 L1112 104 L1144 150Z"/><path d="M995 150 L1021 116 L1047 150Z"/><path d="M128 150 L150 136 L172 150Z"/>
+    </g>
+    <g data-step="1">
+      <path d="M1230 300 Q1250 250 1240 200 Q1250 170 1250 150" stroke="#c92a2a" stroke-width="22" fill="none" opacity=".85"/>
+      <text x="1250" y="292" font-size="22" font-weight="900" fill="#fff" text-anchor="middle">열점 (제자리)</text>
+    </g>
+    <g data-step="2">
+      <path d="M900 180 L640 180" stroke="#fff" stroke-width="8" marker-end="url(#s11-k)"/>
+      <text x="770" y="230" font-size="22" font-weight="900" fill="#fff" text-anchor="middle">태평양판이 움직이는 방향</text>
+      <g font-size="20" font-weight="900" fill="#161b28" text-anchor="middle" class="halo">
+        <text x="1300" y="28">하와이섬 (지금)</text><text x="1110" y="28">오아후섬 300만 년</text>
+      </g>
+    </g>
+    <g data-step="3" font-size="21" font-weight="900" text-anchor="middle">
+      <text x="1000" y="80" fill="#1462d8" class="halo">카우아이섬</text><text x="1000" y="104" fill="#1462d8" class="halo" font-size="19">500 km · 500만 년</text>
+      <text x="150" y="104" fill="#1462d8" class="halo">미드웨이섬</text><text x="150" y="128" fill="#1462d8" class="halo" font-size="19">2,400 km · 2,800만 년</text>
+    </g>
+    <text x="0" y="322" font-size="18" fill="#5f6b80">⚠ 섬 크기와 높이는 과장, 판은 일정한 속력으로 곧게 움직였다고 본 모형</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">판 아래 한자리에 고정된 <b class="blank" data-n="14" data-step="1">열점</b>에서 마그마가 올라와 섬을 만든다</p>
+    <p data-step="2">판이 움직이면 섬이 실려 가 줄지어 늘어선다 → 열점에서 멀수록 오래된 섬</p>
+    <p data-step="3">속력 = 거리 ÷ 나이: 500 km ÷ 500만 년 = 10 cm/년, 2,400 km ÷ 2,800만 년 ≈ 8.6 cm/년</p>
+    <p data-step="3">→ 두 자료에 모두 들어맞는 태평양판의 속력 약 <b class="blank" data-n="15" data-step="3">9</b> cm/년</p>
+  </div>
+  <aside class="script">
+    <p>판이 정말 움직인다면 속도를 잴 수 있어야 합니다. 하와이 열도가 자입니다.</p>
+    <p data-at="1">태평양판 아래 한자리에 고정된 빈칸 14번, 열점에서 마그마가 올라와 섬을 만듭니다. 지금 화산 활동이 있는 곳은 하와이섬입니다.</p>
+    <p data-at="2">판이 지나가는 동안 섬이 실려 가며 줄지어 늘어섭니다. 그래서 열점에서 멀어질수록 섬이 오래되고 깎여 낮아집니다.</p>
+    <p data-at="3">카우아이섬은 500 km 떨어져 있고 500만 년 됐습니다. 500 km를 500만 년으로 나누면 해마다 10 cm. 미드웨이섬은 2,400 km, 2,800만 년이라 약 8.6 cm입니다. 두 자료에 모두 오차 15% 안으로 들어맞는 속력은 빈칸 15번, 약 9 cm/년입니다. 손톱이 자라는 속도와 비슷하다고들 하죠.</p>
+  </aside>
+</section>
+
+<!-- 12 미래와 다른 권역 -->
+<section class="slide" id="s-future" data-title="움직이는 땅이 바꾸는 것" data-part="③ 변동대와 판의 속력">
+  <p class="kicker">③ 변동대와 판의 속력 · 지금 속력이 이어진다면, 그리고 다른 권역으로</p>
+  <h2>지권의 변화는 지권에서 끝나지 않는다</h2>
+  <div class="cols" style="grid-template-columns:640px 1fr">
+    <div class="card" data-step="1">
+      <h3>4,000만 년 뒤 (단원 화면)</h3>
+      <svg viewBox="0 0 560 250" width="560" height="250" aria-label="4,000만 년 동안: 대서양 1,000 km 넓어짐, 태평양판 3,400 km 섭입, 인도판 2,000 km 북상">
+        <g font-size="21" font-weight="800" fill="#161b28"><text x="0" y="28">대서양이 넓어짐 · 2.5 cm/년</text><text x="0" y="108">태평양판 섭입 · 8.5 cm/년</text><text x="0" y="188">인도판 북상 · 5.0 cm/년</text></g>
+        <rect x="0" y="40" width="129" height="30" rx="6" fill="#0b7f99"/><text x="140" y="63" font-size="22" font-weight="900" fill="#0b7f99">1,000 km</text>
+        <rect x="0" y="120" width="440" height="30" rx="6" fill="#1462d8"/><text x="450" y="143" font-size="22" font-weight="900" fill="#1462d8">3,400 km</text>
+        <rect x="0" y="200" width="259" height="30" rx="6" fill="#6741d9"/><text x="270" y="223" font-size="22" font-weight="900" fill="#6741d9">2,000 km</text>
+      </svg>
+      <p class="small">거리 = 속력 × 시간 · 2.5 cm × 4,000만 년 = 1,000 km</p>
+    </div>
+    <div class="lines">
+      <p data-step="2">🌋 지권 → 기권: 화산재와 기체가 기온을 낮춘다</p>
+      <p data-step="3">🌊 지권 → 수권: 해저에서 큰 지진이 나면 <b class="blank" data-n="16" data-step="3">지진해일</b>이 일어난다</p>
+      <p data-step="4">⛰️ 지권 → 기권·생물권: 솟아오른 산맥이 바람과 비의 길을 바꾸어 생물이 사는 환경까지 흔든다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>속도를 알면 미래도 그려집니다. 지금 이 순간에도 대서양은 넓어지고, 태평양판은 일본 해구로 가라앉고, 인도판은 히말라야를 더 밀어 올리고 있어요.</p>
+    <p data-at="1">지금 속력이 그대로라면 4,000만 년 뒤 대서양은 1,000 km 더 넓어집니다. 2.5 cm에 4,000만 년을 곱하면 10억 cm, 곧 1,000 km예요. 해마다 몇 cm가 쌓여 대륙의 배치를 바꿉니다.</p>
+    <p data-at="2">그리고 지권의 변화는 다른 권역으로 퍼집니다. 지난 시간의 피나투보처럼 화산재는 기권의 기온을 낮춥니다.</p>
+    <p data-at="3">해저에서 큰 지진이 나면 바닷물 전체가 들려 빈칸 16번, 지진해일이 일어납니다.</p>
+    <p data-at="4">솟아오른 산맥은 바람과 비의 길을 바꾸어 생물권까지 흔듭니다.</p>
+  </aside>
+</section>
+
+<!-- 13 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>지도는 옳았지만, 힘이 빠져 있었다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>대륙 이동설</b>(1912) → 맨틀 대류 → 해저 확장설 → <b>판구조론</b> · 판을 움직이는 것은 지구 내부 에너지가 일으키는 <b>맨틀 대류</b></li>
+    <li data-k="2" data-step="2"><b>판의 경계</b>: 발산형(해령·열곡, 정단층) · 수렴형(해구·습곡 산맥, 역단층) · 보존형(변환 단층)</li>
+    <li data-k="3" data-step="3">화산과 지진은 판 경계를 따라 <b>변동대</b>를 이룬다(불의 고리) · 판 내부에서도 지진은 일어난다</li>
+    <li data-k="4" data-step="4">하와이 열도로 잰 태평양판 약 9 cm/년 · 지권의 변화는 기권·수권·생물권으로 이어진다</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 첫 추리로 돌아갑니다. 답은 ㉡입니다. 화석도 빙하 자국도 진짜였습니다. 빠진 것은 대륙을 움직이는 힘이었고, 그 답인 맨틀 대류와 해저 확장은 30년이 더 지나서야 증거를 얻었습니다.</p></aside>
+</section>
+
+<!-- 14 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 히말라야 산맥이 만들어진 경계는?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 발산형 경계</div>
+        <div class="opt right" data-step="1">㉡ 수렴형 경계 (대륙판끼리 충돌)</div>
+        <div class="opt wrong" data-step="1">㉢ 보존형 경계</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 열점에서 1,000 km 떨어진 섬의 나이가 1,000만 년이라면 판의 속력은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 1 cm/년</div>
+        <div class="opt right" data-step="2">㉡ 10 cm/년</div>
+        <div class="opt wrong" data-step="2">㉢ 100 cm/년</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 인도판과 유라시아판, 두 대륙판이 충돌해 해구 없이 높은 습곡 산맥이 생겼습니다.</p>
+    <p data-at="2">2번은 ㉡. 1,000 km는 1억 cm, 1억 cm ÷ 1,000만 년 = 10 cm/년입니다.</p>
+  </aside>
+</section>
+
+<!-- 15 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ③ 「갈라지는 땅」</h2>
+  <div class="cols">
+    <div class="card"><h3>직접 움직여 보세요</h3><p>세 가지 경계 만들기, 대서양만큼 새 지각 만들기, 변동대 거리 좁히기, 하와이로 판의 속력 재기, 5천만 년 뒤 지구 그리기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 단원 · Ⅲ-2 역학 시스템</h3><p>지구시스템을 묶어 두는 또 하나의 힘, 중력. 첫 이야기는 중력과 자유 낙하입니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ③을 열어 미션을 하게 합니다. 정리하기 탭의 ‘세 사건을 꿰는 한 문장’도 함께 쓰게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+</body>
+</html>

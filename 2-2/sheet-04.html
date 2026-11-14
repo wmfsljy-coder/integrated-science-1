@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 물질의 전기적 성질 (통합과학1 Ⅱ-2 04)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-04.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 8px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 6px; }
+  h2 { font-size: 14.5px; font-weight: 900; margin: 8px 0 3px; padding: 3px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 12.8px; line-height: 1.62; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 2px 7px; text-align: left; line-height: 1.5; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 4px; }
+  .q p { line-height: 1.65; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 38px; margin-top: 4px; }
+  .foot { margin-top: 6px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-04.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅱ-2 물질의 규칙성과 성질 · 04 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 물질의 전기적 성질</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~14)</p>
+
+  <h2>① 띠 간격 — 도체 · 반도체 · 절연체</h2>
+  <table>
+    <tr><th style="width:20%">무리</th><th style="width:30%">20 ℃ 비저항 · 예</th><th>띠 그림</th></tr>
+    <tr><td><b class="blank" data-n="1">도체</b></td><td>구리 1.7×10⁻⁸ Ω·m · 은 · 철</td><td>원자가 띠와 전도띠가 겹치거나 틈이 거의 없다</td></tr>
+    <tr><td><b class="blank" data-n="2">반도체</b></td><td>순수한 규소 약 2.3×10³ Ω·m · 저마늄</td><td>틈이 어중간하다 (저마늄 0.67 eV · 규소 1.12 eV)</td></tr>
+    <tr><td><b class="blank" data-n="3">절연체</b> (부도체)</td><td>석영 유리 10¹⁶ Ω·m 이상 · 고무</td><td>틈이 아주 넓다 (다이아몬드 5.47 eV)</td></tr>
+  </table>
+  <ul>
+    <li>꽉 찬 원자가 띠와 빈 전도띠 사이의 틈 → <b class="blank" data-n="4">띠 간격</b> : 전자가 이 틈을 건너뛰어야 전류가 흐른다 (상온 열에너지 약 0.026 eV)</li>
+    <li>온도↑ 도체: 원자의 떨림↑ → 전자가 더 자주 부딪혀 <b class="blank" data-n="5">저항</b>이 커진다</li>
+    <li>온도↑ 반도체: 건너뛰는 전자가 지수 함수로 늘어 더 잘 통한다 (규소: 300 K 약 4×10⁻¹⁰ → 500 K 약 2×10⁻⁶)</li>
+  </ul>
+
+  <h2>② 도핑 — 성질을 골라 만든다</h2>
+  <ul>
+    <li>규소는 원자가 전자 4개로 이웃 넷과 결합을 꽉 채운다 → 불순물을 일부러 넣는 <b class="blank" data-n="6">도핑</b></li>
+    <li>인(원자가 전자 5개)을 넣으면 남는 전자가 전하를 나른다 → <b class="blank" data-n="7">n형</b></li>
+    <li>붕소(원자가 전자 3개)를 넣으면 전자가 빈 자리 <b class="blank" data-n="8">양공</b>이 전하를 나른다 → <b class="blank" data-n="9">p형</b></li>
+    <li>순수한 규소의 나르개는 1 cm³에 약 10¹⁰개 → 불순물 10¹⁶개면 약 100만 배 · 원자 100만 개에 1개만 넣어도 수백만 배 → n형·p형: <b class="blank" data-n="10">불순물 반도체</b></li>
+  </ul>
+
+  <h2>③ 다이오드와 소재</h2>
+  <ul>
+    <li>p형과 n형을 맞붙인 소자 → <b class="blank" data-n="11">다이오드</b> : p형에 (+)를 건 <b class="blank" data-n="12">순방향</b>이면 양공과 전자가 접합면에서 만나 전류가 흐르고, 역방향이면 멀어져 거의 흐르지 않는다</li>
+    <li>반도체 소자: 발광 다이오드(LED) · 태양 전지 · 트랜지스터(1947년 저마늄으로 처음 만듦)</li>
+    <li>특정 온도 아래에서 저항이 0 → <b class="blank" data-n="13">초전도체</b> : 자기 공명 영상 장치(MRI)의 강한 전자석</li>
+    <li>탄소 원자가 육각형으로 한 겹 깔린 <b class="blank" data-n="14">그래핀</b> : 전기가 아주 잘 통하고 얇고 휜다</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 온도를 올리면 전기가 더 잘 통하게 되는 것은? <span class="ans">→ ㉢ 규소</span> &nbsp; ㉠ 구리 &nbsp; ㉡ 철 &nbsp; ㉢ 규소</p>
+    <p>2. 규소에 붕소를 조금 섞으면? <span class="ans">→ ㉡</span><br>
+      ㉠ n형, 남는 전자가 전하를 나른다 &nbsp; ㉡ p형, 양공이 전하를 나른다 &nbsp; ㉢ 절연체가 된다</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>반도체가 구리나 유리보다 ‘쓸모 있는’ 까닭을 ‘도핑’이라는 말을 넣어 한 문장으로 설명하세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-04.html · 이야기 ④ 「거꾸로 가는 물질」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

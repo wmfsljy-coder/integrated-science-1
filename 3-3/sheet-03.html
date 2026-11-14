@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 유전정보의 흐름 (통합과학1 Ⅲ-3 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-03.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 8px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 6px; }
+  h2 { font-size: 14.5px; font-weight: 900; margin: 7px 0 3px; padding: 3px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 12.8px; line-height: 1.58; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin: 3px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 2px 7px; text-align: center; line-height: 1.42; }
+  th { background: #f4f6fa; font-weight: 800; }
+  td:first-child, th:first-child { text-align: left; }
+  .q { margin-top: 4px; }
+  .q p { line-height: 1.6; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 38px; margin-top: 4px; }
+  .foot { margin-top: 6px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-03.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅲ-3 생명 시스템 · 03 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 유전정보의 흐름</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~12)</p>
+
+  <h2>① 정보의 흐름 — 핵에서 리보솜까지</h2>
+  <ul>
+    <li>DNA 가운데 단백질 하나의 정보를 가진 부분: <b class="blank" data-n="1">유전자</b></li>
+    <li>핵 속에서 DNA를 본떠 mRNA를 만든다: <b class="blank" data-n="2">전사</b> · 세포질의 리보솜이 mRNA를 읽어 아미노산을 잇는다: <b class="blank" data-n="3">번역</b></li>
+    <li>DNA → RNA → 단백질, 한 방향 흐름: <b class="blank" data-n="4">중심 원리</b> · 설계도 원본 DNA는 핵에 그대로 남는다</li>
+    <li>DNA 두 가닥 가운데 본뜨는 한 가닥: <b class="blank" data-n="5">주형 가닥</b> · 짝: A → U, T → A, G → C, C → G · RNA에는 T 대신 <b class="blank" data-n="6">유라실</b>(U)</li>
+  </ul>
+  <table>
+    <tr><th style="width:18%">헤모글로빈 β</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr>
+    <tr><td>DNA 주형</td><td>TAC</td><td>CAC</td><td>GTG</td><td>GAC</td><td>TGA</td><td>GGA</td><td>CTC</td><td>CTC</td><td>TTC</td></tr>
+    <tr><td>mRNA 코돈</td><td>AUG</td><td>GUG</td><td>CAC</td><td>CUG</td><td>ACU</td><td>CCU</td><td>GAG</td><td>GAG</td><td>AAG</td></tr>
+    <tr><td>아미노산</td><td>Met</td><td>Val</td><td>His</td><td>Leu</td><td>Thr</td><td>Pro</td><td>Glu</td><td>Glu</td><td>Lys</td></tr>
+  </table>
+  <ul>
+    <li>아미노산 하나를 지정하는 mRNA의 염기 3개: <b class="blank" data-n="7">코돈</b> · 염기 27개 → 코돈 9개 → 아미노산 9개 (3 : 1)</li>
+    <li>사람 DNA 약 30억 염기쌍 · β 유전자 약 1,600 염기쌍 = 전체의 약 <b class="blank" data-n="8">200만</b> 분의 1 → 전사되는 것은 필요한 유전자 한 토막뿐, DNA는 그대로 남는다</li>
+  </ul>
+
+  <h2>② 한 글자가 바뀌면 — 낫 모양 적혈구</h2>
+  <ul>
+    <li>1904 헤릭(낫 모양 적혈구 관찰) → 1949 폴링(‘분자병’) → 1956 잉그램(β 사슬 146개 중 한 자리) · 적혈구에서 산소를 나르는 단백질: <b class="blank" data-n="9">헤모글로빈</b></li>
+    <li>DNA의 염기 서열이 바뀌는 것: <b class="blank" data-n="10">돌연변이</b> · 주형 20번째 T → A: CTC → CAC, mRNA GAG → GUG</li>
+    <li>7번째 아미노산이 글루탐산(Glu) 대신 <b class="blank" data-n="11">발린</b>(Val) · 완성된 β 사슬에서는 맨 앞 Met이 떨어져 6번째</li>
+  </ul>
+  <table>
+    <tr><th style="width:18%">바꾼 자리 (주형)</th><th>DNA 주형</th><th>mRNA 코돈</th><th>아미노산</th><th>결과</th></tr>
+    <tr><td>20번 T → A</td><td>CTC → CAC</td><td>GAG → GUG</td><td>Glu → Val</td><td>낫 모양 적혈구</td></tr>
+    <tr><td>21번 C → T</td><td>CTC → CTT</td><td>GAG → GAA</td><td>Glu → Glu</td><td>변화 없음 (같은 아미노산의 코돈이 여럿)</td></tr>
+    <tr><td>19번 C → A</td><td>CTC → ATC</td><td>GAG → UAG</td><td>멈춤</td><td>아미노산 6개에서 끊김</td></tr>
+  </table>
+  <ul>
+    <li>아미노산을 지정하지 않고 번역을 끝내는 코돈: <b class="blank" data-n="12">정지 코돈</b> (UAA · UAG · UGA)</li>
+    <li>염기 한 글자 → mRNA 코돈 → 아미노산 → 헤모글로빈이 들러붙어 막대 → 적혈구가 낫 모양 → 모세 혈관이 막혀 통증 · 숨참</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 정지 코돈을 뺀 mRNA 염기가 300개라면 이어지는 아미노산은 몇 개? <span class="ans">→ ㉠ 100개</span> &nbsp; ㉠ 100개 &nbsp; ㉡ 300개 &nbsp; ㉢ 900개</p>
+    <p>2. 전사에 대한 설명으로 옳은 것은? <span class="ans">→ ㉡</span><br>
+      ㉠ DNA 전체가 한꺼번에 RNA로 옮겨진다 &nbsp; ㉡ 필요한 유전자만 옮겨지고 DNA는 남는다 &nbsp; ㉢ 끝나면 DNA가 RNA로 바뀌어 사라진다</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>DNA 염기 한 글자가 바뀌었을 때 적혈구 모양까지 달라지는 까닭을 ‘전사’와 ‘번역’을 넣어 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-03.html · 이야기 ③ 「한 글자가 바뀌면」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

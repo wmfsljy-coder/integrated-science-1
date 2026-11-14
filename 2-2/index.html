@@ -25,6 +25,7 @@
     <button class="tab-btn" data-tab="6"><span class="num">06</span> 응용 실험실</button>
     <button class="tab-btn" data-tab="7"><span class="num">07</span> 정리하기</button>
     <button class="tab-btn" data-tab="8"><span class="num">08</span> 우리 반</button>
+    <button class="tab-btn" data-tab="9"><span class="num">09</span> 칠판모드</button>
   </nav>
 
   <main>
@@ -51,8 +52,8 @@
         <section class="scene" data-title="판독실 — 주기율표를 훑다">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">서윤</span>“먼저 표 자체를 읽어야 합니다. 원자 번호를 1부터 20까지 밀어 보세요. 가운데에는 그 원자의 <b>전자 껍질</b>이, 아래에는 원자 반지름과 이온화 에너지가 그려집니다. 어디서 무엇이 <b>되풀이</b>되는지 눈으로 찾아보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="a-tab" width="900" height="300"></canvas></div>
-            <div class="canvas-wrap studio"><canvas id="a-trend" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-tab" width="900" height="280"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-trend" width="900" height="340"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">원자 번호<span class="val" id="a-z-val">1 · 수소</span></div>
@@ -96,7 +97,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap studio"><canvas id="a-rx" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-rx" width="900" height="372"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">몇 번째 가로줄(주기)까지 내려갈까<span class="val" id="a-per-val">2주기</span></div>
@@ -123,7 +124,7 @@
           <div class="stage-card" style="padding:6px 0 4px"><div id="wk1"></div></div>
         </section>
       </div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-01.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-01.html">개념정리 학습지</a>(<a href="sheet-01.html?key=1">정답</a>) · <a href="form-01.html">형성평가</a>(<a href="form-01.html?key=1">정답</a> · <a href="form-01.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- =====================================================================
@@ -160,7 +161,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap studio"><canvas id="b-make" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-make" width="900" height="372"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label"><span id="b-n-label">옮길 전자 수</span><span class="val" id="b-n-val">0개</span></div>
@@ -194,7 +195,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap studio"><canvas id="b-prop" width="900" height="620"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-prop" width="900" height="576"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">온도<span class="val" id="b-t-val">20 ℃</span></div>
@@ -227,7 +228,7 @@
           <div class="stage-card" style="padding:6px 0 4px"><div id="wk2"></div></div>
         </section>
       </div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-02.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-02.html">개념정리 학습지</a>(<a href="sheet-02.html?key=1">정답</a>) · <a href="form-02.html">형성평가</a>(<a href="form-02.html?key=1">정답</a> · <a href="form-02.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- =====================================================================
@@ -253,7 +254,7 @@
         <section class="scene" data-title="사면체 조립대 — 산소를 몇 개나 나눠 쓸까">
           <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">민주</span>“사면체 하나에는 산소가 4개 있습니다. 그 산소를 <b>옆 사면체와 몇 개나 나눠 쓰느냐</b>를 슬라이더로 정해 보세요. 나눠 쓴 산소는 두 사면체가 반씩 가진 셈이 되니, 규소 하나가 차지하는 산소 수가 줄어듭니다. 그 숫자가 곧 광물의 이름표입니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="c-tet" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-tet" width="900" height="372"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">이웃과 나눠 쓰는 산소 수<span class="val" id="c-share-val">0개</span></div>
@@ -277,7 +278,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap studio"><canvas id="c-carb" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-carb" width="900" height="360"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">탄소 개수<span class="val" id="c-n-val">1개</span></div>
@@ -327,7 +328,7 @@
           <div class="stage-card" style="padding:6px 0 4px"><div id="wk3"></div></div>
         </section>
       </div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-03.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-03.html">개념정리 학습지</a>(<a href="sheet-03.html?key=1">정답</a>) · <a href="form-03.html">형성평가</a>(<a href="form-03.html?key=1">정답</a> · <a href="form-03.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- =====================================================================
@@ -427,7 +428,7 @@
           <div class="stage-card" style="padding:6px 0 4px"><div id="wk4"></div></div>
         </section>
       </div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-04.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-04.html">개념정리 학습지</a>(<a href="sheet-04.html?key=1">정답</a>) · <a href="form-04.html">형성평가</a>(<a href="form-04.html?key=1">정답</a> · <a href="form-04.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- ===================================================================== 05 수준별 문제 -->
@@ -470,11 +471,20 @@
       </div>
       <div class="stage-card"><div id="share"></div></div>
     </section>
+    <!-- ===================================================================== 09 칠판모드 -->
+    <section class="tab-panel" data-panel="9" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">09 · 전자칠판으로 정리하기</div>
+        <h2 class="display">칠판모드</h2>
+        <p>소단원마다 전자칠판용 <b>칠판 강의 화면</b>, 혼자 넘겨 보는 <b>혼자 복습하기</b>, 빈칸 번호가 같은 <b>개념정리 학습지</b>, 10분 동안 확인하는 <b>형성평가</b>를 모았습니다. 칠판에 열리는 빈칸 번호와 학습지 빈칸 번호가 같아, 수업하며 함께 채우거나 수업 끝에 학습지로 확인할 수 있습니다.</p>
+      </div>
+      <div class="info-card" id="board-wrap" style="margin:0 0 16px"><span class="tag">칠판 정리</span>이야기 네 편을 소단원마다 칠판 강의 화면과 개념정리 학습지로 정리하고, 형성평가로 확인합니다.<div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>01 원소의 주기성 (원자가 전자 · 주기성 · 이온화 에너지 · 빈칸 예측)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-01.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-01.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-01.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-01.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div><div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>02 화학 결합 (옥텟 규칙 · 이온 결합 · 공유 결합 · 전기 전도성)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-02.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-02.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-02.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-02.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div><div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>03 지각·생명체의 물질 (규산염 사면체 · 탄소 화합물 · 단위체)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-03.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-03.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-03.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-03.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div><div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>04 물질의 전기적 성질 (띠 간격 · 도핑 · 다이오드 · 소재)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-04.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-04.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-04.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-04.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div></div>
+    </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
-<script src="../assets/theme.js?v=790c9518"></script>
+<script src="../assets/theme.js?v=c3418585"></script>
 <script src="../assets/scope.js?v=cecf172a"></script>
 <script src="../assets/kit.js?v=94e3bd47"></script>
 <script src="../assets/story.js?v=cd80882e"></script>
@@ -482,12 +492,12 @@
 <script src="../assets/lab.js?v=5ab4e410"></script>
 <script src="../assets/share-config.js?v=645d418e"></script>
 <script src="../assets/share.js?v=8ebc37fa"></script>
-<script src="../assets/account.js?v=c2e093b1"></script>
+<script src="../assets/account.js?v=435378ac"></script>
 <script src="episodes.js"></script>
 <script src="worked.js"></script>
 <script src="handoff.js"></script>
 <script src="quiz-items.js"></script>
-<script src="../assets/review.js?v=31d5449f"></script>
+<script src="../assets/review.js?v=c07fe051"></script>
 <script src="../assets/peer.js?v=b6f0b008"></script>
 <script src="../assets/qboard.js?v=b3bb8d32"></script>
 <script src="lab-cases.js"></script>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 정밀도와 정확도 (통합과학1 Ⅰ-2 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 14px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  table.ledger td { font-size: 28px; padding: 12px 14px; }
+  table.ledger th { padding: 8px 14px; }
+  #s-sort table.ledger td { font-size: 27px; padding: 10px 14px; }
+  .tagS { display: inline-block; font-size: 24px; font-weight: 900; padding: 4px 16px; border-radius: 999px; color: #fff; }
+  .tagS.sys { background: #d9302c; } .tagS.ran { background: #1462d8; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg id="c1-art" viewBox="0 0 1600 520" aria-label="표적지 넉 장. 가온은 한가운데에 모였고, 나래는 오른쪽 위 한곳에 모였고, 다인은 넓게 흩어졌지만 가운데를 둘러쌌고, 라온은 오른쪽 위로 치우친 채 흩어졌다"></svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅰ-2 과학의 측정과 우리 사회 · 01</p>
+    <h1>정밀도와 정확도</h1>
+    <p class="sub" data-step="1">총의 문제와 사람의 문제를 자국만 보고 가려낼 수 있을까</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 측정이 얼마나 믿을 만한지 따지는 두 가지 잣대, 정확도와 정밀도를 봅니다. 여러분은 측정 분석가입니다.</p>
+    <p data-at="1">사격부 코치 선생님이 표적지 넉 장을 들고 왔습니다. 한 사람은 총을 고쳐야 하고, 한 사람은 연습을 더 해야 한다는데, 누가 누구일까요?</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="표적지 넉 장" data-part="도입">
+  <p class="kicker">도입 · 사격부 대표 선발전, 넉 장 모두 10발씩</p>
+  <h2>총을 고칠 사람은 누구일까?</h2>
+  <div class="cols w64" style="align-items:center">
+    <div class="card" style="padding:18px 20px">
+      <svg id="hookSvg" viewBox="0 0 800 470" width="800" height="470" aria-label="가온, 나래, 다인, 라온의 표적지 넉 장을 2줄로 놓은 그림"></svg>
+    </div>
+    <div class="card yel">
+      <h3>연습은 충분하고 총만 정비하면 되는 선수는?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 가온</div>
+        <div class="opt">㉡ 나래</div>
+        <div class="opt">㉢ 다인</div>
+        <div class="opt">㉣ 라온</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>한가운데 붉은 점이 맞혀야 할 자리입니다. 가온은 한가운데에, 나래는 오른쪽 위 한곳에 빈틈없이, 다인은 흩어졌지만 평균은 한가운데, 라온은 치우친 채 흩어졌습니다.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 오늘 끝에 다시 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>정확도</b><span>평균이 참값에 얼마나 가까운가</span></div>
+    <div class="card"><b>정밀도</b><span>측정값끼리 얼마나 모여 있는가</span></div>
+    <div class="card"><b>계통 오차</b><span>한쪽으로 치우치는 오차</span></div>
+    <div class="card"><b>우연 오차</b><span>제멋대로 흩어지는 오차</span></div>
+    <div class="card"><b>유효숫자</b><span>측정값에서 믿을 수 있는 자리</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~12번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 참값과 두 잣대 -->
+<section class="slide" id="s-two" data-title="참값과 두 가지 잣대" data-part="① 정확도와 정밀도">
+  <p class="kicker">① 정확도와 정밀도 · 나래의 표적지를 뜯어보면</p>
+  <h2>‘얼마나 가까운가’와 ‘얼마나 모였나’는 다르다</h2>
+  <div class="cols" style="grid-template-columns:600px 1fr;align-items:center">
+    <svg id="twoSvg" viewBox="0 0 600 500" width="600" height="500" aria-label="과녁 한가운데의 참값, 오른쪽 위에 모인 열 발, 참값에서 평균까지의 화살표와 열 발을 둘러싼 점선 원"></svg>
+    <div class="lines">
+      <p data-step="1">맞혀야 할 자리, 곧 참된 값 → <b class="blank" data-n="1" data-step="1">참값</b></p>
+      <p data-step="2">평균이 참값에 가까운 정도 → <b class="blank" data-n="2" data-step="2">정확도</b></p>
+      <p data-step="3">측정값끼리 모여 있는 정도 → <b class="blank" data-n="3" data-step="3">정밀도</b></p>
+      <p data-step="3">흩어진 정도는 <b class="blank" data-n="4" data-step="3">표준편차</b>로 나타낸다 (작을수록 정밀)</p>
+      <p class="small" data-step="4">나래: 정밀도는 넷 중 가장 좋지만, 정확도는 나쁘다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>나래의 표적지만 크게 봅니다. 두 가지를 따로 따져야 해요.</p>
+    <p data-at="1">한가운데 붉은 점, 맞혀야 할 자리가 빈칸 1번, 참값입니다.</p>
+    <p data-at="2">열 발의 평균 자리를 찍으면 참값에서 꽤 떨어져 있죠. 평균이 참값에 가까운 정도가 빈칸 2번, 정확도입니다.</p>
+    <p data-at="3">열 발이 서로 얼마나 모였는지가 빈칸 3번, 정밀도. 흩어진 정도는 빈칸 4번, 표준편차라는 수로 나타냅니다. 작을수록 정밀해요.</p>
+    <p data-at="4">나래는 가장 촘촘하게 모였으니 정밀도는 최고지만, 중심을 벗어났으니 정확도는 나쁩니다. 두 잣대는 따로 놉니다.</p>
+  </aside>
+</section>
+
+<!-- 5 2×2 판정표 -->
+<section class="slide soft" id="s-grid" data-title="넉 장을 두 잣대로" data-part="① 정확도와 정밀도">
+  <p class="kicker">① 정확도와 정밀도 · 두 잣대로 넉 장을 나누면</p>
+  <h2>정확도와 정밀도는 네 가지로 짝지어진다</h2>
+  <svg id="gridSvg" viewBox="0 0 1400 560" width="1400" height="560" aria-label="정확한지와 정밀한지로 나눈 2×2 표. 가온은 정확하고 정밀, 다인은 정확하지만 정밀하지 않음, 나래는 정밀하지만 정확하지 않음, 라온은 둘 다 아님"></svg>
+  <p class="note">단원 화면 모형: 평균이 중심에서 10 mm 이내면 ‘정확’, 열 발의 표준편차가 8 mm 이하면 ‘정밀’로 판정합니다.</p>
+  <aside class="script">
+    <p>두 잣대를 가로, 세로로 놓고 넉 장을 나눠 봅니다. 학생에게 먼저 칸을 말하게 한 뒤 엽니다.</p>
+    <p data-at="1">가온: 한가운데에 촘촘히. 정확하고 정밀합니다. 측정이 바라는 모습이에요.</p>
+    <p data-at="2">다인: 평균은 한가운데지만 발마다 흩어졌습니다. 정확하지만 정밀하지 않아요.</p>
+    <p data-at="3">나래: 촘촘한데 중심이 아닙니다. 정밀하지만 정확하지 않아요.</p>
+    <p data-at="4">라온: 치우치기도 하고 흩어지기도 했습니다. 둘 다 아닙니다.</p>
+  </aside>
+</section>
+
+<!-- 6 확인 -->
+<section class="slide" id="s-check1" data-title="다인의 표적지" data-part="① 정확도와 정밀도">
+  <p class="kicker">① 정확도와 정밀도 · 확인</p>
+  <h2>단원 화면에서 이렇게 쏘았다면?</h2>
+  <div class="cols" style="grid-template-columns:1fr 440px;align-items:center">
+    <div>
+      <p style="margin-bottom:6px">평균이 중심에서 <b>0 mm</b>, 열 발의 표준편차 <b>30 mm</b></p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 정확하고 정밀하다</div>
+        <div class="opt right" data-step="1">㉡ 정확하지만 정밀하지 않다</div>
+        <div class="opt wrong" data-step="1">㉢ 정밀하지만 정확하지 않다</div>
+        <div class="opt wrong" data-step="1">㉣ 정확하지도 정밀하지도 않다</div>
+      </div>
+    </div>
+    <svg id="chkSvg" viewBox="0 0 440 440" width="440" height="440" aria-label="평균은 한가운데이고 넓게 흩어진 열 발"></svg>
+  </div>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. 그림은 답을 고른 뒤 보여 줘도 됩니다.</p>
+    <p data-at="1">정답은 ㉡. 평균이 한가운데이니 정확하고, 표준편차가 8 mm보다 훨씬 크니 정밀하지 않습니다. 다인의 표적지예요.</p>
+  </aside>
+</section>
+
+<!-- 7 계통 오차 -->
+<section class="slide" id="s-sys" data-title="계통 오차" data-part="② 두 가지 오차">
+  <p class="kicker">② 두 가지 오차 · 나래의 자국은 왜 한곳에 몰렸나</p>
+  <h2>매번 같은 쪽으로 같은 만큼 어긋난다</h2>
+  <div class="cols" style="grid-template-columns:620px 1fr;align-items:center">
+    <svg id="sysSvg" viewBox="0 0 620 500" width="620" height="500" aria-label="왼쪽은 열 발이 모두 오른쪽 위로 같은 만큼 밀린 과녁, 오른쪽은 아무것도 올리지 않았는데 0.5 g을 가리키는 저울"></svg>
+    <div class="lines">
+      <p data-step="1">모든 값이 한쪽으로 같은 만큼 치우친다 → <b class="blank" data-n="5" data-step="1">계통 오차</b></p>
+      <p data-step="2">원인: 총의 조준선이 틀어짐, 저울의 <b class="blank" data-n="6" data-step="2">영점</b>이 어긋남, 늘 같은 버릇</p>
+      <p data-step="3">기기를 <b class="blank" data-n="7" data-step="3">교정</b>하면 사라진다</p>
+      <p class="small" data-step="3">나래는 솜씨가 아니라 총을 고쳐야 한다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>나래의 열 발은 모두 오른쪽 위로, 거의 같은 거리만큼 밀려 있습니다.</p>
+    <p data-at="1">매번 같은 쪽으로 같은 만큼 어긋나는 오차, 빈칸 5번, 계통 오차입니다.</p>
+    <p data-at="2">원인은 사람이 아니라 기계 쪽에 있습니다. 조준선이 틀어진 총, 아무것도 안 올렸는데 0.5 g을 가리키는 저울처럼 빈칸 6번, 영점이 어긋난 경우, 또 언제나 눈금 위쪽을 보는 버릇처럼 일정한 습관도 여기에 듭니다.</p>
+    <p data-at="3">그래서 빈칸 7번, 교정. 영점을 다시 맞추면 사라집니다. 나래는 연습이 아니라 총을 정비실에 보내야 합니다.</p>
+  </aside>
+</section>
+
+<!-- 8 우연 오차 -->
+<section class="slide" id="s-ran" data-title="우연 오차" data-part="② 두 가지 오차">
+  <p class="kicker">② 두 가지 오차 · 다인의 자국은 왜 흩어졌나</p>
+  <h2>발마다 제멋대로 흩어진다</h2>
+  <div class="cols" style="grid-template-columns:620px 1fr;align-items:center">
+    <svg id="ranSvg" viewBox="0 0 620 500" width="620" height="500" aria-label="열 발이 과녁 가운데를 둘러싸고 여러 방향으로 흩어졌고, 평균 자리는 한가운데에 있다"></svg>
+    <div class="lines">
+      <p data-step="1">위로도 아래로도, 제멋대로 흩어진다 → <b class="blank" data-n="8" data-step="1">우연 오차</b></p>
+      <p data-step="2">원인: 손떨림, 눈금을 읽는 눈의 위치, 초시계를 누르는 반응, 바람·진동</p>
+      <p data-step="3">여러 번 재어 <b class="blank" data-n="9" data-step="3">평균</b>을 내면 줄어든다</p>
+      <p class="small" data-step="3">다인은 조준선이 멀쩡하다 → 연습과 반복</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>다인의 열 발은 사방으로 흩어졌습니다. 그런데 평균을 내 보면?</p>
+    <p data-at="1">어느 쪽으로 틀릴지 정해져 있지 않은 오차, 빈칸 8번, 우연 오차입니다.</p>
+    <p data-at="2">손떨림, 눈금을 볼 때마다 조금씩 달라지는 눈의 위치, 초시계를 누르는 반응 시간 같은 것이 원인입니다.</p>
+    <p data-at="3">위로 틀린 것과 아래로 틀린 것이 서로 상쇄되므로 여러 번 재어 빈칸 9번, 평균을 내면 줄어듭니다. 평균 자리가 한가운데니 다인의 총은 멀쩡해요. 다인은 연습을 더 하면 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 9 저울 실험 -->
+<section class="slide soft" id="s-scale" data-title="백 번을 재면 참값에 닿을까" data-part="② 두 가지 오차">
+  <p class="kicker">② 두 가지 오차 · 50.00 g 분동을 거듭 재기 (단원 화면 모형)</p>
+  <h2>반복은 우연 오차만 줄인다</h2>
+  <svg id="scaleSvg" viewBox="0 0 1400 400" width="1400" height="400" aria-label="잰 횟수에 따른 평균. 영점이 맞은 저울은 50.00 g에 다가가고, 영점이 0.5 g 틀어진 저울은 50.5 g 근처에 머문다"></svg>
+  <div class="tight mt">
+    <p data-step="1">영점이 맞은 저울: 6번 평균 49.894 g → 25번 평균 49.995 g, 참값에 다가간다</p>
+    <p data-step="2">영점이 +0.5 g 틀어진 저울: 60번을 재도 평균 50.482 g, 약 0.5 g 어긋난 채 그대로</p>
+    <p data-step="3"><b>우연 오차는 반복이 줄이지만, 계통 오차는 아무리 반복해도 줄지 않는다</b> → 재기 전에 교정부터</p>
+  </div>
+  <aside class="script">
+    <p>사격부 주장 세윤이가 물었죠. 여러 번 재서 평균을 내면 언제나 참값에 가까워지지 않느냐고. 단원 화면의 저울로 확인합니다.</p>
+    <p data-at="1">영점이 맞은 저울입니다. 6번 평균은 49.894 g, 25번이면 49.995 g. 횟수가 늘수록 평균이 참값 50.00 g에 다가갑니다.</p>
+    <p data-at="2">영점을 0.5 g 틀어 놓으면? 60번을 재도 평균이 50.482 g. 처음부터 끝까지 0.5 g쯤 위에 떠 있습니다.</p>
+    <p data-at="3">세윤이의 말은 반만 맞습니다. 반복은 우연 오차만 줄여요. 그래서 나래는 많이 쏜다고 해결되지 않습니다.</p>
+  </aside>
+</section>
+
+<!-- 10 확인: 분류 -->
+<section class="slide" id="s-sort" data-title="어느 오차일까" data-part="② 두 가지 오차">
+  <p class="kicker">② 두 가지 오차 · 확인</p>
+  <h2>고칠 오차인가, 반복으로 줄일 오차인가</h2>
+  <table class="ledger">
+    <tr><th>상황</th><th style="width:220px">오차의 종류</th></tr>
+    <tr><td>영점이 0.5 g 틀어진 저울로 잰다</td><td><span class="tagS sys" data-step="1">계통 오차</span></td></tr>
+    <tr><td>눈금을 읽을 때마다 눈의 위치가 조금씩 달라진다</td><td><span class="tagS ran" data-step="1">우연 오차</span></td></tr>
+    <tr><td>더운 날 늘어난 줄자로 길이를 잰다</td><td><span class="tagS sys" data-step="1">계통 오차</span></td></tr>
+    <tr><td>초시계를 누르는 반응이 매번 조금씩 빠르거나 늦다</td><td><span class="tagS ran" data-step="1">우연 오차</span></td></tr>
+    <tr><td>언제나 눈금의 위쪽을 보는 버릇이 있다</td><td><span class="tagS sys" data-step="1">계통 오차</span></td></tr>
+    <tr><td>바람이 불었다 말았다 하며 저울 값이 오르내린다</td><td><span class="tagS ran" data-step="1">우연 오차</span></td></tr>
+  </table>
+  <p class="small" style="margin-top:24px" data-step="2">‘언제나·매번 같은 쪽’이면 계통 오차(교정), ‘빠를 때도 늦을 때도’이면 우연 오차(평균)</p>
+  <aside class="script">
+    <p>여섯 가지를 짝과 함께 나눠 보게 합니다. 손으로 왼쪽, 오른쪽을 가리키게 해도 좋습니다.</p>
+    <p data-at="1">늘어난 줄자는 언제나 실제보다 짧은 값을 냅니다. 같은 쪽이니 계통 오차. 버릇도 일정하면 계통 오차입니다.</p>
+    <p data-at="2">판단 기준은 하나입니다. 매번 같은 쪽으로 틀리나, 제멋대로 틀리나.</p>
+  </aside>
+</section>
+
+<!-- 11 세 가지 자 -->
+<section class="slide" id="s-ruler" data-title="세 가지 자로 같은 막대를" data-part="③ 유효숫자와 어림">
+  <p class="kicker">③ 유효숫자와 어림 · 같은 막대(실제 길이 42.7 mm)를 세 가지 자로</p>
+  <h2>적을 수 있는 자리는 자가 정한다</h2>
+  <svg id="rulerSvg" viewBox="0 0 1400 450" width="1400" height="450" aria-label="최소 눈금이 1 cm, 1 mm, 0.1 mm인 세 자로 같은 막대 끝을 읽은 그림. 각각 4.3 cm, 4.27 cm, 4.270 cm로 읽는다"></svg>
+  <div class="tight">
+    <p data-step="1">눈금으로 읽을 수 있는 자리까지 읽고, 그다음 한 자리만 <b class="blank" data-n="10" data-step="1">어림</b>해서 적는다</p>
+  </div>
+  <aside class="script">
+    <p>코치 선생님의 질문입니다. 같은 총열을 누구는 4.3 cm, 누구는 4.270 cm로 적어 와요. 아무나 자리를 늘려 적어도 될까요?</p>
+    <p data-at="1">최소 눈금이 1 cm인 자. 4 cm는 눈금으로 읽고, 다음 눈금까지의 거리를 눈으로 나눠 0.3을 붙입니다. 이것이 빈칸 10번, 어림. 4.3 cm입니다.</p>
+    <p data-at="2">1 mm 자. 4.2 cm까지는 눈금으로 읽고, 한 자리를 어림해 4.27 cm.</p>
+    <p data-at="3">0.1 mm 자. 4.27 cm까지 읽고 어림한 자리가 0이라 4.270 cm. 끝의 0도 ‘0까지 확인했다’는 뜻입니다.</p>
+  </aside>
+</section>
+
+<!-- 12 유효숫자 -->
+<section class="slide soft" id="s-sig" data-title="유효숫자" data-part="③ 유효숫자와 어림">
+  <p class="kicker">③ 유효숫자와 어림 · 같은 막대, 다른 자릿수</p>
+  <h2>믿을 수 있는 자리까지만 적는다</h2>
+  <table class="ledger">
+    <tr><th>자의 최소 눈금</th><th>적은 값</th><th>눈금으로 읽은 자리</th><th>어림한 자리</th><th>유효숫자</th></tr>
+    <tr data-step="1"><td><b>1 cm</b></td><td><b>4.3 cm</b></td><td>4</td><td class="c-violet"><b>3</b></td><td><b>2자리</b></td></tr>
+    <tr data-step="1"><td><b>1 mm</b></td><td><b>4.27 cm</b></td><td>4, 2</td><td class="c-violet"><b>7</b></td><td><b>3자리</b></td></tr>
+    <tr data-step="1"><td><b>0.1 mm</b></td><td><b>4.270 cm</b></td><td>4, 2, 7</td><td class="c-violet"><b>0</b></td><td><b>4자리</b></td></tr>
+  </table>
+  <div class="tight mt">
+    <p data-step="1">눈금으로 읽은 자리 + 어림한 한 자리 → <b class="blank" data-n="11" data-step="1">유효숫자</b></p>
+    <p data-step="2">몇 자리까지 적을지는 자의 <b class="blank" data-n="12" data-step="2">최소 눈금</b>이 정한다</p>
+  </div>
+  <div class="card red" data-step="3" style="padding:18px 28px">
+    <p style="margin:0"><b>자리를 늘려 적으면 더 정확하다?</b> 아니다. 1 cm 자로 잰 값을 4.27 cm로 적으면 재지도 않은 자리를 잰 척하는 것이다.</p>
+  </div>
+  <aside class="script">
+    <p>세 자로 읽은 값을 표로 모읍니다.</p>
+    <p data-at="1">눈금으로 읽은 자리에 어림한 한 자리를 더한 것이 빈칸 11번, 유효숫자입니다. 1 cm 자는 2자리, 1 mm 자는 3자리, 0.1 mm 자는 4자리.</p>
+    <p data-at="2">그러니 자릿수는 마음대로가 아니라 빈칸 12번, 자의 최소 눈금이 정합니다.</p>
+    <p data-at="3">평균을 내거나 계산기로 나눴다고 자리가 늘어나지도 않습니다. 재지 않은 자리는 적지 않습니다.</p>
+  </aside>
+</section>
+
+<!-- 13 확인 -->
+<section class="slide" id="s-check2" data-title="연필 길이 적기" data-part="③ 유효숫자와 어림">
+  <p class="kicker">③ 유효숫자와 어림 · 확인</p>
+  <h2>최소 눈금 1 mm 자로 연필을 쟀다. 바르게 적은 것은?</h2>
+  <div class="opts" style="max-width:1100px">
+    <div class="opt wrong" data-step="1">㉠ 12 cm</div>
+    <div class="opt wrong" data-step="1">㉡ 12.3 cm</div>
+    <div class="opt right" data-step="1">㉢ 12.34 cm</div>
+    <div class="opt wrong" data-step="1">㉣ 12.345 cm</div>
+  </div>
+  <p data-step="1" style="margin-top:34px">1 mm(0.1 cm) 자리까지 눈금으로 읽고, 0.01 cm 자리 하나를 어림 → 유효숫자 4자리</p>
+  <aside class="script">
+    <p>손가락으로 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ㉢. ㉡은 어림한 자리를 버린 것이고, ㉣은 이 자로 알 수 없는 자리까지 적은 것입니다.</p>
+  </aside>
+</section>
+
+<!-- 14 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>측정은 두 잣대와 두 오차로 따진다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>정확도</b>: 평균이 참값에 가까운 정도 · <b>정밀도</b>: 측정값끼리 모인 정도(표준편차가 작을수록 정밀)</li>
+    <li data-k="2" data-step="2"><b>계통 오차</b>: 매번 같은 쪽으로 치우침(영점·조준선·버릇) → 교정해야 사라지고, 반복해도 줄지 않는다</li>
+    <li data-k="3" data-step="3"><b>우연 오차</b>: 제멋대로 흩어짐(손떨림·읽는 눈의 위치) → 여러 번 재어 평균을 내면 줄어든다</li>
+    <li data-k="4" data-step="4"><b>유효숫자</b>: 눈금으로 읽은 자리 + 어림한 한 자리 · 자릿수는 자의 최소 눈금이 정한다</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다. 정답은 ㉡ 나래입니다.</p></aside>
+</section>
+
+<!-- 15 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 영점이 1.0 g 틀어진 저울로 같은 물체를 100번 재어 평균을 내면?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 평균의 오차가 거의 0이 된다</div>
+        <div class="opt right" data-step="1">㉡ 평균이 약 1.0 g 어긋난 채 남는다</div>
+        <div class="opt wrong" data-step="1">㉢ 평균의 오차가 100배로 커진다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 최소 눈금이 1 cm인 자로 잰 값으로 알맞은 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 4 cm</div>
+        <div class="opt right" data-step="2">㉡ 4.3 cm</div>
+        <div class="opt wrong" data-step="2">㉢ 4.27 cm</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 영점 오차는 계통 오차라 반복해도 줄지 않습니다. 교정이 먼저입니다.</p>
+    <p data-at="2">2번은 ㉡. 1 cm 눈금까지 읽고 한 자리를 어림해 4.3 cm. ㉢은 재지 않은 자리까지 적었습니다.</p>
+  </aside>
+</section>
+
+<!-- 16 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ① 「과녁에 남은 자국」</h2>
+  <div class="cols">
+    <div class="card"><h3>측정 분석가가 되어 보세요</h3><p>사격 시뮬레이터로 나래와 가온의 표적지 만들기, 저울로 60번 재기, 여덟 가지 오차 분류, 세 가지 자로 막대 읽기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 02 측정 표준의 유용성</h3><p>파리 금고 속 금속 막대 하나가 세계의 1 m였던 시절. 그 막대는 왜 물러나야 했을까요?</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ①을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* 단원 화면의 사격 시뮬레이터와 같은 10발 흩어짐: 평균 0, 평균에서의 제곱평균거리 1 */
+  var U = (function () {
+    var raw = [[0.62, -0.31], [-0.44, 0.78], [1.12, 0.36], [-0.85, -0.52], [0.21, 1.04],
+               [-1.06, 0.18], [0.48, -0.92], [-0.29, -1.11], [0.93, 0.71], [-0.72, -0.21]];
+    var mx = 0, my = 0, s = 0, i, out = [];
+    for (i = 0; i < 10; i++) { mx += raw[i][0]; my += raw[i][1]; }
+    mx /= 10; my /= 10;
+    for (i = 0; i < 10; i++) s += Math.pow(raw[i][0] - mx, 2) + Math.pow(raw[i][1] - my, 2);
+    s = Math.sqrt(s / 10);
+    for (i = 0; i < 10; i++) out.push([(raw[i][0] - mx) / s, (raw[i][1] - my) / s]);
+    return out;
+  })();
+  function face(cx, cy, r, dark) {
+    var h = "", k, f = dark ? ["#f1f3f5", "#dee2e6"] : ["#ffffff", "#eef1f5"];
+    for (k = 0; k < 4; k++) h += "<circle cx='" + cx + "' cy='" + cy + "' r='" + (r * (1 - k * 0.25)) + "' fill='" + f[k % 2] + "' stroke='#495057' stroke-width='" + (r > 120 ? 3 : 2) + "'/>";
+    h += "<circle cx='" + cx + "' cy='" + cy + "' r='" + Math.max(5, r * 0.06) + "' fill='#e03131'/>";
+    return h;
+  }
+  /* (dx, dy) = 무리 가운데가 중심에서 벗어난 양, sd = 흩어짐, hr = 구멍 반지름 */
+  function holes(cx, cy, dx, dy, sd, hr) {
+    var h = "", i;
+    for (i = 0; i < 10; i++) h += "<circle cx='" + (cx + dx + U[i][0] * sd).toFixed(1) + "' cy='" + (cy + dy + U[i][1] * sd).toFixed(1) + "' r='" + hr + "' fill='#161b28' stroke='#fff' stroke-width='1.5'/>";
+    return h;
+  }
+  function T(x, y, s, o) { o = o || {}; return "<text x='" + x + "' y='" + y + "' font-size='" + (o.s || 24) + "' font-weight='" + (o.w || 900) + "' fill='" + (o.c || "#161b28") + "' text-anchor='" + (o.a || "middle") + "'" + (o.halo ? " stroke='#fff' stroke-width='7' paint-order='stroke'" : "") + ">" + s + "</text>"; }
+  var FOUR = [["가온", 0, 0, 0.09], ["나래", 0.42, -0.34, 0.09], ["다인", 0, 0, 0.36], ["라온", 0.42, -0.34, 0.36]];
+
+  /* 표지 */
+  (function () {
+    var h = "", r = 150;
+    FOUR.forEach(function (f, i) {
+      var cx = 260 + i * 360, cy = 230;
+      h += face(cx, cy, r, true) + holes(cx, cy, f[1] * r, f[2] * r, f[3] * r, 7);
+      h += T(cx, 430, f[0], { s: 34, c: "#e9edf5" });
+    });
+    h += "<text x='1560' y='505' fill='#9aa4b5' font-size='18' text-anchor='end'>⚠ 구멍 위치는 이야기 속 기록을 흉내 낸 그림입니다</text>";
+    document.getElementById("c1-art").innerHTML = h;
+  })();
+
+  /* 도입: 넉 장 2줄 */
+  (function () {
+    var h = "", r = 92, D = ["한가운데에 모였다", "오른쪽 위 한곳에 빈틈없이", "흩어졌지만 평균은 한가운데", "오른쪽 위로 치우쳐 흩어졌다"];
+    FOUR.forEach(function (f, i) {
+      var cx = 200 + (i % 2) * 400, cy = 110 + Math.floor(i / 2) * 235;
+      h += face(cx, cy, r) + holes(cx, cy, f[1] * r, f[2] * r, f[3] * r, 5);
+      h += T(cx, cy + r + 30, f[0] + " · " + D[i], { s: 22 });
+    });
+    document.getElementById("hookSvg").innerHTML = h;
+  })();
+
+  /* 참값과 두 잣대 — 나래 확대 */
+  (function () {
+    var cx = 280, cy = 260, r = 220, dx = 0.42 * r, dy = -0.34 * r, sd = 0.09 * r, mx = cx + dx, my = cy + dy;
+    var h = "<defs><marker id='s4-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#6741d9'/></marker></defs>";
+    h += face(cx, cy, r) + holes(cx, cy, dx, dy, sd, 7);
+    h += "<g data-step='1'><circle cx='" + cx + "' cy='" + cy + "' r='22' fill='none' stroke='#e03131' stroke-width='5'/>" + T(cx - 30, cy + 62, "참값", { s: 26, c: "#c92a2a", halo: 1 }) + "</g>";
+    h += "<g data-step='2'><line x1='" + cx + "' y1='" + cy + "' x2='" + (mx - 10) + "' y2='" + (my + 8) + "' stroke='#6741d9' stroke-width='5' stroke-dasharray='12 8' marker-end='url(#s4-a)'/>";
+    h += "<path d='M" + (mx - 12) + " " + my + " h24 M" + mx + " " + (my - 12) + " v24' stroke='#6741d9' stroke-width='5'/>";
+    h += T(cx + 40, cy + 6, "평균까지의 거리", { s: 24, c: "#6741d9", a: "start", halo: 1 }) + "</g>";
+    h += "<g data-step='3'><circle cx='" + mx + "' cy='" + my + "' r='" + (sd * 2) + "' fill='none' stroke='#e8590c' stroke-width='4' stroke-dasharray='9 7'/>";
+    h += T(mx, my - sd * 2 - 14, "흩어진 정도", { s: 24, c: "#e8590c", halo: 1 }) + "</g>";
+    h += "<text x='590' y='494' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 구멍 크기 과장 모식도</text>";
+    document.getElementById("twoSvg").innerHTML = h;
+  })();
+
+  /* 2×2 판정표 */
+  (function () {
+    var h = "", r = 98;
+    h += T(530, 30, "정밀 ○ (모였다)", { s: 26, c: "#198a4a" }) + T(1100, 30, "정밀 ✕ (흩어졌다)", { s: 26, c: "#d9302c" });
+    h += T(110, 160, "정확 ○", { s: 26, c: "#198a4a" }) + T(110, 192, "중심 맞음", { s: 20, w: 700, c: "#5f6b80" });
+    h += T(110, 420, "정확 ✕", { s: 26, c: "#d9302c" }) + T(110, 452, "치우침", { s: 20, w: 700, c: "#5f6b80" });
+    var cells = [[250, 46, 0, "가온", "이상적인 측정", 1], [820, 46, 2, "다인", "우연 오차가 크다", 2], [250, 306, 1, "나래", "계통 오차가 있다", 3], [820, 306, 3, "라온", "두 오차 모두 크다", 4]];
+    cells.forEach(function (c) {
+      var f = FOUR[c[2]], cx = c[0] + 125, cy = c[1] + 120;
+      h += "<rect x='" + c[0] + "' y='" + c[1] + "' width='550' height='240' rx='20' fill='#fff' stroke='#d5dbe6' stroke-width='3'/>";
+      h += "<g data-step='" + c[5] + "'>" + face(cx, cy, r) + holes(cx, cy, f[1] * r, f[2] * r, f[3] * r, 5);
+      h += T(c[0] + 260, c[1] + 110, c[3], { s: 40, a: "start" }) + T(c[0] + 260, c[1] + 156, c[4], { s: 26, w: 800, c: "#5f6b80", a: "start" }) + "</g>";
+    });
+    document.getElementById("gridSvg").innerHTML = h;
+  })();
+
+  /* 확인: 다인 */
+  (function () {
+    var r = 200, cx = 220, cy = 220;
+    var h = face(cx, cy, r) + "<g data-step='1'>" + holes(cx, cy, 0, 0, 0.36 * r, 7) + "<path d='M" + (cx - 14) + " " + cy + " h28 M" + cx + " " + (cy - 14) + " v28' stroke='#6741d9' stroke-width='5'/></g>";
+    document.getElementById("chkSvg").innerHTML = h;
+  })();
+
+  /* 계통 오차: 과녁 + 영점 틀어진 저울 */
+  (function () {
+    var cx = 170, cy = 180, r = 150, dx = 0.42 * r, dy = -0.34 * r, sd = 0.09 * r, i;
+    var h = "<defs><marker id='s7-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#d9302c'/></marker></defs>";
+    h += face(cx, cy, r);
+    h += "<g opacity='.28'>" + holes(cx, cy, 0, 0, sd, 6) + "</g>" + holes(cx, cy, dx, dy, sd, 6);
+    h += "<g data-step='1' stroke='#d9302c' stroke-width='3' marker-end='url(#s7-a)'>";
+    for (i = 0; i < 10; i += 2) h += "<line x1='" + (cx + U[i][0] * sd) + "' y1='" + (cy + U[i][1] * sd) + "' x2='" + (cx + dx + U[i][0] * sd - 8) + "' y2='" + (cy + dy + U[i][1] * sd + 6) + "'/>";
+    h += "</g>";
+    h += T(cx, 372, "흐린 점: 조준선이 맞았다면", { s: 20, w: 800, c: "#5f6b80" });
+    /* 저울 */
+    h += "<g data-step='2'><rect x='380' y='150' width='220' height='150' rx='18' fill='#dee2e6' stroke='#868e96' stroke-width='3'/>";
+    h += "<rect x='395' y='110' width='190' height='40' rx='8' fill='#ced4da' stroke='#868e96' stroke-width='3'/>";
+    h += "<rect x='405' y='190' width='170' height='70' rx='8' fill='#0b1a12'/>";
+    h += "<text x='565' y='243' font-size='44' font-weight='900' fill='#8ce99a' text-anchor='end' font-family='Consolas,monospace'>0.5 g</text>";
+    h += T(490, 340, "아무것도 안 올렸는데", { s: 22, w: 800, c: "#d9302c" }) + T(490, 368, "모든 값 +0.5 g", { s: 22, w: 800, c: "#d9302c" }) + "</g>";
+    h += "<g data-step='3'><rect x='380' y='410' width='220' height='56' rx='28' fill='#198a4a'/>" + T(490, 447, "🔧 교정 → 0.0 g", { s: 24, c: "#fff" }) + "</g>";
+    h += "<text x='10' y='494' font-size='18' fill='#5f6b80'>⚠ 모식도</text>";
+    document.getElementById("sysSvg").innerHTML = h;
+  })();
+
+  /* 우연 오차: 다인 */
+  (function () {
+    var cx = 300, cy = 230, r = 210, sd = 0.36 * r, i;
+    var h = "<defs><marker id='s8-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#1462d8'/></marker></defs>";
+    h += face(cx, cy, r) + holes(cx, cy, 0, 0, sd, 7);
+    h += "<g data-step='1' stroke='#1462d8' stroke-width='3' marker-end='url(#s8-a)'>";
+    for (i = 0; i < 10; i++) { var ex = cx + U[i][0] * sd, ey = cy + U[i][1] * sd; h += "<line x1='" + cx + "' y1='" + cy + "' x2='" + (cx + (ex - cx) * 0.86).toFixed(1) + "' y2='" + (cy + (ey - cy) * 0.86).toFixed(1) + "'/>"; }
+    h += "</g>";
+    h += "<g data-step='3'><circle cx='" + cx + "' cy='" + cy + "' r='18' fill='#fff' stroke='#6741d9' stroke-width='5'/><path d='M" + (cx - 12) + " " + cy + " h24 M" + cx + " " + (cy - 12) + " v24' stroke='#6741d9' stroke-width='4'/>";
+    h += T(cx, cy + r + 34, "열 발의 평균 = 한가운데", { s: 24, c: "#6741d9" }) + "</g>";
+    document.getElementById("ranSvg").innerHTML = h;
+  })();
+
+  /* 저울: 단원 화면과 같은 씨앗 31의 우연 오차 60개로 누적 평균 */
+  (function () {
+    var seed = 31; function r() { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; }
+    var N = [], i; for (i = 0; i < 60; i++) N.push((r() + r() + r() + r() + r() + r() - 3) * 0.20);
+    var X0 = 130, X1 = 1300, Y0 = 30, Y1 = 330;
+    function X(n) { return X0 + (n - 1) / 59 * (X1 - X0); }
+    function Y(g) { return Y1 - (g - 49.6) / 1.2 * (Y1 - Y0); }
+    function run(z) { var s = 0, p = []; for (var n = 1; n <= 60; n++) { s += 50 + z + N[n - 1]; p.push([n, s / n]); } return p; }
+    function line(p, col) { return "<polyline points='" + p.map(function (q) { return X(q[0]).toFixed(1) + " " + Y(q[1]).toFixed(1); }).join(" ") + "' fill='none' stroke='" + col + "' stroke-width='5'/>"; }
+    var h = "";
+    [49.6, 49.8, 50.0, 50.2, 50.4, 50.6, 50.8].forEach(function (g) {
+      h += "<line x1='" + X0 + "' y1='" + Y(g) + "' x2='" + X1 + "' y2='" + Y(g) + "' stroke='#dfe4ec' stroke-width='2'/>";
+      h += "<text x='" + (X0 - 12) + "' y='" + (Y(g) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + g.toFixed(1) + "</text>";
+    });
+    h += "<line x1='" + X0 + "' y1='" + Y(50) + "' x2='" + X1 + "' y2='" + Y(50) + "' stroke='#198a4a' stroke-width='4' stroke-dasharray='12 8'/>";
+    h += T(X1 + 8, Y(50) + 8, "참값", { s: 22, c: "#198a4a", a: "start" });
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [1, 10, 20, 30, 40, 50, 60].forEach(function (n) { h += "<text x='" + X(n) + "' y='" + (Y1 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + n + "</text>"; });
+    h += T(X1, Y1 + 62, "잰 횟수 (번)", { s: 20, c: "#5f6b80", a: "end" }) + T(X0 + 14, Y0 - 10, "평균 (g)", { s: 20, c: "#5f6b80", a: "start" });
+    var a = run(0), b = run(0.5);
+    h += "<g data-step='1'>" + line(a, "#1462d8") + T(X(42), Y(49.84), "영점 0.0 g", { s: 24, c: "#1462d8", halo: 1 }) + "</g>";
+    h += "<g data-step='2'>" + line(b, "#d9302c") + T(X(42), Y(50.66), "영점 +0.5 g", { s: 24, c: "#d9302c", halo: 1 }) + "</g>";
+    h += "<g data-step='3'><line x1='" + (X(60) - 20) + "' y1='" + Y(b[59][1]) + "' x2='" + (X(60) - 20) + "' y2='" + Y(50) + "' stroke='#e8590c' stroke-width='5'/>";
+    h += T(X(60) - 34, (Y(b[59][1]) + Y(50)) / 2 + 8, "약 0.5 g 그대로", { s: 24, c: "#e8590c", a: "end", halo: 1 }) + "</g>";
+    document.getElementById("scaleSvg").innerHTML = h;
+  })();
+
+  /* 세 가지 자 — 30~50 mm 구간, 1 mm = 60 px */
+  (function () {
+    var L = 42.7, X0 = 100, K = 60;
+    function X(mm) { return X0 + (mm - 30) * K; }
+    var rows = [[10, "최소 눈금 1 cm 자", "4.3 cm"], [1, "최소 눈금 1 mm 자", "4.27 cm"], [0.1, "최소 눈금 0.1 mm 자", "4.270 cm"]];
+    var h = "";
+    rows.forEach(function (rw, k) {
+      var y = 20 + k * 145, ry = y + 52, mm, g = "<g>";
+      g += T(X0, y + 20, rw[1], { s: 24, a: "start", c: "#5f6b80" });
+      g += "<path d='M" + (X0 - 30) + " " + (y + 26) + " l14 6 l-8 6 l14 6 l-8 6 l12 4 H" + X(L) + " V" + (y + 26) + " Z' fill='#ffd8a8' stroke='#e8590c' stroke-width='3'/>";
+      g += "<rect x='" + (X0 - 44) + "' y='" + ry + "' width='" + (X(50) - X0 + 88) + "' height='64' rx='6' fill='#fff3bf' stroke='#c99a2e' stroke-width='3'/>";
+      var n = Math.round(20 / rw[0]);
+      for (var i = 0; i <= n; i++) {
+        mm = 30 + i * rw[0]; var x = X(mm), big = Math.abs(mm % 10) < 1e-6 || Math.abs(mm % 10 - 10) < 1e-6, half = Math.abs(mm % 5) < 1e-6 || Math.abs(mm % 5 - 5) < 1e-6, whole = Math.abs(mm - Math.round(mm)) < 1e-6;
+        var len = big ? 40 : half ? 28 : whole ? 22 : 12;
+        g += "<line x1='" + x.toFixed(1) + "' y1='" + ry + "' x2='" + x.toFixed(1) + "' y2='" + (ry + len) + "' stroke='#161b28' stroke-width='" + (big ? 3 : rw[0] < 1 && !whole ? 1 : 2) + "'/>";
+        if (big) g += T(x, ry + 60, (mm / 10) + " cm", { s: 20 });
+      }
+      g += "</g><g data-step='" + (k + 1) + "'>" + T(1390, y + 30, rw[2], { s: 40, a: "end", c: "#e8590c" });
+      g += "<line x1='" + X(L) + "' y1='" + (y + 18) + "' x2='" + X(L) + "' y2='" + (ry + 64) + "' stroke='#e8590c' stroke-width='3' stroke-dasharray='6 5'/>";
+      h += g + "</g>";
+    });
+    h += "<text x='1390' y='446' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 30~50 mm 부분만 크게 그림</text>";
+    document.getElementById("rulerSvg").innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

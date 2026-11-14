@@ -230,41 +230,67 @@ window.sthLab({
       function n(e) { var x = e / KT; return x * x / (Math.exp(x) - 1); }
       var NMAX = 0; for (var e0 = 0.05; e0 < 4; e0 += 0.05) NMAX = Math.max(NMAX, n(e0));
       function Y(v) { return y1 - v / NMAX * (y1 - y0) * 0.95; }
+      /* 햇빛 광자 14개 — 흑체 광자 수 분포의 같은 몫 지점(분위수)에서 뽑은 에너지 */
+      var PH = (function () { var cum = [], s = 0, e1, out = [], k = 0; for (e1 = 0.01; e1 < 6; e1 += 0.01) { s += n(e1); cum.push([e1, s]); }
+        for (var q = 0; q < 14; q++) { var t = (q + .5) / 14 * s; while (k < cum.length - 1 && cum[k][1] < t) k++; out.push(cum[k][0]); } return out; })();
+      var ORDER = [3, 9, 0, 12, 6, 1, 10, 4, 13, 7, 2, 11, 5, 8];
+      function phCol(e) { if (e < 1.65) return "#c2255c"; if (e > 3.1) return "#7048e8"; var nm = 1240 / e; return nm > 620 ? "#f03e3e" : nm > 580 ? "#fd7e14" : nm > 560 ? "#fab005" : nm > 500 ? "#40c057" : nm > 450 ? "#228be6" : "#7048e8"; }
       function draw() {
-        var CH = cv.H, best = cur >= 0.98 * EFF_MAX, e;
+        var CH = cv.H, best = cur >= 0.98 * EFF_MAX, e, k;
         ctx.clearRect(0, 0, W, CH);
-        KK.studio(ctx, 0, 0, 640, CH, null);
+        KK.studio(ctx, 0, 0, 600, CH, null);
         KK.bigText(ctx, "효율 한계 " + (cur * 100).toFixed(1) + " %", 18, 40, 24, best ? "#8ce99a" : "#ffffff");
         KK.bigText(ctx, "띠 간격 " + Eg.toFixed(2) + " eV", 18, 66, 15, "#ffd35a");
-        var g = KK.chart(ctx, { x: 8, y: 80, w: 432, h: CH - 84, x0: 0, x1: 4, y0: 0, y1: NMAX * 1.05, xt: 4, yt: 2, light: true, xl: "광자 에너지 (eV)", yl: "광자 수 (상대)", yf: function () { return ""; } });
-        for (e = 0.02; e < 4; e += 0.02) {
-          var top = g.Y(n(e)); ctx.fillStyle = e < Eg ? "rgba(134,142,150,.35)" : "#fcc419"; ctx.fillRect(g.X(e), top, g.X(0.02) - g.X(0) + .5, g.B - top);
-        }
-        KK.line(ctx, { x: g.X(Eg), y: g.T }, { x: g.X(Eg), y: g.B }, LT.blue, 2.2, [6, 4]);
-        KK.pill(ctx, "회색 = 지나감 · 노랑 = 흡수", g.R - 4, g.T + 16, { a: "right", s: 11, c: "#ffe066", box: [0, 440] });
-        /* 태양 전지판 미니어처 */
-        KK.sun(ctx, 600, 104, 9);
-        for (var k = 0; k < 4; k++) KK.arrow(ctx, { x: 586 - k * 8, y: 118 + k * 6 }, { x: 540 - k * 14, y: 178 + k * 4 }, "rgba(245,159,0,.75)", 2, 8);
-        floorShadow(ctx, 530, 284, 90, 12, .26);
-        var p0 = { x: 460, y: 262 }, p1 = { x: 580, y: 262 }, p2 = { x: 610, y: 196 }, p3 = { x: 490, y: 196 };
-        ctx.fillStyle = "#adb5bd"; ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y); ctx.lineTo(p1.x, p1.y + 8); ctx.lineTo(p0.x, p0.y + 8); ctx.closePath(); ctx.fill();
-        var pg = ctx.createLinearGradient(p3.x, p3.y, p1.x, p1.y); pg.addColorStop(0, "#364fc7"); pg.addColorStop(1, "#1c2a6b");
-        ctx.fillStyle = pg; ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.lineTo(p3.x, p3.y); ctx.closePath(); ctx.fill();
-        ctx.strokeStyle = "rgba(200,215,255,.6)"; ctx.lineWidth = 1;
-        for (k = 1; k < 4; k++) { var t = k / 4; ctx.beginPath(); ctx.moveTo(p0.x + (p1.x - p0.x) * t, p0.y); ctx.lineTo(p3.x + (p2.x - p3.x) * t, p3.y); ctx.stroke(); }
-        for (k = 1; k < 3; k++) { var u = k / 3; ctx.beginPath(); ctx.moveTo(p0.x + (p3.x - p0.x) * u, p0.y + (p3.y - p0.y) * u); ctx.lineTo(p1.x + (p2.x - p1.x) * u, p1.y + (p2.y - p1.y) * u); ctx.stroke(); }
-        ctx.fillStyle = "#868e96"; ctx.fillRect(528, 262, 8, 18);
-        KK.pill(ctx, "태양 전지판", 530, 312, { a: "center", s: 11, c: "#e8ecff" });
-        /* 판정 카드 */
-        var cd = sideCard(ctx, 652, W, CH, "이 재료로 만들면");
-        KK.row(ctx, "흡수되는 광자", (100 * integ(function (x) { return x * x / (Math.exp(x) - 1); }, Eg / KT, 40, 600) / 2.404).toFixed(0) + " %", cd.px, cd.R, 60, LT.orange);
-        KK.row(ctx, "광자 하나에서 얻는 에너지", Eg.toFixed(2) + " eV", cd.px, cd.R, 86, LT.blue);
-        KK.row(ctx, "햇빛 에너지 가운데 쓰는 몫", (cur * 100).toFixed(1) + " %", cd.px, cd.R, 112, best ? LT.green : LT.ink);
-        KK.bar(ctx, cd.px, 124, cd.w, cur / EFF_MAX, best ? LT.green : LT.blue);
-        KK.tip(ctx, best ? "가장 좋은 띠 간격 근처" : (Eg > 1.6 ? "많은 광자가 그냥 지나감" : "광자당 얻는 에너지가 작음"), cd.px - 4, 146, cd.w + 8, best ? true : false);
-        lt(ctx, "참고: 규소 1.12 eV", cd.px, 224, { s: 11.5, c: LT.mute });
-        lt(ctx, "비소화 갈륨 1.42 eV", cd.px, 244, { s: 11.5, c: LT.mute });
-        lt(ctx, "햇빛 = 5778 K 흑체로 어림", cd.px, 280, { s: 11, c: LT.dim });
+        /* 태양전지 단면 블록(주인공): 유리 · n형 · p형 · 뒷면 금속 */
+        var I = KK.iso({ ox: 250, oy: 150, s: .78, L: 300, D: 120 }), ZT = 46;
+        floorShadow(ctx, 300, CH - 22, 250, 18, .26);
+        var LY = [[0, 6, "#adb5bd"], [6, 30, "#4263eb"], [30, 40, "#364fc7"], [40, 46, "#dbe4ff"]];
+        LY.forEach(function (l) { I.box(ctx, 0, 0, l[0], 300, 120, l[1], KK.tint(l[2], 1.15), l[2], KK.tint(l[2], .7)); });
+        /* 윗면 전극 줄 */
+        ctx.strokeStyle = "rgba(255,255,255,.85)"; ctx.lineWidth = 1.4;
+        for (k = 1; k < 6; k++) { var a1 = I.P(k * 50, 0, ZT), a2 = I.P(k * 50, 120, ZT); ctx.beginPath(); ctx.moveTo(a1.x, a1.y); ctx.lineTo(a2.x, a2.y); ctx.stroke(); }
+        I.label(ctx, 0, 120, 18, "p형 규소", -40, 26, "#e8ecff");
+        I.label(ctx, 0, 120, 35, "n형", -46, -2, "#e8ecff");
+        /* 광자: 띠 간격보다 크면 흡수(반짝 + 전자), 작으면 블록을 뚫고 지나감 */
+        var nAbs = 0;
+        ORDER.forEach(function (qi, j) {
+          var pe = PH[qi], ab = pe >= Eg, x = 22 + j * 20, y = 28 + (j % 3) * 22, P0 = I.P(x, y, ZT), c = phCol(pe);
+          var S = { x: P0.x - 24, y: Math.max(84, P0.y - 92) };
+          ctx.strokeStyle = c; ctx.lineWidth = 2.4; ctx.beginPath();
+          for (var u = 0; u <= 1.001; u += .05) { var wx = S.x + (P0.x - S.x) * u + Math.sin(u * 22) * 3, wy = S.y + (P0.y - S.y) * u; if (u === 0) ctx.moveTo(wx, wy); else ctx.lineTo(wx, wy); }
+          ctx.stroke();
+          if (ab) {
+            nAbs++;
+            KK.glow(ctx, P0.x, P0.y + 10, 4, "rgba(255,212,59,.95)", 2.6);
+            ball(ctx, P0.x + 6, P0.y + 4, 3.6, "#ffd43b");
+          } else {
+            ctx.save(); ctx.setLineDash([3, 3]); ctx.strokeStyle = "rgba(120,130,150,.6)"; ctx.lineWidth = 1.6;
+            var Q = I.P(x, y, 0); ctx.beginPath(); ctx.moveTo(P0.x, P0.y); ctx.lineTo(Q.x + 8, Q.y + 30); ctx.stroke(); ctx.restore();
+          }
+        });
+        KK.sun(ctx, 300, 36, 12);
+        /* 전선과 전구: 밝기 = 효율 */
+        var e0 = I.P(300, 60, 40), e1 = I.P(300, 60, 3), bxl = 548, byl = 104, f = cur / EFF_MAX;
+        ctx.strokeStyle = "#c2410c"; ctx.lineWidth = 2.6; ctx.beginPath(); ctx.moveTo(e0.x, e0.y); ctx.lineTo(bxl - 12, e0.y); ctx.lineTo(bxl - 12, byl + 24); ctx.stroke();
+        ctx.strokeStyle = "#343a40"; ctx.beginPath(); ctx.moveTo(e1.x, e1.y); ctx.lineTo(bxl + 12, e1.y); ctx.lineTo(bxl + 12, byl + 24); ctx.stroke();
+        KK.glow(ctx, bxl, byl, 10 + 12 * f, "rgba(255,212,59," + (.15 + .8 * f).toFixed(2) + ")", 2.6);
+        var bg2 = ctx.createRadialGradient(bxl - 6, byl - 6, 2, bxl, byl, 20); bg2.addColorStop(0, "#ffffff"); bg2.addColorStop(1, f > .5 ? "#ffe066" : "#e9ecef");
+        ctx.fillStyle = bg2; ctx.beginPath(); ctx.arc(bxl, byl, 20, 0, 6.2832); ctx.fill(); ctx.strokeStyle = "rgba(60,70,90,.5)"; ctx.lineWidth = 1; ctx.stroke();
+        ctx.fillStyle = "#868e96"; ctx.fillRect(bxl - 10, byl + 18, 20, 10);
+        KK.pill(ctx, "전구 밝기 = 효율", bxl, byl - 32, { a: "center", s: 12, c: "#e8ecff" });
+        KK.pill(ctx, "흡수 " + nAbs + " / 14 광자", 82, CH - 14, { a: "center", s: 12.5, c: "#ffe066" });
+        lt(ctx, "물결선 = 햇빛 광자(색 = 에너지) · 점선 = 그냥 지나감", 586, CH - 10, { s: 11, a: "right", c: LT.mute });
+        /* 판정 카드 — 햇빛 광자 분포는 카드 안 작은 그래프로 */
+        var cd = sideCard(ctx, 612, W, CH, "이 재료로 만들면");
+        KK.row(ctx, "흡수되는 광자", (100 * integ(function (x) { return x * x / (Math.exp(x) - 1); }, Eg / KT, 40, 600) / 2.404).toFixed(0) + " %", cd.px, cd.R, 54, LT.orange);
+        KK.row(ctx, "광자 하나에서 얻는 에너지", Eg.toFixed(2) + " eV", cd.px, cd.R, 76, LT.blue);
+        KK.row(ctx, "햇빛 에너지 가운데 쓰는 몫", (cur * 100).toFixed(1) + " %", cd.px, cd.R, 98, best ? LT.green : LT.ink);
+        KK.bar(ctx, cd.px, 106, cd.w, cur / EFF_MAX, best ? LT.green : LT.blue);
+        KK.tip(ctx, best ? "가장 좋은 띠 간격 근처" : (Eg > 1.6 ? "많은 광자가 그냥 지나감" : "광자당 얻는 에너지가 작음"), cd.px - 4, 122, cd.w + 8, best ? true : false);
+        var g = KK.chart(ctx, { x: cd.px - 10, y: 168, w: cd.w + 14, h: CH - 222, x0: 0, x1: 4, y0: 0, y1: NMAX * 1.05, xt: 4, yt: 2, light: true, xl: "광자 에너지 (eV)", yl: "광자 수", yf: function () { return ""; } });
+        for (e = 0.04; e < 4; e += 0.04) { var top = g.Y(n(e)); ctx.fillStyle = e < Eg ? "rgba(134,142,150,.4)" : "#fcc419"; ctx.fillRect(g.X(e), top, g.X(0.04) - g.X(0) + .5, g.B - top); }
+        KK.line(ctx, { x: g.X(Eg), y: g.T }, { x: g.X(Eg), y: g.B }, LT.blue, 2, [5, 3]);
+        lt(ctx, "참고: 규소 1.12 eV · 비소화 갈륨 1.42 eV", cd.px, CH - 12, { s: 11, c: LT.mute });
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "재료의 띠 간격", min: 0.3, max: 3, step: 0.05, value: 2.5, fmt: function (x) { return x.toFixed(2) + " eV"; },

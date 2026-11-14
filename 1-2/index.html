@@ -24,6 +24,7 @@
     <button class="tab-btn" data-tab="5"><span class="num">05</span> 응용 실험실</button>
     <button class="tab-btn" data-tab="6"><span class="num">06</span> 정리하기</button>
     <button class="tab-btn" data-tab="7"><span class="num">07</span> 우리 반</button>
+    <button class="tab-btn" data-tab="8"><span class="num">08</span> 칠판모드</button>
   </nav>
 
   <main>
@@ -51,7 +52,7 @@
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">측정 분석가 하루</span>“말로 다투지 말고 <b>만들어 봅시다</b>. 여기 사격 시뮬레이터가 있어요. 손잡이가 둘인데, 위쪽은 쏘는 사람의 <b>손떨림</b>, 아래쪽은 총의 <b>조준선이 틀어진 정도</b>입니다. 손잡이를 움직이면 그 조건으로 곧바로 10발을 쏩니다.”</div></div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">하루</span>“오른쪽 표를 보세요. 평균이 중심에서 얼마나 떨어졌는지가 <b>정확도</b>, 열 발이 서로 얼마나 모였는지(표준편차)가 <b>정밀도</b>입니다. 두 가지는 따로 놉니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="a-target" width="900" height="430"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-target" width="900" height="360"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">손떨림<span class="val" id="a-noise-val">20</span></div>
@@ -71,7 +72,7 @@
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">하루</span>“이번엔 총 대신 <b>전자저울</b>입니다. 질량이 정확히 <b>50.00 g</b>인 표준 분동을 몇 번이고 다시 올려 볼 수 있어요. 손잡이 하나는 <b>잰 횟수</b>, 다른 하나는 저울의 <b>영점이 틀어진 정도</b>입니다.”</div></div>
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">사격부 주장 세윤</span>“여러 번 재서 평균을 내면 언제나 참값에 가까워지는 거 아니에요? 그럼 나래 선배도 그냥 많이 쏘면 되잖아요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="a-scale" width="900" height="390"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-scale" width="900" height="330"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">잰 횟수<span class="val" id="a-n-val">6 번</span></div>
@@ -97,7 +98,7 @@
               <button data-m="1">최소 눈금 1 mm 자</button>
               <button data-m="0.1">최소 눈금 0.1 mm 자</button>
             </div>
-            <div class="canvas-wrap studio"><canvas id="a-ruler" width="900" height="310"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-ruler" width="900" height="340"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">막대의 실제 길이<span class="val" id="a-len-val">42.7 mm</span></div>
@@ -124,7 +125,7 @@
         </section>
       </div>
       <div class="sec-more" data-tag="📏 우리 반 측정값" data-title="A4 종이 긴 변, 우리 반이 재면?"><div id="measure"></div></div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-01.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-01.html">개념정리 학습지</a>(<a href="sheet-01.html?key=1">정답</a>) · <a href="form-01.html">형성평가</a>(<a href="form-01.html?key=1">정답</a> · <a href="form-01.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- =====================================================================
@@ -166,7 +167,7 @@
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">마농</span>“왜 이렇게까지 까다롭게 구느냐고요? 표준이 <b>아예 없던</b> 시절로 가 보면 압니다. 옛 시장에서는 천을 <b>뼘</b>으로 팔았어요. 그런데 뼘은 사람마다 다릅니다.”</div></div>
           <div class="story narr"><div class="who">🧵</div><div class="say"><span class="name">이야기</span>손이 <b>12 cm</b>인 상인이 천을 재고 “스물다섯 뼘”이라 말합니다. 손이 <b>18 cm</b>인 손님은 그 말을 듣고 머릿속으로 자기 뼘 스물다섯 개, 곧 <b>450 cm</b>를 떠올리고 값을 치릅니다. 실제 천은 300 cm인데 말입니다. 천 1 cm에 200원입니다.</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="b-market" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-market" width="900" height="300"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">천의 실제 길이<span class="val" id="b-len-val">150 cm</span></div>
@@ -189,7 +190,7 @@
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">마농</span>“결론이 났습니다. 기준을 <b>물건</b>에 두지 말자는 것이었어요. 물건은 늘어나고, 닳고, 잃어버릴 수 있으니까요. 1983년부터 1 m의 정의는 이렇게 바뀌었습니다. <b>빛이 진공에서 1/299,792,458 초 동안 간 거리.</b>”</div></div>
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">견학 온 학생 하윤</span>“그럼 자를 들고 다닐 필요가 없네요. 시계만 정확하면 어디서든 1 m를 만들 수 있는 거죠? 빛을 얼마나 오래 달리게 해야 1 m가 되는지 직접 맞춰 볼게요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="b-light" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-light" width="900" height="270"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="b-light-read"></div>
               <div class="ctrl-group">
@@ -217,7 +218,7 @@
           <div class="stage-card" style="padding:6px 0 4px"><div id="wk2"></div></div>
         </section>
       </div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-02.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-02.html">개념정리 학습지</a>(<a href="sheet-02.html?key=1">정답</a>) · <a href="form-02.html">형성평가</a>(<a href="form-02.html?key=1">정답</a> · <a href="form-02.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- =====================================================================
@@ -238,8 +239,8 @@
           <figure class="hero-art"><img src="img/gps-town.webp" alt="땅을 블록처럼 잘라 낸 작은 마을 모형. 위에는 학교와 옆 건물, 도로가 있고 도로 위 학생이 휴대폰을 들고 있다. 하늘의 GPS 위성 네 대에서 빛줄기가 휴대폰으로 내려오고, 파란 위치 표시가 학교가 아닌 옆 건물 위에 떠 있다." width="900" height="900" loading="lazy"><figcaption><b>위성 네 대의 시계가 내 위치를 정합니다</b> 휴대폰은 여러 위성에서 온 전파가 도착하기까지 걸린 시간을 재서 거리를 구합니다. 그 시간이 아주 조금만 어긋나도 파란 점은 옆 건물로 옮겨 갑니다. <span class="art-note">⚠ 위성의 높이(약 2만 km)와 크기는 실제 비율이 아닙니다.</span></figcaption></figure>
           <div class="case-file"><b class="k">증거물 ①</b> GPS 위성은 <b>원자시계</b>를 싣고, 전파가 위성에서 수신기까지 오는 데 걸린 시간으로 거리를 잰다. &nbsp;|&nbsp; <b class="k">증거물 ②</b> 전파는 빛과 같은 속력, <b>299,792,458 m/s</b>로 달린다. &nbsp;|&nbsp; <b class="k">증거물 ③</b> 아래 지도는 정밀 측정이 떠받치고 있는 분야들이다 — 눌러서 살펴볼 수 있다.</div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="c-fields" width="900" height="440"></canvas></div>
-            <div class="info-card" id="c-fields-info">카드를 누르면 그 분야가 어느 자릿수까지 재고 있는지 아래 사다리에서 함께 강조됩니다.</div>
+            <div class="canvas-wrap studio"><canvas id="c-fields" width="900" height="370"></canvas></div>
+            <div class="info-card" id="c-fields-info">그림 속 모형을 누르면 그 분야가 어느 자릿수까지 재고 있는지 오른쪽 사다리에서 함께 강조됩니다.</div>
           </div>
           <div class="gate loose" id="g3"></div>
         </section>
@@ -263,7 +264,7 @@
         <section class="scene" data-title="조사 ② — 나노미터를 다투는 공장">
           <div class="story"><div class="who">🏭</div><div class="say"><span class="name">공정 관리자 은채</span>“여기는 반도체 공장입니다. 회로 <b>선폭</b>을 목표대로 만들었는지 매 장 재는데, 목표에서 <b>±10 %</b>를 벗어나면 그 칩은 버립니다. 지금 10 nm 공정을 시작했는데 <b>다섯 장에 한 장꼴로</b> 버리고 있어요. 위쪽 손잡이가 우리 <b>측정·공정의 오차</b>, 아래쪽이 <b>목표 선폭</b>입니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="c-chip" width="900" height="350"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-chip" width="900" height="300"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">공정·측정의 오차(표준편차)<span class="val" id="c-sd-val">0.8 nm</span></div>
@@ -283,7 +284,7 @@
           <div class="story"><div class="who">🧑‍⚕️</div><div class="say"><span class="name">보건 선생님 지호</span>“보건실 체온계는 이마에 대면 <b>36.5</b>라는 숫자를 띄웁니다. 그런데 이마에서 오는 것은 숫자가 아니라 <b>끊김 없이 이어지는 신호</b>예요. 그 신호가 숫자가 되려면 두 단계를 거칩니다. <b>얼마나 자주 재느냐(표본화)</b>, 그리고 <b>얼마나 잘게 나누느냐(양자화)</b>.”</div></div>
           <div class="story"><div class="who">🧑‍⚕️</div><div class="say"><span class="name">지호</span>“먼저 표본화입니다. 손목의 맥박 신호를 초에 몇 번 잴지 정해 보세요. 드문드문 재면 아무리 정밀한 센서라도 원래 물결을 되살리지 못합니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="c-samp" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-samp" width="900" height="280"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">1초에 재는 횟수<span class="val" id="c-rate-val">4 번/초</span></div>
@@ -295,7 +296,7 @@
           </div>
           <div class="story"><div class="who">🧑‍⚕️</div><div class="say"><span class="name">지호</span>“다음은 양자화입니다. 체온계가 다루는 범위는 <b>30 ℃에서 45 ℃</b>까지 15 ℃예요. 이 폭을 몇 칸으로 쪼갤지는 <b>비트 수</b>가 정합니다. 칸이 성기면 36.5도 36.7도 같은 숫자로 찍힙니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="c-quant" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-quant" width="900" height="260"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">쓰는 비트 수<span class="val" id="c-bits-val">4 비트</span></div>
@@ -321,7 +322,7 @@
           <div class="stage-card" style="padding:6px 0 4px"><div id="wk3"></div></div>
         </section>
       </div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-03.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-03.html">개념정리 학습지</a>(<a href="sheet-03.html?key=1">정답</a>) · <a href="form-03.html">형성평가</a>(<a href="form-03.html?key=1">정답</a> · <a href="form-03.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- ===================================================================== 04 수준별 문제 -->
@@ -363,11 +364,20 @@
       </div>
       <div class="stage-card"><div id="share"></div></div>
     </section>
+    <!-- ===================================================================== 08 칠판모드 -->
+    <section class="tab-panel" data-panel="8" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">08 · 전자칠판으로 정리하기</div>
+        <h2 class="display">칠판모드</h2>
+        <p>소단원마다 전자칠판용 <b>칠판 강의 화면</b>, 혼자 넘겨 보는 <b>혼자 복습하기</b>, 빈칸 번호가 같은 <b>개념정리 학습지</b>, 10분 동안 확인하는 <b>형성평가</b>를 모았습니다. 칠판에 열리는 빈칸 번호와 학습지 빈칸 번호가 같아, 수업하며 함께 채우거나 수업 끝에 학습지로 확인할 수 있습니다.</p>
+      </div>
+      <div class="info-card" id="board-wrap" style="margin:0 0 16px"><span class="tag">칠판 정리</span>이야기 세 편을 소단원마다 칠판 강의 화면과 개념정리 학습지로 정리하고, 형성평가로 확인합니다.<div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>01 정밀도와 정확도 (정확도·정밀도 · 계통 오차·우연 오차 · 유효숫자)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-01.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-01.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-01.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-01.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div><div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>02 측정 표준의 유용성 (미터원기와 열팽창 · 표준이 없던 시장 · 자연 상수)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-02.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-02.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-02.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-02.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div><div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>03 측정과 현대 문명 (원자시계와 GPS · 나노미터 공정 · 디지털 변환)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-03.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-03.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-03.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-03.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div></div>
+    </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
-<script src="../assets/theme.js?v=790c9518"></script>
+<script src="../assets/theme.js?v=c3418585"></script>
 <script src="../assets/scope.js?v=cecf172a"></script>
 <script src="../assets/kit.js?v=94e3bd47"></script>
 <script src="../assets/story.js?v=cd80882e"></script>
@@ -375,12 +385,12 @@
 <script src="../assets/lab.js?v=5ab4e410"></script>
 <script src="../assets/share-config.js?v=645d418e"></script>
 <script src="../assets/share.js?v=8ebc37fa"></script>
-<script src="../assets/account.js?v=c2e093b1"></script>
+<script src="../assets/account.js?v=435378ac"></script>
 <script src="episodes.js"></script>
 <script src="worked.js"></script>
 <script src="handoff.js"></script>
 <script src="quiz-items.js"></script>
-<script src="../assets/review.js?v=31d5449f"></script>
+<script src="../assets/review.js?v=c07fe051"></script>
 <script src="../assets/peer.js?v=b6f0b008"></script>
 <script src="../assets/qboard.js?v=b3bb8d32"></script>
 <script src="lab-cases.js"></script>

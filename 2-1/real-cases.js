@@ -95,8 +95,9 @@ window.sthLab({
         });
         [400, 500, 600, 700].forEach(function (q) { lt(ctx, q + " nm", X(q), 152, { s: 10, a: "center", c: LT.mute }); });
         function labRow(el, y, colr, label) {
-          slab(ctx, x0, y, x1 - x0, 32, 7, "#e9ecef", "#15171c", "#868e96");
-          LAB[el].l.forEach(function (q) { ctx.save(); ctx.shadowColor = wlColor(q); ctx.shadowBlur = 6; ctx.fillStyle = wlColor(q); ctx.fillRect(X(q) - 1.2, y, 2.6, 32); ctx.restore(); });
+          slab(ctx, x0, y, x1 - x0, 32, 7, "#f8f9fb", "#e4e9f1", "#b8c1cf");
+          ctx.strokeStyle = "rgba(60,75,110,.25)"; ctx.lineWidth = 1; ctx.strokeRect(x0 + .5, y + .5, x1 - x0 - 1, 31);
+          LAB[el].l.forEach(function (q) { ctx.save(); ctx.shadowColor = wlColor(q); ctx.shadowBlur = 5; ctx.fillStyle = wlColor(q); ctx.fillRect(X(q) - 2, y + 2, 4, 28); ctx.restore(); ctx.strokeStyle = "rgba(20,30,50,.45)"; ctx.lineWidth = 1; ctx.strokeRect(X(q) - 2, y + 2, 4, 28); });
           lt(ctx, label + LAB[el].n + " (가열한 기체의 밝은 선)", x0, y + 48, { s: 11.5, w: "800", c: colr });
         }
         labRow(g1, 166, LT.blue, "C·F·G′·h 후보: ");

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 지구시스템의 구성 (통합과학1 Ⅲ-1 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .formula { font-weight: 800; background: #f8fafc; border: 1px dashed #c9d1dd; border-radius: 6px; padding: 2px 10px; display: inline-block; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격·여백을 줄인다 */ p, li { font-size: 12.8px; line-height: 1.62; } table { font-size: 12px; } td, th { padding: 2px 7px; line-height: 1.42; } h2 { font-size: 14.5px; margin: 7px 0 3px; padding: 3px 10px; } header { margin-bottom: 8px; } .guide { margin-bottom: 6px; } .write { height: 40px; } .foot { margin-top: 6px; }</style>
+</head>
+<body>
+<body>
+<div class="tools">
+  <a href="board-01.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅲ-1 지구시스템 · 01 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 지구시스템의 구성</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~15)</p>
+
+  <h2>① 지구시스템의 구성 요소 — 모래 한 알(석영 78%·장석 12%·조개껍데기 7%·화산 유리 3%)</h2>
+  <ul>
+    <li>서로 영향을 주고받는 구성 요소들의 모임 = 시스템. 지구시스템의 구성 요소:</li>
+  </ul>
+  <table>
+    <tr><th style="width:18%">권역</th><th>무엇인가</th></tr>
+    <tr><td><b class="blank" data-n="1">지권</b></td><td>지구의 표면과 내부: 지각·맨틀·외핵·내핵</td></tr>
+    <tr><td><b class="blank" data-n="2">수권</b></td><td>바다·빙하·지하수·하천·호수. 물의 대부분(약 96.5%)이 바닷물, 비열이 커서 기온 변화를 누그러뜨림</td></tr>
+    <tr><td><b class="blank" data-n="3">기권</b></td><td>지구를 둘러싼 대기(질소 약 78%, 산소 약 21%). 아래부터 대류권·성층권·중간권·열권</td></tr>
+    <tr><td><b class="blank" data-n="4">생물권</b></td><td>모든 생명체와 그들이 사는 공간. 다른 세 권역에 걸쳐 있다</td></tr>
+    <tr><td><b class="blank" data-n="5">외권</b></td><td>대기권 바깥의 우주 공간. 지구는 태양계라는 더 큰 시스템의 구성 요소</td></tr>
+  </table>
+
+  <h2>② 물질 순환과 상호 작용</h2>
+  <ul>
+    <li>같은 물이 증발 → 비 → 강물로 권역 사이를 돌고 도는 것: <b class="blank" data-n="6">물의 순환</b> (해마다 약 505,000 km³가 증발하고 내림)</li>
+    <li><span class="formula">머무는 시간 = 저장량 ÷ 해마다 드나드는 양</span></li>
+    <li>대기 속 물: 12,900 ÷ 505,000 → 약 9.3일, 가장 빨리 갈아치워지는 저장고는 <b class="blank" data-n="7">대기</b> · 하천 약 21.5일</li>
+    <li>바닷물: 1,338,000,000 ÷ 434,000 → 약 <b class="blank" data-n="8">3,083</b>년. 저장량에 견주어 드나드는 양이 아주 적어서 오래 머문다</li>
+    <li>권역끼리 영향을 주고받는 것: <b class="blank" data-n="9">상호 작용</b>. 오가는 것은 물질과 <b class="blank" data-n="10">에너지</b> (외권에서 태양 복사 에너지가 들어온다)</li>
+    <li>지권 → 기권: 화산재, 황사 · 기권 → 지권: 버섯바위, 기온 변화로 바위가 부서짐 · 수권 → 지권: 삼각주, 해식 동굴</li>
+    <li>생물권 → 기권: 약 24억 년 전 광합성 생물이 늘며 대기에 <b class="blank" data-n="11">산소</b>가 쌓이기 시작, 숲이 이산화 탄소를 흡수</li>
+  </ul>
+
+  <h2>③ 화산이 일으킨 연쇄 — 1991년 필리핀 피나투보 화산</h2>
+  <ul>
+    <li>이산화 황 약 20 Tg(1 Tg = 100만 t)을 <b class="blank" data-n="12">성층권</b>까지 뿜어 올림 → 황산 알갱이(에어로졸)가 햇빛 일부를 우주로 되돌려 보냄</li>
+    <li>이듬해 지구 평균 기온 약 <b class="blank" data-n="13">0.5</b> ℃ 하강 (모형: 6개월 뒤 가장 많이 식고, 약 15개월 뒤 효과가 절반 아래)</li>
+    <li>에어로졸은 몇 해 안에 가라앉는다 → 화산의 냉각은 <b class="blank" data-n="14">일시적</b></li>
+    <li>가뭄의 연쇄: 기권(강수 감소) → 수권(수위·지하수면 하강) → 생물권(식생 고사) → 지권(토양 침식, <b class="blank" data-n="15">사막화</b>)</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 생물권이 기권을 바꾼 예는? <span class="ans">→ ㉡</span> &nbsp; ㉠ 봄마다 흙먼지가 하늘을 덮는다 &nbsp; ㉡ 숲이 이산화 탄소를 빨아들인다 &nbsp; ㉢ 파도가 절벽을 깎는다</p>
+    <p>2. 하천의 물(저장량 2,120 km³, 해마다 드나드는 양 36,000 km³)이 머무는 시간은? <span class="ans">→ 약 21일 (2,120 ÷ 36,000 ≈ 0.059년)</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>모래 한 알이 화강암에서 떨어져 나와 해변에 닿기까지를 네 권역의 이름을 모두 넣어 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-01.html · 이야기 ① 「모래 한 알의 여행」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

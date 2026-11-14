@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · SI 기본단위 (통합과학1 Ⅰ-1 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes probeIn { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: none; } }
+  .current .art .pwrap { animation: probeIn 1.4s ease both; }
+  .lines p { margin-bottom: 14px; }
+  .tight p { font-size: 29px; margin-bottom: 10px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .two .card { padding: 24px 28px; }
+  .two .card h3 { font-size: 32px; margin-bottom: 6px; }
+  .two .card p { font-size: 28px; margin-bottom: 6px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 27px; padding: 14px 22px; }
+  .seven { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; margin-top: 18px; }
+  .seven .card { padding: 26px 8px 26px; text-align: center; }
+  .seven .card svg { display: block; margin: 0 auto 8px; width: 150px; height: 100px; }
+  .seven .sym { display: block; font-size: 60px; font-weight: 900; letter-spacing: -.03em; line-height: 1.15; }
+  .seven .qn { display: block; font-size: 28px; font-weight: 900; margin-top: 4px; }
+  .seven .un { display: block; font-size: 26px; color: var(--mute); font-weight: 700; }
+  .ev { font-size: 27px !important; }
+  #s-hook .opt { font-size: 26px; padding: 12px 20px; }
+  #s-hook .card.yel h3 { font-size: 30px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="화성 표면 위 옅은 대기층. 파란 점선 궤도는 대기 위 226 km를 지나고, 빨간 점선 궤도는 대기 속 57 km까지 파고든다">
+      <defs>
+        <radialGradient id="c1-mars" cx="0.5" cy="0" r="0.6"><stop offset="0" stop-color="#e8794a"/><stop offset="1" stop-color="#8f3418"/></radialGradient>
+      </defs>
+      <circle cx="800" cy="1240" r="900" fill="url(#c1-mars)"/>
+      <circle cx="800" cy="1240" r="924" fill="none" stroke="#ff922b" stroke-opacity=".32" stroke-width="48"/>
+      <circle cx="800" cy="1240" r="948" fill="none" stroke="#ffa94d" stroke-width="3" stroke-dasharray="10 10"/>
+      <text x="1300" y="418" font-size="22" font-weight="800" fill="#ffc078">생존 한계 약 80 km</text>
+      <g class="pwrap">
+        <path d="M60 60 Q800 348 1540 60" fill="none" stroke="#74b6ff" stroke-width="6" stroke-dasharray="18 12"/>
+        <text x="800" y="186" font-size="28" font-weight="900" fill="#74b6ff" text-anchor="middle">계획 226 km</text>
+        <g transform="translate(330 150)"><rect x="-22" y="-14" width="44" height="28" rx="4" fill="#e2a52a"/><rect x="-70" y="-6" width="44" height="12" fill="#5d8fe0"/><rect x="26" y="-6" width="44" height="12" fill="#5d8fe0"/></g>
+      </g>
+      <g data-step="1">
+        <path d="M60 60 Q800 552 1540 60" fill="none" stroke="#ff6b6b" stroke-width="6" stroke-dasharray="18 12"/>
+        <text x="800" y="296" font-size="28" font-weight="900" fill="#ff8a80" text-anchor="middle">실제 약 57 km</text>
+      </g>
+      <text x="1560" y="26" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 대기의 두께와 궤도선 크기는 실제 비율이 아닙니다</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅰ-1 과학의 기본량 · 01</p>
+    <h1>SI 기본단위</h1>
+    <p class="sub" data-step="1">같은 숫자, 다른 단위 — 화성 대기 속으로 사라진 궤도선</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 단위가 왜 중요한지, 그리고 전 세계가 함께 쓰는 SI 기본단위를 봅니다. 여러분은 사고 조사관입니다.</p>
+    <p data-at="1">1999년, 아홉 달 반을 날아간 궤도선이 화성에서 사라졌습니다. 엔진도 통신도 멀쩡했는데 말이죠.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="교신이 끊긴 아침" data-part="도입">
+  <p class="kicker">도입 · 1999년 9월 23일, 화성 기후 궤도선</p>
+  <h2>226 km를 지나야 할 궤도선이 57 km로 내려갔다</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p class="ev"><b>계획</b> 화성 상공 226 km를 스쳐 지나가기</p>
+      <p class="ev"><b class="c-red">마지막 계산</b> 57 km까지 내려감 (생존 한계 약 80 km)</p>
+      <p class="ev"><b>증거물 ①</b> 지상 팀 소프트웨어: 분사의 충격량(힘 × 시간)을 파운드힘초(lbf·s)로 출력</p>
+      <p class="ev"><b>증거물 ②</b> 항법 팀 소프트웨어: 같은 숫자를 뉴턴초(N·s)로 읽음</p>
+      <p class="small mt">엔진·안테나·통신은 모두 정상이었습니다.</p>
+    </div>
+    <div class="card yel">
+      <h3>왜 169 km나 낮게 들어갔을까?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 엔진이 고장 나 속도를 줄이지 못했다</div>
+        <div class="opt">㉡ 두 팀이 서로 다른 단위를 써서 값이 어긋났다</div>
+        <div class="opt">㉢ 화성의 중력이 예상과 달랐다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>궤도선은 화성 뒤편으로 들어간 뒤 다시 나타나지 않았습니다. 계획은 226 km, 마지막 계산은 57 km. 두 숫자 사이에 무슨 일이 있었을까요?</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 오늘 증거를 모아 직접 판단하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>단위</b><span>숫자가 어떤 양인지 알려 주는 기준</span></div>
+    <div class="card"><b>단위 환산</b><span>다른 단위로 바꿀 때 곱하는 수</span></div>
+    <div class="card"><b>기본량</b><span>SI가 정한 일곱 가지 기준 물리량</span></div>
+    <div class="card"><b>유도량</b><span>기본량을 곱하고 나눠 만든 물리량</span></div>
+    <div class="card"><b>자연 상수</b><span>변하지 않는 기준이 되는 값</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~15번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 두 팀의 단위 -->
+<section class="slide" id="s-cause" data-title="숫자만 건너간 자료" data-part="① 사고의 원인">
+  <p class="kicker">① 사고의 원인 · 증거물 ①②를 이어 보면</p>
+  <h2>숫자는 건너갔지만 단위는 건너가지 못했다</h2>
+  <svg viewBox="0 0 1400 320" width="1400" height="320" aria-label="지상 팀 컴퓨터가 1.0 lbf·s를 내보내고, 숫자 1.0만 건너가 항법 팀 컴퓨터가 1.0 N·s로 읽는 흐름도">
+    <defs><marker id="s4-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker></defs>
+    <g data-step="1">
+      <rect x="0" y="40" width="420" height="230" rx="22" fill="#e7f3ff" stroke="#1462d8" stroke-width="4"/>
+      <text x="210" y="92" font-size="28" font-weight="900" fill="#1462d8" text-anchor="middle">지상 팀 소프트웨어</text>
+      <rect x="40" y="120" width="340" height="110" rx="14" fill="#161b28"/>
+      <text x="210" y="192" font-size="46" font-weight="900" fill="#69db9c" text-anchor="middle">1.0 lbf·s</text>
+    </g>
+    <g data-step="2">
+      <line x1="440" y1="155" x2="950" y2="155" stroke="#495057" stroke-width="6" marker-end="url(#s4-a)"/>
+      <rect x="610" y="112" width="140" height="70" rx="12" fill="#fff6cc" stroke="#f08c00" stroke-width="4"/>
+      <text x="680" y="160" font-size="36" font-weight="900" fill="#161b28" text-anchor="middle">1.0</text>
+      <g transform="translate(700 250) rotate(14)">
+        <rect x="-62" y="-30" width="124" height="54" rx="10" fill="#ffe5e3" stroke="#d9302c" stroke-width="3"/>
+        <text x="0" y="8" font-size="28" font-weight="900" fill="#d9302c" text-anchor="middle">lbf·s</text>
+        <path d="M-56 -26 L56 20 M56 -26 L-56 20" stroke="#d9302c" stroke-width="5"/>
+      </g>
+      <text x="840" y="292" font-size="22" font-weight="800" fill="#d9302c">단위는 빠짐</text>
+    </g>
+    <g data-step="3">
+      <rect x="980" y="40" width="420" height="230" rx="22" fill="#fff0f0" stroke="#d9302c" stroke-width="4"/>
+      <text x="1190" y="92" font-size="28" font-weight="900" fill="#d9302c" text-anchor="middle">항법 팀 소프트웨어</text>
+      <rect x="1020" y="120" width="340" height="110" rx="14" fill="#161b28"/>
+      <text x="1190" y="192" font-size="46" font-weight="900" fill="#ffa8a8" text-anchor="middle">1.0 N·s</text>
+    </g>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">지상 팀: 분사의 충격량(힘 × 시간)을 파운드힘초(lbf·s)로 내보냄</p>
+    <p data-step="3">항법 팀: 같은 숫자를 뉴턴초(N·s)로 읽고 궤도를 계산</p>
+    <p data-step="4">측정값 = 숫자 + <b class="blank" data-n="1" data-step="4">단위</b> · 단위가 다르면 같은 숫자도 다른 양이다</p>
+  </div>
+  <aside class="script">
+    <p>증거물 두 개를 이어 봅시다. 충격량은 힘에 시간을 곱한 양이에요. 분사를 얼마나 세게, 얼마나 오래 했는지를 나타냅니다.</p>
+    <p data-at="1">지상 팀 프로그램은 이 값을 파운드힘초, 미국에서 쓰는 단위로 내보냈습니다.</p>
+    <p data-at="2">그런데 넘겨준 것은 숫자뿐이었습니다. 단위는 따라가지 않았어요.</p>
+    <p data-at="3">항법 팀 프로그램은 그 숫자를 뉴턴초로 읽었습니다.</p>
+    <p data-at="4">빈칸 1번, 단위. 측정값은 숫자와 단위가 함께 있어야 뜻이 정해집니다. 그러면 두 단위는 얼마나 다를까요?</p>
+  </aside>
+</section>
+
+<!-- 5 두 저울 -->
+<section class="slide" id="s-gauge" data-title="두 저울로 같은 힘 재기" data-part="① 사고의 원인">
+  <p class="kicker">① 사고의 원인 · 같은 힘을 뉴턴 저울과 파운드힘 저울로 (단원 화면 모형)</p>
+  <h2>1 파운드힘은 몇 뉴턴일까</h2>
+  <svg id="gaugeSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="뉴턴 눈금 0~50 N과 파운드힘 눈금 0~11 lbf를 한 줄에 맞춘 그림. 1 lbf는 4.45 N, 10 lbf는 44.5 N 자리에 온다"></svg>
+  <div class="tight mt">
+    <p data-step="1">파운드힘 저울 1.0 lbf ↔ 뉴턴 저울 <b class="blank" data-n="2" data-step="1">약 4.45 N</b> (1 lbf = 4.448222 N)</p>
+    <p data-step="2">10.0 lbf ↔ 44.5 N · 어디서나 4.448222배</p>
+    <p data-step="3">lbf로 적은 숫자를 N으로 읽으면 실제 힘의 <b class="c-red">4.45분의 1</b>로 착각한다</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면에서 손잡이를 당겨 두 저울을 같이 읽어 보았죠. 두 저울의 눈금을 한 줄에 맞춰 놓았습니다. 위는 뉴턴, 아래는 파운드힘입니다.</p>
+    <p data-at="1">파운드힘 저울이 1.0을 가리킬 때 뉴턴 저울은 약 4.45. 빈칸 2번, 약 4.45 N입니다.</p>
+    <p data-at="2">10.0 lbf면 44.5 N. 몇 lbf이든 늘 4.448222배입니다.</p>
+    <p data-at="3">그러니 lbf로 적은 숫자를 N으로 읽으면, 실제 힘보다 4.45분의 1밖에 안 되는 힘이 작용했다고 생각하게 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 6 궤도 재계산 -->
+<section class="slide" id="s-orbit" data-title="궤도를 다시 계산하다" data-part="① 사고의 원인">
+  <p class="kicker">① 사고의 원인 · 환산 계수를 바꾸며 근화점 고도 계산 (단원 화면 모형)</p>
+  <h2>곱해야 할 한 번의 환산을 빠뜨렸다</h2>
+  <div class="cols" style="grid-template-columns:800px 1fr;align-items:center">
+    <svg id="orbitSvg" viewBox="0 0 800 470" width="800" height="470" aria-label="환산 계수에 따른 근화점 고도 그래프. 계수 1이면 57 km로 대기에서 부서지고, 계수 4.45이면 예정 고도 226 km에 들어간다"></svg>
+    <div class="lines">
+      <p data-step="1">계수 1 = 단위를 바꾸지 않고 그대로 → <b class="c-red">57 km</b>, 대기에서 부서짐</p>
+      <p data-step="2"><b class="blank" data-n="3" data-step="2">환산 계수</b> 4.448222를 곱하면 → 226 km 진입 성공</p>
+      <div class="card red" data-step="3">
+        <p style="margin:0">사고 조사 보고서의 근본 원인: 지상 소프트웨어가 <b class="blank" data-n="4" data-step="3">SI 단위</b>를 쓰지 않았다</p>
+      </div>
+    </div>
+  </div>
+  <p class="note">⚠ 단원 화면의 단순화한 모형(고도 = 8 + 49 × 계수, km)입니다. 실제로는 아홉 달 동안 쌓인 작은 분사의 오차가 궤도를 조금씩 밀어냈습니다.</p>
+  <aside class="script">
+    <p>사고를 재현합니다. 지상 팀이 보낸 숫자에 어떤 수를 곱해서 항법 컴퓨터에 넣어야 했을까요? 가로축이 그 수, 세로축이 화성에 가장 가까이 갈 때의 고도입니다.</p>
+    <p data-at="1">계수 1, 곧 아무것도 바꾸지 않고 그냥 넣으면 57 km. 생존 한계 80 km보다 아래, 1999년에 실제로 일어난 일입니다.</p>
+    <p data-at="2">4.448222를 곱하면 예정 고도 226 km에 들어갑니다. 빈칸 3번, 환산 계수. 1 lbf를 N으로 바꾸는 바로 그 값이죠.</p>
+    <p data-at="3">사고 조사 보고서가 지목한 근본 원인은 이것입니다. 빈칸 4번, 지상 소프트웨어가 SI 단위를 쓰지 않았다. 고장 난 부품은 없었습니다.</p>
+  </aside>
+</section>
+
+<!-- 7 일곱 기본량 -->
+<section class="slide soft" id="s-seven" data-title="일곱 개의 기본량" data-part="② 기본량과 유도량">
+  <p class="kicker">② 기본량과 유도량 · 재발 방지 위원회가 세운 기준</p>
+  <h2>모든 물리량은 7개의 기본량에서 나온다</h2>
+  <p data-step="1">서로 독립적으로 정한 일곱 가지 기준 물리량 → SI <b class="blank" data-n="5" data-step="1">기본량</b></p>
+  <div class="seven">
+    <div class="card" data-step="1">
+      <svg viewBox="0 0 120 80" width="120" height="80" aria-label="자"><rect x="6" y="28" width="108" height="26" rx="4" fill="#ffd8a8" stroke="#e8590c" stroke-width="3"/><g stroke="#e8590c" stroke-width="3"><line x1="22" y1="28" x2="22" y2="40"/><line x1="40" y1="28" x2="40" y2="46"/><line x1="58" y1="28" x2="58" y2="40"/><line x1="76" y1="28" x2="76" y2="46"/><line x1="94" y1="28" x2="94" y2="40"/></g></svg>
+      <span class="sym c-blue">m</span><span class="qn">길이</span><span class="un">미터</span></div>
+    <div class="card" data-step="1">
+      <svg viewBox="0 0 120 80" width="120" height="80" aria-label="추"><path d="M30 74 L40 26 H80 L90 74 Z" fill="#adb5bd" stroke="#495057" stroke-width="3"/><circle cx="60" cy="18" r="10" fill="none" stroke="#495057" stroke-width="4"/></svg>
+      <span class="sym c-orange">kg</span><span class="qn">질량</span><span class="un">킬로그램</span></div>
+    <div class="card" data-step="1">
+      <svg viewBox="0 0 120 80" width="120" height="80" aria-label="시계"><circle cx="60" cy="40" r="34" fill="#fff" stroke="#6741d9" stroke-width="5"/><path d="M60 40 V18 M60 40 L76 50" stroke="#6741d9" stroke-width="5" stroke-linecap="round"/></svg>
+      <span class="sym c-violet">s</span><span class="qn">시간</span><span class="un">초</span></div>
+    <div class="card" data-step="2">
+      <svg viewBox="0 0 120 80" width="120" height="80" aria-label="전선 속을 흐르는 전하"><rect x="6" y="28" width="108" height="24" rx="12" fill="#c5f6fa" stroke="#0b7f99" stroke-width="3"/><g fill="#0b7f99"><circle cx="28" cy="40" r="6"/><circle cx="56" cy="40" r="6"/><circle cx="84" cy="40" r="6"/></g><path d="M96 64 H112 M106 58 L112 64 L106 70" stroke="#0b7f99" stroke-width="3" fill="none"/></svg>
+      <span class="sym c-teal">A</span><span class="qn">전류</span><span class="un">암페어</span></div>
+    <div class="card" data-step="2">
+      <svg viewBox="0 0 120 80" width="120" height="80" aria-label="온도계"><rect x="52" y="6" width="16" height="54" rx="8" fill="#fff" stroke="#d9302c" stroke-width="3"/><circle cx="60" cy="64" r="12" fill="#e03131"/><rect x="56" y="30" width="8" height="34" fill="#e03131"/></svg>
+      <span class="sym c-red">K</span><span class="qn">온도</span><span class="un">켈빈</span></div>
+    <div class="card" data-step="3">
+      <svg viewBox="0 0 120 80" width="120" height="80" aria-label="작은 입자 묶음"><g fill="#69db7c" stroke="#198a4a" stroke-width="2"><circle cx="40" cy="30" r="10"/><circle cx="62" cy="24" r="10"/><circle cx="84" cy="32" r="10"/><circle cx="50" cy="52" r="10"/><circle cx="74" cy="54" r="10"/></g></svg>
+      <span class="sym c-green">mol</span><span class="qn"><b class="blank" data-n="6" data-step="3">물질량</b></span><span class="un">몰</span></div>
+    <div class="card" data-step="3">
+      <svg viewBox="0 0 120 80" width="120" height="80" aria-label="촛불"><rect x="50" y="38" width="20" height="38" rx="3" fill="#fff3bf" stroke="#f08c00" stroke-width="3"/><path d="M60 8 C70 20 70 30 60 34 C50 30 50 20 60 8 Z" fill="#ffd43b" stroke="#f08c00" stroke-width="2"/></svg>
+      <span class="sym" style="color:#b7791f">cd</span><span class="qn">광도</span><span class="un">칸델라</span></div>
+  </div>
+  <p class="small mt" data-step="3">물질량 1 mol = 입자 6.02214076×10²³ 개의 묶음 · 기본단위 가운데 접두어(k)가 붙은 것은 kg 하나</p>
+  <aside class="script">
+    <p>원인은 찾았습니다. 이제 다시는 같은 일이 없도록 기준을 정리합니다.</p>
+    <p data-at="1">국제단위계, SI는 서로 독립적인 일곱 가지 물리량을 기준으로 삼습니다. 빈칸 5번, 기본량. 먼저 길이 미터, 질량 킬로그램, 시간 초.</p>
+    <p data-at="2">전류 암페어, 그리고 온도 켈빈. 섭씨가 아니라는 점은 잠시 뒤에 봅니다.</p>
+    <p data-at="3">빈칸 6번, 물질량. 단위는 몰이고, 입자의 개수를 세는 기본량입니다. 마지막으로 빛의 밝기, 광도 칸델라. 이 일곱 개가 전부입니다.</p>
+  </aside>
+</section>
+
+<!-- 8 유도량 -->
+<section class="slide" id="s-derived" data-title="기본량을 조립한 유도량" data-part="② 기본량과 유도량">
+  <p class="kicker">② 기본량과 유도량 · 나머지 물리량은 어떻게 만들까</p>
+  <h2>기본량을 곱하고 나누면 새 물리량이 된다</h2>
+  <svg viewBox="0 0 1400 330" width="1400" height="330" aria-label="길이·시간·질량 세 기본량에서 화살표가 넓이(m²), 속력(m/s), 밀도(kg/m³), 힘(kg·m/s²)으로 이어지는 조립도">
+    <defs><marker id="s8-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#868e96"/></marker></defs>
+    <g font-size="30" font-weight="900" text-anchor="middle">
+      <rect x="0" y="20" width="260" height="80" rx="16" fill="#dce9ff"/><text x="130" y="72" fill="#1462d8">길이 m</text>
+      <rect x="0" y="125" width="260" height="80" rx="16" fill="#ece5ff"/><text x="130" y="177" fill="#6741d9">시간 s</text>
+      <rect x="0" y="230" width="260" height="80" rx="16" fill="#ffe8cc"/><text x="130" y="282" fill="#e8590c">질량 kg</text>
+    </g>
+    <g stroke="#868e96" stroke-width="4" fill="none" marker-end="url(#s8-a)">
+      <path d="M262 55 C420 45 480 40 612 42" data-step="1"/>
+      <path d="M262 65 C420 110 480 118 612 122" data-step="2"/><path d="M262 165 C420 150 480 135 612 128" data-step="2"/>
+      <path d="M262 270 C420 220 480 205 612 202" data-step="3"/><path d="M262 75 C430 150 470 190 612 196" data-step="3"/>
+      <path d="M262 280 C420 285 480 282 612 282" data-step="4"/><path d="M262 85 C440 210 470 260 612 274" data-step="4"/><path d="M262 185 C430 240 480 268 612 278" data-step="4"/>
+    </g>
+    <g font-size="28" font-weight="800">
+      <g data-step="1"><rect x="620" y="10" width="780" height="64" rx="14" fill="#f2f5f9"/><text x="645" y="53" fill="#161b28">넓이 = 길이 × 길이</text><text x="1375" y="53" fill="#1462d8" text-anchor="end" font-weight="900">m²</text></g>
+      <g data-step="2"><rect x="620" y="90" width="780" height="64" rx="14" fill="#f2f5f9"/><text x="645" y="133" fill="#161b28">속력 = 길이 ÷ 시간</text><text x="1375" y="133" fill="#1462d8" text-anchor="end" font-weight="900">m/s</text></g>
+      <g data-step="3"><rect x="620" y="170" width="780" height="64" rx="14" fill="#f2f5f9"/><text x="645" y="213" fill="#161b28">밀도 = 질량 ÷ 부피</text><text x="1375" y="213" fill="#1462d8" text-anchor="end" font-weight="900">kg/m³</text></g>
+      <g data-step="4"><rect x="620" y="250" width="780" height="64" rx="14" fill="#fff6cc"/><text x="645" y="293" fill="#161b28">힘 = 질량 × 가속도</text><text x="1375" y="293" fill="#e8590c" text-anchor="end" font-weight="900">N</text></g>
+    </g>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">기본량을 곱하고 나눠 만든 물리량 → <b class="blank" data-n="7" data-step="1">유도량</b> (단위도 기본단위를 곱하고 나눠 만든다)</p>
+    <p data-step="4">힘의 단위 1 N = 1 <b class="blank" data-n="8" data-step="4">kg·m/s²</b> · 충격량 N·s도 유도량의 단위</p>
+    <p data-step="5" class="c-red"><b>SI가 아닌 단위</b>: 파운드힘(lbf) · 마일(1 mile ≈ 1,609 m) · 칼로리(1 cal ≈ 4.184 J) → 쓸 때마다 환산</p>
+  </div>
+  <aside class="script">
+    <p>일곱 개 말고 나머지 물리량은 모두 이 일곱 개를 조립해서 만듭니다.</p>
+    <p data-at="1">넓이는 길이 곱하기 길이, 단위는 제곱미터. 이렇게 만든 물리량이 빈칸 7번, 유도량입니다.</p>
+    <p data-at="2">속력은 길이 나누기 시간, 미터 매 초.</p>
+    <p data-at="3">밀도는 질량 나누기 부피, 부피도 길이를 세 번 곱한 유도량이죠.</p>
+    <p data-at="4">힘은 질량 곱하기 가속도. 그래서 1 뉴턴은 빈칸 8번, 1 kg·m/s²입니다. 사고에 나온 충격량의 단위 뉴턴초도 유도량의 단위예요.</p>
+    <p data-at="5">파운드힘, 마일, 칼로리는 SI 단위가 아닙니다. 이런 단위는 쓸 때마다 반드시 환산해야 합니다. 단원 화면의 분류 미션에서 직접 나눠 보았죠.</p>
+  </aside>
+</section>
+
+<!-- 9 켈빈 온도 -->
+<section class="slide" id="s-temp" data-title="섭씨와 켈빈" data-part="② 기본량과 유도량">
+  <p class="kicker">② 기본량과 유도량 · 온도는 조금 특별하다</p>
+  <h2>온도의 기본단위는 ℃가 아니라 K</h2>
+  <div class="cols" style="grid-template-columns:680px 1fr;align-items:center">
+    <svg viewBox="0 0 680 480" width="680" height="480" aria-label="왼쪽에 섭씨 눈금, 오른쪽에 켈빈 눈금이 있는 온도계. 절대 영도 0 K는 −273.15 ℃, 물이 어는 0 ℃는 273.15 K, 물이 끓는 100 ℃는 373.15 K">
+      <defs>
+        <linearGradient id="s9-lq" x1="0" x2="1"><stop offset="0" stop-color="#ff8787"/><stop offset="1" stop-color="#c92a2a"/></linearGradient>
+        <marker id="s9-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker>
+      </defs>
+      <rect x="320" y="20" width="40" height="420" rx="20" fill="#fff" stroke="#495057" stroke-width="4"/>
+      <circle cx="340" cy="446" r="30" fill="url(#s9-lq)" stroke="#495057" stroke-width="4"/>
+      <rect x="330" y="96" width="20" height="350" fill="url(#s9-lq)"/>
+      <g font-size="26" font-weight="900" data-step="1">
+        <text x="250" y="22" fill="#e8590c" text-anchor="end">℃</text>
+        <text x="430" y="22" fill="#1462d8">K</text>
+      </g>
+      <g data-step="2">
+        <line x1="270" y1="430" x2="410" y2="430" stroke="#6741d9" stroke-width="5"/>
+        <text x="260" y="438" font-size="24" font-weight="900" fill="#e8590c" text-anchor="end">−273.15</text>
+        <text x="420" y="438" font-size="24" font-weight="900" fill="#1462d8">0</text>
+        <text x="500" y="438" font-size="22" font-weight="900" fill="#6741d9">절대 영도</text>
+      </g>
+      <g data-step="3">
+        <line x1="270" y1="160" x2="410" y2="160" stroke="#1c7ed6" stroke-width="5"/>
+        <text x="260" y="168" font-size="24" font-weight="900" fill="#e8590c" text-anchor="end">0</text>
+        <text x="420" y="168" font-size="24" font-weight="900" fill="#1462d8">273.15</text>
+        <text x="16" y="168" font-size="22" font-weight="800" fill="#5f6b80">물이 어는 온도</text>
+      </g>
+      <g data-step="4">
+        <line x1="270" y1="64" x2="410" y2="64" stroke="#e03131" stroke-width="5"/>
+        <text x="260" y="72" font-size="24" font-weight="900" fill="#e8590c" text-anchor="end">100</text>
+        <text x="420" y="72" font-size="24" font-weight="900" fill="#1462d8">373.15</text>
+        <text x="16" y="72" font-size="22" font-weight="800" fill="#5f6b80">물이 끓는 온도</text>
+        <text x="420" y="120" font-size="20" font-weight="900" fill="#495057">K − ℃ = 늘 273.15</text>
+      </g>
+      <text x="16" y="474" font-size="18" fill="#5f6b80">⚠ 눈금 간격은 맞추지 않은 모식도</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">온도의 SI 기본단위: <b class="blank" data-n="9" data-step="1">켈빈</b> (K) · 섭씨온도(℃)는 SI 기본단위가 아니다</p>
+      <p data-step="2">0 K = −273.15 ℃ → <b class="blank" data-n="10" data-step="2">절대 영도</b>, 이보다 낮은 온도는 없다</p>
+      <p data-step="3">물이 어는 0 ℃ = 273.15 K → K = ℃ + <b class="blank" data-n="11" data-step="3">273.15</b></p>
+      <p data-step="4">100 ℃ = 373.15 K · 눈금 <b>간격</b>은 같고 <b>시작점</b>만 다르다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>기본량 가운데 온도는 조금 특별합니다. 우리가 늘 쓰는 섭씨온도는 SI 기본단위가 아니에요.</p>
+    <p data-at="1">온도계 왼쪽은 섭씨, 오른쪽은 빈칸 9번, 켈빈입니다.</p>
+    <p data-at="2">켈빈의 0은 빈칸 10번, 절대 영도. 섭씨로 −273.15 ℃이고, 입자의 열운동이 더 줄어들 수 없는 한계라서 이보다 낮은 온도는 없습니다.</p>
+    <p data-at="3">물이 어는 0 ℃는 켈빈으로 0이 아니라 273.15 K. 그래서 켈빈 온도는 섭씨온도에 빈칸 11번, 273.15를 더한 값입니다.</p>
+    <p data-at="4">물이 끓는 100 ℃는 373.15 K. 1 ℃ 오르면 1 K 오릅니다. 간격은 같고 시작점만 다릅니다.</p>
+  </aside>
+</section>
+
+<!-- 10 확인 -->
+<section class="slide" id="s-check1" data-title="SI 기본단위 고르기" data-part="② 기본량과 유도량">
+  <p class="kicker">② 기본량과 유도량 · 확인</p>
+  <h2>다음 가운데 SI 기본단위는?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ ℃ (섭씨온도)</div>
+    <div class="opt wrong" data-step="1">㉡ N (뉴턴)</div>
+    <div class="opt right" data-step="1">㉢ mol (몰)</div>
+    <div class="opt wrong" data-step="1">㉣ cal (칼로리)</div>
+  </div>
+  <p data-step="1" style="margin-top:40px">℃ → 기본단위는 K · N = kg·m/s²인 유도량의 단위 · cal은 SI가 아닌 단위(SI는 J)</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. ㉠을 고르는 학생이 많을 거예요.</p>
+    <p data-at="1">정답은 ㉢ 몰. 섭씨는 SI 기본단위가 아니고, 뉴턴은 기본단위를 조립한 유도량의 단위, 칼로리는 SI 단위가 아닙니다.</p>
+  </aside>
+</section>
+
+<!-- 11 미터와 초 -->
+<section class="slide soft" id="s-ms" data-title="빛과 원자로 정한 미터와 초" data-part="③ 자연 상수로 정한 기준">
+  <p class="kicker">③ 자연 상수로 정한 기준 · 1 m와 1 s는 무엇으로 정할까</p>
+  <h2>미터는 빛으로, 초는 원자로 정한다</h2>
+  <div class="two">
+    <div class="card" data-step="1">
+      <svg viewBox="0 0 600 220" width="600" height="220" aria-label="광원에서 나온 빛이 1 m 자를 따라 진행하는 그림">
+        <defs><linearGradient id="s11-beam" x1="0" x2="1"><stop offset="0" stop-color="#ffd43b"/><stop offset="1" stop-color="#ffa94d" stop-opacity=".5"/></linearGradient></defs>
+        <rect x="10" y="60" width="70" height="60" rx="10" fill="#495057"/>
+        <rect x="80" y="76" width="480" height="28" fill="url(#s11-beam)"/>
+        <rect x="80" y="140" width="480" height="40" rx="6" fill="#ffd8a8" stroke="#e8590c" stroke-width="3"/>
+        <g stroke="#e8590c" stroke-width="3"><line x1="128" y1="140" x2="128" y2="154"/><line x1="176" y1="140" x2="176" y2="154"/><line x1="224" y1="140" x2="224" y2="154"/><line x1="272" y1="140" x2="272" y2="154"/><line x1="320" y1="140" x2="320" y2="162"/><line x1="368" y1="140" x2="368" y2="154"/><line x1="416" y1="140" x2="416" y2="154"/><line x1="464" y1="140" x2="464" y2="154"/><line x1="512" y1="140" x2="512" y2="154"/></g>
+        <text x="320" y="214" font-size="26" font-weight="900" fill="#e8590c" text-anchor="middle">1 m</text>
+        <text x="320" y="44" font-size="22" font-weight="800" fill="#5f6b80" text-anchor="middle">진공 · 1/299,792,458초 동안</text>
+      </svg>
+      <h3>1 m</h3>
+      <p><b class="blank" data-n="12" data-step="1">빛</b>이 진공에서 1/299,792,458초 동안 간 거리</p>
+    </div>
+    <div class="card" data-step="2">
+      <svg viewBox="0 0 600 220" width="600" height="220" aria-label="원자에서 나온 복사선의 물결">
+        <circle cx="90" cy="110" r="16" fill="#6741d9"/>
+        <g fill="none" stroke="#9775fa" stroke-width="3"><ellipse cx="90" cy="110" rx="62" ry="24"/><ellipse cx="90" cy="110" rx="62" ry="24" transform="rotate(60 90 110)"/><ellipse cx="90" cy="110" rx="62" ry="24" transform="rotate(-60 90 110)"/></g>
+        <path d="M170 110 q15 -40 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0" fill="none" stroke="#6741d9" stroke-width="5"/>
+        <text x="370" y="44" font-size="22" font-weight="800" fill="#5f6b80" text-anchor="middle">특정 복사선의 진동</text>
+        <text x="370" y="196" font-size="26" font-weight="900" fill="#6741d9" text-anchor="middle">9,192,631,770번 = 1 s</text>
+      </svg>
+      <h3>1 s</h3>
+      <p><b class="blank" data-n="13" data-step="2">세슘</b>-133 원자의 복사선이 9,192,631,770번 진동하는 시간</p>
+    </div>
+  </div>
+  <p class="mt" data-step="3">물건이나 지구 자전이 아니라 변하지 않는 자연 현상 → 지구에서도 화성에서도 같은 1 m, 같은 1 s</p>
+  <aside class="script">
+    <p>단위가 어긋나지 않으려면 기준 자체가 어디서나 같아야 합니다. 오늘날 미터와 초는 무엇으로 정할까요?</p>
+    <p data-at="1">1 m는 빈칸 12번, 빛이 진공에서 2억 9979만 2458분의 1초 동안 간 거리입니다. 자의 길이가 아니라 빛과 시간으로 정했어요.</p>
+    <p data-at="2">1초는 빈칸 13번, 세슘-133 원자가 내는 특정 복사선이 91억 9263만 1770번 진동하는 시간. 원자시계의 원리입니다.</p>
+    <p data-at="3">빛의 속력과 원자의 진동은 지구에서 재든 화성에서 재든 같습니다. 그래서 누구나 같은 기준을 다시 만들 수 있습니다.</p>
+  </aside>
+</section>
+
+<!-- 12 킬로그램 -->
+<section class="slide" id="s-kg" data-title="킬로그램 원기에서 플랑크 상수로" data-part="③ 자연 상수로 정한 기준">
+  <p class="kicker">③ 자연 상수로 정한 기준 · 마지막까지 물건이었던 킬로그램</p>
+  <h2>2019년, 킬로그램의 정의가 바뀌었다</h2>
+  <svg viewBox="0 0 1400 290" width="1400" height="290" aria-label="1889년 유리 덮개 속 금속 원기에서 130년 뒤 2019년 플랑크 상수 h로 넘어가는 연표">
+    <defs>
+      <linearGradient id="s12-metal" x1="0" x2="1"><stop offset="0" stop-color="#868e96"/><stop offset=".45" stop-color="#e9ecef"/><stop offset="1" stop-color="#6c757d"/></linearGradient>
+      <marker id="s12-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker>
+    </defs>
+    <line x1="80" y1="250" x2="1340" y2="250" stroke="#adb5bd" stroke-width="6"/>
+    <g data-step="1">
+      <path d="M150 230 V110 Q150 40 230 40 Q310 40 310 110 V230 Z" fill="#e7f5ff" stroke="#74c0fc" stroke-width="4" opacity=".9"/>
+      <rect x="190" y="130" width="80" height="100" rx="8" fill="url(#s12-metal)" stroke="#495057" stroke-width="3"/>
+      <rect x="120" y="230" width="220" height="16" rx="4" fill="#495057"/>
+      <circle cx="230" cy="250" r="12" fill="#495057"/>
+      <text x="230" y="284" font-size="26" font-weight="900" fill="#161b28" text-anchor="middle">1889년 금속 원기</text>
+      <line x1="370" y1="160" x2="900" y2="160" stroke="#495057" stroke-width="5" stroke-dasharray="14 10" marker-end="url(#s12-a)"/>
+      <text x="635" y="140" font-size="28" font-weight="900" fill="#5f6b80" text-anchor="middle">130년 동안 이 덩어리가 기준</text>
+    </g>
+    <g data-step="2">
+      <circle cx="1120" cy="140" r="92" fill="#fff6cc" stroke="#f08c00" stroke-width="6"/>
+      <text x="1120" y="172" font-size="96" font-weight="900" fill="#e8590c" text-anchor="middle" font-style="italic">h</text>
+      <circle cx="1120" cy="250" r="12" fill="#e8590c"/>
+      <text x="1120" y="284" font-size="26" font-weight="900" fill="#e8590c" text-anchor="middle">2019년 플랑크 상수</text>
+    </g>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">1889년부터 130년: 파리 금고 속 금속 원기 하나가 1 kg의 기준 → 물건은 하나뿐이고 변할 수 있다</p>
+    <p data-step="2">2019년부터: <b class="blank" data-n="14" data-step="2">플랑크 상수</b>의 값을 고정해 1 kg을 정의</p>
+    <p data-step="3">일곱 기본단위 모두 물건이 아니라 변하지 않는 <b class="blank" data-n="15" data-step="3">자연 상수</b>에 묶는다</p>
+  </div>
+  <p class="note" data-step="3">길이 — 빛의 속력 · 시간 — 세슘 원자의 진동 · 질량 — 플랑크 상수 · 전류 — 기본 전하 · 온도 — 볼츠만 상수 · 물질량 — 아보가드로수 · 광도 — 정해진 빛의 밝기</p>
+  <aside class="script">
+    <p>미터와 초보다 늦게까지 물건으로 정했던 단위가 있습니다. 바로 킬로그램입니다.</p>
+    <p data-at="1">1889년부터 130년 동안, 파리 근처 금고에 보관한 금속 덩어리 하나가 1 kg이었습니다. 세상에 하나뿐인 물건이 기준이면, 그 물건이 조금만 변해도 전 세계의 1 kg이 바뀝니다.</p>
+    <p data-at="2">그래서 2019년, 빈칸 14번, 플랑크 상수라는 자연 상수의 값을 고정해서 킬로그램을 다시 정의했습니다.</p>
+    <p data-at="3">이제 일곱 기본단위가 모두 빈칸 15번, 자연 상수에 묶여 있습니다. 아래에 무엇으로 정하는지 적어 두었습니다.</p>
+  </aside>
+</section>
+
+<!-- 13 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>단위는 같은 숫자를 같은 양으로 읽게 하는 약속</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1">측정값 = 숫자 + <b>단위</b> · 단위가 다르면 환산 계수를 곱한다 (1 lbf ≈ 4.45 N) — 빠뜨리면 226 km가 57 km로</li>
+    <li data-k="2" data-step="2">SI <b>기본량</b> 7개: 길이(m) · 질량(kg) · 시간(s) · 전류(A) · 온도(K) · 물질량(mol) · 광도(cd)</li>
+    <li data-k="3" data-step="3"><b>유도량</b>: 기본량을 곱하고 나눠 만든다 (속력 m/s, 힘 N = kg·m/s²) · 온도는 K = ℃ + 273.15</li>
+    <li data-k="4" data-step="4">기준은 <b>자연 상수</b>로: 1 m는 빛, 1 s는 세슘 원자, 1 kg은 플랑크 상수(2019년)</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 14 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 3.0 lbf·s로 적힌 충격량을 N·s로 바르게 바꾸는 방법은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 4.448222로 나눈다</div>
+        <div class="opt right" data-step="1">㉡ 4.448222를 곱한다</div>
+        <div class="opt wrong" data-step="1">㉢ 숫자는 그대로 둔다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 물이 어는 온도를 켈빈 온도로 나타내면?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 0 K</div>
+        <div class="opt right" data-step="2">㉡ 273.15 K</div>
+        <div class="opt wrong" data-step="2">㉢ −273.15 K</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 1 lbf가 4.448222 N이므로 곱합니다. 3.0 lbf·s는 약 13.3 N·s예요. 숫자를 그대로 두는 ㉢이 바로 1999년의 실수입니다.</p>
+    <p data-at="2">2번은 ㉡ 273.15 K. 0 K는 절대 영도이고, 켈빈 온도에는 음수가 없습니다.</p>
+  </aside>
+</section>
+
+<!-- 15 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ① 「단위를 잃어버린 우주선」</h2>
+  <div class="cols">
+    <div class="card"><h3>사고 조사관이 되어 보세요</h3><p>두 저울로 1 lbf 재기, 환산 계수를 찾아 궤도선 진입시키기, 물리량 14개 분류, 켈빈 온도계로 절대 영도 찾기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 02 우주의 스케일</h3><p>손톱(10⁻² m)에서 출발해 한 걸음마다 10배씩 넓히면, 관측 가능한 우주까지 몇 걸음일까요?</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ①을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  var LBF = 4.448222;
+  /* 두 저울 눈금 — 단원 화면 모형: 1 lbf = 4.448222 N */
+  (function () {
+    var svg = document.getElementById("gaugeSvg"), X0 = 70, X1 = 1350, YN = 110, YL = 230;
+    function X(n) { return X0 + n / 50 * (X1 - X0); }
+    var h = "<text x='" + X0 + "' y='40' font-size='26' font-weight='900' fill='#1462d8'>뉴턴 저울 (N)</text>";
+    h += "<text x='" + X0 + "' y='318' font-size='26' font-weight='900' fill='#e8590c'>파운드힘 저울 (lbf)</text>";
+    h += "<rect x='" + X0 + "' y='" + (YN - 14) + "' width='" + (X1 - X0) + "' height='28' rx='14' fill='#dce9ff'/>";
+    h += "<rect x='" + X0 + "' y='" + (YL - 14) + "' width='" + (X1 - X0) + "' height='28' rx='14' fill='#ffe8cc'/>";
+    var n, k;
+    for (n = 0; n <= 50; n += 5) {
+      h += "<line x1='" + X(n) + "' y1='" + (YN - 14) + "' x2='" + X(n) + "' y2='" + (YN - 34) + "' stroke='#1462d8' stroke-width='3'/>";
+      h += "<text x='" + X(n) + "' y='" + (YN - 42) + "' font-size='22' font-weight='800' fill='#1462d8' text-anchor='middle'>" + n + "</text>";
+    }
+    for (k = 0; k <= 11; k++) {
+      h += "<line x1='" + X(k * LBF) + "' y1='" + (YL + 14) + "' x2='" + X(k * LBF) + "' y2='" + (YL + 34) + "' stroke='#e8590c' stroke-width='3'/>";
+      h += "<text x='" + X(k * LBF) + "' y='" + (YL + 60) + "' font-size='22' font-weight='800' fill='#e8590c' text-anchor='middle'>" + k + "</text>";
+    }
+    function mark(k, step, lab, left) {
+      var x = X(k * LBF), tx = left ? x - 18 : x + 18, ta = left ? "end" : "start";
+      return "<g data-step='" + step + "'><line x1='" + x + "' y1='" + (YN + 16) + "' x2='" + x + "' y2='" + (YL - 16) + "' stroke='#161b28' stroke-width='4' stroke-dasharray='10 7'/>" +
+        "<circle cx='" + x + "' cy='" + YN + "' r='12' fill='#1462d8'/><circle cx='" + x + "' cy='" + YL + "' r='12' fill='#e8590c'/>" +
+        "<text x='" + tx + "' y='" + ((YN + YL) / 2 + 9) + "' text-anchor='" + ta + "' font-size='26' font-weight='900' fill='#161b28' stroke='#fff' stroke-width='6' paint-order='stroke'>" + lab + "</text></g>";
+    }
+    h += mark(1, 1, "1 lbf = 4.45 N");
+    h += mark(10, 2, "10 lbf = 44.5 N", true);
+    svg.innerHTML = h;
+  })();
+
+  /* 근화점 고도 — 단원 화면 모형 alt(k) = 8 + 49k km, 생존 한계 80 km, 성공 218~234 km */
+  (function () {
+    var svg = document.getElementById("orbitSvg"), X0 = 100, X1 = 770, Y0 = 30, Y1 = 400;
+    function X(k) { return X0 + (k - 0.5) / 5.5 * (X1 - X0); }
+    function Y(h) { return Y1 - h / 300 * (Y1 - Y0); }
+    var h = "<rect x='" + X0 + "' y='" + Y(80) + "' width='" + (X1 - X0) + "' height='" + (Y(0) - Y(80)) + "' fill='#ffe5e3'/>";
+    h += "<text x='" + (X1 - 10) + "' y='" + (Y(0) - 14) + "' font-size='22' font-weight='900' fill='#c92a2a' text-anchor='end'>대기에서 부서짐 (80 km 아래)</text>";
+    h += "<rect x='" + X0 + "' y='" + Y(234) + "' width='" + (X1 - X0) + "' height='" + (Y(218) - Y(234)) + "' fill='#d3f9d8'/>";
+    h += "<text x='" + (X0 + 12) + "' y='" + (Y(234) - 10) + "' font-size='22' font-weight='900' fill='#198a4a'>예정 226 km (±8)</text>";
+    [0, 100, 200, 300].forEach(function (v) {
+      h += "<text x='" + (X0 - 12) + "' y='" + (Y(v) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + v + "</text>";
+    });
+    h += "<text x='" + (X0 + 14) + "' y='20' font-size='20' font-weight='900' fill='#5f6b80'>근화점 고도 (km)</text>";
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [1, 2, 3, 4, 5, 6].forEach(function (k) {
+      h += "<text x='" + X(k) + "' y='" + (Y1 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + k + "</text>";
+    });
+    h += "<text x='" + X1 + "' y='" + (Y1 + 58) + "' font-size='20' font-weight='900' fill='#5f6b80' text-anchor='end'>항법 컴퓨터에 넣기 전 곱하는 환산 계수</text>";
+    var kEnd = (300 - 8) / 49;
+    h += "<line x1='" + X(0.5) + "' y1='" + Y(8 + 49 * 0.5) + "' x2='" + X(kEnd) + "' y2='" + Y(300) + "' stroke='#1462d8' stroke-width='5'/>";
+    h += "<g data-step='1'><line x1='" + X(1) + "' y1='" + Y(57) + "' x2='" + X(1) + "' y2='" + Y1 + "' stroke='#c92a2a' stroke-width='3' stroke-dasharray='8 6'/>";
+    h += "<circle cx='" + X(1) + "' cy='" + Y(57) + "' r='11' fill='#e03131'/>";
+    h += "<text x='" + (X(1) + 18) + "' y='" + (Y(57) + 36) + "' font-size='24' font-weight='900' fill='#c92a2a' stroke='#ffe5e3' stroke-width='6' paint-order='stroke'>× 1 → 57 km</text></g>";
+    h += "<g data-step='2'><line x1='" + X(LBF) + "' y1='" + Y(226) + "' x2='" + X(LBF) + "' y2='" + Y1 + "' stroke='#198a4a' stroke-width='3' stroke-dasharray='8 6'/>";
+    h += "<circle cx='" + X(LBF) + "' cy='" + Y(226) + "' r='11' fill='#2f9e44'/>";
+    h += "<text x='" + (X(LBF) + 18) + "' y='" + (Y(226) + 34) + "' font-size='24' font-weight='900' fill='#198a4a' stroke='#fff' stroke-width='6' paint-order='stroke'>× 4.45 → 226 km</text></g>";
+    svg.innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 지각과 생명체의 물질 (통합과학1 Ⅱ-2 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  #s-hook .opt { font-size: 25px; padding: 12px 18px; }
+  #s-hook .card p { font-size: 26px; margin-bottom: 8px; }
+  table.ledger td { font-size: 27px; padding: 11px 14px; }
+  table.ledger th { padding: 8px 14px; }
+  .cl .card { padding: 18px 20px; }
+  .cl .card h3 { font-size: 29px; margin-bottom: 6px; }
+  .cl .card p { font-size: 25px; line-height: 1.45; margin: 0; }
+  .cl .card svg { display: block; margin: 0 auto 6px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="규소 하나를 산소 넷이 둘러싼 사면체와, 한 장씩 벗겨지는 얇은 운모 판">
+      <g stroke="#aab3c5" stroke-width="5" fill="none">
+        <path d="M520 70 L400 380 L640 380 Z" fill="#2b3550"/><path d="M520 70 L640 380 L700 300 Z" fill="#232b40"/><path d="M400 380 L700 300" stroke-dasharray="10 8"/>
+      </g>
+      <g fill="#ff6b6b"><circle cx="520" cy="70" r="30"/><circle cx="400" cy="380" r="30"/><circle cx="640" cy="380" r="30"/><circle cx="700" cy="300" r="30"/></g>
+      <circle cx="565" cy="300" r="22" fill="#4dabf7"/>
+      <g font-size="22" font-weight="900" fill="#e9eef8" text-anchor="middle"><text x="565" y="308">Si</text><text x="520" y="78">O</text><text x="400" y="388">O</text><text x="640" y="388">O</text><text x="700" y="308">O</text></g>
+      <g transform="translate(900 120)">
+        <path d="M0 260 L360 260 L440 200 L80 200Z" fill="#3b4256" stroke="#8a94a6" stroke-width="3"/>
+        <path d="M0 240 L360 240 L440 180 L80 180Z" fill="#454d63" stroke="#8a94a6" stroke-width="3"/>
+        <path d="M0 220 L360 220 L440 160 L80 160Z" fill="#505a72" stroke="#8a94a6" stroke-width="3"/>
+        <g data-step="1"><path d="M10 170 L370 120 L450 40 L90 90Z" fill="#c5ccd9" opacity=".85" stroke="#e9eef8" stroke-width="3"/></g>
+      </g>
+      <text x="1560" y="510" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 원자 크기·간격은 실제 비율이 아닌 모식도</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅱ-2 물질의 규칙성과 성질 · 03</p>
+    <h1>지각과 생명체의 물질</h1>
+    <p class="sub" data-step="1">같은 부품인데 어떻게 이으냐에 따라 전혀 다른 물질이 된다</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 지각의 광물과 우리 몸의 단백질·핵산이 무엇으로 만들어졌는지 봅니다.</p>
+    <p data-at="1">운모는 손톱으로도 한 장씩 벗겨집니다. 그런데 같은 부품으로 만든 석영은 칼로도 긁히지 않아요. 무엇이 다른지 찾아봅시다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="손톱으로 벗겨지는 돌" data-part="도입">
+  <p class="kicker">도입 · 책상 위의 광물 표본</p>
+  <h2>주성분은 같은데 성질이 전혀 다르다</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p><b>감람석</b> 초록빛 알갱이로 부서진다</p>
+      <p><b>휘석</b> 거의 직각인 두 방향으로 쪼개진다</p>
+      <p><b>각섬석</b> 약 120°로 벌어진 두 방향으로 쪼개진다</p>
+      <p><b>운모</b> 손톱만 걸어도 종이처럼 한 장씩 벗겨진다</p>
+      <p><b>석영</b> 쪼개지는 방향 없이 깨지고, 유리도 긁는다</p>
+      <p class="small mt">다섯 광물 모두 주성분이 <b>규소와 산소</b>입니다.</p>
+    </div>
+    <div class="card yel">
+      <h3>무엇이 다른 걸까?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 사면체의 모양이 광물마다 조금씩 다르다</div>
+        <div class="opt">㉡ 사면체가 이어지는 방식(나눠 쓰는 산소 수)이 다르다</div>
+        <div class="opt">㉢ 규소 대신 다른 원소가 들어 있다</div>
+        <div class="opt">㉣ 만들어진 온도만 다르고 구조는 같다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>단원 화면의 광물 표본 다섯 개입니다. 쪼개지는 모습이 모두 달라요.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 오늘 사면체를 직접 이어 보며 판단하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>규산염 사면체</b><span>규소 하나를 산소 넷이 둘러싼 지각의 부품</span></div>
+    <div class="card"><b>단위체</b><span>큰 분자를 이루려고 되풀이해 이어 붙이는 작은 분자</span></div>
+    <div class="card"><b>아미노산</b><span>단백질의 단위체 · 20종</span></div>
+    <div class="card"><b>단백질</b><span>아미노산이 길게 이어진 분자</span></div>
+    <div class="card"><b>핵산</b><span>뉴클레오타이드가 이어진 DNA·RNA</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~14번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 지각과 사면체 -->
+<section class="slide" id="s-tet" data-title="지각의 부품 하나" data-part="① 규산염 광물">
+  <p class="kicker">① 규산염 광물 · 지각은 무엇으로 되어 있나</p>
+  <h2>산소와 규소가 지각의 4분의 3</h2>
+  <svg id="tetSvg" viewBox="0 0 1400 380" width="1400" height="380" aria-label="지각 질량비 막대: 산소 46.6%, 규소 27.7%. 오른쪽에 규소 하나를 산소 넷이 둘러싼 사면체"></svg>
+  <div class="tight">
+    <p data-step="1">지각의 질량비: 산소 46.6% · 규소 27.7%</p>
+    <p data-step="2">규소 하나를 산소 넷이 둘러싼 부품 → <b class="blank" data-n="1" data-step="2">규산염 사면체</b> (SiO₄)</p>
+    <p data-step="3">규소는 원자가 전자가 4개 → 결합을 4개까지 만든다 (탄소와 같다)</p>
+  </div>
+  <aside class="script">
+    <p>지각을 이루는 원소를 질량으로 따져 봅니다.</p>
+    <p data-at="1">산소가 46.6%, 규소가 27.7%. 둘을 합하면 4분의 3쯤입니다.</p>
+    <p data-at="2">지각 부피의 90%가 넘는 광물이 같은 부품 하나로 만들어집니다. 규소 하나를 산소 넷이 둘러싼, 빈칸 1번, 규산염 사면체예요.</p>
+    <p data-at="3">규소는 지난 시간에 본 탄소처럼 원자가 전자가 4개라 결합을 네 개 만듭니다. 그래서 네 꼭짓점에 산소가 붙습니다.</p>
+  </aside>
+</section>
+
+<!-- 5 나눠 쓰는 산소 -->
+<section class="slide soft" id="s-share" data-title="산소를 몇 개 나눠 쓸까" data-part="① 규산염 광물">
+  <p class="kicker">① 규산염 광물 · 단원 화면 사면체 조립대</p>
+  <h2>나눠 쓰는 산소가 늘면 산소 비율이 준다</h2>
+  <div class="cols" style="grid-template-columns:440px 1fr;align-items:center">
+    <svg id="shareSvg" viewBox="0 0 440 420" width="440" height="420" aria-label="두 사면체가 꼭짓점의 산소 하나를 나눠 쓰는 모습. 나눠 쓴 산소는 두 사면체가 반씩 가진다"></svg>
+    <div>
+      <p data-step="1">이웃 사면체와 나눠 쓰는 <b class="blank" data-n="2" data-step="1">산소</b> 하나 = 두 사면체가 반씩</p>
+      <table class="ledger">
+        <tr><th>나눠 쓰는 산소</th><th>규소 하나당 산소</th><th>Si : O</th><th>광물</th></tr>
+        <tr data-step="2"><td>0개</td><td>4 − 0 = 4</td><td><b>1 : 4</b></td><td>감람석</td></tr>
+        <tr data-step="3"><td>2개</td><td>4 − 1 = 3</td><td><b>1 : 3</b></td><td>휘석</td></tr>
+        <tr data-step="4"><td>3개</td><td>4 − 1.5 = 2.5</td><td><b>1 : 2.5</b></td><td>운모</td></tr>
+        <tr data-step="5"><td>4개 (모두)</td><td>4 − 2 = 2</td><td><b>1 : 2</b></td><td>석영 · 장석</td></tr>
+      </table>
+    </div>
+  </div>
+  <aside class="script">
+    <p>사면체 하나에는 산소가 넷 있습니다. 이웃과 몇 개를 나눠 쓰느냐가 광물의 이름표가 됩니다.</p>
+    <p data-at="1">빈칸 2번, 산소. 나눠 쓴 산소는 두 사면체가 반씩 가진 셈이라 규소 하나가 차지하는 산소가 반 개씩 줄어요.</p>
+    <p data-at="2">하나도 나눠 쓰지 않으면 4개 그대로, 1 : 4. 감람석입니다.</p>
+    <p data-at="3">두 개를 나눠 쓰면 반씩 두 번 줄어 3개, 1 : 3. 휘석입니다.</p>
+    <p data-at="4">세 개면 2.5개, 1 : 2.5. 운모예요.</p>
+    <p data-at="5">네 개를 모두 나눠 쓰면 2개, 1 : 2. 석영의 화학식 SiO₂가 바로 이 비입니다.</p>
+  </aside>
+</section>
+
+<!-- 6 다섯 구조 -->
+<section class="slide" id="s-struct" data-title="이어지는 모양" data-part="① 규산염 광물">
+  <p class="kicker">① 규산염 광물 · 사면체를 위에서 내려다보면</p>
+  <h2>나눠 쓰는 수에 따라 모양이 달라진다</h2>
+  <svg id="structSvg" viewBox="0 0 1400 420" width="1400" height="420" aria-label="위에서 본 사면체(삼각형) 모식도 네 가지: 떨어진 독립형, 한 줄로 이어진 단사슬형, 넓게 이어진 판상, 모든 방향으로 이어진 망상"></svg>
+  <div class="tight">
+    <p><span data-step="1">0개 <b class="blank" data-n="3" data-step="1">독립형</b> </span><span data-step="2">· 2개 단사슬형 </span><span data-step="3">· 3개 <b class="blank" data-n="4" data-step="3">판상</b> </span><span data-step="4">· 4개 <b class="blank" data-n="5" data-step="4">망상</b></span></p>
+  </div>
+  <p class="note">⚠ 단순화한 평면 모식도(파랑 = 규소, 빨강 = 산소). 각섬석은 사슬 두 줄이 붙은 복사슬형으로, 사면체마다 산소를 2개 또는 3개 나눠 써서 Si : O = 1 : 2.75입니다. 실제 광물에는 사이사이에 철·마그네슘·칼슘 같은 양이온도 들어갑니다.</p>
+  <aside class="script">
+    <p>삼각형 하나가 사면체 하나를 위에서 본 모습입니다. 파란 점이 규소, 빨간 점이 산소예요.</p>
+    <p data-at="1">따로 떨어져 있으면 빈칸 3번, 독립형. 감람석입니다.</p>
+    <p data-at="2">양옆과 하나씩, 두 개를 나눠 쓰면 한 줄로 길게 이어진 단사슬형. 휘석이에요. 사슬 두 줄이 붙으면 각섬석의 복사슬형이 됩니다.</p>
+    <p data-at="3">세 개를 나눠 쓰면 넓은 판이 됩니다. 빈칸 4번, 판상. 운모입니다.</p>
+    <p data-at="4">네 개를 모두 나눠 쓰면 모든 방향으로 이어진 삼차원 그물, 빈칸 5번, 망상. 석영과 장석입니다.</p>
+  </aside>
+</section>
+
+<!-- 7 쪼개짐 -->
+<section class="slide soft" id="s-cleave" data-title="약한 곳을 따라 쪼개진다" data-part="① 규산염 광물">
+  <p class="kicker">① 규산염 광물 · 구조가 성질로 이어진다</p>
+  <h2>약한 면을 따라 쪼개진다</h2>
+  <div class="cols c4 cl">
+    <div class="card" data-step="1">
+      <svg viewBox="0 0 220 120" width="220" height="120" aria-label="거의 직각인 두 방향 쪼개짐"><rect x="60" y="20" width="100" height="90" fill="#c3fae8" stroke="#0ca678" stroke-width="4"/><g stroke="#087f5b" stroke-width="3"><line x1="85" y1="20" x2="85" y2="110"/><line x1="135" y1="20" x2="135" y2="110"/><line x1="60" y1="50" x2="160" y2="50"/><line x1="60" y1="80" x2="160" y2="80"/></g></svg>
+      <h3>휘석</h3><p>사슬 사이가 약함 → 거의 직각인 두 방향</p>
+    </div>
+    <div class="card" data-step="2">
+      <svg viewBox="0 0 220 120" width="220" height="120" aria-label="약 120도로 벌어진 두 방향 쪼개짐"><path d="M110 15 L175 55 L150 110 L70 110 L45 55Z" fill="#d3f9d8" stroke="#2f9e44" stroke-width="4"/><g stroke="#2b8a3e" stroke-width="3"><line x1="80" y1="30" x2="140" y2="110"/><line x1="140" y1="30" x2="80" y2="110"/></g></svg>
+      <h3>각섬석</h3><p>복사슬 사이가 약함 → 약 120°인 두 방향</p>
+    </div>
+    <div class="card" data-step="3">
+      <svg viewBox="0 0 220 120" width="220" height="120" aria-label="얇은 판으로 한 장씩 벗겨지는 운모"><g stroke="#7048e8" stroke-width="3" fill="#e5dbff"><rect x="40" y="80" width="140" height="14"/><rect x="40" y="62" width="140" height="14"/><rect x="40" y="44" width="140" height="14"/></g><path d="M40 36 L180 36 L200 10 L60 16Z" fill="#d0bfff" stroke="#7048e8" stroke-width="3"/></svg>
+      <h3>운모</h3><p>판과 판 사이가 약함 → 한 방향으로 얇게</p>
+    </div>
+    <div class="card" data-step="4">
+      <svg viewBox="0 0 220 120" width="220" height="120" aria-label="쪼개짐 없이 조개껍데기 모양으로 깨진 석영"><path d="M60 110 L80 20 L150 15 L170 110Z" fill="#e7f5ff" stroke="#1c7ed6" stroke-width="4"/><g fill="none" stroke="#1c7ed6" stroke-width="3"><path d="M95 95 Q115 60 140 95"/><path d="M103 95 Q115 72 130 95"/></g></svg>
+      <h3>석영</h3><p>모든 방향 공유 결합 → 약한 면 없음, 단단함</p>
+    </div>
+  </div>
+  <p class="mt" data-step="5">부품은 하나, 사면체의 <b class="blank" data-n="6" data-step="5">연결 방식</b>이 광물의 성질을 가른다</p>
+  <aside class="script">
+    <p>구조가 쪼개지는 모습으로 어떻게 이어지는지 봅니다. 결합이 약한 곳이 먼저 갈라집니다.</p>
+    <p data-at="1">휘석은 사슬과 사슬 사이가 약해 거의 직각인 두 방향으로 쪼개집니다.</p>
+    <p data-at="2">각섬석은 사슬 두 줄이 붙은 복사슬이라 약 120°로 벌어진 두 방향입니다.</p>
+    <p data-at="3">운모는 판 안쪽은 튼튼하지만 판과 판 사이가 약해 한 장씩 벗겨집니다.</p>
+    <p data-at="4">석영은 모든 방향으로 공유 결합이 이어져 약한 면이 없습니다. 쪼개짐 없이 깨지고 아주 단단해요.</p>
+    <p data-at="5">빈칸 6번, 연결 방식. 첫 추리를 떠올려 보세요.</p>
+  </aside>
+</section>
+
+<!-- 8 탄소 -->
+<section class="slide" id="s-carbon" data-title="사슬과 고리" data-part="② 탄소 화합물">
+  <p class="kicker">② 탄소 화합물 · 단원 화면 탄소 조립대 (1기압 끓는점)</p>
+  <h2>탄소는 사슬도, 고리도 만든다</h2>
+  <svg id="carbSvg" viewBox="0 0 1400 360" width="1400" height="360" aria-label="사슬형 탄화수소의 탄소 수 1~10에 따른 끓는점 막대그래프와 25 ℃ 선. 탄소 5개인 펜테인(36 ℃)부터 실온에서 액체다. 오른쪽에 탄소 5개 사슬과 고리 모형"></svg>
+  <div class="tight">
+    <p data-step="1">결합 4개 + 같은 원소끼리 튼튼히 이어진다 → <b class="blank" data-n="7" data-step="1">탄소</b> : 사슬·가지·고리</p>
+    <p data-step="2">사슬형 CₙH₂ₙ₊₂: 탄소가 많을수록 끓는점이 높다 · 실온에서 액체인 가장 작은 것 펜테인(C₅H₁₂, 36 ℃) · 탄소 8개는 C₈H₁₈</p>
+    <p data-step="3">같은 탄소 수에서 수소가 2개 적은 CₙH₂ₙ → <b class="blank" data-n="8" data-step="3">고리형</b> (사이클로헥세인 C₆H₁₂)</p>
+  </div>
+  <aside class="script">
+    <p>생명체 쪽으로 넘어갑니다. 생명체를 이루는 분자의 뼈대는 탄소입니다.</p>
+    <p data-at="1">규소처럼 결합을 네 개 만들면서, 탄소끼리 서로 튼튼하게 이어지는 원소. 빈칸 7번, 탄소. 그래서 사슬도, 가지도, 고리도 됩니다.</p>
+    <p data-at="2">사슬형 탄화수소의 끓는점입니다. 탄소가 늘수록 끓는점이 올라갑니다. 25 ℃ 선을 넘는 첫 막대가 펜테인, 실온에서 액체인 가장 작은 사슬형이에요. 공식에 8을 넣으면 C₈H₁₈입니다.</p>
+    <p data-at="3">사슬의 양 끝을 이어 고리로 만들면 끝의 수소 두 개가 빠집니다. 빈칸 8번, 고리형.</p>
+  </aside>
+</section>
+
+<!-- 9 단위체 -->
+<section class="slide soft" id="s-unit" data-title="단위체를 이어 붙인다" data-part="③ 생명체의 단위체">
+  <p class="kicker">③ 생명체의 단위체 · 작은 부품을 이어 큰 분자로</p>
+  <h2>적은 종류의 부품을 길게 잇는다</h2>
+  <svg id="unitSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="구슬 하나(단위체), 20가지 색 구슬이 이어진 단백질 사슬, 4가지 색 구슬이 이어진 핵산 사슬"></svg>
+  <div class="tight">
+    <p data-step="1">큰 분자를 이루려고 되풀이해 잇는 작은 분자 → <b class="blank" data-n="9" data-step="1">단위체</b></p>
+    <p data-step="2"><b class="blank" data-n="10" data-step="2">아미노산</b> 20종이 이어지면 → <b class="blank" data-n="11" data-step="2">단백질</b> (케라틴, 효소 아밀레이스)</p>
+    <p data-step="3"><b class="blank" data-n="12" data-step="3">뉴클레오타이드</b>(염기 A·T·G·C) 4종이 이어지면 → <b class="blank" data-n="13" data-step="3">핵산</b> (DNA·RNA)</p>
+  </div>
+  <aside class="script">
+    <p>생명체는 탄소 뼈대의 작은 분자를 길게 이어 큰 분자를 만듭니다.</p>
+    <p data-at="1">이렇게 되풀이해 이어 붙이는 작은 분자가 빈칸 9번, 단위체입니다.</p>
+    <p data-at="2">빈칸 10번 아미노산 20종이 길게 이어지면 빈칸 11번 단백질. 머리카락의 케라틴도, 녹말을 분해하는 효소도 단백질이에요.</p>
+    <p data-at="3">빈칸 12번 뉴클레오타이드가 이어지면 빈칸 13번 핵산. 염기가 A, T, G, C 네 가지뿐입니다. DNA와 RNA가 핵산이에요.</p>
+  </aside>
+</section>
+
+<!-- 10 가짓수 -->
+<section class="slide" id="s-count" data-title="다양성은 어디서 오나" data-part="③ 생명체의 단위체">
+  <p class="kicker">③ 생명체의 단위체 · 단원 화면 단위체 계산실</p>
+  <h2>몇 개만 이어도 가짓수가 폭발한다</h2>
+  <svg id="cntSvg" viewBox="0 0 1400 380" width="1400" height="380" aria-label="이어 붙인 단위체 수에 따른 서열 가짓수(로그 눈금). 아미노산은 20의 n제곱으로 10개에서 약 10조, 뉴클레오타이드는 4의 n제곱으로 20개에서 약 1조"></svg>
+  <div class="tight">
+    <p data-step="1">아미노산 20종: 20ⁿ → 9개 5.12×10¹¹ · <b>10개 20¹⁰ ≈ 1.0×10¹³ (약 10조)</b></p>
+    <p data-step="2">염기 4종: 4ⁿ → 19개 2.7×10¹¹ · <b>20개 4²⁰ ≈ 1.1×10¹² (약 1조)</b></p>
+    <p data-step="3">종류는 적어도, 단위체를 잇는 <b class="blank" data-n="14" data-step="3">순서</b>가 다양성을 만든다</p>
+  </div>
+  <aside class="script">
+    <p>단위체 종류가 20가지, 4가지뿐인데 생명체는 왜 이렇게 다양할까요? 이어 붙이는 개수를 늘려 봅니다. 세로축은 10배마다 한 칸입니다.</p>
+    <p data-at="1">아미노산은 자리마다 20가지라 20의 n제곱. 9개로는 1조에 못 미치고, 10개면 약 10조 가지로 1조 선을 넘습니다.</p>
+    <p data-at="2">염기는 4가지라 4의 n제곱. 20개를 이어야 약 1조 가지가 됩니다. 사람의 단백질은 보통 아미노산이 수백 개예요.</p>
+    <p data-at="3">빈칸 14번, 순서. 부품 종류가 아니라 잇는 순서가 다양성을 만듭니다. 모든 순서가 제 구실을 하는 것은 아니라는 점도 짚어 줍니다.</p>
+  </aside>
+</section>
+
+<!-- 11 같은 설계도 -->
+<section class="slide soft" id="s-same" data-title="지각과 생명체의 같은 설계도" data-part="③ 생명체의 단위체">
+  <p class="kicker">③ 생명체의 단위체 · 지각과 생명체를 나란히 놓으면</p>
+  <h2>단위체를 여러 방식으로 잇는다</h2>
+  <table class="ledger">
+    <tr><th style="width:300px">단위체</th><th>무엇이 달라지나</th><th style="width:420px">만들어지는 물질</th></tr>
+    <tr data-step="1"><td><b>규산염 사면체</b></td><td>나눠 쓰는 산소 수(연결 방식)</td><td>감람석 · 휘석 · 운모 · 석영</td></tr>
+    <tr data-step="2"><td><b>아미노산</b> 20종</td><td>잇는 순서와 개수</td><td>단백질 (케라틴 · 아밀레이스)</td></tr>
+    <tr data-step="3"><td><b>뉴클레오타이드</b> 4종</td><td>염기의 배열 순서</td><td>핵산 (DNA · RNA)</td></tr>
+  </table>
+  <p class="mt" data-step="4">지각도 생명체도 <b class="c-blue">적은 종류의 단위체를 여러 방식으로 잇는다</b>는 같은 설계도를 쓴다</p>
+  <aside class="script">
+    <p>오늘 본 세 가지를 나란히 놓아 봅니다.</p>
+    <p data-at="1">광물은 사면체가 산소를 몇 개 나눠 쓰느냐로 갈립니다.</p>
+    <p data-at="2">단백질은 아미노산을 어떤 순서로 몇 개 잇느냐로 갈립니다.</p>
+    <p data-at="3">핵산은 염기의 배열 순서에 유전 정보를 담습니다.</p>
+    <p data-at="4">부품이 아니라 잇는 방식이 물질을 정합니다. 단원 화면 계산실의 분류 활동이 바로 이것입니다.</p>
+  </aside>
+</section>
+
+<!-- 12 확인 -->
+<section class="slide" id="s-check1" data-title="단위체가 아미노산인 것" data-part="③ 생명체의 단위체">
+  <p class="kicker">③ 생명체의 단위체 · 확인</p>
+  <h2>단위체가 아미노산인 물질은?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ 석영 (모래알)</div>
+    <div class="opt right" data-step="1">㉡ 녹말을 분해하는 효소 아밀레이스</div>
+    <div class="opt wrong" data-step="1">㉢ RNA</div>
+    <div class="opt wrong" data-step="1">㉣ 흑운모</div>
+  </div>
+  <p data-step="1" style="margin-top:36px">효소도 단백질이다. RNA는 뉴클레오타이드, 석영·흑운모는 규산염 사면체가 단위체다.</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. 효소가 무엇으로 되어 있는지 헷갈리는 학생이 많습니다.</p>
+    <p data-at="1">정답은 ㉡. 효소는 단백질이라 단위체가 아미노산입니다. RNA는 DNA처럼 뉴클레오타이드로 된 핵산이에요.</p>
+  </aside>
+</section>
+
+<!-- 13 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>부품이 아니라 잇는 방식이 물질을 정한다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>규산염 사면체</b>(SiO₄)가 산소를 0·2·3·4개 나눠 씀 → 독립형 1 : 4 · 단사슬형 1 : 3 · 판상 1 : 2.5 · 망상 1 : 2</li>
+    <li data-k="2" data-step="2">연결 방식 → 성질: 운모는 판 사이가 약해 얇게 벗겨지고, 석영은 약한 면이 없어 단단하다</li>
+    <li data-k="3" data-step="3">탄소는 결합 4개 + 탄소끼리 튼튼 → 사슬(CₙH₂ₙ₊₂)·고리(CₙH₂ₙ)</li>
+    <li data-k="4" data-step="4"><b>아미노산</b> 20종 → <b>단백질</b> · 뉴클레오타이드 4종 → <b>핵산</b> · 다양성은 순서에서 (20¹⁰ ≈ 10조, 4²⁰ ≈ 1조)</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 14 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 사면체가 산소 네 개를 모두 나눠 쓴 구조의 규소 : 산소 비는?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 1 : 4</div>
+        <div class="opt wrong" data-step="1">㉡ 1 : 3</div>
+        <div class="opt wrong" data-step="1">㉢ 1 : 2.5</div>
+        <div class="opt right" data-step="1">㉣ 1 : 2</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. DNA의 단위체는?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 아미노산</div>
+        <div class="opt right" data-step="2">㉡ 뉴클레오타이드</div>
+        <div class="opt wrong" data-step="2">㉢ 규산염 사면체</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉣. 4 − 4 × ½ = 2, 석영과 장석의 망상 구조입니다.</p>
+    <p data-at="2">2번은 ㉡ 뉴클레오타이드. 아미노산은 단백질의 단위체입니다.</p>
+  </aside>
+</section>
+
+<!-- 15 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ③ 「같은 부품, 다른 물건」</h2>
+  <div class="cols">
+    <div class="card"><h3>지질 조사관이 되어 보세요</h3><p>산소를 나눠 써서 광물 구조 찾기, 탄소 사슬과 고리 만들기, 1조 가지를 넘기는 단위체 수 찾기, 물질 일곱 개 분류가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 04 물질의 전기적 성질</h3><p>금속은 뜨거워지면 전기가 덜 통하는데, 거꾸로 더 잘 통하는 물질이 있습니다. 1947년 저마늄 조각을 따라갑니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ③을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function T(x, y, s, o) { o = o || {}; return "<text x='" + x + "' y='" + y + "' font-size='" + (o.s || 24) + "' font-weight='" + (o.w || 900) + "' fill='" + (o.c || "#161b28") + "' text-anchor='" + (o.a || "middle") + "'>" + s + "</text>"; }
+  /* 위에서 본 사면체: 삼각형 + 꼭짓점 산소(빨강) + 가운데 규소(파랑) */
+  function tri(cx, cy, s, down, fill) {
+    var h = s * Math.sqrt(3) / 2, k = down ? -1 : 1;
+    var P = [[cx - s / 2, cy + k * h / 3], [cx + s / 2, cy + k * h / 3], [cx, cy - k * 2 * h / 3]];
+    var str = "<polygon points='" + P.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ") + "' fill='" + (fill || "#e7f5ff") + "' stroke='#1c7ed6' stroke-width='3'/>";
+    str += "<circle cx='" + cx + "' cy='" + cy + "' r='" + (s * 0.09).toFixed(1) + "' fill='#1c7ed6'/>";
+    P.forEach(function (p) { str += "<circle cx='" + p[0].toFixed(1) + "' cy='" + p[1].toFixed(1) + "' r='" + (s * 0.11).toFixed(1) + "' fill='#e03131'/>"; });
+    return { s: str, P: P };
+  }
+
+  /* 지각 질량비 + 사면체 */
+  (function () {
+    var h = "", X0 = 160, W = 520;
+    h += T(0, 30, "지각의 질량비 (%)", { s: 22, a: "start", c: "#5f6b80" });
+    [["산소", 46.6, "#e03131", 90], ["규소", 27.7, "#1c7ed6", 190]].forEach(function (b) {
+      h += T(X0 - 20, b[3] + 38, b[0], { s: 28, a: "end" });
+      h += "<g data-step='1'><rect x='" + X0 + "' y='" + b[3] + "' width='" + (b[1] / 50 * W).toFixed(1) + "' height='60' rx='10' fill='" + b[2] + "'/>" + T(X0 + b[1] / 50 * W + 12, b[3] + 40, b[1] + "%", { s: 28, a: "start", c: b[2] }) + "</g>";
+    });
+    h += "<g data-step='1'>" + T(X0, 310, "둘을 합하면 74.3%", { s: 24, a: "start", c: "#5f6b80" }) + "</g>";
+    h += "<g data-step='2'>";
+    var A = [1060, 40], B = [920, 320], C = [1180, 330], D = [1250, 230], S = [1100, 240];
+    h += "<path d='M" + A + " L" + B + " L" + C + " Z' fill='#e7f5ff' stroke='#1c7ed6' stroke-width='4'/><path d='M" + A + " L" + C + " L" + D + " Z' fill='#d0ebff' stroke='#1c7ed6' stroke-width='4'/><path d='M" + B + " L" + D + "' stroke='#1c7ed6' stroke-width='3' stroke-dasharray='10 8'/>";
+    [A, B, C, D].forEach(function (p) { h += "<circle cx='" + p[0] + "' cy='" + p[1] + "' r='28' fill='#e03131'/>" + T(p[0], p[1] + 9, "O", { s: 24, c: "#fff" }); });
+    h += "<circle cx='" + S[0] + "' cy='" + S[1] + "' r='22' fill='#1c7ed6'/>" + T(S[0], S[1] + 8, "Si", { s: 20, c: "#fff" });
+    h += T(1330, 120, "SiO₄", { s: 32, a: "end", c: "#1c7ed6" }) + "</g>";
+    h += "<text x='1395' y='374' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 원자 크기 과장 모식도</text>";
+    document.getElementById("tetSvg").innerHTML = h;
+  })();
+
+  /* 두 사면체가 산소 하나를 나눠 쓴다 */
+  (function () {
+    var h = "", a = tri(130, 250, 170, false), b = tri(300, 152, 170, true);
+    h += a.s + b.s;
+    h += "<circle cx='215' cy='" + (250 - 170 * Math.sqrt(3) / 3).toFixed(1) + "' r='30' fill='none' stroke='#f08c00' stroke-width='5' data-step='1'/>";
+    h += "<g data-step='1'>" + T(215, 60, "나눠 쓴 산소 = ½ + ½", { s: 24, c: "#e8590c" }) + "</g>";
+    h += T(220, 390, "위에서 본 사면체 두 개", { s: 22, w: 800, c: "#5f6b80" });
+    h += "<text x='436' y='414' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 단순화한 모식도</text>";
+    document.getElementById("shareSvg").innerHTML = h;
+  })();
+
+  /* 네 구조 */
+  (function () {
+    var h = "", s = 64, hh = s * Math.sqrt(3) / 2, i, j;
+    function frame(x, st, name, ratio) {
+      return "<rect x='" + x + "' y='20' width='320' height='340' rx='18' fill='#f8f9fa' stroke='#dee2e6' stroke-width='3'/><g data-step='" + st + "'>" + T(x + 160, 400, ratio, { s: 24, c: "#1c7ed6" });
+    }
+    /* 독립형 */
+    h += frame(0, 1, "독립형", "1 : 4 · 감람석");
+    [[80, 110], [230, 100], [100, 260], [240, 250], [165, 185]].forEach(function (p) { h += tri(p[0], p[1], s).s; });
+    h += "</g>";
+    /* 단사슬형 */
+    h += frame(360, 2, "단사슬형", "1 : 3 · 휘석");
+    for (i = 0; i < 4; i++) h += tri(360 + 64 + i * s, 200, s).s;
+    h += "</g>";
+    /* 판상: 꼭짓점 하나를 정확히 두 사면체가 나눠 쓰는 육각 고리 그물(삼각 격자에서 4분의 1을 뺀 꼴) */
+    h += frame(720, 3, "판상", "1 : 2.5 · 운모");
+    (function () {
+      var a = 50, ah = a * Math.sqrt(3) / 2, x0 = 700, y0 = 330, m, n, V = {};
+      function pos(m, n) { return [x0 + m * a + n * a / 2, y0 - n * ah]; }
+      function has(m, n) { return !(((m % 2) + 2) % 2 === 0 && ((n % 2) + 2) % 2 === 0); }
+      function inside(p) { return p[0] > 744 && p[0] < 1016 && p[1] > 44 && p[1] < 340; }
+      var T3 = [];
+      for (m = -6; m < 12; m++) for (n = 0; n < 8; n++) {
+        [[[m, n], [m + 1, n], [m, n + 1]], [[m + 1, n], [m, n + 1], [m + 1, n + 1]]].forEach(function (t) {
+          if (!t.every(function (q) { return has(q[0], q[1]); })) return;
+          var P = t.map(function (q) { return pos(q[0], q[1]); });
+          if (P.every(inside)) T3.push(P);
+        });
+      }
+      T3.forEach(function (P) {
+        h += "<polygon points='" + P.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ") + "' fill='#e7f5ff' stroke='#1c7ed6' stroke-width='3'/>";
+        h += "<circle cx='" + ((P[0][0] + P[1][0] + P[2][0]) / 3).toFixed(1) + "' cy='" + ((P[0][1] + P[1][1] + P[2][1]) / 3).toFixed(1) + "' r='5' fill='#1c7ed6'/>";
+      });
+      T3.forEach(function (P) { P.forEach(function (p) { h += "<circle cx='" + p[0].toFixed(1) + "' cy='" + p[1].toFixed(1) + "' r='6' fill='#e03131'/>"; }); });
+    })();
+    h += "</g>";
+    /* 망상: 모든 규소가 산소 다리로 이웃과 연결 */
+    h += frame(1080, 4, "망상", "1 : 2 · 석영 · 장석");
+    var N = [], ox = 1150, oy = 120, d = 120, dz = [50, -40];
+    for (i = 0; i < 2; i++) for (j = 0; j < 2; j++) for (var k = 0; k < 2; k++) N.push([ox + i * d + k * dz[0], oy + j * d + k * -dz[1] + 20, i, j, k]);
+    N.forEach(function (p) { N.forEach(function (q) {
+      var dd = Math.abs(p[2] - q[2]) + Math.abs(p[3] - q[3]) + Math.abs(p[4] - q[4]);
+      if (dd === 1 && (p[2] + p[3] + p[4]) < (q[2] + q[3] + q[4])) {
+        h += "<line x1='" + p[0] + "' y1='" + p[1] + "' x2='" + q[0] + "' y2='" + q[1] + "' stroke='#1c7ed6' stroke-width='4'/>";
+        h += "<circle cx='" + ((p[0] + q[0]) / 2) + "' cy='" + ((p[1] + q[1]) / 2) + "' r='9' fill='#e03131'/>";
+      }
+    }); });
+    N.forEach(function (p) { h += "<circle cx='" + p[0] + "' cy='" + p[1] + "' r='12' fill='#1c7ed6'/>"; });
+    h += T(1240, 345, "규소마다 산소 다리 4개(일부만 그림)", { s: 18, w: 800, c: "#5f6b80" }) + "</g>";
+    document.getElementById("structSvg").innerHTML = h;
+  })();
+
+  /* 사슬형 끓는점 */
+  (function () {
+    var BP = [-162, -89, -42, -0.5, 36, 69, 98, 126, 151, 174], NM = ["메테인", "에테인", "프로페인", "뷰테인", "펜테인", "헥세인", "헵테인", "옥테인", "노네인", "데케인"];
+    var X0 = 70, Y0 = 160, k = 0.7, h = "";
+    function Y(t) { return Y0 - t * k; }
+    h += "<line x1='" + (X0 - 10) + "' y1='" + Y(0) + "' x2='880' y2='" + Y(0) + "' stroke='#161b28' stroke-width='3'/>" + T(X0 - 16, Y(0) + 8, "0 ℃", { s: 19, a: "end", c: "#5f6b80" });
+    h += T(X0 - 16, Y(150) + 8, "150", { s: 19, a: "end", c: "#5f6b80" }) + T(X0 - 16, Y(-150) + 8, "−150", { s: 19, a: "end", c: "#5f6b80" });
+    h += "<g data-step='2'>";
+    for (var i = 0; i < 10; i++) {
+      var x = X0 + i * 80, t = BP[i], y = Y(Math.max(t, 0)), hh = Math.abs(t) * k, liq = t > 25;
+      h += "<rect x='" + (x + 8) + "' y='" + (t >= 0 ? Y(t) : Y(0)) + "' width='56' height='" + Math.max(3, hh).toFixed(1) + "' rx='5' fill='" + (liq ? "#1c7ed6" : "#a5d8ff") + "'/>";
+      h += T(x + 36, t >= 0 ? Y(t) - 8 : Y(t) + 24, (t === -0.5 ? "−0.5" : String(t).replace("-", "−")), { s: 19, c: liq ? "#1864ab" : "#5f6b80" });
+      h += T(x + 36, 345, "C" + (i + 1), { s: 21 });
+    }
+    h += "<line x1='" + (X0 - 10) + "' y1='" + Y(25) + "' x2='880' y2='" + Y(25) + "' stroke='#e8590c' stroke-width='3' stroke-dasharray='10 7'/>" + T(884, Y(25) + 7, "25 ℃", { s: 20, a: "start", c: "#e8590c" });
+    h += "<rect x='" + (X0 + 4 * 80 + 2) + "' y='" + (Y(36) - 34) + "' width='68' height='" + (36 * k + 40) + "' rx='8' fill='none' stroke='#e8590c' stroke-width='4'/>";
+    h += "</g>";
+    /* 오른쪽: 탄소 5개 사슬과 고리 */
+    h += "<g data-step='1'>";
+    var cx0 = 990, cy0 = 90, pts = [], j;
+    for (j = 0; j < 5; j++) pts.push([cx0 + j * 70, cy0 + (j % 2 ? 40 : 0)]);
+    h += "<polyline points='" + pts.map(function (p) { return p.join(","); }).join(" ") + "' fill='none' stroke='#495057' stroke-width='5'/>";
+    pts.forEach(function (p) { h += "<circle cx='" + p[0] + "' cy='" + p[1] + "' r='16' fill='#343a40'/>" + T(p[0], p[1] + 7, "C", { s: 18, c: "#fff" }); });
+    h += T(1130, 175, "사슬형 C₅H₁₂", { s: 22, c: "#495057" }) + "</g>";
+    h += "<g data-step='3'>";
+    var rc = [1130, 270], R = 52, rp = [];
+    for (j = 0; j < 6; j++) rp.push([rc[0] + R * Math.cos(-Math.PI / 2 + j * Math.PI / 3), rc[1] + R * Math.sin(-Math.PI / 2 + j * Math.PI / 3)]);
+    h += "<polygon points='" + rp.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ") + "' fill='none' stroke='#2f9e44' stroke-width='5'/>";
+    rp.forEach(function (p) { h += "<circle cx='" + p[0].toFixed(1) + "' cy='" + p[1].toFixed(1) + "' r='14' fill='#2b8a3e'/>"; });
+    h += T(1300, 278, "고리형 C₆H₁₂", { s: 22, c: "#2b8a3e", a: "start" }).replace("x='1300'", "x='1200'") + "</g>";
+    h += "<text x='1395' y='354' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 수소는 생략</text>";
+    document.getElementById("carbSvg").innerHTML = h;
+  })();
+
+  /* 단위체 구슬 */
+  (function () {
+    var AA = ["#e8590c", "#0ca678", "#7048e8", "#f59f00", "#1c7ed6", "#2f9e44", "#e64980", "#5c7086", "#c2410c", "#087f5b", "#5f3dc4", "#d9480f"];
+    var NU = ["#e8590c", "#0ca678", "#1c7ed6", "#f59f00"], NL = ["A", "T", "G", "C"];
+    var h = "", i;
+    h += "<g data-step='1'><circle cx='90' cy='70' r='30' fill='#e8590c'/>" + T(90, 140, "단위체 하나", { s: 22 }) + "</g>";
+    h += "<g data-step='2'>" + T(230, 76, "아미노산 20종", { s: 22, a: "start", c: "#5f6b80" });
+    var seq = [0, 3, 7, 1, 1, 9, 4, 11, 2, 6, 0, 5, 10, 8, 3, 7];
+    for (i = 0; i < seq.length; i++) h += (i ? "<line x1='" + (430 + (i - 1) * 58) + "' y1='70' x2='" + (430 + i * 58) + "' y2='70' stroke='#495057' stroke-width='5'/>" : "") ;
+    for (i = 0; i < seq.length; i++) h += "<circle cx='" + (430 + i * 58) + "' cy='70' r='22' fill='" + AA[seq[i]] + "'/>";
+    h += T(1320, 130, "→ 단백질", { s: 26, a: "end", c: "#c2255c" }) + "</g>";
+    h += "<g data-step='3'>" + T(230, 236, "뉴클레오타이드 4종", { s: 22, a: "start", c: "#5f6b80" });
+    var ns = [0, 2, 3, 1, 1, 0, 2, 2, 3, 0, 1, 3, 2, 0];
+    h += "<line x1='490' y1='230' x2='" + (490 + (ns.length - 1) * 60) + "' y2='230' stroke='#495057' stroke-width='5'/>";
+    for (i = 0; i < ns.length; i++) h += "<rect x='" + (490 + i * 60 - 22) + "' y='208' width='44' height='44' rx='8' fill='" + NU[ns[i]] + "'/>" + T(490 + i * 60, 240, NL[ns[i]], { s: 22, c: "#fff" });
+    h += T(1320, 300, "→ 핵산 (DNA · RNA)", { s: 26, a: "end", c: "#1864ab" }) + "</g>";
+    h += "<text x='0' y='322' font-size='18' fill='#5f6b80'>⚠ 단위체를 색 구슬로 단순화한 그림</text>";
+    document.getElementById("unitSvg").innerHTML = h;
+  })();
+
+  /* 서열 가짓수 (로그 눈금) */
+  (function () {
+    var X0 = 120, X1 = 1360, Y0 = 320, Y1 = 30, h = "";
+    function X(n) { return X0 + (n - 1) / 19 * (X1 - X0); }
+    function Y(l) { return Y0 - l / 14 * (Y0 - Y1); }
+    [0, 2, 4, 6, 8, 10, 12, 14].forEach(function (l) { h += "<line x1='" + X0 + "' y1='" + Y(l) + "' x2='" + X1 + "' y2='" + Y(l) + "' stroke='#e8edf4' stroke-width='2'/>" + T(X0 - 12, Y(l) + 7, "10" + ["⁰", "", "²", "", "⁴", "", "⁶", "", "⁸", "", "¹⁰", "", "¹²", "", "¹⁴"][l], { s: 20, a: "end", c: "#5f6b80" }); });
+    h += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='3'/>";
+    [1, 5, 10, 15, 20].forEach(function (n) { h += T(X(n), Y0 + 30, n, { s: 20, c: "#5f6b80" }); });
+    h += T(X1, Y0 + 56, "이어 붙인 단위체 수", { s: 20, a: "end", c: "#5f6b80" });
+    h += "<line x1='" + X0 + "' y1='" + Y(12) + "' x2='" + X1 + "' y2='" + Y(12) + "' stroke='#e8590c' stroke-width='4' stroke-dasharray='12 8'/>" + T(X0 + 10, Y(12) - 10, "1조 (10¹²)", { s: 22, a: "start", c: "#e8590c" });
+    var n, a = [], b = [];
+    for (n = 1; n <= 10; n++) a.push([X(n), Y(n * Math.log10(20))]);
+    for (n = 1; n <= 20; n++) b.push([X(n), Y(n * Math.log10(4))]);
+    h += "<g data-step='1'><polyline points='" + a.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ") + "' fill='none' stroke='#c2255c' stroke-width='5'/>";
+    a.forEach(function (p, i) { h += "<circle cx='" + p[0].toFixed(1) + "' cy='" + p[1].toFixed(1) + "' r='" + (i === 9 ? 12 : 7) + "' fill='#c2255c'/>"; });
+    h += T(a[9][0] + 18, a[9][1] + 8, "아미노산 10개 ≈ 10조", { s: 22, a: "start", c: "#c2255c" }) + "</g>";
+    h += "<g data-step='2'><polyline points='" + b.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ") + "' fill='none' stroke='#1864ab' stroke-width='5'/>";
+    b.forEach(function (p, i) { h += "<circle cx='" + p[0].toFixed(1) + "' cy='" + p[1].toFixed(1) + "' r='" + (i === 19 ? 12 : 7) + "' fill='#1864ab'/>"; });
+    h += T(b[19][0] - 16, b[19][1] - 42, "뉴클레오타이드 20개 ≈ 1조", { s: 22, a: "end", c: "#1864ab" }) + "</g>";
+    document.getElementById("cntSvg").innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

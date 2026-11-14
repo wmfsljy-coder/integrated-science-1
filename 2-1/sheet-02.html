@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 별에서 만들어지는 원소 (통합과학1 Ⅱ-1 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격·여백을 줄인다 */ p, li { font-size: 12.8px; line-height: 1.62; } table { font-size: 12px; } td, th { padding: 2px 7px; line-height: 1.42; } h2 { font-size: 14.5px; margin: 7px 0 3px; padding: 3px 10px; } header { margin-bottom: 8px; } .guide { margin-bottom: 6px; } .write { height: 40px; } .foot { margin-top: 6px; } p, li { line-height: 1.55; } .write { height: 36px; }</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-02.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅱ-1 자연의 구성 원소 · 02 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 별에서 만들어지는 원소</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~13)</p>
+
+  <h2>① 별의 부엌 — 질량이 메뉴를 정한다</h2>
+  <ul>
+    <li>가벼운 원자핵이 합쳐져 무거운 원자핵이 되며 에너지를 내놓는 반응: <b class="blank" data-n="1">핵융합</b> → 별이 빛나는 까닭</li>
+    <li>태양 중심(약 1,500만 K): 수소 → <b class="blank" data-n="2">헬륨</b> · 태양의 질량비는 수소 약 74%, 헬륨 약 25%, 나머지 약 1.3%</li>
+    <li>질량이 클수록 중력이 세게 짓눌러 <b class="blank" data-n="3">중심 온도</b>가 높다 → 더 무거운 원료에 불이 붙는다</li>
+    <li>태양의 0.5배 미만: 헬륨에 불이 붙지 않음(1억 K 미만) · 0.5~8배: <b class="blank" data-n="4">탄소·산소</b>까지 · 8배 넘음: 탄소에 불 · 약 10배 넘음: 규소까지 태워 철</li>
+    <li>무거운 별의 속은 양파처럼 층층이(바깥 수소 → 헬륨 → 탄소·산소 → 네온·마그네슘 → 규소·황 → 중심 철): 더 뜨거워야 불이 붙는 <b class="blank" data-n="5">무거운 원소</b>일수록 중심 가까이에 쌓인다</li>
+  </ul>
+  <table>
+    <tr><th>타는 원료 → 만들어지는 원소</th><th>수소 → 헬륨</th><th>헬륨 → 탄소·산소</th><th>탄소 → 네온·마그네슘</th><th>네온·산소 → 규소·황</th><th>규소 → 철</th></tr>
+    <tr><td>필요한 온도</td><td>1,000만 K</td><td>1억 K</td><td>6억 K</td><td>15억 K</td><td>27억 K</td></tr>
+  </table>
+
+  <h2>② 철에서 멈추는 까닭</h2>
+  <ul>
+    <li>원자핵이 얼마나 단단히 묶였는가: 핵자 하나당 <b class="blank" data-n="6">결합 에너지</b> · 곡선의 꼭대기는 질량수 56인 <b class="blank" data-n="7">철-56</b> (약 8.79 MeV)</li>
+    <li>꼭대기보다 가벼운 쪽은 합칠수록(핵융합), 무거운 쪽은 쪼갤수록(핵분열) 에너지가 나온다</li>
+    <li>철보다 무거운 핵을 융합하려면 에너지를 넣어 주어야 함 → 중심핵이 무너지고 바깥층이 폭발: <b class="blank" data-n="8">초신성</b> → 원소를 우주로 뿌림</li>
+  </ul>
+  <table>
+    <tr><th style="width:20%">별의 질량 (태양 = 1)</th><th style="width:28%">만드는 원소</th><th>최후</th></tr>
+    <tr><td>0.5 미만</td><td>헬륨까지</td><td>적색왜성 (아직 하나도 죽지 않음)</td></tr>
+    <tr><td>0.5~8 (태양)</td><td>탄소·산소까지</td><td>적색거성 → 바깥층 <b class="blank" data-n="9">행성상 성운</b>, 중심 <b class="blank" data-n="10">백색왜성</b></td></tr>
+    <tr><td>8 넘음</td><td>탄소에 불 · 약 10 넘으면 철까지</td><td>초신성 → 중성자별 (약 25 넘으면 블랙홀)</td></tr>
+  </table>
+
+  <h2>③ 철보다 무거운 원소와 우리 몸</h2>
+  <ul>
+    <li>금·백금·우라늄: 중성자가 폭포처럼 쏟아지는 곳(초신성 폭발, <b class="blank" data-n="11">중성자별 충돌</b>)에서만 · 2017년 8월 17일 중력파와 함께 확인</li>
+    <li>출생지: 빅뱅(수소, 헬륨) · 별 속의 핵융합(탄소, 질소, 산소, 규소, 철) · 별의 마지막 순간(금, 우라늄)</li>
+    <li>사람 몸: 산소 65%, 탄소 18.5%, 수소 9.5%, 질소 3.2% → 빅뱅에서 온 것은 <b class="blank" data-n="12">수소</b> 9.5%뿐, 나머지 90.5%는 별에서 → 우리는 <b class="blank" data-n="13">별의 먼지</b>로 지어졌다</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 태양과 질량이 같은 별이 일생 동안 만들 수 있는 가장 무거운 원소는? <span class="ans">→ 탄소·산소</span> &nbsp; ㉠ 헬륨 &nbsp; ㉡ 탄소·산소 &nbsp; ㉢ 철</p>
+    <p>2. 몸무게 60 kg인 사람의 몸에서 별이 만든 원소의 질량은 약? <span class="ans">→ 약 54 kg (60 × 0.905)</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>‘우리는 별의 먼지로 만들어졌다’는 말을 몸의 탄소와 반지의 금을 예로 들어 한 문장으로 설명하세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-02.html · 이야기 ② 「별의 부엌」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

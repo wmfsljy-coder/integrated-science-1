@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 과학적 표기법 (통합과학1 Ⅰ-1 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes digIn { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+  .current .art .dwrap { animation: digIn 1.2s ease both; }
+  .lines p { margin-bottom: 14px; }
+  .tight p { font-size: 29px; margin-bottom: 10px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 27px; padding: 14px 22px; }
+  .ev { font-size: 27px !important; }
+  #s-hook .opt { font-size: 27px; padding: 14px 22px; }
+  .longnum { font-variant-numeric: tabular-nums; letter-spacing: .02em; word-break: break-all; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg id="coverSvg" viewBox="0 0 1600 520" aria-label="3 다음에 7과 0이 열두 개 이어진 숫자 블록과, 소수점이 왼쪽으로 열세 칸 뛰어 3.7 × 10¹³이 되는 그림"></svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅰ-1 과학의 기본량 · 03</p>
+    <h1>과학적 표기법</h1>
+    <p class="sub" data-step="1">0을 세지 않아도 틀리지 않는 숫자 쓰기</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 아주 큰 수와 아주 작은 수를 짧고 정확하게 쓰는 방법을 배웁니다.</p>
+    <p data-at="1">0을 열두 개나 세는 대신, 소수점을 옮긴 칸 수만 적으면 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="0이 몇 개였더라" data-part="도입">
+  <p class="kicker">도입 · 밤 11시, 과학 보고서 마감 한 시간 전</p>
+  <h2>0의 개수를 세 번째 다시 세는 중</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p class="ev">“사람 몸에는 세포가 <span class="longnum">37000000000000</span>개 있고, 물 한 컵에는 분자가 <span class="longnum">6690000000000000000000000</span>개 들어 있다.”</p>
+      <p class="ev mt"><b>자료</b> 사람 몸의 세포 수 약 3.7×10¹³ 개 (2013년 연구진의 추정값)</p>
+      <p class="small">세민: “셀 때마다 개수가 달라요. 과학자들은 이런 수를 어떻게 적어요?”</p>
+    </div>
+    <div class="card yel">
+      <h3>우리 반 25명의 세포를 모두 더하면?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 10억(10⁹) 개쯤</div>
+        <div class="opt">㉡ 1,000조(10¹⁵) 개쯤</div>
+        <div class="opt">㉢ 10²⁴ 개쯤</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>세민이는 분명히 맞게 옮겨 적었는데 0을 셀 때마다 개수가 다릅니다. 한 사람 몸에 세포가 약 3.7×10¹³ 개 있다면, 우리 반 25명을 모두 더하면 몇 개쯤일까요?</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 오늘 직접 셈해서 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>과학적 표기법</b><span>A × 10ⁿ 꼴로 쓰는 방법</span></div>
+    <div class="card"><b>계수</b><span>앞에 오는 수 A</span></div>
+    <div class="card"><b>지수</b><span>소수점을 옮긴 칸 수 n</span></div>
+    <div class="card"><b>물질량</b><span>입자를 묶어 세는 기본량(mol)</span></div>
+    <div class="card"><b>유효숫자</b><span>믿을 만한 자리의 숫자</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~14번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 규칙 -->
+<section class="slide" id="s-rule" data-title="규칙은 하나" data-part="① 소수점 옮기기">
+  <p class="kicker">① 소수점 옮기기 · 과학 선생님의 규칙</p>
+  <h2>A × 10ⁿ, 계수 A는 1 이상 10 미만</h2>
+  <svg viewBox="0 0 1400 300" width="1400" height="300" aria-label="3.7 × 10¹³에서 3.7은 계수 A, 13은 지수 n임을 가리키는 그림">
+    <defs><marker id="s4-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker></defs>
+    <g font-weight="900">
+      <text x="600" y="200" font-size="140" fill="#198a4a" text-anchor="end">3.7</text>
+      <text x="660" y="190" font-size="100" fill="#161b28" text-anchor="middle">×</text>
+      <text x="720" y="200" font-size="140" fill="#161b28">10</text>
+      <text x="890" y="110" font-size="80" fill="#6741d9">13</text>
+    </g>
+    <g data-step="2">
+      <rect x="40" y="226" width="520" height="64" rx="14" fill="#ddf5e6"/>
+      <text x="300" y="270" font-size="28" font-weight="900" fill="#198a4a" text-anchor="middle">계수 A · 1 ≤ A &lt; 10</text>
+      <line x1="480" y1="226" x2="500" y2="212" stroke="#198a4a" stroke-width="4"/>
+    </g>
+    <g data-step="3">
+      <rect x="1000" y="20" width="400" height="64" rx="14" fill="#ece5ff"/>
+      <text x="1200" y="63" font-size="28" font-weight="900" fill="#6741d9" text-anchor="middle">지수 n · 옮긴 칸 수</text>
+      <line x1="1000" y1="60" x2="972" y2="70" stroke="#6741d9" stroke-width="4" marker-end="url(#s4-a)"/>
+    </g>
+    <g data-step="4" font-size="26" font-weight="900">
+      <rect x="1000" y="150" width="400" height="120" rx="14" fill="#f2f5f9"/>
+      <text x="1030" y="198" fill="#161b28">소수점을 왼쪽으로 → +</text>
+      <text x="1030" y="246" fill="#161b28">소수점을 오른쪽으로 → −</text>
+    </g>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">아주 큰 수·작은 수를 A × 10ⁿ 꼴로 쓰는 방법 → <b class="blank" data-n="1" data-step="1">과학적 표기법</b></p>
+    <p data-step="2">A는 <b class="blank" data-n="2" data-step="2">계수</b>, 언제나 <b class="blank" data-n="3" data-step="2">1 이상 10 미만</b></p>
+    <p data-step="3">n은 지수 = <b class="blank" data-n="4" data-step="3">소수점을 옮긴 칸 수</b></p>
+  </div>
+  <aside class="script">
+    <p>과학적 표기법은 규칙이 딱 하나입니다.</p>
+    <p data-at="1">아주 큰 수나 작은 수를 A 곱하기 10의 n제곱 꼴로 쓰는 방법, 빈칸 1번, 과학적 표기법입니다.</p>
+    <p data-at="2">앞의 수 A는 빈칸 2번, 계수. 계수는 언제나 빈칸 3번, 1 이상 10 미만이어야 합니다. 그래야 한 수를 쓰는 방법이 하나로 정해져요.</p>
+    <p data-at="3">n은 지수, 빈칸 4번, 소수점을 옮긴 칸 수입니다.</p>
+    <p data-at="4">소수점을 왼쪽으로 옮겼으면 플러스, 오른쪽으로 옮겼으면 마이너스. 큰 수는 지수가 양수, 1보다 작은 수는 음수가 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 5 세 수 고치기 -->
+<section class="slide" id="s-three" data-title="세 수를 고쳐 쓰기" data-part="① 소수점 옮기기">
+  <p class="kicker">① 소수점 옮기기 · 세 가지 수를 직접 고쳐 보면 (단원 화면 미션)</p>
+  <h2>소수점이 뛴 칸 수가 곧 지수</h2>
+  <svg id="threeSvg" viewBox="0 0 1400 360" width="1400" height="360" aria-label="빛의 속력, 사람 몸의 세포 수, 수소 원자의 지름에서 소수점이 왼쪽 8칸, 왼쪽 13칸, 오른쪽 10칸 옮겨 가는 그림"></svg>
+  <div class="tight mt">
+    <p data-step="1">빛의 속력 299,792,458 m/s → 2.99792458×10⁸ ≈ <b class="blank" data-n="5" data-step="1">3.0×10⁸</b> m/s</p>
+    <p data-step="2">사람 몸의 세포 수 37,000,000,000,000 개 → 3.7×10¹³ 개</p>
+    <p data-step="3">수소 원자의 지름 0.0000000001 m → <b class="blank" data-n="6" data-step="3">1.0×10⁻¹⁰</b> m (지수가 음수)</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면에서 세 수를 직접 고쳐 보았죠. 노란 구슬이 소수점입니다.</p>
+    <p data-at="1">빛의 속력. 소수점을 왼쪽으로 8칸 옮기면 2.99792458, 지수는 8. 두 자리로 어림하면 빈칸 5번, 3.0×10⁸ m/s입니다.</p>
+    <p data-at="2">세포 수는 왼쪽으로 13칸, 3.7×10¹³ 개. 0을 셀 필요가 없습니다.</p>
+    <p data-at="3">수소 원자의 지름은 소수점을 오른쪽으로 10칸 옮겨야 1이 됩니다. 그래서 지수는 −10, 빈칸 6번, 1.0×10⁻¹⁰ m입니다.</p>
+  </aside>
+</section>
+
+<!-- 6 확인 -->
+<section class="slide" id="s-check1" data-title="올바른 표기 고르기" data-part="① 소수점 옮기기">
+  <p class="kicker">① 소수점 옮기기 · 확인</p>
+  <h2>과학적 표기법에 맞게 쓴 것은?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ 37 × 10¹²</div>
+    <div class="opt wrong" data-step="1">㉡ 0.37 × 10¹⁴</div>
+    <div class="opt right" data-step="1">㉢ 3.7 × 10¹³</div>
+    <div class="opt wrong" data-step="1">㉣ 370 × 10¹¹</div>
+  </div>
+  <p data-step="1" style="margin-top:40px">넷 다 같은 값 · 계수가 10 이상이면 계수 ÷ 10, 지수 + 1 · 계수가 1보다 작으면 계수 × 10, 지수 − 1</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. 네 개가 모두 같은 값이라는 점을 먼저 확인시킵니다.</p>
+    <p data-at="1">정답은 ㉢. 계수가 1 이상 10 미만인 것은 3.7뿐입니다. 37 × 10¹²처럼 계수가 10을 넘으면 계수를 10으로 나누고 지수를 1 올려 고칩니다.</p>
+  </aside>
+</section>
+
+<!-- 7 물질량 -->
+<section class="slide soft" id="s-mol" data-title="분자를 묶어 세는 물질량" data-part="② 물질량과 아보가드로수">
+  <p class="kicker">② 물질량과 아보가드로수 · 셀 수 없는 것을 세는 방법</p>
+  <h2>분자는 묶음으로 센다: 1 mol</h2>
+  <div class="cols" style="grid-template-columns:720px 1fr;align-items:center">
+    <svg viewBox="0 0 720 470" width="720" height="470" aria-label="전자저울 위 물이 담긴 비커와, 확대경 속 산소 하나에 수소 둘이 붙은 물 분자들. 저울에 18.0 g이 표시된다">
+      <defs>
+        <linearGradient id="s7-w" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#74c0fc"/><stop offset="1" stop-color="#1c7ed6"/></linearGradient>
+        <clipPath id="s7-clip"><circle cx="530" cy="170" r="135"/></clipPath>
+      </defs>
+      <rect x="40" y="380" width="340" height="60" rx="12" fill="#495057"/>
+      <rect x="150" y="396" width="120" height="34" rx="6" fill="#161b28"/>
+      <text x="210" y="422" font-size="26" font-weight="900" fill="#69db9c" text-anchor="middle" data-hide="3">0.0 g</text>
+      <text x="210" y="422" font-size="26" font-weight="900" fill="#69db9c" text-anchor="middle" data-step="3">18.0 g</text>
+      <rect x="70" y="360" width="280" height="22" rx="6" fill="#868e96"/>
+      <path d="M120 180 V340 Q120 360 140 360 H280 Q300 360 300 340 V180" fill="#e7f5ff" stroke="#495057" stroke-width="5"/>
+      <path d="M124 290 H296 V340 Q296 356 280 356 H140 Q124 356 124 340 Z" fill="url(#s7-w)" data-step="3"/>
+      <line x1="300" y1="300" x2="410" y2="240" stroke="#495057" stroke-width="3" stroke-dasharray="8 6"/>
+      <circle cx="530" cy="170" r="135" fill="#e7f5ff" stroke="#495057" stroke-width="6"/>
+      <g id="s7-mols" clip-path="url(#s7-clip)"></g>
+      <text x="530" y="335" font-size="20" font-weight="800" fill="#5f6b80" text-anchor="middle">물 분자 지름 약 0.3 nm</text>
+      <text x="16" y="462" font-size="18" fill="#5f6b80">⚠ 분자 크기는 크게 과장한 모식도</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">분자 하나는 너무 작아 셀 수 없다 → 정해진 개수씩 묶어 세는 기본량 <b class="blank" data-n="7" data-step="1">물질량</b> (단위 mol)</p>
+      <p data-step="2">1 mol = 입자 <b class="blank" data-n="8" data-step="2">6.02×10²³</b> 개 (아보가드로수 6.02214076×10²³)</p>
+      <p data-step="3">물은 1 mol이 <b class="blank" data-n="9" data-step="3">18.0 g</b> → 저울로 분자 수를 센다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>이번엔 물 한 컵의 분자 수입니다. 물 분자는 지름이 약 0.3 nm라서 아무리 정밀한 저울로도 하나씩 달 수 없어요.</p>
+    <p data-at="1">그래서 아주 많은 입자를 정해진 개수씩 묶어서 셉니다. 연필 열두 자루를 한 다스로 세는 것처럼요. 이 기본량이 빈칸 7번, 물질량, 단위는 몰입니다. 첫 시간에 본 일곱 기본량 가운데 하나죠.</p>
+    <p data-at="2">1 mol은 입자 빈칸 8번, 6.02×10²³ 개. 이 수를 아보가드로수라고 합니다.</p>
+    <p data-at="3">물은 1 mol이 빈칸 9번, 18.0 g입니다. 저울에 18.0 g을 올리면 분자 6.02×10²³ 개를 올린 셈이에요.</p>
+  </aside>
+</section>
+
+<!-- 8 물 한 컵 -->
+<section class="slide" id="s-cup" data-title="물 한 컵의 분자 수" data-part="② 물질량과 아보가드로수">
+  <p class="kicker">② 물질량과 아보가드로수 · 물 한 컵 약 200 g을 저울에 (단원 화면 모형)</p>
+  <h2>질량 → 물질량 → 분자 수</h2>
+  <svg id="cupSvg" viewBox="0 0 1400 280" width="1400" height="280" aria-label="물 200 g을 18.0으로 나누면 11.11 mol, 여기에 6.022×10²³을 곱하면 66.9×10²³, 고쳐 쓰면 6.7×10²⁴ 개"></svg>
+  <div class="tight mt">
+    <p data-step="3">곱셈: 계수끼리 곱하고(11.11 × 6.022 ≈ 66.9), 지수끼리 <b class="blank" data-n="10" data-step="3">더한다</b> → 66.9×10²³</p>
+    <p data-step="4">계수가 10을 넘으면 고쳐 쓴다: 66.9×10²³ = 6.69×10²⁴ ≈ <b class="blank" data-n="11" data-step="4">6.7×10²⁴</b> 개</p>
+  </div>
+  <aside class="script">
+    <p>물 한 컵, 약 200 g에는 분자가 몇 개 있을까요? 세 칸으로 나눠 계산합니다.</p>
+    <p data-at="1">저울에 200 g이 올라갔습니다.</p>
+    <p data-at="2">1 mol이 18.0 g이니까 200 나누기 18.0, 약 11.11 mol입니다.</p>
+    <p data-at="3">1 mol마다 6.022×10²³ 개이므로 곱합니다. 계수끼리 곱하고, 지수끼리는 빈칸 10번, 더합니다. 66.9×10²³.</p>
+    <p data-at="4">그런데 계수 66.9는 10을 넘었죠. 계수를 10으로 나누고 지수를 1 올리면 6.69×10²⁴, 두 자리로 빈칸 11번, 6.7×10²⁴ 개. 보고서의 그 긴 수가 바로 이것입니다.</p>
+  </aside>
+</section>
+
+<!-- 9 우리 반 세포 -->
+<section class="slide soft" id="s-class" data-title="우리 반의 세포를 모두 더하면" data-part="③ 우리 반 세포와 유효숫자">
+  <p class="kicker">③ 우리 반 세포와 유효숫자 · 인원을 바꿔 가며 더하기 (단원 화면 모형)</p>
+  <h2>25명이면 10¹⁵ 개에 가깝다</h2>
+  <div class="cols" style="grid-template-columns:800px 1fr;align-items:center">
+    <svg id="classSvg" viewBox="0 0 800 470" width="800" height="470" aria-label="우리 반 인원 1~40명에 따른 전체 세포 수 막대그래프. 25명이면 9.3×10¹⁴ 개, 28명에서 처음 10¹⁵ 개를 넘는다"></svg>
+    <div class="lines">
+      <p data-step="1">한 사람 3.7×10¹³ 개 × n명 → 계수만 곱한다</p>
+      <p data-step="2">25명: 92.5×10¹³ = 9.25×10¹⁴ ≈ <b class="blank" data-n="12" data-step="2">9.3×10¹⁴</b> 개</p>
+      <p data-step="3">27명 9.99×10¹⁴ → <b class="blank" data-n="13" data-step="3">28명</b> 1.04×10¹⁵ : 처음으로 10¹⁵ 개를 넘는다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>보고서의 마지막 문장, 우리 반 전체의 세포 수입니다. 한 사람이 3.7×10¹³ 개예요.</p>
+    <p data-at="1">인원수를 곱할 때는 계수에만 곱하면 됩니다. 지수 13은 그대로예요.</p>
+    <p data-at="2">25명이면 3.7 곱하기 25는 92.5, 92.5×10¹³. 계수가 10을 넘으니 고치면 9.25×10¹⁴, 빈칸 12번, 약 9.3×10¹⁴ 개. 처음 어림에서 1,000조, 10¹⁵ 개쯤을 고른 학생이 가장 가까웠습니다.</p>
+    <p data-at="3">27명은 9.99×10¹⁴로 아직 모자라고, 빈칸 13번, 28명에서 1.04×10¹⁵ 개로 처음 10¹⁵ 개를 넘습니다.</p>
+  </aside>
+</section>
+
+<!-- 10 유효숫자 -->
+<section class="slide" id="s-sig" data-title="어림한 만큼만 적기" data-part="③ 우리 반 세포와 유효숫자">
+  <p class="kicker">③ 우리 반 세포와 유효숫자 · 같은 값, 다른 정직함</p>
+  <h2>3.7×10¹³은 ‘3과 7까지 믿을 만하다’는 뜻</h2>
+  <svg id="sigSvg" viewBox="0 0 1400 300" width="1400" height="300" aria-label="37,000,000,000,000에서 3과 7만 믿을 만한 자리이고 나머지 0은 자리만 채운 것. 3.7×10¹³으로 쓰면 믿을 만한 두 자리만 남는다"></svg>
+  <div class="tight mt">
+    <p data-step="2">측정·어림으로 믿을 수 있는 자리의 숫자 → <b class="blank" data-n="14" data-step="2">유효숫자</b> (3.7×10¹³ → 2개, 18.0 g → 3개)</p>
+    <p data-step="3">37,000,000,000,000이라고 쓰면 한 개까지 세어 본 것처럼 보인다</p>
+    <p data-step="4">과학적 표기법: <b>짧게</b> 쓰고 · 지수로 <b>크기를 비교</b>하고 · <b>믿을 만한 정도</b>를 드러낸다</p>
+  </div>
+  <aside class="script">
+    <p>3.7×10¹³과 37,000,000,000,000. 값은 같습니다. 그런데 뜻하는 바가 다릅니다.</p>
+    <p data-at="1">긴 수로 쓰면 숫자가 열네 개나 됩니다.</p>
+    <p data-at="2">이 값은 2013년 연구진이 기관마다 따로 어림해 더한 추정값이라, 믿을 수 있는 것은 3과 7 두 자리뿐입니다. 이런 숫자가 빈칸 14번, 유효숫자. 물 18.0 g의 끝자리 0도 0.1 g까지 쟀다는 뜻이라 유효숫자예요.</p>
+    <p data-at="3">긴 수로 쓰면 마치 세포를 한 개까지 세어 본 것처럼 보입니다. 실제로 그렇게 센 사람은 아무도 없죠.</p>
+    <p data-at="4">어림한 값은 어림한 만큼만 적는 것, 이것이 과학의 정직함입니다. 과학적 표기법은 짧게 쓰고, 크기를 비교하고, 믿을 만한 정도를 드러내는 세 가지 일을 한꺼번에 합니다.</p>
+  </aside>
+</section>
+
+<!-- 11 확인 -->
+<section class="slide" id="s-check2" data-title="과학적 표기법을 쓰는 까닭" data-part="③ 우리 반 세포와 유효숫자">
+  <p class="kicker">③ 우리 반 세포와 유효숫자 · 확인</p>
+  <h2>3.7×10¹³으로 쓰는 까닭으로 옳지 <span class="c-red">않은</span> 것은?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ 0을 세다가 틀리는 실수를 줄인다</div>
+    <div class="opt wrong" data-step="1">㉡ 지수만 보고 크기를 바로 비교할 수 있다</div>
+    <div class="opt wrong" data-step="1">㉢ 믿을 만한 자리까지만 드러낸다</div>
+    <div class="opt right" data-step="1">㉣ 37,000,000,000,000과 다른 더 정확한 값이 된다</div>
+  </div>
+  <p data-step="1" style="margin-top:40px">두 표기의 값은 같다 · 과학적 표기법은 값을 바꾸지 않고 쓰는 방법만 바꾼다</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ㉣. 두 표기는 같은 값입니다. 과학적 표기법은 값을 더 정확하게 만드는 것이 아니라, 얼마나 정확한지를 정직하게 보여 줍니다.</p>
+  </aside>
+</section>
+
+<!-- 12 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>과학적 표기법은 짧고, 비교하기 쉽고, 정직하다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>과학적 표기법</b> A × 10ⁿ: 계수 1 ≤ A &lt; 10, 지수 n = 소수점을 옮긴 칸 수 (왼쪽 +, 오른쪽 −)</li>
+    <li data-k="2" data-step="2"><b>물질량</b> 1 mol = 6.02×10²³ 개 · 물 1 mol = 18.0 g → 물 200 g의 분자 6.7×10²⁴ 개</li>
+    <li data-k="3" data-step="3">곱셈은 계수끼리 곱하고 지수끼리 더한다 · 계수가 10을 넘으면 지수를 1 올린다 (25명 9.3×10¹⁴ 개)</li>
+    <li data-k="4" data-step="4"><b>유효숫자</b>: 믿을 만한 자리 · 어림한 값은 어림한 만큼만 적는다</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 어림을 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 13 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 지구의 지름 12,700,000 m를 과학적 표기법으로 바르게 쓴 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 127 × 10⁵ m</div>
+        <div class="opt right" data-step="1">㉡ 1.27 × 10⁷ m</div>
+        <div class="opt wrong" data-step="1">㉢ 1.27 × 10⁻⁷ m</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. (2 × 10³) × (3 × 10⁴)을 계산하면?</p>
+      <div class="opts">
+        <div class="opt right" data-step="2">㉠ 6 × 10⁷</div>
+        <div class="opt wrong" data-step="2">㉡ 6 × 10¹²</div>
+        <div class="opt wrong" data-step="2">㉢ 5 × 10⁷</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 소수점을 왼쪽으로 7칸 옮깁니다. ㉠은 계수가 10을 넘고, ㉢은 지수의 부호가 반대예요.</p>
+    <p data-at="2">2번은 ㉠. 계수끼리 곱해 6, 지수끼리 더해 7. 지수를 곱하면 ㉡, 계수를 더하면 ㉢이 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 14 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 단원" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ③ 「0을 세다가 밤을 새운 보고서」</h2>
+  <div class="cols">
+    <div class="card"><h3>보고서를 구해 내세요</h3><p>소수점을 옮겨 세 수 고치기, 저울로 물 1 mol과 한 컵 담기, 우리 반 세포 수 세기, 표기 9개 분류하기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 단원 · Ⅰ-2 과학의 측정과 우리 사회</h3><p>같은 것을 여러 번 재면 값이 왜 조금씩 다를까요? 정밀도와 정확도, 측정 표준이 우리 생활을 어떻게 바꾸는지 봅니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ③을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function T(x, y, s, o) {
+    o = o || {};
+    return "<text x='" + x + "' y='" + y + "' font-size='" + (o.fs || 22) + "' font-weight='" + (o.fw || 900) + "' fill='" + (o.c || "#161b28") + "' text-anchor='" + (o.a || "middle") + "'" + (o.halo ? " stroke='" + (o.halo === true ? "#fff" : o.halo) + "' stroke-width='6' paint-order='stroke'" : "") + ">" + s + "</text>";
+  }
+  /* 숫자 블록과 소수점 구슬: D 숫자열, o 처음 소수점 자리(앞 숫자 개수), q 옮긴 뒤 자리 */
+  function digits(x0, y, w, D, o, q, opt) {
+    opt = opt || {};
+    var h = "", hl = opt.hl || [];
+    for (var j = 0; j < D.length; j++) {
+      var on = hl.indexOf(j) >= 0;
+      h += "<rect x='" + (x0 + j * w + 2) + "' y='" + (y - w * 0.95) + "' width='" + (w - 4) + "' height='" + (w * 1.1) + "' rx='6' fill='" + (on ? (opt.hc || "#ddf5e6") : (opt.bg || "#f2f5f9")) + "'/>";
+      h += T(x0 + j * w + w / 2, y, D[j], { fs: Math.round(w * 0.78), c: on ? (opt.hk || "#198a4a") : (opt.fg || "#161b28") });
+    }
+    if (o != null) h += "<circle cx='" + (x0 + o * w) + "' cy='" + (y + w * 0.22) + "' r='" + Math.max(5, w * 0.16) + "' fill='none' stroke='" + (opt.pc || "#868e96") + "' stroke-width='3'/>";
+    if (q != null) {
+      var xa = x0 + o * w, xb = x0 + q * w, H = opt.ah || 30, top = y - w - 2 * H;
+      h += "<g" + (opt.step ? " data-step='" + opt.step + "'" : "") + "><path d='M" + xa + " " + (y - w) + " Q" + ((xa + xb) / 2) + " " + top + " " + xb + " " + (y - w) + "' fill='none' stroke='#f08c00' stroke-width='4' stroke-dasharray='9 6'/>";
+      h += "<circle cx='" + xb + "' cy='" + (y + w * 0.22) + "' r='" + Math.max(6, w * 0.18) + "' fill='#ffd43b' stroke='#f08c00' stroke-width='2'/>";
+      if (opt.lab) h += T((xa + xb) / 2, y - w - H - 8, opt.lab, { fs: opt.lfs || 24, c: "#e8590c", halo: opt.dark ? "#0b0e15" : true });
+      h += "</g>";
+    }
+    return h;
+  }
+  /* 표지 */
+  (function () {
+    var svg = document.getElementById("coverSvg"), D = "37000000000000".split(""), w = 66, x0 = 800 - D.length * w / 2;
+    var h = "<g class='dwrap'>" + digits(x0, 250, w, D, D.length, 1, { bg: "rgba(255,255,255,.08)", fg: "#c9d1df", hl: [0, 1], hc: "rgba(255,212,59,.18)", hk: "#ffd43b", pc: "#9aa4b5", step: 1, lab: "왼쪽으로 13칸", lfs: 28, dark: true, ah: 60 }) + "</g>";
+    h += "<g data-step='1'>" + T(800, 440, "= 3.7 × 10¹³", { fs: 92, c: "#ffd43b" }) + "</g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 세 수 고치기 — 단원 화면 미션 값 */
+  (function () {
+    var svg = document.getElementById("threeSvg"), w = 34, h = "";
+    var rows = [
+      { y: 120, D: "299792458", o: 9, q: 1, name: "빛의 속력 (m/s)", lab: "왼쪽 8칸 → +8", res: "2.99792458 × 10⁸", col: "#1462d8", step: 1 },
+      { y: 230, D: "37000000000000", o: 14, q: 1, name: "사람 몸의 세포 수 (개)", lab: "왼쪽 13칸 → +13", res: "3.7 × 10¹³", col: "#198a4a", step: 2 },
+      { y: 340, D: "00000000001", o: 1, q: 11, name: "수소 원자의 지름 (m)", lab: "오른쪽 10칸 → −10", res: "1.0 × 10⁻¹⁰", col: "#6741d9", step: 3 }
+    ];
+    rows.forEach(function (r) {
+      h += "<g data-step='" + r.step + "'>";
+      h += T(0, r.y - 4, r.name, { fs: 22, c: r.col, a: "start" });
+      h += digits(320, r.y, w, r.D.split(""), r.o, r.q, { lab: r.lab, lfs: 22 });
+      h += "<path d='M860 " + (r.y - 12) + " H940' stroke='#495057' stroke-width='4'/><path d='M934 " + (r.y - 20) + " L946 " + (r.y - 12) + " L934 " + (r.y - 4) + "' fill='none' stroke='#495057' stroke-width='4'/>";
+      h += T(970, r.y, r.res, { fs: 40, c: r.col, a: "start" });
+      h += "</g>";
+    });
+    svg.innerHTML = h;
+  })();
+
+  /* 확대경 속 물 분자 (산소 하나 + 수소 둘, 결합각 약 104.5°) */
+  (function () {
+    var g = document.getElementById("s7-mols"), h = "", k = 0;
+    for (var i = 0; i < 5; i++) for (var j = 0; j < 5; j++) {
+      var cx = 420 + j * 56 + (i % 2) * 26, cy = 58 + i * 56, a = (k++ * 47) % 360 * Math.PI / 180, d = 22, half = 104.5 / 2 * Math.PI / 180;
+      h += "<circle cx='" + (cx + d * Math.cos(a - half)) + "' cy='" + (cy + d * Math.sin(a - half)) + "' r='9' fill='#fff' stroke='#868e96' stroke-width='2'/>";
+      h += "<circle cx='" + (cx + d * Math.cos(a + half)) + "' cy='" + (cy + d * Math.sin(a + half)) + "' r='9' fill='#fff' stroke='#868e96' stroke-width='2'/>";
+      h += "<circle cx='" + cx + "' cy='" + cy + "' r='15' fill='#e03131'/>";
+    }
+    g.innerHTML = h;
+  })();
+
+  /* 물 한 컵 계산 — 단원 화면: 200 g ÷ 18.0 g/mol × 6.02214076×10²³ */
+  (function () {
+    var svg = document.getElementById("cupSvg"), h = "";
+    function box(x, w, top, val, fill, col, step) {
+      return "<g data-step='" + step + "'><rect x='" + x + "' y='20' width='" + w + "' height='130' rx='18' fill='" + fill + "'/>" +
+        T(x + w / 2, 66, top, { fs: 24, fw: 800, c: "#5f6b80" }) + T(x + w / 2, 122, val, { fs: 40, c: col }) + "</g>";
+    }
+    function arr(x0, x1, lab, col, step) {
+      return "<g data-step='" + step + "'><path d='M" + x0 + " 85 H" + (x1 - 10) + "' stroke='" + col + "' stroke-width='5'/><path d='M" + (x1 - 18) + " 74 L" + x1 + " 85 L" + (x1 - 18) + " 96' fill='none' stroke='" + col + "' stroke-width='5'/>" +
+        T((x0 + x1) / 2, 184, lab, { fs: 22, c: col }) + "</g>";
+    }
+    h += box(0, 300, "질량", "200 g", "#d0ebff", "#1462d8", 1);
+    h += arr(310, 450, "÷ 18.0 g/mol", "#6741d9", 2);
+    h += box(460, 340, "물질량", "11.11 mol", "#e5dbff", "#6741d9", 2);
+    h += arr(810, 950, "× 6.022×10²³", "#e8590c", 3);
+    h += box(960, 440, "분자 수", "66.9×10²³ 개", "#fff3bf", "#e8590c", 3);
+    h += "<g data-step='4'><rect x='960' y='200' width='440' height='70' rx='16' fill='#ddf5e6'/>" + T(1180, 248, "= 6.7×10²⁴ 개", { fs: 36, c: "#198a4a" }) + "</g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 우리 반 세포 수 — 3.7×10¹³ × n */
+  (function () {
+    var svg = document.getElementById("classSvg"), X0 = 110, X1 = 780, Y0 = 30, Y1 = 400, MAX = 1.6e15, CELL = 3.7e13;
+    function X(n) { return X0 + (n - 0.5) / 40 * (X1 - X0); }
+    function Y(v) { return Y1 - v / MAX * (Y1 - Y0); }
+    var h = "";
+    [0, 5e14, 1e15, 1.5e15].forEach(function (v, i) {
+      h += "<line x1='" + X0 + "' y1='" + Y(v) + "' x2='" + X1 + "' y2='" + Y(v) + "' stroke='#e8edf4' stroke-width='2'/>";
+      h += T(X0 - 12, Y(v) + 7, ["0", "5×10¹⁴", "10¹⁵", "1.5×10¹⁵"][i], { fs: 20, fw: 800, c: "#5f6b80", a: "end" });
+    });
+    h += T(X0 - 100, 18, "전체 세포 수 (개)", { fs: 20, c: "#5f6b80", a: "start" });
+    h += "<g data-step='1'>";
+    for (var n = 1; n <= 40; n++) {
+      var v = CELL * n, col = n >= 28 ? "#f08c00" : "#74c0fc";
+      h += "<rect x='" + (X(n) - 6) + "' y='" + Y(v) + "' width='12' height='" + (Y1 - Y(v)) + "' rx='3' fill='" + col + "'/>";
+    }
+    h += "</g>";
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [1, 10, 20, 30, 40].forEach(function (n) { h += T(X(n), Y1 + 30, n, { fs: 20, fw: 800 }); });
+    h += T(X1, Y1 + 58, "우리 반 인원 (명)", { fs: 20, c: "#5f6b80", a: "end" });
+    h += "<line x1='" + X0 + "' y1='" + Y(1e15) + "' x2='" + X1 + "' y2='" + Y(1e15) + "' stroke='#c92a2a' stroke-width='3' stroke-dasharray='10 7'/>";
+    h += "<g data-step='2'><rect x='" + (X(25) - 9) + "' y='" + (Y(CELL * 25) - 4) + "' width='18' height='" + (Y1 - Y(CELL * 25) + 4) + "' rx='4' fill='none' stroke='#1462d8' stroke-width='4'/>";
+    h += "<line x1='330' y1='118' x2='" + X(25) + "' y2='" + (Y(CELL * 25) - 6) + "' stroke='#1462d8' stroke-width='3'/>" + T(130, 124, "25명 9.3×10¹⁴", { fs: 22, c: "#1462d8", a: "start", halo: "#f2f5f9" }) + "</g>";
+    h += "<g data-step='3'><rect x='" + (X(28) - 9) + "' y='" + (Y(CELL * 28) - 4) + "' width='18' height='" + (Y1 - Y(CELL * 28) + 4) + "' rx='4' fill='none' stroke='#c92a2a' stroke-width='4'/>";
+    h += "<line x1='330' y1='58' x2='" + X(28) + "' y2='" + (Y(CELL * 28) - 6) + "' stroke='#c92a2a' stroke-width='3'/>" + T(130, 64, "28명 1.04×10¹⁵", { fs: 22, c: "#c92a2a", a: "start", halo: "#f2f5f9" }) + "</g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 유효숫자 */
+  (function () {
+    var svg = document.getElementById("sigSvg"), D = "37000000000000".split(""), w = 52, x0 = 60, h = "";
+    h += "<g data-step='1'>" + digits(x0, 90, w, D, null, null, {}) + "</g>";
+    h += "<g data-step='2'>" + digits(x0, 90, w, D.slice(0, 2), null, null, { hl: [0, 1] });
+    h += "<path d='M" + (x0 + 2 * w + 6) + " 120 H" + (x0 + D.length * w - 4) + "' stroke='#9aa4b5' stroke-width='4'/>";
+    h += T(x0 + w, 136, "믿을 만한 자리", { fs: 22, c: "#198a4a" });
+    h += T((x0 + 2 * w + x0 + D.length * w) / 2, 150, "자리만 채운 0 (한 개씩 세지 않았다)", { fs: 22, c: "#5f6b80" }) + "</g>";
+    h += "<g data-step='3'>" + digits(x0, 250, w, ["3", ".", "7"], null, null, { hl: [0, 2] });
+    h += T(x0 + 3 * w + 20, 250, "× 10¹³", { fs: 44, a: "start" });
+    h += T(x0 + 3 * w + 220, 246, "← 유효숫자 두 자리만 남는다", { fs: 24, c: "#198a4a", a: "start" }) + "</g>";
+    svg.innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

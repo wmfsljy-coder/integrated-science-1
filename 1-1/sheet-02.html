@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 우주의 스케일 (통합과학1 Ⅰ-1 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-02.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 8px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 6px; }
+  h2 { font-size: 14.5px; font-weight: 900; margin: 8px 0 3px; padding: 3px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 12.8px; line-height: 1.62; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 2px 6px; text-align: center; line-height: 1.5; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 4px; }
+  .q p { line-height: 1.6; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 40px; margin-top: 4px; }
+  .foot { margin-top: 6px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-02.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅰ-1 과학의 기본량 · 02 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 우주의 스케일</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~14)</p>
+
+  <h2>① 크기의 사다리 — 한 걸음마다 10배</h2>
+  <ul>
+    <li>10ⁿ = 10을 n번 곱한 수 · n을 <b class="blank" data-n="1">지수</b>라 한다 · 한 걸음(× 10) = 지수가 1 커짐 · 10⁰ = 1</li>
+    <li>1보다 작은 수는 지수가 <b class="blank" data-n="2">음수</b> → 0.1 = 10⁻¹, 0.01 = 10⁻² (1 cm), 0.001 = 10⁻³ (1 mm)</li>
+    <li>작은 쪽: 손톱 10⁻² m → 모래알 10⁻³ m → 사람의 세포 <b class="blank" data-n="3">10⁻⁵ m</b> → 바이러스 10⁻⁷ m → 수소 원자 10⁻¹⁰ m</li>
+    <li>가장 작은 쪽 끝: <b class="blank" data-n="4">원자핵</b> 약 10⁻¹⁵ m (손톱에서 13걸음)</li>
+  </ul>
+  <table>
+    <tr><th>사람</th><th>지구의 지름</th><th>지구 ~ 달</th><th>지구 ~ 태양</th><th>1 광년</th><th>우리은하</th><th>관측 가능한 우주</th></tr>
+    <tr><td>약 10⁰ m</td><td>1.27×10⁷ m</td><td>3.84×10⁸ m</td><td>1.50×10¹¹ m</td><td>9.46×10¹⁵ m</td><td><b class="blank" data-n="5">10²¹ m</b></td><td>약 10²⁶ m</td></tr>
+  </table>
+
+  <h2>② 배율 = 지수의 차</h2>
+  <ul>
+    <li>두 크기의 배율 = 10<sup>(큰 지수 − 작은 지수)</sup> → 배율은 <b class="blank" data-n="6">지수의 차</b></li>
+    <li>손톱 10⁻² m → 관측 가능한 우주 10²⁶ m : 26 − (−2) = 28 → <b class="blank" data-n="7">28걸음</b></li>
+    <li>원자핵 10⁻¹⁵ m → 관측 가능한 우주 10²⁶ m : 26 − (−15) = <b class="blank" data-n="8">41걸음</b></li>
+    <li>지구 10⁷ m ÷ 원자 10⁻¹⁰ m : 7 − (−10) = 17 → 지구는 원자보다 <b class="blank" data-n="9">10¹⁷ 배</b> 크다 (음수를 빼면 더해진다)</li>
+  </ul>
+
+  <h2>③ 빛으로 재는 거리</h2>
+  <ul>
+    <li>빛의 속력 299,792,458 m/s → 빛은 1초에 <b class="blank" data-n="10">약 3×10⁸ m</b></li>
+    <li>걸리는 시간 = 거리 ÷ 빛의 속력 → 달 약 1.3초, 태양 <b class="blank" data-n="11">8분 20초</b>, 해왕성 약 4시간</li>
+    <li>빛이 1년 동안 가는 거리 → 1 <b class="blank" data-n="12">광년</b> (시간이 아니라 거리의 단위)</li>
+    <li>299,792,458 m/s × 3.156×10⁷ s(1년) ≈ <b class="blank" data-n="13">9.46×10¹⁵ m</b></li>
+    <li>가장 가까운 별 4.2 광년 · 우리은하의 지름 약 10²¹ m = 약 <b class="blank" data-n="14">10만 광년</b></li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 지구에서 태양까지(약 10¹¹ m)는 지구의 지름(약 10⁷ m)의 몇 배? <span class="ans">→ ㉠</span> &nbsp; ㉠ 10⁴ 배 &nbsp; ㉡ 10¹⁸ 배 &nbsp; ㉢ 10⁷⁷ 배</p>
+    <p>2. 다음 가운데 가장 먼 거리는? <span class="ans">→ ㉡</span> &nbsp; ㉠ 지구에서 태양까지 &nbsp; ㉡ 1 광년 &nbsp; ㉢ 지구에서 달까지</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>손톱(10⁻² m)에서 관측 가능한 우주(10²⁶ m)까지 왜 28걸음이면 충분한지, ‘지수’라는 말을 넣어 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-02.html · 이야기 ② 「10의 거듭제곱으로 걷기」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

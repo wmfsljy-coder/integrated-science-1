@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 화학 결합 (통합과학1 Ⅱ-2 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-02.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 8px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 6px; }
+  h2 { font-size: 14.5px; font-weight: 900; margin: 8px 0 3px; padding: 3px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 12.8px; line-height: 1.62; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 2px 7px; text-align: left; line-height: 1.5; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 4px; }
+  .q p { line-height: 1.65; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 38px; margin-top: 4px; }
+  .foot { margin-top: 6px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-02.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅱ-2 물질의 규칙성과 성질 · 02 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 화학 결합</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~13)</p>
+
+  <h2>① 전자를 주고받다 — 이온 결합</h2>
+  <ul>
+    <li>18족처럼 가장 바깥 껍질에 전자 8개(수소·헬륨은 2개)를 채우면 안정해진다 → <b class="blank" data-n="1">옥텟 규칙</b> · 방법: 주고받거나(금속 + 비금속) 같이 쓴다(비금속 + 비금속)</li>
+    <li>나트륨 (2, 8, 1): 전자 1개를 내주어 <b class="blank" data-n="2">양이온</b> Na⁺ (2, 8) &nbsp;·&nbsp; 염소 (2, 8, 7): 전자 1개를 받아 <b class="blank" data-n="3">음이온</b> Cl⁻ (2, 8, 8)</li>
+    <li>양이온과 음이온이 끌어당겨 이루는 결합 → <b class="blank" data-n="4">이온 결합</b> · 산화 마그네슘은 전자 2개를 주고받아 Mg²⁺, O²⁻</li>
+    <li>Na⁺와 Cl⁻가 가로·세로·높이로 번갈아 쌓인 <b class="blank" data-n="5">결정</b> — NaCl 한 쌍씩 떨어진 분자는 없다 · 녹는점이 높다(염화 나트륨 802 ℃, 산화 마그네슘 2,852 ℃)</li>
+  </ul>
+
+  <h2>② 전자를 같이 쓰다 — 공유 결합</h2>
+  <ul>
+    <li>비금속 원소끼리 전자를 내놓아 같이 쓴다 → <b class="blank" data-n="6">공유 결합</b> · 물 H₂O: 산소는 8개, 수소는 2개를 채운다(나눠 쓴 전자쌍은 양쪽에 센다)</li>
+    <li>공유 결합으로 만들어진 입자 → <b class="blank" data-n="7">분자</b> : 전체가 전기적으로 중성 · 녹는점이 낮다</li>
+    <li>메테인 CH₄: 탄소(원자가 전자 4개)가 네 방향으로 결합 &nbsp;·&nbsp; 산소 O₂: 전자쌍 두 쌍을 나눠 씀 → <b class="blank" data-n="8">이중 결합</b></li>
+  </ul>
+
+  <h2>③ 전기가 통하는 까닭</h2>
+  <p>물질에 전기가 통하는 성질 → <b class="blank" data-n="9">전기 전도성</b></p>
+  <table>
+    <tr><th style="width:26%">물질 (결합)</th><th style="width:13%">고체</th><th style="width:16%">녹인 것</th><th style="width:16%">물에 녹인 것</th><th>까닭</th></tr>
+    <tr><td>염화 나트륨 (이온 결합)</td><td>✕</td><td>○</td><td>○</td><td>고체에서는 이온이 묶여 있고, 녹으면 <b class="blank" data-n="10">이온</b>이 움직인다</td></tr>
+    <tr><td>설탕 (공유 결합)</td><td>✕</td><td>✕</td><td>✕</td><td>중성인 분자뿐 → 움직이는 전하가 없다</td></tr>
+    <tr><td>구리 (금속)</td><td>○</td><td>○</td><td>녹지 않음</td><td>금속 전체를 돌아다니는 <b class="blank" data-n="11">자유 전자</b></td></tr>
+  </table>
+  <ul>
+    <li>전기가 통하려면 움직일 수 있는 <b class="blank" data-n="12">전하</b>가 있어야 한다 · 순수한 물은 거의 통하지 않고, 수돗물은 녹아 있는 이온 때문에 통한다</li>
+    <li>이름 없는 시료 가려내기: 이온 결합 물질은 <b class="blank" data-n="13">녹는점</b>이 높고, 고체 ✕ · 녹이거나 물에 녹이면 ○ (예: 2,852 ℃ 산화 마그네슘, 770 ℃ 염화 칼륨) / 공유 결합 분자는 녹는점이 낮고 녹여도 ✕ (−114 ℃ 에탄올, 186 ℃ 설탕)</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 물(H₂O) · 산소(O₂) · 소금(NaCl)을 결합에 따라 바르게 나눈 것은? <span class="ans">→ ㉡</span><br>
+      ㉠ 셋 다 이온 결합 &nbsp; ㉡ 물·산소는 공유, 소금은 이온 &nbsp; ㉢ 물·소금은 이온, 산소는 공유</p>
+    <p>2. 고체 상태에서도 전기가 통하는 것은? <span class="ans">→ ㉢ 구리</span> &nbsp; ㉠ 염화 나트륨 &nbsp; ㉡ 설탕 &nbsp; ㉢ 구리</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>고체 소금은 전기가 통하지 않는데 소금물은 통하는 까닭을 ‘이온’이라는 말을 넣어 한 문장으로 설명하세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-02.html · 이야기 ② 「녹이면 통한다」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 효소와 화학 반응 (통합과학1 Ⅲ-3 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 8px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 6px; }
+  h2 { font-size: 14.5px; font-weight: 900; margin: 7px 0 3px; padding: 3px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 12.8px; line-height: 1.58; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin: 3px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 2px 7px; text-align: center; line-height: 1.42; }
+  th { background: #f4f6fa; font-weight: 800; }
+  td:first-child, th:first-child { text-align: left; }
+  .q { margin-top: 4px; }
+  .q p { line-height: 1.6; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 38px; margin-top: 4px; }
+  .foot { margin-top: 6px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-01.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅲ-3 생명 시스템 · 01 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 효소와 화학 반응</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~13)</p>
+
+  <h2>① 효소가 하는 일 — 과산화 수소의 분해 (2H₂O₂ → 2H₂O + O₂)</h2>
+  <ul>
+    <li>반응이 일어나려면 넘어야 할 언덕: <b class="blank" data-n="1">활성화 에너지</b> (과산화 수소: 효소 없이 약 75 kJ/mol)</li>
+    <li>언덕을 75 → 8 kJ/mol(카탈레이스)로 낮추는 생체 촉매: <b class="blank" data-n="2">효소</b> · 반응물·생성물과 그 에너지 차이는 그대로 → 속도만 바꾼다</li>
+  </ul>
+  <table>
+    <tr><th style="width:34%">25 °C 효소 없을 때보다 (단원 화면 계산)</th><th>온도만 50 °C</th><th>온도만 80 °C</th><th>효소 · 언덕 29 kJ/mol</th><th>카탈레이스 · 8 kJ/mol</th></tr>
+    <tr><td>반응이 빨라지는 배수</td><td>약 <b class="blank" data-n="3">10배</b></td><td>약 110배</td><td>약 1억 배</td><td>약 5천억 배</td></tr>
+  </table>
+  <ul>
+    <li>효소가 없어도 과산화 수소는 <b class="blank" data-n="4">아주 느리게</b> 분해된다 (묽으면 거품이 보이지 않을 뿐)</li>
+    <li>효소는 반응물이 아니다 → 반응 뒤에도 그대로 남아 다시 쓰인다</li>
+  </ul>
+
+  <h2>② 온도와 pH — 김치 유산균 효소 (단원 화면 모형)</h2>
+  <ul>
+    <li>효소의 주성분: <b class="blank" data-n="5">단백질</b> → 접힌 모양이 맞아야 기질이 홈에 들어간다</li>
+    <li>가장 빠르게 일하는 온도: <b class="blank" data-n="6">최적 온도</b> (이 효소 30 °C) · 가장 빠르게 일하는 pH: <b class="blank" data-n="7">최적 pH</b> (이 효소 5.5, 위액 속 펩신은 pH 2 부근)</li>
+    <li>높은 열에 단백질의 접힌 모양이 풀려 홈이 사라진다: <b class="blank" data-n="8">변성</b> → 온도를 내려도 돌아오지 않는다 (삶은 달걀)</li>
+  </ul>
+  <table>
+    <tr><th style="width:12%">통</th><th>조건</th><th>효소에 일어난 일</th><th>결과</th></tr>
+    <tr><td>㉮</td><td>김치냉장고 −2 °C</td><td>온도 활성 약 3 % · 아주 느림</td><td>몇 달에 걸쳐 익는 중</td></tr>
+    <tr><td>㉯</td><td>실온 20 °C</td><td>온도 활성 약 71 % · 잘 일함</td><td>하루 만에 시어짐</td></tr>
+    <tr><td>㉰</td><td>80 °C 국물 → 20 °C</td><td>변성 · 홈이 사라짐</td><td>한 달째 변화 없음</td></tr>
+  </table>
+
+  <h2>③ 기질 특이성 — 자물쇠와 열쇠, 효소 세제</h2>
+  <ul>
+    <li>효소가 작용하는 물질: <b class="blank" data-n="9">기질</b> · 짝이 맞는 기질에만 작용하는 성질: <b class="blank" data-n="10">기질 특이성</b> → 김치 옆 과산화 수소수는 멀쩡</li>
+    <li>핏자국(단백질)에는 짝이 맞는 <b class="blank" data-n="11">단백질 분해 효소</b>: 40 °C 약 95 %, 30 °C 약 88 % / 지방 분해 효소 약 30 % / 75 °C 이상은 변성으로 0 % (모형값)</li>
+    <li>생활 속 효소: 위액 속 <b class="blank" data-n="12">펩신</b>(단백질) · 이자액 속 라이페이스(지방) · 침 속 <b class="blank" data-n="13">아밀레이스</b>(녹말) · 연육제 파파인 · 엿기름 · 효소 세제</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 반응에 효소를 넣었을 때 달라지는 것은? <span class="ans">→ ㉡</span><br>
+      ㉠ 만들어지는 물질의 종류 &nbsp; ㉡ 활성화 에너지의 크기 &nbsp; ㉢ 반응물과 생성물의 에너지 차이</p>
+    <p>2. 최적 온도가 30 °C인 효소로 익는 김치를 −2 °C에 두면? <span class="ans">→ ㉡ 아주 느리게 계속 익는다</span><br>
+      ㉠ 효소가 변성되어 영영 안 익는다 &nbsp; ㉡ 아주 느리게 계속 익는다 &nbsp; ㉢ 활성화 에너지가 0이 된다</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>통 ㉮(−2 °C)와 통 ㉰(80 °C 국물)가 둘 다 ‘안 익는 것처럼’ 보였지만 까닭이 다릅니다. 그 차이를 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-01.html · 이야기 ① 「익지 않는 김치」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

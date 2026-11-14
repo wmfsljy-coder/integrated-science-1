@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 중력과 자유 낙하 (통합과학1 Ⅲ-2 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes dropIn { from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: none; } }
+  .current .art .fall { animation: dropIn 1.2s ease both; }
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  .formula-line { font-size: 36px !important; font-weight: 900; color: var(--blue); }
+  table.ledger td { font-size: 30px; padding: 14px 14px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="기울어진 탑, 공기를 뺀 유리 통 안에서 같은 높이로 나란히 떨어지는 쇠공과 깃털의 잔상, 지구를 도는 인공위성">
+      <g transform="rotate(4 330 500)">
+        <rect x="270" y="110" width="120" height="390" rx="8" fill="#d9d2c3"/>
+        <g stroke="#a39a86" stroke-width="4"><line x1="270" y1="170" x2="390" y2="170"/><line x1="270" y1="235" x2="390" y2="235"/><line x1="270" y1="300" x2="390" y2="300"/><line x1="270" y1="365" x2="390" y2="365"/><line x1="270" y1="430" x2="390" y2="430"/></g>
+        <rect x="290" y="80" width="80" height="34" rx="6" fill="#c9c1ae"/>
+      </g>
+      <g class="fall">
+        <rect x="700" y="30" width="200" height="460" rx="24" fill="rgba(116,182,255,.10)" stroke="#74b6ff" stroke-width="4"/>
+        <g fill="#adb5bd"><circle cx="760" cy="70" r="16" opacity=".3"/><circle cx="760" cy="86" r="16" opacity=".4"/><circle cx="760" cy="132" r="16" opacity=".55"/><circle cx="760" cy="210" r="16" opacity=".7"/><circle cx="760" cy="320" r="16" opacity=".85"/><circle cx="760" cy="460" r="16"/></g>
+        <g fill="#ffe8a1" stroke="#f08c00" stroke-width="2">
+          <path d="M800 70 Q840 56 880 70 Q840 84 800 70Z" opacity=".3"/><path d="M800 86 Q840 72 880 86 Q840 100 800 86Z" opacity=".4"/><path d="M800 132 Q840 118 880 132 Q840 146 800 132Z" opacity=".55"/>
+          <path d="M800 210 Q840 196 880 210 Q840 224 800 210Z" opacity=".7"/><path d="M800 320 Q840 306 880 320 Q840 334 800 320Z" opacity=".85"/><path d="M800 460 Q840 446 880 460 Q840 474 800 460Z"/>
+        </g>
+      </g>
+      <g data-step="1">
+        <circle cx="1290" cy="300" r="110" fill="#1971c2"/><path d="M1215 260 q30 -30 60 -10 q20 30 -10 50 q-40 10 -50 -40Z" fill="#40c057"/>
+        <circle cx="1290" cy="300" r="185" fill="none" stroke="#69db9c" stroke-width="4" stroke-dasharray="12 10"/>
+        <circle cx="1421" cy="169" r="14" fill="#ffd43b"/>
+      </g>
+      <text x="1560" y="510" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 탑·통·지구의 크기와 거리는 실제 비율이 아닙니다</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅲ-2 역학 시스템 · 01</p>
+    <h1>중력과 자유 낙하</h1>
+    <p class="sub" data-step="1">깃털 한 장에서 인공위성까지, 모두 같은 힘으로 떨어진다</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 2000년 동안 믿어 온 한 문장을 무너뜨리고, 마지막에는 대포알을 인공위성으로 만들어 봅니다.</p>
+    <p data-at="1">떨어지는 깃털과 지구를 도는 위성, 전혀 달라 보이지만 같은 힘 하나로 설명됩니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="공기를 빼면 깃털은?" data-part="도입">
+  <p class="kicker">도입 · 16세기 말, 갈릴레이가 토를 단 한 문장</p>
+  <h2>공기를 모두 빼면 깃털은 어떻게 떨어질까</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p><b>아리스토텔레스</b> “무거운 물체가 가벼운 물체보다 빨리 떨어진다.”</p>
+      <p class="small">돌과 깃털을 떨어뜨려 보면 누구나 그렇게 보여 2000년 가까이 의심받지 않았다.</p>
+      <p class="mt"><b>갈릴레이</b> “공기가 없다면 둘은 똑같이 떨어질 것이다.”</p>
+      <p class="small mt">준비물: 쇠공(약 0.5 kg) · 깃털(약 1 g) · 높이 5.0 m 투명 통 · 공기를 빼는 펌프</p>
+    </div>
+    <div class="card yel">
+      <h3>공기를 모두 빼낸 통에서 동시에 놓으면?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 무거운 쇠공이 먼저 닿는다</div>
+        <div class="opt">㉡ 둘이 똑같이 떨어져 동시에 닿는다</div>
+        <div class="opt">㉢ 깃털이 한참 떠 있다가 천천히 닿는다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>아리스토텔레스의 문장은 눈으로 보기에 틀린 데가 없어 보였습니다. 갈릴레이는 공기가 범인일 수 있다고 의심했어요.</p>
+    <p data-at="1">손을 들게 하고 까닭을 한 문장씩 묻습니다. 답은 주지 않습니다. 오늘 진공 통 실험으로 직접 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>중력</b><span>지구가 물체를 끌어당기는 힘</span></div>
+    <div class="card"><b>중력 가속도</b><span>떨어지며 1초마다 빨라지는 정도</span></div>
+    <div class="card"><b>자유 낙하</b><span>중력만 받아 떨어지는 운동</span></div>
+    <div class="card"><b>수평으로 던진 물체</b><span>앞으로 가면서 동시에 떨어진다</span></div>
+    <div class="card"><b>인공위성</b><span>끝없이 떨어지며 지구를 돈다</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~14번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 공기 저항 -->
+<section class="slide" id="s-air" data-title="공기 저항과 종단 속도" data-part="① 공기를 빼면">
+  <p class="kicker">① 공기를 빼면 · 공기 속에서 떨어지는 깃털</p>
+  <h2>공기 속에서 깃털은 금세 더 빨라지지 못한다</h2>
+  <div class="cols" style="grid-template-columns:640px 1fr;align-items:center">
+    <svg viewBox="0 0 640 480" width="640" height="480" aria-label="떨어지는 깃털의 세 순간. 아래로 향하는 중력은 그대로이고 위로 향하는 공기 저항은 점점 커져 세 번째 순간에 중력과 같아진다">
+      <defs>
+        <marker id="s4-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e03131"/></marker>
+        <marker id="s4-ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1462d8"/></marker>
+      </defs>
+      <g font-size="22" font-weight="900" text-anchor="middle">
+        <g>
+          <path transform="translate(110 230) rotate(-12)" d="M-46 0 Q0 -20 46 0 Q0 20 -46 0Z M-46 0 L46 0" fill="#ffe8a1" stroke="#f08c00" stroke-width="3"/>
+          <line x1="110" y1="252" x2="110" y2="380" stroke="#e03131" stroke-width="8" marker-end="url(#s4-ar)"/>
+          <text x="110" y="444" fill="#161b28">놓은 직후</text>
+          <text x="110" y="60" fill="#5f6b80">거의 멈춤</text>
+        </g>
+        <g data-step="1">
+          <path transform="translate(320 230) rotate(-12)" d="M-46 0 Q0 -20 46 0 Q0 20 -46 0Z M-46 0 L46 0" fill="#ffe8a1" stroke="#f08c00" stroke-width="3"/>
+          <line x1="320" y1="252" x2="320" y2="380" stroke="#e03131" stroke-width="8" marker-end="url(#s4-ar)"/>
+          <line x1="320" y1="208" x2="320" y2="146" stroke="#1462d8" stroke-width="8" marker-end="url(#s4-ab)"/>
+          <text x="320" y="444" fill="#161b28">빨라지는 중</text>
+          <text x="320" y="60" fill="#5f6b80">속도 ↑</text>
+          <text x="388" y="170" fill="#1462d8" text-anchor="start" font-size="20">공기 저항</text>
+          <text x="388" y="340" fill="#e03131" text-anchor="start" font-size="20">중력</text>
+        </g>
+        <g data-step="2">
+          <path transform="translate(540 230) rotate(-12)" d="M-46 0 Q0 -20 46 0 Q0 20 -46 0Z M-46 0 L46 0" fill="#ffe8a1" stroke="#f08c00" stroke-width="3"/>
+          <line x1="540" y1="252" x2="540" y2="380" stroke="#e03131" stroke-width="8" marker-end="url(#s4-ar)"/>
+          <line x1="540" y1="208" x2="540" y2="88" stroke="#1462d8" stroke-width="8" marker-end="url(#s4-ab)"/>
+          <text x="540" y="444" fill="#161b28">종단 속도</text>
+          <text x="540" y="60" fill="#5f6b80">일정</text>
+        </g>
+      </g>
+      <text x="0" y="474" font-size="18" fill="#5f6b80">⚠ 깃털 크기·화살표 길이는 보기 쉽게 그린 것</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">빨라질수록 위쪽으로 받는 <b class="blank" data-n="1" data-step="1">공기 저항</b>도 커진다</p>
+      <p data-step="2">공기 저항 = 중력 → 더 빨라지지 못하고 일정한 속도: <b class="blank" data-n="2" data-step="2">종단 속도</b></p>
+      <p class="small" data-step="3">단원 화면 모형: 쇠공 약 93 m/s · 넓고 가벼운 깃털 약 1.3 m/s</p>
+      <p data-step="3">깃털이 늦은 까닭은 무게가 아니라 <b class="c-blue">공기 저항</b></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>공기 속에서 깃털을 놓는 순간부터 봅시다. 처음에는 중력만 아래로 작용해요.</p>
+    <p data-at="1">빨라질수록 공기가 위로 미는 힘이 커집니다. 빈칸 1번, 공기 저항.</p>
+    <p data-at="2">공기 저항이 중력과 같아지면 알짜힘이 없어 더 빨라지지 못하고 일정한 속도로 내려옵니다. 빈칸 2번, 종단 속도.</p>
+    <p data-at="3">단원 화면 모형에서 쇠공의 종단 속도는 약 93 m/s, 깃털은 약 1.3 m/s입니다. 깃털이 늦은 것은 가벼워서가 아니라 공기 저항을 크게 받기 때문이에요.</p>
+  </aside>
+</section>
+
+<!-- 5 진공 통 -->
+<section class="slide" id="s-vac" data-title="진공 통 — 공기를 0%로" data-part="① 공기를 빼면">
+  <p class="kicker">① 공기를 빼면 · 높이 5.0 m 진공 통 (단원 화면 모형)</p>
+  <h2>공기를 빼면 쇠공과 깃털이 나란히 떨어진다</h2>
+  <div class="cols" style="grid-template-columns:760px 1fr;align-items:center">
+    <svg viewBox="0 0 760 500" width="760" height="500" aria-label="두 유리 통의 같은 시간 간격 잔상. 공기 60% 통에서는 깃털이 위쪽에 처져 있고, 공기 0% 통에서는 쇠공과 깃털이 언제나 같은 높이에 있다">
+      <g>
+        <rect x="60" y="30" width="240" height="420" rx="20" fill="#e7f3ff" stroke="#74a7e0" stroke-width="4"/>
+        <g fill="#a5c8f0"><circle cx="90" cy="120" r="4"/><circle cx="270" cy="90" r="4"/><circle cx="110" cy="300" r="4"/><circle cx="250" cy="250" r="4"/><circle cx="160" cy="390" r="4"/><circle cx="280" cy="360" r="4"/><circle cx="200" cy="200" r="4"/><circle cx="85" cy="420" r="4"/></g>
+        <text x="180" y="484" font-size="24" font-weight="900" fill="#161b28" text-anchor="middle">공기 60%</text>
+      </g>
+      <g data-step="1">
+        <g fill="#495057"><circle cx="140" cy="60" r="15" opacity=".3"/><circle cx="140" cy="82" r="15" opacity=".45"/><circle cx="140" cy="148" r="15" opacity=".6"/><circle cx="140" cy="258" r="15" opacity=".8"/><circle cx="140" cy="413" r="15"/></g>
+        <g fill="#ffe8a1" stroke="#f08c00" stroke-width="2"><path d="M195 60 Q230 47 265 60 Q230 73 195 60Z" opacity=".3"/><path d="M195 80 Q230 67 265 80 Q230 93 195 80Z" opacity=".45"/><path d="M195 105 Q230 92 265 105 Q230 118 195 105Z" opacity=".6"/><path d="M195 130 Q230 117 265 130 Q230 143 195 130Z" opacity=".8"/><path d="M195 158 Q230 145 265 158 Q230 171 195 158Z"/></g>
+      </g>
+      <g>
+        <rect x="440" y="30" width="240" height="420" rx="20" fill="#f8f9fa" stroke="#868e96" stroke-width="4"/>
+        <text x="560" y="484" font-size="24" font-weight="900" fill="#161b28" text-anchor="middle">공기 0% (진공)</text>
+      </g>
+      <g data-step="2">
+        <g fill="#495057"><circle cx="520" cy="60" r="15" opacity=".3"/><circle cx="520" cy="82" r="15" opacity=".45"/><circle cx="520" cy="148" r="15" opacity=".6"/><circle cx="520" cy="258" r="15" opacity=".8"/><circle cx="520" cy="413" r="15"/></g>
+        <g fill="#ffe8a1" stroke="#f08c00" stroke-width="2"><path d="M575 60 Q610 47 645 60 Q610 73 575 60Z" opacity=".3"/><path d="M575 82 Q610 69 645 82 Q610 95 575 82Z" opacity=".45"/><path d="M575 148 Q610 135 645 148 Q610 161 575 148Z" opacity=".6"/><path d="M575 258 Q610 245 645 258 Q610 271 575 258Z" opacity=".8"/><path d="M575 413 Q610 400 645 413 Q610 426 575 413Z"/></g>
+        <g stroke="#2f9e44" stroke-width="3" stroke-dasharray="8 6"><line x1="500" y1="148" x2="665" y2="148"/><line x1="500" y1="258" x2="665" y2="258"/><line x1="500" y1="413" x2="665" y2="413"/></g>
+        <text x="700" y="263" font-size="20" font-weight="900" fill="#2f9e44">같은</text><text x="700" y="287" font-size="20" font-weight="900" fill="#2f9e44">높이</text>
+      </g>
+      <text x="380" y="20" font-size="18" fill="#5f6b80" text-anchor="middle">⚠ 0.25초 간격 잔상 · 깃털 위치는 모식</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">공기가 있으면 깃털이 한참 늦게 닿는다</p>
+      <p data-step="2">공기를 모두 빼면 같은 순간 늘 같은 높이 → 약 1.01초 만에 함께 닿음</p>
+      <p data-step="2">공기 저항 없이 중력만 받아 떨어지는 운동: <b class="blank" data-n="3" data-step="2">자유 낙하</b></p>
+      <div class="card yel" data-step="3"><p class="small" style="margin:0;color:#161b28">🌙 1971년 아폴로 15호 사령관 데이비드 스콧이 달 표면에서 망치와 매의 깃털을 동시에 놓았다 → <b>동시에</b> 닿음</p></div>
+    </div>
+  </div>
+  <p class="note">피사의 사탑 실험은 제자가 남긴 이야기일 뿐 실제로 있었는지 확실하지 않습니다. 갈릴레이는 빗면을 굴리는 실험으로 낙하 법칙을 밝혔습니다.</p>
+  <aside class="script">
+    <p>단원 화면의 진공 통입니다. 같은 시간 간격으로 찍은 잔상이에요.</p>
+    <p data-at="1">공기 60%에서는 쇠공이 바닥에 닿을 때 깃털은 아직 위쪽에 있습니다.</p>
+    <p data-at="2">공기를 0%로 빼면 쇠공과 깃털이 언제나 같은 높이에 있고, 5 m를 약 1.01초 만에 함께 떨어집니다. 이렇게 중력만 받아 떨어지는 운동이 빈칸 3번, 자유 낙하입니다. 첫 추리의 답이 여기서 나옵니다.</p>
+    <p data-at="3">1971년, 공기가 없는 달에서 실제로 해 봤습니다. 망치와 깃털이 동시에 닿았어요. 갈릴레이의 예상이 달에서 확인된 순간입니다.</p>
+  </aside>
+</section>
+
+<!-- 6 같은 시간 간격 -->
+<section class="slide" id="s-strobe" data-title="1초마다 빨라지는 정도" data-part="② 자유 낙하">
+  <p class="kicker">② 자유 낙하 · 1초 간격으로 찍은 자유 낙하 (지구)</p>
+  <h2>떨어지는 동안 일정하게 빨라진다</h2>
+  <div class="cols" style="grid-template-columns:640px 1fr;align-items:center">
+    <svg viewBox="0 0 640 490" width="640" height="490" aria-label="1초 간격 자유 낙하. 1초 뒤 4.9 m, 2초 뒤 19.6 m, 3초 뒤 44.1 m 떨어지고 속도는 9.8, 19.6, 29.4 m/s이다">
+      <line x1="110" y1="40" x2="110" y2="440" stroke="#161b28" stroke-width="4"/>
+      <g font-size="20" font-weight="800" fill="#5f6b80" text-anchor="end">
+        <line x1="96" y1="40" x2="110" y2="40" stroke="#161b28" stroke-width="3"/><text x="88" y="47">0 m</text>
+        <line x1="96" y1="130.7" x2="110" y2="130.7" stroke="#161b28" stroke-width="3"/><text x="88" y="138">10 m</text>
+        <line x1="96" y1="221.4" x2="110" y2="221.4" stroke="#161b28" stroke-width="3"/><text x="88" y="229">20 m</text>
+        <line x1="96" y1="312.1" x2="110" y2="312.1" stroke="#161b28" stroke-width="3"/><text x="88" y="319">30 m</text>
+        <line x1="96" y1="402.8" x2="110" y2="402.8" stroke="#161b28" stroke-width="3"/><text x="88" y="410">40 m</text>
+      </g>
+      <circle cx="190" cy="40" r="16" fill="#495057"/><text x="230" y="48" font-size="22" font-weight="900" fill="#161b28">0초 · 놓는 순간</text>
+      <g data-step="1"><circle cx="190" cy="84.4" r="16" fill="#495057"/><text x="230" y="92" font-size="22" font-weight="900" fill="#1462d8">1초 · 4.9 m · 9.8 m/s</text></g>
+      <g data-step="2"><circle cx="190" cy="217.8" r="16" fill="#495057"/><text x="230" y="226" font-size="22" font-weight="900" fill="#1462d8">2초 · 19.6 m · 19.6 m/s</text></g>
+      <g data-step="3"><circle cx="190" cy="440" r="16" fill="#495057"/><text x="230" y="448" font-size="22" font-weight="900" fill="#1462d8">3초 · 44.1 m · 29.4 m/s</text></g>
+      <text x="630" y="484" font-size="18" fill="#5f6b80" text-anchor="end">공기 저항이 없을 때 · 거리는 놓은 곳부터</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">1초마다 속도가 똑같이 늘어나는 정도: <b class="blank" data-n="4" data-step="1">중력 가속도</b> g</p>
+      <p data-step="1">지구에서 g ≈ <b class="blank" data-n="5" data-step="1">9.8 m/s²</b></p>
+      <p class="formula-line" data-step="2">v = gt &nbsp;·&nbsp; h = ½gt²</p>
+      <p data-step="3">1초·2초·3초 동안 떨어진 거리의 비 → <b class="blank" data-n="6" data-step="3">1 : 4 : 9</b></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>지구에서 공기 저항 없이 공을 놓고 1초마다 찍었다고 합시다.</p>
+    <p data-at="1">1초 뒤 속도는 9.8 m/s. 1초마다 빨라지는 이 정도가 빈칸 4번, 중력 가속도입니다. 지구에서는 빈칸 5번, 9.8 m/s²예요.</p>
+    <p data-at="2">2초 뒤에는 19.6 m/s, 떨어진 거리는 19.6 m. 속도는 v = gt, 거리는 h = ½gt²입니다.</p>
+    <p data-at="3">3초 뒤에는 44.1 m. 4.9, 19.6, 44.1을 4.9로 나누면 빈칸 6번, 1 : 4 : 9. 시간의 제곱에 비례합니다. 그래서 잔상 간격이 아래로 갈수록 벌어지죠.</p>
+  </aside>
+</section>
+
+<!-- 7 천체마다 다른 g -->
+<section class="slide soft" id="s-planet" data-title="천체마다 다른 g" data-part="② 자유 낙하">
+  <p class="kicker">② 자유 낙하 · 낙하 계산기로 천체를 바꿔 보면 (단원 화면 값)</p>
+  <h2>같은 19.6 m라도 천체마다 걸리는 시간이 다르다</h2>
+  <svg viewBox="0 0 1400 320" width="1400" height="320" aria-label="높이 19.6 m에서 바닥까지 걸리는 시간 막대: 달 4.92초, 화성 3.25초, 지구 2.00초, 목성 1.26초">
+    <text x="0" y="24" font-size="20" font-weight="900" fill="#5f6b80">높이 19.6 m에서 놓았을 때 바닥까지 걸리는 시간 (괄호 안은 g, m/s²)</text>
+    <g font-size="26" font-weight="900" fill="#161b28">
+      <g data-step="2"><text x="0" y="86">달 (1.62)</text><rect x="250" y="56" width="984" height="44" rx="8" fill="#868e96"/><text x="1248" y="88">4.92초</text></g>
+      <g data-step="2"><text x="0" y="156">화성 (3.71)</text><rect x="250" y="126" width="650" height="44" rx="8" fill="#e8590c"/><text x="914" y="158">3.25초</text></g>
+      <g data-step="1"><text x="0" y="226">지구 (9.80)</text><rect x="250" y="196" width="400" height="44" rx="8" fill="#1462d8"/><text x="664" y="228">2.00초</text></g>
+      <g data-step="2"><text x="0" y="296">목성 (24.79)</text><rect x="250" y="266" width="252" height="44" rx="8" fill="#c08a4d"/><text x="516" y="298">1.26초</text></g>
+    </g>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">지구: 19.6 m → 2.00초 (t = √(2h/g)) · g가 클수록 빨리 닿는다</p>
+    <p data-step="2">달: 같은 높이에서 4.92초 · 닿는 순간 10 m/s가 넘으려면 약 31 m 이상</p>
+    <p data-step="3">식 어디에도 떨어지는 물체의 <b class="blank" data-n="7" data-step="3">질량</b>이 없다 → 무엇을 떨어뜨려도 같다</p>
+  </div>
+  <p class="note">공기 저항이 없을 때 · 낙하 계산기의 g 값(달 1.62, 화성 3.71, 지구 9.80, 목성 24.79 m/s²)으로 계산했습니다.</p>
+  <aside class="script">
+    <p>단원 화면의 낙하 계산기 미션 두 개를 칠판에서 함께 풀어 봅니다.</p>
+    <p data-at="1">지구에서 바닥까지 2.00초가 걸리는 높이는 ½ × 9.8 × 2² = 19.6 m입니다.</p>
+    <p data-at="2">같은 19.6 m라도 달에서는 4.92초, 목성에서는 1.26초. 달에서 닿는 순간 10 m/s가 되려면 v² = 2gh에서 약 31 m가 필요합니다.</p>
+    <p data-at="3">h = ½gt², v = gt 어디에도 빈칸 7번, 질량이 없습니다. 쇠공이든 깃털이든 같은 천체에서는 똑같이 떨어집니다.</p>
+  </aside>
+</section>
+
+<!-- 8 수평으로 던지기 -->
+<section class="slide" id="s-throw" data-title="수평으로 던진 공" data-part="③ 던지기와 궤도">
+  <p class="kicker">③ 던지기와 궤도 · 높이 20 m 옥상에서 왼쪽 공은 놓고, 오른쪽 공은 10 m/s로 던지기</p>
+  <h2>던진 공과 놓은 공은 동시에 땅에 닿는다</h2>
+  <div class="cols" style="grid-template-columns:720px 1fr;align-items:center">
+    <svg viewBox="0 0 720 480" width="720" height="480" aria-label="옥상에서 놓은 공은 곧게, 수평으로 던진 공은 포물선을 그리며 떨어지는데 0.5초마다 두 공의 높이가 같고 동시에 땅에 닿는다">
+      <defs><marker id="s8-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e8590c"/></marker></defs>
+      <rect x="40" y="54" width="160" height="380" fill="#ced4da"/><rect x="30" y="44" width="180" height="12" fill="#868e96"/>
+      <rect x="0" y="434" width="720" height="46" fill="#a47148"/>
+      <text x="120" y="250" font-size="24" font-weight="900" fill="#495057" text-anchor="middle">20 m</text>
+      <g data-step="1" fill="#6741d9">
+        <circle cx="215" cy="40" r="13" opacity=".35"/><circle cx="215" cy="63" r="13" opacity=".5"/><circle cx="215" cy="133" r="13" opacity=".65"/><circle cx="215" cy="250" r="13" opacity=".8"/><circle cx="215" cy="420" r="13"/>
+      </g>
+      <g data-step="2">
+        <path d="M215 40 Q407 40 599 420" fill="none" stroke="#e8590c" stroke-width="3" stroke-dasharray="8 6"/>
+        <g fill="#e8590c"><circle cx="310" cy="63" r="13" opacity=".5"/><circle cx="405" cy="133" r="13" opacity=".65"/><circle cx="500" cy="250" r="13" opacity=".8"/><circle cx="599" cy="420" r="13"/></g>
+        <line x1="232" y1="22" x2="300" y2="22" stroke="#e8590c" stroke-width="5" marker-end="url(#s8-a)"/><text x="310" y="30" font-size="20" font-weight="900" fill="#e8590c">10 m/s</text>
+      </g>
+      <g data-step="3">
+        <g stroke="#2f9e44" stroke-width="3" stroke-dasharray="6 6"><line x1="228" y1="63" x2="297" y2="63"/><line x1="228" y1="133" x2="392" y2="133"/><line x1="228" y1="250" x2="487" y2="250"/><line x1="228" y1="420" x2="586" y2="420"/></g>
+        <g stroke="#fff" stroke-width="3"><line x1="215" y1="448" x2="599" y2="448"/><line x1="215" y1="440" x2="215" y2="456"/><line x1="310" y1="440" x2="310" y2="456"/><line x1="405" y1="440" x2="405" y2="456"/><line x1="500" y1="440" x2="500" y2="456"/></g>
+        <text x="407" y="475" font-size="19" font-weight="900" fill="#fff" text-anchor="middle">0.5초마다 수평으로 5 m씩</text>
+        <text x="540" y="190" font-size="20" font-weight="900" fill="#2f9e44">같은 높이</text>
+      </g>
+      <text x="715" y="20" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 0.5초 간격 · 마지막은 2.02초</text>
+    </svg>
+    <div class="lines">
+      <p data-step="2">수평 방향: 같은 시간에 같은 거리 → <b class="blank" data-n="8" data-step="2">등속</b> 운동</p>
+      <p data-step="2">연직 방향: 놓은 공과 똑같은 자유 낙하</p>
+      <p data-step="3">두 공은 <b class="blank" data-n="9" data-step="3">동시에</b> 땅에 닿는다 (20 m → 약 2.02초)</p>
+      <p data-step="3">두 운동이 합쳐진 길: <b class="blank" data-n="10" data-step="3">포물선</b></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>단원 화면의 두 공 비교입니다. 높이는 20 m로 고정이에요.</p>
+    <p data-at="1">왼쪽 공은 그냥 놓았습니다. 0.5초마다 찍은 잔상의 간격이 점점 벌어지죠.</p>
+    <p data-at="2">오른쪽 공은 수평으로 10 m/s로 던졌습니다. 옆으로는 0.5초마다 5 m씩, 같은 간격입니다. 빈칸 8번, 등속 운동. 아래로는 놓은 공과 똑같이 떨어집니다.</p>
+    <p data-at="3">초록 선을 보세요. 매 순간 두 공의 높이가 같습니다. 그래서 빈칸 9번, 동시에 닿습니다. 20 m에서 약 2.02초. 두 운동이 합쳐진 길이 빈칸 10번, 포물선입니다.</p>
+  </aside>
+</section>
+
+<!-- 9 던지는 속도를 바꾸면 -->
+<section class="slide soft" id="s-range" data-title="세게 던질수록" data-part="③ 던지기와 궤도">
+  <p class="kicker">③ 던지기와 궤도 · 높이 20 m에서 수평 속도만 바꾸면</p>
+  <h2>세게 던질수록 멀리 가지만, 떨어지는 시간은 그대로</h2>
+  <table class="ledger">
+    <tr><th>수평으로 던지는 속도</th><th>땅에 닿는 데 걸리는 시간</th><th>수평으로 날아간 거리</th></tr>
+    <tr data-step="1"><td>0 m/s (그냥 놓기)</td><td>약 2.02초</td><td>0 m (바로 아래)</td></tr>
+    <tr data-step="2"><td>5 m/s</td><td>약 2.02초</td><td>약 10.1 m</td></tr>
+    <tr data-step="2"><td>10 m/s</td><td>약 2.02초</td><td>약 20.2 m</td></tr>
+    <tr data-step="3"><td>20 m/s</td><td>약 2.02초</td><td>약 40.4 m</td></tr>
+  </table>
+  <p class="mt" data-step="4">수평 거리 = 수평 속도 × 떨어지는 시간 · 그럼 <b class="c-red">아주아주 세게</b> 던지면?</p>
+  <aside class="script">
+    <p>단원 화면 미션처럼 수평 속도를 5 m/s 이상으로 바꿔 가며 확인합니다.</p>
+    <p data-at="1">그냥 놓으면 약 2.02초 뒤 바로 아래에 떨어집니다.</p>
+    <p data-at="2">5 m/s, 10 m/s로 던져도 떨어지는 시간은 똑같이 약 2.02초. 날아간 거리만 10.1 m, 20.2 m로 늘어납니다.</p>
+    <p data-at="3">20 m/s면 약 40.4 m. 속도를 2배로 하면 거리도 2배입니다.</p>
+    <p data-at="4">그럼 아주아주 세게 던지면 어떻게 될까요? 뉴턴이 바로 이 질문을 했습니다.</p>
+  </aside>
+</section>
+
+<!-- 10 뉴턴의 대포 -->
+<section class="slide" id="s-cannon" data-title="뉴턴의 대포" data-part="③ 던지기와 궤도">
+  <p class="kicker">③ 던지기와 궤도 · 뉴턴의 생각 실험 (『프린키피아』, 1687)</p>
+  <h2>아주 세게 쏘면 땅이 휘는 만큼 떨어진다</h2>
+  <div class="cols" style="grid-template-columns:760px 1fr;align-items:center">
+    <svg viewBox="0 0 760 500" width="760" height="500" aria-label="지구 위 높은 산에서 수평으로 쏜 대포알. 느리면 가까이, 빠르면 멀리 떨어지고, 더 빠르면 원궤도를 돌며, 아주 빠르면 지구를 벗어난다">
+      <defs>
+        <marker id="s10-ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e8590c"/></marker>
+        <marker id="s10-ap" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#7048e8"/></marker>
+        <radialGradient id="s10-earth" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#4dabf7"/><stop offset="1" stop-color="#1864ab"/></radialGradient>
+      </defs>
+      <circle cx="380" cy="290" r="160" fill="url(#s10-earth)"/>
+      <path d="M300 230 q40 -40 80 -10 q30 40 -20 60 q-50 10 -60 -50Z M420 330 q40 -10 50 30 q-20 40 -50 20Z" fill="#51cf66" opacity=".8"/>
+      <path d="M352 134 L380 98 L408 134Z" fill="#868e96"/><rect x="372" y="90" width="26" height="12" rx="3" fill="#343a40"/>
+      <g data-step="1"><path d="M392 96 Q428 96 448 145" fill="none" stroke="#e8590c" stroke-width="5" marker-end="url(#s10-ao)"/><line x1="0" y1="30" x2="40" y2="30" stroke="#e8590c" stroke-width="6"/><text x="50" y="38" font-size="20" font-weight="900" fill="#e8590c">느리면 가까이</text></g>
+      <g data-step="2"><path d="M392 96 Q540 96 530 235" fill="none" stroke="#e8590c" stroke-width="5" marker-end="url(#s10-ao)"/><text x="50" y="64" font-size="20" font-weight="900" fill="#e8590c">빠를수록 멀리</text></g>
+      <g data-step="3"><circle cx="380" cy="290" r="192" fill="none" stroke="#2f9e44" stroke-width="5" stroke-dasharray="14 9"/><circle cx="546" cy="386" r="11" fill="#2f9e44"/><line x1="0" y1="92" x2="40" y2="92" stroke="#2f9e44" stroke-width="6" stroke-dasharray="10 6"/><text x="50" y="100" font-size="20" font-weight="900" fill="#2f9e44">원궤도</text></g>
+      <g data-step="4"><path d="M392 96 C560 80 690 120 740 250" fill="none" stroke="#7048e8" stroke-width="5" marker-end="url(#s10-ap)"/><line x1="0" y1="124" x2="40" y2="124" stroke="#7048e8" stroke-width="6"/><text x="50" y="132" font-size="20" font-weight="900" fill="#7048e8">탈출</text></g>
+      <text x="0" y="492" font-size="18" fill="#5f6b80">⚠ 산·대포 크기는 실제 비율이 아님 · 공기 없음, 완전한 구로 가정</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">느리면 가까이, <span data-step="2">빠를수록 멀리 떨어진다</span></p>
+      <p data-step="3">약 7.9 km/s: 떨어지는 만큼 땅도 휘어 <b class="blank" data-n="11" data-step="3">원궤도</b></p>
+      <p data-step="3">→ 영영 바닥에 닿지 않는 <b class="blank" data-n="12" data-step="3">인공위성</b></p>
+      <p data-step="4">약 11.2 km/s 이상: 돌아오지 않는다 → <b class="blank" data-n="13" data-step="4">탈출 속도</b></p>
+    </div>
+  </div>
+  <p class="note">속도는 지표면 기준. 단원 화면의 대포(고도 100 km)에서는 원궤도 7.85 km/s, 탈출 11.10 km/s입니다.</p>
+  <aside class="script">
+    <p>공기가 없는 아주 높은 산꼭대기에 대포를 놓고 수평으로 쏩니다. 뉴턴이 1687년 책에 그려 넣은 생각 실험이에요.</p>
+    <p data-at="1">느리게 쏘면 가까이 떨어집니다.</p>
+    <p data-at="2">더 빠르게 쏘면 더 멀리 떨어지죠. 앞 장면의 표와 같습니다.</p>
+    <p data-at="3">지표 기준 약 7.9 km/s가 되면, 떨어지는 만큼 지구 표면도 휘어져 땅에 닿지 못하고 빈칸 11번, 원궤도를 돕니다. 이것이 빈칸 12번, 인공위성입니다. 단원 화면에서 이심률 0.03 이하가 되는 속도를 찾았죠.</p>
+    <p data-at="4">약 11.2 km/s를 넘으면 지구의 중력을 이기고 돌아오지 않습니다. 빈칸 13번, 탈출 속도.</p>
+  </aside>
+</section>
+
+<!-- 11 끝없이 떨어진다 -->
+<section class="slide" id="s-orbit" data-title="달은 끝없이 떨어지는 중" data-part="③ 던지기와 궤도">
+  <p class="kicker">③ 던지기와 궤도 · 1초 동안 일어나는 일 (지표 근처, 약 7.9 km/s)</p>
+  <h2>인공위성과 달은 멈춰 있지 않고 계속 떨어진다</h2>
+  <svg viewBox="0 0 1400 400" width="1400" height="400" aria-label="1초 동안 직진하면 약 7.9 km를 가지만 그동안 4.9 m 떨어지고, 지표도 7.9 km 가는 동안 약 4.9 m 낮아져 높이가 그대로이다">
+    <defs><marker id="s11-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#161b28"/></marker>
+      <marker id="s11-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e03131"/></marker></defs>
+    <path d="M150 210 Q650 210 1150 360 L1150 400 L150 400Z" fill="#74c0fc"/>
+    <path d="M150 210 Q650 210 1150 360" fill="none" stroke="#1864ab" stroke-width="5"/>
+    <text x="300" y="260" font-size="22" font-weight="900" fill="#1864ab">지표</text>
+    <circle cx="150" cy="130" r="14" fill="#2f9e44"/>
+    <g data-step="1"><line x1="166" y1="130" x2="1140" y2="130" stroke="#161b28" stroke-width="4" stroke-dasharray="12 8" marker-end="url(#s11-a)"/>
+      <text x="640" y="112" font-size="22" font-weight="900" fill="#161b28" text-anchor="middle">중력이 없다면 1초 동안 곧장: 약 7.9 km</text></g>
+    <g data-step="2"><path d="M150 130 Q650 130 1150 280" fill="none" stroke="#2f9e44" stroke-width="5"/><circle cx="1150" cy="280" r="14" fill="#2f9e44"/>
+      <line x1="1170" y1="134" x2="1170" y2="266" stroke="#e03131" stroke-width="5" marker-end="url(#s11-r)"/>
+      <text x="1186" y="200" font-size="22" font-weight="900" fill="#e03131">1초 동안</text><text x="1186" y="228" font-size="22" font-weight="900" fill="#e03131">4.9 m 떨어짐</text></g>
+    <g data-step="3"><text x="900" y="372" font-size="22" font-weight="900" fill="#fff" text-anchor="end">지표도 7.9 km 가면 약 4.9 m 낮아진다</text>
+      <g stroke="#f08c00" stroke-width="4"><line x1="150" y1="146" x2="150" y2="196"/><line x1="1150" y1="296" x2="1150" y2="346"/></g>
+      <text x="1186" y="330" font-size="20" font-weight="900" fill="#e8590c">높이 그대로</text></g>
+    <text x="1395" y="20" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 땅의 휘어짐과 높이 차이는 아주 크게 과장</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="3">떨어지는 만큼 지표가 휘어 높이가 그대로 → 영영 닿지 않고 지구를 돈다 (달도 같다)</p>
+    <p data-step="4">자유 낙하 · 포물선 운동 · 궤도 운동 → 모두 <b class="blank" data-n="14" data-step="4">중력</b> 하나가 만든 운동</p>
+  </div>
+  <aside class="script">
+    <p>인공위성이 왜 떨어지지 않는지가 아니라, 떨어지는데도 왜 땅에 닿지 않는지를 봅니다.</p>
+    <p data-at="1">중력이 없다면 위성은 1초 동안 곧장 약 7.9 km를 날아갑니다.</p>
+    <p data-at="2">하지만 중력 때문에 그 1초 동안 ½ × 9.8 × 1² = 4.9 m 떨어집니다. 자유 낙하와 똑같아요.</p>
+    <p data-at="3">지구는 둥글어서 7.9 km를 가는 동안 지표도 약 4.9 m 낮아집니다. 떨어진 만큼 땅도 내려가니 높이가 그대로예요. 달도 이렇게 끝없이 떨어지고 있습니다.</p>
+    <p data-at="4">오늘 본 세 운동은 모두 빈칸 14번, 중력 하나가 만들었습니다.</p>
+  </aside>
+</section>
+
+<!-- 12 확인 -->
+<section class="slide" id="s-check" data-title="구호 상자는 어떻게 떨어질까" data-part="③ 던지기와 궤도">
+  <p class="kicker">③ 던지기와 궤도 · 확인</p>
+  <h2>수평으로 날아가는 비행기에서 떨어뜨린 구호 상자는?</h2>
+  <div class="opts" style="max-width:1250px">
+    <div class="opt wrong" data-step="1">㉠ 자유 낙하 — 떨어뜨린 곳 바로 아래로 곧게 떨어진다</div>
+    <div class="opt right" data-step="1">㉡ 수평으로 던진 물체 — 앞으로 가면서 포물선을 그린다</div>
+    <div class="opt wrong" data-step="1">㉢ 궤도 운동 — 땅에 닿지 않고 지구를 돈다</div>
+  </div>
+  <p data-step="1" style="margin-top:40px">상자는 놓이는 순간 이미 <b>비행기와 같은 수평 속도</b>로 날고 있다 → 수평 등속 + 연직 자유 낙하 (공기 저항 무시)</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. 공기 저항은 무시합니다.</p>
+    <p data-at="1">정답은 ㉡. 상자는 가만히 있다가 떨어진 것이 아니라 비행기와 함께 날고 있었습니다. 단원 결말에서 사례를 세 갈래로 나눈 것과 같은 생각입니다.</p>
+  </aside>
+</section>
+
+<!-- 13 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>떨어지는 모든 운동은 중력이 만든다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1">공기 저항이 없으면 질량과 관계없이 똑같이 떨어진다: <b>자유 낙하</b> (진공 통 · 아폴로 15호)</li>
+    <li data-k="2" data-step="2"><b>중력 가속도</b> g(지구 9.8 m/s²) · v = gt, h = ½gt² · 1초 : 2초 : 3초 동안 거리 1 : 4 : 9</li>
+    <li data-k="3" data-step="3"><b>수평으로 던진 물체</b>: 수평 등속 + 연직 자유 낙하 → 포물선, 놓은 공과 동시에 닿는다</li>
+    <li data-k="4" data-step="4">약 7.9 km/s면 땅이 휘는 만큼 떨어져 <b>인공위성</b> · 달과 위성은 끝없이 떨어지는 중</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 14 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 지구에서 가만히 놓은 물체가 3초 동안 떨어진 거리는? (공기 저항 무시, g = 9.8 m/s²)</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 14.7 m</div>
+        <div class="opt wrong" data-step="1">㉡ 29.4 m</div>
+        <div class="opt right" data-step="1">㉢ 44.1 m</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 20 m 옥상에서 공 A는 놓고, 공 B는 수평으로 10 m/s로 던졌다. 먼저 닿는 공은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ A</div>
+        <div class="opt wrong" data-step="2">㉡ B</div>
+        <div class="opt right" data-step="2">㉢ 동시에 닿는다</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉢. h = ½ × 9.8 × 3² = 44.1 m입니다. 29.4는 3초 뒤의 속도(m/s)예요.</p>
+    <p data-at="2">2번은 ㉢. 연직 방향 운동은 똑같은 자유 낙하라서 둘 다 약 2.02초 뒤에 닿습니다.</p>
+  </aside>
+</section>
+
+<!-- 15 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ① 「피사에서 달까지」</h2>
+  <div class="cols">
+    <div class="card"><h3>조사관이 되어 보세요</h3><p>진공 통에서 공기 빼기, 천체를 바꾸는 낙하 계산기, 두 공 나란히 던지기, 뉴턴의 대포로 원궤도·탈출 만들기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 02 뉴턴 운동 법칙</h3><p>엘리베이터 안 체중계 눈금이 50 kg에서 55 kg, 45 kg으로 오르내렸습니다. 고장일까요, 중력이 바뀐 걸까요?</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ①을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+</body>
+</html>

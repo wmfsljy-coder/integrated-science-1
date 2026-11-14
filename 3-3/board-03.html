@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 유전정보의 흐름 (통합과학1 Ⅲ-3 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  .kw6 { grid-template-columns: repeat(3, 1fr) !important; }
+  .kw6 .card { min-height: 0 !important; height: auto !important; padding: 20px 26px !important; }
+  table.ledger td, table.ledger th { font-size: 27px; padding: 12px 12px; }
+  .mono { font-family: Consolas, "Courier New", monospace; font-weight: 900; letter-spacing: .04em; }
+  .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 46px; }
+  .flow .card { position: relative; font-size: 27px !important; line-height: 1.4; padding: 18px 22px; }
+  .flow .card b.k { display: inline-block; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: #fff; text-align: center; line-height: 40px; margin-right: 10px; font-size: 22px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="DNA 이중 나선에서 RNA 한 가닥이 만들어지고, 그 RNA를 읽어 아미노산 사슬이 이어지며, 끝에는 동그란 적혈구와 낫 모양 적혈구가 있다">
+      <defs><marker id="c-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#dbe4ff"/></marker></defs>
+      <g fill="none" stroke-width="7">
+        <path d="M120 180 C170 120 220 240 270 180 S370 120 420 180" stroke="#74c0fc"/>
+        <path d="M120 180 C170 240 220 120 270 180 S370 240 420 180" stroke="#ffd43b"/>
+      </g>
+      <g stroke="#dbe4ff" stroke-width="3"><line x1="150" y1="160" x2="150" y2="200"/><line x1="195" y1="152" x2="195" y2="208"/><line x1="245" y1="160" x2="245" y2="200"/><line x1="300" y1="160" x2="300" y2="200"/><line x1="345" y1="152" x2="345" y2="208"/><line x1="395" y1="160" x2="395" y2="200"/></g>
+      <text x="270" y="290" font-size="28" font-weight="900" fill="#dbe4ff" text-anchor="middle">DNA</text>
+      <line x1="460" y1="180" x2="560" y2="180" stroke="#dbe4ff" stroke-width="6" marker-end="url(#c-a)"/>
+      <path d="M600 180 C640 150 680 210 720 180 S800 150 840 180" fill="none" stroke="#ff8787" stroke-width="7"/>
+      <text x="720" y="290" font-size="28" font-weight="900" fill="#dbe4ff" text-anchor="middle">RNA</text>
+      <line x1="880" y1="180" x2="980" y2="180" stroke="#dbe4ff" stroke-width="6" marker-end="url(#c-a)"/>
+      <g fill="#b197fc"><circle cx="1030" cy="180" r="20"/><circle cx="1075" cy="180" r="20"/><circle cx="1120" cy="180" r="20"/><circle cx="1165" cy="180" r="20"/><circle cx="1210" cy="180" r="20"/></g>
+      <text x="1120" y="290" font-size="28" font-weight="900" fill="#dbe4ff" text-anchor="middle">단백질</text>
+      <g data-step="1">
+        <ellipse cx="1380" cy="140" rx="70" ry="44" fill="#e03131"/><ellipse cx="1380" cy="140" rx="30" ry="18" fill="#c92a2a"/>
+        <path d="M1310 250 C1350 200 1420 200 1460 250 C1420 225 1350 225 1310 250Z" fill="#e03131"/>
+        <text x="1380" y="300" font-size="24" font-weight="900" fill="#ffc9c9" text-anchor="middle">한 글자가 바뀌면?</text>
+      </g>
+      <text x="1560" y="510" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 분자와 세포의 크기는 실제 비율이 아님</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅲ-3 생명 시스템 · 03</p>
+    <h1>유전정보의 흐름</h1>
+    <p class="sub" data-step="1">146개 가운데 단 하나 — 낫 모양 적혈구의 정체를 쫓는다</p>
+  </div>
+  <aside class="script">
+    <p>1904년 미국 시카고, 의사 헤릭은 노엘이라는 학생의 피에서 낫처럼 휜 적혈구를 봤습니다.</p>
+    <p data-at="1">오늘은 DNA에서 단백질까지 정보가 흐르는 길을 따라가, 그 원인을 찾습니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="낫 모양 적혈구의 원인?" data-part="도입">
+  <p class="kicker">도입 · 1904년 시카고의 사건 기록</p>
+  <h2>노엘의 적혈구는 왜 낫 모양으로 굳었을까</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p>정상 적혈구: 지름 7~8 µm, 가운데가 눌린 원반 모양</p>
+      <p>환자의 적혈구: 낫 모양으로 굳어 좁은 모세 혈관을 막음</p>
+      <p class="mt">헤모글로빈의 β 사슬: 아미노산 146개로 된 단백질</p>
+      <p>환자와 정상인의 β 사슬을 견주자 <b>딱 한 자리</b>만 달랐다</p>
+    </div>
+    <div class="card yel">
+      <h3>적혈구가 낫 모양이 된 원인은?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 적혈구가 영양을 제대로 받지 못해서</div>
+        <div class="opt">㉡ 헤모글로빈 아미노산 146개 가운데 하나가 달라서</div>
+        <div class="opt">㉢ 몸속에 철이 모자라서</div>
+        <div class="opt">㉣ 적혈구의 수가 모자라서</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>노엘은 숨이 차고 온몸이 아픈 증상으로 오래 고생했습니다. 원인이 밝혀지기까지 반세기가 걸렸어요.</p>
+    <p data-at="1">손을 들게 하고 까닭을 한 문장씩 묻습니다. 답은 주지 않습니다. 오늘 염기 한 글자를 직접 바꿔 보며 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 여섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw kw6">
+    <div class="card"><b>유전자</b><span>단백질 정보를 가진 DNA의 한 부분</span></div>
+    <div class="card"><b>전사</b><span>DNA를 본떠 RNA를 만든다</span></div>
+    <div class="card"><b>번역</b><span>RNA를 읽어 아미노산을 잇는다</span></div>
+    <div class="card"><b>코돈</b><span>아미노산 하나를 정하는 염기 3개</span></div>
+    <div class="card"><b>중심 원리</b><span>DNA → RNA → 단백질</span></div>
+    <div class="card"><b>돌연변이</b><span>DNA 염기 서열이 바뀌는 것</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~12번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 여섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 세포 속 흐름 -->
+<section class="slide" id="s-cell" data-title="DNA → RNA → 단백질" data-part="① 정보의 흐름">
+  <p class="kicker">① 정보의 흐름 · 설계도 원본은 핵 밖으로 나가지 않는다</p>
+  <h2>핵 속 DNA를 본떠 만든 RNA를 리보솜이 읽는다</h2>
+  <div class="cols" style="grid-template-columns:760px 1fr;align-items:center">
+    <svg viewBox="0 0 760 480" width="760" height="480" aria-label="세포 단면. 핵 속 DNA의 한 부분인 유전자를 본떠 mRNA가 만들어지고, mRNA는 핵막 구멍으로 나와 세포질의 리보솜에서 읽혀 아미노산 사슬이 된다">
+      <defs><marker id="s4-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e8590c"/></marker></defs>
+      <ellipse cx="380" cy="240" rx="370" ry="225" fill="#fff4e6" stroke="#f08c00" stroke-width="4"/>
+      <circle cx="230" cy="230" r="150" fill="#e7f5ff" stroke="#1c7ed6" stroke-width="4"/>
+      <rect x="370" y="216" width="22" height="28" fill="#fff4e6"/>
+      <text x="230" y="110" font-size="22" font-weight="900" fill="#1864ab" text-anchor="middle">핵</text>
+      <text x="600" y="90" font-size="22" font-weight="900" fill="#d9480f" text-anchor="middle">세포질</text>
+      <g fill="none" stroke-width="6">
+        <path d="M110 200 C140 170 170 230 200 200 S260 170 290 200 S330 230 350 200" stroke="#74c0fc"/>
+        <path d="M110 200 C140 230 170 170 200 200 S260 230 290 200 S330 170 350 200" stroke="#ffd43b"/>
+      </g>
+      <text x="140" y="160" font-size="20" font-weight="900" fill="#161b28">DNA</text>
+      <g data-step="1"><rect x="196" y="176" width="100" height="48" rx="10" fill="none" stroke="#e03131" stroke-width="4" stroke-dasharray="8 5"/><text x="246" y="252" font-size="20" font-weight="900" fill="#e03131" text-anchor="middle">유전자 하나</text></g>
+      <g data-step="2">
+        <path d="M200 300 C240 280 280 320 320 300" fill="none" stroke="#ff8787" stroke-width="7"/>
+        <text x="200" y="340" font-size="20" font-weight="900" fill="#c92a2a">mRNA</text>
+        <path d="M330 300 C390 290 400 240 410 230" fill="none" stroke="#e8590c" stroke-width="4" marker-end="url(#s4-a)"/>
+        <text x="300" y="410" font-size="20" font-weight="900" fill="#e8590c">핵막 구멍으로</text>
+      </g>
+      <g data-step="3">
+        <path d="M440 300 C490 280 540 320 590 300 S650 280 690 300" fill="none" stroke="#ff8787" stroke-width="7"/>
+        <ellipse cx="560" cy="292" rx="44" ry="30" fill="#868e96" opacity=".9"/>
+        <text x="560" y="350" font-size="20" font-weight="900" fill="#495057" text-anchor="middle">리보솜</text>
+        <g fill="#b197fc"><circle cx="560" cy="250" r="12"/><circle cx="572" cy="226" r="12"/><circle cx="590" cy="204" r="12"/><circle cx="614" cy="190" r="12"/><circle cx="640" cy="184" r="12"/></g>
+        <text x="660" y="170" font-size="20" font-weight="900" fill="#7048e8" text-anchor="middle">아미노산 사슬</text>
+      </g>
+      <text x="0" y="476" font-size="18" fill="#5f6b80">⚠ 세포 속 구조의 크기는 실제 비율이 아님</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">DNA 가운데 단백질 하나의 정보를 가진 부분: <b class="blank" data-n="1" data-step="1">유전자</b></p>
+      <p data-step="2">핵 속에서 DNA를 본떠 mRNA를 만든다: <b class="blank" data-n="2" data-step="2">전사</b></p>
+      <p data-step="3">세포질의 리보솜이 mRNA를 읽어 아미노산을 잇는다: <b class="blank" data-n="3" data-step="3">번역</b></p>
+      <p data-step="4">DNA → RNA → 단백질, 한 방향 흐름: <b class="blank" data-n="4" data-step="4">중심 원리</b></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>세포를 잘라 본 그림입니다. DNA는 핵 속에 있고, 단백질을 조립하는 리보솜은 핵 밖 세포질에 있어요.</p>
+    <p data-at="1">긴 DNA 가운데 단백질 하나의 정보를 가진 부분이 빈칸 1번, 유전자입니다.</p>
+    <p data-at="2">세포는 그 유전자를 본떠 복사본 mRNA를 만듭니다. 빈칸 2번, 전사. mRNA는 핵막의 작은 구멍으로 나갑니다. 설계도 원본 DNA는 핵에 그대로 남아요.</p>
+    <p data-at="3">리보솜이 mRNA를 읽어 아미노산을 하나씩 이어 붙입니다. 빈칸 3번, 번역입니다.</p>
+    <p data-at="4">정보는 DNA에서 RNA, RNA에서 단백질로 한 방향으로 흐릅니다. 빈칸 4번, 중심 원리입니다.</p>
+  </aside>
+</section>
+
+<!-- 5 전사 -->
+<section class="slide soft" id="s-tx" data-title="전사 — 짝 맞춰 본뜨기" data-part="① 정보의 흐름">
+  <p class="kicker">① 정보의 흐름 · 사람 헤모글로빈 β 유전자의 실제 앞부분 27글자 (단원 화면)</p>
+  <h2>DNA 한 가닥을 짝 맞춰 본떠 mRNA를 만든다</h2>
+  <svg id="s5-svg" viewBox="0 0 1400 300" width="1400" height="300" aria-label="DNA 주형 가닥 TAC CAC GTG GAC TGA GGA CTC CTC TTC를 짝 맞춰 본뜬 mRNA AUG GUG CAC CUG ACU CCU GAG GAG AAG">
+    <text x="0" y="78" font-size="22" font-weight="900" fill="#161b28">DNA 주형 가닥</text>
+    <g data-step="2"><text x="0" y="198" font-size="22" font-weight="900" fill="#c92a2a">mRNA</text></g>
+    <g id="s5-dna"></g>
+    <g id="s5-rna" data-step="2"></g>
+    <g data-step="1" id="s5-pair"></g>
+    <text x="1400" y="290" font-size="18" fill="#5f6b80" text-anchor="end">짝: A → U · T → A · G → C · C → G</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">DNA 두 가닥 가운데 본뜨는 한 가닥: <b class="blank" data-n="5" data-step="1">주형 가닥</b> · 염기끼리 짝을 맞춘다</p>
+    <p data-step="2">RNA에는 T(타이민) 대신 <b class="blank" data-n="6" data-step="2">유라실</b>(U)이 들어간다 → 주형의 A 맞은편은 U</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면에 올린 실제 사람 헤모글로빈 β 유전자의 앞부분 27글자입니다.</p>
+    <p data-at="1">DNA 두 가닥 가운데 이 한 가닥을 본뜹니다. 빈칸 5번, 주형 가닥. G의 짝은 C, C의 짝은 G, T의 짝은 A입니다.</p>
+    <p data-at="2">그런데 A의 짝은 T가 아니라 U입니다. RNA에는 T 대신 빈칸 6번, 유라실이 들어가기 때문이에요. 그래서 TAC는 AUG가 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 6 번역 -->
+<section class="slide" id="s-codon" data-title="번역 — 세 글자씩 읽기" data-part="① 정보의 흐름">
+  <p class="kicker">① 정보의 흐름 · 리보솜을 끝까지 밀면 (단원 화면 미션)</p>
+  <h2>mRNA를 세 글자씩 끊어 읽어 아미노산을 잇는다</h2>
+  <svg id="s6-svg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="mRNA를 세 글자씩 끊은 코돈 아홉 개 AUG GUG CAC CUG ACU CCU GAG GAG AAG가 차례로 메싸이오닌, 발린, 히스티딘, 류신, 트레오닌, 프롤린, 글루탐산, 글루탐산, 라이신을 지정한다">
+    <g id="s6-rna"></g>
+    <g id="s6-aa" data-step="2"></g>
+    <text x="1400" y="326" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 아미노산 구슬은 모식</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">아미노산 하나를 지정하는 mRNA의 염기 3개: <b class="blank" data-n="7" data-step="1">코돈</b></p>
+    <p data-step="3">염기 27개 → 코돈 9개 → 아미노산 9개 (3 : 1) · 첫 코돈 AUG는 메싸이오닌(Met)</p>
+  </div>
+  <aside class="script">
+    <p>리보솜은 mRNA를 한 글자씩이 아니라 세 글자씩 끊어 읽습니다.</p>
+    <p data-at="1">아미노산 하나를 정하는 이 세 글자가 빈칸 7번, 코돈입니다.</p>
+    <p data-at="2">코돈표를 보며 하나씩 옮기면 메싸이오닌, 발린, 히스티딘, 류신, 트레오닌, 프롤린, 글루탐산, 글루탐산, 라이신. 단원 화면에서 리보솜을 끝까지 밀어 만든 9개짜리 사슬입니다.</p>
+    <p data-at="3">염기 27개가 아미노산 9개가 되었으니 3 : 1입니다. 7번째 아미노산 글루탐산을 기억해 두세요.</p>
+  </aside>
+</section>
+
+<!-- 7 배율 -->
+<section class="slide soft" id="s-scale" data-title="30억 분의 1,600" data-part="① 정보의 흐름">
+  <p class="kicker">① 정보의 흐름 · 오개념 확인: 전사 때 DNA 전체가 RNA로 옮겨질까 (단원 화면 배율 다이얼)</p>
+  <h2>전사되는 것은 DNA 가운데 아주 작은 한 토막이다</h2>
+  <svg viewBox="0 0 1400 360" width="1400" height="360" aria-label="확대 막대 세 줄. 사람 DNA 전체 약 30억 염기쌍, 그 가운데 11번 염색체 약 1억 3,500만 염기쌍, 그 가운데 헤모글로빈 β 유전자 약 1,600 염기쌍">
+    <g font-size="22" font-weight="900" fill="#161b28">
+      <rect x="40" y="40" width="1320" height="44" rx="8" fill="#1c7ed6"/>
+      <text x="140" y="71" fill="#fff">사람 DNA 전체 · 약 30억 염기쌍</text>
+      <g data-step="1">
+        <rect x="60" y="40" width="58" height="44" fill="#ffd43b"/>
+        <path d="M60 84 L40 160 M118 84 L1360 160" stroke="#868e96" stroke-width="3" stroke-dasharray="8 6" fill="none"/>
+        <rect x="40" y="160" width="1320" height="44" rx="8" fill="#ffd43b"/>
+        <text x="60" y="191">11번 염색체 · 약 1억 3,500만 염기쌍</text>
+      </g>
+      <g data-step="2">
+        <rect x="700" y="160" width="6" height="44" fill="#e03131"/>
+        <path d="M700 204 L40 280 M706 204 L1360 280" stroke="#868e96" stroke-width="3" stroke-dasharray="8 6" fill="none"/>
+        <rect x="40" y="280" width="1320" height="44" rx="8" fill="#ff8787"/>
+        <text x="60" y="311">헤모글로빈 β 유전자 · 약 1,600 염기쌍 (아미노산 정보 441염기)</text>
+      </g>
+    </g>
+    <text x="1400" y="356" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 줄마다 배율이 다름 · 노란 칸과 빨간 칸은 보이게 키운 것</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="2">유전자 하나 = DNA 전체의 약 <b class="blank" data-n="8" data-step="2">200만</b> 분의 1 → 화면에서 1 px이 되려면 약 2,400배 넘게 확대</p>
+    <p data-step="3">전사되는 것은 필요한 유전자 한 토막뿐 · 전사가 끝나도 DNA는 그대로 남는다</p>
+  </div>
+  <aside class="script">
+    <p>하윤이 물었습니다. 전사할 때 DNA 전체가 통째로 RNA가 되느냐고요. 자로 재 봅시다.</p>
+    <p data-at="1">사람 DNA 전체는 약 30억 염기쌍. 그 가운데 헤모글로빈 β 유전자가 들어 있는 11번 염색체는 약 1억 3,500만 염기쌍입니다.</p>
+    <p data-at="2">β 유전자는 약 1,600 염기쌍. 전체의 빈칸 8번, 약 200만 분의 1입니다. 단원 화면에서 이 유전자가 1 px로 보이려면 약 2,400배, 코돈 하나가 10 px가 되려면 천만 배 넘게 확대해야 했죠.</p>
+    <p data-at="3">그러니 한 번 전사로 만들어지는 RNA는 DNA에 비해 아주 짧습니다. DNA 전체가 RNA로 옮겨진다는 생각은 오개념입니다.</p>
+  </aside>
+</section>
+
+<!-- 8 역사 -->
+<section class="slide" id="s-history" data-title="분자병의 발견" data-part="② 한 글자가 바뀌면">
+  <p class="kicker">② 한 글자가 바뀌면 · 원인이 밝혀지기까지 반세기</p>
+  <h2>원인은 적혈구 속 단백질 하나에 있었다</h2>
+  <svg viewBox="0 0 1400 320" width="1400" height="320" aria-label="연표. 1904년 헤릭이 낫 모양 적혈구를 관찰, 1949년 폴링이 헤모글로빈 자체가 다르다는 것을 보이고 분자병이라 이름 붙임, 1956년 잉그램이 β 사슬 146개 가운데 한 자리의 차이를 찾음">
+    <line x1="60" y1="150" x2="1340" y2="150" stroke="#161b28" stroke-width="5"/>
+    <g font-weight="900" text-anchor="middle">
+      <g><circle cx="200" cy="150" r="16" fill="#e03131"/><text x="200" y="110" font-size="30" fill="#e03131">1904</text>
+        <text x="200" y="200" font-size="22" fill="#161b28">헤릭</text><text x="200" y="232" font-size="22" fill="#161b28">낫 모양 적혈구 관찰</text>
+        <ellipse cx="150" cy="290" rx="34" ry="20" fill="#e03131"/><path d="M210 300 C230 270 270 270 290 300 C270 288 230 288 210 300Z" fill="#e03131"/></g>
+      <g data-step="1"><circle cx="700" cy="150" r="16" fill="#1462d8"/><text x="700" y="110" font-size="30" fill="#1462d8">1949</text>
+        <text x="700" y="200" font-size="22" fill="#161b28">폴링 · ‘분자병’</text><text x="700" y="232" font-size="22" fill="#161b28">혈액 속 단백질 자체가 다르다</text></g>
+      <g data-step="2"><circle cx="1200" cy="150" r="16" fill="#2f9e44"/><text x="1200" y="110" font-size="30" fill="#2f9e44">1956</text>
+        <text x="1200" y="200" font-size="22" fill="#161b28">잉그램</text><text x="1200" y="232" font-size="22" fill="#161b28">β 사슬 146개 중 한 자리</text></g>
+    </g>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">적혈구 속에서 산소를 나르는 단백질: <b class="blank" data-n="9" data-step="1">헤모글로빈</b></p>
+    <p data-step="2">β 사슬 아미노산 146개 가운데 단 하나가 달랐다 → 그 아미노산은 무엇이 정했을까?</p>
+  </div>
+  <aside class="script">
+    <p>1904년 헤릭은 낫 모양 적혈구를 처음 기록했습니다.</p>
+    <p data-at="1">1949년 라이너스 폴링은 이 병이 혈액 속 단백질 자체가 다른 데서 온다는 것을 보이고 ‘분자병’이라고 불렀습니다. 그 단백질이 빈칸 9번, 헤모글로빈입니다.</p>
+    <p data-at="2">1956년 버넌 잉그램은 β 사슬 146개 가운데 딱 한 자리가 다르다는 것을 찾았습니다. 첫 추리의 답은 ㉡이에요. 이제 그 아미노산을 정한 것이 무엇인지 거슬러 올라갑니다.</p>
+  </aside>
+</section>
+
+<!-- 9 낫 모양 돌연변이 -->
+<section class="slide soft" id="s-sickle" data-title="20번째 글자 T → A" data-part="② 한 글자가 바뀌면">
+  <p class="kicker">② 한 글자가 바뀌면 · 단원 화면: DNA 주형 가닥 20번째 염기를 T에서 A로</p>
+  <h2>DNA 한 글자가 아미노산 하나를 바꾼다</h2>
+  <svg id="s9-svg" viewBox="0 0 1400 380" width="1400" height="380" aria-label="정상과 환자 비교. 7번째 코돈 자리에서 DNA 주형 가닥 CTC가 CAC로 바뀌고, mRNA 코돈 GAG가 GUG로 바뀌어, 글루탐산 대신 발린이 붙는다">
+    <g font-size="22" font-weight="900" fill="#161b28">
+      <text x="0" y="58">정상 DNA 주형</text><text x="0" y="108">정상 mRNA</text><text x="0" y="156">아미노산</text>
+      <g data-step="1" fill="#c92a2a"><text x="0" y="238">바뀐 DNA 주형</text><text x="0" y="288">바뀐 mRNA</text></g>
+      <g data-step="2" fill="#c92a2a"><text x="0" y="336">아미노산</text></g>
+    </g>
+    <line x1="0" y1="184" x2="1400" y2="184" stroke="#c9d1dd" stroke-width="3"/>
+    <g id="s9-rows"></g>
+    <text x="1400" y="376" font-size="18" fill="#5f6b80" text-anchor="end">5~9번째 코돈만 보임</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">DNA의 염기 서열이 바뀌는 것: <b class="blank" data-n="10" data-step="1">돌연변이</b> (주형 CTC → CAC, mRNA GAG → GUG)</p>
+    <p data-step="2">7번째 아미노산이 글루탐산(Glu) 대신 <b class="blank" data-n="11" data-step="2">발린</b>(Val) · 완성된 β 사슬에서는 6번째</p>
+  </div>
+  <aside class="script">
+    <p>잉그램이 찾은 것을 단원 화면에서 재현했습니다. 위는 정상, 아래는 20번째 글자를 바꾼 서열입니다.</p>
+    <p data-at="1">주형 가닥 20번째 T가 A로 바뀌면 CTC가 CAC가 되고, mRNA의 코돈은 GAG에서 GUG가 됩니다. 이렇게 DNA 염기 서열이 바뀌는 것이 빈칸 10번, 돌연변이입니다.</p>
+    <p data-at="2">GUG는 빈칸 11번, 발린을 지정합니다. 글루탐산 자리에 발린이 붙었어요. 실제 세포에서는 번역 뒤 맨 앞 메싸이오닌이 떨어져 나가, 완성된 사슬에서는 6번째 아미노산입니다.</p>
+  </aside>
+</section>
+
+<!-- 10 세 가지 결과 -->
+<section class="slide" id="s-three" data-title="한 글자, 세 가지 결과" data-part="② 한 글자가 바뀌면">
+  <p class="kicker">② 한 글자가 바뀌면 · 단원 화면 미션: 7번째 코돈(주형 19~21번 CTC)의 한 글자만 바꾸면</p>
+  <h2>같은 한 글자라도 결과는 세 갈래다</h2>
+  <table class="ledger">
+    <tr><th>바꾼 자리 (주형)</th><th>DNA 주형</th><th>mRNA 코돈</th><th>아미노산</th><th>결과</th></tr>
+    <tr data-step="1"><td>20번 T → A</td><td class="mono">CTC → CAC</td><td class="mono">GAG → GUG</td><td>Glu → Val</td><td>낫 모양 적혈구</td></tr>
+    <tr data-step="2"><td>21번 C → T</td><td class="mono">CTC → CTT</td><td class="mono">GAG → GAA</td><td>Glu → Glu</td><td>아무 변화 없음</td></tr>
+    <tr data-step="3"><td>19번 C → A</td><td class="mono">CTC → ATC</td><td class="mono">GAG → UAG</td><td>멈춤</td><td>6개에서 끊김</td></tr>
+  </table>
+  <div class="tight mt">
+    <p data-step="2">같은 아미노산을 지정하는 코돈이 여럿 (GAG · GAA → 모두 글루탐산)</p>
+    <p data-step="3">아미노산을 지정하지 않고 번역을 끝내는 코돈: <b class="blank" data-n="12" data-step="3">정지 코돈</b> (UAA · UAG · UGA)</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면 미션 세 가지를 모두 7번째 코돈에서 만들어 봅니다.</p>
+    <p data-at="1">20번째를 T에서 A로 바꾸면 발린이 되어 낫 모양 적혈구가 됩니다. 앞 장면에서 본 것이에요.</p>
+    <p data-at="2">21번째를 C에서 T로 바꾸면 코돈은 GAA가 되지만 이것도 글루탐산입니다. 염기는 바뀌었는데 아미노산 서열은 그대로예요. 같은 아미노산을 가리키는 코돈이 여럿이기 때문입니다.</p>
+    <p data-at="3">19번째를 C에서 A로 바꾸면 UAG. 아미노산을 지정하지 않고 번역을 끝내는 빈칸 12번, 정지 코돈입니다. 사슬이 아미노산 6개에서 끊깁니다.</p>
+  </aside>
+</section>
+
+<!-- 11 순서 -->
+<section class="slide soft" id="s-chain" data-title="한 글자에서 온몸까지" data-part="② 한 글자가 바뀌면">
+  <p class="kicker">② 한 글자가 바뀌면 · 단원 화면 마지막 미션: 일어난 순서대로</p>
+  <h2>한 글자의 변화가 온몸의 혈액 순환까지 바꾼다</h2>
+  <div class="flow">
+    <div class="card"><b class="k">1</b>DNA 주형 가닥의 염기 한 글자가 바뀐다</div>
+    <div class="card"><b class="k">2</b>전사된 mRNA 코돈이 GAG에서 GUG로</div>
+    <div class="card"><b class="k">3</b>번역에서 글루탐산 대신 발린이 붙는다</div>
+    <div class="card" data-step="1"><b class="k">4</b>헤모글로빈끼리 들러붙어 긴 막대를 이룬다</div>
+    <div class="card" data-step="1"><b class="k">5</b>막대에 밀려 적혈구가 낫처럼 굳는다</div>
+    <div class="card" data-step="2"><b class="k">6</b>굳은 적혈구가 모세 혈관을 막아 통증 · 숨참</div>
+  </div>
+  <p class="mt" data-step="3">DNA → (전사) → mRNA → (번역) → 단백질 → 세포 모양 → 몸의 형질</p>
+  <p class="note">낫 모양 적혈구 빈혈증은 부모 양쪽에서 이 유전자를 모두 물려받았을 때 증상이 나타나고, 한쪽만 물려받은 사람은 대체로 건강하게 지냅니다.</p>
+  <aside class="script">
+    <p>단원 화면에서 순서대로 놓았던 여섯 단계입니다. 윗줄은 오늘 직접 확인한 정보의 흐름이에요.</p>
+    <p data-at="1">아미노산 하나가 다른 헤모글로빈은 서로 들러붙어 긴 막대를 이루고, 그 막대에 밀려 적혈구가 낫처럼 굳습니다.</p>
+    <p data-at="2">굳은 적혈구가 좁은 모세 혈관을 막아 노엘의 통증과 숨참이 나타났습니다.</p>
+    <p data-at="3">맨 앞의 한 글자가 바뀌면 끝의 단백질이, 세포 모양이, 결국 온몸이 달라집니다. 정보가 한 방향으로 흐르기 때문입니다.</p>
+  </aside>
+</section>
+
+<!-- 12 확인 -->
+<section class="slide" id="s-check" data-title="바뀌어도 그대로인 까닭" data-part="② 한 글자가 바뀌면">
+  <p class="kicker">② 한 글자가 바뀌면 · 확인</p>
+  <h2>염기가 바뀌어도 아미노산 서열이 그대로인 까닭은?</h2>
+  <div class="opts" style="max-width:1250px">
+    <div class="opt wrong" data-step="1">㉠ 바뀐 염기는 전사되지 않아서</div>
+    <div class="opt right" data-step="1">㉡ 같은 아미노산을 지정하는 코돈이 여러 개라서</div>
+    <div class="opt wrong" data-step="1">㉢ 리보솜이 틀린 염기를 고쳐 읽어서</div>
+  </div>
+  <p data-step="1" style="margin-top:40px">GAG → GAA: 코돈은 바뀌었지만 둘 다 <b>글루탐산</b> → 단백질은 그대로</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ㉡. 바뀐 염기도 그대로 전사되고, 리보솜은 받은 코돈을 그대로 읽습니다. 다만 코돈표에서 GAG와 GAA가 모두 글루탐산이라 결과가 같을 뿐입니다.</p>
+  </aside>
+</section>
+
+<!-- 13 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>정보는 한 글자 단위로 읽히고 옮겨진다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>중심 원리</b>: DNA →(<b>전사</b>, 핵)→ mRNA →(<b>번역</b>, 리보솜)→ 단백질</li>
+    <li data-k="2" data-step="2">전사는 필요한 <b>유전자</b> 한 토막만(DNA의 약 200만 분의 1) · DNA는 그대로 남는다</li>
+    <li data-k="3" data-step="3">mRNA 염기 3개 = <b>코돈</b> 1개 = 아미노산 1개 · 같은 아미노산의 코돈이 여럿, 정지 코돈도 있다</li>
+    <li data-k="4" data-step="4"><b>돌연변이</b> 한 글자: GAG → GUG, 글루탐산 → 발린 → 낫 모양 적혈구</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 14 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 정지 코돈을 뺀 mRNA 염기가 300개라면 이어지는 아미노산은 몇 개?</p>
+      <div class="opts">
+        <div class="opt right" data-step="1">㉠ 100개</div>
+        <div class="opt wrong" data-step="1">㉡ 300개</div>
+        <div class="opt wrong" data-step="1">㉢ 900개</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 전사에 대한 설명으로 옳은 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ DNA 전체가 한꺼번에 RNA로 옮겨진다</div>
+        <div class="opt right" data-step="2">㉡ 필요한 유전자만 옮겨지고 DNA는 남는다</div>
+        <div class="opt wrong" data-step="2">㉢ 끝나면 DNA가 RNA로 바뀌어 사라진다</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉠. 염기 3개가 코돈 1개, 코돈 1개가 아미노산 1개이므로 300 ÷ 3 = 100개입니다.</p>
+    <p data-at="2">2번은 ㉡. 오늘 배율 다이얼로 확인한 오개념입니다.</p>
+  </aside>
+</section>
+
+<!-- 15 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ③ 「한 글자가 바뀌면」</h2>
+  <div class="cols">
+    <div class="card"><h3>조사관이 되어 보세요</h3><p>리보솜을 밀어 실제 β 유전자 번역하기, 염기 한 글자 바꿔 세 가지 돌연변이 만들기, 배율 다이얼로 30억 속 유전자 찾기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 단원 정리</h3><p>익지 않는 김치, 숨으로 빠져나간 지방, 낫 모양 적혈구. 세 이야기에 모두 들어 있는 물질은 무엇일까요? ‘화학 반응’과 ‘정보’로 한 문장을 써 봅니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ③을 열어 미션을 하게 하고, 정리하기 탭의 한 문장 쓰기로 단원을 마무리합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+  /* 염기 서열 그림 (단원 화면 서열: 사람 헤모글로빈 β 유전자 앞부분) */
+  (function () {
+    var NS = "http://www.w3.org/2000/svg";
+    var TPL = "TACCACGTGGACTGAGGACTCCTCTTC", RNA = { A: "U", T: "A", G: "C", C: "G" };
+    var COL = { A: "#ff8787", T: "#ffd43b", U: "#ffa94d", G: "#69db7c", C: "#74c0fc" };
+    var AA = [["Met", "메싸이오닌"], ["Val", "발린"], ["His", "히스티딘"], ["Leu", "류신"], ["Thr", "트레오닌"], ["Pro", "프롤린"], ["Glu", "글루탐산"], ["Glu", "글루탐산"], ["Lys", "라이신"]];
+    function mk(tag, at, txt) { var e = document.createElementNS(NS, tag); for (var k in at) e.setAttribute(k, at[k]); if (txt != null) e.textContent = txt; return e; }
+    function base(g, x, y, ch, w, hi, h) {
+      h = h || 44;
+      g.appendChild(mk("rect", { x: x, y: y, width: w, height: h, rx: 7, fill: COL[ch], stroke: hi ? "#c92a2a" : "none", "stroke-width": hi ? 5 : 0 }));
+      g.appendChild(mk("text", { x: x + w / 2, y: y + h / 2 + 9, "font-size": 26, "font-weight": 900, "text-anchor": "middle", fill: "#161b28", "font-family": "Consolas, monospace" }, ch));
+    }
+    var rna = ""; for (var i = 0; i < TPL.length; i++) rna += RNA[TPL[i]];
+    /* 장면 5: 주형과 mRNA 27글자 */
+    var X5 = function (i) { return 190 + i * 38 + Math.floor(i / 3) * 12; };
+    var gD = document.getElementById("s5-dna"), gR = document.getElementById("s5-rna"), gP = document.getElementById("s5-pair");
+    for (i = 0; i < 27; i++) {
+      base(gD, X5(i), 48, TPL[i], 34);
+      base(gR, X5(i), 168, rna[i], 34);
+      gP.appendChild(mk("line", { x1: X5(i) + 17, y1: 96, x2: X5(i) + 17, y2: 162, stroke: "#868e96", "stroke-width": 3, "stroke-dasharray": "5 5" }));
+    }
+    for (i = 0; i < 9; i++) gD.appendChild(mk("text", { x: X5(i * 3) + 55, y: 32, "font-size": 18, "font-weight": 800, "text-anchor": "middle", fill: "#5f6b80" }, (i + 1) + "번째"));
+    /* 장면 6: 코돈과 아미노산 */
+    var X6 = function (c) { return 30 + c * 152; };
+    var g6 = document.getElementById("s6-rna"), a6 = document.getElementById("s6-aa");
+    for (var c = 0; c < 9; c++) {
+      for (var j = 0; j < 3; j++) base(g6, X6(c) + j * 42, 30, rna[c * 3 + j], 38);
+      g6.appendChild(mk("rect", { x: X6(c) - 4, y: 24, width: 130, height: 56, rx: 10, fill: "none", stroke: "#161b28", "stroke-width": 3 }));
+      if (c) a6.appendChild(mk("line", { x1: X6(c) - 89, y1: 170, x2: X6(c) + 61, y2: 170, stroke: "#7048e8", "stroke-width": 6 }));
+    }
+    for (c = 0; c < 9; c++) {
+      a6.appendChild(mk("line", { x1: X6(c) + 61, y1: 84, x2: X6(c) + 61, y2: 134, stroke: "#868e96", "stroke-width": 3, "stroke-dasharray": "5 5" }));
+      a6.appendChild(mk("circle", { cx: X6(c) + 61, cy: 170, r: 36, fill: c === 6 ? "#e8590c" : "#b197fc", stroke: "#7048e8", "stroke-width": 3 }));
+      a6.appendChild(mk("text", { x: X6(c) + 61, y: 179, "font-size": 24, "font-weight": 900, "text-anchor": "middle", fill: "#161b28" }, AA[c][0]));
+      a6.appendChild(mk("text", { x: X6(c) + 61, y: 240, "font-size": 20, "font-weight": 900, "text-anchor": "middle", fill: "#161b28" }, AA[c][1]));
+    }
+    /* 장면 9: 5~9번째 코돈, 정상(위) · 20번째 T→A(아래) */
+    var g9 = document.getElementById("s9-rows");
+    var MUT = TPL.slice(0, 19) + "A" + TPL.slice(20);
+    function row(tpl, yD, yA, stepDR, stepA) {
+      var g = mk("g", stepDR ? { "data-step": stepDR } : {}), ga = mk("g", stepA ? { "data-step": stepA } : {}); g9.appendChild(g); g9.appendChild(ga);
+      var m = ""; for (var k = 0; k < tpl.length; k++) m += RNA[tpl[k]];
+      for (var cc = 4; cc < 9; cc++) {
+        var x = 260 + (cc - 4) * 226;
+        if (!stepDR) g.appendChild(mk("text", { x: x + 62, y: 18, "font-size": 20, "font-weight": 900, "text-anchor": "middle", fill: cc === 6 ? "#e03131" : "#5f6b80" }, (cc + 1) + "번째 코돈"));
+        for (var jj = 0; jj < 3; jj++) {
+          var p = cc * 3 + jj, hi = tpl !== TPL && p === 19;
+          base(g, x + jj * 42, yD, tpl[p], 38, hi, 40);
+          base(g, x + jj * 42, yD + 50, m[p], 38, hi, 40);
+        }
+        var aa = { GAG: "Glu", GUG: "Val", ACU: "Thr", CCU: "Pro", AAG: "Lys" }[m.substr(cc * 3, 3)];
+        ga.appendChild(mk("text", { x: x + 62, y: yA, "font-size": 26, "font-weight": 900, "text-anchor": "middle", fill: (aa === "Val") ? "#e03131" : "#161b28" }, aa));
+      }
+    }
+    row(TPL, 30, 156, null, null);
+    row(MUT, 210, 336, "1", "2");
+  })();
+</script>
+</body>
+</html>

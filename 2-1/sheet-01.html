@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 빅뱅과 원소의 생성 (통합과학1 Ⅱ-1 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격·여백을 줄인다 */ p, li { font-size: 12.8px; line-height: 1.62; } table { font-size: 12px; } td, th { padding: 2px 7px; line-height: 1.42; } h2 { font-size: 14.5px; margin: 7px 0 3px; padding: 3px 10px; } header { margin-bottom: 8px; } .guide { margin-bottom: 6px; } .write { height: 40px; } .foot { margin-top: 6px; } p, li { line-height: 1.55; } .write { height: 36px; }</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-01.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅱ-1 자연의 구성 원소 · 01 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 빅뱅과 원소의 생성</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~14)</p>
+
+  <h2>① 별빛의 지문 — 스펙트럼</h2>
+  <table>
+    <tr><th style="width:24%">광원</th><th style="width:34%">보이는 무늬</th><th>이름</th></tr>
+    <tr><td>백열전구 (뜨거운 고체)</td><td>끊김 없는 무지개 띠</td><td><b class="blank" data-n="1">연속 스펙트럼</b></td></tr>
+    <tr><td>가열한 기체</td><td>어두운 바탕에 밝은 선</td><td><b class="blank" data-n="2">방출 스펙트럼</b></td></tr>
+    <tr><td>별빛 (태양)</td><td>무지개 위에 검은 선(흡수선)</td><td><b class="blank" data-n="3">흡수 스펙트럼</b></td></tr>
+  </table>
+  <ul>
+    <li>원소마다 선이 놓이는 <b class="blank" data-n="4">파장</b>이 정해져 있다 → 선의 위치(원소의 지문)로 별을 이루는 원소를 알아낸다</li>
+    <li>햇빛의 검은 선 약 656 nm = 실험실 수소의 밝은 선과 같은 자리 → 태양에 수소가 있다</li>
+    <li>1868년 일식: 태양 가장자리 빛의 약 588 nm 노란 선(나트륨 약 589 nm와 어긋남) → 새 원소 <b class="blank" data-n="5">헬륨</b> (지구에서는 1895년에 찾음)</li>
+    <li>햇빛은 눈에 연속처럼 보이지만, 분광기로 보면 검은 흡수선(프라운호퍼선)이 수백 개 넘게 있다</li>
+  </ul>
+
+  <h2>② 빅뱅의 증거</h2>
+  <ul>
+    <li>어느 별, 어느 은하든 수소 약 75%, 헬륨 약 25% → 질량비 약 <b class="blank" data-n="6">3 : 1</b> (별이 만든 것이 아니라 우주가 태어날 때 정해짐)</li>
+    <li>뜨겁고 빽빽한 상태에서 팽창하며 식어 온 우주의 시작: <b class="blank" data-n="7">빅뱅</b></li>
+    <li>하늘 어느 방향에서나 똑같이 오는 온도 2.7 K의 복사: <b class="blank" data-n="8">우주 배경 복사</b></li>
+    <li>약 38만 년, 3,000 K 아래로 식어 원자가 생기자 빛이 풀려남 → 우주가 <b class="blank" data-n="9">팽창</b>하는 동안 식어 지금 2.7 K</li>
+  </ul>
+
+  <h2>③ 빅뱅 뒤 3분 — 빅뱅 핵합성</h2>
+  <ul>
+    <li>약 10<sup>12</sup> K: <b class="blank" data-n="10">쿼크</b> 셋이 뭉쳐 양성자·중성자 → 식을수록 무거운 중성자가 줄고, 약 100억 K 아래에서 비가 굳음</li>
+    <li>중성자 : 양성자 ≈ 1 : 7. 둘이 붙은 <b class="blank" data-n="11">중수소</b>를 뜨거운 빛이 깨뜨려 헬륨으로 가는 길이 막힘(병목)</li>
+    <li>약 10억 K(빅뱅 뒤 약 3분): 중성자가 거의 모두 헬륨으로 → 핵자 16개 중 4개, 헬륨 질량비 25% → <b class="blank" data-n="12">빅뱅 핵합성</b></li>
+    <li>질량수 5와 8에는 <b class="blank" data-n="13">안정한 원자핵</b>이 없다 → 벽을 건너뛸 시간이 없어 <b class="blank" data-n="14">리튬</b>에서 멈춤 (탄소·산소·철은 나중에 별에서)</li>
+  </ul>
+  <table>
+    <tr><th style="width:12%">증거물</th><th style="width:40%">관측</th><th>까닭</th></tr>
+    <tr><td>①</td><td>하늘 어디서나 2.7 K의 복사</td><td>약 38만 년에 풀려난 빛이 팽창하며 식음</td></tr>
+    <tr><td>②</td><td>어디서나 수소 : 헬륨 ≈ 3 : 1</td><td>빅뱅 뒤 약 3분, 중성자가 모두 헬륨으로</td></tr>
+    <tr><td>③</td><td>리튬보다 무거운 원소는 초기 물질에 거의 없음</td><td>질량수 5와 8의 벽</td></tr>
+  </table>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 별빛 스펙트럼의 흡수선 위치로 알 수 있는 것은? <span class="ans">→ ㉡</span> &nbsp; ㉠ 별까지의 거리 &nbsp; ㉡ 별 대기를 이루는 원소 &nbsp; ㉢ 별이 태어난 해</p>
+    <p>2. 우주 배경 복사가 된 빛이 풀려난 때는? <span class="ans">→ 약 38만 년, 원자가 생길 때</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>우주 어디서나 수소 : 헬륨이 약 3 : 1인 까닭을 ‘별이 만든 것이 아니라 …’로 시작해 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-01.html · 이야기 ① 「우주가 남긴 지문」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

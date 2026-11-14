@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 충돌과 운동량 보존 (통합과학1 Ⅲ-2 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-03.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 8px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 6px; }
+  h2 { font-size: 14.5px; font-weight: 900; margin: 7px 0 3px; padding: 3px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 12.8px; line-height: 1.58; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin: 3px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 2px 7px; text-align: center; line-height: 1.42; }
+  th { background: #f4f6fa; font-weight: 800; }
+  td:first-child, th:first-child { text-align: left; }
+  .q { margin-top: 4px; }
+  .q p { line-height: 1.6; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 38px; margin-top: 4px; }
+  .foot { margin-top: 6px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-03.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅲ-2 역학 시스템 · 03 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 충돌과 운동량 보존</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~13)</p>
+
+  <h2>① 운동량 보존 — 레일 위 수레 (A가 3.0 m/s로 정지한 B에)</h2>
+  <ul>
+    <li>질량 × 속도: <b class="blank" data-n="1">운동량</b> p = mv (단위 kg·m/s, 방향이 있다) · 수레 A 4 kg × 3.0 m/s = 12 · 야구공 0.145 kg × 40 m/s = 5.8 · 자동차 1,400 kg × 14 m/s = 19,600</li>
+    <li>빨리 달리는 트럭이 멈추기 어려운 까닭은 관성이 아니라 운동량이 커서</li>
+  </ul>
+  <table>
+    <tr><th style="width:26%">A 4 kg, B 2 kg</th><th>충돌 후 속도</th><th>운동량의 합</th><th>운동 에너지</th></tr>
+    <tr><td>완전 탄성 충돌</td><td>A 1.0 m/s · B 4.0 m/s</td><td>12 → 12</td><td>18 J → 18 J</td></tr>
+    <tr><td>완전 비탄성 충돌 (붙어서)</td><td>함께 2.0 m/s</td><td>12 → 12</td><td>18 J → 12 J</td></tr>
+  </table>
+  <ul>
+    <li>충돌 전후 운동량의 합이 같다: <b class="blank" data-n="2">운동량 보존</b> (충돌 방식과 관계없이 늘 성립)</li>
+    <li>운동 에너지까지 그대로인 충돌: <b class="blank" data-n="3">완전 탄성 충돌</b> · A가 더 가벼우면(A 2 kg, B 4 kg) A는 −1.0 m/s로 튕기고 B는 2.0 m/s</li>
+    <li>붙어서 함께 가면 <b class="blank" data-n="4">운동 에너지</b> 일부(6 J)가 찌그러짐·열·소리로 · 질량이 같으면 처음 속도의 절반(1.50 m/s)</li>
+  </ul>
+
+  <h2>② 충격량 — 야구공 받기와 두 차의 충돌</h2>
+  <ul>
+    <li>힘 × 힘이 작용한 시간: <b class="blank" data-n="5">충격량</b> (N·s, 힘-시간 그래프의 넓이) = <b class="blank" data-n="6">운동량의 변화</b> (FΔt = Δp)</li>
+    <li>145 g 야구공(40 m/s)을 멈추는 충격량은 5.8 N·s로 정해져 있다 → 바꿀 수 있는 것은 멈추는 <b class="blank" data-n="7">시간</b></li>
+    <li>0.010초 → 580 N, 0.020초 → 290 N: 시간 2배 → <b class="blank" data-n="8">평균 힘</b>은 절반 (F = Δp ÷ Δt) · 400 N 아래로는 약 0.015초 이상</li>
+    <li>승용차(1,400 kg)와 트럭(8,000 kg): 서로 미는 힘은 작용 반작용, 시간도 같다 → 충격량의 크기가 같다</li>
+    <li>Δv = 충격량 ÷ m → 승용차의 <b class="blank" data-n="9">속도 변화</b>가 트럭의 약 5.7배 → 피해가 큰 까닭은 같은 충격량에 더 크게 흔들려서</li>
+  </ul>
+
+  <h2>③ 안전장치 — 1,400 kg 자동차, 14 m/s로 벽에 (충격량 19,600 N·s)</h2>
+  <table>
+    <tr><th style="width:26%">찌그러지는 거리</th><th>0.20 m</th><th>0.50 m</th><th>1.00 m</th><th>1.50 m</th></tr>
+    <tr><td>멈추는 시간 · 감속도</td><td>약 0.029초 · 50 g</td><td>약 0.071초 · 20 g</td><td>약 0.143초 · 10 g</td><td>약 0.214초 · 약 6.7 g</td></tr>
+    <tr><td>판정 (20 g 이하, 1.20 m 이하)</td><td>탈락(너무 단단)</td><td>합격</td><td>합격</td><td>탈락(승객실까지)</td></tr>
+  </table>
+  <ul>
+    <li>앞부분은 잘 구겨지게(시간을 늘림), <b class="blank" data-n="10">승객실</b>은 단단하게(생존 공간)</li>
+    <li>사고 순간: 차체가 멈춤 → 몸은 <b class="blank" data-n="11">관성</b> 때문에 앞으로 → 안전띠가 붙잡아 시간을 늘림 → <b class="blank" data-n="12">에어백</b>이 넓이를 넓히고 시간을 더 늘림 → 충격량은 그대로, 평균 힘이 줄어듦</li>
+    <li>시간을 늘려 힘을 줄인다: 번지점프 줄, 체조 매트, 포수의 글러브 ↔ 시간을 줄여 힘을 키운다: 망치, 송판 격파, 모루</li>
+    <li>뒤에서 받힐 때: <b class="blank" data-n="13">목받이</b> — 머리와 몸이 함께 움직이게 해 목이 꺾이지 않게</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 2 kg 수레가 3 m/s로 와서 정지한 2 kg 수레와 붙어 함께 움직인다. 충돌 후 속력은? <span class="ans">→ ㉠ 1.5 m/s</span><br>
+      ㉠ 1.5 m/s &nbsp; ㉡ 3 m/s &nbsp; ㉢ 6 m/s</p>
+    <p>2. 에어백이 줄여 주는 것은? (충격량 / 운동량 변화 / 평균 힘) <span class="ans">→ 몸이 받는 평균 힘</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>‘에어백은 충격량을 줄여 준다’는 말이 왜 틀렸는지 ‘시간’과 ‘평균 힘’을 넣어 한 문장으로 고쳐 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-03.html · 이야기 ③ 「충돌 실험실」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

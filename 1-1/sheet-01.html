@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · SI 기본단위 (통합과학1 Ⅰ-1 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 8px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 6px; }
+  h2 { font-size: 14.5px; font-weight: 900; margin: 8px 0 3px; padding: 3px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 12.8px; line-height: 1.6; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 2px 7px; text-align: center; line-height: 1.5; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 4px; }
+  .q p { line-height: 1.6; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 40px; margin-top: 4px; }
+  .foot { margin-top: 6px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-01.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅰ-1 과학의 기본량 · 01 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · SI 기본단위</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~15)</p>
+
+  <h2>① 사고의 원인 — 1999년 화성 기후 궤도선</h2>
+  <ul>
+    <li>계획은 화성 상공 226 km, 마지막 계산은 57 km(생존 한계 약 80 km). 엔진·통신은 모두 정상이었다.</li>
+    <li>지상 팀은 분사의 충격량(힘 × 시간)을 파운드힘초(lbf·s)로 내보냈고, 항법 팀은 같은 숫자를 뉴턴초(N·s)로 읽었다.</li>
+    <li>측정값 = 숫자 + <b class="blank" data-n="1">단위</b> — 단위가 다르면 같은 숫자도 다른 양이다.</li>
+    <li>두 저울로 같은 힘 재기: 1.0 lbf ↔ <b class="blank" data-n="2">약 4.45 N</b> (1 lbf = 4.448222 N), 10.0 lbf ↔ 44.5 N</li>
+    <li>궤도 재계산(단순화한 모형): 계수 1(환산 안 함) → 57 km, <b class="blank" data-n="3">환산 계수</b> 4.448222를 곱하면 → 226 km</li>
+    <li>사고 조사 보고서의 근본 원인: 지상 소프트웨어가 <b class="blank" data-n="4">SI 단위</b>를 쓰지 않았다.</li>
+  </ul>
+
+  <h2>② 기본량과 유도량</h2>
+  <ul>
+    <li>서로 독립적으로 정한 일곱 가지 기준 물리량 → SI <b class="blank" data-n="5">기본량</b></li>
+  </ul>
+  <table>
+    <tr><th>기본량</th><td>길이</td><td>질량</td><td>시간</td><td>전류</td><td>온도</td><td><b class="blank" data-n="6">물질량</b></td><td>광도</td></tr>
+    <tr><th>단위</th><td>m (미터)</td><td>kg (킬로그램)</td><td>s (초)</td><td>A (암페어)</td><td>K (켈빈)</td><td>mol (몰)</td><td>cd (칸델라)</td></tr>
+  </table>
+  <ul>
+    <li>기본량을 곱하고 나눠 만든 물리량 → <b class="blank" data-n="7">유도량</b> : 넓이(m²) = 길이 × 길이, 속력(m/s) = 길이 ÷ 시간, 밀도(kg/m³) = 질량 ÷ 부피</li>
+    <li>힘 = 질량 × 가속도 → 1 N = 1 <b class="blank" data-n="8">kg·m/s²</b> · SI가 아닌 단위: 파운드힘(lbf), 마일(≈ 1,609 m), 칼로리(≈ 4.184 J) → 쓸 때마다 환산</li>
+    <li>온도의 SI 기본단위는 ℃가 아니라 <b class="blank" data-n="9">켈빈</b> (K)</li>
+    <li>0 K = −273.15 ℃ → <b class="blank" data-n="10">절대 영도</b> (이보다 낮은 온도는 없다)</li>
+    <li>물이 어는 0 ℃ = 273.15 K, 끓는 100 ℃ = 373.15 K → K = ℃ + <b class="blank" data-n="11">273.15</b> (간격은 같고 시작점만 다르다)</li>
+  </ul>
+
+  <h2>③ 자연 상수로 정한 기준</h2>
+  <ul>
+    <li>1 m = <b class="blank" data-n="12">빛</b>이 진공에서 1/299,792,458초 동안 간 거리</li>
+    <li>1 s = <b class="blank" data-n="13">세슘</b>-133 원자의 복사선이 9,192,631,770번 진동하는 시간 (원자시계)</li>
+    <li>1 kg: 1889년부터 130년 동안 금속 원기 → 2019년부터 <b class="blank" data-n="14">플랑크 상수</b>의 값을 고정해 정의</li>
+    <li>일곱 기본단위 모두 물건이 아니라 변하지 않는 <b class="blank" data-n="15">자연 상수</b>에 묶는다 → 어디서 재도 같은 기준</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 3.0 lbf·s로 적힌 충격량을 N·s로 바르게 바꾸는 방법은? <span class="ans">→ ㉡ (약 13.3 N·s)</span><br>
+      ㉠ 4.448222로 나눈다 &nbsp; ㉡ 4.448222를 곱한다 &nbsp; ㉢ 숫자는 그대로 둔다</p>
+    <p>2. 물이 어는 온도를 켈빈 온도로 나타내면? <span class="ans">→ ㉡</span> &nbsp; ㉠ 0 K &nbsp; ㉡ 273.15 K &nbsp; ㉢ −273.15 K</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>화성 기후 궤도선 사고를 예로 들어, 단위를 통일하고 기준을 자연 상수로 정하는 까닭을 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-01.html · 이야기 ① 「단위를 잃어버린 우주선」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

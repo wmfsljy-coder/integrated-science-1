@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 물질의 전기적 성질 (통합과학1 Ⅱ-2 04)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .two .card h3 { font-size: 30px; }
+  .two .card p { font-size: 27px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  #s-hook .opt { font-size: 25px; padding: 12px 18px; }
+  #s-hook .card p { font-size: 27px; margin-bottom: 10px; }
+  .use .card { padding: 22px 24px; }
+  .use .card h3 { font-size: 29px; margin-bottom: 6px; }
+  .use .card p { font-size: 25px; line-height: 1.45; margin: 0 0 6px; }
+  .use .card svg { display: block; margin: 0 auto 8px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="저마늄 조각 위에 금박 두 점이 닿은 첫 트랜지스터 모식도. 다음 단계에서 작은 신호가 큰 신호로 나온다">
+      <rect x="600" y="330" width="400" height="120" rx="10" fill="#5c6b8a" stroke="#aab3c5" stroke-width="4"/>
+      <text x="800" y="405" font-size="34" font-weight="900" fill="#e9eef8" text-anchor="middle">저마늄 (Ge)</text>
+      <path d="M740 80 L860 80 L812 326 L788 326Z" fill="#3b4256" stroke="#aab3c5" stroke-width="4"/>
+      <circle cx="792" cy="328" r="8" fill="#ffd43b"/><circle cx="808" cy="328" r="8" fill="#ffd43b"/>
+      <path d="M780 300 L700 120" stroke="#ffd43b" stroke-width="4"/><path d="M820 300 L900 120" stroke="#ffd43b" stroke-width="4"/>
+      <path d="M360 160 Q390 140 420 160 T480 160 T540 160" fill="none" stroke="#74c0fc" stroke-width="5"/>
+      <text x="450" y="230" font-size="24" font-weight="800" fill="#aab3c5" text-anchor="middle">약한 신호</text>
+      <g data-step="1"><path d="M1040 160 Q1080 60 1120 160 T1200 160 T1280 160" fill="none" stroke="#ffa94d" stroke-width="7"/>
+        <text x="1160" y="250" font-size="24" font-weight="800" fill="#ffd8a8" text-anchor="middle">크게 키운 신호</text></g>
+      <text x="1560" y="510" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 장치 크기와 배선은 다시 꾸민 모식도</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅱ-2 물질의 규칙성과 성질 · 04</p>
+    <h1>물질의 전기적 성질</h1>
+    <p class="sub" data-step="1">애매한 물질이라서 쓸모가 있었다</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 물질을 전기가 통하는 정도로 나누고, 그 성질을 어떻게 골라 쓰는지 봅니다.</p>
+    <p data-at="1">1947년 12월 벨 연구소, 바딘과 브래튼이 저마늄 조각으로 첫 트랜지스터를 만들었습니다. 첫 시간에 멘델레예프가 비워 둔 바로 그 칸의 원소예요.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="거꾸로 가는 물질" data-part="도입">
+  <p class="kicker">도입 · 구리선과 저마늄을 데우면</p>
+  <h2>전기가 통하는 정도는 어떻게 될까?</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p><b>20 ℃ 비저항</b> (클수록 전기가 안 통함)</p>
+      <p>구리 <b class="c-blue">1.7×10⁻⁸ Ω·m</b> · 순수한 규소 약 <b>2.3×10³ Ω·m</b> · 석영 유리 <b class="c-red">10¹⁶ Ω·m 이상</b></p>
+      <p>구리선은 온도가 오르면 저항이 커진다</p>
+      <p>규소에 인을 100만 분의 1 넣으면 전기가 훨씬 잘 통한다</p>
+    </div>
+    <div class="card yel">
+      <h3>온도를 올리면?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 둘 다 더 잘 통하게 된다</div>
+        <div class="opt">㉡ 둘 다 덜 통하게 된다</div>
+        <div class="opt">㉢ 구리는 덜, 저마늄은 더 잘 통하게 된다</div>
+        <div class="opt">㉣ 구리는 더 잘, 저마늄은 덜 통하게 된다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>비저항은 같은 크기로 만들었을 때 전기를 얼마나 막는지 나타냅니다. 구리와 유리는 스물넉 자리나 차이 납니다. 규소는 그 사이 어디쯤이에요.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 띠 간격으로 직접 판단하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>도체</b><span>전기가 잘 통하는 물질</span></div>
+    <div class="card"><b>반도체</b><span>그 중간 · 성질을 조절할 수 있는 물질</span></div>
+    <div class="card"><b>절연체</b><span>전기가 거의 통하지 않는 물질 (부도체)</span></div>
+    <div class="card"><b>불순물 반도체</b><span>불순물을 일부러 넣은 n형·p형 반도체</span></div>
+    <div class="card"><b>다이오드</b><span>전류를 한쪽으로만 흘리는 소자</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~14번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 비저항 -->
+<section class="slide" id="s-rho" data-title="스물넉 자리의 차이" data-part="① 띠 간격">
+  <p class="kicker">① 띠 간격 · 전기가 통하는 정도로 물질 나누기</p>
+  <h2>구리와 유리는 스물넉 자리 차이</h2>
+  <svg id="rhoSvg" viewBox="0 0 1400 280" width="1400" height="280" aria-label="비저항 로그 눈금: 구리 10의 −8제곱, 규소 약 10의 3제곱, 석영 유리 10의 16제곱 이상"></svg>
+  <div class="tight">
+    <p data-step="1">전기가 잘 통한다 (구리·은·철) → <b class="blank" data-n="1" data-step="1">도체</b></p>
+    <p data-step="2">그 중간, 조건에 따라 달라진다 (규소·저마늄) → <b class="blank" data-n="2" data-step="2">반도체</b></p>
+    <p data-step="3">전기가 거의 통하지 않는다 (유리·고무·다이아몬드) → <b class="blank" data-n="3" data-step="3">절연체</b> (부도체)</p>
+  </div>
+  <aside class="script">
+    <p>비저항을 10배마다 한 칸인 눈금에 찍어 봅니다. 오른쪽으로 갈수록 전기를 잘 막습니다.</p>
+    <p data-at="1">구리는 10의 −8제곱 근처. 전기가 잘 통하는 빈칸 1번, 도체입니다.</p>
+    <p data-at="2">순수한 규소는 약 2.3×10³. 구리와 유리 사이의 빈칸 2번, 반도체입니다.</p>
+    <p data-at="3">석영 유리는 10의 16제곱 이상. 빈칸 3번, 절연체, 부도체라고도 합니다. 구리와는 스물넉 자리 차이예요. 이 차이가 어디서 오는지 봅시다.</p>
+  </aside>
+</section>
+
+<!-- 5 띠 간격 -->
+<section class="slide soft" id="s-band" data-title="띠와 띠 사이의 틈" data-part="① 띠 간격">
+  <p class="kicker">① 띠 간격 · 단원 화면 띠 간격 실험대</p>
+  <h2>전자가 건너뛸 틈이 얼마나 넓은가</h2>
+  <div class="cols" style="grid-template-columns:780px 1fr;align-items:center">
+    <svg id="bandSvg" viewBox="0 0 780 470" width="780" height="470" aria-label="세 물질의 띠 그림. 도체는 원자가 띠와 전도띠가 겹치고, 규소는 1.12 eV, 다이아몬드는 5.47 eV의 틈이 있다"></svg>
+    <div class="lines">
+      <p data-step="1">꽉 찬 원자가 띠와 빈 전도띠 사이의 틈 → <b class="blank" data-n="4" data-step="1">띠 간격</b></p>
+      <p data-step="2">도체: 띠가 겹치거나 틈이 거의 없다</p>
+      <p data-step="3">반도체: 틈이 어중간 (저마늄 0.67 eV · 규소 1.12 eV)</p>
+      <p data-step="4">절연체: 틈이 아주 넓다 (다이아몬드 5.47 eV)</p>
+    </div>
+  </div>
+  <p class="note">노란 점 = 전도띠로 건너뛴 전자(⚠ 띠 두께·점 개수는 모식). 0.3 eV 미만은 도체, 3.0 eV 이상은 절연체로 자른 것은 단원 화면의 교과서용 어림선이며, 실제로는 매끄럽게 이어집니다. 상온의 열에너지는 약 0.026 eV입니다.</p>
+  <aside class="script">
+    <p>물질 속 전자는 아무 데나 있을 수 없고 띠 안에만 있습니다. 아래 띠는 전자로 꽉 차 있고, 위 띠는 비어 있어요. 전자가 위 띠로 건너뛰어야 움직이며 전류가 흐릅니다.</p>
+    <p data-at="1">그 사이의 틈이 빈칸 4번, 띠 간격입니다.</p>
+    <p data-at="2">도체는 띠가 겹쳐 있어 전자가 언제든 움직입니다.</p>
+    <p data-at="3">반도체는 틈이 어중간합니다. 규소 1.12, 저마늄 0.67 eV. 상온에서는 아주 일부만 건너뜁니다.</p>
+    <p data-at="4">다이아몬드는 5.47 eV. 상온의 열에너지 약 0.026 eV로는 아무도 건너뛰지 못합니다. 탄소로만 되어 있어도 흑연과 달리 전기가 통하지 않아요.</p>
+  </aside>
+</section>
+
+<!-- 6 온도 -->
+<section class="slide" id="s-temp" data-title="데우면 반대로 간다" data-part="① 띠 간격">
+  <p class="kicker">① 띠 간격 · 온도를 올리면</p>
+  <h2>금속과 반도체는 정반대로 행동한다</h2>
+  <div class="cols" style="grid-template-columns:420px 1fr;align-items:start">
+    <div class="card" data-step="1">
+      <h3>도체 (구리)</h3>
+      <p style="font-size:27px">온도↑ → 원자의 떨림↑ → 움직이는 전자가 더 자주 부딪힘 → <b class="blank" data-n="5" data-step="1">저항</b>이 커진다</p>
+    </div>
+    <svg id="tempSvg" viewBox="0 0 900 470" width="900" height="470" aria-label="온도에 따른 건너뛴 전자 비율(로그 눈금). 규소는 300 K에서 약 4×10⁻¹⁰, 500 K에서 약 2×10⁻⁶으로 늘어난다. 저마늄은 늘 규소보다 크다"></svg>
+  </div>
+  <p class="note">건너뛴 전자 비율은 단원 화면과 같은 어림식 exp(−E<sub>g</sub>/2k<sub>B</sub>T)로 계산한 값입니다. 300 K ≈ 27 ℃, 500 K ≈ 227 ℃.</p>
+  <aside class="script">
+    <p>처음 질문으로 돌아갑니다. 온도를 올리면 어떻게 될까요?</p>
+    <p data-at="1">구리는 이미 움직이는 전자가 많습니다. 데우면 원자의 떨림이 커져 전자가 더 자주 부딪히니 빈칸 5번, 저항이 커집니다.</p>
+    <p data-at="2">반도체는 다릅니다. 규소를 300 K에서 500 K로 데우면 건너뛴 전자의 비율이 약 4×10⁻¹⁰에서 약 2×10⁻⁶으로, 수천 배 늘어납니다. 지수 함수로 늘기 때문이에요.</p>
+    <p data-at="3">그래서 첫 추리의 답은 ㉢. 구리는 덜, 저마늄은 더 잘 통합니다. 서로 반대로 갑니다.</p>
+  </aside>
+</section>
+
+<!-- 7 도핑 -->
+<section class="slide soft" id="s-dope" data-title="일부러 넣는 불순물" data-part="② 도핑">
+  <p class="kicker">② 도핑 · 단원 화면 도핑실</p>
+  <h2>원자가 전자가 하나 많거나 모자란 원자를 섞는다</h2>
+  <svg id="dopeSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="규소 격자 두 개. 왼쪽은 인 원자 하나가 들어가 전자 하나가 남고, 오른쪽은 붕소 원자 하나가 들어가 결합 하나에 빈자리가 생긴다"></svg>
+  <div class="tight">
+    <p data-step="1">규소는 원자가 전자 4개로 이웃 넷과 결합을 꽉 채움 → 불순물을 일부러 넣는 <b class="blank" data-n="6" data-step="1">도핑</b></p>
+    <p data-step="2">인(원자가 전자 5개) → 남는 전자가 전하를 나름 → <b class="blank" data-n="7" data-step="2">n형</b></p>
+    <p data-step="3">붕소(원자가 전자 3개) → 전자가 빈 자리 <b class="blank" data-n="8" data-step="3">양공</b>이 전하를 나름 → <b class="blank" data-n="9" data-step="3">p형</b></p>
+  </div>
+  <p class="note">⚠ 입체 결정을 평면으로 펼친 모식도이며 불순물 비율은 크게 과장했습니다. 막대 두 줄 = 전자 두 개로 이룬 결합.</p>
+  <aside class="script">
+    <p>반도체가 쓸모 있어진 결정적 이유입니다. 동그라미가 원자, 막대 두 줄이 전자 두 개로 이룬 결합입니다.</p>
+    <p data-at="1">순수한 규소는 원자가 전자 4개로 이웃 넷과 결합을 꽉 채워 움직일 전자가 거의 없습니다. 여기에 불순물을 일부러 넣는 것이 빈칸 6번, 도핑입니다.</p>
+    <p data-at="2">원자가 전자가 5개인 인을 넣으면 결합에 쓰고 하나가 남습니다. 이 전자가 움직이며 전하를 나릅니다. 빈칸 7번, n형. n은 음(negative)의 첫 글자예요.</p>
+    <p data-at="3">원자가 전자가 3개인 붕소를 넣으면 결합 하나에 전자가 비어 빈자리가 생깁니다. 빈칸 8번, 양공. 이웃 전자가 빈자리로 옮겨 가면 빈자리가 움직이는 것처럼 보여 양전하를 나르는 셈입니다. 빈칸 9번, p형.</p>
+  </aside>
+</section>
+
+<!-- 8 수백만 배 -->
+<section class="slide" id="s-boost" data-title="조금 넣어도 수백만 배" data-part="② 도핑">
+  <p class="kicker">② 도핑 · 섞는 양에 따라 (단원 화면 모형)</p>
+  <h2>아주 조금 넣어도 전도도가 수백만 배 뛴다</h2>
+  <svg id="boostSvg" viewBox="0 0 1400 340" width="1400" height="340" aria-label="1 cm³ 안의 불순물 원자 수(10¹²~10¹⁸개)에 따른 순수한 규소 대비 전도도. 10¹⁶개에서 약 100만 배"></svg>
+  <div class="tight">
+    <p data-step="1">순수한 규소의 나르개: 1 cm³에 약 10¹⁰개 → 불순물 10¹⁶개를 넣으면 약 100만 배</p>
+    <p data-step="2">원자 100만 개에 1개 정도만 넣어도 수백만 배 → n형·p형: <b class="blank" data-n="10" data-step="2">불순물 반도체</b></p>
+  </div>
+  <p class="note">전도도 배수 = (불순물 수 + 10¹⁰) ÷ 10¹⁰ 으로 어림한 단원 화면 모형 값입니다. 넣는 원소를 고르면 나르개가 전자(n형)가 될지 양공(p형)이 될지도 정할 수 있습니다.</p>
+  <aside class="script">
+    <p>섞는 양을 바꾸며 순수한 규소보다 전기가 몇 배 잘 통하는지 봅니다. 세로축은 10배마다 한 칸입니다.</p>
+    <p data-at="1">순수한 규소에는 상온에서 움직이는 나르개가 1 cm³에 약 10¹⁰개뿐입니다. 불순물을 10¹⁶개 넣으면 약 100만 배가 됩니다.</p>
+    <p data-at="2">규소 원자 100만 개에 1개 정도만 넣어도 전도도가 수백만 배 뜁니다. 이렇게 불순물을 넣은 반도체가 빈칸 10번, 불순물 반도체입니다. 성질을 골라 설계할 수 있게 된 거예요.</p>
+  </aside>
+</section>
+
+<!-- 9 다이오드 -->
+<section class="slide soft" id="s-diode" data-title="한쪽으로만 흐르는 문" data-part="③ 다이오드와 소재">
+  <p class="kicker">③ 다이오드와 소재 · 단원 화면 다이오드 시험대</p>
+  <h2>p형과 n형을 붙이면 전류가 한쪽으로만</h2>
+  <svg id="diodeSvg" viewBox="0 0 1400 360" width="1400" height="360" aria-label="p형과 n형을 붙인 소자. 순방향 전압에서는 양공과 전자가 접합면에서 만나 전류가 흐르고, 역방향에서는 서로 멀어져 거의 흐르지 않는다. 오른쪽에 전압-전류 그래프"></svg>
+  <div class="tight">
+    <p data-step="1">p형과 n형을 맞붙인 소자 → <b class="blank" data-n="11" data-step="1">다이오드</b></p>
+    <p data-step="2">p형에 (+)를 건 <b class="blank" data-n="12" data-step="2">순방향</b>: 양공과 전자가 접합면에서 만나 전류가 흐른다</p>
+    <p data-step="3">역방향: 양공과 전자가 접합면에서 멀어져 전류가 거의 흐르지 않는다</p>
+  </div>
+  <p class="note">그래프는 단원 화면 모형(이상적인 다이오드 I = I₀(e<sup>V/V<sub>T</sub></sup> − 1), I₀ = 10⁻¹² A, 직렬 저항 100 Ω)입니다. 실제 다이오드는 역방향 전압이 아주 커지면 갑자기 전류가 흐릅니다. ⚠ 입자 그림은 모식입니다.</p>
+  <aside class="script">
+    <p>n형과 p형을 맞붙여 봅니다.</p>
+    <p data-at="1">이것이 빈칸 11번, 다이오드입니다.</p>
+    <p data-at="2">p형 쪽에 +, n형 쪽에 −를 걸면 양공과 전자가 접합면으로 몰려와 만나며 전류가 흐릅니다. 빈칸 12번, 순방향. 그래프처럼 전압이 어느 정도를 넘으면 전류가 가파르게 늘어 1 mA를 넘깁니다.</p>
+    <p data-at="3">반대로 걸면 양공과 전자가 양쪽 끝으로 끌려가 가운데가 텅 빕니다. 전류가 거의 0입니다. 전류의 방향을 고르는 문이에요.</p>
+  </aside>
+</section>
+
+<!-- 10 소재 -->
+<section class="slide" id="s-use" data-title="일상과 첨단의 소재" data-part="③ 다이오드와 소재">
+  <p class="kicker">③ 다이오드와 소재 · 전기적 성질을 설계하다</p>
+  <h2>구분하는 데서 설계하는 데로</h2>
+  <div class="cols c3 use">
+    <div class="card" data-step="1">
+      <svg viewBox="0 0 300 120" width="300" height="120" aria-label="발광 다이오드, 태양 전지, 칩"><path d="M40 90 V50 A26 26 0 0 1 92 50 V90Z" fill="#ff8787" stroke="#c92a2a" stroke-width="4"/><line x1="56" y1="90" x2="56" y2="115" stroke="#495057" stroke-width="4"/><line x1="76" y1="90" x2="76" y2="115" stroke="#495057" stroke-width="4"/><rect x="118" y="30" width="80" height="80" fill="#1864ab"/><g stroke="#a5d8ff" stroke-width="2"><line x1="145" y1="30" x2="145" y2="110"/><line x1="172" y1="30" x2="172" y2="110"/><line x1="118" y1="57" x2="198" y2="57"/><line x1="118" y1="84" x2="198" y2="84"/></g><rect x="222" y="40" width="56" height="56" rx="6" fill="#343a40"/><g stroke="#adb5bd" stroke-width="3"><line x1="230" y1="40" x2="230" y2="28"/><line x1="250" y1="40" x2="250" y2="28"/><line x1="270" y1="40" x2="270" y2="28"/><line x1="230" y1="96" x2="230" y2="108"/><line x1="250" y1="96" x2="250" y2="108"/><line x1="270" y1="96" x2="270" y2="108"/></g></svg>
+      <h3>반도체 소자</h3><p>발광 다이오드(LED) · 태양 전지 · 트랜지스터</p><p class="small">스마트폰 안에는 트랜지스터가 수백억 개</p>
+    </div>
+    <div class="card" data-step="2">
+      <svg viewBox="0 0 300 120" width="300" height="120" aria-label="초전도 전자석 코일"><g fill="none" stroke="#7048e8" stroke-width="7"><ellipse cx="150" cy="30" rx="80" ry="16"/><ellipse cx="150" cy="52" rx="80" ry="16"/><ellipse cx="150" cy="74" rx="80" ry="16"/><ellipse cx="150" cy="96" rx="80" ry="16"/></g></svg>
+      <h3><b class="blank" data-n="13" data-step="2">초전도체</b></h3><p>특정 온도 아래에서 저항이 0 → 자기 공명 영상 장치(MRI)의 강한 전자석</p>
+    </div>
+    <div class="card" data-step="3">
+      <svg viewBox="0 0 300 120" width="300" height="120" aria-label="탄소 원자가 육각형으로 한 겹 깔린 그래핀"><g id="use-hex" fill="none" stroke="#2f9e44" stroke-width="4"></g></svg>
+      <h3><b class="blank" data-n="14" data-step="3">그래핀</b></h3><p>탄소 원자가 육각형으로 한 겹 → 전기가 아주 잘 통하고 얇고 휜다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>전기적 성질을 고를 수 있게 되자 세상이 바뀌었습니다.</p>
+    <p data-at="1">다이오드에서 빛을 내는 LED, 빛으로 전기를 만드는 태양 전지, 신호를 키우고 끄고 켜는 트랜지스터가 나왔습니다.</p>
+    <p data-at="2">어떤 물질은 특정 온도 아래로 식히면 저항이 정확히 0이 됩니다. 빈칸 13번, 초전도체. 열이 나지 않아 아주 센 전류를 계속 흘릴 수 있어 MRI의 전자석에 씁니다.</p>
+    <p data-at="3">탄소 원자가 육각형으로 한 겹만 깔린 빈칸 14번, 그래핀. 전기가 아주 잘 통하면서도 얇고 휘어 차세대 소재로 연구되고 있습니다.</p>
+  </aside>
+</section>
+
+<!-- 11 확인 -->
+<section class="slide" id="s-check1" data-title="절연체는 어느 것" data-part="③ 다이오드와 소재">
+  <p class="kicker">③ 다이오드와 소재 · 확인</p>
+  <h2>절연체로 분류해야 하는 것은?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ 저마늄</div>
+    <div class="opt right" data-step="1">㉡ 고체 소금</div>
+    <div class="opt wrong" data-step="1">㉢ 은</div>
+    <div class="opt wrong" data-step="1">㉣ 규소</div>
+  </div>
+  <p data-step="1" style="margin-top:36px">고체 소금은 이온이 묶여 있어 통하지 않는다(녹이면 통함, 이야기 ②). 은은 도체, 저마늄·규소는 반도체다.</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. 규소를 절연체로 고르는 학생이 있습니다.</p>
+    <p data-at="1">정답은 ㉡. ‘고체’라는 데 주의하세요. 지난 시간 이야기와 이어집니다. 다이아몬드도 탄소로만 되어 있지만 절연체입니다.</p>
+  </aside>
+</section>
+
+<!-- 12 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>띠 간격이 가르고, 도핑이 설계한다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>띠 간격</b>: 도체(겹침) · 반도체(규소 1.12 eV, 저마늄 0.67 eV) · 절연체(다이아몬드 5.47 eV)</li>
+    <li data-k="2" data-step="2">온도↑: 도체는 저항↑, 반도체는 건너뛰는 전자가 지수 함수로 늘어 더 잘 통한다</li>
+    <li data-k="3" data-step="3">도핑: 인 → <b>n형</b>(전자), 붕소 → <b>p형</b>(양공) · 조금만 넣어도 수백만 배</li>
+    <li data-k="4" data-step="4"><b>다이오드</b>는 순방향으로만 전류를 흘린다 · LED·태양 전지·트랜지스터, 초전도체, 그래핀</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 13 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 온도를 올리면 전기가 더 잘 통하게 되는 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 구리</div>
+        <div class="opt wrong" data-step="1">㉡ 철</div>
+        <div class="opt right" data-step="1">㉢ 규소</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 규소에 붕소를 조금 섞으면?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ n형, 남는 전자가 전하를 나른다</div>
+        <div class="opt right" data-step="2">㉡ p형, 양공이 전하를 나른다</div>
+        <div class="opt wrong" data-step="2">㉢ 절연체가 된다</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉢ 규소. 금속인 구리와 철은 데우면 저항이 커집니다.</p>
+    <p data-at="2">2번은 ㉡. 붕소는 원자가 전자가 3개라 빈자리, 양공이 생깁니다.</p>
+  </aside>
+</section>
+
+<!-- 14 활동·마무리 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 단원 마무리" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ④ 「거꾸로 가는 물질」</h2>
+  <div class="cols">
+    <div class="card"><h3>소재 연구원이 되어 보세요</h3><p>띠 간격과 온도 바꾸기, 인과 붕소로 도핑하기, 다이오드에 전압 걸기, 물질 아홉 개 분류가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>단원 마무리 · 정리하기</h3><p>원자가 전자의 되풀이 → 결합 → 단위체를 잇는 방식 → 전기적 성질. 네 사건을 ‘물질의 성질은 …에서 나온다’로 이어 한 문장으로 써 봅시다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ④를 열어 미션을 하게 하고, 정리하기 탭에서 네 사건을 꿰는 한 문장을 쓰게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function T(x, y, s, o) { o = o || {}; return "<text x='" + x + "' y='" + y + "' font-size='" + (o.s || 24) + "' font-weight='" + (o.w || 900) + "' fill='" + (o.c || "#161b28") + "' text-anchor='" + (o.a || "middle") + "'>" + s + "</text>"; }
+  var SUP = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+  function sup(n) { return String(n).split("").map(function (c) { return SUP[c] || c; }).join(""); }
+
+  /* 비저항 로그 눈금 */
+  (function () {
+    var X0 = 60, X1 = 1340, Y = 150, h = "";
+    function X(l) { return X0 + (l + 10) / 28 * (X1 - X0); }
+    h += "<defs><linearGradient id='rho-g' x1='0' x2='1'><stop offset='0' stop-color='#0ca678'/><stop offset='.5' stop-color='#f59f00'/><stop offset='1' stop-color='#7048e8'/></linearGradient></defs>";
+    h += "<rect x='" + X0 + "' y='" + (Y - 10) + "' width='" + (X1 - X0) + "' height='20' rx='10' fill='url(#rho-g)' opacity='.35'/>";
+    for (var l = -10; l <= 18; l += 2) h += "<line x1='" + X(l) + "' y1='" + (Y + 12) + "' x2='" + X(l) + "' y2='" + (Y + 26) + "' stroke='#5f6b80' stroke-width='2'/>" + T(X(l), Y + 52, "10" + sup(l), { s: 20, w: 800, c: "#5f6b80" });
+    h += T(X1, Y + 88, "비저항 (Ω·m) → 전기를 잘 막는다", { s: 20, a: "end", c: "#5f6b80" });
+    [[Math.log10(1.7e-8), "구리 1.7×10⁻⁸", "#0ca678", 1], [Math.log10(2.3e3), "규소 약 2.3×10³", "#e8590c", 2], [16, "석영 유리 10¹⁶ 이상", "#7048e8", 3]].forEach(function (p) {
+      h += "<g data-step='" + p[3] + "'><circle cx='" + X(p[0]).toFixed(1) + "' cy='" + Y + "' r='18' fill='" + p[2] + "' stroke='#fff' stroke-width='4'/>" + T(X(p[0]).toFixed(1), Y - 34, p[1], { s: 24, c: p[2] }) + "</g>";
+    });
+    h += "<g data-step='3'><path d='M" + X(-7.77).toFixed(1) + " 60 H" + X(16).toFixed(1) + "' stroke='#c92a2a' stroke-width='3' stroke-dasharray='8 6'/>" + T((X(-7.77) + X(16)) / 2, 48, "스물넉 자리 (10²⁴배)", { s: 22, c: "#c92a2a" }) + "</g>";
+    document.getElementById("rhoSvg").innerHTML = h;
+  })();
+
+  /* 띠 그림 세 개 */
+  (function () {
+    var h = "", K = 38, B = 400;
+    function panel(x, gap, name, sub, col, st) {
+      var vTop = B - 90, cBot = vTop - gap * K, s = "";
+      s += "<rect x='" + x + "' y='" + vTop + "' width='200' height='90' rx='8' fill='#1c7ed6'/>";
+      s += "<rect x='" + x + "' y='" + (cBot - 90) + "' width='200' height='90' rx='8' fill='" + (gap < 0 ? "rgba(255,255,255,.55)" : "#fff") + "' stroke='#1c7ed6' stroke-width='4'/>";
+      if (gap > 0) s += "<line x1='" + (x + 220) + "' y1='" + vTop + "' x2='" + (x + 220) + "' y2='" + cBot + "' stroke='" + col + "' stroke-width='4'/><line x1='" + (x + 212) + "' y1='" + vTop + "' x2='" + (x + 228) + "' y2='" + vTop + "' stroke='" + col + "' stroke-width='4'/><line x1='" + (x + 212) + "' y1='" + cBot + "' x2='" + (x + 228) + "' y2='" + cBot + "' stroke='" + col + "' stroke-width='4'/>";
+      s += "<g data-step='" + st + "'>" + T(x + 100, B + 36, name, { s: 26, c: col }) + T(x + 100, B + 64, sub, { s: 20, w: 800, c: "#5f6b80" }) + "</g>";
+      return s;
+    }
+    h += "<g data-step='1'>";
+    h += panel(10, -0.4, "도체", "띠가 겹침", "#0ca678", 2);
+    h += panel(280, 1.12, "반도체", "규소 1.12 eV", "#e8590c", 3);
+    h += panel(550, 5.47, "절연체", "다이아몬드 5.47 eV", "#7048e8", 4);
+    h += T(650, B - 38, "원자가 띠 (꽉 참)", { s: 22, c: "#fff" });
+    h += T(650, B - 90 - 5.47 * K - 38, "전도띠 (비어 있음)", { s: 22, c: "#1c7ed6" });
+    h += "</g>";
+    /* 건너뛴 전자: 도체는 많이, 반도체는 조금, 절연체는 없음 */
+    h += "<g data-step='2'>";
+    [[40, 0], [80, 1], [130, 0], [170, 1]].forEach(function (p) { h += "<circle cx='" + (10 + p[0]) + "' cy='" + (B - 90 + 0.4 * K - 60 + p[1] * 22) + "' r='9' fill='#fab005' stroke='#e67700' stroke-width='2'/>"; });
+    h += "</g><g data-step='3'><circle cx='380' cy='" + (B - 90 - 1.12 * K - 45) + "' r='9' fill='#fab005' stroke='#e67700' stroke-width='2'/></g>";
+    h += "<g data-step='3'>" + T(380, B - 90 - 1.12 * K / 2 + 8, "1.12 eV", { s: 20, c: "#e8590c" }) + "</g>";
+    h += "<g data-step='4'>" + T(650, B - 90 - 5.47 * K / 2 + 8, "5.47 eV", { s: 22, c: "#7048e8" }) + "</g>";
+    document.getElementById("bandSvg").innerHTML = h;
+  })();
+
+  /* 온도에 따른 건너뛴 전자 비율 */
+  (function () {
+    var kB = 8.617e-5, X0 = 110, X1 = 860, Y0 = 400, Y1 = 56, h = "";
+    function X(t) { return X0 + (t - 250) / 350 * (X1 - X0); }
+    function Y(l) { return Y0 - (l + 12) / 10 * (Y0 - Y1); }
+    function r(eg, t) { return Math.exp(-eg / (2 * kB * t)); }
+    for (var l = -12; l <= -2; l += 2) h += "<line x1='" + X0 + "' y1='" + Y(l) + "' x2='" + X1 + "' y2='" + Y(l) + "' stroke='#e8edf4' stroke-width='2'/>" + T(X0 - 10, Y(l) + 7, "10" + sup(l), { s: 20, a: "end", c: "#5f6b80" });
+    h += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='3'/>";
+    [300, 400, 500, 600].forEach(function (t) { h += T(X(t), Y0 + 30, t + " K", { s: 20, c: "#5f6b80" }); });
+    h += T(X0 - 100, 18, "건너뛴 전자 비율", { s: 20, a: "start", c: "#5f6b80" });
+    h += "<line x1='" + X0 + "' y1='" + Y(-6) + "' x2='" + X1 + "' y2='" + Y(-6) + "' stroke='#e8590c' stroke-width='3' stroke-dasharray='10 7'/>" + T(X(330), Y(-6) + 28, "100만 분의 1 (10⁻⁶)", { s: 20, c: "#e8590c" });
+    var si = [], ge = [], t;
+    for (t = 250; t <= 600; t += 5) { si.push(X(t).toFixed(1) + "," + Y(Math.max(-12, Math.log10(r(1.12, t)))).toFixed(1)); ge.push(X(t).toFixed(1) + "," + Y(Math.min(-2, Math.log10(r(0.67, t)))).toFixed(1)); }
+    h += "<g data-step='2'><polyline points='" + si.join(" ") + "' fill='none' stroke='#1c7ed6' stroke-width='5'/>";
+    h += "<circle cx='" + X(300) + "' cy='" + Y(Math.log10(r(1.12, 300))) + "' r='10' fill='#1c7ed6'/>" + T(X(300) + 16, Y(Math.log10(r(1.12, 300))) + 32, "300 K 약 4×10⁻¹⁰", { s: 21, a: "start", c: "#1864ab" });
+    h += "<circle cx='" + X(500) + "' cy='" + Y(Math.log10(r(1.12, 500))) + "' r='10' fill='#1c7ed6'/>" + T(X(500) - 16, Y(Math.log10(r(1.12, 500))) - 16, "500 K 약 2×10⁻⁶", { s: 21, a: "end", c: "#1864ab" });
+    h += T(X(560), Y(Math.log10(r(1.12, 560))) - 20, "규소", { s: 22, c: "#1864ab" });
+    h += "<polyline points='" + ge.join(" ") + "' fill='none' stroke='#868e96' stroke-width='4' stroke-dasharray='12 8'/>" + T(X(330), Y(Math.log10(r(0.67, 330))) - 16, "저마늄", { s: 22, c: "#5f6b80" }) + "</g>";
+    h += "<g data-step='3'><rect x='" + (X(470) - 165) + "' y='" + (Y(-10) - 30) + "' width='330' height='44' rx='10' fill='#fff6cc'/>" + T(X(470), Y(-10), "데울수록 더 잘 통한다", { s: 22, c: "#e67700" }) + "</g>";
+    document.getElementById("tempSvg").innerHTML = h;
+  })();
+
+  /* 도핑: 규소 격자 두 개 */
+  (function () {
+    var h = "";
+    function grid(ox, kind) {
+      var s = "", D = 110, i, j, cx, cy;
+      for (j = 0; j < 3; j++) for (i = 0; i < 4; i++) {
+        cx = ox + i * D; cy = 40 + j * D;
+        if (i < 3) s += "<g stroke='#868e96' stroke-width='3'><line x1='" + (cx + 30) + "' y1='" + (cy - 6) + "' x2='" + (cx + D - 30) + "' y2='" + (cy - 6) + "'/><line x1='" + (cx + 30) + "' y1='" + (cy + 6) + "' x2='" + (cx + D - 30) + "' y2='" + (cy + 6) + "'/></g>";
+        if (j < 2) s += "<g stroke='#868e96' stroke-width='3'><line x1='" + (cx - 6) + "' y1='" + (cy + 30) + "' x2='" + (cx - 6) + "' y2='" + (cy + D - 30) + "'/><line x1='" + (cx + 6) + "' y1='" + (cy + 30) + "' x2='" + (cx + 6) + "' y2='" + (cy + D - 30) + "'/></g>";
+      }
+      for (j = 0; j < 3; j++) for (i = 0; i < 4; i++) {
+        cx = ox + i * D; cy = 40 + j * D;
+        var dop = i === 1 && j === 1;
+        s += "<circle cx='" + cx + "' cy='" + cy + "' r='28' fill='#dee2e6' stroke='#868e96' stroke-width='3'" + (dop ? " data-hide='" + (kind === "n" ? 2 : 3) + "'" : "") + "/>";
+        s += "<text x='" + cx + "' y='" + (cy + 8) + "' font-size='22' font-weight='900' fill='#495057' text-anchor='middle'" + (dop ? " data-hide='" + (kind === "n" ? 2 : 3) + "'" : "") + ">Si</text>";
+      }
+      var dx = ox + D, dy = 40 + D;
+      if (kind === "n") {
+        s += "<g data-step='2'><circle cx='" + dx + "' cy='" + dy + "' r='30' fill='#ffc9c9' stroke='#e03131' stroke-width='4'/>" + T(dx, dy + 8, "P", { s: 24, c: "#c92a2a" });
+        s += "<circle cx='" + (dx + 52) + "' cy='" + (dy - 46) + "' r='12' fill='#fab005' stroke='#e67700' stroke-width='3'/>" + T(dx + 52, dy - 70, "남는 전자", { s: 20, c: "#e67700" }) + "</g>";
+        s += "<g data-step='2'>" + T(ox + 165, 326, "n형 (인을 섞음)", { s: 24, c: "#c92a2a" }) + "</g>";
+      } else {
+        s += "<g data-step='3'><circle cx='" + dx + "' cy='" + dy + "' r='30' fill='#d0ebff' stroke='#1c7ed6' stroke-width='4'/>" + T(dx, dy + 8, "B", { s: 24, c: "#1864ab" });
+        s += "<rect x='" + (dx + 30) + "' y='" + (dy + 1) + "' width='60' height='10' fill='#f1f3f5'/><circle cx='" + (dx + 60) + "' cy='" + (dy + 6) + "' r='11' fill='#fff' stroke='#1c7ed6' stroke-width='3' stroke-dasharray='4 3'/>" + T(dx + 60, dy + 48, "양공", { s: 20, c: "#1864ab" }) + "</g>";
+        s += "<g data-step='3'>" + T(ox + 165, 326, "p형 (붕소를 섞음)", { s: 24, c: "#1864ab" }) + "</g>";
+      }
+      return s;
+    }
+    h += grid(100, "n") + grid(820, "p");
+    document.getElementById("dopeSvg").innerHTML = h;
+  })();
+
+  /* 불순물 수에 따른 전도도 배수 */
+  (function () {
+    var X0 = 140, Y0 = 280, Y1 = 30, h = "", NI = 1e10;
+    function Y(l) { return Y0 - l / 9 * (Y0 - Y1); }
+    [0, 2, 4, 6, 8].forEach(function (l) { h += "<line x1='" + X0 + "' y1='" + Y(l) + "' x2='1380' y2='" + Y(l) + "' stroke='#e8edf4' stroke-width='2'/>" + T(X0 - 12, Y(l) + 7, "10" + sup(l) + "배", { s: 20, a: "end", c: "#5f6b80" }); });
+    h += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='1380' y2='" + Y0 + "' stroke='#161b28' stroke-width='3'/>";
+    h += "<line x1='" + X0 + "' y1='" + Y(6) + "' x2='1380' y2='" + Y(6) + "' stroke='#e8590c' stroke-width='3' stroke-dasharray='10 7'/>" + T(X0 + 8, Y(6) - 10, "100만 배", { s: 22, a: "start", c: "#e8590c" });
+    h += "<g data-step='1'>";
+    for (var e = 12; e <= 18; e++) {
+      var b = (Math.pow(10, e) + NI) / NI, l = Math.log10(b), x = X0 + 40 + (e - 12) * 170, big = b >= 1e6;
+      h += "<rect x='" + x + "' y='" + Y(l).toFixed(1) + "' width='100' height='" + (Y0 - Y(l)).toFixed(1) + "' rx='8' fill='" + (big ? "#2f9e44" : "#74c0fc") + "'/>";
+      h += T(x + 50, Y0 + 30, "10" + sup(e) + "개", { s: 21 });
+    }
+    h += T(1380, Y0 + 56, "1 cm³ 안의 불순물 원자 수", { s: 20, a: "end", c: "#5f6b80" }) + "</g>";
+    document.getElementById("boostSvg").innerHTML = h;
+  })();
+
+  /* 다이오드 */
+  (function () {
+    var h = "<defs><marker id='dio-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#495057'/></marker></defs>";
+    function junction(ox, oy, fwd, st) {
+      var s = "<g data-step='" + st + "'>";
+      s += "<rect x='" + ox + "' y='" + oy + "' width='200' height='90' fill='#d0ebff' stroke='#1c7ed6' stroke-width='3'/><rect x='" + (ox + 200) + "' y='" + oy + "' width='200' height='90' fill='#ffe3e3' stroke='#e03131' stroke-width='3'/>";
+      s += T(ox + 100, oy - 12, "p형", { s: 24, c: "#1864ab" }) + T(ox + 300, oy - 12, "n형", { s: 24, c: "#c92a2a" });
+      var hx = fwd ? [120, 150, 175, 135, 165] : [20, 40, 30, 55, 25], ex = fwd ? [225, 250, 280, 235, 265] : [370, 350, 375, 345, 380];
+      hx.forEach(function (x, i) { s += "<circle cx='" + (ox + x) + "' cy='" + (oy + 18 + i * 13.5) + "' r='8' fill='#fff' stroke='#1c7ed6' stroke-width='3'/>"; });
+      ex.forEach(function (x, i) { s += "<circle cx='" + (ox + x) + "' cy='" + (oy + 18 + i * 13.5) + "' r='7' fill='#fab005' stroke='#e67700' stroke-width='2'/>"; });
+      if (!fwd) s += "<rect x='" + (ox + 90) + "' y='" + (oy + 4) + "' width='220' height='82' fill='none' stroke='#868e96' stroke-width='3' stroke-dasharray='8 6'/>";
+      s += T(ox - 18, oy + 56, fwd ? "+" : "−", { s: 34, c: fwd ? "#c92a2a" : "#1864ab", a: "end" }) + T(ox + 418, oy + 56, fwd ? "−" : "+", { s: 34, c: fwd ? "#1864ab" : "#c92a2a", a: "start" });
+      s += T(ox + 200, oy + 120, fwd ? "순방향 → 전류가 흐른다" : "역방향 → 가운데가 비어 거의 0", { s: 22, c: fwd ? "#2f9e44" : "#c92a2a" });
+      return s + "</g>";
+    }
+    h += T(260, 22, "p형 + n형 = 다이오드", { s: 22, c: "#495057" });
+    h += junction(60, 62, true, 2);
+    h += junction(60, 228, false, 3);
+    /* 전압-전류 그래프 */
+    var GX = 620, GY = 300, GW = 700, GH = 250, g = "";
+    function gx(v) { return GX + (v + 1) / 2 * GW; }
+    function gy(ma) { return GY - Math.min(ma, 5) / 5 * GH; }
+    g += "<line x1='" + GX + "' y1='" + GY + "' x2='" + (GX + GW) + "' y2='" + GY + "' stroke='#161b28' stroke-width='3'/><line x1='" + gx(0) + "' y1='" + (GY + 10) + "' x2='" + gx(0) + "' y2='" + (GY - GH - 10) + "' stroke='#161b28' stroke-width='3'/>";
+    g += T(GX + GW, GY + 34, "전압 (V)", { s: 20, a: "end", c: "#5f6b80" }) + T(gx(0) + 10, GY - GH - 16, "전류 (mA)", { s: 20, a: "start", c: "#5f6b80" });
+    [-1, -0.5, 0.5, 1].forEach(function (v) { g += T(gx(v), GY + 30, (v < 0 ? "−" : "") + Math.abs(v), { s: 19, c: "#5f6b80" }); });
+    g += "<line x1='" + GX + "' y1='" + gy(1) + "' x2='" + (GX + GW) + "' y2='" + gy(1) + "' stroke='#e8590c' stroke-width='2' stroke-dasharray='8 6'/>" + T(GX + 6, gy(1) - 8, "1 mA", { s: 19, a: "start", c: "#e8590c" });
+    /* 이상적 다이오드 + 직렬 저항 100 Ω (단원 화면 모형) */
+    function cur(V) { var I0 = 1e-12, VT = 0.02585, R = 100; if (V <= 0) return I0 * (Math.exp(Math.max(V, -2) / VT) - 1); var lo = 0, hi = V / R; for (var k = 0; k < 60; k++) { var m = (lo + hi) / 2; if (VT * Math.log(m / I0 + 1) + m * R - V > 0) hi = m; else lo = m; } return lo; }
+    var fw = [], rv = [], v;
+    for (v = 0; v <= 1.0001; v += 0.01) fw.push(gx(v).toFixed(1) + "," + gy(cur(v) * 1000).toFixed(1));
+    for (v = -1; v <= 0.0001; v += 0.02) rv.push(gx(v).toFixed(1) + "," + gy(Math.max(0, cur(v) * 1000)).toFixed(1));
+    g += "<g data-step='2'><polyline points='" + fw.join(" ") + "' fill='none' stroke='#2f9e44' stroke-width='5'/></g>";
+    g += "<g data-step='3'><polyline points='" + rv.join(" ") + "' fill='none' stroke='#c92a2a' stroke-width='5'/>" + T(gx(-0.5), GY - 18, "역방향: 거의 0", { s: 20, c: "#c92a2a" }) + "</g>";
+    h += "<g data-step='2'>" + g + "</g>";
+    document.getElementById("diodeSvg").innerHTML = h;
+  })();
+
+  /* 그래핀 육각형 */
+  (function () {
+    var g = "", R = 22, w = R * Math.sqrt(3), i, j;
+    for (j = 0; j < 3; j++) for (i = 0; i < 6; i++) {
+      var cx = 40 + i * w + (j % 2) * w / 2, cy = 24 + j * R * 1.5, p = [];
+      for (var k = 0; k < 6; k++) p.push((cx + R * Math.cos(Math.PI / 6 + k * Math.PI / 3)).toFixed(1) + "," + (cy + R * Math.sin(Math.PI / 6 + k * Math.PI / 3)).toFixed(1));
+      g += "<polygon points='" + p.join(" ") + "'/>";
+    }
+    document.getElementById("use-hex").innerHTML = g;
+  })();
+})();
+</script>
+</body>
+</html>

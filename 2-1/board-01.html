@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 빅뱅과 원소의 생성 (통합과학1 Ⅱ-1 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  .specrow { display: grid; grid-template-columns: 450px 950px; align-items: center; margin-bottom: 22px; }
+  .specrow p { margin: 0; font-size: 26px; line-height: 1.4; color: var(--mute); font-weight: 700; }
+  .specrow p + p { margin-top: 20px; font-size: 30px; color: var(--ink); }
+  table.ledger td { font-size: 27px; padding: 12px 12px; vertical-align: top; }
+  table.ledger th { padding: 8px 12px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg id="coverSvg" viewBox="0 0 1600 520" aria-label="개기 일식으로 가려진 태양과 코로나, 망원경 끝의 프리즘을 지나 펼쳐진 무지개 띠 위에 밝은 노란 선 하나"></svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅱ-1 자연의 구성 원소 · 01</p>
+    <h1>빅뱅과 원소의 생성</h1>
+    <p class="sub" data-step="1">가 본 적 없는 태양에서 먼저 찾은 원소, 그리고 우주가 태어난 첫 3분</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 별빛을 펼쳐 원소를 알아내는 방법과, 우주가 태어난 직후 수소와 헬륨이 만들어진 과정을 봅니다. 여러분은 별빛의 지문을 읽는 조사관입니다.</p>
+    <p data-at="1">지구에서 찾기 27년 전에 태양에서 먼저 발견된 원소가 있습니다. 어떻게 가능했는지부터 시작합니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="태양에서 먼저 찾은 원소" data-part="도입">
+  <p class="kicker">도입 · 1868년 8월, 인도 상공의 개기 일식</p>
+  <h2>무지개 속에 처음 보는 노란 선이 있었다</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p>달이 태양을 가린 몇 분, 가장자리에서 새어 나온 빛을 <b>프리즘</b>으로 펼쳤다</p>
+      <p>지구에서 본 적 없는 <b class="c-orange">노란 선</b> 하나 → 태양(헬리오스)의 이름을 딴 새 원소</p>
+      <p class="small mt">지구에서 이 원소를 실제로 손에 넣은 것은 27년 뒤인 1895년입니다.</p>
+    </div>
+    <div class="card yel">
+      <h3>햇빛을 프리즘으로 펼치면 무지개. 태양의 스펙트럼은 끊김 없는 연속일까?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 완전히 연속이다</div>
+        <div class="opt">㉡ 검은 선이 수백 개 있다</div>
+        <div class="opt">㉢ 몇 개의 밝은 선만 있다</div>
+        <div class="opt">㉣ 색이 일곱 개로 딱 나뉜다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>가 본 적도, 만져 본 적도 없는 태양의 성분을 어떻게 알아냈을까요? 답은 빛입니다.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 오늘 스펙트럼을 직접 펼쳐 보며 판단하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>스펙트럼</b><span>빛을 파장(색)에 따라 펼친 띠</span></div>
+    <div class="card"><b>흡수선</b><span>원소가 특정 파장을 흡수해 생긴 검은 선</span></div>
+    <div class="card"><b>빅뱅</b><span>뜨겁고 빽빽한 상태에서 팽창하며 시작한 우주</span></div>
+    <div class="card"><b>빅뱅 핵합성</b><span>빅뱅 뒤 약 3분 동안 가벼운 원자핵이 생긴 일</span></div>
+    <div class="card"><b>우주 배경 복사</b><span>하늘 어디서나 오는 2.7 K의 복사</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~14번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 세 가지 스펙트럼 -->
+<section class="slide" id="s-spec3" data-title="스펙트럼의 세 종류" data-part="① 별빛의 지문">
+  <p class="kicker">① 별빛의 지문 · 광원을 바꿔 가며 빛을 펼치면</p>
+  <h2>빛을 펼치면 세 가지 무늬가 나온다</h2>
+  <div class="specrow" data-step="1">
+    <div><p>백열전구 · 끊김 없는 띠</p><p><b class="blank" data-n="1" data-step="1">연속 스펙트럼</b></p></div>
+    <svg id="sp3a" viewBox="0 0 950 110" width="950" height="110" aria-label="빨강부터 보라까지 끊김 없이 이어진 무지개 띠"></svg>
+  </div>
+  <div class="specrow" data-step="2">
+    <div><p>가열한 기체 · 어두운 바탕에 밝은 선</p><p><b class="blank" data-n="2" data-step="2">방출 스펙트럼</b></p></div>
+    <svg id="sp3b" viewBox="0 0 950 110" width="950" height="110" aria-label="검은 바탕 위에 수소와 헬륨의 밝은 선 몇 개"></svg>
+  </div>
+  <div class="specrow" data-step="3">
+    <div><p>별빛(태양) · 무지개 위에 검은 선</p><p><b class="blank" data-n="3" data-step="3">흡수 스펙트럼</b></p></div>
+    <svg id="sp3c" viewBox="0 0 950 140" width="950" height="140" aria-label="무지개 띠 위에 검은 흡수선이 여러 개 있고 아래에 파장 눈금 400부터 700 nm"></svg>
+  </div>
+  <p class="note">흡수선: 연속 스펙트럼의 빛이 그보다 차가운 기체를 지날 때, 기체 속 원소가 특정 파장을 흡수해 생긴 검은 선. 화면의 선은 대표적인 몇 개만 그렸습니다.</p>
+  <aside class="script">
+    <p>단원 화면의 분광기에서 광원을 하나씩 바꿔 본 것과 같습니다. 파장이 왼쪽 보라 400 nm에서 오른쪽 빨강 700 nm까지입니다.</p>
+    <p data-at="1">백열전구처럼 뜨거운 고체는 끊김 없는 무지개를 냅니다. 빈칸 1번, 연속 스펙트럼.</p>
+    <p data-at="2">뜨겁고 옅은 기체는 몇 개의 파장에서만 빛납니다. 빈칸 2번, 방출 스펙트럼.</p>
+    <p data-at="3">별빛은 무지개 위에 검은 선이 박혀 있습니다. 별 바깥 대기의 원소가 그 파장만 흡수했기 때문이에요. 빈칸 3번, 흡수 스펙트럼.</p>
+  </aside>
+</section>
+
+<!-- 5 원소의 지문 -->
+<section class="slide" id="s-finger" data-title="선의 위치는 원소의 지문" data-part="① 별빛의 지문">
+  <p class="kicker">① 별빛의 지문 · 실험실의 수소와 햇빛을 나란히 놓으면</p>
+  <h2>같은 자리의 선 = 같은 원소</h2>
+  <svg id="fpSvg" viewBox="0 0 1400 420" width="1400" height="420" aria-label="위는 실험실에서 가열한 수소의 밝은 선, 가운데는 햇빛의 검은 선, 아래는 1868년 일식 때 태양 가장자리 빛의 밝은 노란 선. 수소 선들은 위아래가 같은 파장에 있다"></svg>
+  <div class="tight">
+    <p data-step="1">원소마다 선이 놓이는 <b class="blank" data-n="4" data-step="1">파장</b>이 정해져 있다 → 선의 위치로 원소를 알아낸다</p>
+    <p data-step="2">햇빛의 검은 선 가운데 약 656 nm의 붉은 선 = 실험실 수소의 밝은 선과 같은 자리 → 태양에 수소</p>
+    <p data-step="3">1868년 약 588 nm의 노란 선: 나트륨(약 589 nm)과도 어긋남 → 새 원소 <b class="blank" data-n="5" data-step="3">헬륨</b></p>
+  </div>
+  <aside class="script">
+    <p>사람마다 지문이 다르듯 원소마다 선이 놓이는 자리가 다릅니다.</p>
+    <p data-at="1">빈칸 4번, 파장. 선이 어느 파장에 있는지가 그 원소의 지문입니다. 밝은 선이든 검은 선이든 자리는 같아요.</p>
+    <p data-at="2">실험실에서 수소를 가열해 얻은 붉은 선, 약 656 nm. 햇빛의 검은 선 가운데 꼭 같은 자리에 선이 있습니다. 태양에 수소가 있다는 뜻이죠.</p>
+    <p data-at="3">1868년 일식 때 태양 가장자리 빛에서 나온 노란 선은 약 588 nm. 가로등 빛을 내는 나트륨 선과 아주 가깝지만 자리가 어긋났습니다. 그래서 새 원소라고 판단했고, 빈칸 5번, 헬륨이라는 이름이 붙었습니다.</p>
+  </aside>
+</section>
+
+<!-- 6 확인 -->
+<section class="slide" id="s-check1" data-title="햇빛 스펙트럼의 정체" data-part="① 별빛의 지문">
+  <p class="kicker">① 별빛의 지문 · 확인</p>
+  <h2>햇빛을 분광기로 정밀하게 펼치면?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ 끊김 없는 연속 스펙트럼이다</div>
+    <div class="opt right" data-step="1">㉡ 무지개 위에 검은 흡수선이 수백 개 넘게 있다</div>
+    <div class="opt wrong" data-step="1">㉢ 어두운 바탕에 밝은 선 몇 개만 있다</div>
+    <div class="opt wrong" data-step="1">㉣ 빨주노초파남보 일곱 색으로 딱 나뉜다</div>
+  </div>
+  <p data-step="1" style="margin-top:40px">눈에는 끊김 없는 무지개로 보여도, 주로 태양 대기의 원소가 만든 <b>검은 줄(프라운호퍼선)</b>이 촘촘하다.</p>
+  <aside class="script">
+    <p>처음에 고른 첫 추리를 떠올리게 하고, 짝과 30초 이야기한 뒤 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ㉡. 무지개처럼 보여서 연속 스펙트럼이라고 여기기 쉽지만, 자세히 보면 검은 선이 수백 개 넘게 있습니다. 일부는 지구 대기의 산소가 만든 것입니다.</p>
+  </aside>
+</section>
+
+<!-- 7 어디서나 3:1 -->
+<section class="slide soft" id="s-ratio" data-title="어디서나 같은 비율" data-part="② 빅뱅의 증거">
+  <p class="kicker">② 빅뱅의 증거 · 별과 은하의 지문을 모아 보니</p>
+  <h2>어느 별, 어느 은하든 비율이 같다</h2>
+  <div class="cols" style="grid-template-columns:640px 1fr;align-items:center">
+    <svg id="ratioSvg" viewBox="0 0 640 470" width="640" height="470" aria-label="태양, 오래된 별, 먼 은하, 성운 네 곳의 수소와 헬륨 질량비 원그래프가 모두 약 75 대 25로 같다"></svg>
+    <div class="lines">
+      <p data-step="1">수소 약 75%, 헬륨 약 25% → 질량비 약 <b class="blank" data-n="6" data-step="1">3 : 1</b></p>
+      <p data-step="2">별마다 사정이 다른데 비율이 같다 → 별이 만든 것이 아니라 우주가 태어날 때 정해졌다</p>
+      <p data-step="2">뜨겁고 빽빽한 상태에서 팽창하며 식어 온 우주의 시작: <b class="blank" data-n="7" data-step="2">빅뱅</b></p>
+      <p class="small" data-step="3">증거물 ③ 리튬보다 무거운 원소는 우주 초기 물질에서 거의 보이지 않는다</p>
+    </div>
+  </div>
+  <p class="note">원그래프의 수는 질량 백분율(%)을 어림한 값이고, 나머지 원소(약 1~2%)는 생략했습니다. 단원 화면의 태양값은 수소 73.8%, 헬륨 24.9%입니다.</p>
+  <aside class="script">
+    <p>지문을 읽는 방법을 알았으니, 여러 별과 은하의 스펙트럼을 모아 수소와 헬륨의 양을 비교해 봅시다.</p>
+    <p data-at="1">어느 별이든 어느 은하든 수소 약 75%, 헬륨 약 25%입니다. 빈칸 6번, 질량비 3 : 1.</p>
+    <p data-at="2">별마다 크기도 나이도 다른데 비율이 같다면, 별이 만든 것이 아니라 우주가 태어날 때 이미 정해졌다는 뜻입니다. 빈칸 7번, 빅뱅. 우주가 아주 뜨겁고 빽빽한 상태에서 팽창하며 식어 왔다는 생각입니다.</p>
+    <p data-at="3">게다가 리튬보다 무거운 원소는 우주 초기 물질에 거의 없습니다. 이 까닭은 세 번째 파트에서 찾습니다.</p>
+  </aside>
+</section>
+
+<!-- 8 우주 배경 복사 -->
+<section class="slide" id="s-cmb" data-title="하늘 어디서나 오는 2.7 K" data-part="② 빅뱅의 증거">
+  <p class="kicker">② 빅뱅의 증거 · 증거물 ①</p>
+  <h2>하늘의 모든 방향에서 같은 복사가 온다</h2>
+  <svg id="cmbSvg" viewBox="0 0 1400 380" width="1400" height="380" aria-label="왼쪽은 지구를 둘러싼 하늘의 모든 방향에서 똑같이 들어오는 복사, 오른쪽은 약 38만 년에 3000 K였던 빛이 우주가 팽창하며 늘어나 지금 2.7 K가 되는 띠"></svg>
+  <div class="tight">
+    <p data-step="1">어느 방향을 보아도 똑같이 쏟아지는 온도 2.7 K의 복사: <b class="blank" data-n="8" data-step="1">우주 배경 복사</b></p>
+    <p data-step="2">약 38만 년, 우주가 3,000 K 아래로 식자 원자핵이 전자를 붙잡아 원자가 됨 → 빛이 곧게 뻗어 나감</p>
+    <p data-step="3">그 빛이 우주가 <b class="blank" data-n="9" data-step="3">팽창</b>하는 동안 식어 지금 2.7 K로 관측된다</p>
+  </div>
+  <aside class="script">
+    <p>빅뱅의 또 다른 증거입니다. 전파 망원경을 하늘 어디로 돌려도 똑같은 복사가 들어옵니다.</p>
+    <p data-at="1">온도로 나타내면 2.7 K, 영하 270 ℃쯤 되는 아주 차가운 복사예요. 빈칸 8번, 우주 배경 복사.</p>
+    <p data-at="2">초기 우주는 너무 뜨거워 전자가 원자핵에 붙지 못했고, 빛은 전자에 부딪혀 곧게 나가지 못했습니다. 약 38만 년, 3,000 K 아래로 식자 원자가 만들어지고 빛이 풀려났습니다.</p>
+    <p data-at="3">그때의 빛이 우주가 빈칸 9번, 팽창하는 동안 파장이 늘어나 식었고, 지금 2.7 K로 보입니다. 우주가 뜨거운 상태에서 출발했다는 직접 증거입니다.</p>
+  </aside>
+</section>
+
+<!-- 9 식어 가는 우주 -->
+<section class="slide" id="s-cool" data-title="온도가 내려가는 우주" data-part="③ 빅뱅 뒤 3분">
+  <p class="kicker">③ 빅뱅 뒤 3분 · 단원 화면처럼 온도를 낮춰 가면</p>
+  <h2>우주가 식으면서 차례로 입자가 생겼다</h2>
+  <svg id="coolSvg" viewBox="0 0 1400 400" width="1400" height="400" aria-label="왼쪽 10의 13제곱 K에서 오른쪽 10의 3제곱 K로 온도가 내려가는 띠. 쿼크 시대, 양성자와 중성자, 중수소 병목, 헬륨 생성, 재결합이 차례로 표시된다"></svg>
+  <div class="tight">
+    <p data-step="1">약 10<sup>12</sup> K: <b class="blank" data-n="10" data-step="1">쿼크</b> 셋이 뭉쳐 양성자와 중성자가 된다</p>
+    <p data-step="2">식을수록 더 무거운 중성자가 줄어들고, 약 100억 K 아래에서 중성자 : 양성자 비가 굳는다</p>
+    <p data-step="3">약 10억 K(빅뱅 뒤 약 3분) 헬륨 원자핵 생성 → 3,000 K(약 38만 년) 원자 생성</p>
+  </div>
+  <p class="note">단원 화면 모형: 온도 T ≈ 10<sup>10</sup> K ÷ √(시간(초)). 실제 계산은 수십 개의 핵반응을 함께 푼 결과입니다.</p>
+  <aside class="script">
+    <p>단원 화면 장면 3에서 슬라이더를 오른쪽 끝에서 왼쪽으로 내린 것과 같습니다. 온도가 내려가는 것이 곧 시간이 흐르는 것이에요.</p>
+    <p data-at="1">10의 12제곱 K쯤 되면 빈칸 10번, 쿼크 셋이 뭉쳐 양성자와 중성자가 됩니다.</p>
+    <p data-at="2">둘은 서로 바뀔 수 있는데, 온도가 내려갈수록 조금 더 무거운 중성자가 줄어듭니다. 100억 K 아래로 식으면 그 비가 굳어요.</p>
+    <p data-at="3">10억 K 근처, 빅뱅 뒤 약 3분에 헬륨 원자핵이 만들어지고, 한참 뒤 3,000 K, 약 38만 년에 원자가 생깁니다. 앞에서 본 우주 배경 복사가 이때 풀려난 빛이죠.</p>
+  </aside>
+</section>
+
+<!-- 10 3:1이 정해진 3분 -->
+<section class="slide soft" id="s-np" data-title="3 : 1이 정해진 순간" data-part="③ 빅뱅 뒤 3분">
+  <p class="kicker">③ 빅뱅 뒤 3분 · 핵자 16개로 따라가 보기</p>
+  <h2>중성자가 모두 헬륨에 묶였다</h2>
+  <div class="cols" style="grid-template-columns:660px 1fr;align-items:center">
+    <svg id="npSvg" viewBox="0 0 660 470" width="660" height="470" aria-label="양성자 14개와 중성자 2개. 중성자와 양성자가 붙은 중수소가 빛에 깨지다가, 결국 중성자 2개와 양성자 2개가 헬륨 원자핵 하나로 묶이고 양성자 12개가 남는다"></svg>
+    <div class="lines">
+      <p data-step="1">비가 굳을 때 중성자 : 양성자 ≈ 1 : 7 (핵자 16개 중 중성자 2개)</p>
+      <p data-step="2">둘이 붙은 <b class="blank" data-n="11" data-step="2">중수소</b>를 뜨거운 빛이 곧바로 깨뜨린다 → 헬륨으로 가는 길이 막힘</p>
+      <p data-step="3">약 10억 K, 중수소가 살아남자 중성자가 거의 모두 헬륨으로 → 16개 중 4개, 질량의 25%</p>
+      <p data-step="3">빅뱅 뒤 약 3분 동안 가벼운 원자핵이 만들어진 일: <b class="blank" data-n="12" data-step="3">빅뱅 핵합성</b></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>헬륨 원자핵은 양성자 2개와 중성자 2개로 되어 있습니다. 그러니 헬륨의 양은 중성자가 몇 개 남았느냐로 정해져요.</p>
+    <p data-at="1">비가 굳고 중성자가 조금 더 붕괴한 뒤에는 중성자 1개당 양성자 7개. 핵자 16개라면 중성자 2개, 양성자 14개입니다.</p>
+    <p data-at="2">중성자와 양성자가 붙으면 빈칸 11번, 중수소. 그런데 이때는 빛이 너무 뜨거워 만들어지자마자 깨집니다. 병목이에요.</p>
+    <p data-at="3">10억 K 근처로 식자 중수소가 살아남고, 중성자 2개가 양성자 2개와 함께 헬륨 하나로 묶입니다. 16개 중 4개, 질량의 25%. 남은 양성자 12개가 수소라서 12 : 4 = 3 : 1. 빈칸 12번, 빅뱅 핵합성입니다.</p>
+  </aside>
+</section>
+
+<!-- 11 질량수 5와 8의 벽 -->
+<section class="slide" id="s-wall" data-title="질량수 5와 8의 벽" data-part="③ 빅뱅 뒤 3분">
+  <p class="kicker">③ 빅뱅 뒤 3분 · 원자핵 조립대에서 질량수를 하나씩 올리면</p>
+  <h2>계단이 두 곳에서 끊겨 있었다</h2>
+  <svg id="wallSvg" viewBox="0 0 1400 380" width="1400" height="380" aria-label="질량수 1부터 12까지 원자핵 계단. 질량수 5와 8 자리는 안정한 원자핵이 없어 끊겨 있고, 리튬-7 다음부터는 회색이다"></svg>
+  <div class="tight">
+    <p data-step="2">질량수 5와 8에는 <b class="blank" data-n="13" data-step="2">안정한 원자핵</b>이 없다 (만들어져도 순식간에 부서진다)</p>
+    <p data-step="3">벽을 건너뛸 시간이 몇 분뿐 → 빅뱅 핵합성은 <b class="blank" data-n="14" data-step="3">리튬</b>에서 멈췄다 (그나마 아주 적은 양)</p>
+    <p data-step="4">탄소는 헬륨 셋이 거의 동시에 부딪쳐야 생긴다 → 오래 뜨거운 별 속을 기다려야 했다</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면 장면 4의 원자핵 조립대입니다. 양성자와 중성자를 하나씩 붙여 질량수를 올려 봅니다. 기둥 높이는 핵자 하나가 얼마나 단단히 묶였는지입니다.</p>
+    <p data-at="1">수소, 중수소, 헬륨-3, 헬륨-4. 헬륨-4가 특히 단단해서 중성자가 거의 모두 여기로 몰립니다.</p>
+    <p data-at="2">그런데 질량수 5에는 안정한 원자핵이 없습니다. 빈칸 13번, 안정한 원자핵. 질량수 8의 베릴륨-8도 곧바로 헬륨 둘로 쪼개집니다.</p>
+    <p data-at="3">벽을 건너뛰려면 오래 뜨거워야 하는데 우주는 몇 분 만에 식고 성글어졌습니다. 그래서 빈칸 14번, 리튬에서 멈췄어요.</p>
+    <p data-at="4">우리 몸의 탄소는 헬륨 셋이 거의 동시에 부딪쳐야 만들어집니다. 그런 곳이 바로 다음 시간에 볼 별의 속입니다.</p>
+  </aside>
+</section>
+
+<!-- 12 확인 -->
+<section class="slide" id="s-check2" data-title="3분 동안 만들어진 것" data-part="③ 빅뱅 뒤 3분">
+  <p class="kicker">③ 빅뱅 뒤 3분 · 확인</p>
+  <h2>빅뱅 뒤 3분 동안 만들어지지 <span class="c-red">않은</span> 원소는?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ 수소</div>
+    <div class="opt wrong" data-step="1">㉡ 헬륨</div>
+    <div class="opt wrong" data-step="1">㉢ 리튬 (아주 적은 양)</div>
+    <div class="opt right" data-step="1">㉣ 탄소</div>
+  </div>
+  <p data-step="1" style="margin-top:40px">질량수 5와 8의 벽 때문에 빅뱅은 수소·헬륨·약간의 리튬까지만. 탄소·산소·철은 아직 없었다.</p>
+  <aside class="script">
+    <p>손가락으로 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ㉣ 탄소. 양성자는 넘쳐났지만 벽을 건너뛸 시간이 없었습니다. 탄소가 어디서 만들어졌는지가 다음 시간의 사건입니다.</p>
+  </aside>
+</section>
+
+<!-- 13 세 증거 -->
+<section class="slide soft" id="s-three" data-title="세 증거를 하나로" data-part="③ 빅뱅 뒤 3분">
+  <p class="kicker">③ 빅뱅 뒤 3분 · 사건 파일 ①의 증거물 정리</p>
+  <h2>세 증거가 모두 뜨거운 출발을 가리킨다</h2>
+  <table class="ledger">
+    <tr><th style="width:150px">증거물</th><th style="width:520px">관측</th><th>오늘 찾은 까닭</th></tr>
+    <tr data-step="1"><td><b>①</b></td><td>하늘 어디서나 2.7 K의 복사</td><td>약 38만 년에 풀려난 빛이 우주가 팽창하며 식은 것</td></tr>
+    <tr data-step="2"><td><b>②</b></td><td>어디서나 수소 : 헬륨 ≈ 3 : 1 (질량비)</td><td>빅뱅 뒤 약 3분, 중성자 : 양성자 ≈ 1 : 7에서 중성자가 모두 헬륨으로</td></tr>
+    <tr data-step="3"><td><b>③</b></td><td>리튬보다 무거운 원소는 초기 물질에 거의 없음</td><td>질량수 5와 8에 안정한 원자핵이 없는 벽</td></tr>
+  </table>
+  <p class="mt" data-step="3">빅뱅 이론이 미리 계산한 값과 관측이 맞아떨어진다 → <b class="c-blue">빅뱅 우주론의 증거</b></p>
+  <aside class="script">
+    <p>사건 파일 ①의 증거물 세 개를 다시 봅니다. 학생에게 오른쪽 칸을 먼저 말하게 한 뒤 엽니다.</p>
+    <p data-at="1">증거물 ①, 2.7 K 복사는 38만 년에 풀려난 빛이 식은 것.</p>
+    <p data-at="2">증거물 ②, 3 : 1은 3분 동안의 빅뱅 핵합성에서 정해졌습니다.</p>
+    <p data-at="3">증거물 ③, 무거운 원소가 없는 것은 질량수 5와 8의 벽 때문입니다. 이론이 예측한 값과 관측이 일치하니 증거가 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 14 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>별빛을 읽어 우주의 출생 기록을 찾았다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>스펙트럼</b>: 연속 · 방출 · 흡수. 선이 놓인 파장은 원소마다 정해져 별의 구성 원소를 알려 준다 (헬륨은 태양에서 먼저)</li>
+    <li data-k="2" data-step="2"><b>빅뱅</b>의 증거: 어디서나 수소 : 헬륨 ≈ 3 : 1, 하늘 어디서나 2.7 K의 우주 배경 복사</li>
+    <li data-k="3" data-step="3"><b>빅뱅 핵합성</b>: 약 3분, 중성자 : 양성자 ≈ 1 : 7 → 중성자가 모두 헬륨으로 → 헬륨 질량비 약 25%</li>
+    <li data-k="4" data-step="4">질량수 5와 8의 벽 → 수소·헬륨·약간의 리튬에서 멈춤. 탄소·산소·철은 별에서 (다음 시간)</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 15 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 별빛 스펙트럼의 흡수선 위치로 알 수 있는 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 별까지의 거리</div>
+        <div class="opt right" data-step="1">㉡ 별 대기를 이루는 원소</div>
+        <div class="opt wrong" data-step="1">㉢ 별이 태어난 해</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 우주 배경 복사가 된 빛이 풀려난 때는?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 빅뱅 뒤 약 3분, 헬륨이 생길 때</div>
+        <div class="opt right" data-step="2">㉡ 약 38만 년, 원자가 생길 때</div>
+        <div class="opt wrong" data-step="2">㉢ 첫 별이 빛나기 시작할 때</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 선이 놓이는 파장은 원소마다 정해져 있어 별 대기의 원소를 알려 줍니다.</p>
+    <p data-at="2">2번은 ㉡. 3,000 K 아래로 식어 원자가 생기자 빛이 풀려났습니다. 3분은 헬륨 원자핵이 생긴 때입니다.</p>
+  </aside>
+</section>
+
+<!-- 16 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ① 「우주가 남긴 지문」</h2>
+  <div class="cols">
+    <div class="card"><h3>별빛의 지문을 읽어 보세요</h3><p>분광기로 수소 656 nm·헬륨 588 nm 선 찾기, 우주의 온도를 낮춰 헬륨이 생기는 순간 찾기, 원자핵 조립대에서 두 개의 벽 찾기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 02 별에서 만들어지는 원소</h3><p>빅뱅은 수소·헬륨만 남겼습니다. 내 몸의 탄소와 반지의 금은 어디서 왔을까요? 별의 부엌으로 갑니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ①을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  var LO = 400, HI = 700;
+  /* 파장(nm) → 화면 색 (근사) */
+  function rgb(nm) {
+    var r = 0, g = 0, b = 0;
+    if (nm < 440) { r = (440 - nm) / 60; b = 1; } else if (nm < 490) { g = (nm - 440) / 50; b = 1; }
+    else if (nm < 510) { g = 1; b = (510 - nm) / 20; } else if (nm < 580) { r = (nm - 510) / 70; g = 1; }
+    else if (nm < 645) { r = 1; g = (645 - nm) / 65; } else { r = 1; }
+    var f = nm < 420 ? 0.45 + 0.55 * (nm - 400) / 20 : (nm > 680 ? 0.45 + 0.55 * (700 - nm) / 20 : 1);
+    function c(v) { return Math.round(255 * Math.pow(Math.max(0, v) * f, 0.8)); }
+    return "rgb(" + c(r) + "," + c(g) + "," + c(b) + ")";
+  }
+  function grad(id) {
+    var s = "<linearGradient id='" + id + "' x1='0' x2='1' y1='0' y2='0'>";
+    for (var nm = LO; nm <= HI; nm += 10) s += "<stop offset='" + ((nm - LO) / (HI - LO)).toFixed(3) + "' stop-color='" + rgb(nm) + "'/>";
+    return s + "</linearGradient>";
+  }
+  var H = [656.3, 486.1, 434.0, 410.2], HE = [587.6, 501.6, 447.1], NA = 589.3, FE = [527.0, 495.8, 438.4], MG = 518.4;
+  /* 띠 하나: kind = cont | emis | abs */
+  function strip(id, x, y, w, h, kind, lines, extra) {
+    function X(nm) { return x + (nm - LO) / (HI - LO) * w; }
+    var s = "";
+    if (kind === "emis") s += "<rect x='" + x + "' y='" + y + "' width='" + w + "' height='" + h + "' rx='6' fill='#0b0e15'/>";
+    else s += "<rect x='" + x + "' y='" + y + "' width='" + w + "' height='" + h + "' rx='6' fill='url(#" + id + ")'/>";
+    (lines || []).forEach(function (nm) {
+      if (kind === "emis") s += "<rect x='" + (X(nm) - 3) + "' y='" + y + "' width='6' height='" + h + "' fill='" + rgb(nm) + "'/><rect x='" + (X(nm) - 1) + "' y='" + y + "' width='2' height='" + h + "' fill='#fff' opacity='.7'/>";
+      else s += "<rect x='" + (X(nm) - 2.5) + "' y='" + y + "' width='5' height='" + h + "' fill='#0b0e15'/>";
+    });
+    return s + (extra || "");
+  }
+  function axis(x, y, w, col) {
+    var s = "";
+    [400, 450, 500, 550, 600, 650, 700].forEach(function (nm) {
+      var xx = x + (nm - LO) / (HI - LO) * w;
+      s += "<line x1='" + xx + "' y1='" + y + "' x2='" + xx + "' y2='" + (y + 8) + "' stroke='" + col + "' stroke-width='2'/>";
+      var an = nm === 400 ? "start" : (nm === 700 ? "end" : "middle");
+      s += "<text x='" + xx + "' y='" + (y + 30) + "' font-size='19' font-weight='800' fill='" + col + "' text-anchor='" + an + "'>" + nm + (nm === 700 ? " nm" : "") + "</text>";
+    });
+    return s;
+  }
+
+  /* 표지 */
+  (function () {
+    var s = "<defs>" + grad("c1-rb") + "<radialGradient id='c1-co'><stop offset='.55' stop-color='#f8f9fa' stop-opacity='.95'/><stop offset='1' stop-color='#74c0fc' stop-opacity='0'/></radialGradient></defs>";
+    s += "<circle cx='330' cy='220' r='190' fill='url(#c1-co)'/><circle cx='330' cy='220' r='105' fill='#05070b'/>";
+    s += "<path d='M434 196 q18 -22 30 -6 q6 16 -18 22 z' fill='#ff8787'/>";
+    s += "<line x1='470' y1='212' x2='690' y2='250' stroke='#ffe066' stroke-width='6' opacity='.8'/>";
+    s += "<polygon points='690,300 760,180 830,300' fill='#a5d8ff' opacity='.85' stroke='#e7f5ff' stroke-width='3'/>";
+    s += "<path d='M800 250 L1000 190 L1000 330 Z' fill='url(#c1-rb)' opacity='.35'/>";
+    s += strip("c1-rb", 1000, 190, 520, 140, "abs", []);
+    var xHe = 1000 + (587.6 - LO) / (HI - LO) * 520;
+    s += "<g data-step='1'><rect x='" + (xHe - 5) + "' y='176' width='10' height='168' fill='#fff59d' stroke='#fff' stroke-width='2'/>";
+    s += "<text x='" + xHe + "' y='160' font-size='30' font-weight='900' fill='#ffe066' text-anchor='middle'>588 nm ?</text></g>";
+    s += "<text x='1560' y='510' fill='#9aa4b5' font-size='18' text-anchor='end'>⚠ 장치·천체 크기와 선의 위치는 실제와 다르게 그린 모식도</text>";
+    document.getElementById("coverSvg").innerHTML = s;
+  })();
+
+  /* 세 가지 스펙트럼 */
+  (function () {
+    document.getElementById("sp3a").innerHTML = "<defs>" + grad("s4-ga") + "</defs>" + strip("s4-ga", 0, 10, 900, 90, "cont", []);
+    document.getElementById("sp3b").innerHTML = strip("", 0, 10, 900, 90, "emis", H.concat(HE));
+    document.getElementById("sp3c").innerHTML = "<defs>" + grad("s4-gc") + "</defs>" + strip("s4-gc", 0, 10, 900, 90, "abs", H.concat([NA, MG]).concat(FE)) + axis(0, 102, 900, "#5f6b80");
+  })();
+
+  /* 원소의 지문 */
+  (function () {
+    var X0 = 230, W = 1060, s = "<defs>" + grad("s5-g") + grad("s5-g2") + "</defs>";
+    function X(nm) { return X0 + (nm - LO) / (HI - LO) * W; }
+    s += "<g font-size='23' font-weight='900' fill='#161b28' text-anchor='end'>";
+    s += "<text x='" + (X0 - 20) + "' y='60'>실험실 수소</text><text x='" + (X0 - 20) + "' y='88' font-size='19' fill='#5f6b80'>(가열한 기체)</text>";
+    s += "<text x='" + (X0 - 20) + "' y='190'>햇빛</text>";
+    s += "<g data-step='3'><text x='" + (X0 - 20) + "' y='316'>1868년 일식</text><text x='" + (X0 - 20) + "' y='344' font-size='19' fill='#5f6b80'>(태양 가장자리)</text></g></g>";
+    s += strip("", X0, 30, W, 70, "emis", H);
+    s += strip("s5-g", X0, 150, W, 70, "abs", H.concat([NA, MG]).concat(FE));
+    s += "<g data-step='2'>";
+    H.forEach(function (nm) { s += "<line x1='" + X(nm) + "' y1='100' x2='" + X(nm) + "' y2='150' stroke='#e03131' stroke-width='3' stroke-dasharray='6 5'/>"; });
+    s += "<rect x='" + (X(656.3) - 12) + "' y='24' width='24' height='202' rx='8' fill='none' stroke='#f08c00' stroke-width='5'/>";
+    s += "<text x='" + (X(656.3) - 22) + "' y='130' font-size='22' font-weight='900' fill='#c92a2a' text-anchor='end' stroke='#fff' stroke-width='6' paint-order='stroke'>약 656 nm 같은 자리</text></g>";
+    s += "<g data-step='3'>" + strip("", X0, 280, W, 70, "emis", [587.6]);
+    s += "<line x1='" + X(NA) + "' y1='226' x2='" + X(NA) + "' y2='360' stroke='#5f6b80' stroke-width='3' stroke-dasharray='4 5'/>";
+    s += "<text x='" + (X(NA) + 10) + "' y='252' font-size='20' font-weight='900' fill='#5f6b80'>나트륨 약 589 nm</text>";
+    s += "<text x='" + (X(587.6) - 12) + "' y='272' font-size='22' font-weight='900' fill='#e67700' text-anchor='end' stroke='#fff' stroke-width='6' paint-order='stroke'>약 588 nm 노란 선</text></g>";
+    s += axis(X0, 362, W, "#5f6b80");
+    s += "<text x='1396' y='18' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 대표 선만 그린 모식도 · 파장 위치는 맞춤</text>";
+    document.getElementById("fpSvg").innerHTML = s;
+  })();
+
+  /* 원그래프 넷 */
+  (function () {
+    var P = [[160, 120, "태양"], [480, 120, "오래된 별"], [160, 345, "먼 은하"], [480, 345, "성운"]], s = "";
+    P.forEach(function (p, i) {
+      var cx = p[0], cy = p[1], r = 82;
+      s += "<circle cx='" + cx + "' cy='" + cy + "' r='" + r + "' fill='#d0ebff' stroke='#1462d8' stroke-width='3'/>";
+      s += "<g data-step='1'><circle cx='" + cx + "' cy='" + cy + "' r='" + r + "' fill='#ff8787'/>";
+      s += "<path d='M" + cx + " " + cy + " L" + cx + " " + (cy - r) + " A" + r + " " + r + " 0 0 1 " + (cx + r) + " " + cy + " Z' fill='#9775fa'/>";
+      s += "<text x='" + (cx - 26) + "' y='" + (cy + 30) + "' font-size='22' font-weight='900' fill='#fff' text-anchor='middle'>H 75</text>";
+      s += "<text x='" + (cx + 36) + "' y='" + (cy - 22) + "' font-size='20' font-weight='900' fill='#fff' text-anchor='middle'>He 25</text></g>";
+      s += "<text x='" + cx + "' y='" + (cy + r + 32) + "' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>" + p[2] + "</text>";
+    });
+    document.getElementById("ratioSvg").innerHTML = s;
+  })();
+
+  /* 우주 배경 복사 */
+  (function () {
+    var s = "<defs><marker id='s8-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#e8590c'/></marker>";
+    s += "<linearGradient id='s8-tl' x1='0' x2='1'><stop offset='0' stop-color='#ffa94d'/><stop offset='1' stop-color='#1c7ed6'/></linearGradient></defs>";
+    s += "<circle cx='210' cy='170' r='150' fill='#0b1426'/>";
+    s += "<circle cx='210' cy='170' r='34' fill='#1c7ed6'/><path d='M190 156 q14 -10 26 0 q10 14 -6 22 q-16 4 -20 -22z' fill='#51cf66'/>";
+    s += "<g data-step='1' stroke='#ffa94d' stroke-width='4' fill='none' marker-end='url(#s8-a)'>";
+    for (var k = 0; k < 8; k++) {
+      var a = k * Math.PI / 4, x1 = 210 + Math.cos(a) * 142, y1 = 170 + Math.sin(a) * 142, x2 = 210 + Math.cos(a) * 52, y2 = 170 + Math.sin(a) * 52;
+      s += "<line x1='" + x1.toFixed(1) + "' y1='" + y1.toFixed(1) + "' x2='" + x2.toFixed(1) + "' y2='" + y2.toFixed(1) + "' stroke-dasharray='10 6'/>";
+    }
+    s += "</g><g data-step='1'><text x='210' y='358' font-size='24' font-weight='900' fill='#e8590c' text-anchor='middle'>어느 방향이든 2.7 K</text></g>";
+    var X0 = 470, X1 = 1380;
+    s += "<g data-step='2'><rect x='" + X0 + "' y='70' width='" + (X1 - X0) + "' height='60' rx='10' fill='url(#s8-tl)'/>";
+    s += "<text x='" + (X0 + 14) + "' y='110' font-size='24' font-weight='900' fill='#fff'>약 38만 년 · 3,000 K</text>";
+    s += "<text x='" + (X0 + 14) + "' y='168' font-size='22' font-weight='800' fill='#161b28'>원자가 생겨 빛이 풀려남</text>";
+    var w = "M" + X0 + " 250";
+    for (var i = 0; i < 12; i++) w += " q 12 -36 24 0 q 12 36 24 0";
+    s += "<path d='" + w + "' fill='none' stroke='#e8590c' stroke-width='5'/></g>";
+    s += "<g data-step='3'><text x='" + (X1 - 14) + "' y='110' font-size='24' font-weight='900' fill='#fff' text-anchor='end'>지금 · 2.7 K</text>";
+    var w2 = "M" + (X0 + 600) + " 250";
+    for (var j = 0; j < 2; j++) w2 += " q 37 -36 74 0 q 37 36 74 0";
+    s += "<path d='" + w2 + "' fill='none' stroke='#1c7ed6' stroke-width='5'/>";
+    s += "<text x='" + X1 + "' y='330' font-size='22' font-weight='900' fill='#1c7ed6' text-anchor='end'>우주가 팽창하며 파장이 늘어나 식었다</text></g>";
+    s += "<text x='" + X0 + "' y='364' font-size='18' fill='#5f6b80'>⚠ 파장이 늘어나는 정도는 줄여 그림 · 실제로는 약 1,100배</text>";
+    document.getElementById("cmbSvg").innerHTML = s;
+  })();
+
+  /* 식어 가는 우주 — 단원 화면의 단계 경계(10¹² K, 8.2×10⁹ K, 0.9×10⁹ K, 3,000 K) */
+  (function () {
+    var X0 = 60, X1 = 1340;
+    function X(e) { return X0 + (13 - e) / 10 * (X1 - X0); }
+    function L(v) { return Math.log(v) / Math.LN10; }
+    var ST = [[13, 12, "#495057", "쿼크·경입자", 0], [12, L(8.2e9), "#1462d8", "양성자·중성자", 1], [L(8.2e9), L(0.9e9), "#6741d9", "중수소 병목", 2], [L(0.9e9), L(3000), "#e8590c", "원자핵 + 떠도는 전자", 3], [L(3000), 3, "#0b7f99", "원자", 3]];
+    var s = "<defs><marker id='s9-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#161b28'/></marker></defs>";
+    s += "<text x='" + X0 + "' y='30' font-size='20' font-weight='900' fill='#5f6b80'>우주의 온도 (K) · 온도가 내려간다 = 시간이 흐른다</text>";
+    s += "<line x1='" + X0 + "' y1='60' x2='" + (X1 + 20) + "' y2='60' stroke='#161b28' stroke-width='4' marker-end='url(#s9-a)'/>";
+    for (var e = 13; e >= 3; e--) {
+      s += "<line x1='" + X(e) + "' y1='52' x2='" + X(e) + "' y2='68' stroke='#161b28' stroke-width='2'/>";
+      if (e % 2 === 1) s += "<text x='" + X(e) + "' y='96' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>10<tspan dy='-9' font-size='15'>" + e + "</tspan></text>";
+    }
+    ST.forEach(function (t) {
+      var a = X(t[0]), b = X(t[1]);
+      s += "<g" + (t[4] ? " data-step='" + t[4] + "'" : "") + "><rect x='" + a + "' y='120' width='" + (b - a) + "' height='70' fill='" + t[2] + "'/>";
+      s += "<text x='" + ((a + b) / 2) + "' y='164' font-size='" + (b - a < 230 ? 20 : 23) + "' font-weight='900' fill='#fff' text-anchor='middle'>" + t[3] + "</text></g>";
+    });
+    function mark(e, lab, sub, step, y) {
+      var x = X(e);
+      return "<g data-step='" + step + "'><line x1='" + x + "' y1='190' x2='" + x + "' y2='" + (y - 26) + "' stroke='#161b28' stroke-width='3'/>" +
+        "<text x='" + x + "' y='" + y + "' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle'>" + lab + "</text>" +
+        "<text x='" + x + "' y='" + (y + 28) + "' font-size='19' font-weight='800' fill='#5f6b80' text-anchor='middle'>" + sub + "</text></g>";
+    }
+    s += mark(12, "약 10¹² K", "양성자·중성자 생성", 1, 250);
+    s += mark(10, "약 100억 K", "중성자 : 양성자 비가 굳음", 2, 320);
+    s += mark(9, "약 10억 K · 약 3분", "헬륨 원자핵 생성", 3, 250);
+    s += mark(L(3000), "3,000 K · 약 38만 년", "원자 생성 · 빛이 풀려남", 3, 320);
+    s += "<text x='1396' y='396' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 가로축은 로그 눈금(한 칸 = 10배)</text>";
+    document.getElementById("coolSvg").innerHTML = s;
+  })();
+
+  /* 핵자 16개 */
+  (function () {
+    function p(x, y) { return "<circle cx='" + x + "' cy='" + y + "' r='19' fill='#ff6b6b' stroke='#7a1a14' stroke-width='2'/><text x='" + x + "' y='" + (y + 7) + "' font-size='19' font-weight='900' fill='#fff' text-anchor='middle'>p</text>"; }
+    function n(x, y) { return "<circle cx='" + x + "' cy='" + y + "' r='19' fill='#ced4da' stroke='#495057' stroke-width='2'/><text x='" + x + "' y='" + (y + 7) + "' font-size='19' font-weight='900' fill='#343a40' text-anchor='middle'>n</text>"; }
+    var s = "", i;
+    /* 1단계: 16개 (n 2 + p 14) */
+    s += "<g data-hide='3'>";
+    var pos = [];
+    for (i = 0; i < 16; i++) pos.push([70 + (i % 8) * 72, 70 + Math.floor(i / 8) * 72]);
+    pos.forEach(function (q, k) { s += (k === 3 || k === 12) ? n(q[0], q[1]) : p(q[0], q[1]); });
+    s += "</g>";
+    s += "<g data-step='1' data-hide='3'><text x='330' y='200' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>중성자 2 : 양성자 14 = 1 : 7</text></g>";
+    /* 2단계: 중수소가 빛에 깨진다 */
+    s += "<g data-step='2' data-hide='3'>" + n(250, 300) + p(288, 300);
+    s += "<path d='M120 250 q20 -16 40 0 q20 16 40 0 q20 -16 40 0' fill='none' stroke='#f59f00' stroke-width='5'/><text x='110' y='240' font-size='20' font-weight='900' fill='#e67700'>빛</text>";
+    s += "<path d='M320 280 l18 -14 M320 320 l18 14' stroke='#e03131' stroke-width='5'/>";
+    s += "<text x='350' y='308' font-size='22' font-weight='900' fill='#c92a2a'>중수소가 깨짐</text></g>";
+    /* 3단계: 헬륨 1 + 양성자 12 */
+    s += "<g data-step='3'><circle cx='130' cy='140' r='62' fill='#f3f0ff' stroke='#6741d9' stroke-width='4'/>" + n(110, 120) + n(150, 160) + p(150, 120) + p(110, 160);
+    s += "<text x='130' y='236' font-size='22' font-weight='900' fill='#6741d9' text-anchor='middle'>헬륨-4 (4개)</text>";
+    for (i = 0; i < 12; i++) s += p(290 + (i % 4) * 66, 80 + Math.floor(i / 4) * 62);
+    s += "<text x='390' y='290' font-size='22' font-weight='900' fill='#c92a2a' text-anchor='middle'>수소 (양성자 12개)</text>";
+    s += "<rect x='40' y='330' width='580' height='92' rx='16' fill='#fff' stroke='#161b28' stroke-width='3'/>";
+    s += "<text x='330' y='368' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>헬륨 4 ÷ 16 = 25%</text>";
+    s += "<text x='330' y='404' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>수소 : 헬륨 = 12 : 4 = 3 : 1</text></g>";
+    s += "<text x='10' y='462' font-size='18' fill='#5f6b80'>⚠ 핵자 16개로 줄인 모식도 · 관측된 헬륨 질량비는 약 24~25%</text>";
+    document.getElementById("npSvg").innerHTML = s;
+  })();
+
+  /* 질량수 계단 — 단원 화면의 핵자당 결합 에너지(MeV) */
+  (function () {
+    var D = [[1, "¹H", 0, 1], [2, "²H", 1.112, 1], [3, "³He", 2.573, 1], [4, "⁴He", 7.074, 1], [5, "", 0, 2], [6, "⁶Li", 5.332, 3], [7, "⁷Li", 5.606, 3], [8, "⁸Be", 0, 3], [9, "⁹Be", 6.463, 4], [10, "¹⁰B", 6.475, 4], [11, "¹¹B", 6.928, 4], [12, "¹²C", 7.680, 4]];
+    var X0 = 120, CW = 100, YB = 300, K = 30, s = "";
+    s += "<text x='10' y='28' font-size='20' font-weight='900' fill='#5f6b80'>핵자 하나당 결합 에너지 (MeV) · 높을수록 단단하다</text>";
+    s += "<line x1='" + X0 + "' y1='" + YB + "' x2='" + (X0 + CW * 12) + "' y2='" + YB + "' stroke='#161b28' stroke-width='4'/>";
+    D.forEach(function (d) {
+      var x = X0 + (d[0] - 1) * CW, h = Math.max(6, d[2] * K), wall = d[0] === 5 || d[0] === 8;
+      s += "<text x='" + (x + CW / 2) + "' y='" + (YB + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + d[0] + "</text>";
+      s += "<g data-step='" + d[3] + "'>";
+      if (wall) {
+        s += "<rect x='" + (x + 12) + "' y='" + (YB - 230) + "' width='" + (CW - 24) + "' height='230' fill='#fff0f0' stroke='#e03131' stroke-width='4' stroke-dasharray='10 7'/>";
+        s += "<text x='" + (x + CW / 2) + "' y='" + (YB - 130) + "' font-size='40' text-anchor='middle'>🚧</text>";
+        s += "<text x='" + (x + CW / 2) + "' y='" + (YB - 84) + "' font-size='19' font-weight='900' fill='#c92a2a' text-anchor='middle'>불안정</text>";
+      } else {
+        var col = d[3] === 4 ? "#adb5bd" : (d[0] <= 4 ? "#4dabf7" : "#20c997");
+        s += "<rect x='" + (x + 14) + "' y='" + (YB - h) + "' width='" + (CW - 28) + "' height='" + h + "' rx='6' fill='" + col + "'/>";
+        s += "<text x='" + (x + CW / 2) + "' y='" + (YB - h - 10) + "' font-size='21' font-weight='900' fill='#161b28' text-anchor='middle'>" + d[1] + "</text>";
+      }
+      s += "</g>";
+    });
+    s += "<text x='" + (X0 + CW * 6) + "' y='" + (YB + 62) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='middle'>질량수 A</text>";
+    s += "<g data-step='4'><text x='" + (X0 + CW * 10) + "' y='" + (YB + 62) + "' font-size='22' font-weight='900' fill='#495057' text-anchor='middle'>9~12 · 나중에 별 속에서</text></g>";
+    document.getElementById("wallSvg").innerHTML = s;
+  })();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 과학적 표기법 (통합과학1 Ⅰ-1 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-03.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 8px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 6px; }
+  h2 { font-size: 14.5px; font-weight: 900; margin: 8px 0 3px; padding: 3px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 12.8px; line-height: 1.62; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 2px 7px; text-align: left; line-height: 1.5; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 4px; }
+  .q p { line-height: 1.6; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 40px; margin-top: 4px; }
+  .foot { margin-top: 6px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-03.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅰ-1 과학의 기본량 · 03 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 과학적 표기법</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~14)</p>
+
+  <h2>① 소수점 옮기기</h2>
+  <ul>
+    <li>아주 큰 수·작은 수를 A × 10ⁿ 꼴로 쓰는 방법 → <b class="blank" data-n="1">과학적 표기법</b></li>
+    <li>A는 <b class="blank" data-n="2">계수</b>, 언제나 <b class="blank" data-n="3">1 이상 10 미만</b> · n은 지수 = <b class="blank" data-n="4">소수점을 옮긴 칸 수</b> (왼쪽으로 옮기면 +, 오른쪽으로 옮기면 −)</li>
+  </ul>
+  <table>
+    <tr><th style="width:24%">수</th><th>그대로 쓰면</th><th style="width:22%">소수점</th><th style="width:22%">과학적 표기법</th></tr>
+    <tr><td>빛의 속력</td><td>299,792,458 m/s</td><td>왼쪽 8칸</td><td><b class="blank" data-n="5">3.0×10⁸</b> m/s</td></tr>
+    <tr><td>사람 몸의 세포 수</td><td>37,000,000,000,000 개</td><td>왼쪽 13칸</td><td>3.7×10¹³ 개</td></tr>
+    <tr><td>수소 원자의 지름</td><td>0.0000000001 m</td><td>오른쪽 10칸</td><td><b class="blank" data-n="6">1.0×10⁻¹⁰</b> m</td></tr>
+  </table>
+  <ul>
+    <li>고쳐 쓰기: 37 × 10¹² → 3.7 × 10¹³ (계수가 10 이상이면 계수 ÷ 10, 지수 + 1) · 0.37 × 10¹⁴ → 3.7 × 10¹³ (계수가 1보다 작으면 계수 × 10, 지수 − 1)</li>
+  </ul>
+
+  <h2>② 물질량과 아보가드로수</h2>
+  <ul>
+    <li>분자는 너무 작아 하나씩 셀 수 없다 → 정해진 개수씩 묶어 세는 기본량 <b class="blank" data-n="7">물질량</b> (단위 mol)</li>
+    <li>1 mol = 입자 <b class="blank" data-n="8">6.02×10²³</b> 개 (아보가드로수 6.02214076×10²³) · 물은 1 mol이 <b class="blank" data-n="9">18.0 g</b></li>
+    <li>물 한 컵 200 g: 200 ÷ 18.0 = 11.11 mol → × 6.022×10²³ → 계수끼리 곱하고 지수끼리 <b class="blank" data-n="10">더한다</b> → 66.9×10²³</li>
+    <li>계수가 10을 넘으면 고쳐 쓴다: 66.9×10²³ = 6.69×10²⁴ ≈ <b class="blank" data-n="11">6.7×10²⁴</b> 개</li>
+  </ul>
+
+  <h2>③ 우리 반 세포와 유효숫자</h2>
+  <ul>
+    <li>한 사람 3.7×10¹³ 개 × 인원 → 계수만 곱한다 · 25명: 92.5×10¹³ = 9.25×10¹⁴ ≈ <b class="blank" data-n="12">9.3×10¹⁴</b> 개</li>
+    <li>27명 9.99×10¹⁴ 개 → <b class="blank" data-n="13">28명</b> 1.04×10¹⁵ 개 : 처음으로 10¹⁵ 개를 넘는다</li>
+    <li>측정·어림으로 믿을 수 있는 자리의 숫자 → <b class="blank" data-n="14">유효숫자</b> (3.7×10¹³ → 2개, 18.0 g → 3개)</li>
+    <li>37,000,000,000,000으로 쓰면 한 개까지 세어 본 것처럼 보인다 → 어림한 값은 어림한 만큼만 적는다</li>
+    <li>과학적 표기법의 좋은 점: 짧게 쓴다 · 지수로 크기를 바로 비교한다 · 믿을 만한 정도(유효숫자)를 드러낸다</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 지구의 지름 12,700,000 m를 과학적 표기법으로 바르게 쓴 것은? <span class="ans">→ ㉡</span> &nbsp; ㉠ 127 × 10⁵ m &nbsp; ㉡ 1.27 × 10⁷ m &nbsp; ㉢ 1.27 × 10⁻⁷ m</p>
+    <p>2. (2 × 10³) × (3 × 10⁴)을 계산하면? <span class="ans">→ ㉠</span> &nbsp; ㉠ 6 × 10⁷ &nbsp; ㉡ 6 × 10¹² &nbsp; ㉢ 5 × 10⁷</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>‘사람 몸의 세포는 3.7×10¹³ 개’라는 문장에서 3.7과 13이 각각 무엇을 알려 주는지 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-03.html · 이야기 ③ 「0을 세다가 밤을 새운 보고서」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

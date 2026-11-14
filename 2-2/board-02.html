@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 화학 결합 (통합과학1 Ⅱ-2 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .two .card h3 { font-size: 30px; }
+  .two .card p { font-size: 27px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  #s-hook .opt { font-size: 25px; padding: 12px 18px; }
+  #s-hook .card p { font-size: 27px; margin-bottom: 10px; }
+  table.ledger td { font-size: 28px; padding: 12px 14px; }
+  table.ledger th { padding: 8px 14px; }
+  .ok { color: #2f9e44; font-weight: 900; }
+  .no { color: #c92a2a; font-weight: 900; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="전지에 연결된 두 전극을 녹인 물질이 담긴 도가니에 꽂은 장치. 다음 단계에서 전구가 켜지고 전극에 은빛 방울이 맺힌다">
+      <rect x="250" y="210" width="190" height="110" rx="14" fill="#2b3550" stroke="#5c6b8a" stroke-width="4"/>
+      <text x="345" y="278" font-size="34" font-weight="900" fill="#e9eef8" text-anchor="middle">전지</text>
+      <path d="M440 240 H700 V330" fill="none" stroke="#aab3c5" stroke-width="6"/>
+      <path d="M440 290 H520 V120 H1050 V240 H900 V330" fill="none" stroke="#aab3c5" stroke-width="6"/>
+      <circle cx="1050" cy="120" r="0" fill="none"/>
+      <g transform="translate(1050 160)">
+        <circle cx="0" cy="0" r="42" fill="#3b4256" stroke="#aab3c5" stroke-width="5"/>
+        <g data-step="1"><circle cx="0" cy="0" r="80" fill="#ffd43b" opacity=".25"/><circle cx="0" cy="0" r="42" fill="#ffd43b"/></g>
+      </g>
+      <path d="M620 330 L660 490 H940 L980 330Z" fill="#495057" stroke="#868e96" stroke-width="5"/>
+      <path d="M632 370 L660 482 H940 L968 370Z" fill="#ff922b" opacity=".9"/>
+      <rect x="690" y="300" width="20" height="150" fill="#ced4da"/><rect x="890" y="300" width="20" height="150" fill="#ced4da"/>
+      <g data-step="1" fill="#f1f3f5" stroke="#adb5bd" stroke-width="2"><circle cx="700" cy="458" r="9"/><circle cx="688" cy="440" r="7"/><circle cx="712" cy="425" r="6"/></g>
+      <text x="1560" y="510" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 장치 모식도</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅱ-2 물질의 규칙성과 성질 · 02</p>
+    <h1>화학 결합</h1>
+    <p class="sub" data-step="1">고체일 때는 통하지 않던 전기가, 녹이자 통했다</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 원자들이 어떻게 결합하는지, 그리고 결합의 차이가 어떤 성질의 차이로 이어지는지 봅니다.</p>
+    <p data-at="1">1807년 데이비는 녹인 수산화 칼륨에 전류를 흘려 처음으로 칼륨을 얻었습니다. 고체일 때는 아무 일도 없었는데, 녹이자 전기가 통했어요.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="녹이면 통한다" data-part="도입">
+  <p class="kicker">도입 · 부엌의 하얀 가루 두 가지</p>
+  <h2>소금은 녹이면 통하고, 설탕은 안 통한다</h2>
+  <div class="cols w64">
+    <div class="card">
+      <table class="ledger">
+        <tr><th></th><th>고체</th><th>녹인 것</th><th>물에 녹인 것</th></tr>
+        <tr><td><b>소금</b> (녹는점 802 ℃)</td><td class="no">✕</td><td class="ok">○</td><td class="ok">○</td></tr>
+        <tr><td><b>설탕</b> (녹는점 약 186 ℃)</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td></tr>
+      </table>
+      <p class="small mt">○ 전기가 통한다 · ✕ 통하지 않는다. 데이비는 같은 방법으로 녹인 수산화 칼륨에서 칼륨을, 며칠 뒤 나트륨을 얻었습니다.</p>
+    </div>
+    <div class="card yel">
+      <h3>소금 덩어리는 왜 녹여야 통할까?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 녹으면 금속으로 바뀌기 때문</div>
+        <div class="opt">㉡ 묶여 있던 이온이 풀려나 움직일 수 있게 되기 때문</div>
+        <div class="opt">㉢ 열이 원자에서 전자를 떼어 내기 때문</div>
+        <div class="opt">㉣ 액체는 원래 모두 전기가 통하기 때문</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>둘 다 하얀 가루인데 전기에서는 전혀 다르게 행동합니다. 표를 같이 읽어 봅시다.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 오늘 원자의 전자를 직접 옮겨 보며 스스로 판단하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>옥텟 규칙</b><span>바깥 껍질에 전자 8개를 채워 안정해지려는 경향</span></div>
+    <div class="card"><b>이온 결합</b><span>전자를 주고받아 생긴 이온끼리의 결합</span></div>
+    <div class="card"><b>공유 결합</b><span>전자를 같이 써서 이루는 결합</span></div>
+    <div class="card"><b>전기 전도성</b><span>물질에 전기가 통하는 성질</span></div>
+    <div class="card"><b>자유 전자</b><span>금속 전체를 돌아다니는 전자</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~13번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 옥텟 규칙 -->
+<section class="slide" id="s-octet" data-title="안정해지는 두 방법" data-part="① 주고받기">
+  <p class="kicker">① 전자를 주고받다 · 비활성 기체를 닮으려는 원자</p>
+  <h2>바깥 껍질을 8개로 채우면 안정하다</h2>
+  <div class="cols" style="grid-template-columns:620px 1fr;align-items:center">
+    <svg id="octSvg" viewBox="0 0 620 380" width="620" height="380" aria-label="네온(2, 8)과 아르곤(2, 8, 8)의 전자 껍질. 가장 바깥 껍질에 전자가 8개씩 꽉 차 있다"></svg>
+    <div class="lines">
+      <p data-step="1">18족처럼 가장 바깥 껍질에 전자 8개(수소·헬륨은 2개) → 안정: <b class="blank" data-n="1" data-step="1">옥텟 규칙</b></p>
+      <p data-step="2">방법 ① 전자를 <b class="c-red">주고받는다</b> (금속 + 비금속)</p>
+      <p data-step="3">방법 ② 전자를 <b class="c-blue">같이 쓴다</b> (비금속 + 비금속)</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>지난 시간에 18족은 거의 반응하지 않는다고 했습니다. 네온과 아르곤의 바깥 껍질을 보세요.</p>
+    <p data-at="1">초록 전자가 8개씩 꽉 차 있습니다. 다른 원자들도 이렇게 바깥 껍질을 8개로 채우면 안정해지려 해요. 빈칸 1번, 옥텟 규칙. 수소와 헬륨은 첫 껍질이라 2개입니다.</p>
+    <p data-at="2">8개를 채우는 방법은 두 가지입니다. 하나는 전자를 주고받는 것, 금속과 비금속이 만날 때입니다.</p>
+    <p data-at="3">다른 하나는 전자를 같이 쓰는 것, 비금속끼리 만날 때입니다. 차례로 봅시다.</p>
+  </aside>
+</section>
+
+<!-- 5 염화 나트륨 -->
+<section class="slide" id="s-nacl" data-title="나트륨과 염소" data-part="① 주고받기">
+  <p class="kicker">① 전자를 주고받다 · 염화 나트륨이 만들어질 때</p>
+  <h2>나트륨이 준 전자 하나를 염소가 받는다</h2>
+  <svg id="naclSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="나트륨(2, 8, 1)이 전자 1개를 염소(2, 8, 7)에게 주어 Na⁺(2, 8)와 Cl⁻(2, 8, 8)가 되고 서로 끌어당긴다"></svg>
+  <div class="tight">
+    <p data-step="1">나트륨: 전자 1개를 내주어 <b class="blank" data-n="2" data-step="1">양이온</b> Na⁺ (2, 8)</p>
+    <p data-step="2">염소: 전자 1개를 받아 <b class="blank" data-n="3" data-step="2">음이온</b> Cl⁻ (2, 8, 8)</p>
+    <p data-step="3">양이온과 음이온이 끌어당겨 결합 → <b class="blank" data-n="4" data-step="3">이온 결합</b> (금속 + 비금속)</p>
+    <p class="small" data-step="4">산화 마그네슘 MgO: 마그네슘이 전자 2개를 내주고 산소가 받는다 → Mg²⁺, O²⁻</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면 조립대의 첫 물질, 염화 나트륨입니다. 나트륨은 바깥 껍질에 1개, 염소는 7개예요.</p>
+    <p data-at="1">나트륨이 바깥 전자 하나를 내주면 안쪽 껍질 8개가 바깥이 됩니다. 전자가 하나 모자라니 +1, 빈칸 2번, 양이온입니다.</p>
+    <p data-at="2">염소는 그 전자를 받아 8개를 채웁니다. 전자가 하나 많으니 −1, 빈칸 3번, 음이온.</p>
+    <p data-at="3">+와 −는 서로 끌어당깁니다. 이렇게 이온 사이의 끌어당김으로 이루어진 결합이 빈칸 4번, 이온 결합입니다.</p>
+    <p data-at="4">마그네슘은 전자 2개를 내주고 산소가 2개를 받아 ±2가 됩니다. 산화 마그네슘도 이온 결합이에요.</p>
+  </aside>
+</section>
+
+<!-- 6 결정 -->
+<section class="slide soft" id="s-lattice" data-title="소금 속은 바둑판" data-part="① 주고받기">
+  <p class="kicker">① 전자를 주고받다 · 소금 알갱이를 크게 확대하면</p>
+  <h2>이온이 번갈아 빼곡히 쌓여 있다</h2>
+  <div class="cols" style="grid-template-columns:600px 1fr;align-items:center">
+    <svg id="latSvg" viewBox="0 0 600 500" width="600" height="500" aria-label="Na⁺와 Cl⁻가 가로세로로 번갈아 놓인 격자"></svg>
+    <div class="lines">
+      <p data-step="1">Na⁺와 Cl⁻가 가로·세로·높이로 번갈아 쌓인 <b class="blank" data-n="5" data-step="1">결정</b></p>
+      <p data-step="2">NaCl 한 쌍씩 떨어진 분자는 없다<br><span class="small">NaCl = Na⁺와 Cl⁻의 개수비 1 : 1</span></p>
+      <p data-step="3">끌어당기는 힘이 세서 녹는점이 높다<br><span class="small">염화 나트륨 802 ℃ · 산화 마그네슘(±2) 2,852 ℃</span></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>소금 알갱이가 네모난 까닭이 여기 있습니다.</p>
+    <p data-at="1">Na⁺와 Cl⁻가 모든 방향으로 번갈아 놓입니다. 빈칸 5번, 결정. 하나의 거대한 격자예요.</p>
+    <p data-at="2">물 분자처럼 NaCl 한 쌍이 따로 떨어져 있지 않습니다. NaCl은 이온의 개수비가 1 : 1이라는 뜻입니다.</p>
+    <p data-at="3">이온 하나가 사방의 반대 이온에게 둘러싸여 세게 붙들려 있으니 녹는점이 802 ℃나 됩니다. 전하가 ±2인 산화 마그네슘은 2,852 ℃로 훨씬 높아요.</p>
+  </aside>
+</section>
+
+<!-- 7 물 -->
+<section class="slide" id="s-h2o" data-title="물 분자" data-part="② 같이 쓰기">
+  <p class="kicker">② 전자를 같이 쓰다 · 산소와 수소가 만나면</p>
+  <h2>전자쌍을 나눠 쓰면 둘 다 채워진다</h2>
+  <svg id="h2oSvg" viewBox="0 0 1400 340" width="1400" height="340" aria-label="수소 원자 둘과 산소 원자 하나가 전자쌍을 하나씩 나눠 써서 산소는 8개, 수소는 2개를 채운 물 분자의 전자점식"></svg>
+  <div class="tight">
+    <p data-step="1">비금속 원소끼리 전자를 내놓아 같이 쓴다 → <b class="blank" data-n="6" data-step="1">공유 결합</b></p>
+    <p data-step="2">산소는 8개, 수소는 2개를 채운다 (나눠 쓴 전자쌍은 양쪽 모두에 센다)</p>
+    <p data-step="3">공유 결합으로 만들어진 입자 → <b class="blank" data-n="7" data-step="3">분자</b> · 전체가 전기적으로 중성</p>
+  </div>
+  <aside class="script">
+    <p>이번에는 비금속끼리입니다. 산소는 원자가 전자가 6개, 수소는 1개예요. 누구도 전자를 내주려 하지 않습니다.</p>
+    <p data-at="1">그래서 서로 하나씩 내놓아 전자쌍을 만들고 같이 씁니다. 빈칸 6번, 공유 결합.</p>
+    <p data-at="2">동그라미로 세어 봅시다. 산소 쪽 동그라미 안에는 8개, 수소 쪽 동그라미 안에는 2개. 나눠 쓴 전자쌍은 양쪽 모두에 셉니다.</p>
+    <p data-at="3">이렇게 만들어진 입자가 빈칸 7번, 분자입니다. 이온이 아니어서 전체가 전기적으로 중성이에요.</p>
+  </aside>
+</section>
+
+<!-- 8 메테인과 산소 -->
+<section class="slide soft" id="s-more" data-title="메테인과 산소 분자" data-part="② 같이 쓰기">
+  <p class="kicker">② 전자를 같이 쓰다 · 몇 쌍을 나눠 쓸까</p>
+  <h2>모자란 수만큼 전자쌍을 나눠 쓴다</h2>
+  <div class="two">
+    <div class="card" data-step="1">
+      <svg id="ch4Svg" viewBox="0 0 560 300" width="560" height="300" aria-label="탄소 하나가 수소 넷과 전자쌍을 하나씩 나눠 쓴 메테인의 전자점식"></svg>
+      <p><b>메테인 CH₄</b> · 탄소는 원자가 전자 4개 → 네 방향으로 결합</p>
+    </div>
+    <div class="card" data-step="2">
+      <svg id="o2Svg" viewBox="0 0 560 300" width="560" height="300" aria-label="산소 원자 둘이 전자쌍 두 쌍을 나눠 쓴 산소 분자의 전자점식"></svg>
+      <p><b>산소 O₂</b> · 전자쌍 두 쌍을 나눠 씀 → <b class="blank" data-n="8" data-step="2">이중 결합</b></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>원자마다 모자란 전자 수만큼 전자쌍을 나눠 씁니다.</p>
+    <p data-at="1">탄소는 원자가 전자가 4개라 4개가 모자랍니다. 수소 넷과 한 쌍씩, 네 방향으로 결합해요. 탄소 화합물이 다양한 까닭이 이것입니다. 다음 시간에 다시 나옵니다.</p>
+    <p data-at="2">산소는 2개가 모자랍니다. 산소 원자 둘이 전자쌍을 두 쌍 나눠 씁니다. 빈칸 8번, 이중 결합. 우리가 숨 쉬는 산소가 이런 분자입니다.</p>
+  </aside>
+</section>
+
+<!-- 9 시험대 -->
+<section class="slide" id="s-test" data-title="언제 전기가 통하나" data-part="③ 전기가 통하는 까닭">
+  <p class="kicker">③ 전기가 통하는 까닭 · 데이비의 실험을 되풀이하면</p>
+  <h2>결합이 다르면 전기가 통하는 때가 다르다</h2>
+  <p data-step="1">물질에 전기가 통하는 성질 → <b class="blank" data-n="9" data-step="1">전기 전도성</b></p>
+  <table class="ledger">
+    <tr><th style="width:360px">물질 (결합)</th><th>고체</th><th>녹인 것 (액체)</th><th>물에 녹인 것</th></tr>
+    <tr data-step="1"><td><b>염화 나트륨</b> (이온 결합)</td><td class="no">✕</td><td class="ok">○ 802 ℃ 넘게 가열</td><td class="ok">○</td></tr>
+    <tr data-step="2"><td><b>설탕</b> (공유 결합)</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕ 잘 녹지만</td></tr>
+    <tr data-step="3"><td><b>구리</b> (금속)</td><td class="ok">○</td><td class="ok">○</td><td class="small">물에 녹지 않음</td></tr>
+  </table>
+  <aside class="script">
+    <p>단원 화면 성질 시험대를 정리한 표입니다.</p>
+    <p data-at="1">전기가 통하는 성질을 빈칸 9번, 전기 전도성이라 합니다. 염화 나트륨은 고체일 때 안 통하고, 녹이거나 물에 녹이면 통합니다.</p>
+    <p data-at="2">설탕은 물에 아주 잘 녹지만 설탕물도 전기가 통하지 않습니다. 물에 녹는다고 다 통하는 게 아니에요.</p>
+    <p data-at="3">구리는 고체든 녹인 것이든 늘 통합니다. 세 물질의 차이를 다음 장면에서 입자로 봅니다.</p>
+  </aside>
+</section>
+
+<!-- 10 움직이는 전하 -->
+<section class="slide soft" id="s-why" data-title="움직일 수 있는 전하" data-part="③ 전기가 통하는 까닭">
+  <p class="kicker">③ 전기가 통하는 까닭 · 입자로 들여다보면</p>
+  <h2>전기를 나르는 것은 움직이는 전하다</h2>
+  <svg id="whySvg" viewBox="0 0 1400 300" width="1400" height="300" aria-label="네 칸 그림: 고체 소금은 이온이 제자리에 묶여 있고, 녹인 소금은 이온이 양쪽 전극으로 움직이며, 설탕물은 중성 분자만 있고, 구리는 자유 전자가 돌아다닌다"></svg>
+  <div class="tight">
+    <p data-step="2">녹이거나 물에 녹이면 <b class="blank" data-n="10" data-step="2">이온</b>이 풀려나 전극 쪽으로 움직인다 → 통한다</p>
+    <p data-step="3">설탕: 중성인 분자뿐 → 녹여도 움직이는 전하가 없다</p>
+    <p data-step="4">구리: 금속 전체를 돌아다니는 <b class="blank" data-n="11" data-step="4">자유 전자</b> → 고체든 액체든 통한다</p>
+  </div>
+  <div class="card blue" data-step="5" style="padding:14px 30px"><p style="margin:0">전기가 통하려면 움직일 수 있는 <b class="blank" data-n="12" data-step="5">전하</b>가 있어야 한다</p></div>
+  <aside class="script">
+    <p>네 칸 그림입니다. 노란 전구가 켜졌는지 보세요.</p>
+    <p data-at="1">고체 소금. 이온은 있지만 결정 속 제자리에 묶여 있어 움직이지 못합니다. 전구가 꺼져 있어요.</p>
+    <p data-at="2">녹이거나 물에 녹이면 빈칸 10번, 이온이 풀려납니다. 양이온은 − 극으로, 음이온은 + 극으로 움직이며 전하를 나릅니다.</p>
+    <p data-at="3">설탕물에는 중성인 분자만 있습니다. 움직여도 전하를 나르지 못해요.</p>
+    <p data-at="4">구리는 원자들이 내놓은 전자가 빈칸 11번, 자유 전자가 되어 금속 전체를 돌아다닙니다.</p>
+    <p data-at="5">결국 기준은 하나입니다. 빈칸 12번, 움직일 수 있는 전하가 있는가. 첫 추리를 다시 떠올려 보세요.</p>
+  </aside>
+</section>
+
+<!-- 11 감식실 -->
+<section class="slide" id="s-sample" data-title="이름 없는 시료" data-part="③ 전기가 통하는 까닭">
+  <p class="kicker">③ 전기가 통하는 까닭 · 측정값만 보고 결합 가려내기 (단원 화면 감식실)</p>
+  <h2>녹는점과 전기 전도성이 결합을 알려 준다</h2>
+  <table class="ledger">
+    <tr><th style="width:110px">시료</th><th style="width:190px">녹는점</th><th>전기 전도성</th><th style="width:360px">결합</th></tr>
+    <tr><td>㉯</td><td>−114 ℃</td><td>고체 ✕ · 액체 ✕</td><td><b class="c-blue" data-step="2">공유 (에탄올)</b></td></tr>
+    <tr><td>㉰</td><td>2,852 ℃</td><td>고체 ✕ · 녹인 것 ○</td><td><b class="c-red" data-step="1">이온 (산화 마그네슘)</b></td></tr>
+    <tr><td>㉱</td><td>186 ℃</td><td>고체 ✕ · 녹인 것 ✕ · 물에 녹인 것 ✕</td><td><b class="c-blue" data-step="2">공유 (설탕)</b></td></tr>
+    <tr><td>㉲</td><td>770 ℃</td><td>고체 ✕ · 물에 녹인 것 ○</td><td><b class="c-red" data-step="1">이온 (염화 칼륨)</b></td></tr>
+  </table>
+  <p class="mt" data-step="3">이온 결합 물질은 <b class="blank" data-n="13" data-step="3">녹는점</b>이 높고, 고체 ✕ · 녹이거나 물에 녹이면 ○</p>
+  <aside class="script">
+    <p>단원 화면 감식실의 시료 일부입니다. 이름표 없이 측정값만 있어요. 짝과 먼저 나눠 보게 합니다.</p>
+    <p data-at="1">녹는점이 높고 녹이거나 물에 녹이면 통하는 ㉰와 ㉲는 이온 결합입니다.</p>
+    <p data-at="2">녹는점이 낮고 녹여도 통하지 않는 ㉯와 ㉱는 공유 결합 분자입니다. ㉱는 물에 잘 녹아도 이온이 되지 않는 설탕이에요.</p>
+    <p data-at="3">규칙으로 정리합니다. 이온 결합 물질은 빈칸 13번, 녹는점이 높습니다.</p>
+  </aside>
+</section>
+
+<!-- 12 확인 -->
+<section class="slide" id="s-check1" data-title="고체 소금은 왜 안 통할까" data-part="③ 전기가 통하는 까닭">
+  <p class="kicker">③ 전기가 통하는 까닭 · 확인</p>
+  <h2>고체 소금에 전기가 통하지 않는 까닭은?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ 고체 소금에는 이온이 없어서</div>
+    <div class="opt right" data-step="1">㉡ 이온이 결정 속 제자리에 묶여 움직이지 못해서</div>
+    <div class="opt wrong" data-step="1">㉢ 소금은 공유 결합 물질이라서</div>
+    <div class="opt wrong" data-step="1">㉣ 녹아야만 전자가 새로 생겨서</div>
+  </div>
+  <p data-step="1" style="margin-top:36px">고체에도 Na⁺와 Cl⁻는 그대로 있다. 다만 움직이지 못할 뿐이다.</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. ㉠을 고르는 학생이 많습니다.</p>
+    <p data-at="1">정답은 ㉡. 녹인다고 이온이 새로 생기는 것이 아니라, 이미 있던 이온이 움직일 수 있게 되는 것입니다.</p>
+  </aside>
+</section>
+
+<!-- 13 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>결합이 다르면 성질이 다르다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>옥텟 규칙</b>: 바깥 껍질 전자 8개(H는 2개)로 안정 → 주고받거나 같이 쓴다</li>
+    <li data-k="2" data-step="2"><b>이온 결합</b>(금속 + 비금속): Na⁺·Cl⁻ 결정 · 녹는점 높음 · 고체 ✕, 녹이거나 물에 녹이면 ○</li>
+    <li data-k="3" data-step="3"><b>공유 결합</b>(비금속 + 비금속): H₂O·CH₄·O₂ 분자 · 녹는점 낮음 · 녹여도 ✕</li>
+    <li data-k="4" data-step="4">전기가 통하려면 움직일 수 있는 전하(이온, <b>자유 전자</b>)가 있어야 한다</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 14 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 물(H₂O) · 산소(O₂) · 소금(NaCl)을 결합에 따라 바르게 나눈 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 셋 다 이온 결합</div>
+        <div class="opt right" data-step="1">㉡ 물·산소는 공유, 소금은 이온</div>
+        <div class="opt wrong" data-step="1">㉢ 물·소금은 이온, 산소는 공유</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 고체 상태에서도 전기가 통하는 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 염화 나트륨</div>
+        <div class="opt wrong" data-step="2">㉡ 설탕</div>
+        <div class="opt right" data-step="2">㉢ 구리</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 물과 산소는 비금속끼리, 소금은 금속 나트륨과 비금속 염소입니다.</p>
+    <p data-at="2">2번은 ㉢ 구리. 자유 전자가 늘 돌아다니기 때문입니다.</p>
+  </aside>
+</section>
+
+<!-- 15 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ② 「녹이면 통한다」</h2>
+  <div class="cols">
+    <div class="card"><h3>결합 분석가가 되어 보세요</h3><p>전자를 옮기고 나눠 네 물질 완성하기, 온도를 올리고 물에 녹여 전구 켜기, 이름 없는 시료 여섯 가려내기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 03 지각·생명체의 물질</h3><p>운모는 손톱으로 벗겨지는데, 같은 부품으로 만든 석영은 칼로도 긁히지 않습니다. 무엇이 다를까요?</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ②를 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* 전자 껍질 모형: sh = 껍질별 전자 수, hl = 바깥 껍질 전자 색 */
+  function atom(cx, cy, sh, sym, hl, r0, dr, nucR) {
+    var h = "", k, j; r0 = r0 || 40; dr = dr || 26; nucR = nucR || 24;
+    for (k = 0; k < sh.length; k++) {
+      var r = r0 + dr * k, last = k === sh.length - 1;
+      h += "<circle cx='" + cx + "' cy='" + cy + "' r='" + r + "' fill='none' stroke='#adb5bd' stroke-width='3'/>";
+      for (j = 0; j < sh[k]; j++) {
+        var t = -Math.PI / 2 + j * 2 * Math.PI / sh[k] + k * 0.3;
+        h += "<circle cx='" + (cx + r * Math.cos(t)).toFixed(1) + "' cy='" + (cy + r * Math.sin(t)).toFixed(1) + "' r='" + (last ? 8 : 6) + "' fill='" + (last ? hl : "#1462d8") + "'/>";
+      }
+    }
+    h += "<circle cx='" + cx + "' cy='" + cy + "' r='" + nucR + "' fill='#495057'/><text x='" + cx + "' y='" + (cy + 8) + "' font-size='" + (sym.length > 2 ? 20 : 24) + "' font-weight='900' fill='#fff' text-anchor='middle'>" + sym + "</text>";
+    return h;
+  }
+  function T(x, y, s, o) { o = o || {}; return "<text x='" + x + "' y='" + y + "' font-size='" + (o.s || 24) + "' font-weight='" + (o.w || 900) + "' fill='" + (o.c || "#161b28") + "' text-anchor='" + (o.a || "middle") + "'>" + s + "</text>"; }
+
+  /* 네온·아르곤 */
+  document.getElementById("octSvg").innerHTML =
+    atom(160, 170, [2, 8], "Ne", "#2f9e44") + T(160, 330, "네온 (2, 8)") +
+    atom(450, 170, [2, 8, 8], "Ar", "#2f9e44") + T(450, 330, "아르곤 (2, 8, 8)") +
+    "<g data-step='1'>" + T(310, 372, "바깥 껍질 전자 8개 = 꽉 참", { c: "#2f9e44", s: 24 }) + "</g>";
+
+  /* 염화 나트륨 */
+  (function () {
+    var h = "<defs><marker id='nacl-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#e8590c'/></marker>" +
+      "<marker id='nacl-b' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#495057'/></marker></defs>";
+    h += atom(150, 150, [2, 8, 1], "Na", "#f76707") + T(150, 296, "Na (2, 8, 1)");
+    h += atom(480, 150, [2, 8, 7], "Cl", "#2f9e44") + T(480, 296, "Cl (2, 8, 7)");
+    h += "<g data-step='1'><path d='M150 54 Q320 -6 470 42' fill='none' stroke='#e8590c' stroke-width='5' stroke-dasharray='10 8' marker-end='url(#nacl-a)'/>" + T(316, 120, "전자 1개", { c: "#e8590c", s: 22 }) + "</g>";
+    h += "<g data-step='1'><line x1='640' y1='150' x2='720' y2='150' stroke='#495057' stroke-width='6' marker-end='url(#nacl-b)'/>";
+    h += atom(860, 150, [2, 8], "Na⁺", "#1462d8") + T(860, 296, "Na⁺ (2, 8)", { c: "#c92a2a" }) + T(940, 60, "+", { s: 44, c: "#c92a2a" }) + "</g>";
+    h += "<g data-step='2'>" + atom(1200, 150, [2, 8, 8], "Cl⁻", "#2f9e44") + T(1200, 296, "Cl⁻ (2, 8, 8)", { c: "#1462d8" }) + T(1312, 52, "−", { s: 44, c: "#1462d8" }) + "</g>";
+    h += "<g data-step='3'><line x1='955' y1='150' x2='1085' y2='150' stroke='#c92a2a' stroke-width='6' marker-end='url(#nacl-b)'/><line x1='1085' y1='150' x2='955' y2='150' stroke='#c92a2a' stroke-width='6' marker-end='url(#nacl-b)'/>" + T(1020, 136, "끌어당김", { s: 20, c: "#c92a2a" }) + "</g>";
+    document.getElementById("naclSvg").innerHTML = h;
+  })();
+
+  /* 결정 격자 */
+  (function () {
+    var h = "", i, j, X0 = 70, Y0 = 60, D = 76;
+    h += "<g>";
+    for (j = 0; j < 6; j++) for (i = 0; i < 6; i++) {
+      var x = X0 + i * D, y = Y0 + j * D, na = (i + j) % 2 === 0;
+      h += na ? "<circle cx='" + x + "' cy='" + y + "' r='20' fill='#9775fa'/><text x='" + x + "' y='" + (y + 7) + "' font-size='18' font-weight='900' fill='#fff' text-anchor='middle'>+</text>"
+              : "<circle cx='" + x + "' cy='" + y + "' r='32' fill='#69db7c'/><text x='" + x + "' y='" + (y + 8) + "' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle'>−</text>";
+    }
+    h += "</g>";
+    h += "<g data-step='2'><rect x='" + (X0 + 2 * D - 44) + "' y='" + (Y0 + 2 * D - 44) + "' width='" + (D + 88) + "' height='88' rx='44' fill='none' stroke='#e03131' stroke-width='5' stroke-dasharray='12 8'/>" + "<text x='" + (X0 + 2.5 * D) + "' y='" + (Y0 + 2 * D - 52) + "' font-size='22' font-weight='900' fill='#e03131' text-anchor='middle' stroke='#fff' stroke-width='7' paint-order='stroke'>이 둘만 따로? 아니다</text>" + "</g>";
+    h += "<g font-size='20' font-weight='900'><circle cx='90' cy='478' r='12' fill='#9775fa'/><text x='110' y='485'>Na⁺</text><circle cx='200' cy='478' r='18' fill='#69db7c'/><text x='226' y='485'>Cl⁻</text></g>";
+    h += "<text x='590' y='488' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 이온 크기 과장 · 한 층만 그림</text>";
+    document.getElementById("latSvg").innerHTML = h;
+  })();
+
+  /* 물 분자 전자점식 */
+  (function () {
+    var h = "", y = 170, O = "#e8590c", Hc = "#1462d8";
+    function e(x, yy, c) { return "<circle cx='" + x + "' cy='" + yy + "' r='9' fill='" + c + "'/>"; }
+    /* 떨어진 원자 */
+    h += "<g data-hide='1'>" + T(330, y + 22, "H", { s: 64 }) + e(375, y, Hc) +
+      T(700, y + 22, "O", { s: 64 }) + e(686, y - 50, O) + e(714, y - 50, O) + e(686, y + 50, O) + e(714, y + 50, O) + e(645, y, O) + e(755, y, O) +
+      T(1070, y + 22, "H", { s: 64 }) + e(1025, y, Hc) + T(700, 320, "원자가 전자: 수소 1개 · 산소 6개 · 수소 1개", { s: 24, w: 800, c: "#5f6b80" }) + "</g>";
+    /* 공유 */
+    h += "<g data-step='1'>" + T(520, y + 22, "H", { s: 64 }) + T(700, y + 22, "O", { s: 64 }) + T(880, y + 22, "H", { s: 64 }) +
+      e(610, y - 12, Hc) + e(610, y + 12, O) + e(790, y - 12, O) + e(790, y + 12, Hc) +
+      e(686, y - 56, O) + e(714, y - 56, O) + e(686, y + 56, O) + e(714, y + 56, O) +
+      T(700, 320, "전자쌍 2개를 나눠 씀 · H₂O", { s: 24, w: 800, c: "#5f6b80" }) + "</g>";
+    h += "<g data-step='2' fill='none' stroke-width='4'><circle cx='700' cy='" + y + "' r='108' stroke='#e8590c' stroke-dasharray='12 8'/><circle cx='520' cy='" + y + "' r='100' stroke='#1462d8' stroke-dasharray='6 8'/><circle cx='880' cy='" + y + "' r='100' stroke='#1462d8' stroke-dasharray='6 8'/></g>";
+    h += "<g data-step='2'>" + T(700, 40, "산소 8개", { c: "#e8590c" }) + T(420, 60, "수소 2개", { c: "#1462d8" }) + T(980, 60, "수소 2개", { c: "#1462d8" }) + "</g>";
+    document.getElementById("h2oSvg").innerHTML = h;
+  })();
+
+  /* 메테인 · 산소 분자 */
+  (function () {
+    function e(x, yy, c) { return "<circle cx='" + x + "' cy='" + yy + "' r='8' fill='" + c + "'/>"; }
+    var C = "#2f9e44", Hc = "#1462d8", O = "#e8590c", cx = 280, cy = 150, h = "";
+    h += T(cx, cy + 20, "C", { s: 56 });
+    [[0, -1], [0, 1], [-1, 0], [1, 0]].forEach(function (d) {
+      var hx = cx + d[0] * 150, hy = cy + d[1] * 112;
+      h += T(hx, hy + (d[1] ? 20 : 18), "H", { s: 50 });
+      var mx = cx + d[0] * 70, my = cy + d[1] * 56, px = d[1] ? 11 : 0, py = d[0] ? 11 : 0;
+      h += e(mx - px, my - py, C) + e(mx + px, my + py, Hc);
+    });
+    h += "<circle cx='" + cx + "' cy='" + cy + "' r='96' fill='none' stroke='#2f9e44' stroke-width='3' stroke-dasharray='10 8'/>" + T(470, 290, "탄소 8개 · 수소 2개씩", { s: 20, w: 800, c: "#5f6b80" });
+    document.getElementById("ch4Svg").innerHTML = h;
+    var g = "", y = 140;
+    g += T(190, y + 20, "O", { s: 60 }) + T(370, y + 20, "O", { s: 60 });
+    g += e(270, y - 26, O) + e(290, y - 26, O) + e(270, y - 6, O) + e(290, y - 6, O) + e(270, y + 14, O) + e(290, y + 14, O) + e(270, y + 34, O) + e(290, y + 34, O);
+    g += e(176, y - 50, O) + e(204, y - 50, O) + e(176, y + 62, O) + e(204, y + 62, O) + e(356, y - 50, O) + e(384, y - 50, O) + e(356, y + 62, O) + e(384, y + 62, O);
+    g += "<rect x='256' y='" + (y - 42) + "' width='48' height='92' rx='20' fill='none' stroke='#c92a2a' stroke-width='4'/>" + T(280, y - 58, "두 쌍", { s: 22, c: "#c92a2a" });
+    g += T(470, 290, "산소 원자마다 8개", { s: 20, w: 800, c: "#5f6b80" });
+    document.getElementById("o2Svg").innerHTML = g;
+  })();
+
+  /* 네 칸: 고체 소금 · 녹인 소금 · 설탕물 · 구리 */
+  (function () {
+    var h = "<defs><marker id='why-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#495057'/></marker></defs>";
+    var W = 330, G = 26;
+    function panel(k, title, st, lit) {
+      var x = k * (W + G);
+      var s = "<g" + (st ? " data-step='" + st + "'" : "") + "><rect x='" + x + "' y='40' width='" + W + "' height='250' rx='18' fill='#fff' stroke='#ced4da' stroke-width='3'/>";
+      s += T(x + W / 2, 28, title, { s: 22 });
+      s += "<rect x='" + (x + 16) + "' y='70' width='14' height='200' fill='#868e96'/><rect x='" + (x + W - 30) + "' y='70' width='14' height='200' fill='#868e96'/>";
+      s += T(x + 23, 64, "+", { s: 22, c: "#c92a2a" }) + T(x + W - 23, 64, "−", { s: 22, c: "#1462d8" });
+      s += "<circle cx='" + (x + W - 24) + "' cy='30' r='14' fill='" + (lit ? "#ffd43b" : "#dee2e6") + "' stroke='#868e96' stroke-width='3'/>";
+      return { x: x, s: s };
+    }
+    function ion(x, y, pos) { return pos ? "<circle cx='" + x + "' cy='" + y + "' r='11' fill='#9775fa'/>" : "<circle cx='" + x + "' cy='" + y + "' r='16' fill='#69db7c'/>"; }
+    var p, i, j;
+    p = panel(0, "고체 소금", 0, false); h += p.s;
+    for (j = 0; j < 4; j++) for (i = 0; i < 6; i++) h += ion(p.x + 60 + i * 42, 100 + j * 46, (i + j) % 2 === 0);
+    h += "<g data-step='1'>" + T(p.x + W / 2, 282, "제자리에 묶임", { s: 20, c: "#c92a2a" }) + "</g></g>";
+    p = panel(1, "녹인 소금 · 소금물", 2, true); h += p.s;
+    [[70, 100], [150, 150], [230, 210], [110, 230], [200, 110], [260, 160]].forEach(function (q, n) {
+      var pos = n % 2 === 0, x = p.x + q[0], y = q[1];
+      h += ion(x, y, pos) + "<line x1='" + x + "' y1='" + y + "' x2='" + (x + (pos ? 40 : -40)) + "' y2='" + y + "' stroke='#495057' stroke-width='3' marker-end='url(#why-a)'/>";
+    });
+    h += T(p.x + W / 2, 282, "이온이 움직임", { s: 20, c: "#2f9e44" }) + "</g>";
+    p = panel(2, "설탕물", 3, false); h += p.s;
+    [[80, 110], [170, 170], [250, 110], [120, 220], [230, 230]].forEach(function (q) { h += "<ellipse cx='" + (p.x + q[0]) + "' cy='" + q[1] + "' rx='26' ry='16' fill='#ffe8a1' stroke='#f08c00' stroke-width='3'/>"; });
+    h += T(p.x + W / 2, 282, "중성 분자뿐", { s: 20, c: "#c92a2a" }) + "</g>";
+    p = panel(3, "구리 (고체)", 4, true); h += p.s;
+    for (j = 0; j < 3; j++) for (i = 0; i < 5; i++) h += "<circle cx='" + (p.x + 70 + i * 48) + "' cy='" + (110 + j * 60) + "' r='17' fill='#e8a87c'/>";
+    [[95, 140], [190, 135], [140, 196], [235, 200], [115, 82]].forEach(function (q) { h += "<circle cx='" + (p.x + q[0]) + "' cy='" + q[1] + "' r='7' fill='#1462d8'/><line x1='" + (p.x + q[0] + 9) + "' y1='" + q[1] + "' x2='" + (p.x + q[0] - 26) + "' y2='" + q[1] + "' stroke='#1462d8' stroke-width='3' marker-end='url(#why-a)'/>"; });
+    h += T(p.x + W / 2, 282, "자유 전자가 움직임", { s: 20, c: "#2f9e44" }) + "</g>";
+    document.getElementById("whySvg").innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

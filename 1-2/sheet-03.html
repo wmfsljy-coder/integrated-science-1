@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 측정과 현대 문명 (통합과학1 Ⅰ-2 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-03.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격·여백을 줄인다 */ p, li { font-size: 12.8px; line-height: 1.62; } table { font-size: 12px; } td, th { padding: 2px 7px; line-height: 1.42; } h2 { font-size: 14.5px; margin: 7px 0 3px; padding: 3px 10px; } header { margin-bottom: 8px; } .guide { margin-bottom: 6px; } .write { height: 40px; } .foot { margin-top: 6px; } p, li { line-height: 1.55; } .write { height: 36px; }</style>
+</head>
+
+<body>
+<div class="tools">
+  <a href="board-03.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅰ-2 과학의 측정과 우리 사회 · 03 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 측정과 현대 문명</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~13)</p>
+
+  <h2>① 시간이 곧 위치 — 지도 앱이 나를 옆 건물에 찍은 까닭</h2>
+  <ul>
+    <li>GPS 위성은 <b class="blank" data-n="1">원자시계</b>를 싣고, 전파가 위성에서 수신기까지 오는 데 걸린 시간을 잰다</li>
+    <li>거리 = 빛의 속력(299,792,458 m/s) × 시간 → 시계가 1 ns 틀리면 약 30 cm, 1 µs(100만분의 1초) 틀리면 약 <b class="blank" data-n="2">300 m</b></li>
+    <li>위치를 10 m 안쪽으로 맞추려면 시계 오차는 <b class="blank" data-n="3">30 ns</b> 안쪽 (30 ns → 약 9 m) · 340 ns면 약 102 m (단원 화면 모형)</li>
+    <li>아주 작은 차이까지 재는 <b class="blank" data-n="4">정밀 측정</b>이 현대 문명을 떠받친다: GPS 약 10⁻⁹ 초, 반도체 약 10⁻⁹ m, 의료 영상 약 10⁻³ m, 거래 약 10⁻³ kg, 기후 관측 약 10⁻¹ ℃</li>
+  </ul>
+
+  <h2>② 나노미터 공장 — 같은 오차, 다른 결과</h2>
+  <ul>
+    <li>회로 선폭은 <b class="blank" data-n="5">나노미터</b> 단위 (1 nm = 10⁻⁹ m) · 목표의 ±10 %를 벗어나면 버린다(단원 화면에서 정한 값)</li>
+  </ul>
+  <table>
+    <tr><th style="width:20%">목표 선폭</th><th style="width:20%">허용 범위</th><th>오차 0.8 nm일 때 쓸 수 있는 칩의 비율</th></tr>
+    <tr><td>90 nm</td><td>± 9 nm</td><td>약 100 %</td></tr>
+    <tr><td>10 nm</td><td>± 1 nm</td><td>약 79 % (다섯 장에 한 장꼴로 버림) → 오차를 0.5 nm로 줄이면 95.4 %</td></tr>
+  </table>
+  <ul>
+    <li>만든 칩 가운데 쓸 수 있는 칩의 비율 → <b class="blank" data-n="6">수율</b></li>
+    <li>대상이 작아지면 <b class="blank" data-n="7">허용 오차</b>도 함께 작아진다 → 더 작게 만들려면 더 정밀하게 재는 기술이 먼저</li>
+  </ul>
+
+  <h2>③ 숫자로 바뀌는 순간 — 아날로그–디지털 변환</h2>
+  <ul>
+    <li>이어지는 신호를 얼마나 자주 재느냐 → <b class="blank" data-n="8">표본화</b> · 맥박 신호: 1초에 4번이면 최대 오차 41.2 %, 12번이면 4.9 %</li>
+    <li>값을 얼마나 잘게 나누느냐 → <b class="blank" data-n="9">양자화</b> · n비트 = 2ⁿ칸, 비트 하나 늘면 칸 수가 <b class="blank" data-n="10">두 배</b></li>
+  </ul>
+  <table>
+    <tr><th style="width:18%">체온계(30~45 ℃)</th><th style="width:16%">칸 수</th><th style="width:20%">한 칸</th><th>최대 오차(한 칸의 절반)</th></tr>
+    <tr><td>4비트</td><td>16칸</td><td>약 0.94 ℃</td><td>약 0.47 ℃ → 36.5 ℃와 36.7 ℃가 둘 다 36.56으로 찍힌다</td></tr>
+    <tr><td><b class="blank" data-n="11">8비트</b></td><td>256칸</td><td>약 0.0586 ℃</td><td>약 0.0293 ℃ → 0.05 ℃까지 가른다</td></tr>
+  </table>
+  <ul>
+    <li>표본화 + 양자화 → 이어지던 신호가 <b class="blank" data-n="12">디지털</b> 정보가 된다</li>
+    <li>몇 번을 옮겨 적어도, <b class="blank" data-n="13">정보 통신</b>으로 멀리 보내도 값이 변하지 않는다 → 세계의 관측값을 모아 수십 년치를 견준다 (단, 없던 정확도가 생기지는 않는다)</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. GPS 위성의 시계가 100 ns(0.1 µs) 틀리면 위치 오차는? &nbsp; ㉠ 약 3 m &nbsp; ㉡ 약 30 m &nbsp; ㉢ 약 300 m <span class="ans">→ ㉡</span></p>
+    <p>2. 양자화의 비트 수를 하나 늘리면 칸 수는? <span class="ans">→ 두 배가 된다</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>‘정밀 측정 → 정보 → 생활의 변화’의 예를 오늘 배운 것 가운데 하나로 들어 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-03.html · 이야기 ③ 「30 cm를 다투는 사람들」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

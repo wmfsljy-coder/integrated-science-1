@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 원소의 주기성 (통합과학1 Ⅱ-2 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 8px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 6px; }
+  h2 { font-size: 14.5px; font-weight: 900; margin: 8px 0 3px; padding: 3px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 12.8px; line-height: 1.62; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 2px 7px; text-align: left; line-height: 1.5; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 4px; }
+  .q p { line-height: 1.65; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 38px; margin-top: 4px; }
+  .foot { margin-top: 6px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-01.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅱ-2 물질의 규칙성과 성질 · 01 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 원소의 주기성</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~13)</p>
+
+  <h2>① 되풀이의 정체 — 리튬 (2, 1) · 나트륨 (2, 8, 1) · 칼륨 (2, 8, 8, 1)</h2>
+  <ul>
+    <li>가장 바깥 껍질의 전자 → <b class="blank" data-n="1">원자가 전자</b> : 화학적 성질을 정한다</li>
+    <li>원자가 전자 수가 같은 원소 → 같은 세로줄 <b class="blank" data-n="2">족</b> &nbsp;·&nbsp; 전자 껍질 수가 같은 원소 → 같은 가로줄 <b class="blank" data-n="3">주기</b></li>
+    <li>원자 번호 순서로 원자가 전자 수가 1 → 7, 18족에서 0(바깥 껍질이 꽉 참), 다시 1 → 성질도 되풀이: <b class="blank" data-n="4">주기성</b></li>
+  </ul>
+
+  <h2>② 표를 읽고 예측하기</h2>
+  <ul>
+    <li>원자에서 전자 1개를 떼어 내는 데 드는 에너지 → <b class="blank" data-n="5">이온화 에너지</b> : 같은 주기에서 오른쪽으로 갈수록 대체로 커져 18족에서 가장 크고(He 2372 kJ/mol), 같은 족에서 아래로 갈수록 작다(Li 520 → Na 496 → K 419)</li>
+    <li>원자 반지름: 같은 족에서 아래로 갈수록 <b class="blank" data-n="6">전자 껍질</b> 수가 늘어 커진다(K 227 pm) · 같은 주기에서 오른쪽으로 갈수록 핵의 양전하가 커져 작아진다</li>
+  </ul>
+  <table>
+    <tr><th style="width:24%">에카규소의 이웃</th><th>규소(위)</th><th>주석(아래)</th><th>갈륨(왼쪽)</th><th>비소(오른쪽)</th><th style="width:16%">네 이웃의 평균</th></tr>
+    <tr><td>원자량</td><td>28.09</td><td>118.71</td><td>69.72</td><td>74.92</td><td>72.86</td></tr>
+    <tr><td>밀도 (g/cm³)</td><td>2.33</td><td>7.31</td><td>5.91</td><td>5.73</td><td>5.32</td></tr>
+  </table>
+  <ul>
+    <li>성질이 고르게 변하므로 빈칸의 값 ≈ 네 이웃의 <b class="blank" data-n="7">평균</b> · 1871년 멘델레예프의 예측: 원자량 72, 밀도 5.5</li>
+    <li>1886년 빈클러가 찾은 원소 <b class="blank" data-n="8">저마늄</b> : 원자량 72.63, 밀도 5.32 g/cm³ → 주기율표는 아직 모르는 것을 맞히는 도구</li>
+  </ul>
+
+  <h2>③ 같은 족, 같은 행동</h2>
+  <table>
+    <tr><th style="width:24%">족</th><th style="width:16%">원자가 전자</th><th>행동</th><th style="width:28%">경향</th></tr>
+    <tr><td>1족(수소 제외) <b class="blank" data-n="9">알칼리 금속</b></td><td>1개</td><td>전자 1개를 잃고 +1의 <b class="blank" data-n="10">양이온</b> · 물과 반응해 수소 기체</td><td>아래로 갈수록 격렬 (Li &lt; Na &lt; K)</td></tr>
+    <tr><td>17족 <b class="blank" data-n="11">할로젠</b></td><td>7개</td><td>전자 1개를 얻어 −1의 <b class="blank" data-n="12">음이온</b></td><td>위로 갈수록 반응성 큼 (F &gt; Cl &gt; Br)</td></tr>
+    <tr><td>18족 <b class="blank" data-n="13">비활성 기체</b></td><td>0개(꽉 참)</td><td>전자를 주지도 받지도 않아 거의 반응하지 않음</td><td>He · Ne · Ar</td></tr>
+  </table>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 원자 번호 1~20 가운데 이온화 에너지가 가장 큰 원소는? <span class="ans">→ ㉡ 헬륨 (2372 kJ/mol)</span><br>
+      ㉠ 수소 &nbsp; ㉡ 헬륨 &nbsp; ㉢ 네온 &nbsp; ㉣ 칼륨</p>
+    <p>2. 17족에서 반응성이 가장 큰 원소는? <span class="ans">→ ㉠ 플루오린</span> &nbsp; ㉠ 플루오린 &nbsp; ㉡ 염소 &nbsp; ㉢ 브로민</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>나트륨과 칼륨의 화학적 성질이 비슷한 까닭을 ‘원자가 전자’라는 말을 넣어 한 문장으로 설명하세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-01.html · 이야기 ① 「빈칸이 있는 표」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

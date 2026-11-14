@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 측정과 현대 문명 (통합과학1 Ⅰ-2 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 14px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  table.ledger td { font-size: 27px; padding: 10px 14px; }
+  table.ledger th { padding: 6px 14px; }
+  .ev p { font-size: 28px; margin-bottom: 12px; }
+  #s-check1 .opt, #s-check2 .opt { font-size: 29px; padding: 14px 24px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg id="c3-art" viewBox="0 0 1600 520" aria-label="하늘의 GPS 위성 네 대에서 휴대폰으로 신호가 내려오고, 지도 앱의 파란 위치 표시가 학교가 아닌 옆 건물 위에 떠 있다"></svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅰ-2 과학의 측정과 우리 사회 · 03</p>
+    <h1>측정과 현대 문명</h1>
+    <p class="sub" data-step="1">지도 앱이 나를 옆 건물에 찍었다</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 정밀한 측정이 우리 생활을 어떻게 떠받치는지, 그리고 측정값이 어떻게 디지털 정보가 되는지 봅니다.</p>
+    <p data-at="1">등교 첫날, 하윤이의 지도 앱이 학교가 아니라 옆 건물을 가리킵니다. 범인은 지도일까요, 시계일까요?</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="위성의 시계가 틀리면" data-part="도입">
+  <p class="kicker">도입 · GPS 위성은 지구 위 약 2만 km에</p>
+  <h2>위성 시계가 1 µs 틀리면 내 위치는?</h2>
+  <div class="cols">
+    <div class="card ev">
+      <p><b>증거물 ①</b> GPS 위성은 원자시계를 싣고, 전파가 위성에서 수신기까지 오는 데 걸린 시간으로 거리를 잰다</p>
+      <p><b>증거물 ②</b> 전파는 빛과 같은 속력, 299,792,458 m/s로 달린다</p>
+      <p class="small mt">1 µs(마이크로초) = 100만분의 1초 · 1 ns(나노초) = 10억분의 1초</p>
+    </div>
+    <div class="card yel">
+      <h3>내 위치는 얼마나 어긋날까?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 1 mm 쯤</div>
+        <div class="opt">㉡ 30 cm 쯤</div>
+        <div class="opt">㉢ 300 m 쯤</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>하윤이는 위성이 2만 km 밖에 있는데 시계가 아주 조금 틀린다고 위치가 달라질 리 없다고 말합니다.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 곧 계산해 봅니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>원자시계</b><span>원자의 진동을 세어 시간을 재는 시계</span></div>
+    <div class="card"><b>정밀 측정</b><span>아주 작은 차이까지 재는 일</span></div>
+    <div class="card"><b>나노미터</b><span>10억분의 1 m, 반도체의 눈금</span></div>
+    <div class="card"><b>표본화</b><span>신호를 얼마나 자주 재는가</span></div>
+    <div class="card"><b>양자화</b><span>값을 얼마나 잘게 나누는가</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~13번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 거리 = 빛의 속력 × 시간 -->
+<section class="slide" id="s-gps" data-title="시간이 곧 거리" data-part="① 시간이 곧 위치">
+  <p class="kicker">① 시간이 곧 위치 · 항법 기술자 준서의 설명</p>
+  <h2>거리 = 빛의 속력 × 시간</h2>
+  <div class="cols" style="grid-template-columns:600px 1fr;align-items:center">
+    <svg id="gpsSvg" viewBox="0 0 600 480" width="600" height="480" aria-label="위성에서 휴대폰까지 전파가 오는 데 걸린 시간을 재어 거리를 구하는 그림"></svg>
+    <div class="lines">
+      <p data-step="1">위성은 <b class="blank" data-n="1" data-step="1">원자시계</b>를 싣고, 전파가 오는 데 걸린 시간을 잰다</p>
+      <p data-step="2">전파는 빛의 속력 → 1 ns 틀리면 약 30 cm</p>
+      <p data-step="3">1 µs(100만분의 1초) 틀리면 약 <b class="blank" data-n="2" data-step="3">300 m</b></p>
+      <p class="small" data-step="3">299,792,458 m/s × 0.000001 s ≈ 300 m</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>휴대폰은 위성까지의 거리를 자로 재지 않습니다. 시간을 잽니다.</p>
+    <p data-at="1">GPS 위성에는 빈칸 1번, 원자시계가 실려 있습니다. 지난 시간에 1초를 정한 그 세슘 시계예요. 전파를 보낸 시각과 받은 시각의 차이로 거리를 구합니다.</p>
+    <p data-at="2">전파는 빛의 속력으로 달리니 시계가 1 ns만 틀려도 거리가 약 30 cm 틀립니다.</p>
+    <p data-at="3">1 µs면 그 1000배, 빈칸 2번, 약 300 m. 첫 추리의 답은 ㉢입니다. 파란 점이 옆 건물로 간 까닭이죠.</p>
+  </aside>
+</section>
+
+<!-- 5 시계 오차와 위치 오차 -->
+<section class="slide soft" id="s-gps2" data-title="위성의 시계와 내 위치" data-part="① 시간이 곧 위치">
+  <p class="kicker">① 시간이 곧 위치 · 시계 오차에 따른 위치 오차 (단원 화면 모형)</p>
+  <h2>10 m를 지키려면 시계는 30 ns 안쪽</h2>
+  <svg id="errSvg" viewBox="0 0 1400 400" width="1400" height="400" aria-label="시계 오차가 0에서 1000 ns로 커질 때 위치 오차가 0에서 약 300 m로 비례해 커지는 그래프"></svg>
+  <div class="tight mt">
+    <p data-step="1">위치를 10 m 안쪽으로 맞추려면 시계 오차는 <b class="blank" data-n="3" data-step="1">30 ns</b> 안쪽 (30 ns → 약 9 m)</p>
+    <p data-step="2">340 ns만 틀려도 약 102 m, 옆 블록으로 건너뛴다</p>
+  </div>
+  <p class="note">단원 화면은 ‘거리 = 빛의 속력 × 시간’ 한 줄만 남긴 단순화한 모형입니다. 실제 GPS는 위성 네 기 이상의 신호를 함께 풀어 시계 오차까지 계산하고, 대기와 건물 반사도 오차에 끼어듭니다.</p>
+  <aside class="script">
+    <p>단원 화면에서 손잡이로 바꿔 본 시계 오차와 위치 오차를 그래프로 그립니다. 두 양은 정비례합니다.</p>
+    <p data-at="1">같은 건물 안을 가리키는 10 m를 지키려면, 빈칸 3번, 시계가 30 ns 안쪽까지 맞아야 합니다. 10억분의 30초예요.</p>
+    <p data-at="2">340 ns만 틀려도 100 m를 넘습니다. 위성이 값비싼 원자시계를 싣고 다니는 까닭입니다.</p>
+  </aside>
+</section>
+
+<!-- 6 정밀 측정이 떠받치는 분야 -->
+<section class="slide" id="s-fields" data-title="정밀 측정이 떠받치는 분야" data-part="① 시간이 곧 위치">
+  <p class="kicker">① 시간이 곧 위치 · 단원 화면의 분야 지도</p>
+  <h2>현대 문명은 정밀한 측정 위에 서 있다</h2>
+  <table class="ledger">
+    <tr><th style="width:290px">분야</th><th style="width:260px">재는 자릿수</th><th>무엇을 재나</th></tr>
+    <tr data-step="1"><td><b>🛰️ 위성 항법(GPS)</b></td><td>약 10⁻⁹ 초</td><td>원자시계로 ns 단위 시간 → 거리와 위치</td></tr>
+    <tr data-step="1"><td><b>🏭 반도체 공정</b></td><td>약 10⁻⁹ m</td><td>회로의 선폭을 나노미터 단위로</td></tr>
+    <tr data-step="2"><td><b>🏥 의료 영상 진단</b></td><td>약 10⁻³ m</td><td>몸에서 오는 신호로 mm 단위 단면 영상</td></tr>
+    <tr data-step="2"><td><b>⚖️ 거래와 무역</b></td><td>약 10⁻³ kg</td><td>표준 단위와 저울 검정으로 공정한 거래</td></tr>
+    <tr data-step="2"><td><b>🌡️ 기후 관측</b></td><td>약 10⁻¹ ℃</td><td>같은 표준으로 잰 기온·기압을 수십 년치 비교</td></tr>
+    <tr data-step="2"><td><b>🚀 우주 탐사</b></td><td>약 10⁰ m</td><td>탐사선의 거리와 속도 → 궤도 계산</td></tr>
+  </table>
+  <p class="mt" data-step="3" style="margin-top:22px">아주 작은 차이까지 재는 <b class="blank" data-n="4" data-step="3">정밀 측정</b> → 정보 → 생활의 변화</p>
+  <aside class="script">
+    <p>GPS만이 아닙니다. 단원 화면의 분야 지도를 표로 옮겼습니다.</p>
+    <p data-at="1">GPS는 10억분의 1초, 반도체는 10억분의 1 m를 다룹니다. 다음 파트에서 반도체 공장으로 갑니다.</p>
+    <p data-at="2">병원, 시장, 기상청, 우주 탐사까지. 분야마다 필요한 자릿수가 다릅니다.</p>
+    <p data-at="3">이렇게 아주 작은 차이까지 재는 일이 빈칸 4번, 정밀 측정입니다. 측정이 정보가 되고, 정보가 생활을 바꿉니다.</p>
+  </aside>
+</section>
+
+<!-- 7 나노미터와 허용 범위 -->
+<section class="slide" id="s-chip" data-title="나노미터를 다투는 공장" data-part="② 나노미터 공장">
+  <p class="kicker">② 나노미터 공장 · 공정 관리자 은채의 고민</p>
+  <h2>선폭이 작아지면 허용 범위도 좁아진다</h2>
+  <svg id="tolSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="목표 선폭 90 nm의 허용 범위 ±9 nm와 10 nm의 허용 범위 ±1 nm를 같은 비율로 비교한 막대"></svg>
+  <div class="tight mt">
+    <p data-step="1">회로 선폭은 <b class="blank" data-n="5" data-step="1">나노미터</b> 단위 (1 nm = 10⁻⁹ m)</p>
+    <p data-step="2">목표의 ±10 %를 벗어나면 버린다: 90 nm → ± 9 nm, 10 nm → ± 1 nm</p>
+  </div>
+  <p class="note">‘목표의 ±10 %’라는 허용 범위는 설명을 위해 단원 화면에서 정한 값입니다. 실제 규격은 공정마다 다릅니다.</p>
+  <aside class="script">
+    <p>반도체 공장에서는 회로의 선 굵기, 곧 선폭을 매 장 잽니다.</p>
+    <p data-at="1">단위는 빈칸 5번, 나노미터. 10억분의 1 m입니다.</p>
+    <p data-at="2">목표에서 10 %를 벗어나면 그 칩은 버립니다. 90 nm 공정은 ±9 nm까지 봐주지만, 10 nm 공정은 ±1 nm뿐이에요. 같은 비율로 그리면 이렇게 좁습니다.</p>
+  </aside>
+</section>
+
+<!-- 8 수율 -->
+<section class="slide soft" id="s-yield" data-title="같은 오차, 다른 결과" data-part="② 나노미터 공장">
+  <p class="kicker">② 나노미터 공장 · 오차 0.8 nm 그대로 (단원 화면 모형 · ⚠ 두 그림의 가로 눈금은 다름)</p>
+  <h2>같은 오차가 10 nm 공정에서는 치명적이다</h2>
+  <svg id="ydSvg" viewBox="0 0 1400 360" width="1400" height="360" aria-label="오차 0.8 nm로 만든 선폭의 분포. 90 nm 공정은 허용 범위 안에 모두 들어가고, 10 nm 공정은 양쪽 꼬리가 허용 범위 밖으로 나간다"></svg>
+  <div class="tight mt">
+    <p data-step="1">만든 칩 가운데 쓸 수 있는 칩의 비율 → <b class="blank" data-n="6" data-step="1">수율</b> · 90 nm 약 100 %, 10 nm 약 79 %</p>
+    <p data-step="3">오차를 0.5 nm로 줄이면 95.4 % · 대상이 작아지면 <b class="blank" data-n="7" data-step="3">허용 오차</b>도 작아진다</p>
+  </div>
+  <aside class="script">
+    <p>측정과 공정의 오차는 0.8 nm로 같습니다. 만든 선폭이 목표 둘레에 이렇게 흩어집니다.</p>
+    <p data-at="1">90 nm 공정은 거의 전부 허용 범위 안이라 쓸 수 있는 칩의 비율, 빈칸 6번, 수율이 약 100 %. 그런데 10 nm 공정은 약 79 %, 다섯 장에 한 장꼴로 버립니다.</p>
+    <p data-at="2">녹색이 쓸 수 있는 칩, 빨간 꼬리가 버리는 칩입니다.</p>
+    <p data-at="3">오차를 0.5 nm로 줄여야 95 %를 넘습니다. 대상이 작아지면 빈칸 7번, 허용 오차도 함께 작아지니, 더 작게 만들려면 더 정밀하게 재는 기술이 먼저 있어야 합니다.</p>
+  </aside>
+</section>
+
+<!-- 9 확인 -->
+<section class="slide" id="s-check1" data-title="같은 오차, 왜 다를까" data-part="② 나노미터 공장">
+  <p class="kicker">② 나노미터 공장 · 확인</p>
+  <h2>같은 오차 0.8 nm가 10 nm 공정에서만 문제인 까닭은?</h2>
+  <div class="opts" style="max-width:1300px">
+    <div class="opt wrong" data-step="1">㉠ 10 nm 공정의 측정기가 더 낡았기 때문이다</div>
+    <div class="opt right" data-step="1">㉡ 허용 범위가 목표의 10 %라, 선폭이 작아지면 허용 범위도 좁아지기 때문이다</div>
+    <div class="opt wrong" data-step="1">㉢ 작은 칩일수록 측정 오차가 저절로 커지기 때문이다</div>
+    <div class="opt wrong" data-step="1">㉣ 10 nm 공정에서는 정확도를 따지지 않기 때문이다</div>
+  </div>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ㉡. 오차는 그대로인데 봐줄 수 있는 폭이 ±9 nm에서 ±1 nm로 줄었습니다.</p>
+  </aside>
+</section>
+
+<!-- 10 표본화 -->
+<section class="slide" id="s-samp" data-title="얼마나 자주 재나" data-part="③ 숫자로 바뀌는 순간">
+  <p class="kicker">③ 숫자로 바뀌는 순간 · 손목 맥박 신호를 2초 동안 (단원 화면 모형)</p>
+  <h2>드문드문 재면 물결이 되살아나지 않는다</h2>
+  <svg id="spSvg" viewBox="0 0 1400 380" width="1400" height="380" aria-label="원래 맥박 물결과, 1초에 4번 잰 점을 이은 선, 1초에 12번 잰 점을 이은 선"></svg>
+  <div class="tight mt">
+    <p data-step="1">이어지는 신호를 얼마나 자주 재느냐 → <b class="blank" data-n="8" data-step="1">표본화</b></p>
+    <p data-step="2">1초에 4번: 되살린 신호의 최대 오차 41.2 % · 1초에 12번: 4.9 % (5 % 이내)</p>
+  </div>
+  <aside class="script">
+    <p>보건 선생님 지호의 체온계 이야기입니다. 몸에서 오는 것은 숫자가 아니라 끊김 없이 이어지는 신호예요. 숫자가 되려면 두 단계를 거칩니다.</p>
+    <p data-at="1">첫째, 얼마나 자주 재느냐. 빈칸 8번, 표본화입니다. 1초에 4번 잰 점을 이으면 꼭짓점이 깎이고 모양이 달라집니다.</p>
+    <p data-at="2">1초에 12번 재면 최대 오차가 4.9 %로 5 % 안에 들어옵니다. 센서가 아무리 좋아도 드문드문 재면 소용없어요.</p>
+  </aside>
+</section>
+
+<!-- 11 양자화 -->
+<section class="slide soft" id="s-quant" data-title="얼마나 잘게 나누나" data-part="③ 숫자로 바뀌는 순간">
+  <p class="kicker">③ 숫자로 바뀌는 순간 · 30~45 ℃를 칸으로 나누는 체온계 (단원 화면 모형)</p>
+  <h2>칸이 성기면 36.5와 36.7이 같은 숫자</h2>
+  <div class="cols" style="grid-template-columns:720px 1fr;align-items:center">
+    <svg id="qtSvg" viewBox="0 0 720 470" width="720" height="470" aria-label="실제 온도와 화면에 찍히는 온도의 계단 그래프. 4비트는 한 칸 약 0.94 ℃로 36.5와 36.7이 같은 칸, 8비트는 한 칸 약 0.06 ℃"></svg>
+    <div class="lines">
+      <p data-step="1">값을 얼마나 잘게 나누느냐 → <b class="blank" data-n="9" data-step="1">양자화</b></p>
+      <p data-step="2">n비트 = 2ⁿ칸 · 비트 하나 늘면 칸 수가 <b class="blank" data-n="10" data-step="2">두 배</b></p>
+      <p data-step="3">0.05 ℃까지 가르려면 <b class="blank" data-n="11" data-step="3">8비트</b> (256칸, 한 칸 0.0586 ℃, 최대 오차 0.0293 ℃)</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>둘째 단계, 체온계가 다루는 30 ℃에서 45 ℃까지 15 ℃를 몇 칸으로 나눌까요?</p>
+    <p data-at="1">값을 칸으로 잘게 나누는 것이 빈칸 9번, 양자화입니다. 4비트면 16칸, 한 칸이 약 0.94 ℃라 36.5 ℃도 36.7 ℃도 같은 36.56으로 찍힙니다.</p>
+    <p data-at="2">비트 수가 칸 수를 정합니다. 비트 하나 늘 때마다 칸 수가 빈칸 10번, 두 배가 됩니다.</p>
+    <p data-at="3">반올림 오차가 한 칸의 절반이니, 0.05 ℃까지 가르려면 한 칸이 0.1 ℃보다 작아야 합니다. 빈칸 11번, 8비트, 256칸이면 한 칸 0.0586 ℃로 충분합니다.</p>
+  </aside>
+</section>
+
+<!-- 12 디지털 정보 -->
+<section class="slide" id="s-digital" data-title="디지털이 되면" data-part="③ 숫자로 바뀌는 순간">
+  <p class="kicker">③ 숫자로 바뀌는 순간 · 아날로그–디지털 변환</p>
+  <h2>숫자가 된 측정값은 흐려지지 않는다</h2>
+  <svg id="dgSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="아날로그 신호는 옮길 때마다 잡음이 쌓여 흐려지고, 디지털 숫자 36.50은 몇 번을 옮겨도 그대로다"></svg>
+  <div class="tight mt">
+    <p data-step="1">표본화 + 양자화 → 이어지던 신호가 <b class="blank" data-n="12" data-step="1">디지털</b> 정보가 된다</p>
+    <p data-step="2">몇 번을 옮겨 적어도, <b class="blank" data-n="13" data-step="2">정보 통신</b>으로 멀리 보내도 값이 변하지 않는다</p>
+    <p data-step="3">세계의 관측소가 같은 표준·같은 형식으로 보내 와 지구 전체의 변화를 한 그래프로 본다</p>
+  </div>
+  <aside class="script">
+    <p>표본화와 양자화를 거치면 무엇이 좋아질까요?</p>
+    <p data-at="1">이어지던 아날로그 신호가 빈칸 12번, 디지털 정보, 곧 숫자가 됩니다.</p>
+    <p data-at="2">아날로그 신호는 옮길 때마다 잡음이 쌓이지만, 숫자는 몇 번을 옮겨도 36.50 그대로입니다. 빈칸 13번, 정보 통신으로 지구 반대편에 보내도 마찬가지예요.</p>
+    <p data-at="3">그래서 세계 곳곳의 기후 관측소 자료를 모아 수십 년치를 견줄 수 있습니다. 단, 디지털로 바꾼다고 없던 정확도가 생기지는 않습니다.</p>
+  </aside>
+</section>
+
+<!-- 13 확인 -->
+<section class="slide soft" id="s-check2" data-title="4비트 체온계" data-part="③ 숫자로 바뀌는 순간">
+  <p class="kicker">③ 숫자로 바뀌는 순간 · 확인</p>
+  <h2>4비트 체온계가 36.5 ℃와 36.7 ℃를 똑같이 보여 준 까닭은?</h2>
+  <div class="opts" style="max-width:1300px">
+    <div class="opt wrong" data-step="1">㉠ 1초에 재는 횟수가 너무 적어서 (표본화)</div>
+    <div class="opt right" data-step="1">㉡ 온도 범위를 나눈 칸이 너무 넓어서 (양자화)</div>
+    <div class="opt wrong" data-step="1">㉢ 체온계의 영점이 틀어져서 (계통 오차)</div>
+    <div class="opt wrong" data-step="1">㉣ 디지털로 바꾸면 값이 언제나 부정확해져서</div>
+  </div>
+  <aside class="script">
+    <p>손가락으로 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ㉡. 4비트는 16칸, 한 칸이 약 0.94 ℃라서 0.2 ℃ 차이를 가르지 못합니다. 비트 수를 올리면 해결됩니다.</p>
+  </aside>
+</section>
+
+<!-- 14 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>정밀한 측정이 정보가 되어 문명을 떠받친다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>GPS</b>: 거리 = 빛의 속력 × 시간 · 시계 1 µs 오차 → 약 300 m · 10 m 안쪽은 30 ns 안쪽 (원자시계)</li>
+    <li data-k="2" data-step="2"><b>반도체</b>: 허용 오차는 대상이 작아지는 만큼 작아진다 → 더 작게 만들려면 더 정밀한 측정이 먼저</li>
+    <li data-k="3" data-step="3"><b>표본화</b>(얼마나 자주) + <b>양자화</b>(얼마나 잘게, n비트 = 2ⁿ칸) → 디지털 정보</li>
+    <li data-k="4" data-step="4">디지털 정보는 복사·전송해도 변하지 않아 정보 통신으로 나누고 수십 년치를 견줄 수 있다</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 15 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. GPS 위성의 시계가 100 ns(0.1 µs) 틀리면 위치 오차는? (단원 화면 모형)</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 약 3 m</div>
+        <div class="opt right" data-step="1">㉡ 약 30 m</div>
+        <div class="opt wrong" data-step="1">㉢ 약 300 m</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 양자화의 비트 수를 하나 늘리면 칸 수는?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 한 칸 늘어난다</div>
+        <div class="opt right" data-step="2">㉡ 두 배가 된다</div>
+        <div class="opt wrong" data-step="2">㉢ 절반이 된다</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 1 ns에 약 30 cm이니 100 ns면 약 30 m입니다.</p>
+    <p data-at="2">2번은 ㉡. n비트는 2ⁿ칸이라 비트 하나마다 칸 수가 두 배가 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 16 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ③ 「30 cm를 다투는 사람들」</h2>
+  <div class="cols">
+    <div class="card"><h3>파란 점을 제자리로</h3><p>위성 시계 오차 바꾸기, 10 nm 공정의 수율 95&nbsp;% 만들기, 맥박 신호 되살리기, 체온계 비트 수 올리기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 단원 마무리</h3><p>단원 화면의 수준별 문제와 응용 실험실(기온 기록기 설계 등)로 세 이야기를 처음 보는 상황에 적용해 봅니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ③을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function T(x, y, s, o) { o = o || {}; return "<text x='" + x + "' y='" + y + "' font-size='" + (o.s || 24) + "' font-weight='" + (o.w || 900) + "' fill='" + (o.c || "#161b28") + "' text-anchor='" + (o.a || "middle") + "'" + (o.halo ? " stroke='" + (o.halo === 2 ? "#f2f5f9" : "#fff") + "' stroke-width='7' paint-order='stroke'" : "") + ">" + s + "</text>"; }
+  function sat(x, y, k) { return "<g><rect x='" + (x - 16) + "' y='" + (y - 12) + "' width='32' height='24' rx='4' fill='#dee2e6'/><rect x='" + (x - 62) + "' y='" + (y - 8) + "' width='40' height='16' fill='#4dabf7'/><rect x='" + (x + 22) + "' y='" + (y - 8) + "' width='40' height='16' fill='#4dabf7'/></g>"; }
+
+  /* 표지 */
+  (function () {
+    var h = "<defs><linearGradient id='c3-beam' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='#ffd43b' stop-opacity='.1'/><stop offset='1' stop-color='#ffd43b' stop-opacity='.7'/></linearGradient></defs>";
+    var S = [[260, 70], [620, 40], [1000, 50], [1360, 80]], px = 760, py = 400;
+    S.forEach(function (s) { h += "<line x1='" + s[0] + "' y1='" + s[1] + "' x2='" + px + "' y2='" + (py - 20) + "' stroke='url(#c3-beam)' stroke-width='4' stroke-dasharray='10 8'/>" + sat(s[0], s[1]); });
+    h += "<rect x='0' y='440' width='1600' height='80' fill='#2b3140'/>";
+    h += "<rect x='420' y='250' width='260' height='190' fill='#4c566a'/><polygon points='420,250 550,200 680,250' fill='#5c677d'/><rect x='538' y='170' width='4' height='40' fill='#ced4da'/><rect x='542' y='170' width='34' height='20' fill='#ff6b6b'/>";
+    h += T(550, 330, "학교", { s: 30, c: "#e9edf5" });
+    h += "<rect x='900' y='230' width='220' height='210' fill='#3b4252'/>" + T(1010, 330, "옆 건물", { s: 30, c: "#e9edf5" });
+    h += "<rect x='" + (px - 12) + "' y='" + (py - 24) + "' width='24' height='44' rx='5' fill='#e9ecef' stroke='#161b28' stroke-width='3'/>";
+    h += "<g data-step='1'><path d='M1010 168 c-26 0 -40 20 -40 40 c0 30 40 60 40 60 c0 0 40 -30 40 -60 c0 -20 -14 -40 -40 -40 Z' fill='#339af0' stroke='#fff' stroke-width='4'/><circle cx='1010' cy='206' r='13' fill='#fff'/></g>";
+    h += "<text x='1590' y='505' fill='#9aa4b5' font-size='18' text-anchor='end'>⚠ 위성의 높이(약 2만 km)와 크기는 실제 비율이 아닙니다</text>";
+    document.getElementById("c3-art").innerHTML = h;
+  })();
+
+  /* 위성 → 휴대폰 */
+  (function () {
+    var h = "<defs><marker id='s4-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#e8590c'/></marker></defs>";
+    h += sat(300, 60);
+    h += "<rect x='270' y='400' width='60' height='60' rx='10' fill='#e9ecef' stroke='#161b28' stroke-width='4'/>" + T(300, 474, "", {});
+    h += "<g data-step='1'><circle cx='420' cy='70' r='34' fill='#fff' stroke='#6741d9' stroke-width='5'/><path d='M420 70 V48 M420 70 L436 80' stroke='#6741d9' stroke-width='5'/>" + T(470, 78, "원자시계", { s: 24, c: "#6741d9", a: "start" }) + "</g>";
+    h += "<g data-step='2'><line x1='300' y1='84' x2='300' y2='390' stroke='#e8590c' stroke-width='5' stroke-dasharray='14 10' marker-end='url(#s4-a)'/>";
+    h += T(280, 200, "빛의 속력 × 시간", { s: 24, c: "#e8590c", a: "end" }) + "</g>";
+    h += "<g data-step='3'><rect x='60' y='300' width='180' height='70' rx='12' fill='#ffe3e3' stroke='#d9302c' stroke-width='3'/>" + T(150, 333, "시계 1 µs 틀림", { s: 22, c: "#d9302c" }) + T(150, 361, "→ 약 300 m", { s: 22, c: "#d9302c" }) + "</g>";
+    h += "<text x='590' y='474' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 거리 비율 무시한 모식도</text>";
+    document.getElementById("gpsSvg").innerHTML = h;
+  })();
+
+  /* 시계 오차 → 위치 오차 (c = 299,792,458 m/s) */
+  (function () {
+    var C = 0.299792458, X0 = 120, X1 = 1300, Y0 = 20, Y1 = 330;
+    function X(ns) { return X0 + ns / 1000 * (X1 - X0); }
+    function Y(m) { return Y1 - m / 320 * (Y1 - Y0); }
+    var h = "<rect x='" + X0 + "' y='" + Y(10) + "' width='" + (X1 - X0) + "' height='" + (Y1 - Y(10)) + "' fill='#d3f9d8'/>";
+    h += "<rect x='" + X0 + "' y='" + Y(320) + "' width='" + (X1 - X0) + "' height='" + (Y(100) - Y(320)) + "' fill='#ffe3e3'/>";
+    h += T(X1 - 10, Y(100) - 12, "100 m 넘게: 옆 블록", { s: 21, c: "#c92a2a", a: "end" });
+    [0, 100, 200, 300].forEach(function (m) { h += "<text x='" + (X0 - 12) + "' y='" + (Y(m) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + m + "</text>"; });
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 200, 400, 600, 800, 1000].forEach(function (t) { h += "<text x='" + X(t) + "' y='" + (Y1 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + t + "</text>"; });
+    h += T(X1, Y1 + 62, "위성 시계 오차 (ns)", { s: 20, c: "#5f6b80", a: "end" }) + T(X0 + 12, Y0 + 22, "위치 오차 (m)", { s: 20, c: "#5f6b80", a: "start" });
+    h += "<line x1='" + X(0) + "' y1='" + Y(0) + "' x2='" + X(1000) + "' y2='" + Y(1000 * C) + "' stroke='#1462d8' stroke-width='5'/>";
+    h += "<circle cx='" + X(1000) + "' cy='" + Y(1000 * C) + "' r='9' fill='#1462d8'/>" + T(X(1000) - 16, Y(1000 * C) - 12, "1000 ns = 1 µs → 약 300 m", { s: 22, c: "#1462d8", a: "end", halo: 1 });
+    h += "<g data-step='1'><circle cx='" + X(30) + "' cy='" + Y(30 * C) + "' r='10' fill='#198a4a'/><line x1='" + X(30) + "' y1='" + Y1 + "' x2='" + X(30) + "' y2='" + Y(30 * C) + "' stroke='#198a4a' stroke-width='3'/>";
+    h += "<line x1='" + X(30) + "' y1='" + Y(30 * C) + "' x2='" + (X(380) - 8) + "' y2='" + (Y(20) - 8) + "' stroke='#198a4a' stroke-width='2'/>" + T(X(380), Y(20), "30 ns → 9.0 m (10 m 이내: 같은 건물 안)", { s: 22, c: "#198a4a", a: "start", halo: 1 }) + "</g>";
+    h += "<g data-step='2'><circle cx='" + X(340) + "' cy='" + Y(340 * C) + "' r='10' fill='#d9302c'/><line x1='" + X(340) + "' y1='" + Y1 + "' x2='" + X(340) + "' y2='" + Y(340 * C) + "' stroke='#d9302c' stroke-width='3' stroke-dasharray='6 5'/>";
+    h += T(X(340) + 20, Y(340 * C) + 36, "340 ns → 101.9 m", { s: 22, c: "#d9302c", a: "start", halo: 1 }) + "</g>";
+    document.getElementById("errSvg").innerHTML = h;
+  })();
+
+  /* 허용 범위 막대 — 1 nm = 12 px */
+  (function () {
+    var K = 11, X0 = 30, h = "";
+    [[90, 9, 60, "#1462d8"], [10, 1, 200, "#e8590c"]].forEach(function (r) {
+      var y = r[2], w = r[0] * K, lo = (r[0] - r[1]) * K, hi = (r[0] + r[1]) * K;
+      h += T(X0, y - 20, "목표 " + r[0] + " nm", { s: 26, a: "start", c: r[3] });
+      h += "<rect x='" + X0 + "' y='" + y + "' width='" + w + "' height='60' rx='6' fill='" + r[3] + "' opacity='.22'/>";
+      h += "<g data-step='2'><rect x='" + (X0 + lo) + "' y='" + (y - 12) + "' width='" + (hi - lo) + "' height='84' rx='6' fill='none' stroke='#198a4a' stroke-width='5'/>";
+      h += T(X0 + hi + 16, y + 40, "± " + r[1] + " nm", { s: 28, c: "#198a4a", a: "start" }) + "</g>";
+    });
+    h += "<g data-step='1'><path d='M" + X0 + " 300 H" + (X0 + 10 * K) + " M" + X0 + " 288 v24 M" + (X0 + 10 * K) + " 288 v24' stroke='#161b28' stroke-width='3' fill='none'/>" + T(X0 + 10 * K + 14, 308, "10 nm = 10억분의 10 m", { s: 22, w: 800, c: "#5f6b80", a: "start" }) + "</g>";
+    h += "<text x='1395' y='326' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 두 막대는 같은 비율</text>";
+    document.getElementById("tolSvg").innerHTML = h;
+  })();
+
+  /* 수율 — 선폭 분포(정규분포, 오차 0.8 nm), 허용 범위 목표의 ±10 % */
+  (function () {
+    function pdf(x, m, s) { return Math.exp(-0.5 * Math.pow((x - m) / s, 2)) / s; }
+    function panel(ox, w, m, tol, xr, sd, tag) {
+      var W = 620, Hh = 230, B = 270, h = "", i, pts = [], ins = [], x;
+      function X(v) { return ox + (v - (m - xr)) / (2 * xr) * W; }
+      function Y(v) { return B - v / pdf(m, m, 0.5) * Hh; }
+      h += "<line x1='" + ox + "' y1='" + B + "' x2='" + (ox + W) + "' y2='" + B + "' stroke='#161b28' stroke-width='3'/>";
+      for (i = 0; i <= 240; i++) { x = m - xr + 2 * xr * i / 240; pts.push(X(x).toFixed(1) + " " + Y(pdf(x, m, sd)).toFixed(1)); }
+      var all = "M" + X(m - xr) + " " + B + " L" + pts.join(" L") + " L" + X(m + xr) + " " + B + " Z";
+      h += "<g data-step='2'><path d='" + all + "' fill='#ff8787' opacity='.75'/>";
+      h += "<clipPath id='" + tag + "-c'><rect x='" + X(m - tol) + "' y='0' width='" + (X(m + tol) - X(m - tol)) + "' height='" + B + "'/></clipPath>";
+      h += "<path d='" + all + "' fill='#51cf66' clip-path='url(#" + tag + "-c)'/></g>";
+      h += "<polyline points='" + pts.join(" ") + "' fill='none' stroke='#161b28' stroke-width='3'/>";
+      [m - tol, m + tol].forEach(function (v) { h += "<line x1='" + X(v) + "' y1='" + (B - Hh - 10) + "' x2='" + X(v) + "' y2='" + (B + 8) + "' stroke='#198a4a' stroke-width='4' stroke-dasharray='8 6'/>"; });
+      h += T(X(m - tol), B + 32, (m - tol) + "", { s: 20, c: "#198a4a" }) + T(X(m + tol), B + 32, (m + tol) + "", { s: 20, c: "#198a4a" }) + T(X(m), B + 32, m + " nm", { s: 20 });
+      return h;
+    }
+    var h = panel(40, 90, 90, 9, 12, 0.8, "s8a") + panel(740, 10, 10, 1, 3, 0.8, "s8b");
+    h += T(350, 30, "목표 90 nm · 허용 ± 9 nm", { s: 26, c: "#1462d8" }) + T(1050, 30, "목표 10 nm · 허용 ± 1 nm", { s: 26, c: "#e8590c" });
+    h += "<g data-step='1'>" + T(350, 340, "수율 약 100 %", { s: 28, c: "#198a4a" }) + T(1050, 340, "수율 약 79 %", { s: 28, c: "#d9302c" }) + "</g>";
+    /* 오차 0.5 nm로 줄인 분포 */
+    (function () {
+      var pts = [], i, x, W = 620, B = 270, Hh = 230, m = 10, xr = 3;
+      function X(v) { return 740 + (v - (m - xr)) / (2 * xr) * W; }
+      function Y(v) { return B - v / (1 / 0.5) * Hh; }
+      for (i = 0; i <= 240; i++) { x = m - xr + 2 * xr * i / 240; pts.push(X(x).toFixed(1) + " " + Y(Math.exp(-0.5 * Math.pow((x - m) / 0.5, 2)) / 0.5).toFixed(1)); }
+      h += "<g data-step='3'><polyline points='" + pts.join(" ") + "' fill='none' stroke='#6741d9' stroke-width='4' stroke-dasharray='10 6'/>" + T(1398, 200, "오차 0.5 nm → 95.4 %", { s: 21, c: "#6741d9", a: "end", halo: 2 }) + "</g>";
+    })();
+    document.getElementById("ydSvg").innerHTML = h;
+  })();
+
+  /* 표본화 — 맥박 모형 sin(2π·1.2·t), 2초 */
+  (function () {
+    var F = 1.2, X0 = 60, X1 = 1360, M = 170, A = 120;
+    function sig(t) { return Math.sin(2 * Math.PI * F * t); }
+    function X(t) { return X0 + t / 2 * (X1 - X0); }
+    function Y(v) { return M - v * A; }
+    var h = "<line x1='" + X0 + "' y1='" + M + "' x2='" + X1 + "' y2='" + M + "' stroke='#dfe4ec' stroke-width='2'/>", pts = [], t, k;
+    for (t = 0; t <= 2.0001; t += 0.005) pts.push(X(t).toFixed(1) + " " + Y(sig(t)).toFixed(1));
+    h += "<polyline points='" + pts.join(" ") + "' fill='none' stroke='#1462d8' stroke-width='5'/>";
+    function samp(rate, col, step, label, ly) {
+      var p = [], g = "<g data-step='" + step + "'>";
+      for (k = 0; k / rate <= 2 + 1e-9; k++) p.push([k / rate, sig(k / rate)]);
+      g += "<polyline points='" + p.map(function (q) { return X(q[0]).toFixed(1) + " " + Y(q[1]).toFixed(1); }).join(" ") + "' fill='none' stroke='" + col + "' stroke-width='4' stroke-dasharray='10 6'/>";
+      p.forEach(function (q) { g += "<circle cx='" + X(q[0]).toFixed(1) + "' cy='" + Y(q[1]).toFixed(1) + "' r='" + (rate > 8 ? 6 : 9) + "' fill='" + col + "'/>"; });
+      g += T(X1, ly, label, { s: 22, c: col, a: "end", halo: 1 });
+      return g + "</g>";
+    }
+    h += samp(4, "#e8590c", 1, "1초에 4번 → 최대 오차 41.2 %", 344);
+    h += samp(12, "#198a4a", 2, "1초에 12번 → 4.9 %", 374);
+    h += T(X0, 360, "— 원래 맥박", { s: 22, c: "#1462d8", a: "start" });
+    [0, 1, 2].forEach(function (s) { h += T(X(s), M + A + 26, s + "초", { s: 18, w: 800, c: "#5f6b80" }); });
+    document.getElementById("spSvg").innerHTML = h;
+  })();
+
+  /* 양자화 — 30~45 ℃, n비트 = 2ⁿ칸, 화면값 = 30 + round((T−30)/칸) × 칸 */
+  (function () {
+    var X0 = 90, X1 = 690, Y0 = 20, Y1 = 400, T0 = 36, T1 = 37.5, V0 = 35.5, V1 = 37.6;
+    function X(t) { return X0 + (t - T0) / (T1 - T0) * (X1 - X0); }
+    function Y(v) { return Y1 - (v - V0) / (V1 - V0) * (Y1 - Y0); }
+    function stair(bits) {
+      var st = 15 / Math.pow(2, bits), p = [], t = T0, k, v;
+      while (t < T1 - 1e-9) {
+        k = Math.round((t - 30) / st); v = 30 + k * st;
+        var tE = Math.min(T1, 30 + (k + 0.5) * st);
+        p.push(X(t).toFixed(1) + " " + Y(v).toFixed(1), X(tE).toFixed(1) + " " + Y(v).toFixed(1));
+        t = tE;
+      }
+      return p.join(" ");
+    }
+    var h = "";
+    [36, 36.5, 37, 37.5].forEach(function (v) { h += "<line x1='" + X0 + "' y1='" + Y(v) + "' x2='" + X1 + "' y2='" + Y(v) + "' stroke='#e2e7ef' stroke-width='2'/><text x='" + (X0 - 10) + "' y='" + (Y(v) + 7) + "' font-size='19' font-weight='800' fill='#5f6b80' text-anchor='end'>" + v.toFixed(1) + "</text>"; });
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [36, 36.5, 37, 37.5].forEach(function (t) { h += "<text x='" + X(t) + "' y='" + (Y1 + 28) + "' font-size='19' font-weight='800' fill='#161b28' text-anchor='middle'>" + t.toFixed(1) + "</text>"; });
+    h += T(X1, Y1 + 58, "실제 온도 (℃)", { s: 19, c: "#5f6b80", a: "end" }) + T(X0 + 10, Y0 + 18, "화면에 찍힌 온도 (℃)", { s: 19, c: "#5f6b80", a: "start" });
+    h += "<line x1='" + X(36) + "' y1='" + Y(36) + "' x2='" + X(37.5) + "' y2='" + Y(37.5) + "' stroke='#adb5bd' stroke-width='3' stroke-dasharray='6 6'/>";
+    h += "<g data-step='1'><polyline points='" + stair(4) + "' fill='none' stroke='#e8590c' stroke-width='6'/>";
+    [36.5, 36.7].forEach(function (t) { h += "<line x1='" + X(t) + "' y1='" + Y1 + "' x2='" + X(t) + "' y2='" + Y(36.5625) + "' stroke='#e8590c' stroke-width='2' stroke-dasharray='5 5'/>"; });
+    h += T(X(36.76), Y(36.5625) + 32, "4비트: 둘 다 36.56", { s: 21, c: "#e8590c", a: "start", halo: 2 }) + "</g>";
+    h += "<g data-step='3'><polyline points='" + stair(8) + "' fill='none' stroke='#1462d8' stroke-width='3'/>" + T(X(37.45), Y(37.35), "8비트", { s: 21, c: "#1462d8", a: "end", halo: 2 }) + "</g>";
+    document.getElementById("qtSvg").innerHTML = h;
+  })();
+
+  /* 아날로그 복사 vs 디지털 복사 */
+  (function () {
+    var h = "", L = ["원본", "1번 옮김", "10번 옮김"], i;
+    function wave(ox, oy, noise) {
+      var p = [], x;
+      for (x = 0; x <= 320; x += 2) { var n = noise * (Math.sin(x * 0.9) * 0.6 + Math.sin(x * 2.3 + 1) * 0.4); p.push((ox + x) + " " + (oy - 34 * Math.sin(x / 320 * 4 * Math.PI) + n).toFixed(1)); }
+      return "<polyline points='" + p.join(" ") + "' fill='none' stroke='#6741d9' stroke-width='4'/>";
+    }
+    h += T(20, 70, "아날로그", { s: 26, a: "start", c: "#6741d9" }) + T(20, 210, "디지털", { s: 26, a: "start", c: "#1462d8" });
+    for (i = 0; i < 3; i++) {
+      var ox = 200 + i * 400;
+      h += T(ox + 160, 24, L[i], { s: 22, w: 800, c: "#5f6b80" });
+      h += "<g" + (i ? " data-step='2'" : "") + ">" + wave(ox, 90, [0, 6, 16][i]);
+      h += "<rect x='" + (ox + 40) + "' y='160' width='240' height='80' rx='12' fill='#161b28'/>" + T(ox + 160, 214, "36.50 ℃", { s: 36, c: "#8ce99a" }) + "</g>";
+      if (i < 2) h += "<g data-step='2'>" + T(ox + 360, 130, "→", { s: 40, c: "#9aa4b5" }) + "</g>";
+    }
+    h += "<g data-step='2'>" + T(1360, 290, "잡음이 쌓여 흐려진다 · 숫자는 그대로", { s: 22, c: "#5f6b80", a: "end" }) + "</g>";
+    h += "<text x='20' y='322' font-size='18' fill='#5f6b80'>⚠ 잡음은 과장한 모식도</text>";
+    document.getElementById("dgSvg").innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

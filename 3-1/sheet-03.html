@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 판구조론과 지권의 변화 (통합과학1 Ⅲ-1 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-03.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .formula { font-weight: 800; background: #f8fafc; border: 1px dashed #c9d1dd; border-radius: 6px; padding: 2px 10px; display: inline-block; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격·여백을 줄인다 */ p, li { font-size: 12.8px; line-height: 1.62; } table { font-size: 12px; } td, th { padding: 2px 7px; line-height: 1.42; } h2 { font-size: 14.5px; margin: 7px 0 3px; padding: 3px 10px; } header { margin-bottom: 8px; } .guide { margin-bottom: 6px; } .write { height: 40px; } .foot { margin-top: 6px; }</style>
+</head>
+<body>
+<body>
+<div class="tools">
+  <a href="board-03.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학1 · Ⅲ-1 지구시스템 · 03 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 판구조론과 지권의 변화</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~16)</p>
+
+  <h2>① 대륙 이동설에서 판구조론으로</h2>
+  <ul>
+    <li>베게너의 증거: 대서양 양쪽 해안선이 맞물림, 메소사우루스·글로소프테리스 화석, 빙하가 긁은 자국, 이어지는 산맥과 암석 나이</li>
+    <li>대륙은 원래 하나였다가 갈라져 이동했다(1912년) → <b class="blank" data-n="1">대륙 이동설</b> · 하나였던 초대륙 <b class="blank" data-n="2">판게아</b></li>
+    <li>받아들여지지 않은 까닭: 대륙을 움직이는 힘을 설명하지 못했다</li>
+    <li>1920~30년대 홈스: <b class="blank" data-n="3">맨틀 대류</b>를 원동력으로 제안 → 1950~60년대 음향 측심으로 해령·해구 발견</li>
+    <li>1962년 헤스 등: <b class="blank" data-n="4">해저 확장설</b> (해령을 축으로 대칭인 고지자기 줄무늬가 뒷받침) → 1960년대 후반 <b class="blank" data-n="5">판구조론</b></li>
+    <li>맨틀을 천천히 대류시키는 에너지: <b class="blank" data-n="6">지구 내부 에너지</b> · 판(암석권)은 해마다 몇 cm씩 움직인다</li>
+  </ul>
+
+  <h2>② 판의 경계</h2>
+  <table>
+    <tr><th style="width:15%">경계</th><th style="width:31%">움직임 · 지형</th><th style="width:17%">단층</th><th style="width:16%">지진</th><th>대표 지역</th></tr>
+    <tr><td><b class="blank" data-n="7">발산형</b></td><td>멀어진다 · 해령, 열곡, 새 해양 지각</td><td><b class="blank" data-n="10">정단층</b></td><td>얕다(70 km 이내)</td><td>대서양 중앙 해령, 동아프리카 열곡대</td></tr>
+    <tr><td><b class="blank" data-n="8">수렴형</b></td><td>부딪힌다 · 섭입: 해구, 호상 열도 / 충돌: 습곡 산맥</td><td><b class="blank" data-n="11">역단층</b></td><td>얕은 곳~700 km</td><td>일본 해구, 안데스, 히말라야</td></tr>
+    <tr><td><b class="blank" data-n="9">보존형</b></td><td>어긋난다 · 지각의 생성·소멸 없음</td><td><b class="blank" data-n="12">변환 단층</b></td><td>얕다(규모는 클 수 있음)</td><td>산안드레아스 단층</td></tr>
+  </table>
+
+  <h2>③ 변동대와 판의 속력</h2>
+  <ul>
+    <li>화산과 지진이 판 경계를 따라 좁은 띠를 이룬 곳: <b class="blank" data-n="13">변동대</b> · 태평양 둘레의 띠 = 불의 고리</li>
+    <li>예외: 하와이 같은 열점 화산, 경주(2016년, 규모 5.8)·포항(2017년, 규모 5.4) 같은 판 내부 지진</li>
+    <li>판 아래 한자리에 고정된 <b class="blank" data-n="14">열점</b>에서 섬이 생기고, 판에 실려 가므로 멀수록 오래된 섬</li>
+    <li><span class="formula">속력 = 거리 ÷ 나이</span> 카우아이섬 500 km ÷ 500만 년 = 10 cm/년, 미드웨이섬 2,400 km ÷ 2,800만 년 ≈ 8.6 cm/년 → 약 <b class="blank" data-n="15">9</b> cm/년</li>
+    <li>지권의 변화 → 다른 권역: 화산재가 기온을 낮춤(기권), 해저 지진이 <b class="blank" data-n="16">지진해일</b>을 일으킴(수권), 산맥이 바람과 비의 길을 바꿈(생물권)</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 히말라야 산맥이 만들어진 경계는? <span class="ans">→ 수렴형 경계 (대륙판끼리 충돌)</span></p>
+    <p>2. 열점에서 1,000 km 떨어진 섬의 나이가 1,000만 년이라면 판의 속력은? <span class="ans">→ 10 cm/년</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>베게너의 대륙 이동설에 빠져 있던 것과, 판구조론이 그것을 어떻게 채웠는지 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-03.html · 이야기 ③ 「갈라지는 땅」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

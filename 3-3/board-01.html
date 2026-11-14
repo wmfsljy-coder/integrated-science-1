@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 효소와 화학 반응 (통합과학1 Ⅲ-3 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes bubbleUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+  .current .art .bub { animation: bubbleUp 1.4s ease both; }
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  .kw6 { grid-template-columns: repeat(3, 1fr) !important; }
+  .kw6 .card { min-height: 0 !important; height: auto !important; padding: 20px 26px !important; }
+  table.ledger td, table.ledger th { font-size: 28px; padding: 12px 14px; }
+  .life td { vertical-align: top; text-align: left; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="같은 날 담근 김치 세 통. 영하의 냉장고 속 통, 기포가 오르는 실온 통, 뜨거운 국물을 부은 통. 오른쪽에는 기질이 홈에 들어간 효소 모형">
+      <g font-weight="900" text-anchor="middle">
+        <g>
+          <rect x="190" y="190" width="200" height="270" rx="26" fill="rgba(190,220,255,.16)" stroke="#a5d8ff" stroke-width="4"/>
+          <rect x="204" y="270" width="172" height="176" rx="16" fill="#e0452c"/>
+          <rect x="180" y="168" width="220" height="34" rx="12" fill="#74c0fc"/>
+          <text x="290" y="150" font-size="44" fill="#a5d8ff">❄</text>
+          <text x="290" y="500" font-size="26" fill="#dbe4ff">㉮ −2 °C</text>
+        </g>
+        <g>
+          <rect x="500" y="190" width="200" height="270" rx="26" fill="rgba(190,220,255,.16)" stroke="#a5d8ff" stroke-width="4"/>
+          <rect x="514" y="270" width="172" height="176" rx="16" fill="#c92a2a"/>
+          <rect x="490" y="168" width="220" height="34" rx="12" fill="#74c0fc"/>
+          <g class="bub" fill="#fff3bf"><circle cx="560" cy="300" r="9"/><circle cx="610" cy="330" r="7"/><circle cx="650" cy="292" r="10"/><circle cx="585" cy="380" r="6"/><circle cx="640" cy="400" r="8"/></g>
+          <text x="600" y="500" font-size="26" fill="#dbe4ff">㉯ 20 °C</text>
+        </g>
+        <g>
+          <rect x="810" y="190" width="200" height="270" rx="26" fill="rgba(190,220,255,.16)" stroke="#a5d8ff" stroke-width="4"/>
+          <rect x="824" y="270" width="172" height="176" rx="16" fill="#8f3b25"/>
+          <path d="M870 150 q-16 -24 0 -48 q16 -24 0 -48 M910 150 q-16 -24 0 -48 q16 -24 0 -48 M950 150 q-16 -24 0 -48 q16 -24 0 -48" fill="none" stroke="#ffc9c9" stroke-width="5" stroke-linecap="round"/>
+          <text x="910" y="500" font-size="26" fill="#dbe4ff">㉰ 80 °C 국물</text>
+        </g>
+      </g>
+      <g data-step="1">
+        <path d="M1180 210 q90 -70 190 -10 q60 40 40 110 l-62 -6 q-10 -40 -50 -36 q-34 6 -30 46 l-62 30 q-80 -40 -26 -134Z" fill="#748ffc"/>
+        <circle cx="1340" cy="302" r="26" fill="#ffd43b"/>
+        <text x="1300" y="420" font-size="28" font-weight="900" fill="#dbe4ff" text-anchor="middle">효소 + 기질</text>
+      </g>
+      <text x="1560" y="510" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 효소 모형은 크게 그린 것</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학1 · Ⅲ-3 생명 시스템 · 01</p>
+    <h1>효소와 화학 반응</h1>
+    <p class="sub" data-step="1">같은 날 담근 김치 세 통, 무엇이 운명을 갈랐을까</p>
+  </div>
+  <aside class="script">
+    <p>급식실 김치냉장고에서 3주가 지나도 익지 않는 김치통이 나왔습니다. 오늘은 이 사건을 효소로 풉니다.</p>
+    <p data-at="1">김치가 익는 것도 화학 반응이고, 그 반응을 굴리는 것은 유산균 속 효소입니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="효소를 넣지 않으면?" data-part="도입">
+  <p class="kicker">도입 · 급식실 정 선생님의 사건 기록</p>
+  <h2>효소가 없으면 반응은 어떻게 될까</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p><b>같은 배추 · 같은 양념</b>으로 같은 날 담근 김치 세 통</p>
+      <p class="mt">㉮ 김치냉장고 −2 °C → 3주째 안 익음</p>
+      <p>㉯ 실온 20 °C → 하루 만에 시어짐</p>
+      <p>㉰ 80 °C 국물을 붓고 식혀 20 °C 보관 → 한 달째 변화 없음</p>
+      <p class="small mt">상처에 바르는 과산화 수소는 몸속 효소 카탈레이스를 만나면 거품을 내며 분해된다.</p>
+    </div>
+    <div class="card yel">
+      <h3>과산화 수소에 카탈레이스(효소)를 넣지 않으면?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 전혀 분해되지 않는다</div>
+        <div class="opt">㉡ 아주 느리게 분해된다</div>
+        <div class="opt">㉢ 오히려 더 빨리 분해된다</div>
+        <div class="opt">㉣ 다른 물질로 바뀐다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>세 통의 운명이 왜 갈렸는지는 오늘 마지막에 풉니다. 먼저 효소가 무엇을 하는 물질인지부터 묻겠습니다.</p>
+    <p data-at="1">손을 들게 하고 까닭을 한 문장씩 묻습니다. 답은 주지 않습니다. 활성화 에너지 장면에서 함께 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 여섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw kw6">
+    <div class="card"><b>효소</b><span>몸속 반응을 빠르게 하는 단백질</span></div>
+    <div class="card"><b>활성화 에너지</b><span>반응이 넘어야 할 언덕</span></div>
+    <div class="card"><b>최적 온도</b><span>효소가 가장 잘 일하는 온도</span></div>
+    <div class="card"><b>최적 pH</b><span>효소가 가장 잘 일하는 pH</span></div>
+    <div class="card"><b>변성</b><span>열 때문에 모양이 풀려 못 돌아옴</span></div>
+    <div class="card"><b>기질 특이성</b><span>짝이 맞는 기질에만 작용</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~13번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 여섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 활성화 에너지 -->
+<section class="slide" id="s-ea" data-title="활성화 에너지" data-part="① 효소가 하는 일">
+  <p class="kicker">① 효소가 하는 일 · 과산화 수소의 분해 (2H₂O₂ → 2H₂O + O₂)</p>
+  <h2>효소는 반응이 넘어야 할 언덕을 낮춘다</h2>
+  <div class="cols" style="grid-template-columns:700px 1fr;align-items:center">
+    <svg viewBox="0 0 700 480" width="700" height="480" aria-label="반응 경로 그래프. 효소가 없으면 75 kJ/mol 높이의 언덕을 넘어야 하고, 카탈레이스가 있으면 언덕이 8 kJ/mol로 낮아진다. 반응물과 생성물의 높이는 같다">
+      <defs>
+        <marker id="s4-ak" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#161b28"/></marker>
+        <marker id="s4-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e03131"/></marker>
+        <marker id="s4-ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#2f9e44"/></marker>
+      </defs>
+      <line x1="60" y1="430" x2="60" y2="30" stroke="#161b28" stroke-width="4" marker-end="url(#s4-ak)"/>
+      <line x1="60" y1="430" x2="680" y2="430" stroke="#161b28" stroke-width="4" marker-end="url(#s4-ak)"/>
+      <text x="22" y="240" font-size="20" font-weight="800" fill="#5f6b80" transform="rotate(-90 22 240)" text-anchor="middle">에너지</text>
+      <text x="670" y="466" font-size="20" font-weight="800" fill="#5f6b80" text-anchor="end">반응의 진행 →</text>
+      <path d="M70 300 L200 300 C260 300 280 90 340 90 C400 90 420 370 480 370 L650 370" fill="none" stroke="#161b28" stroke-width="5"/>
+      <text x="100" y="286" font-size="22" font-weight="900" fill="#161b28">H₂O₂</text>
+      <text x="500" y="404" font-size="22" font-weight="900" fill="#161b28">H₂O + O₂</text>
+      <g data-step="1">
+        <line x1="150" y1="300" x2="150" y2="102" stroke="#e03131" stroke-width="5" marker-end="url(#s4-ar)"/>
+        <line x1="140" y1="90" x2="330" y2="90" stroke="#e03131" stroke-width="2" stroke-dasharray="6 6"/>
+        <text x="362" y="70" font-size="22" font-weight="900" fill="#e03131">효소 없음 · 75 kJ/mol</text>
+      </g>
+      <g data-step="2">
+        <path d="M200 300 C250 300 300 262 340 262 C390 262 420 370 480 370" fill="none" stroke="#1462d8" stroke-width="6" stroke-dasharray="14 8"/>
+        <text x="452" y="250" font-size="22" font-weight="900" fill="#1462d8">카탈레이스 · 8 kJ/mol</text>
+      </g>
+      <g data-step="3">
+        <line x1="610" y1="300" x2="610" y2="360" stroke="#2f9e44" stroke-width="5" marker-end="url(#s4-ag)"/>
+        <line x1="200" y1="300" x2="620" y2="300" stroke="#2f9e44" stroke-width="2" stroke-dasharray="6 6"/>
+        <text x="76" y="340" font-size="20" font-weight="900" fill="#2f9e44">출발·도착 높이는 그대로</text>
+      </g>
+      <text x="690" y="20" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 언덕 높이는 비율을 맞춘 모식</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">반응이 일어나려면 넘어야 할 언덕: <b class="blank" data-n="1" data-step="1">활성화 에너지</b></p>
+      <p data-step="2">언덕을 75 → 8 kJ/mol로 낮추는 생체 촉매: <b class="blank" data-n="2" data-step="2">효소</b></p>
+      <p data-step="3">반응물·생성물과 그 에너지 차이는 그대로 → 효소는 <b class="c-blue">속도만</b> 바꾼다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>가로는 반응이 진행되는 순서, 세로는 에너지입니다. 과산화 수소가 물과 산소로 바뀌려면 가운데 언덕을 넘어야 해요.</p>
+    <p data-at="1">이 언덕의 높이가 빈칸 1번, 활성화 에너지입니다. 효소가 없으면 약 75 kJ/mol.</p>
+    <p data-at="2">몸속 카탈레이스가 붙으면 언덕이 8 kJ/mol까지 내려갑니다. 이렇게 생물 몸속에서 언덕을 낮추는 촉매가 빈칸 2번, 효소입니다.</p>
+    <p data-at="3">초록 선을 보세요. 출발점과 도착점은 그대로입니다. 만들어지는 물질도, 두 높이의 차이도 바뀌지 않아요. 효소가 바꾸는 것은 속도뿐입니다.</p>
+  </aside>
+</section>
+
+<!-- 5 얼마나 빨라지나 -->
+<section class="slide soft" id="s-speed" data-title="효소 대 온도" data-part="① 효소가 하는 일">
+  <p class="kicker">① 효소가 하는 일 · 단원 화면 계산기: 25 °C 효소 없을 때보다 몇 배 빨라질까</p>
+  <h2>온도를 올리는 것보다 효소가 훨씬 세다</h2>
+  <svg viewBox="0 0 1400 400" width="1400" height="400" aria-label="반응이 빨라지는 배수를 10배마다 같은 길이로 그린 막대. 온도만 50 °C로 올리면 약 10배, 80 °C면 약 110배, 효소로 언덕을 29 kJ/mol까지 낮추면 약 1억 배, 8 kJ/mol이면 약 5천억 배">
+    <g font-size="18" font-weight="800" fill="#5f6b80" text-anchor="middle">
+      <line x1="420" y1="344" x2="1320" y2="344" stroke="#161b28" stroke-width="3"/>
+      <line x1="420" y1="336" x2="420" y2="352" stroke="#161b28" stroke-width="3"/><text x="420" y="378">1배</text>
+      <line x1="645" y1="336" x2="645" y2="352" stroke="#161b28" stroke-width="3"/><text x="645" y="378">1,000배</text>
+      <line x1="870" y1="336" x2="870" y2="352" stroke="#161b28" stroke-width="3"/><text x="870" y="378">100만 배</text>
+      <line x1="1095" y1="336" x2="1095" y2="352" stroke="#161b28" stroke-width="3"/><text x="1095" y="378">10억 배</text>
+      <line x1="1320" y1="336" x2="1320" y2="352" stroke="#161b28" stroke-width="3"/><text x="1320" y="378">1조 배</text>
+    </g>
+    <g font-size="24" font-weight="900" fill="#161b28">
+      <g data-step="1"><text x="0" y="48">온도만 50 °C</text><rect x="420" y="20" width="76" height="40" rx="8" fill="#f08c00"/><text x="510" y="50">약 10배</text></g>
+      <g data-step="1"><text x="0" y="118">온도만 80 °C</text><rect x="420" y="90" width="154" height="40" rx="8" fill="#e8590c"/><text x="588" y="120">약 110배</text></g>
+      <g data-step="2"><text x="0" y="188">효소 · 언덕 29 kJ/mol</text><rect x="420" y="160" width="606" height="40" rx="8" fill="#4dabf7"/><text x="1040" y="190">약 1억 배</text></g>
+      <g data-step="2"><text x="0" y="258">카탈레이스 · 8 kJ/mol</text><rect x="420" y="230" width="880" height="40" rx="8" fill="#1462d8"/><text x="1310" y="296" text-anchor="end" fill="#1462d8">약 5천억 배</text></g>
+    </g>
+    <text x="1400" y="20" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 가로 눈금은 1,000배마다 같은 길이</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">효소 없이 온도만 25 → 50 °C: 약 <b class="blank" data-n="3" data-step="1">10배</b> (80 °C까지 올려도 약 110배)</p>
+    <p data-step="2">25 °C 그대로 효소가 언덕을 낮추면 → 1억 배 이상 · 몸은 체온에서 반응을 굴린다</p>
+  </div>
+  <p class="note">아레니우스 식으로 계산한 단원 화면 값입니다(활성화 에너지 75 kJ/mol 기준).</p>
+  <aside class="script">
+    <p>단원 화면의 두 가지 길, 온도 쪽과 효소 쪽을 견줍니다. 가로 눈금은 천 배마다 같은 길이예요.</p>
+    <p data-at="1">효소 없이 온도만 25 °C에서 50 °C로 올리면 빈칸 3번, 약 10배 빨라집니다. 80 °C까지 올려도 약 110배예요.</p>
+    <p data-at="2">온도는 25 °C 그대로 두고 효소가 언덕을 29 kJ/mol까지만 낮춰도 1억 배, 카탈레이스처럼 8 kJ/mol이면 약 5천억 배입니다. 우리 몸이 체온에서 수많은 반응을 굴릴 수 있는 까닭입니다.</p>
+  </aside>
+</section>
+
+<!-- 6 효소가 없어도 -->
+<section class="slide" id="s-reuse" data-title="효소가 없어도 반응은 일어난다" data-part="① 효소가 하는 일">
+  <p class="kicker">① 효소가 하는 일 · 첫 추리로 돌아가기</p>
+  <h2>효소는 반응에 쓰여 없어지지 않는다</h2>
+  <svg viewBox="0 0 1400 330" width="1400" height="330" aria-label="효소가 과산화 수소와 만나 홈에 붙이고, 물과 산소로 바꾸어 내보낸 뒤 처음 모양 그대로 다음 과산화 수소를 받는 순환">
+    <defs><marker id="s6-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#161b28"/></marker></defs>
+    <g font-size="22" font-weight="900" text-anchor="middle" fill="#161b28">
+      <g>
+        <path d="M70 120 q70 -60 150 -10 q30 30 20 80 l-50 0 q0 -36 -36 -36 q-36 0 -36 36 l-48 0 q-30 -40 0 -70Z" fill="#748ffc"/>
+        <circle cx="290" cy="110" r="22" fill="#ffd43b"/>
+        <text x="150" y="250">효소</text><text x="290" y="250">기질 H₂O₂</text>
+      </g>
+      <line x1="340" y1="140" x2="420" y2="140" stroke="#161b28" stroke-width="5" marker-end="url(#s6-a)"/>
+      <g data-step="2">
+        <path d="M450 120 q70 -60 150 -10 q30 30 20 80 l-50 0 q0 -36 -36 -36 q-36 0 -36 36 l-48 0 q-30 -40 0 -70Z" fill="#748ffc"/>
+        <circle cx="548" cy="170" r="22" fill="#ffd43b"/>
+        <text x="540" y="250">홈에 꼭 맞게 붙음</text>
+      </g>
+      <line data-step="2" x1="680" y1="140" x2="760" y2="140" stroke="#161b28" stroke-width="5" marker-end="url(#s6-a)"/>
+      <g data-step="2">
+        <path d="M790 120 q70 -60 150 -10 q30 30 20 80 l-50 0 q0 -36 -36 -36 q-36 0 -36 36 l-48 0 q-30 -40 0 -70Z" fill="#748ffc"/>
+        <circle cx="1010" cy="96" r="16" fill="#74c0fc"/><circle cx="1040" cy="150" r="16" fill="#74c0fc"/><circle cx="1000" cy="200" r="16" fill="#ff8787"/>
+        <text x="880" y="250">효소는 그대로</text><text x="1040" y="250">H₂O · O₂</text>
+      </g>
+      <g data-step="3">
+        <path d="M880 280 C700 330 360 330 160 268" fill="none" stroke="#2f9e44" stroke-width="5" stroke-dasharray="12 8" marker-end="url(#s6-a)"/>
+        <text x="520" y="300" fill="#2f9e44">다음 H₂O₂를 받는다</text>
+      </g>
+    </g>
+    <text x="1400" y="22" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 분자 모양·크기는 모식</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">효소가 없어도 과산화 수소는 <b class="blank" data-n="4" data-step="1">아주 느리게</b> 분해된다 (묽으면 거품이 보이지 않을 뿐)</p>
+    <p data-step="3">효소는 반응물이 아니다 → 반응 뒤에도 그대로 남아 다시 쓰인다</p>
+  </div>
+  <aside class="script">
+    <p>첫 추리의 답을 확인합니다. 효소가 없으면 과산화 수소는 어떻게 될까요?</p>
+    <p data-at="1">빈칸 4번, 아주 느리게 분해됩니다. 그래서 정답은 ㉡. 묽은 용액에서는 너무 느려 거품이 보이지 않을 뿐이에요. 효소는 없던 반응을 새로 만들지 않습니다.</p>
+    <p data-at="2">효소의 홈에 과산화 수소가 꼭 맞게 붙고, 물과 산소로 바뀌어 떨어집니다.</p>
+    <p data-at="3">떨어진 뒤 효소는 처음 모양 그대로입니다. 반응물처럼 쓰여 없어지지 않고 다음 분자를 받습니다. 효소가 반응에 쓰여 사라진다는 생각은 오개념입니다.</p>
+  </aside>
+</section>
+
+<!-- 7 온도 -->
+<section class="slide" id="s-temp" data-title="온도와 효소" data-part="② 온도와 pH">
+  <p class="kicker">② 온도와 pH · 김치 유산균 효소의 온도 다이얼 (단원 화면 모형, pH 5.5)</p>
+  <h2>효소가 가장 잘 일하는 온도가 따로 있다</h2>
+  <div class="cols" style="grid-template-columns:720px 1fr;align-items:center">
+    <svg viewBox="0 0 720 480" width="720" height="480" aria-label="온도에 따른 효소 활성 그래프. 30 °C에서 가장 높고, −2 °C에서는 약 3 %, 20 °C에서는 약 71 %이다. 더 뜨거우면 변성으로 떨어진다">
+      <g font-size="18" font-weight="800" fill="#5f6b80" text-anchor="middle">
+        <line x1="80" y1="400" x2="660" y2="400" stroke="#161b28" stroke-width="3"/>
+        <line x1="80" y1="400" x2="80" y2="60" stroke="#161b28" stroke-width="3"/>
+        <text x="80" y="428">−5</text><text x="148" y="428">5</text><text x="284" y="428">25</text><text x="420" y="428">45</text><text x="556" y="428">65</text>
+        <text x="640" y="456" text-anchor="end">온도 (°C)</text>
+        <text x="60" y="406" text-anchor="end">0</text><text x="60" y="246" text-anchor="end">50</text><text x="60" y="86" text-anchor="end">100</text>
+        <text x="96" y="46" text-anchor="start">활성 (%)</text>
+      </g>
+      <path id="s7-curve" d="" fill="none" stroke="#1462d8" stroke-width="6"/>
+      <path d="M420 254 C450 300 470 380 500 400" fill="none" stroke="#868e96" stroke-width="5" stroke-dasharray="10 8"/>
+      <text x="508" y="360" font-size="18" font-weight="900" fill="#868e96">변성 (모식)</text>
+      <g data-step="2">
+        <line x1="318" y1="80" x2="318" y2="400" stroke="#2f9e44" stroke-width="3" stroke-dasharray="8 6"/>
+        <circle cx="318" cy="80" r="10" fill="#2f9e44"/>
+        <text x="332" y="76" font-size="22" font-weight="900" fill="#2f9e44">30 °C · 100 %</text>
+      </g>
+      <g data-step="3" font-size="20" font-weight="900">
+        <circle cx="100" cy="391" r="10" fill="#e03131"/><text x="112" y="468" fill="#e03131">㉮ −2 °C · 약 3 %</text>
+        <circle cx="250" cy="174" r="10" fill="#e8590c"/><text x="92" y="128" fill="#e8590c">㉯ 20 °C · 약 71 %</text>
+      </g>
+      <text x="700" y="20" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 실선은 단원 화면 모형 곡선</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">효소의 주성분: <b class="blank" data-n="5" data-step="1">단백질</b> → 접힌 모양이 맞아야 일한다</p>
+      <p data-step="2">가장 빠르게 일하는 온도: <b class="blank" data-n="6" data-step="2">최적 온도</b> (이 효소는 30 °C)</p>
+      <p data-step="3">−2 °C: 효소가 죽은 것이 아니라 <b class="c-blue">아주 느려졌을 뿐</b></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>단원 화면의 온도 다이얼을 칠판에 옮겼습니다. 세로는 효소가 일하는 정도, 활성입니다.</p>
+    <p data-at="1">효소는 빈칸 5번, 단백질로 되어 있습니다. 단백질은 접힌 모양이 맞아야 기질이 들어가요.</p>
+    <p data-at="2">이 효소는 30 °C에서 가장 빠릅니다. 빈칸 6번, 최적 온도. 단원 화면에서 온도 활성 95 % 이상을 만든 범위가 이 근처였습니다.</p>
+    <p data-at="3">통 ㉮의 −2 °C에서는 약 3 %, 통 ㉯의 20 °C에서는 약 71 %. −2 °C에서도 0이 아니죠. 효소가 죽은 게 아니라 느려진 것뿐입니다. 회색 점선처럼 너무 뜨거우면 다른 일이 생기는데, 그건 잠시 뒤에 봅니다.</p>
+  </aside>
+</section>
+
+<!-- 8 pH -->
+<section class="slide soft" id="s-ph" data-title="pH와 효소" data-part="② 온도와 pH">
+  <p class="kicker">② 온도와 pH · 김치 국물의 pH 다이얼 (단원 화면 모형, 30 °C)</p>
+  <h2>효소마다 가장 잘 일하는 pH도 다르다</h2>
+  <div class="cols" style="grid-template-columns:720px 1fr;align-items:center">
+    <svg viewBox="0 0 720 480" width="720" height="480" aria-label="pH에 따른 활성 그래프. 김치 유산균 효소는 pH 5.5에서 가장 높고 pH 6.5에서 약 71 %이다. 위액 속 펩신은 pH 2 부근에서 가장 잘 일한다">
+      <g font-size="18" font-weight="800" fill="#5f6b80" text-anchor="middle">
+        <line x1="80" y1="400" x2="660" y2="400" stroke="#161b28" stroke-width="3"/>
+        <line x1="80" y1="400" x2="80" y2="60" stroke="#161b28" stroke-width="3"/>
+        <text x="80" y="428">2</text><text x="160" y="428">3</text><text x="240" y="428">4</text><text x="320" y="428">5</text><text x="400" y="428">6</text><text x="480" y="428">7</text><text x="560" y="428">8</text><text x="640" y="428">9</text>
+        <text x="640" y="456" text-anchor="end">pH</text>
+        <text x="60" y="406" text-anchor="end">0</text><text x="60" y="246" text-anchor="end">50</text><text x="60" y="86" text-anchor="end">100</text>
+        <text x="96" y="46" text-anchor="start">활성 (%)</text>
+      </g>
+      <path id="s8-curve" d="" fill="none" stroke="#1462d8" stroke-width="6"/>
+      <g data-step="1">
+        <line x1="360" y1="80" x2="360" y2="400" stroke="#2f9e44" stroke-width="3" stroke-dasharray="8 6"/>
+        <circle cx="360" cy="80" r="10" fill="#2f9e44"/>
+        <text x="374" y="76" font-size="22" font-weight="900" fill="#2f9e44">pH 5.5 · 100 %</text>
+        <circle cx="440" cy="174" r="10" fill="#e8590c"/><text x="456" y="180" font-size="20" font-weight="900" fill="#e8590c">pH 6.5 · 약 71 %</text>
+      </g>
+      <g data-step="2">
+        <path d="M80 110 C100 110 130 200 170 400" fill="none" stroke="#7048e8" stroke-width="5" stroke-dasharray="10 8"/>
+        <text x="130" y="176" font-size="20" font-weight="900" fill="#7048e8">펩신</text>
+      </g>
+      <text x="700" y="20" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 펩신 곡선은 모식</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">가장 빠르게 일하는 pH: <b class="blank" data-n="7" data-step="1">최적 pH</b> (이 효소는 5.5)</p>
+      <p data-step="2">위액 속 펩신은 pH 2 부근 → 강한 산성인 위 속에서 일한다</p>
+      <p data-step="3">온도·pH가 최적에서 멀수록 느려진다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>이번에는 온도를 30 °C로 두고 pH만 바꿉니다.</p>
+    <p data-at="1">김치 유산균 효소는 pH 5.5에서 가장 잘 일합니다. 빈칸 7번, 최적 pH. 처음 국물 pH 6.5에서는 약 71 %였어요.</p>
+    <p data-at="2">위액 속 소화 효소 펩신은 pH 2 부근, 강한 산성에서 가장 잘 일합니다. 효소마다 최적 pH가 다릅니다.</p>
+    <p data-at="3">온도와 pH 모두 최적에서 멀어질수록 효소가 일하는 속도가 떨어집니다.</p>
+  </aside>
+</section>
+
+<!-- 9 변성 -->
+<section class="slide" id="s-denat" data-title="통 ㉰ — 변성" data-part="② 온도와 pH">
+  <p class="kicker">② 온도와 pH · 통 ㉰: 80 °C 국물을 부었다 식힌 통</p>
+  <h2>뜨거운 열에 풀린 효소는 식혀도 돌아오지 않는다</h2>
+  <svg viewBox="0 0 1400 360" width="1400" height="360" aria-label="접힌 효소의 홈에 기질이 꼭 맞는 모습, 80 °C에서 효소가 풀린 실처럼 펴진 모습, 20 °C로 식혀도 풀린 채로 남아 기질이 들어가지 못하는 모습">
+    <defs><marker id="s9-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#161b28"/></marker></defs>
+    <g font-size="24" font-weight="900" text-anchor="middle" fill="#161b28">
+      <g>
+        <path d="M110 150 q90 -80 200 -10 q40 40 26 100 l-66 0 q0 -44 -44 -44 q-44 0 -44 44 l-62 0 q-40 -50 -10 -90Z" fill="#748ffc"/>
+        <circle cx="226" cy="230" r="26" fill="#ffd43b"/>
+        <text x="220" y="320">접힌 모양 · 홈이 있다</text>
+      </g>
+      <g data-step="1">
+        <line x1="420" y1="180" x2="530" y2="180" stroke="#161b28" stroke-width="5" marker-end="url(#s9-a)"/>
+        <text x="475" y="160" fill="#e03131">80 °C</text>
+        <path d="M570 190 q30 -60 60 0 t60 0 t60 0 t60 0 t60 0" fill="none" stroke="#748ffc" stroke-width="16" stroke-linecap="round"/>
+        <text x="690" y="320">모양이 풀림</text>
+      </g>
+      <g data-step="2">
+        <line x1="900" y1="180" x2="1010" y2="180" stroke="#161b28" stroke-width="5" marker-end="url(#s9-a)"/>
+        <text x="955" y="160" fill="#1462d8">20 °C</text>
+        <path d="M1050 190 q30 -60 60 0 t60 0 t60 0 t60 0 t60 0" fill="none" stroke="#748ffc" stroke-width="16" stroke-linecap="round"/>
+        <circle cx="1350" cy="110" r="26" fill="#ffd43b"/>
+        <text x="1350" y="70" fill="#e03131" font-size="30">✗</text>
+        <text x="1170" y="320">식혀도 그대로</text>
+      </g>
+    </g>
+    <text x="1400" y="22" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 단백질 사슬은 모식</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">높은 열에 단백질의 접힌 모양이 풀려 홈이 사라진다: <b class="blank" data-n="8" data-step="1">변성</b></p>
+    <p data-step="2">온도를 다시 내려도 돌아오지 않는다 → 삶은 달걀이 식어도 날달걀이 되지 않는 것과 같다</p>
+  </div>
+  <aside class="script">
+    <p>통 ㉰는 단원 화면에서 온도 활성을 80 % 이상으로 맞춰도 익지 않았습니다. 왜 그럴까요?</p>
+    <p data-at="1">효소는 단백질이라 80 °C 국물을 맞으면 접힌 모양이 풀립니다. 기질이 들어갈 홈이 사라지죠. 빈칸 8번, 변성.</p>
+    <p data-at="2">변성된 효소는 식혀도 돌아오지 않습니다. 삶은 달걀을 식힌다고 날달걀이 되지 않는 것과 같아요. 낮은 온도에서 느려지는 것과는 전혀 다른 일입니다.</p>
+  </aside>
+</section>
+
+<!-- 10 세 통 정리 -->
+<section class="slide soft" id="s-jars" data-title="세 통의 운명" data-part="② 온도와 pH">
+  <p class="kicker">② 온도와 pH · 사건 파일 정리</p>
+  <h2>세 통의 운명은 온도가 갈랐다</h2>
+  <table class="ledger">
+    <tr><th>통</th><th>조건</th><th>효소에 일어난 일</th><th>결과</th></tr>
+    <tr data-step="1"><td>㉮</td><td>김치냉장고 −2 °C</td><td>온도 활성 약 3 % · 아주 느림</td><td>몇 달에 걸쳐 익는 중</td></tr>
+    <tr data-step="2"><td>㉯</td><td>실온 20 °C</td><td>온도 활성 약 71 % · 잘 일함</td><td>하루 만에 시어짐</td></tr>
+    <tr data-step="3"><td>㉰</td><td>80 °C 국물 → 20 °C</td><td>변성 · 홈이 사라짐</td><td>한 달째 변화 없음</td></tr>
+  </table>
+  <p class="mt" data-step="4">김치냉장고는 김치를 ‘안 익게’가 아니라 <b class="c-blue">‘아주 느리게’</b> 익게 만든다</p>
+  <aside class="script">
+    <p>세 통을 한 줄씩 정리합니다.</p>
+    <p data-at="1">통 ㉮는 효소가 약 3 %로만 일합니다. 최적 온도에서 이틀이면 끝날 일이 몇 달로 늘어난 것뿐이에요.</p>
+    <p data-at="2">통 ㉯는 효소가 잘 일하는 온도라 하루 만에 시었습니다.</p>
+    <p data-at="3">통 ㉰만은 다릅니다. 효소가 변성되어 온도를 내려도 돌아오지 않았어요.</p>
+    <p data-at="4">김치냉장고에 오래 둔 김치도 결국 시어지는 까닭이 여기 있습니다.</p>
+  </aside>
+</section>
+
+<!-- 11 자물쇠와 열쇠 -->
+<section class="slide" id="s-lock" data-title="자물쇠와 열쇠" data-part="③ 기질 특이성">
+  <p class="kicker">③ 기질 특이성 · 김치통 옆 과산화 수소수는 왜 멀쩡했을까</p>
+  <h2>효소는 짝이 맞는 물질에만 작용한다</h2>
+  <div class="cols" style="grid-template-columns:720px 1fr;align-items:center">
+    <svg viewBox="0 0 720 460" width="720" height="460" aria-label="네모난 홈을 가진 효소에 네모난 기질은 꼭 맞아 들어가고, 세모난 다른 물질은 들어가지 못한다">
+      <g>
+        <path d="M60 140 L300 140 L300 230 L210 230 L210 190 L150 190 L150 230 L60 230 Z" fill="#748ffc"/>
+        <text x="180" y="120" font-size="22" font-weight="900" fill="#161b28" text-anchor="middle">효소</text>
+      </g>
+      <g data-step="1">
+        <rect x="154" y="192" width="52" height="40" rx="4" fill="#ffd43b" stroke="#f08c00" stroke-width="3"/>
+        <text x="180" y="290" font-size="22" font-weight="900" fill="#2f9e44" text-anchor="middle">꼭 맞는 짝 → 반응 ○</text>
+      </g>
+      <g data-step="2">
+        <path d="M420 140 L660 140 L660 230 L570 230 L570 190 L510 190 L510 230 L420 230 Z" fill="#748ffc"/>
+        <path d="M512 300 L570 300 L541 250 Z" fill="#ff8787" stroke="#c92a2a" stroke-width="3"/>
+        <text x="600" y="290" font-size="30" font-weight="900" fill="#e03131">✗</text>
+        <text x="540" y="350" font-size="22" font-weight="900" fill="#e03131" text-anchor="middle">모양이 다른 물질 → 반응 ✗</text>
+      </g>
+      <text x="0" y="440" font-size="18" fill="#5f6b80">⚠ 실제 홈은 입체 모양 · 네모·세모는 모식</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">효소가 작용하는 물질: <b class="blank" data-n="9" data-step="1">기질</b> · 홈에 꼭 맞게 들어간다</p>
+      <p data-step="2">짝이 맞는 기질에만 작용하는 성질: <b class="blank" data-n="10" data-step="2">기질 특이성</b></p>
+      <p data-step="3">김치 속 효소는 과산화 수소의 짝이 아니다 → 과산화 수소수는 멀쩡</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>정 선생님이 물었습니다. 김치 속 효소가 그렇게 대단하면 옆에 둔 과산화 수소도 분해해야 하지 않느냐고요.</p>
+    <p data-at="1">효소가 작용하는 물질을 빈칸 9번, 기질이라고 합니다. 기질은 효소의 홈에 자물쇠와 열쇠처럼 꼭 맞게 들어갑니다.</p>
+    <p data-at="2">모양이 다른 물질은 들어가지 못합니다. 짝이 맞는 기질에만 작용하는 이 성질이 빈칸 10번, 기질 특이성입니다.</p>
+    <p data-at="3">그래서 김치 옆 과산화 수소수는 끝내 멀쩡했습니다.</p>
+  </aside>
+</section>
+
+<!-- 12 세탁 -->
+<section class="slide soft" id="s-wash" data-title="효소 세제" data-part="③ 기질 특이성">
+  <p class="kicker">③ 기질 특이성 · 앞치마 핏자국(단백질)을 30분 세탁 (단원 화면 모형값)</p>
+  <h2>짝이 맞는 효소를 알맞은 온도에서 써야 지워진다</h2>
+  <svg viewBox="0 0 1400 330" width="1400" height="330" aria-label="핏자국 제거율 막대. 단백질 분해 효소 40 °C 약 95 %, 30 °C 약 88 %, 지방 분해 효소 40 °C 약 30 %, 단백질 분해 효소 75 °C 0 %">
+    <g font-size="18" font-weight="800" fill="#5f6b80" text-anchor="middle">
+      <line x1="460" y1="300" x2="1260" y2="300" stroke="#161b28" stroke-width="3"/>
+      <text x="460" y="326">0 %</text><text x="860" y="326">50 %</text><text x="1260" y="326">100 %</text>
+    </g>
+    <g font-size="24" font-weight="900" fill="#161b28">
+      <g data-step="1"><text x="0" y="48">단백질 분해 효소 · 40 °C</text><rect x="460" y="20" width="760" height="40" rx="8" fill="#1462d8"/><text x="1232" y="50">약 95 %</text></g>
+      <g data-step="1"><text x="0" y="118">단백질 분해 효소 · 30 °C</text><rect x="460" y="90" width="704" height="40" rx="8" fill="#4dabf7"/><text x="1176" y="120">약 88 %</text></g>
+      <g data-step="2"><text x="0" y="188">지방 분해 효소 · 40 °C</text><rect x="460" y="160" width="242" height="40" rx="8" fill="#fab005"/><text x="714" y="190">약 30 %</text></g>
+      <g data-step="3"><text x="0" y="258">단백질 분해 효소 · 75 °C</text><rect x="460" y="230" width="6" height="40" fill="#e03131"/><text x="480" y="260" fill="#e03131">0 % (변성)</text></g>
+    </g>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">핏자국(단백질)에는 짝이 맞는 <b class="blank" data-n="11" data-step="1">단백질 분해 효소</b> · 이 세제 효소는 40 °C 부근이 가장 좋다</p>
+    <p data-step="3">뜨거운 물이 늘 잘 지우는 것은 아니다 → 75 °C 이상이면 효소가 변성</p>
+  </div>
+  <p class="note">세탁 화면의 제거율은 실제 세제 시험 수치가 아니라 원리를 보이기 위한 모형값입니다.</p>
+  <aside class="script">
+    <p>단원 화면의 세탁기 미션입니다. 핏자국을 30분 동안 빨았습니다.</p>
+    <p data-at="1">핏자국은 단백질이라 빈칸 11번, 단백질 분해 효소가 짝입니다. 40 °C에서 약 95 %, 30 °C에서 약 88 %가 지워졌어요.</p>
+    <p data-at="2">짝이 아닌 지방 분해 효소를 넣으면 약 30 %에 그칩니다. 기질 특이성입니다.</p>
+    <p data-at="3">짝이 맞는 효소라도 물을 75 °C 이상으로 올리면 오히려 지워지지 않습니다. 효소가 변성되기 때문이에요. 통 ㉰와 같은 일입니다.</p>
+  </aside>
+</section>
+
+<!-- 13 생활 속 효소 -->
+<section class="slide" id="s-life" data-title="생활 속 효소" data-part="③ 기질 특이성">
+  <p class="kicker">③ 기질 특이성 · 생활 속 효소 아홉 가지를 기질로 나누면</p>
+  <h2>효소마다 열 수 있는 자물쇠가 따로 있다</h2>
+  <table class="ledger life">
+    <tr><th>단백질을 분해 (고기 · 핏자국)</th><th>지방을 분해 (기름때 · 버터)</th><th>녹말을 분해 (밥 · 빵)</th></tr>
+    <tr data-step="1"><td>위액 속 <b class="blank" data-n="12" data-step="1">펩신</b> (최적 pH 2 부근)</td><td>이자액 속 라이페이스</td><td>침 속 <b class="blank" data-n="13" data-step="1">아밀레이스</b></td></tr>
+    <tr data-step="2"><td>연육제 속 파파인</td><td>기름때 주방 세제 효소</td><td>엿기름 속 효소 (식혜 · 물엿)</td></tr>
+    <tr data-step="2"><td>핏자국 세제 프로테이스</td><td>튀김 기름 배수구 약품</td><td>밥풀용 세제 효소</td></tr>
+  </table>
+  <p class="mt" data-step="3">생활 속 화학 반응: 효소가 큰 분자를 잘게 끊어 소화하고, 연하게 하고, 지운다</p>
+  <aside class="script">
+    <p>단원 화면에서 생활 속 효소 아홉 가지를 세 갈래로 나눴습니다.</p>
+    <p data-at="1">위액 속 단백질 분해 효소는 빈칸 12번, 펩신. 침 속 녹말 분해 효소는 빈칸 13번, 아밀레이스입니다. 밥을 오래 씹으면 단맛이 나는 까닭이에요. 지방은 이자액 속 라이페이스가 분해합니다.</p>
+    <p data-at="2">연육제의 파파인, 세제 속 효소, 식혜를 만드는 엿기름도 모두 짝이 맞는 기질에만 작용합니다.</p>
+    <p data-at="3">이번 단원 성취기준의 ‘생활 속 화학 반응 사례’ 조사 주제로 써도 좋습니다.</p>
+  </aside>
+</section>
+
+<!-- 14 확인 -->
+<section class="slide" id="s-check" data-title="통 ㉰를 데우면?" data-part="③ 기질 특이성">
+  <p class="kicker">③ 기질 특이성 · 확인</p>
+  <h2>통 ㉰를 30 °C로 데워도 김치가 익지 않는 까닭은?</h2>
+  <div class="opts" style="max-width:1250px">
+    <div class="opt wrong" data-step="1">㉠ 30 °C는 최적 온도보다 낮아서</div>
+    <div class="opt wrong" data-step="1">㉡ 효소가 반응에 쓰여 모두 없어져서</div>
+    <div class="opt right" data-step="1">㉢ 효소(단백질)가 변성되어 기질이 들어갈 홈이 사라져서</div>
+  </div>
+  <p data-step="1" style="margin-top:40px">30 °C는 이 효소의 최적 온도 · 효소는 반응에 쓰여 없어지지 않는다 → 남는 답은 <b>변성</b></p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ㉢. ㉠은 최적 온도를 잊은 답, ㉡은 오늘 짚은 오개념입니다. 변성된 효소는 온도를 바꿔도 돌아오지 않습니다.</p>
+  </aside>
+</section>
+
+<!-- 15 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>효소는 언덕을 낮춰 속도만 바꾼다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>효소</b>는 <b>활성화 에너지</b>를 낮춰 반응을 빠르게 한다 · 생성물은 그대로, 효소는 다시 쓰인다</li>
+    <li data-k="2" data-step="2">효소는 단백질 → <b>최적 온도</b>·<b>최적 pH</b>에서 가장 빠르다 (김치 효소 30 °C · pH 5.5)</li>
+    <li data-k="3" data-step="3">낮은 온도는 느리게 할 뿐 · 높은 열은 <b>변성</b> → 식혀도 돌아오지 않는다</li>
+    <li data-k="4" data-step="4"><b>기질 특이성</b>: 짝이 맞는 기질에만 작용 → 펩신·아밀레이스·효소 세제</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 16 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 반응에 효소를 넣었을 때 달라지는 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 만들어지는 물질의 종류</div>
+        <div class="opt right" data-step="1">㉡ 활성화 에너지의 크기</div>
+        <div class="opt wrong" data-step="1">㉢ 반응물과 생성물의 에너지 차이</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 최적 온도가 30 °C인 효소로 익는 김치를 −2 °C에 두면?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 효소가 변성되어 영영 안 익는다</div>
+        <div class="opt right" data-step="2">㉡ 아주 느리게 계속 익는다</div>
+        <div class="opt wrong" data-step="2">㉢ 활성화 에너지가 0이 된다</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 출발점과 도착점은 그대로이고 언덕만 낮아졌습니다.</p>
+    <p data-at="2">2번은 ㉡. 낮은 온도는 효소를 변성시키지 않습니다. −2 °C에서도 약 3 %로 일하고 있어요.</p>
+  </aside>
+</section>
+
+<!-- 17 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ① 「익지 않는 김치」</h2>
+  <div class="cols">
+    <div class="card"><h3>조사관이 되어 보세요</h3><p>온도·pH 다이얼로 최적 조건 찾기, 활성화 에너지를 낮춰 1억 배 만들기, 얼룩에 맞는 효소 세제 고르기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 02 동화 작용과 이화 작용</h3><p>어떤 사람의 몸에서 지방 10 kg이 줄었습니다. 그 10 kg의 질량은 주로 어디로 갔을까요?</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ①을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+  /* 단원 화면 모형 곡선: 온도 활성 exp(−(t−30)²/(2·12²)), pH 활성 exp(−(p−5.5)²/(2·1.2²)) */
+  (function () {
+    function path(f, a, b, st, X, Y) { var d = "", t; for (t = a; t <= b + 1e-9; t += st) d += (d ? " L" : "M") + X(t).toFixed(1) + " " + Y(f(t)).toFixed(1); return d; }
+    var Y = function (a) { return 400 - a * 320; };
+    document.getElementById("s7-curve").setAttribute("d", path(function (t) { return Math.exp(-(t - 30) * (t - 30) / 288); }, -5, 45, 1, function (t) { return 80 + (t + 5) * 6.8; }, Y));
+    document.getElementById("s8-curve").setAttribute("d", path(function (p) { return Math.exp(-(p - 5.5) * (p - 5.5) / 2.88); }, 2, 9, 0.1, function (p) { return 80 + (p - 2) * 80; }, Y));
+  })();
+</script>
+</body>
+</html>

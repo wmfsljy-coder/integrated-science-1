@@ -24,6 +24,7 @@
     <button class="tab-btn" data-tab="5"><span class="num">05</span> 응용 실험실</button>
     <button class="tab-btn" data-tab="6"><span class="num">06</span> 정리하기</button>
     <button class="tab-btn" data-tab="7"><span class="num">07</span> 우리 반</button>
+    <button class="tab-btn" data-tab="8"><span class="num">08</span> 칠판모드</button>
   </nav>
 
   <main>
@@ -50,7 +51,7 @@
         <section class="scene" data-title="조사 ① — 두 저울로 같은 힘 재기">
           <div class="story"><div class="who">👩‍🚀</div><div class="say"><span class="name">한나</span>“먼저 두 단위가 얼마나 다른지부터 봅시다. 똑같은 힘을 <b>뉴턴 저울</b>과 <b>파운드힘 저울</b>로 동시에 재는 장치를 만들어 왔어요. 손잡이를 당겨 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="a-gauge" width="900" height="372"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-gauge" width="900" height="300"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">당기는 힘 (뉴턴 저울 눈금)<span class="val" id="a-f-val">10.0 N</span></div>
@@ -82,12 +83,12 @@
         <section class="scene" data-title="재발 방지 위원회 — 기준을 다시 세우다">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">표준 연구원 도윤</span>“원인은 찾았습니다. 이제 다시는 같은 일이 없도록 <b>기준</b>을 정리해야죠. 세상의 모든 물리량은 단 <b>7개의 기본량</b>에서 나옵니다. 카드를 눌러 하나씩 확인해 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="a-cards" width="900" height="330"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-cards" width="900" height="256"></canvas></div>
             <div class="info-card" id="a-cards-info">카드를 누르면 그 기본량의 단위와 정의가 여기에 나타납니다.</div>
           </div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">도윤</span>“기본량 가운데 <b>온도</b>는 조금 특별합니다. 우리가 쓰는 섭씨온도(℃)는 SI 기본단위가 아니에요. 기본단위는 <b>켈빈(K)</b>이고, 시작점이 다릅니다. 직접 움직여 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="a-temp" width="900" height="262"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-temp" width="900" height="250"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">섭씨온도<span class="val" id="a-c-val">25 ℃</span></div>
@@ -113,7 +114,7 @@
           <div class="stage-card" style="padding:6px 0 4px"><div id="wk1"></div></div>
         </section>
       </div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-01.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-01.html">개념정리 학습지</a>(<a href="sheet-01.html?key=1">정답</a>) · <a href="form-01.html">형성평가</a>(<a href="form-01.html?key=1">정답</a> · <a href="form-01.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- =====================================================================
@@ -139,7 +140,7 @@
         <section class="scene" data-title="산책 ① — 배율 손잡이를 돌려라">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">동아리 선생님</span>“직접 걸어 보면 알겠지. 손잡이를 한 칸 움직일 때마다 화면 한 변이 <b>10배</b>가 된다. 가운데가 지금 보이는 것, 양옆은 한 걸음 앞뒤의 모습이야.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="b-walk" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-walk" width="900" height="330"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">화면 한 변의 길이 · 10ⁿ m<span class="val" id="b-n-val">n = −2</span></div>
@@ -154,7 +155,7 @@
         <section class="scene" data-title="산책 ② — 두 크기는 몇 배 차이일까">
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">세민</span>“걸음 수를 세면서 알았어요. <b>두 크기의 배율 차이 = 지수의 차</b>네요! 표지 두 개를 꽂아서 확인해 볼래요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="b-cmp" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-cmp" width="900" height="280"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">표지 A · 10ⁿ m<span class="val" id="b-ea-val">n = 0</span></div>
@@ -174,7 +175,7 @@
         <section class="scene" data-title="산책 ③ — 빛으로 거리를 재다">
           <div class="story"><div class="who">🧑‍🏫</div><div class="say"><span class="name">동아리 선생님</span>“우주는 너무 넓어서 미터로 말하면 0이 스무 개도 넘지. 그래서 천문학자들은 <b>빛이 가는 시간</b>으로 거리를 말한단다. 1 m의 정의도 결국 빛이 간 시간이었지? 거리를 바꿔 가며 빛이 얼마나 걸리는지 보렴.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="b-light" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-light" width="900" height="260"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="b-light-read"></div>
               <div class="ctrl-group">
@@ -204,7 +205,7 @@
           </div>
         </section>
       </div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-02.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-02.html">개념정리 학습지</a>(<a href="sheet-02.html?key=1">정답</a>) · <a href="form-02.html">형성평가</a>(<a href="form-02.html?key=1">정답</a> · <a href="form-02.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- =====================================================================
@@ -234,7 +235,7 @@
               <button data-t="1">사람 몸의 세포 수</button>
               <button data-t="2">수소 원자의 지름</button>
             </div>
-            <div class="canvas-wrap studio"><canvas id="c-sci" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-sci" width="900" height="262"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">소수점을 옮긴 칸 수 (왼쪽으로 옮기면 +)<span class="val" id="c-p-val">0칸</span></div>
@@ -291,7 +292,7 @@
           <div class="stage-card" style="padding:6px 0 4px"><div id="wk3"></div></div>
         </section>
       </div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-03.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-03.html">개념정리 학습지</a>(<a href="sheet-03.html?key=1">정답</a>) · <a href="form-03.html">형성평가</a>(<a href="form-03.html?key=1">정답</a> · <a href="form-03.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- ===================================================================== 04 수준별 문제 -->
@@ -334,11 +335,20 @@
       </div>
       <div class="stage-card"><div id="share"></div></div>
     </section>
+    <!-- ===================================================================== 08 칠판모드 -->
+    <section class="tab-panel" data-panel="8" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">08 · 전자칠판으로 정리하기</div>
+        <h2 class="display">칠판모드</h2>
+        <p>소단원마다 전자칠판용 <b>칠판 강의 화면</b>, 혼자 넘겨 보는 <b>혼자 복습하기</b>, 빈칸 번호가 같은 <b>개념정리 학습지</b>, 10분 동안 확인하는 <b>형성평가</b>를 모았습니다. 칠판에 열리는 빈칸 번호와 학습지 빈칸 번호가 같아, 수업하며 함께 채우거나 수업 끝에 학습지로 확인할 수 있습니다.</p>
+      </div>
+      <div class="info-card" id="board-wrap" style="margin:0 0 16px"><span class="tag">칠판 정리</span>이야기 세 편을 소단원마다 칠판 강의 화면과 개념정리 학습지로 정리하고, 형성평가로 확인합니다.<div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>01 SI 기본단위 (단위와 환산 · 기본량과 유도량 · 자연 상수)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-01.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-01.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-01.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-01.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div><div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>02 우주의 스케일 (10의 거듭제곱 · 배율 · 광년)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-02.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-02.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-02.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-02.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div><div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>03 과학적 표기법 (계수와 지수 · 물질량 · 유효숫자)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-03.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-03.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-03.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-03.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div></div>
+    </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
-<script src="../assets/theme.js?v=790c9518"></script>
+<script src="../assets/theme.js?v=c3418585"></script>
 <script src="../assets/scope.js?v=cecf172a"></script>
 <script src="../assets/kit.js?v=94e3bd47"></script>
 <script src="../assets/story.js?v=cd80882e"></script>
@@ -346,12 +356,12 @@
 <script src="../assets/lab.js?v=5ab4e410"></script>
 <script src="../assets/share-config.js?v=645d418e"></script>
 <script src="../assets/share.js?v=8ebc37fa"></script>
-<script src="../assets/account.js?v=c2e093b1"></script>
+<script src="../assets/account.js?v=435378ac"></script>
 <script src="episodes.js"></script>
 <script src="worked.js"></script>
 <script src="handoff.js"></script>
 <script src="quiz-items.js"></script>
-<script src="../assets/review.js?v=31d5449f"></script>
+<script src="../assets/review.js?v=c07fe051"></script>
 <script src="../assets/peer.js?v=b6f0b008"></script>
 <script src="../assets/qboard.js?v=b3bb8d32"></script>
 <script src="lab-cases.js"></script>
